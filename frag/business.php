@@ -48,7 +48,7 @@ while($row=mysql_fetch_assoc($result)) {
 	$name=$row["name"];
 	$remark=$row["remark"];
 	$url=$row["url"];
-	$imagePath=get_root().$row["imagePath"];
+	$imagePath=get_root()."/".$row["imagePath"];
 	if($url!=NULL) {
 		$name="<a href='{$url}'>{$name}</a>";
 	}
@@ -81,7 +81,7 @@ while($row=mysql_fetch_assoc($result)) {
 	$name=$row["name"];
 	$remark=$row["remark"];
 	$url=$row["url"];
-	$imagePath=get_root().$row["imagePath"];
+	$imagePath=get_root()."/".$row["imagePath"];
 	if($url!=NULL) {
 		$name="<a href='{$url}'>{$name}</a>";
 	}
@@ -113,7 +113,7 @@ echo "</tr>\n";
 while($row=mysql_fetch_assoc($result)) {
 	$name=$row["name"];
 	$url=$row["url"];
-	$imagePath=get_root().$row["imagePath"];
+	$imagePath=get_root()."/".$row["imagePath"];
 	$fromDate=$row["fromDate"];
 	echo "</tr>";
 	echo "<td><a href='{$url}'>{$name}</a></td>";
