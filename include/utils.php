@@ -1,0 +1,25 @@
+<?php
+
+# show all errors in the output... This should be turned off for production...
+error_reporting(E_ALL);
+ini_set('display_errors','1');
+
+# input is in bytes
+function formatSize($size) {
+	$units=array('B','KB','MB','GB','TB');
+	for ($i = 0; $size > 1024; $i++) { $size /= 1024; }
+	return round($size, 2).' '.$units[$i];
+}
+# input is in seconds
+function formatTimeperiod($size) {
+	$units=array('secs','mins','hrs','days','months','years');
+	$mults=array(60,60,24,30,12);
+	$i=0;
+	while($size>$mults[$i]) {
+		$size/=$mults[$i];
+		$i++;
+	}
+	return round($size, 2).' '.$units[$i];
+}
+
+?>
