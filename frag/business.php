@@ -15,7 +15,7 @@ $query=sprintf("SELECT id,name FROM TbBsCourses");
 $result=mysql_query($query);
 assert($result);
 
-echo "<h1>Courses that I teach</h1>";
+echo "Courses that I teach";
 echo "<table style='empty-cells:show' border='1'>";
 echo "<tr>";
 echo "<td>name</td>";
@@ -36,7 +36,7 @@ $query=sprintf("SELECT name,remark,url,imagePath FROM TbBsCompanies where funcCo
 $result=mysql_query($query);
 assert($result);
 
-echo "<h1>Companies that I consulted</h1>";
+echo "Companies that I consult";
 echo "<table style='empty-cells:show' border='1'>";
 echo "<tr>";
 echo "<td>name</td>";
@@ -48,7 +48,7 @@ while($row=mysql_fetch_assoc($result)) {
 	$name=$row["name"];
 	$remark=$row["remark"];
 	$url=$row["url"];
-	$imagePath=$row["imagePath"];
+	$imagePath=get_root().$row["imagePath"];
 	if($url!=NULL) {
 		$name="<a href='{$url}'>{$name}</a>";
 	}
@@ -69,7 +69,7 @@ $query=sprintf("SELECT name,remark,url,imagePath FROM TbBsCompanies where funcTe
 $result=mysql_query($query);
 assert($result);
 
-echo "<h1>Companies that I taught in</h1>";
+echo "Companies that I taught in";
 echo "<table style='empty-cells:show' border='1'>";
 echo "<tr>";
 echo "<td>name</td>";
@@ -81,7 +81,7 @@ while($row=mysql_fetch_assoc($result)) {
 	$name=$row["name"];
 	$remark=$row["remark"];
 	$url=$row["url"];
-	$imagePath=$row["imagePath"];
+	$imagePath=get_root().$row["imagePath"];
 	if($url!=NULL) {
 		$name="<a href='{$url}'>{$name}</a>";
 	}
@@ -102,7 +102,7 @@ $query=sprintf("SELECT name,url,imagePath,fromDate FROM TbBsCompanies where func
 $result=mysql_query($query);
 assert($result);
 
-echo "<h1>My Certifications</h1>";
+echo "My Certifications";
 echo "<table style='empty-cells:show' border='1'>";
 echo "<tr>";
 echo "<td>type of certification</td>";
@@ -113,7 +113,7 @@ echo "</tr>\n";
 while($row=mysql_fetch_assoc($result)) {
 	$name=$row["name"];
 	$url=$row["url"];
-	$imagePath=$row["imagePath"];
+	$imagePath=get_root().$row["imagePath"];
 	$fromDate=$row["fromDate"];
 	echo "</tr>";
 	echo "<td><a href='{$url}'>{$name}</a></td>";

@@ -12,6 +12,7 @@
 	<a href="http://veltzer.org">veltzer.org blog</a><br/>
 	<a href="http://veltzer.net/~mark/wordpress">veltzer.net blog</a><br/>
 	Php...<br/>
-	<a href="http://veltzer.net/~mark/php">php</a><br/>
+	<a href="http://veltzer.net/~mark/php">php root</a><br/>
+	<a href="http://veltzer.net/~mark/php/pages">php pages</a><br/>
 </body>
 </html>
