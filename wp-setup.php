@@ -8,11 +8,16 @@
  */
 
 // constant which is word press relation to the php code...
-define("REL_PATH","../php");
+define("REL_PATH","/home/mark/public_html/php");
 ini_set("include_path", ini_get("include_path").":".REL_PATH);
 
-function get_root() {
+// this returns the php codes position for file inclusion
+function get_file_root() {
 	return REL_PATH;
+}
+// this returns the php codes position for urls
+function get_root() {
+	return "http://veltzer.net/~mark/php";
 }
 
 function debug() {
