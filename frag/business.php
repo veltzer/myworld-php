@@ -15,8 +15,8 @@ $query=sprintf("SELECT id,name FROM TbBsCourses");
 $result=mysql_query($query);
 assert($result);
 
-echo "Courses that I teach";
-echo "<table style='empty-cells:show' border='1'>";
+echo "Courses that I teach or have taught in the past...";
+echo "<table style='empty-cells:show;width:100%;' border='1'>";
 echo "<tr>";
 echo "<td>name</td>";
 echo "</tr>\n";
@@ -36,8 +36,8 @@ $query=sprintf("SELECT name,remark,url,imagePath FROM TbBsCompanies where funcCo
 $result=mysql_query($query);
 assert($result);
 
-echo "Companies that I consult";
-echo "<table style='empty-cells:show' border='1'>";
+echo "Companies that I consult or have consulted in the past...";
+echo "<table style='empty-cells:show;width:100%' border='1'>";
 echo "<tr>";
 echo "<td>name</td>";
 echo "<td>remark</td>";
@@ -69,8 +69,8 @@ $query=sprintf("SELECT name,remark,url,imagePath FROM TbBsCompanies where funcTe
 $result=mysql_query($query);
 assert($result);
 
-echo "Companies that I taught in";
-echo "<table style='empty-cells:show' border='1'>";
+echo "Companies that I teach or have taught in the past...";
+echo "<table style='empty-cells:show;width:100%' border='1'>";
 echo "<tr>";
 echo "<td>name</td>";
 echo "<td>remark</td>";
@@ -102,8 +102,8 @@ $query=sprintf("SELECT name,url,imagePath,fromDate FROM TbBsCompanies where func
 $result=mysql_query($query);
 assert($result);
 
-echo "My Certifications";
-echo "<table style='empty-cells:show' border='1'>";
+echo "My Certifications...";
+echo "<table style='empty-cells:show;width:100%' border='1'>";
 echo "<tr>";
 echo "<td>type of certification</td>";
 echo "<td>date from which I am certified</td>";

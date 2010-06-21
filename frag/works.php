@@ -62,7 +62,8 @@ assert($result);
 $fields_num=mysql_num_fields($result);
 
 echo "<h1>Works that I have viewed</h1>";
-echo "<table style='empty-cells:show' border='1'><tr>";
+#echo "<div style='overflow: auto; height:400px;'>";
+echo "<table style='empty-cells:show;' border='1'><tr>";
 // printing table headers
 for($i=0; $i<$fields_num; $i++)
 {
@@ -153,6 +154,7 @@ while($row=mysql_fetch_row($result))
 }
 assert(mysql_free_result($result));
 echo "</table>";
+#echo "</div>";
 
 $table="TbWkWork";
 
