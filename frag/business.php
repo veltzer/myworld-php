@@ -30,6 +30,7 @@ while($row=mysql_fetch_assoc($result)) {
 }
 assert(mysql_free_result($result));
 echo "</table>";
+echo "<br/>";
 
 // sending query
 $query=sprintf("SELECT name,remark,url,imagePath FROM TbBsCompanies where funcConsulting order by name asc");
@@ -63,6 +64,7 @@ while($row=mysql_fetch_assoc($result)) {
 }
 assert(mysql_free_result($result));
 echo "</table>";
+echo "<br/>";
 
 // sending query
 $query=sprintf("SELECT name,remark,url,imagePath FROM TbBsCompanies where funcTeaching order by name asc");
@@ -96,6 +98,7 @@ while($row=mysql_fetch_assoc($result)) {
 }
 assert(mysql_free_result($result));
 echo "</table>";
+echo "<br/>";
 
 // sending query
 $query=sprintf("SELECT name,url,imagePath,fromDate FROM TbBsCompanies where funcCertification order by name asc");
@@ -123,6 +126,7 @@ while($row=mysql_fetch_assoc($result)) {
 }
 assert(mysql_free_result($result));
 echo "</table>";
+echo "<br/>";
 
 }
 

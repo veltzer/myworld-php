@@ -61,7 +61,7 @@ assert($result);
 
 $fields_num=mysql_num_fields($result);
 
-echo "<h1>Works that I have viewed</h1>";
+echo "Works that I have viewed";
 #echo "<div style='overflow: auto; height:400px;'>";
 echo "<table style='empty-cells:show;' border='1'><tr>";
 // printing table headers
@@ -154,8 +154,10 @@ while($row=mysql_fetch_row($result))
 }
 assert(mysql_free_result($result));
 echo "</table>";
+echo "<br/>";
 #echo "</div>";
 
+echo "Some statistics...<br/>";
 $table="TbWkWork";
 
 $query=sprintf("SELECT count(*) FROM %s",mysql_real_escape_string($table));
@@ -220,6 +222,8 @@ assert($result);
 $row=mysql_fetch_row($result);
 echo $query.' = '.$row[0]."<br/>";
 assert(mysql_free_result($result));
+
+echo "<br/>";
 
 }
 
