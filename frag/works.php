@@ -1,7 +1,6 @@
 <?php
 
 require("include/utils.php");
-require("include/db.php");
 require("include/na.php");
 
 function create_works() {
@@ -9,8 +8,8 @@ function create_works() {
 // sending query
 $query=sprintf("SELECT * FROM TbWkProducer");
 $result=mysql_query($query);
-$producers=array();
 assert($result);
+$producers=array();
 while($row=mysql_fetch_assoc($result)) {
 	$producers[$row['id']]=$row;
 }
@@ -21,8 +20,8 @@ assert(mysql_free_result($result));
 // sending query
 $query=sprintf("SELECT * FROM TbWkWorkType");
 $result=mysql_query($query);
-$types=array();
 assert($result);
+$types=array();
 while($row=mysql_fetch_assoc($result)) {
 	$types[$row['id']]=$row;
 }
@@ -33,8 +32,8 @@ assert(mysql_free_result($result));
 // sending query
 $query=sprintf("SELECT * FROM TbLcNamed");
 $result=mysql_query($query);
-$locations=array();
 assert($result);
+$locations=array();
 while($row=mysql_fetch_assoc($result)) {
 	$locations[$row['id']]=$row;
 }
@@ -45,8 +44,8 @@ assert(mysql_free_result($result));
 // sending query
 $query=sprintf("SELECT * FROM TbIdPerson");
 $result=mysql_query($query);
-$persons=array();
 assert($result);
+$persons=array();
 while($row=mysql_fetch_assoc($result)) {
 	$persons[$row['id']]=$row;
 }

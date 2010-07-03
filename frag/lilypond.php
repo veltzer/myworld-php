@@ -1,8 +1,9 @@
 <?php
 
 require("include/utils.php");
-require("include/db.php");
 require("include/na.php");
+
+//שלום
 
 function create_lilypond() {
 
@@ -16,6 +17,8 @@ echo "<table style='empty-cells:show;width:100%;' border='1'>";
 echo "<tr>";
 echo "<td>title</td>";
 echo "<td>subtitle</td>";
+echo "<td>source</td>";
+echo "<td>pdf</td>";
 echo "<td>composer</td>";
 echo "<td>copyright</td>";
 echo "<td>style</td>";
@@ -25,16 +28,20 @@ echo "</tr>\n";
 
 while($row=mysql_fetch_assoc($result)) {
 	$id=$row["id"];
-	$title=$row["title"];
-	$subtitle=$row["subtitle"];
-	$composer=$row["composer"];
-	$copyright=$row["copyright"];
-	$style=$row["style"];
-	$piece=$row["piece"];
-	$poet=$row["poet"];
+	$title=val_or_na($row["title"]);
+	$subtitle=val_or_na($row["subtitle"]);
+	$composer=val_or_na($row["composer"]);
+	$copyright=val_or_na($row["copyright"]);
+	$style=val_or_na($row["style"]);
+	$piece=val_or_na($row["piece"]);
+	$poet=val_or_na($row["poet"]);
+	$a_source="GetBlob.php?table=TbMsLilypond&id=$id&field=source&type=text/plain";
+	$a_pdf="GetBlob.php?table=TbMsLilypond&id=$id&field=pdf&type=application/pdf";
 	echo "</tr>";
 	echo "<td>{$title}</td>";
 	echo "<td>{$subtitle}</td>";
+	echo "<td><a href='{$a_source}'>source</a></td>";
+	echo "<td><a href='{$a_pdf}'>pdf</a></td>";
 	echo "<td>{$composer}</td>";
 	echo "<td>{$copyright}</td>";
 	echo "<td>{$style}</td>";

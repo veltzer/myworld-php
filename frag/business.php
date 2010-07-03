@@ -1,7 +1,6 @@
 <?php
 
 require("include/utils.php");
-require("include/db.php");
 require("include/na.php");
 
 function create_business() {
