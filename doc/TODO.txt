@@ -1,0 +1,5 @@
+- wrap phps in wordpress plugins
+	- write scripts to install the plugins to wordpress folder.
+- import all company images into my database.
+- get ridd of setup and wp-setup if I can...
+- move this to my own folder and leave a symlink here.
