@@ -15,7 +15,7 @@ $p_type = $_GET['type'];
 
 # security...
 assert($p_table=='TbMsLilypond');
-assert($p_field=='source' || $p_field=='pdf' || $p_field=='ps');
+assert($p_field=='source' || $p_field=='pdf' || $p_field=='ps' || $p_field=='midi');
 
 #echo "table is $p_table<br/>";
 #echo "id is $p_id<br/>";
