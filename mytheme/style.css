@@ -1,4 +1,4 @@
-/*   
+/*
 Theme Name: mytheme
 Theme URI: http://veltzer.net
 Description: A theme for technical blogs (derived from Shlomi Noach)
@@ -15,17 +15,17 @@ License: http://www.opensource.org/licenses/gpl-license.php
 }
 
 .aligncenter {
-   display: block;
-   margin-left: auto;
-   margin-right: auto;
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
 }
 
 .alignleft {
-   float: left;
+	float: left;
 }
 
 .alignright {
-   float: right;
+	float: right;
 }
 
 body {
@@ -35,9 +35,9 @@ body {
 	color: #505050;
 	font-family: Verdana, Arial, Helvetica, sans-serif;
 }
-img { 
-        border: 0px; 
-} 
+img {
+	border: 0px;
+}
 form {
 	display: inline;
 }
@@ -99,46 +99,46 @@ form {
 	font-size: 10px;
 }
 #sitemeta ul{
-        list-style: none;
+	list-style: none;
 	display: inline;
 }
 
 #sitemeta li {
-        float: left;
-        margin: 0 0 0 10px;
+	float: left;
+	margin: 0 0 0 10px;
 }
 
 #sitemeta a {
-        color: #252525;
+	color: #252525;
 }
 
 #sitemeta a:hover {
-        color: #f26522;
+	color: #f26522;
 }
 
 #meta li.rss {
-        padding: 0 0 0 15px;
-        background: url(images/rss-icon.gif) no-repeat left center;
+	padding: 0 0 0 15px;
+	background: url(images/rss-icon.gif) no-repeat left center;
 }
 #newsflash {
 	float: right;
 	margin: 0px 20px 0px 20px;
 }
 #newsflash a {
-        color: #f26522;
+	color: #f26522;
 }
 
 #bd {
 	margin: 0px 230px 0px 0px;
-        color: #505050;
+	color: #505050;
 }
-#sidebar {	
-        font-size: 8pt;
+#sidebar {
+	font-size: 8pt;
 	width: 200px;
 	float: right;
-	color:#606060;
+	color: #606060;
 	padding-left: 10px;
-        border-left: 1px solid #e0e0e0;
+	border-left: 1px solid #e0e0e0;
 }
 #sidebar ul {
 	list-style:none outside;
@@ -229,18 +229,18 @@ li.vategories ul {
 blockquote {
 	margin: 10px;
 	font-size: 10pt;
-        padding: 10px;
-        border: 1px dashed #f26522;
-        background:#fafafa;
+	padding: 10px;
+	border: 1px dashed #f26522;
+	background:#fafafa;
 }
 blockquote p {
 	padding: 0px;
 	margin: 0px;
 }
 pre {
-        font-family:'Courier New', Courier, Monospace, Fixed;
+	font-family:'Courier New', Courier, Monospace, Fixed;
 	line-height: normal;
-        overflow: auto;
+	overflow: auto;
 	padding-bottom: 25px;
 	margin: 0px;
 
@@ -254,7 +254,7 @@ cite {
 	margin-left: 4px;
 }
 #author, #email, #url, #comment, .s {
-	border: 1px solid #bdc1a3; 
+	border: 1px solid #bdc1a3;
 	padding: 5px;
 	font-size: 8pt;
 	background:#ffffff;
@@ -276,7 +276,7 @@ cite {
 	font-size: 8pt;
 	background: #f26522;
 	color: #ffffff;
-	border: 1px solid #a0a0a0; 
+	border: 1px solid #a0a0a0;
 }
 
 .searchresults ul {
