@@ -51,7 +51,6 @@ function create_lilypond() {
 	}
 	assert(mysql_free_result($result));
 	$res.="</table>";
-	$res.="<br/>";
 	return $res;
 }
 ?>

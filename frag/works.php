@@ -149,7 +149,7 @@ function create_works() {
 	}
 	assert(mysql_free_result($result));
 	$res.="</table>";
-	$res.="<br/>";
+	#$res.="<br/>";
 	#$res.="</div>";
 
 	$res.="Some statistics...<br/>";
@@ -218,7 +218,7 @@ function create_works() {
 	$res.=$query.' = '.$row[0]."<br/>";
 	assert(mysql_free_result($result));
 
-	$res.="<br/>";
+	#$res.="<br/>";
 	return $res;
 }
 

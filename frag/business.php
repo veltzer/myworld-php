@@ -25,7 +25,6 @@ function create_courses() {
 	}
 	assert(mysql_free_result($result));
 	$res.="</table>";
-	$res.="<br/>";
 	return $res;
 }
 
@@ -62,7 +61,6 @@ function create_consulting() {
 	}
 	assert(mysql_free_result($result));
 	$res.="</table>";
-	$res.="<br/>";
 	return $res;
 }
 
@@ -73,7 +71,6 @@ function create_teaching() {
 	$result=mysql_query($query);
 	assert($result);
 
-	$res.="Companies that I teach or have taught in the past...";
 	$res.=get_start_table();
 	$res.="<tr>";
 	$res.="<td>name</td>";
@@ -100,7 +97,6 @@ function create_teaching() {
 	}
 	assert(mysql_free_result($result));
 	$res.="</table>";
-	$res.="<br/>";
 	return $res;
 }
 
@@ -131,7 +127,6 @@ function create_certification() {
 	}
 	assert(mysql_free_result($result));
 	$res.="</table>";
-	$res.="<br/>";
 	return $res;
 }
 
