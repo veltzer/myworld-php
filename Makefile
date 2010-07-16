@@ -17,3 +17,4 @@ install:
 	sudo cp -r $(THEME_NAME) $(THEME_DIR)
 	sudo cp misc/rss.png /var/www/blog/wp-includes/images/rss.png
 	sudo cp misc/favicon.ico /var/www/
+	sudo cp misc/htaccess /var/www/.htaccess
