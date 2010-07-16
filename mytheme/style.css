@@ -9,6 +9,15 @@ Version: 1.0
 License: http://www.opensource.org/licenses/gpl-license.php
 */
 
+/*
+ * I use gcolor2 to pick colors
+ */
+
+.mycolor {
+	/* this is the blue I use */
+	color: #3160BB;
+}
+
 .clear {
 	clear:both;
 	height:1px;
@@ -53,9 +62,10 @@ form {
 }
 #blogtitle h1 {
 	display: inline;
+	padding-right: 15px;
 }
 #blogtitle h1 a {
-	color: #f26522;
+	color: #3160BB;
 	font-size: 16pt;
 	text-decoration: none;
 	font-weight: normal;
@@ -76,16 +86,13 @@ form {
 }
 #menu ul li a {
 	font-size: 10pt;
-	padding-left: 15px;
+	padding-right: 15px;
 	font-weight: bold;
 	text-decoration: none;
 	color: #505050;
-
-	margin-left: 15px;
-	border-left: 1px solid #e0e0e0;
 }
 #menu ul li a:hover {
-	color: #f26522;
+	color: #3160bb;
 }
 
 #blogdescription {
@@ -113,7 +120,7 @@ form {
 }
 
 #sitemeta a:hover {
-	color: #f26522;
+	color: #3160bb;
 }
 
 #meta li.rss {
@@ -125,7 +132,7 @@ form {
 	margin: 0px 20px 0px 20px;
 }
 #newsflash a {
-	color: #f26522;
+	color: #3160bb;
 }
 
 #bd {
@@ -168,7 +175,7 @@ li.vategories ul {
 	text-decoration: none;
 }
 #sidebar a:hover {
-	color: #f26522;
+	color: #3160bb;
 }
 #sidebar h2 {
 	font-size: 12pt;
@@ -177,7 +184,7 @@ li.vategories ul {
 	display: inline;
 }
 #aboutme a {
-	color: #f26522;
+	color: #3160bb;
 	text-decoration: none;
 }
 
@@ -194,12 +201,12 @@ li.vategories ul {
 	padding-top: 10px;
 }
 #yui-main a {
-	color: #f26522;
+	color: #3160bb;
 	text-decoration: none;
 }
 #yui-main h1 {
 	display: inline;
-	color: #f26522;
+	color: #3160bb;
 	font-size: 14pt;
 	text-decoration: none;
 	font-weight: normal;
@@ -209,12 +216,12 @@ li.vategories ul {
 	text-decoration: none;
 }
 #yui-main h1 a:hover {
-	color: #f26522;
+	color: #3160bb;
 }
 
 #yui-main h2 {
 	display: inline;
-	color: #f26522;
+	color: #3160bb;
 	font-size: 14pt;
 	text-decoration: none;
 	font-weight: normal;
@@ -224,13 +231,13 @@ li.vategories ul {
 	font-size: 14pt;
 }
 #yui-main h2 a:hover {
-	color: #f26522;
+	color: #3160bb;
 }
 blockquote {
 	margin: 10px;
 	font-size: 10pt;
 	padding: 10px;
-	border: 1px dashed #f26522;
+	border: 1px dashed #3160bb;
 	background:#fafafa;
 }
 blockquote p {
@@ -274,7 +281,7 @@ cite {
 }
 #submit, #searchsubmit {
 	font-size: 8pt;
-	background: #f26522;
+	background: #3160bb;
 	color: #ffffff;
 	border: 1px solid #a0a0a0;
 }
@@ -295,6 +302,6 @@ dl, dd, dt {
 	margin: 0px;
 }
 #footnote a {
-	color: #f26522;
+	color: #3160bb;
 	text-decoration: none;
 }

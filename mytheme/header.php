@@ -23,22 +23,21 @@
 <div id="wrapper">
 <div id="<?php yui_doc() ?>" class="<?php yui_secondary_column() ?>">
 <div id="hd">
-	<div id="sitemeta">
+	<!--div id="sitemeta">
 		<ul>
      			<?php wp_register(); ?>
      			<li><?php wp_loginout(); ?></li>
      			<?php wp_meta(); ?>
      			<li class="rss"><a href="<?php bloginfo('rss2_url'); ?>">Subscribe RSS Feed</a></li>
   		</ul>
-	</div>
+	</div-->
 	<div id="titlewrapper">
 		<div id="blogtitle">
-			<h1><a href="<?php echo get_option('home'); ?>/"><?php bloginfo('name'); ?></a></h1>
+			<h1><a href="<?php echo get_option('home'); ?>/"><?php bloginfo('name'); ?></a></h1><span id="blogdescription"><?php bloginfo('description'); ?></span>
 		</div>
 		<div id="menu">
 			<ul>
-				<li><div id="blogdescription"><?php bloginfo('description'); ?></div></li>
-				<li><a href="<?php echo get_option('home'); ?>/">Home</a></li>
+				<!--<li><a href="<?php echo get_option('home'); ?>/">Home</a></li>-->
 				<?php wp_list_pages('title_li'); ?>
 			</ul>
 		</div>
