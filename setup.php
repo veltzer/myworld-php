@@ -9,4 +9,8 @@ function get_root() {
 	return "http://veltzer.net/~mark/php/";
 }
 
+function my_include($page) {
+	include_once($page);
+}
+
 ?>

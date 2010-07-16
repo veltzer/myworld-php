@@ -1,8 +1,5 @@
 <?php
 
-require("include/utils.php");
-require("include/na.php");
-
 function create_business() {
 
 # TODO:

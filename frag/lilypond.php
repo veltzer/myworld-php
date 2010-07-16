@@ -1,10 +1,5 @@
 <?php
 
-require("include/utils.php");
-require("include/na.php");
-
-//שלום
-
 function create_lilypond() {
 
 // sending query

@@ -2,8 +2,10 @@
 <?php
 
 require("../setup.php");
-require("frag/business.php");
-require("include/db.php");
+my_include("include/utils.php");
+my_include("include/na.php");
+my_include("include/db.php");
+my_include("frag/business.php");
 
 db_connect();
 create_business();
