@@ -15,6 +15,10 @@ function my_include($file) {
 	include_once(plugin_dir_path( __FILE__ ).$file);
 }
 
+function link_to($relative) {
+	return plugin_basename(__FILE__).$relative;
+}
+
 /*
  * Plugin initialization function
  */

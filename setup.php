@@ -13,4 +13,9 @@ function my_include($page) {
 	include_once($page);
 }
 
+function link_to($relative) {
+	#return get_root().$relative;
+	return $relative;
+}
+
 ?>
