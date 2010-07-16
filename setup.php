@@ -18,4 +18,8 @@ function link_to_direct($direct_page) {
 	return "../direct/".$direct_page;
 }
 
+function link_to_resource($resource) {
+	return "http://veltzer.net/~mark/php/".$relative;
+}
+
 ?>

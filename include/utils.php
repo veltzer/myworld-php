@@ -22,4 +22,8 @@ function formatTimeperiod($size) {
 	return round($size, 2).' '.$units[$i];
 }
 
+function get_start_table() {
+	return "<table style='empty-cells:show;width:100%;' border='1'>";
+}
+
 ?>

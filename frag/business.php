@@ -12,7 +12,7 @@ $result=mysql_query($query);
 assert($result);
 
 echo "Courses that I teach or have taught in the past...";
-echo "<table style='empty-cells:show;width:100%;' border='1'>";
+echo get_start_table();
 echo "<tr>";
 echo "<td>name</td>";
 echo "</tr>\n";
@@ -34,7 +34,7 @@ $result=mysql_query($query);
 assert($result);
 
 echo "Companies that I consult or have consulted in the past...";
-echo "<table style='empty-cells:show;width:100%' border='1'>";
+echo get_start_table();
 echo "<tr>";
 echo "<td>name</td>";
 echo "<td>remark</td>";
@@ -45,7 +45,7 @@ while($row=mysql_fetch_assoc($result)) {
 	$name=$row["name"];
 	$remark=$row["remark"];
 	$url=$row["url"];
-	$imagePath=get_root()."/".$row["imagePath"];
+	$imagePath=link_to_resource($row["imagePath"]);
 	if($url!=NULL) {
 		$name="<a href='{$url}'>{$name}</a>";
 	}
@@ -68,7 +68,7 @@ $result=mysql_query($query);
 assert($result);
 
 echo "Companies that I teach or have taught in the past...";
-echo "<table style='empty-cells:show;width:100%' border='1'>";
+echo get_start_table();
 echo "<tr>";
 echo "<td>name</td>";
 echo "<td>remark</td>";
@@ -79,7 +79,7 @@ while($row=mysql_fetch_assoc($result)) {
 	$name=$row["name"];
 	$remark=$row["remark"];
 	$url=$row["url"];
-	$imagePath=get_root()."/".$row["imagePath"];
+	$imagePath=link_to_resource($row["imagePath"]);
 	if($url!=NULL) {
 		$name="<a href='{$url}'>{$name}</a>";
 	}
@@ -102,7 +102,7 @@ $result=mysql_query($query);
 assert($result);
 
 echo "My Certifications...";
-echo "<table style='empty-cells:show;width:100%' border='1'>";
+echo get_start_table();
 echo "<tr>";
 echo "<td>type of certification</td>";
 echo "<td>date from which I am certified</td>";
@@ -112,7 +112,7 @@ echo "</tr>\n";
 while($row=mysql_fetch_assoc($result)) {
 	$name=$row["name"];
 	$url=$row["url"];
-	$imagePath=get_root()."/".$row["imagePath"];
+	$imagePath=link_to_resource($row["imagePath"]);
 	$fromDate=$row["fromDate"];
 	echo "</tr>";
 	echo "<td><a href='{$url}'>{$name}</a></td>";

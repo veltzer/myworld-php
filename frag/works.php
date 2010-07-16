@@ -59,7 +59,7 @@ $fields_num=mysql_num_fields($result);
 
 echo "Works that I have viewed";
 #echo "<div style='overflow: auto; height:400px;'>";
-echo "<table style='empty-cells:show;' border='1'><tr>";
+echo get_start_table();
 // printing table headers
 for($i=0; $i<$fields_num; $i++)
 {
