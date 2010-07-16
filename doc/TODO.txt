@@ -5,3 +5,6 @@
 - move this to my own folder and leave a symlink here.
 - picasa albums are showing way too low.
 	fix it.
+- permalinks look bad. A link to an article looks like:
+	http://veltzer.net/blog/blog/2010/07/02/grep-is-broken-use-perl-instead/
+	The extra "blog" there is redundant. Do something about it.
