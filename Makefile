@@ -11,7 +11,7 @@ all:
 
 .PHONY: install
 install:
-	-sudo rm -rf $(FULL_PLUGIN_DIR)
+	-sudo rm -rf $(FULL_PLUGIN_DIR) $(FULL_THEME_DIR)
 	sudo cp -r $(PLUGIN_NAME) $(PLUGIN_DIR) 
 	sudo cp -r include frag direct resources $(FULL_PLUGIN_DIR)
 	sudo cp -r $(THEME_NAME) $(THEME_DIR)
