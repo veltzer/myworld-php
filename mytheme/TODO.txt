@@ -2,3 +2,4 @@
 2. icon for the site should be built and installed with "make install".
 3. No comments appear in the big pages (although comments are allowed).
 4. The RSS icon should be turned bluish.
+5. Alternating colors in table so that they could be better read.

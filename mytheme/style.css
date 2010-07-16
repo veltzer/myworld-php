@@ -251,7 +251,7 @@ pre {
 	padding-bottom: 25px;
 	margin: 0px;
 
-	background-image:url('images/bg_pre_dots.png');
+/*	background-image:url('images/bg_pre_dots.png'); */
 	background-repeat: repeat-x;
 	background-position: bottom left;
 }

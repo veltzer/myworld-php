@@ -15,4 +15,4 @@ install:
 	sudo cp -r $(PLUGIN_NAME) $(PLUGIN_DIR) 
 	sudo cp -r include frag direct resources $(FULL_PLUGIN_DIR)
 	sudo cp -r $(THEME_NAME) $(THEME_DIR)
-	sudo cp mytheme/images/rss.png /var/www/blog/wp-includes/images/rss.png
+	sudo cp misc/rss.png /var/www/blog/wp-includes/images/rss.png
