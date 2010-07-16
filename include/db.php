@@ -35,7 +35,7 @@ function db_connect() {
 
 function db_disconnect() {
 	global $link;
-	assert(mysql_close($link));
+//	assert(mysql_close($link));
 }
 
 ?>

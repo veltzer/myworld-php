@@ -1,9 +1,5 @@
 <?php
 
-# show all errors in the output... This should be turned off for production...
-error_reporting(E_ALL);
-ini_set('display_errors','1');
-
 # input is in bytes
 function formatSize($size) {
 	$units=array('B','KB','MB','GB','TB');

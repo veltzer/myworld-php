@@ -1,5 +1,9 @@
 <?php
 
+# show all errors in the output... This should be turned off for production...
+#error_reporting(E_ALL);
+#ini_set('display_errors','1');
+
 $BASE_PATH = dirname(__FILE__);
 ini_set("include_path", ini_get("include_path").":".$BASE_PATH);
 
