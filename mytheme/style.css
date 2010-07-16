@@ -181,7 +181,7 @@ li.vategories ul {
 	font-size: 12pt;
 	font-weight: bold;
 	text-decoration: none;
-	display: inline;
+	/* display: inline; */
 }
 #aboutme a {
 	color: #3160bb;
@@ -304,4 +304,8 @@ dl, dd, dt {
 #footnote a {
 	color: #3160bb;
 	text-decoration: none;
+}
+
+.twitterwidget-title {
+	padding-left: 15px;
 }
