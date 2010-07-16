@@ -8,10 +8,10 @@ my_include("include/db.php");
 my_include("frag/business.php");
 
 db_connect();
-create_courses();
-create_consulting();
-create_teaching();
-create_certification();
+echo create_courses();
+echo create_consulting();
+echo create_teaching();
+echo create_certification();
 db_disconnect();
 
 ?>

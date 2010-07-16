@@ -5,40 +5,43 @@
 # Handle creation of tables via my own class.
 
 function create_courses() {
+	$res="";
 	// sending query
 	$query=sprintf("SELECT id,name FROM TbBsCourses");
 	$result=mysql_query($query);
 	assert($result);
 
-	echo get_start_table();
-	echo "<tr>";
-	echo "<td>name</td>";
-	echo "</tr>\n";
+	$res.=get_start_table();
+	$res.="<tr>";
+	$res.="<td>name</td>";
+	$res.="</tr>\n";
 
 	while($row=mysql_fetch_assoc($result)) {
 		$id=$row["id"];
 		$name=$row["name"];
-		echo "</tr>";
-		echo "<td>{$name}</td>";
-		echo "</tr>\n";
+		$res.="</tr>";
+		$res.="<td>{$name}</td>";
+		$res.="</tr>\n";
 	}
 	assert(mysql_free_result($result));
-	echo "</table>";
-	echo "<br/>";
+	$res.="</table>";
+	$res.="<br/>";
+	return $res;
 }
 
 function create_consulting() {
+	$res="";
 	// sending query
 	$query=sprintf("SELECT name,remark,url,imagePath FROM TbBsCompanies where funcConsulting order by name asc");
 	$result=mysql_query($query);
 	assert($result);
 
-	echo get_start_table();
-	echo "<tr>";
-	echo "<td>name</td>";
-	echo "<td>remark</td>";
-	echo "<td>image</td>";
-	echo "</tr>\n";
+	$res.=get_start_table();
+	$res.="<tr>";
+	$res.="<td>name</td>";
+	$res.="<td>remark</td>";
+	$res.="<td>image</td>";
+	$res.="</tr>\n";
 
 	while($row=mysql_fetch_assoc($result)) {
 		$name=$row["name"];
@@ -51,30 +54,32 @@ function create_consulting() {
 		if($remark==NULL) {
 			$remark=get_na_string();
 		}
-		echo "</tr>";
-		echo "<td>{$name}</td>";
-		echo "<td>{$remark}</td>";
-		echo "<td><img src='{$imagePath}'/></td>";
-		echo "</tr>\n";
+		$res.="</tr>";
+		$res.="<td>{$name}</td>";
+		$res.="<td>{$remark}</td>";
+		$res.="<td><img src='{$imagePath}'/></td>";
+		$res.="</tr>\n";
 	}
 	assert(mysql_free_result($result));
-	echo "</table>";
-	echo "<br/>";
+	$res.="</table>";
+	$res.="<br/>";
+	return $res;
 }
 
 function create_teaching() {
+	$res="";
 	// sending query
 	$query=sprintf("SELECT name,remark,url,imagePath FROM TbBsCompanies where funcTeaching order by name asc");
 	$result=mysql_query($query);
 	assert($result);
 
-	echo "Companies that I teach or have taught in the past...";
-	echo get_start_table();
-	echo "<tr>";
-	echo "<td>name</td>";
-	echo "<td>remark</td>";
-	echo "<td>image</td>";
-	echo "</tr>\n";
+	$res.="Companies that I teach or have taught in the past...";
+	$res.=get_start_table();
+	$res.="<tr>";
+	$res.="<td>name</td>";
+	$res.="<td>remark</td>";
+	$res.="<td>image</td>";
+	$res.="</tr>\n";
 
 	while($row=mysql_fetch_assoc($result)) {
 		$name=$row["name"];
@@ -87,44 +92,47 @@ function create_teaching() {
 		if($remark==NULL) {
 			$remark=get_na_string();
 		}
-		echo "</tr>";
-		echo "<td>{$name}</td>";
-		echo "<td>{$remark}</td>";
-		echo "<td><img src='{$imagePath}'/></td>";
-		echo "</tr>\n";
+		$res.="</tr>";
+		$res.="<td>{$name}</td>";
+		$res.="<td>{$remark}</td>";
+		$res.="<td><img src='{$imagePath}'/></td>";
+		$res.="</tr>\n";
 	}
 	assert(mysql_free_result($result));
-	echo "</table>";
-	echo "<br/>";
+	$res.="</table>";
+	$res.="<br/>";
+	return $res;
 }
 
 function create_certification() {
+	$res="";
 	// sending query
 	$query=sprintf("SELECT name,url,imagePath,fromDate FROM TbBsCompanies where funcCertification order by name asc");
 	$result=mysql_query($query);
 	assert($result);
 
-	echo get_start_table();
-	echo "<tr>";
-	echo "<td>type of certification</td>";
-	echo "<td>date from which I am certified</td>";
-	echo "<td>image</td>";
-	echo "</tr>\n";
+	$res.=get_start_table();
+	$res.="<tr>";
+	$res.="<td>type of certification</td>";
+	$res.="<td>date from which I am certified</td>";
+	$res.="<td>image</td>";
+	$res.="</tr>\n";
 	// printing table rows
 	while($row=mysql_fetch_assoc($result)) {
 		$name=$row["name"];
 		$url=$row["url"];
 		$imagePath=link_to_resource($row["imagePath"]);
 		$fromDate=$row["fromDate"];
-		echo "</tr>";
-		echo "<td><a href='{$url}'>{$name}</a></td>";
-		echo "<td>{$fromDate}</td>";
-		echo "<td><img src='{$imagePath}'/></td>";
-		echo "</tr>\n";
+		$res.="</tr>";
+		$res.="<td><a href='{$url}'>{$name}</a></td>";
+		$res.="<td>{$fromDate}</td>";
+		$res.="<td><img src='{$imagePath}'/></td>";
+		$res.="</tr>\n";
 	}
 	assert(mysql_free_result($result));
-	echo "</table>";
-	echo "<br/>";
+	$res.="</table>";
+	$res.="<br/>";
+	return $res;
 }
 
 ?>
