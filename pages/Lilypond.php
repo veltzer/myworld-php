@@ -9,7 +9,7 @@ my_include("include/db.php");
 my_include("frag/lilypond.php");
 
 db_connect();
-create_lilypond();
+echo create_lilypond();
 db_disconnect();
 
 ?>

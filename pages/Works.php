@@ -9,7 +9,7 @@ my_include("frag/works.php");
 
 
 db_connect();
-create_works();
+echo create_works();
 db_disconnect();
 
 ?>
