@@ -15,8 +15,8 @@ function my_include($file) {
 	include_once(plugin_dir_path( __FILE__ ).$file);
 }
 
-function link_to($relative) {
-	return plugin_basename(__FILE__).$relative;
+function link_to_direct($direct_page) {
+	return WP_PLUGIN_URL."/myworld/direct/".$direct_page;
 }
 
 /*
