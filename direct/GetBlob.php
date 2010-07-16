@@ -4,9 +4,9 @@
 // http://veltzer.net/~mark/php/pages/GetBlob.php?table=TbMsLilypond&id=5&field=pdf&type=application/pdf
 
 require("../setup.php");
-require("include/utils.php");
-require("include/db.php");
-require("include/na.php");
+my_include("include/utils.php");
+my_include("include/db.php");
+my_include("include/na.php");
 
 $p_table = $_GET['table'];
 $p_id = $_GET['id'];
@@ -16,11 +16,6 @@ $p_type = $_GET['type'];
 # security...
 assert($p_table=='TbMsLilypond');
 assert($p_field=='source' || $p_field=='pdf' || $p_field=='ps' || $p_field=='midi');
-
-#echo "table is $p_table<br/>";
-#echo "id is $p_id<br/>";
-#echo "field is $p_field<br/>";
-#echo "type is $p_type<br/>";
 
 db_connect();
 $query=sprintf("SELECT %s FROM %s where id=%s",

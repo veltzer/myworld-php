@@ -31,10 +31,10 @@ while($row=mysql_fetch_assoc($result)) {
 	$style=val_or_na($row["style"]);
 	$piece=val_or_na($row["piece"]);
 	$poet=val_or_na($row["poet"]);
-	$a_source=link_to("GetBlob.php?table=TbMsLilypond&id=$id&field=source&type=text/plain");
-	$a_pdf=link_to("GetBlob.php?table=TbMsLilypond&id=$id&field=pdf&type=application/pdf");
-	$a_ps=link_to("GetBlob.php?table=TbMsLilypond&id=$id&field=ps&type=application/postscript");
-	$a_midi=link_to("GetBlob.php?table=TbMsLilypond&id=$id&field=midi&type=audio/midi");
+	$a_source=link_to_direct("GetBlob.php?table=TbMsLilypond&id=$id&field=source&type=text/plain");
+	$a_pdf=link_to_direct("GetBlob.php?table=TbMsLilypond&id=$id&field=pdf&type=application/pdf");
+	$a_ps=link_to_direct("GetBlob.php?table=TbMsLilypond&id=$id&field=ps&type=application/postscript");
+	$a_midi=link_to_direct("GetBlob.php?table=TbMsLilypond&id=$id&field=midi&type=audio/midi");
 	echo "</tr>";
 	echo "<td>{$title}</td>";
 	echo "<td>{$subtitle}</td>";

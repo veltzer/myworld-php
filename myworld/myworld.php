@@ -12,7 +12,7 @@ Author URI: http://www.veltzer.net
  * Handy function to include files once from my own plugin directory
  */
 function my_include($file) {
-	include_once(plugin_dir_path( __FILE__ ).$file);
+	include_once(plugin_dir_path(__FILE__).$file);
 }
 
 function link_to_direct($direct_page) {
