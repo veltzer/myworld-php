@@ -3,3 +3,4 @@
 3. No comments appear in the big pages (although comments are allowed).
 4. The RSS icon should be turned bluish.
 5. Alternating colors in table so that they could be better read.
+6. Make the sidebar to the right go all the way to the top.
