@@ -37,41 +37,44 @@ function myworld_admin_init() {
 }
 add_action('admin_init', 'myworld_admin_init');
 
+my_include("include/db.php");
+my_include("include/na.php");
+my_include("include/utils.php");
+my_include("frag/business.php");
+my_include("frag/works.php");
+my_include("frag/lilypond.php");
+
 /*
  * The function that creates dynamic content
  */
 function myworld_create_content($what) {
+	db_connect();
 	switch($what) {
-		case "business":
-			my_include("include/db.php");
-			my_include("include/na.php");
-			my_include("include/utils.php");
-			my_include("frag/business.php");
-			db_connect();
-			$ret=create_business();
-			db_disconnect();
-			return $ret;
+		case "courses":
+			$ret=create_courses();
+			break;
+		case "consulting":
+			$ret=create_consulting();
+			break;
+		case "teaching":
+			$ret=create_teaching();
+			break;
+		case "certification":
+			$ret=create_certification();
+			break;
 		case "works":
-			my_include("include/db.php");
-			my_include("include/na.php");
-			my_include("include/utils.php");
-			my_include("frag/works.php");
-			db_connect();
 			$ret=create_works();
-			db_disconnect();
-			return $ret;
+			break;
 		case "lilypond":
-			my_include("include/db.php");
-			my_include("include/na.php");
-			my_include("include/utils.php");
-			my_include("frag/lilypond.php");
-			db_connect();
 			$ret=create_lilypond();
-			db_disconnect();
-			return $ret;
+			break;
 		default:
-			return "[$what] is unknown";
+			$ret="[$what] is unknown";
+			break;
 	}
+	#$ret="<br/>$ret<br/>";
+	db_disconnect();
+	return $ret;
 }
 
 /*

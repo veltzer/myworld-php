@@ -26,6 +26,7 @@ function db_connect() {
 	assert_options(ASSERT_WARNING,1);
 	#assert_options(ASSERT_QUIET_EVAL,0);
 
+
 	global $link;
 	$link=mysql_connect($db_host,$db_user,$db_pwd);
 	assert($link);
