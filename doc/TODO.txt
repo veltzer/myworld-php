@@ -3,3 +3,5 @@
 - import all company images into my database.
 - get ridd of setup and wp-setup if I can...
 - move this to my own folder and leave a symlink here.
+- picasa albums are showing way too low.
+	fix it.
