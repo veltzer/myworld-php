@@ -7,4 +7,4 @@ install:
 	-sudo rm -rf $(WP_DIR)/$(PLUGIN_DIR)/$(PLUGIN_NAME)
 	sudo cp -r $(PLUGIN_NAME) $(WP_DIR)/$(PLUGIN_DIR) 
 	sudo mkdir $(WP_DIR)/$(PLUGIN_DIR)/$(PLUGIN_NAME)/include
-	sudo cp -r include frag direct images $(WP_DIR)/$(PLUGIN_DIR)/$(PLUGIN_NAME)
+	sudo cp -r include frag direct resources $(WP_DIR)/$(PLUGIN_DIR)/$(PLUGIN_NAME)

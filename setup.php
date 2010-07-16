@@ -19,7 +19,7 @@ function link_to_direct($direct_page) {
 }
 
 function link_to_resource($resource) {
-	return "http://veltzer.net/~mark/php/".$resource;
+	return "../resources/".$resource;
 }
 
 ?>

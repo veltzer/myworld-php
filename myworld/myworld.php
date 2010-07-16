@@ -20,7 +20,7 @@ function link_to_direct($direct_page) {
 }
 
 function link_to_resource($resource) {
-	return WP_PLUGIN_URL."/myworld/".$resource;
+	return WP_PLUGIN_URL."/myworld/resources/".$resource;
 }
 
 /*
