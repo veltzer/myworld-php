@@ -7,7 +7,6 @@ $query=sprintf("SELECT id,title,subtitle,composer,copyright,style,piece,poet FRO
 $result=mysql_query($query);
 assert($result);
 
-echo "Some music I maintain in lilypond format...";
 echo "<table style='empty-cells:show;width:100%;' border='1'>";
 echo "<tr>";
 echo "<td>title</td>";

@@ -38,7 +38,7 @@ function myworld_create_content($what) {
 			my_include("include/db.php");
 			my_include("include/na.php");
 			my_include("include/utils.php");
-			my_include("include/business.php");
+			my_include("frag/business.php");
 			db_connect();
 			$ret=create_business();
 			db_disconnect();
@@ -47,7 +47,7 @@ function myworld_create_content($what) {
 			my_include("include/db.php");
 			my_include("include/na.php");
 			my_include("include/utils.php");
-			my_include("include/works.php");
+			my_include("frag/works.php");
 			db_connect();
 			$ret=create_works();
 			db_disconnect();
@@ -56,7 +56,7 @@ function myworld_create_content($what) {
 			my_include("include/db.php");
 			my_include("include/na.php");
 			my_include("include/utils.php");
-			my_include("include/lilypond.php");
+			my_include("frag/lilypond.php");
 			db_connect();
 			$ret=create_lilypond();
 			db_disconnect();
