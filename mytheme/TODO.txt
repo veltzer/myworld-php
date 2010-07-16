@@ -1,0 +1,4 @@
+1. code snipplets inlined should be more emphasized.
+2. icon for the site should be built and installed with "make install".
+3. No comments appear in the big pages (although comments are allowed).
+4. The RSS icon should be turned bluish.
