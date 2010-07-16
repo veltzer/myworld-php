@@ -2,6 +2,9 @@ WP_DIR=/var/www/blog
 PLUGIN_DIR=wp-content/plugins
 PLUGIN_NAME=myworld
 
+.PHONY: all
+all:
+
 .PHONY: install
 install:
 	-sudo rm -rf $(WP_DIR)/$(PLUGIN_DIR)/$(PLUGIN_NAME)
