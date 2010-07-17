@@ -1,7 +1,11 @@
 here are the plugins that I am ACTUALLY using. All other plugins can be removed:
+
+The names here are in ** folder ** format which means that they are the names
+which are shown if you list the content of $WP/wp-content/plugins
+
 akismet - for SPAM
 all-in-one-seo-pack - URLS, SEO etc...
 google-analyticator - google analytics.
-kPicasa - for my picasa albums.
+kpicasa-gallery - for my picasa albums.
 twitter-widget-pro - for the twitter sidebar
 wp-syntax - for the code snipplets.
