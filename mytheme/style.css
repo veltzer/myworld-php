@@ -8,35 +8,33 @@ Tags: blue ,white, two-columns, flexible-width
 Version: 1.0
 License: http://www.opensource.org/licenses/gpl-license.php
 */
-
 /*
+ * Notes:
  * I use gcolor2 to pick colors
+ *
+ * TODO:
+ * - too much repetition of colors here - reduce it.
+ * - document every color I use so I'll know how to change it.
  */
-
 .mycolor {
 	/* this is the blue I use */
 	color: #3160BB;
 }
-
 .clear {
 	clear:both;
 	height:1px;
 }
-
 .aligncenter {
 	display: block;
 	margin-left: auto;
 	margin-right: auto;
 }
-
 .alignleft {
 	float: left;
 }
-
 .alignright {
 	float: right;
 }
-
 body {
 	background: #ffffff;
 	font-size: 9pt;
@@ -54,7 +52,6 @@ form {
 	width: 90%;
 	text-align:left;
 }
-
 #hd {
 	padding-bottom: 10px;
 	margin-bottom: 20px;
@@ -94,13 +91,11 @@ form {
 #menu ul li a:hover {
 	color: #3160bb;
 }
-
 #blogdescription {
 	color: #909090;
 	font-size:10pt;
 	font-weight: bold;
 }
-
 #sitemeta {
 	float: right;
 	font-size: 10px;
@@ -109,20 +104,16 @@ form {
 	list-style: none;
 	display: inline;
 }
-
 #sitemeta li {
 	float: left;
 	margin: 0 0 0 10px;
 }
-
 #sitemeta a {
 	color: #252525;
 }
-
 #sitemeta a:hover {
 	color: #3160bb;
 }
-
 #meta li.rss {
 	padding: 0 0 0 15px;
 	background: url(images/rss-icon.gif) no-repeat left center;
@@ -134,7 +125,6 @@ form {
 #newsflash a {
 	color: #3160bb;
 }
-
 #bd {
 	margin: 0px 230px 0px 0px;
 	color: #505050;
@@ -181,13 +171,11 @@ li.vategories ul {
 	font-size: 12pt;
 	font-weight: bold;
 	text-decoration: none;
-	/* display: inline; */
 }
 #aboutme a {
 	color: #3160bb;
 	text-decoration: none;
 }
-
 .post-wrap {
 	margin-left: 0px;
 	padding-bottom: 10px;
@@ -218,7 +206,6 @@ li.vategories ul {
 #yui-main h1 a:hover {
 	color: #3160bb;
 }
-
 #yui-main h2 {
 	display: inline;
 	color: #3160bb;
@@ -250,7 +237,6 @@ pre {
 	overflow: auto;
 	padding-bottom: 25px;
 	margin: 0px;
-
 	background-repeat: repeat-x;
 	background-position: bottom left;
 }
@@ -284,7 +270,6 @@ cite {
 	color: #ffffff;
 	border: 1px solid #a0a0a0;
 }
-
 .searchresults ul {
 	list-style: none;
 	display: inline;
@@ -304,7 +289,6 @@ dl, dd, dt {
 	color: #3160bb;
 	text-decoration: none;
 }
-
 .twitterwidget-title {
 	padding-left: 15px;
 }
