@@ -2,6 +2,6 @@ here are the plugins that I am ACTUALLY using. All other plugins can be removed:
 akismet - for SPAM
 all-in-one-seo-pack - URLS, SEO etc...
 google-analyticator - google analytics.
-picasaview - for my picasa albums.
+kPicasa - for my picasa albums.
 twitter-widget-pro - for the twitter sidebar
 wp-syntax - for the code snipplets.
