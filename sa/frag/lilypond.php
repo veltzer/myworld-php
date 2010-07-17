@@ -11,7 +11,7 @@ function create_lilypond() {
 	$res.="<tr>";
 	$res.="<td>title</td>";
 	$res.="<td>subtitle</td>";
-	$res.="<td>source</td>";
+	$res.="<td>ly</td>";
 	$res.="<td>pdf</td>";
 	$res.="<td>ps</td>";
 	$res.="<td>midi</td>";
@@ -31,14 +31,14 @@ function create_lilypond() {
 		$style=val_or_na($row["style"]);
 		$piece=val_or_na($row["piece"]);
 		$poet=val_or_na($row["poet"]);
-		$a_source=link_to_direct("GetBlob.php?table=TbMsLilypond&id=$id&field=source&type=text/plain");
-		$a_pdf=link_to_direct("GetBlob.php?table=TbMsLilypond&id=$id&field=pdf&type=application/pdf");
-		$a_ps=link_to_direct("GetBlob.php?table=TbMsLilypond&id=$id&field=ps&type=application/postscript");
-		$a_midi=link_to_direct("GetBlob.php?table=TbMsLilypond&id=$id&field=midi&type=audio/midi");
+		$a_ly=link_to_direct("GetBlob.php?table=TbMsLilypond&id=$id&field=ly&type=text/plain&name_field=fbasename");
+		$a_pdf=link_to_direct("GetBlob.php?table=TbMsLilypond&id=$id&field=pdf&type=application/pdf&name_field=fbasename");
+		$a_ps=link_to_direct("GetBlob.php?table=TbMsLilypond&id=$id&field=ps&type=application/postscript&name_field=fbasename");
+		$a_midi=link_to_direct("GetBlob.php?table=TbMsLilypond&id=$id&field=midi&type=audio/midi&name_field=fbasename");
 		$res.="</tr>";
 		$res.="<td>{$title}</td>";
 		$res.="<td>{$subtitle}</td>";
-		$res.="<td><a href='{$a_source}'>source</a></td>";
+		$res.="<td><a href='{$a_ly}'>ly</a></td>";
 		$res.="<td><a href='{$a_pdf}'>pdf</a></td>";
 		$res.="<td><a href='{$a_ps}'>ps</a></td>";
 		$res.="<td><a href='{$a_midi}'>midi</a></td>";
