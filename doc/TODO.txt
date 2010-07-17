@@ -7,3 +7,6 @@
 	and so should be lilypond fragment.
 	There I would have sugar functions for creating a link for a blog
 	and extracting the data of a blob requested.
+- take an image of me and pass it though some gimp folder and put it on the side bar
+	of my site.
+- put some info on the todo page.
