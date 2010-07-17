@@ -1,7 +1,7 @@
 <?php
 
 // url to use this script:
-// http://veltzer.net/~mark/php/pages/GetBlob.php?table=TbMsLilypond&id=5&field=pdf&type=application/pdf
+// http://veltzer.net/~mark/php/pages/GetBlob.php?table=TbMsLilypond&id=5&field=pdf&type=application/pdf&name_field=filebasename
 
 require("../setup.php");
 my_include("include/utils.php");
