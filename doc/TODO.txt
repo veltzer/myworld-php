@@ -10,3 +10,5 @@
 - take an image of me and pass it though some gimp folder and put it on the side bar
 	of my site.
 - put some info on the todo page.
+- my pages (not the posts - the pages) do not have a discussion at the botton although
+	I allowed it in the configuration. This seems to be some kind of theme problem.
