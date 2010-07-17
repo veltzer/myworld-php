@@ -37,6 +37,9 @@ assert($result);
 assert(mysql_num_rows($result)==1);
 $fileContent=@mysql_result($result,0,$p_field);
 $fileName=@mysql_result($result,0,$p_name_field);
+# You can see more HTTP headers that may improve stuff in
+# http://en.wikipedia.org/wiki/List_of_HTTP_headers
+# ideas are: Content-MD5, Content-Length, Last-Modified
 header("Content-type: $p_type");
 header("Cache-Control: no-cache");
 header("Content-Disposition: attachment; filename=$fileName.$p_field");
