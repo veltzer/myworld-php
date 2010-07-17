@@ -5,3 +5,7 @@
 	http://veltzer.net/blog/blog/2010/07/02/grep-is-broken-use-perl-instead/
 	The extra "blog" there is redundant. Do something about it.
 - fix up my favicon after learning some gimp howto.
+- GetBlob.php should be based on include/blob.php
+	and so should be lilypond fragment.
+	There I would have sugar functions for creating a link for a blog
+	and extracting the data of a blob requested.
