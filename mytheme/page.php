@@ -13,7 +13,7 @@
 	</div><!-- end post -->
 <?php endwhile;
 // to enable comments, uncomment the line below 
-// comments_template(); 
+comments_template(); 
 else: ?>
 		<h2 class="title"><?php _e('Not Found'); ?></h2>
 		<p><?php _e("Sorry, but the page you're looking for couldn't be found. Double check your URL or you should try searching for it."); ?></p>

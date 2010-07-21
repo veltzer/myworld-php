@@ -80,7 +80,8 @@ function myworld_create_content($what) {
 /*
  * The function that hooks into WP to substitute content
  */
-function myworld_the_content( $content ) {
+function myworld_the_content($content) {
+	$content=myworld_the_title($content);
 	$pattern = "/\[myworld:\s*([^\]]+)\s*\]/";
 	preg_match_all( $pattern, $content, $tags );
 	foreach( $tags[0] as $k=>$cnt ) {
@@ -88,5 +89,22 @@ function myworld_the_content( $content ) {
 	}
 	return $content;
 }
+/*
+ * The function that is called when displaying titles of articles
+ *
+ * Check if the title is hebrew and if so wrap it in the right tags...
+ */
+function isHebrew($string) {
+	return ereg("[א-ת]",$string,$regs);
+}
+
+function myworld_the_title($title) {
+	if(isHebrew($title)) {
+		$title="<div class=hebtitle>".$title."</div>";
+	}
+	return $title;
+}
 
 add_filter('the_content','myworld_the_content');
+add_filter('the_title','myworld_the_title');
+add_filter('the_excerpt','myworld_the_title');

@@ -292,3 +292,12 @@ dl, dd, dt {
 .twitterwidget-title {
 	padding-left: 15px;
 }
+:lang(he) { direction: rtl; text-align:right; }
+.hebcontent {
+	direction: rtl;
+	text-align: right;
+}
+.hebtitle {
+	direction: rtl;
+	text-align: right;
+}
