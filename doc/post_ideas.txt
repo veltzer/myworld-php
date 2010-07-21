@@ -4,3 +4,4 @@
 - how to write a WordPress theme with download example...
 - how to backup your debian system.
 	Look at what I have in ~/Dropbox/system
+- post about my experiences with hebrew (the filters I used).
