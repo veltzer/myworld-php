@@ -12,3 +12,6 @@
 - put some info on the about page.
 - put a todo page on the blog with stuff that I want to do in the blog
 	and handle it from there.
+- check what's the status of a hebrew spell checker in my blog...
+	(do I have one ? does it work? what about the english one ?)
+- add images to my political posts (the hebrew ones).
