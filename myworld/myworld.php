@@ -99,7 +99,7 @@ function isHebrew($string) {
 }
 
 function myworld_the_title($title) {
-	if(isHebrew($title)) {
+	if (!is_admin() && isHebrew($title)) {
 		$title="<div class=hebtitle>".$title."</div>";
 	}
 	return $title;
