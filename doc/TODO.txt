@@ -1,3 +1,8 @@
+- divide my plugin into two plugins:
+	- one that handles the hebrew stuff.
+	- one that handles the myworld stuff.
+	- blog about the hebrew plugin.
+
 - import all company images into my database.
 - permalinks look bad. A link to an article looks like:
 	http://veltzer.net/blog/blog/2010/07/02/grep-is-broken-use-perl-instead/

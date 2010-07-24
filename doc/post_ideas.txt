@@ -5,3 +5,9 @@
 - how to backup your debian system.
 	Look at what I have in ~/Dropbox/system
 - post about my experiences with hebrew (the filters I used).
+
+- post about atime and noatime and calling for a mainstream distribution to work with
+	noatime by default.
+
+- a post about how to build java using a makefile rather than ant. The advantages and
+disadvantages of this approach. An example makefile.
