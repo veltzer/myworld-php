@@ -3,15 +3,21 @@
 	- one that handles the myworld stuff.
 	- blog about the hebrew plugin.
 
+- reinstall my blog and see exactly what is needed to get it to it's current state.
+- write a script that copies the blog to a remote machine (veltzer.org for instance).
+
 - import all company images into my database.
 - permalinks look bad. A link to an article looks like:
 	http://veltzer.net/blog/blog/2010/07/02/grep-is-broken-use-perl-instead/
 	The extra "blog" there is redundant. Do something about it.
+	this is because of the multi-site feature - when I'll get ridd of it the
+	permalinks will be better.
 - fix up my favicon after learning some gimp howto.
 - GetBlob.php should be based on include/blob.php
 	and so should be lilypond fragment.
 	There I would have sugar functions for creating a link for a blog
 	and extracting the data of a blob requested.
+- add google analytics to GetBlob.php.
 - take an image of me and pass it though some gimp folder and put it on the side bar
 	of my site.
 - put some info on the about page.
