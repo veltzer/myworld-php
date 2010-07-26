@@ -301,3 +301,7 @@ dl, dd, dt {
 	direction: rtl;
 	text-align: right;
 }
+/* style for inline code in posts */
+code {
+	font-weight: bold;
+}
