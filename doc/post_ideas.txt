@@ -11,3 +11,5 @@
 
 - a post about how to build java using a makefile rather than ant. The advantages and
 disadvantages of this approach. An example makefile.
+
+- a post about the fax machine. Why it should go away. Why it is still used.
