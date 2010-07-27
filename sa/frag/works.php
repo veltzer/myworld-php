@@ -1,5 +1,26 @@
 <?php
 
+function get_full_name($persons,$id) {
+	$arr=array();
+	$firstname=$persons[$id]['firstname'];
+	$surname=$persons[$id]['surname'];
+	$othername=$persons[$id]['othername'];
+	$ordinal=$persons[$id]['ordinal'];
+	if($firstname!=NULL) {
+		array_push($arr,$firstname);
+	}
+	if($othername!=NULL) {
+		array_push($arr,$othername);
+	}
+	if($surname!=NULL) {
+		array_push($arr,$surname);
+	}
+	if($ordinal!=NULL) {
+		array_push($arr,$ordinal);
+	}
+	return join(" ",$arr);
+}
+
 function create_works() {
 	$res="";
 	// sending query
@@ -117,14 +138,13 @@ function create_works() {
 			$row[$locationid]=get_na_string();
 		}
 		if($row[$viewerid]!=NULL) {
-			$name=$persons[$row[$viewerid]]['firstname']." ".$persons[$row[$viewerid]]['surname'];
+			$name=get_full_name($persons,$row[$viewerid]);
 			$row[$viewerid]=$name;
 		} else {
 			$row[$viewerid]=get_na_string();
 		}
 		if($row[$creatorid]!=NULL) {
-			$name=$persons[$row[$creatorid]]['firstname']." ".$persons[$row[$creatorid]]['surname'];
-			$row[$creatorid]=$name;
+			$row[$creatorid]=get_full_name($persons,$row[$creatorid]);;
 		} else {
 			$row[$creatorid]=get_na_string();
 		}

@@ -3,6 +3,11 @@
 	- one that handles the myworld stuff.
 	- blog about the hebrew plugin.
 
+- comments issues:
+	comments do not look good if they are on hebrew posts.
+	They do not have hebrew translations.
+	They do not by default accepts right to left text.
+
 - reinstall my blog and see exactly what is needed to get it to it's current state.
 - write a script that copies the blog to a remote machine (veltzer.org for instance).
 
