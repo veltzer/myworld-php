@@ -31,3 +31,9 @@
 - check what's the status of a hebrew spell checker in my blog...
 	(do I have one ? does it work? what about the english one ?)
 - add images to my political posts (the hebrew ones).
+
+- icon for the site should be built and installed with "make install".
+- Alternating colors in table so that they could be better read.
+
+Theme issues:
+- Make the sidebar to the right go all the way to the top.
