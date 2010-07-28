@@ -1,3 +1,8 @@
+- make a script that installs my blog from scratch:
+	It opens wp-3.0, adds all the plugins and themes, and adds any needed configuration
+	files etc...
+	This will enable me to make an easy script to transfer my blog to another host.
+
 - divide my plugin into two plugins:
 	- one that handles the hebrew stuff.
 	- one that handles the myworld stuff.
