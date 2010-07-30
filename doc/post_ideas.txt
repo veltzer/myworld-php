@@ -13,3 +13,6 @@
 disadvantages of this approach. An example makefile.
 
 - a post about the fax machine. Why it should go away. Why it is still used.
+
+- an anti Oracle post:
+	http://linuxtoday.com/news_story.php3?ltsn=2010-07-29-011-35-NW-BZ
