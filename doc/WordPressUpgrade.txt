@@ -7,3 +7,7 @@ Here is how to upgrade wordpress...
 - after the upgrade remember to remove the hello dolly plugin.
 - you should see that you are using the new wordpress version from
 	the admin dashboard panel.
+- there is an chance that you are overriding various images or the like.
+	(in my case the rss icon) of the default installation of wp.
+	If so, then override them again (hopefuly you save them before
+	this whole process of upgrade began...).
