@@ -1,0 +1,7 @@
+Here is how to upgrade wordpress...
+===================================
+- If you want to do it through the wp admin then run the
+	wp_unlock_full.sh script to open up everything.
+- from the admin tell it to upgrade (if you ran the script as
+	in the previous stage it will not give you any problems).
+- after the upgrade remember to remove the hello dolly plugin.
