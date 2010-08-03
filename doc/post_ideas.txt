@@ -16,3 +16,13 @@ disadvantages of this approach. An example makefile.
 
 - an anti Oracle post:
 	http://linuxtoday.com/news_story.php3?ltsn=2010-07-29-011-35-NW-BZ
+
+- a post about the scripts to open and close wordpress for any type of operation.
+	also talk about what I have in doc/WordPressUpgrade.txt
+
+- talk about increasing the size of uploads for wordpress. Review the following topics:
+	- info.php - how to see your current limits.
+	- changin the system wide php.ini.
+	- creating a local php.ini.
+	- creating a local .htaccess file.
+	- interferece from the multi site feature which has it's own limitations.
