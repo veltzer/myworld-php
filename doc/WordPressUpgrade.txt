@@ -5,3 +5,5 @@ Here is how to upgrade wordpress...
 - from the admin tell it to upgrade (if you ran the script as
 	in the previous stage it will not give you any problems).
 - after the upgrade remember to remove the hello dolly plugin.
+- you should see that you are using the new wordpress version from
+	the admin dashboard panel.
