@@ -1,5 +1,5 @@
 - make a script that installs my blog from scratch:
-	It opens wp-3.0, adds all the plugins and themes, and adds any needed configuration
+	It opens wp-3.0.1, adds all the plugins and themes, and adds any needed configuration
 	files etc...
 	This will enable me to make an easy script to transfer my blog to another host.
 
@@ -12,6 +12,7 @@
 	comments do not look good if they are on hebrew posts.
 	They do not have hebrew translations.
 	They do not by default accepts right to left text.
+	Make my hebrew plugin handle this...
 
 - reinstall my blog and see exactly what is needed to get it to it's current state.
 - write a script that copies the blog to a remote machine (veltzer.org for instance).
