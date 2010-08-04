@@ -9,11 +9,14 @@ MyWorld plugin to WordPress.
 
 == Description ==
 
-The long description comes here.
+This is a wordpress plugin to connect to the myworld system which
+is Mark Veltzers system for storing personal information.
 
 == Installation ==
 
 Upload the MyWorld plugin to your blog, Activate it.
+
+There is no admin panel to configure as of yet.
 
 == Changelog ==
 

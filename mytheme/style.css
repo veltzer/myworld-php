@@ -289,19 +289,20 @@ dl, dd, dt {
 	color: #3160bb;
 	text-decoration: none;
 }
+
+/* twitter widget style */
 .twitterwidget-title {
 	padding-left: 15px;
 }
-:lang(he) { direction: rtl; text-align:right; }
-.hebcontent {
-	direction: rtl;
-	text-align: right;
-}
-.hebtitle {
-	direction: rtl;
-	text-align: right;
-}
+
 /* style for inline code in posts */
 code {
 	font-weight: bold;
+}
+
+/* hebrew stuff starts here... */
+/* :lang(he) { direction: rtl; text-align:right; } */
+.hebtitle .hebcontent .hebexcerpt {
+	direction: rtl;
+	text-align: right;
 }

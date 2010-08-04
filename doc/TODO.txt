@@ -6,7 +6,13 @@
 - divide my plugin into two plugins:
 	- one that handles the hebrew stuff.
 	- one that handles the myworld stuff.
-	- blog about the hebrew plugin.
+
+analytics:
+==========
+- how to I use google analytics for my blobs ?
+	Maybe I should just have my own analytics ? A table which records each person
+	accessing the blob table, the ip, the browser and shit, and then have some
+	analysis about it?
 
 - comments issues:
 	comments do not look good if they are on hebrew posts.

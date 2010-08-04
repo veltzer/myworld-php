@@ -6,9 +6,6 @@
 	Look at what I have in ~/Dropbox/system
 - post about my experiences with hebrew (the filters I used).
 
-- post about atime and noatime and calling for a mainstream distribution to work with
-	noatime by default.
-
 - a post about how to build java using a makefile rather than ant. The advantages and
 disadvantages of this approach. An example makefile.
 
@@ -26,3 +23,6 @@ disadvantages of this approach. An example makefile.
 	- creating a local php.ini.
 	- creating a local .htaccess file.
 	- interferece from the multi site feature which has it's own limitations.
+
+- blog about updating the full wordpress distribution.
+	(about secrurity of it).

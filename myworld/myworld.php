@@ -23,20 +23,6 @@ function link_to_resource($resource) {
 	return WP_PLUGIN_URL."/myworld/resources/".$resource;
 }
 
-/*
- * Plugin initialization function
- */
-function myworld_init() {
-}
-add_action('init', 'myworld_init');
-
-/*
- * Plugin shutdown function
- */
-function myworld_admin_init() {
-}
-add_action('admin_init', 'myworld_admin_init');
-
 my_include("include/db.php");
 my_include("include/na.php");
 my_include("include/utils.php");
@@ -81,7 +67,6 @@ function myworld_create_content($what) {
  * The function that hooks into WP to substitute content
  */
 function myworld_the_content($content) {
-	$content=myworld_the_title($content);
 	$pattern = "/\[myworld:\s*([^\]]+)\s*\]/";
 	preg_match_all( $pattern, $content, $tags );
 	foreach( $tags[0] as $k=>$cnt ) {
@@ -89,22 +74,4 @@ function myworld_the_content($content) {
 	}
 	return $content;
 }
-/*
- * The function that is called when displaying titles of articles
- *
- * Check if the title is hebrew and if so wrap it in the right tags...
- */
-function isHebrew($string) {
-	return ereg("[א-ת]",$string,$regs);
-}
-
-function myworld_the_title($title) {
-	if (!is_admin() && isHebrew($title)) {
-		$title="<div class=hebtitle>".$title."</div>";
-	}
-	return $title;
-}
-
 add_filter('the_content','myworld_the_content');
-add_filter('the_title','myworld_the_title');
-add_filter('the_excerpt','myworld_the_title');
