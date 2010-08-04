@@ -18,18 +18,18 @@ function myheb_is_hebrew($string) {
 }
 
 function myheb_wrap_in_div($content,$class) {
-	$content="<div class='".$class."'>".$title."</div>";
+	$content="<div class='".$class."'>".$content."</div>";
 	return $content;
 }
 
 /*
  * The function that hooks into WP to substitute titles
  */
-function myheb_the_title($title) {
-	if (!is_admin() && myheb_is_hebrew($title)) {
-		$title=myheb_wrap_in_div($title,'hebtitle');
+function myheb_the_title($content) {
+	if (!is_admin() && myheb_is_hebrew($content)) {
+		$content=myheb_wrap_in_div($content,'hebtitle');
 	}
-	return $title;
+	return $content;
 }
 add_filter('the_title','myheb_the_title');
 
@@ -37,10 +37,10 @@ add_filter('the_title','myheb_the_title');
  * The function that hooks into WP to substitute content
  */
 function myheb_the_content($content) {
-	if (!is_admin() && myheb_is_hebrew($title)) {
-		$title=myheb_wrap_in_div($title,'hebcontent');
+	if (!is_admin() && myheb_is_hebrew($content)) {
+		$content=myheb_wrap_in_div($content,'hebcontent');
 	}
-	return $title;
+	return $content;
 }
 add_filter('the_content','myheb_the_content');
 
@@ -48,9 +48,9 @@ add_filter('the_content','myheb_the_content');
  * The function that hooks into WP to substitute excerpts
  */
 function myheb_the_excerpt($content) {
-	if (!is_admin() && myheb_is_hebrew($title)) {
-		$title=myheb_wrap_in_div($title,'hebexcerpt');
+	if (!is_admin() && myheb_is_hebrew($content)) {
+		$content=myheb_wrap_in_div($content,'hebexcerpt');
 	}
-	$content=myheb_the_title($content);
+	return $content;
 }
 add_filter('the_excerpt','myheb_the_excerpt');

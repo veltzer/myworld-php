@@ -1,0 +1,11 @@
+- when mouse overs over titles which have been changed to hebrew by this
+plugin then it shows not only the content of the title but also the wrapping
+div. make this behave better.
+
+- this plugin is over simplistic in it's approach - it simply scans the text for
+hebrew. Allow the user to say what is hebrew or what is not using a tag.
+
+- allow comments in hebrew. 
+
+- the plugin should not reply on the css styles (heb{title,content,except}) which are
+in the mytheme theme but rather be self contained.

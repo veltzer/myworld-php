@@ -301,8 +301,17 @@ code {
 }
 
 /* hebrew stuff starts here... */
-/* :lang(he) { direction: rtl; text-align:right; } */
-.hebtitle .hebcontent .hebexcerpt {
+/* This next line is not required...
+ * :lang(he) { direction: rtl; text-align:right; } */
+.hebtitle {
+	direction: rtl;
+	text-align: right;
+}
+.hebcontent {
+	direction: rtl;
+	text-align: right;
+}
+.hebexcerpt {
 	direction: rtl;
 	text-align: right;
 }
