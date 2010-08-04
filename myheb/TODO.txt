@@ -9,3 +9,9 @@ hebrew. Allow the user to say what is hebrew or what is not using a tag.
 
 - the plugin should not reply on the css styles (heb{title,content,except}) which are
 in the mytheme theme but rather be self contained.
+
+- comments issues:
+	comments do not look good if they are on hebrew posts.
+	They do not have hebrew translations.
+	They do not by default accepts right to left text.
+	Make my hebrew plugin handle this...

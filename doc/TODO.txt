@@ -1,11 +1,23 @@
+publication
+===========
+- "make public" to upload my plugins and themes to the wordpress community.
+- put links for these in my computing section.
+- add git for the trees that I'm developing these plugins in to my git repostory.
+	- link to these trees.
+
+installation
+============
+- reinstall my blog and see exactly what is needed to get it to it's current state.
 - make a script that installs my blog from scratch:
 	It opens wp-3.0.1, adds all the plugins and themes, and adds any needed configuration
 	files etc...
 	This will enable me to make an easy script to transfer my blog to another host.
-
-- divide my plugin into two plugins:
-	- one that handles the hebrew stuff.
-	- one that handles the myworld stuff.
+- write a script that copies the blog to a remote machine (veltzer.org for instance).
+- permalinks look bad. A link to an article looks like:
+	http://veltzer.net/blog/blog/2010/07/02/grep-is-broken-use-perl-instead/
+	The extra "blog" there is redundant. Do something about it.
+	this is because of the multi-site feature - when I'll get ridd of it the
+	permalinks will be better.
 
 analytics:
 ==========
@@ -14,27 +26,16 @@ analytics:
 	accessing the blob table, the ip, the browser and shit, and then have some
 	analysis about it?
 
-- comments issues:
-	comments do not look good if they are on hebrew posts.
-	They do not have hebrew translations.
-	They do not by default accepts right to left text.
-	Make my hebrew plugin handle this...
-
-- reinstall my blog and see exactly what is needed to get it to it's current state.
-- write a script that copies the blog to a remote machine (veltzer.org for instance).
-
-- import all company images into my database.
-- permalinks look bad. A link to an article looks like:
-	http://veltzer.net/blog/blog/2010/07/02/grep-is-broken-use-perl-instead/
-	The extra "blog" there is redundant. Do something about it.
-	this is because of the multi-site feature - when I'll get ridd of it the
-	permalinks will be better.
+favicon:
+========
+- icon for the site should be built and installed with "make install".
 - fix up my favicon after learning some gimp howto.
-- GetBlob.php should be based on include/blob.php
-	and so should be lilypond fragment.
-	There I would have sugar functions for creating a link for a blog
-	and extracting the data of a blob requested.
-- add google analytics to GetBlob.php.
+- the fav icon should be part of a plugin. I seem to recall these is a "favicon"
+	plugin to wordpress ?!? This would be better than the barbaric overriding
+	of the favicon that I'm doing right now...
+
+blog:
+=====
 - take an image of me and pass it though some gimp folder and put it on the side bar
 	of my site.
 - put some info on the about page.
@@ -44,8 +45,4 @@ analytics:
 	(do I have one ? does it work? what about the english one ?)
 - add images to my political posts (the hebrew ones).
 
-- icon for the site should be built and installed with "make install".
 - Alternating colors in table so that they could be better read.
-
-Theme issues:
-- Make the sidebar to the right go all the way to the top.

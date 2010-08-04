@@ -1,0 +1,7 @@
+- import all company images into my database.
+- GetBlob.php should be based on include/blob.php
+	and so should be lilypond fragment.
+	There I would have sugar functions for creating a link for a blog
+	and extracting the data of a blob requested.
+- add google analytics to GetBlob.php.
+
