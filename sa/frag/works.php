@@ -72,7 +72,8 @@ function create_works() {
 	assert(mysql_free_result($result));
 
 	// sending query
-	$query=sprintf("SELECT * FROM TbWkWork");
+	$query=sprintf("SELECT id,creatorId,name,length,size,typeId,producerId,viewDate,viewerId,locationId,remark,rating,review FROM TbWkWork");
+	//$query=sprintf("SELECT * FROM TbWkWork");
 	$result=mysql_query($query);
 	assert($result);
 
