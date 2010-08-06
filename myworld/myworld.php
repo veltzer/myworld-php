@@ -30,51 +30,79 @@ my_include("frag/business.php");
 my_include("frag/works.php");
 my_include("frag/lilypond.php");
 
-/*
- * The function that creates dynamic content
- */
-function myworld_create_content($what) {
-	db_connect();
-	switch($what) {
-		case "courses":
-			$ret=create_courses();
-			break;
-		case "consulting":
-			$ret=create_consulting();
-			break;
-		case "teaching":
-			$ret=create_teaching();
-			break;
-		case "certification":
-			$ret=create_certification();
-			break;
-		case "works":
-			$ret=create_works();
-			break;
-		case "lilypond":
-			$ret=create_lilypond();
-			break;
-		case "test":
-			$ret="שלום";
-			break;
-		default:
-			$ret="[$what] is unknown";
-			break;
-	}
-	#$ret="<br/>$ret<br/>";
-	db_disconnect();
-	return $ret;
-}
+if(!class_exists('MyWorld')) {
+	class MyWorld { 
+		/*
+		 * Our own version number
+		 */
+		var $version = "0.0.1";
+		/*
+		 * The function that creates dynamic content
+		 */
+		function create_content($what) {
+			db_connect();
+			switch($what) {
+				case "courses":
+					$ret=create_courses();
+					break;
+				case "consulting":
+					$ret=create_consulting();
+					break;
+				case "teaching":
+					$ret=create_teaching();
+					break;
+				case "certification":
+					$ret=create_certification();
+					break;
+				case "works":
+					$ret=create_works();
+					break;
+				case "lilypond":
+					$ret=create_lilypond();
+					break;
+				case "test":
+					$ret="שלום";
+					break;
+				default:
+					$ret="[$what] is unknown";
+					break;
+			}
+			#$ret="<br/>$ret<br/>";
+			db_disconnect();
+			return $ret;
+		}
 
-/*
- * The function that hooks into WP to substitute content
- */
-function myworld_the_content($content) {
-	$pattern = "/\[myworld:\s*([^\]]+)\s*\]/";
-	preg_match_all( $pattern, $content, $tags );
-	foreach( $tags[0] as $k=>$cnt ) {
-		$content=str_replace($cnt,myworld_create_content($tags[1][$k]),$content);
+		/*
+		 * The function that hooks into WP to substitute content
+		 */
+		function the_content($content) {
+			$pattern = "/\[myworld:\s*([^\]]+)\s*\]/";
+			preg_match_all( $pattern, $content, $tags );
+			foreach( $tags[0] as $k=>$cnt ) {
+				$content=str_replace($cnt,$this->create_content($tags[1][$k]),$content);
+			}
+			return $content;
+		}
+
+		/*
+		 * This function will add my javascript code
+		 */
+		function wp_head() {
+			//wp_enqueue_script("jquery");
+			//echo wp_enqueue_script("mysupport","zumzum");
+			//wp_enqueue_script('mysupport', plugins_url('javascript/mysupport.js', __FILE__), array('mysupport'), '0.1');
+			//echo "foobar";
+			echo "<script type='text/javascript' src='".plugins_url('javascript/mysupport.js?ver=',__FILE__).$this->version."'></script>'";
+			echo "<link rel='stylesheet' id='myworld-css' href='".plugins_url('css/mystyle.css?ver=',__FILE__).$this->version."' type='text/css' media='screen' />";
+		}
+
+		function MyWorld() {
+			add_action('wp_head',array(&$this, 'wp_head'));
+			add_filter('the_content',array(&$this, 'the_content'));
+		}
 	}
-	return $content;
+	// now create an instance of the class...
+	global $MyWorld_instance;
+	$MyWorld_instance=&new MyWorld();
 }
-add_filter('the_content','myworld_the_content');
+?>

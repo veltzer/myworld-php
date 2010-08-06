@@ -68,7 +68,6 @@ function create_lilypond() {
 	}
 	if($show_style=="div") {
 		$res.="</div>";
-		$res.="hello";
 	}
 	return $res;
 }
