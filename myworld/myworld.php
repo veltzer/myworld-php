@@ -54,6 +54,9 @@ function myworld_create_content($what) {
 		case "lilypond":
 			$ret=create_lilypond();
 			break;
+		case "test":
+			$ret="שלום";
+			break;
 		default:
 			$ret="[$what] is unknown";
 			break;

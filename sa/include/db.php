@@ -28,6 +28,8 @@ function db_connect() {
 	$link=mysql_connect($db_host,$db_user,$db_pwd);
 	assert($link);
 	assert(mysql_select_db($database));
+	# I'm not sure if I need this...
+	//assert(mysql_set_charset('utf8',$link));
 }
 
 function db_disconnect() {

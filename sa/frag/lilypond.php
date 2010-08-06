@@ -51,6 +51,8 @@ function create_lilypond() {
 	}
 	assert(mysql_free_result($result));
 	$res.="</table>";
+	// convert to html entities so that utf8 will display well...
+	//$res=htmlentities($res,ENT_COMPAT,"UTF-8");
 	return $res;
 }
 ?>
