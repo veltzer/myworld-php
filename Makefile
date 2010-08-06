@@ -43,7 +43,6 @@ install:
 	sudo cp -r $(MYHEB_PLUGIN_NAME) $(PLUGIN_DIR) 
 	-sudo rm -rf $(MYWORLD_PLUGIN_FULL_DIR)
 	sudo cp -r $(MYWORLD_PLUGIN_NAME) $(PLUGIN_DIR) 
-	sudo cp -r sa/* $(MYWORLD_PLUGIN_FULL_DIR)
 	-sudo rm -rf $(MYTHEME_THEME_FULL_DIR)
 	sudo cp -r $(MYTHEME_THEME_NAME) $(THEME_DIR)
 	sudo cp misc/rss.png $(WP_DIR)/wp-includes/images/rss.png
