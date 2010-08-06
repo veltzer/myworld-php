@@ -26,7 +26,7 @@ body {
 .accordion2 h3.active {
 	background-position: right 5px;
 }
-.accordion2 p {
+.accordion2 div {
 	background: #f7f7f7;
 	margin: 0;
 	padding: 10px 15px 20px;
