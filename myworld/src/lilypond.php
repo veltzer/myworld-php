@@ -13,15 +13,17 @@ function create_lilypond() {
 		$res.="<tr>";
 		$res.="<td>title</td>";
 		$res.="<td>subtitle</td>";
-		$res.="<td>ly</td>";
-		$res.="<td>pdf</td>";
-		$res.="<td>ps</td>";
-		$res.="<td>midi</td>";
 		$res.="<td>composer</td>";
 		$res.="<td>copyright</td>";
 		$res.="<td>style</td>";
 		$res.="<td>piece</td>";
 		$res.="<td>poet</td>";
+		$res.="<td>ly</td>";
+		$res.="<td>pdf</td>";
+		$res.="<td>ps</td>";
+		$res.="<td>midi</td>";
+		$res.="<td>wav</td>";
+		$res.="<td>mp3</td>";
 		$res.="</tr>\n";
 	}
 	if($show_style=="div") {
@@ -54,17 +56,17 @@ function create_lilypond() {
 			$res.="<tr>";
 			$res.="<td>{$s_title}</td>";
 			$res.="<td>{$s_subtitle}</td>";
+			$res.="<td>{$s_composer}</td>";
+			$res.="<td>{$s_copyright}</td>";
+			$res.="<td>{$s_style}</td>";
+			$res.="<td>{$s_piece}</td>";
+			$res.="<td>{$s_poet}</td>";
 			$res.="<td>{$s_a_ly}</td>";
 			$res.="<td>{$s_a_pdf}</td>";
 			$res.="<td>{$s_a_ps}</td>";
 			$res.="<td>{$s_a_midi}</td>";
 			$res.="<td>{$s_a_wav}</td>";
 			$res.="<td>{$s_a_mp3}</td>";
-			$res.="<td>{$s_composer}</td>";
-			$res.="<td>{$s_copyright}</td>";
-			$res.="<td>{$s_style}</td>";
-			$res.="<td>{$s_piece}</td>";
-			$res.="<td>{$s_poet}</td>";
 			$res.="</tr>\n";
 		}
 		if($show_style=="div") {
@@ -79,6 +81,9 @@ function create_lilypond() {
 			}
 			if($row["composer"]!=NULL) {
 				$res.="<li>composer: ${s_composer}</li>";
+			}
+			if($row["copyright"]!=NULL) {
+				$res.="<li>copyright: ${s_copyright}</li>";
 			}
 			if($row["style"]!=NULL) {
 				$res.="<li>style: ${s_style}</li>";
