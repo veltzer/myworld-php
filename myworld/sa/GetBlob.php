@@ -18,7 +18,7 @@ $debug=0;
 
 # security...
 assert($p_table=='TbMsLilypond');
-assert($p_field=='ly' || $p_field=='pdf' || $p_field=='ps' || $p_field=='midi');
+#assert($p_field=='ly' || $p_field=='pdf' || $p_field=='ps' || $p_field=='midi');
 
 db_connect();
 $query=sprintf("SELECT %s,%s FROM %s where id=%s",

@@ -7,6 +7,6 @@ jQuery(document).ready(function() {
 		jQuery(this).next("div").slideToggle();
 		//siblings("p:visible").slideUp("slow");
 		jQuery(this).toggleClass("active");
-		jQuery(this).siblings("h3").removeClass("active");
+		//jQuery(this).siblings("h3").removeClass("active");
 	});
 });
