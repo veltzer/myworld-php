@@ -16,7 +16,7 @@ function my_include($file) {
 }
 
 function link_to_direct($direct_page) {
-	return WP_PLUGIN_URL."/myworld/direct/".$direct_page;
+	return WP_PLUGIN_URL."/myworld/sa/".$direct_page;
 }
 
 function link_to_resource($resource) {

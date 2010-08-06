@@ -3,7 +3,7 @@
 // url to use this script:
 // http://veltzer.net/~mark/php/pages/GetBlob.php?table=TbMsLilypond&id=5&field=pdf&type=application/pdf&name_field=filebasename
 
-require("../setup.php");
+require("setup.php");
 my_include("include/utils.php");
 my_include("include/db.php");
 my_include("include/na.php");
