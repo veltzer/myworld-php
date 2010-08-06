@@ -1,8 +1,5 @@
 <?php
 
-# TODO:
-# Make this script go throught the groups tables to render the creators and viewers.
-
 function assert_callcack($file, $line, $message) {
 	echo "file is {$file}<br/>";
 	echo "line is {$line}<br/>";

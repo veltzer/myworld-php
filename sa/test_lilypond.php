@@ -1,5 +1,9 @@
-<meta http-equiv=Content-Type content="text/html; charset=utf-8">
-<html><head><title>Lilypond music</title></head><body>
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+		<title>Lilypond music</title>
+	</head>
+<body>
 <?php
 
 require("setup.php");

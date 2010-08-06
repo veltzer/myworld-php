@@ -1,4 +1,9 @@
-<html><head><title>Business info sheet</title></head><body>
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+		<title>Business info sheet</title>
+	</head>
+<body>
 <?php
 
 require("setup.php");

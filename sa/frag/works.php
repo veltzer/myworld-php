@@ -1,5 +1,8 @@
 <?php
 
+# TODO:
+# Make this script go through the groups tables to render the creators and viewers.
+
 function get_full_name($persons,$id) {
 	$arr=array();
 	$firstname=$persons[$id]['firstname'];

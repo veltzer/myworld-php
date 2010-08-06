@@ -1,4 +1,9 @@
-<html><head><title>Works</title></head><body>
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+		<title>Works</title>
+	</head>
+<body>
 <?php
 
 require("setup.php");
