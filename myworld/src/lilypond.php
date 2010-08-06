@@ -68,12 +68,22 @@ function create_lilypond() {
 			}
 			$res.="<h3>{$header}</h3>";
 			$res.="<div><ul>";
-			$res.="<li>subtitle: ${s_subtitle}</li>";
-			$res.="<li>composer: ${s_composer}</li>";
-			$res.="<li>style: ${s_style}</li>";
-			$res.="<li>piece: ${s_piece}</li>";
-			$res.="<li>poet: ${s_poet}</li>";
-			$res.="<li>links ${s_a_ly}, ${s_a_pdf}, ${s_a_ps}, ${s_a_midi}</li>";
+			if($row["subtitle"]!=NULL) {
+				$res.="<li>subtitle: ${s_subtitle}</li>";
+			}
+			if($row["composer"]!=NULL) {
+				$res.="<li>composer: ${s_composer}</li>";
+			}
+			if($row["style"]!=NULL) {
+				$res.="<li>style: ${s_style}</li>";
+			}
+			if($row["piece"]!=NULL) {
+				$res.="<li>piece: ${s_piece}</li>";
+			}
+			if($row["poet"]!=NULL) {
+				$res.="<li>poet: ${s_poet}</li>";
+			}
+			$res.="<li>links: ${s_a_ly}, ${s_a_pdf}, ${s_a_ps}, ${s_a_midi}</li>";
 			$res.="</ul></div>";
 		}
 	}
