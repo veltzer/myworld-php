@@ -12,7 +12,7 @@ require("setup.php");
 my_include("include/utils.php");
 my_include("include/na.php");
 my_include("include/db.php");
-my_include("frag/lilypond.php");
+my_include("src/lilypond.php");
 
 db_connect();
 echo create_lilypond();

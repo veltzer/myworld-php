@@ -9,7 +9,7 @@ header("Content-type: text/html; charset=UTF-8");
 <?php
 
 require("setup.php");
-my_include("frag/helloworld.php");
+my_include("src/helloworld.php");
 echo create_helloworld();
 
 ?>

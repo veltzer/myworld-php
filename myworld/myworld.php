@@ -26,9 +26,9 @@ function link_to_resource($resource) {
 my_include("include/db.php");
 my_include("include/na.php");
 my_include("include/utils.php");
-my_include("frag/business.php");
-my_include("frag/works.php");
-my_include("frag/lilypond.php");
+my_include("src/business.php");
+my_include("src/works.php");
+my_include("src/lilypond.php");
 
 if(!class_exists('MyWorld')) {
 	class MyWorld { 
