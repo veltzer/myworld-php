@@ -15,3 +15,6 @@ in the mytheme theme but rather be self contained.
 	They do not have hebrew translations.
 	They do not by default accepts right to left text.
 	Make my hebrew plugin handle this...
+
+- take a loot at hebrew4wp at http://hebrew4wp.nadav.org/.
+	Maybe I can get some ideas from there...
