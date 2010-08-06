@@ -41,10 +41,14 @@ function create_lilypond() {
 		$s_a_pdf=link_to_direct("GetBlob.php?table=TbMsLilypond&id=$id&field=pdf&type=application/pdf&name_field=filebasename");
 		$s_a_ps=link_to_direct("GetBlob.php?table=TbMsLilypond&id=$id&field=ps&type=application/postscript&name_field=filebasename");
 		$s_a_midi=link_to_direct("GetBlob.php?table=TbMsLilypond&id=$id&field=midi&type=audio/midi&name_field=filebasename");
+		$s_a_wav=link_to_direct("GetBlob.php?table=TbMsLilypond&id=$id&field=wav&type=audio/x-wav&name_field=filebasename");
+		$s_a_mp3=link_to_direct("GetBlob.php?table=TbMsLilypond&id=$id&field=mp3&type=audio/mpeg&name_field=filebasename");
 		$s_a_ly="<a href='{$s_a_ly}'>ly</a>";
 		$s_a_pdf="<a href='{$s_a_pdf}'>pdf</a>";
 		$s_a_ps="<a href='{$s_a_ps}'>ps</a>";
 		$s_a_midi="<a href='{$s_a_midi}'>midi</a>";
+		$s_a_wav="<a href='{$s_a_wav}'>wav</a>";
+		$s_a_mp3="<a href='{$s_a_mp3}'>mp3</a>";
 		
 		if($show_style=="table") {
 			$res.="<tr>";
@@ -54,6 +58,8 @@ function create_lilypond() {
 			$res.="<td>{$s_a_pdf}</td>";
 			$res.="<td>{$s_a_ps}</td>";
 			$res.="<td>{$s_a_midi}</td>";
+			$res.="<td>{$s_a_wav}</td>";
+			$res.="<td>{$s_a_mp3}</td>";
 			$res.="<td>{$s_composer}</td>";
 			$res.="<td>{$s_copyright}</td>";
 			$res.="<td>{$s_style}</td>";
@@ -83,7 +89,7 @@ function create_lilypond() {
 			if($row["poet"]!=NULL) {
 				$res.="<li>poet: ${s_poet}</li>";
 			}
-			$res.="<li>links: ${s_a_ly}, ${s_a_pdf}, ${s_a_ps}, ${s_a_midi}</li>";
+			$res.="<li>links: ${s_a_ly}, ${s_a_pdf}, ${s_a_ps}, ${s_a_midi}, ${s_a_wav}, ${s_a_mp3}</li>";
 			$res.="</ul></div>";
 		}
 	}
