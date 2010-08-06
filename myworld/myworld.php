@@ -88,11 +88,11 @@ if(!class_exists('MyWorld')) {
 		 * This function will add my javascript code
 		 */
 		function wp_head() {
-			//wp_enqueue_script("jquery");
-			//echo wp_enqueue_script("mysupport","zumzum");
-			//wp_enqueue_script('mysupport', plugins_url('javascript/mysupport.js', __FILE__), array('mysupport'), '0.1');
-			//echo "foobar";
+			// This next line is supposed to work but it doesn't...
+			//wp_enqueue_script('mysupport', plugins_url('javascript/mysupport.js', __FILE__), array('jquery'), '1.0');
+			// I used direct inclusion like below...
 			echo "<script type='text/javascript' src='".plugins_url('javascript/mysupport.js?ver=',__FILE__).$this->version."'></script>'";
+			// and now for the style sheet...
 			echo "<link rel='stylesheet' id='myworld-css' href='".plugins_url('css/mystyle.css?ver=',__FILE__).$this->version."' type='text/css' media='screen' />";
 		}
 
