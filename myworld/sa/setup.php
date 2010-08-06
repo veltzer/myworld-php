@@ -1,7 +1,7 @@
 <?php
 
 function my_include($page) {
-	include_once($page);
+	include_once("../".$page);
 }
 
 function link_to_direct($direct_page) {
