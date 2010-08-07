@@ -98,7 +98,7 @@ if(!class_exists('MyWorld')) {
 
 		function MyWorld() {
 			add_action('wp_head',array(&$this, 'wp_head'));
-			add_filter('the_content',array(&$this, 'the_content'));
+			add_filter('the_content',array(&$this, 'the_content'),0);
 		}
 	}
 	// now create an instance of the class...

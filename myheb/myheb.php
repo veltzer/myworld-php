@@ -14,6 +14,7 @@ Author URI: http://www.veltzer.net
  * Check if the title is hebrew and if so wrap it in the right tags...
  */
 function myheb_is_hebrew($string) {
+	//return ereg("^[א-ת\s\;\,\.\?\*\:]*$",$string,$regs);
 	return ereg("[א-ת]",$string,$regs);
 }
 
@@ -31,7 +32,7 @@ function myheb_the_title($content) {
 	}
 	return $content;
 }
-add_filter('the_title','myheb_the_title');
+add_filter('the_title','myheb_the_title',-10);
 
 /*
  * The function that hooks into WP to substitute content
@@ -42,7 +43,7 @@ function myheb_the_content($content) {
 	}
 	return $content;
 }
-add_filter('the_content','myheb_the_content');
+add_filter('the_content','myheb_the_content',-10);
 
 /*
  * The function that hooks into WP to substitute excerpts
@@ -53,4 +54,4 @@ function myheb_the_excerpt($content) {
 	}
 	return $content;
 }
-add_filter('the_excerpt','myheb_the_excerpt');
+add_filter('the_excerpt','myheb_the_excerpt',-10);
