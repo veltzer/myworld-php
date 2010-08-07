@@ -78,7 +78,7 @@ function create_lilypond() {
 			if($row["composer"]!=NULL) {
 				$header.=" / ".$s_composer;
 			}
-			if($row["poet"]!=NULL) {
+			if($row["poet"]!=NULL && $s_poet!=$s_composer) {
 				$header.=", ".$s_poet;
 			}
 			$res.="<h3>{$header}</h3>";
