@@ -34,3 +34,16 @@ body {
 	border-right: solid 1px #c4c4c4;
 	display: none;
 }
+
+/* for the audio players
+ * I tried the following in order to get the player bigger so that the entire
+ * name of the composer + the tune + the poet will fit in but it does not change size
+ * (damn flash!). Guess this will have to wait until a real audio player comes along
+ * that is implemented in real html + javascript...
+ */
+/*
+p.audioplayer_container {
+	text-align: center;
+	width: 100%;
+}
+*/

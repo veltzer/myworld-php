@@ -18,9 +18,34 @@ function formatTimeperiod($size) {
 	return round($size, 2).' '.$units[$i];
 }
 
+/* Function to start an HTML table for you */
 function get_start_table() {
 	#return "<table style='empty-cells:show;width:100%;' border='1'>";
 	return "<table style='empty-cells:show;width:100%;'>";
+}
+
+/* Function to put an audio player for a clip */
+// check out: http://wpaudioplayer.com/frequently-asked-questions
+function get_audio_player($url,$title,$composer,$poet) {
+	$str="[audio:${url}|titles=${title}";
+	if($composer!=NULL || $poet!=NULL) {
+		if($composer!=NULL) {
+			if($poet!=NULL) {
+				$artists=join(", ",array($composer,$poet));
+			} else {
+				$artists=$composer;
+			}
+		} else {
+			if($poet!=NULL) {
+				$artists=$poet;
+			} else {
+				$artists="";
+			}
+		}
+		$str.="|artists=${artists}";
+	}
+	$str.="]";
+	return $str;
 }
 
 ?>
