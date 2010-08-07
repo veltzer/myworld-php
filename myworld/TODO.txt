@@ -5,3 +5,4 @@
 	and extracting the data of a blob requested.
 - add google analytics to GetBlob.php.
 
+- audio playing looks bad for hebrew titles. fix it. 
