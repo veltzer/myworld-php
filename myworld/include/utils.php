@@ -31,7 +31,11 @@ function get_audio_player($url,$title,$composer,$poet) {
 	if($composer!=NULL || $poet!=NULL) {
 		if($composer!=NULL) {
 			if($poet!=NULL) {
-				$artists=join(", ",array($composer,$poet));
+				if($composer!=$poet) {
+					$artists=$composer." - ".$poet;
+				} else {
+					$artists=$composer;
+				}
 			} else {
 				$artists=$composer;
 			}
