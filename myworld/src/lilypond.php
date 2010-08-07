@@ -4,7 +4,7 @@ function create_lilypond() {
 	$show_style="div";
 	$res="";
 	// sending query
-	$query=sprintf("SELECT id,title,subtitle,composer,copyright,style,piece,poet FROM TbMsLilypond");
+	$query=sprintf("SELECT id,title,subtitle,composer,poet,style,piece,copyright FROM TbMsLilypond");
 	$result=mysql_query($query);
 	assert($result);
 
@@ -14,10 +14,10 @@ function create_lilypond() {
 		$res.="<td>title</td>";
 		$res.="<td>subtitle</td>";
 		$res.="<td>composer</td>";
-		$res.="<td>copyright</td>";
+		$res.="<td>poet</td>";
 		$res.="<td>style</td>";
 		$res.="<td>piece</td>";
-		$res.="<td>poet</td>";
+		$res.="<td>copyright</td>";
 		$res.="<td>ly</td>";
 		$res.="<td>pdf</td>";
 		$res.="<td>ps</td>";
@@ -36,10 +36,10 @@ function create_lilypond() {
 		$s_title=val_or_na($row["title"]);
 		$s_subtitle=val_or_na($row["subtitle"]);
 		$s_composer=val_or_na($row["composer"]);
-		$s_copyright=val_or_na($row["copyright"]);
+		$s_poet=val_or_na($row["poet"]);
 		$s_style=val_or_na($row["style"]);
 		$s_piece=val_or_na($row["piece"]);
-		$s_poet=val_or_na($row["poet"]);
+		$s_copyright=val_or_na($row["copyright"]);
 		$s_a_ly=link_to_direct("GetBlob.php?table=TbMsLilypond&id=$id&field=ly&type=text/plain&name_field=filebasename");
 		$s_a_pdf=link_to_direct("GetBlob.php?table=TbMsLilypond&id=$id&field=pdf&type=application/pdf&name_field=filebasename");
 		$s_a_ps=link_to_direct("GetBlob.php?table=TbMsLilypond&id=$id&field=ps&type=application/postscript&name_field=filebasename");
@@ -60,10 +60,10 @@ function create_lilypond() {
 			$res.="<td>{$s_title}</td>";
 			$res.="<td>{$s_subtitle}</td>";
 			$res.="<td>{$s_composer}</td>";
-			$res.="<td>{$s_copyright}</td>";
+			$res.="<td>{$s_poet}</td>";
 			$res.="<td>{$s_style}</td>";
 			$res.="<td>{$s_piece}</td>";
-			$res.="<td>{$s_poet}</td>";
+			$res.="<td>{$s_copyright}</td>";
 			$res.="<td>{$s_a_ly}</td>";
 			$res.="<td>{$s_a_pdf}</td>";
 			$res.="<td>{$s_a_ps}</td>";
@@ -78,6 +78,9 @@ function create_lilypond() {
 			if($row["composer"]!=NULL) {
 				$header.=" / ".$s_composer;
 			}
+			if($row["poet"]!=NULL) {
+				$header.=", ".$s_poet;
+			}
 			$res.="<h3>{$header}</h3>";
 			$res.="<div><ul>";
 			if($row["subtitle"]!=NULL) {
@@ -86,8 +89,8 @@ function create_lilypond() {
 			if($row["composer"]!=NULL) {
 				$res.="<li>composer: ${s_composer}</li>";
 			}
-			if($row["copyright"]!=NULL) {
-				$res.="<li>copyright: ${s_copyright}</li>";
+			if($row["poet"]!=NULL) {
+				$res.="<li>poet: ${s_poet}</li>";
 			}
 			if($row["style"]!=NULL) {
 				$res.="<li>style: ${s_style}</li>";
@@ -95,8 +98,8 @@ function create_lilypond() {
 			if($row["piece"]!=NULL) {
 				$res.="<li>piece: ${s_piece}</li>";
 			}
-			if($row["poet"]!=NULL) {
-				$res.="<li>poet: ${s_poet}</li>";
+			if($row["copyright"]!=NULL) {
+				$res.="<li>copyright: ${s_copyright}</li>";
 			}
 			$res.="<li>links: ${s_a_ly}, ${s_a_pdf}, ${s_a_ps}, ${s_a_midi}, ${s_a_wav}, ${s_a_mp3}, ${s_a_ogg}</li>";
 			$res.="</ul></div>";
