@@ -40,8 +40,13 @@ $fileName=@mysql_result($result,0,$p_name_field);
 # You can see more HTTP headers that may improve stuff in
 # http://en.wikipedia.org/wiki/List_of_HTTP_headers
 # ideas are: Content-MD5, Content-Length, Last-Modified
+# if you want to debug HTTP headers just use wget -S on the
+# command line and compared the headers that you are generating
+# with the headers that a regular content generates by using
+# the web server...
 header("Content-type: $p_type");
 header("Cache-Control: no-cache");
+header("Content-Length: ".strlen($fileContent));
 header("Content-Disposition: attachment; filename=$fileName.$p_field");
 echo $fileContent;
 db_disconnect();
