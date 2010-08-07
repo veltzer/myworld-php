@@ -103,7 +103,9 @@ function create_lilypond() {
 			}
 			$res.="<li>links: ${s_a_ly}, ${s_a_pdf}, ${s_a_ps}, ${s_a_midi}, ${s_a_wav}, ${s_a_mp3}, ${s_a_ogg}</li>";
 			$res.="</ul>";
-			# lets put a link to play the mp3
+			# lets put a link to play the audio, currently it looks like the
+			# audio plugin can only play mp3 so that's the only link that we
+			# put...
 			$res.="[audio:${link_mp3}]";
 			$res.="</div>";
 		}
