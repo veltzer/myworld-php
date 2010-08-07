@@ -4,13 +4,14 @@ function create_lilypond() {
 	$show_style="div";
 	$res="";
 	// sending query
-	$query=sprintf("SELECT id,title,subtitle,composer,poet,style,piece,copyright FROM TbMsLilypond");
+	$query=sprintf("SELECT id,uuid,title,subtitle,composer,poet,style,piece,copyright FROM TbMsLilypond");
 	$result=mysql_query($query);
 	assert($result);
 
 	if($show_style=="table") {
 		$res.=get_start_table();
 		$res.="<tr>";
+		$res.="<td>uuid</td>";
 		$res.="<td>title</td>";
 		$res.="<td>subtitle</td>";
 		$res.="<td>composer</td>";
@@ -33,6 +34,7 @@ function create_lilypond() {
 
 	while($row=mysql_fetch_assoc($result)) {
 		$id=$row["id"];
+		$s_uuid=$row["uuid"];
 		$s_title=val_or_na($row["title"]);
 		$s_subtitle=val_or_na($row["subtitle"]);
 		$s_composer=val_or_na($row["composer"]);
@@ -40,13 +42,13 @@ function create_lilypond() {
 		$s_style=val_or_na($row["style"]);
 		$s_piece=val_or_na($row["piece"]);
 		$s_copyright=val_or_na($row["copyright"]);
-		$link_ly=link_to_direct("GetBlob.php?table=TbMsLilypond&id=$id&field=ly&type=text/plain&name_field=filebasename");
-		$link_pdf=link_to_direct("GetBlob.php?table=TbMsLilypond&id=$id&field=pdf&type=application/pdf&name_field=filebasename");
-		$link_ps=link_to_direct("GetBlob.php?table=TbMsLilypond&id=$id&field=ps&type=application/postscript&name_field=filebasename");
-		$link_midi=link_to_direct("GetBlob.php?table=TbMsLilypond&id=$id&field=midi&type=audio/midi&name_field=filebasename");
-		$link_wav=link_to_direct("GetBlob.php?table=TbMsLilypond&id=$id&field=wav&type=audio/x-wav&name_field=filebasename");
-		$link_mp3=link_to_direct("GetBlob.php?table=TbMsLilypond&id=$id&field=mp3&type=audio/mpeg&name_field=filebasename");
-		$link_ogg=link_to_direct("GetBlob.php?table=TbMsLilypond&id=$id&field=ogg&type=audio/ogg&name_field=filebasename");
+		$link_ly=link_to_direct("GetBlob.php?table=TbMsLilypond&sfield=uuid&id=$id&field=ly&type=text/plain&name_field=filebasename");
+		$link_pdf=link_to_direct("GetBlob.php?table=TbMsLilypond&sfield=uuid&id=$id&field=pdf&type=application/pdf&name_field=filebasename");
+		$link_ps=link_to_direct("GetBlob.php?table=TbMsLilypond&sfield=uuid&id=$id&field=ps&type=application/postscript&name_field=filebasename");
+		$link_midi=link_to_direct("GetBlob.php?table=TbMsLilypond&sfield=uuid&id=$id&field=midi&type=audio/midi&name_field=filebasename");
+		$link_wav=link_to_direct("GetBlob.php?table=TbMsLilypond&sfield=uuid&id=$id&field=wav&type=audio/x-wav&name_field=filebasename");
+		$link_mp3=link_to_direct("GetBlob.php?table=TbMsLilypond&sfield=uuid&id=$id&field=mp3&type=audio/mpeg&name_field=filebasename");
+		$link_ogg=link_to_direct("GetBlob.php?table=TbMsLilypond&sfield=uuid&id=$id&field=ogg&type=audio/ogg&name_field=filebasename");
 		$s_a_ly="<a href='{$link_ly}'>ly</a>";
 		$s_a_pdf="<a href='{$link_pdf}'>pdf</a>";
 		$s_a_ps="<a href='{$link_ps}'>ps</a>";
@@ -57,6 +59,7 @@ function create_lilypond() {
 		
 		if($show_style=="table") {
 			$res.="<tr>";
+			$res.="<td>{$s_uuid}</td>";
 			$res.="<td>{$s_title}</td>";
 			$res.="<td>{$s_subtitle}</td>";
 			$res.="<td>{$s_composer}</td>";
@@ -102,6 +105,7 @@ function create_lilypond() {
 				$res.="<li>copyright: ${s_copyright}</li>";
 			}
 			$res.="<li>links: ${s_a_ly}, ${s_a_pdf}, ${s_a_ps}, ${s_a_midi}, ${s_a_wav}, ${s_a_mp3}, ${s_a_ogg}</li>";
+			$res.="<li>uuid: ${s_uuid}</li>";
 			$res.="</ul>";
 			# lets put a link to play the audio, currently it looks like the
 			# audio plugin can only play mp3 so that's the only link that we

@@ -9,6 +9,7 @@ my_include("include/db.php");
 my_include("include/na.php");
 
 $p_table = $_GET['table'];
+$p_sfield = $_GET['sfield'];
 $p_id = $_GET['id'];
 $p_field = $_GET['field'];
 $p_name_field = $_GET['name_field'];
@@ -18,13 +19,15 @@ $debug=0;
 
 # security...
 assert($p_table=='TbMsLilypond');
+assert($p_sfield=='id' || $p_sfield=='uuid');
 #assert($p_field=='ly' || $p_field=='pdf' || $p_field=='ps' || $p_field=='midi');
 
 db_connect();
-$query=sprintf("SELECT %s,%s FROM %s where id=%s",
+$query=sprintf("SELECT %s,%s FROM %s where %s=%s",
 	mysql_real_escape_string($p_field),
 	mysql_real_escape_string($p_name_field),
 	mysql_real_escape_string($p_table),
+	mysql_real_escape_string($p_sfield),
 	mysql_real_escape_string($p_id)
 );
 if($debug==1) {
