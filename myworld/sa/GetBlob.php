@@ -15,7 +15,7 @@ $p_field = $_GET['field'];
 $p_name_field = $_GET['name_field'];
 $p_type = $_GET['type'];
 
-$debug=0;
+$debug=1;
 
 # security...
 assert($p_table=='TbMsLilypond');
@@ -23,7 +23,7 @@ assert($p_sfield=='id' || $p_sfield=='uuid');
 #assert($p_field=='ly' || $p_field=='pdf' || $p_field=='ps' || $p_field=='midi');
 
 db_connect();
-$query=sprintf("SELECT %s,%s FROM %s where %s=%s",
+$query=sprintf("SELECT %s,%s FROM %s where %s=\"%s\"",
 	mysql_real_escape_string($p_field),
 	mysql_real_escape_string($p_name_field),
 	mysql_real_escape_string($p_table),
