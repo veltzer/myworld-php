@@ -16,3 +16,6 @@ What is yet to do ?
 - put the favicon in the database.
 - put the right link to the GetBlob.php script instead of it's name.
 - get it out of the plugin (make the plugin lighter).
+
+references:
+http://wordpress.org/extend/plugins/favicons/
