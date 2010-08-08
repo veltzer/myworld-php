@@ -29,7 +29,7 @@ function create_lilypond() {
 		$res.="</tr>\n";
 	}
 	if($show_style=="div") {
-		$res.="<div class=\"accordion2\">";
+		$res.=multi_accordion_start();
 	}
 
 	while($row=mysql_fetch_assoc($result)) {
@@ -84,40 +84,40 @@ function create_lilypond() {
 			if($row["poet"]!=NULL && $s_poet!=$s_composer) {
 				$header.=", ".$s_poet;
 			}
-			$res.="<h3>{$header}</h3>";
-			$res.="<div><ul>";
+			$body="";
+			$body.="<ul>";
 			if($row["subtitle"]!=NULL) {
-				$res.="<li>subtitle: ${s_subtitle}</li>";
+				$body.="<li>subtitle: ${s_subtitle}</li>";
 			}
 			if($row["composer"]!=NULL) {
-				$res.="<li>composer: ${s_composer}</li>";
+				$body.="<li>composer: ${s_composer}</li>";
 			}
 			if($row["poet"]!=NULL) {
-				$res.="<li>poet: ${s_poet}</li>";
+				$body.="<li>poet: ${s_poet}</li>";
 			}
 			if($row["style"]!=NULL) {
-				$res.="<li>style: ${s_style}</li>";
+				$body.="<li>style: ${s_style}</li>";
 			}
 			if($row["piece"]!=NULL) {
-				$res.="<li>piece: ${s_piece}</li>";
+				$body.="<li>piece: ${s_piece}</li>";
 			}
 			if($row["copyright"]!=NULL) {
-				$res.="<li>copyright: ${s_copyright}</li>";
+				$body.="<li>copyright: ${s_copyright}</li>";
 			}
-			$res.="<li>links: ${s_a_ly}, ${s_a_pdf}, ${s_a_ps}, ${s_a_midi}, ${s_a_wav}, ${s_a_mp3}, ${s_a_ogg}</li>";
-			$res.="<li>uuid: ${s_uuid}</li>";
-			$res.="</ul>";
+			$body.="<li>links: ${s_a_ly}, ${s_a_pdf}, ${s_a_ps}, ${s_a_midi}, ${s_a_wav}, ${s_a_mp3}, ${s_a_ogg}</li>";
+			$body.="<li>uuid: ${s_uuid}</li>";
+			$body.="</ul>";
 			# lets put a link to play the audio, currently it looks like the
 			# audio plugin can only play mp3 so that's the only link that we
 			# put...
-			$res.="You can play the automatically generated mp3 file here...";
-			$res.=get_audio_player(
+			$body.="You can play the automatically generated mp3 file here...";
+			$body.=get_audio_player(
 				$link_mp3,
 				$row["title"],
 				$row["composer"],
 				$row["poet"]
 			);
-			$res.="</div>";
+			$res.=multi_accordion_entry($header,$body);
 		}
 	}
 	assert(mysql_free_result($result));
@@ -125,7 +125,7 @@ function create_lilypond() {
 		$res.="</table>";
 	}
 	if($show_style=="div") {
-		$res.="</div>";
+		$res.=multi_accordion_end();
 	}
 	return $res;
 }

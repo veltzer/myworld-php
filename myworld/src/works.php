@@ -82,30 +82,25 @@ function create_works() {
 
 	$fields_num=mysql_num_fields($result);
 
-	#$res.="<div style='overflow: auto; height:400px;'>";
-	$res.=get_start_table();
-	// printing table headers
-	for($i=0; $i<$fields_num; $i++)
-	{
-		$field=mysql_fetch_field($result);
+	// analyzing positions of ids in the data
+	for($i=0; $i<$fields_num; $i++) {
+		$field=mysql_fetch_field($result,$i);
+		if($field->name=='name') {
+			$nameid=$i;
+		}
 		if($field->name=='producerId') {
-			$field->name="producer";
-			$prodid=$i;
+			$producerid=$i;
 		}
 		if($field->name=='viewerId') {
-			$field->name="viewer";
 			$viewerid=$i;
 		}
 		if($field->name=='locationId') {
-			$field->name="location";
 			$locationid=$i;
 		}
 		if($field->name=='typeId') {
-			$field->name="type";
 			$typeid=$i;
 		}
 		if($field->name=='creatorId') {
-			$field->name="creator";
 			$creatorid=$i;
 		}
 		if($field->name=='size') {
@@ -114,67 +109,165 @@ function create_works() {
 		if($field->name=='length') {
 			$lengthid=$i;
 		}
-		$res.="<td>{$field->name}</td>";
+		if($field->name=='viewDate') {
+			$viewdateid=$i;
+		}
+		if($field->name=='remark') {
+			$remarkid=$i;
+		}
+		if($field->name=='rating') {
+			$ratingid=$i;
+		}
+		if($field->name=='review') {
+			$reviewid=$i;
+		}
 	}
-	$res.="</tr>\n";
+	$show_style="div";
+	//$show_style="table";
+	if($show_style=="table") {
+		$res.=get_start_table();
+		// printing table headers
+		$res.="<tr>\n";
+		for($i=0; $i<$fields_num; $i++) {
+			$field=mysql_fetch_field($result,$i);
+			$name=$field->name;
+			if($field->name=='producerId') {
+				$name="producer";
+			}
+			if($field->name=='viewerId') {
+				$name="viewer";
+			}
+			if($field->name=='locationId') {
+				$name="location";
+			}
+			if($field->name=='typeId') {
+				$name="type";
+			}
+			if($field->name=='creatorId') {
+				$name="creator";
+			}
+			$res.="<td>{$name}</td>";
+		}
+		$res.="</tr>\n";
+	}
+	if($show_style=="div") {
+		$res.=multi_accordion_start();
+	}
 	// printing table rows
 	while($row=mysql_fetch_row($result))
 	{
 		#handle producers
 		#<a href="url">Link text</a>
-		if($row[$prodid]!=NULL) {
-			$url=$producers[$row[$prodid]]['url'];
-			$name=$producers[$row[$prodid]]['name'];
-			$row[$prodid]="<a href='{$url}'>{$name}</a>";
+		if($row[$producerid]!=NULL) {
+			$url=$producers[$row[$producerid]]['url'];
+			$name=$producers[$row[$producerid]]['name'];
+			$s_producer="<a href='{$url}'>{$name}</a>";
 		} else {
-			$row[$prodid]=get_na_string();
+			$s_producer=get_na_string();
 		}
 		if($row[$typeid]!=NULL) {
 			$name=$types[$row[$typeid]]['name'];
-			$row[$typeid]=$name;
+			$s_type=$types[$row[$typeid]]['name'];
 		} else {
-			$row[$typeid]=get_na_string();
+			$s_type=get_na_string();
 		}
 		if($row[$locationid]!=NULL) {
-			$name=$locations[$row[$locationid]]['name'];
-			$row[$locationid]=$name;
+			$s_location=$locations[$row[$locationid]]['name'];
 		} else {
-			$row[$locationid]=get_na_string();
+			$s_location=get_na_string();
 		}
 		if($row[$viewerid]!=NULL) {
-			$name=get_full_name($persons,$row[$viewerid]);
-			$row[$viewerid]=$name;
+			$s_viewer=get_full_name($persons,$row[$viewerid]);
 		} else {
-			$row[$viewerid]=get_na_string();
+			$s_viewer=get_na_string();
 		}
 		if($row[$creatorid]!=NULL) {
-			$row[$creatorid]=get_full_name($persons,$row[$creatorid]);;
+			$s_creator=get_full_name($persons,$row[$creatorid]);
 		} else {
-			$row[$creatorid]=get_na_string();
+			$s_creator=get_na_string();
 		}
 		if($row[$sizeid]!=NULL) {
-			$row[$sizeid]=formatSize($row[$sizeid]);
+			$s_size=formatSize($row[$sizeid]);
 		}
 		if($row[$lengthid]!=NULL) {
-			$row[$lengthid]=formatTimeperiod($row[$lengthid]);
+			$s_length=formatTimeperiod($row[$lengthid]);
 		}
-		$res.="<tr>";
 
-		// $row is array... foreach( .. ) puts every element
-		// of $row to $cell variable
-		foreach($row as $cell) {
-			if($cell==NULL) {
-				$cell=get_na_string();
+		if($show_style=="table") {
+			$res.="<tr>";
+			// $row is array... foreach( .. ) puts every element
+			// of $row to $cell variable
+			foreach($row as $cell) {
+				if($cell==NULL) {
+					$cell=get_na_string();
+				}
+				$res.="<td>$cell</td>";
 			}
-			$res.="<td>$cell</td>";
+			$res.="</tr>\n";
 		}
-
-		$res.="</tr>\n";
+		if($show_style=="div") {
+			if($row[$nameid]!=NULL) {
+				if($row[$creatorid]!=NULL) {
+					$header=$row[$nameid]." / ".$s_creator;
+				} else {
+					$header=$row[$nameid];
+				}
+			} else {
+				if($row[$creatorid]!=NULL) {
+					$header=$s_creator;
+				} else {
+					$header="Huh?!?";
+				}
+			}
+			$body="";
+			$body.="<ul>";
+			if($row[$nameid]!=NULL) {
+				$body.="<li>name: ".$row[$nameid]."</li>";
+			}
+			if($row[$creatorid]!=NULL) {
+				$body.="<li>creator: ".$s_creator."</li>";
+			}
+			if($row[$lengthid]!=NULL) {
+				$body.="<li>length: ".$row[$lengthid]."</li>";
+			}
+			if($row[$sizeid]!=NULL) {
+				$body.="<li>size: ".$row[$sizeid]."</li>";
+			}
+			if($row[$typeid]!=NULL) {
+				$body.="<li>type: ".$s_type."</li>";
+			}
+			if($row[$producerid]!=NULL) {
+				$body.="<li>producer: ".$s_producer."</li>";
+			}
+			if($row[$viewdateid]!=NULL) {
+				$body.="<li>view date: ".$row[$viewdateid]."</li>";
+			}
+			if($row[$viewerid]!=NULL) {
+				$body.="<li>viewer: ".$s_viewer."</li>";
+			}
+			if($row[$locationid]!=NULL) {
+				$body.="<li>location: ".$s_location."</li>";
+			}
+			if($row[$remarkid]!=NULL) {
+				$body.="<li>remark: ".$row[$remarkid]."</li>";
+			}
+			if($row[$ratingid]!=NULL) {
+				$body.="<li>rating: ".$row[$ratingid]."</li>";
+			}
+			if($row[$reviewid]!=NULL) {
+				$body.="<li>review: ".$row[$reviewid]."</li>";
+			}
+			$body.="</ul>";
+			$res.=multi_accordion_entry($header,$body);
+		}
 	}
 	assert(mysql_free_result($result));
-	$res.="</table>";
-	#$res.="<br/>";
-	#$res.="</div>";
+	if($show_style=="table") {
+		$res.="</table>";
+	}
+	if($show_style=="div") {
+		$res.=multi_accordion_end();
+	}
 
 	$res.="Some statistics...<br/>";
 	$table="TbWkWork";
@@ -242,7 +335,6 @@ function create_works() {
 	$res.=$query.' = '.$row[0]."<br/>";
 	assert(mysql_free_result($result));
 
-	#$res.="<br/>";
 	return $res;
 }
 
