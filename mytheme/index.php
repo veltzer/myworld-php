@@ -22,7 +22,7 @@
 			<div class="previous"><?php next_posts_link('&laquo; Previous') ?></div>
 			<div class="next"><?php previous_posts_link('Next &raquo;') ?></div>
 		</div>
-	<?php else : ?>
+<?php else : ?>
 		<h2 class="post-title"><?php _e('Not Found'); ?></h2>
 		<p><?php _e("Sorry, but you are looking for something that isn't here. Double check your URL or you should try searching for it."); ?></p>
 		<?php @include (TEMPLATEPATH . "/searchform.php"); ?>
