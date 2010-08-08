@@ -8,6 +8,7 @@ RewriteRule . /blog/index.php [L]
 </IfModule>
 # END WordPress
 
+# This is for being able to upload big files to php
 php_value upload_max_filesize 20M
 php_value post_max_size 20M
 php_value max_execution_time 200
