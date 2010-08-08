@@ -1,7 +1,18 @@
 This is documentation about using the favicon here...
 =====================================================
 - Ultimately the favicon should be in the database.
-- How to do that is debatable (need to check out the favicon plugin for wordpress
-	and see how these guys accomplish this task).
-- Meanwhile the favicon is here inside the misc folder and gets installed using
-	the makefile on issuing "make install".
+- Currently it is not.
+- My first solution was to put it here in the build directory (not as part of any wordpress
+plugin but rather as a standalone file) and have the "make install" process install it
+at the root of my website (usually /var/www).
+- This was a stupid solution since it is too much hardcoded.
+- I found, by scanning wordpress plugins that deal with the favicon issue, that there is
+a way for a page to set it's own favicon.
+- This is done by a syntax like this:
+	echo "<link rel='SHORTCUT ICON' type='image/x-icon' href='".plugins_url('resources/favicon.ico',__FILE__)."' />\n";
+- This is how I got to the current situation: the favicon is part of the plugin (still not in the database) but has nothing to do with the build system. Better.
+
+What is yet to do ?
+- put the favicon in the database.
+- put the right link to the GetBlob.php script instead of it's name.
+- get it out of the plugin (make the plugin lighter).
