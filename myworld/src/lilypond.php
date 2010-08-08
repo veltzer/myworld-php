@@ -110,6 +110,7 @@ function create_lilypond() {
 			# lets put a link to play the audio, currently it looks like the
 			# audio plugin can only play mp3 so that's the only link that we
 			# put...
+			$res.="You can play the automatically generated mp3 file here...";
 			$res.=get_audio_player(
 				$link_mp3,
 				$row["title"],
