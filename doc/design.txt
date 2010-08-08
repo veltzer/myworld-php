@@ -6,13 +6,6 @@ Goals:
 	produce different output of required for wordpress.
 - That it would be easy to run my php code from within wordpress.
 
-What you have to do in wordpress in order to run my php code:
-=============================================================
-1. install some php execute plugin that allows you to execute php code as
-	part of posts or comments.
-2. add
-	<?php
-		require("wp-setup.php");
-		// now you can require any of my files using php related path names
-		// and use any of my functions...
-	?>
+Policy
+======
+- all includes are root oriented (from php downwards...) - is this still relevant ?!?

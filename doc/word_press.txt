@@ -1,3 +1,6 @@
+This is documentation regarding various issues regarding wordpress
+==================================================================
+
 Here is how to upgrade wordpress...
 ===================================
 - If you want to do it through the wp admin then run the

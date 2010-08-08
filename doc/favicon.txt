@@ -1,0 +1,7 @@
+This is documentation about using the favicon here...
+=====================================================
+- Ultimately the favicon should be in the database.
+- How to do that is debatable (need to check out the favicon plugin for wordpress
+	and see how these guys accomplish this task).
+- Meanwhile the favicon is here inside the misc folder and gets installed using
+	the makefile on issuing "make install".

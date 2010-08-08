@@ -28,7 +28,6 @@ analytics:
 
 favicon:
 ========
-- icon for the site should be built and installed with "make install".
 - fix up my favicon after learning some gimp howto.
 - the fav icon should be part of a plugin. I seem to recall these is a "favicon"
 	plugin to wordpress ?!? This would be better than the barbaric overriding
