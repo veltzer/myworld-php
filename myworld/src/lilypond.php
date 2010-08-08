@@ -86,6 +86,9 @@ function create_lilypond() {
 			}
 			$body="";
 			$body.="<ul>";
+			if($row["title"]!=NULL) {
+				$body.="<li>title: ${s_title}</li>";
+			}
 			if($row["subtitle"]!=NULL) {
 				$body.="<li>subtitle: ${s_subtitle}</li>";
 			}
