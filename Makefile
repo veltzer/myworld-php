@@ -46,7 +46,6 @@ install:
 	-sudo rm -rf $(MYTHEME_THEME_FULL_DIR)
 	sudo cp -r $(MYTHEME_THEME_NAME) $(THEME_DIR)
 	sudo cp misc/rss.png $(WP_DIR)/wp-includes/images/rss.png
-	sudo cp misc/favicon.ico $(WEB_ROOT)
 	sudo cp misc/htaccess $(WEB_ROOT)/.htaccess
 
 .PHONY: clean
