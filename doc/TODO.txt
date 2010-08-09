@@ -21,20 +21,16 @@ installation
 
 analytics:
 ==========
+- get ridd of google analytics and instead get a plugin that does all of those statistics
+"in house" well.
 - how to I use google analytics for my blobs ?
 	Maybe I should just have my own analytics ? A table which records each person
 	accessing the blob table, the ip, the browser and shit, and then have some
 	analysis about it?
 
-favicon:
-========
+blog content:
+=============
 - fix up my favicon after learning some gimp howto.
-- the fav icon should be part of a plugin. I seem to recall these is a "favicon"
-	plugin to wordpress ?!? This would be better than the barbaric overriding
-	of the favicon that I'm doing right now...
-
-blog:
-=====
 - take an image of me and pass it though some gimp folder and put it on the side bar
 	of my site.
 - put some info on the about page.
@@ -43,5 +39,3 @@ blog:
 - check what's the status of a hebrew spell checker in my blog...
 	(do I have one ? does it work? what about the english one ?)
 - add images to my political posts (the hebrew ones).
-
-- Alternating colors in table so that they could be better read.
