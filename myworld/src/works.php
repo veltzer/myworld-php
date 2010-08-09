@@ -75,7 +75,7 @@ function create_works() {
 	assert(mysql_free_result($result));
 
 	// sending query
-	$query=sprintf("SELECT id,creatorId,name,length,size,typeId,producerId,viewDate,viewerId,locationId,remark,rating,review FROM TbWkWork");
+	$query=sprintf("SELECT id,creatorId,name,length,size,typeId,producerId,startViewDate,endViewDate,viewerId,locationId,remark,rating,review FROM TbWkWork");
 	//$query=sprintf("SELECT * FROM TbWkWork");
 	$result=mysql_query($query);
 	assert($result);
@@ -109,8 +109,11 @@ function create_works() {
 		if($field->name=='length') {
 			$lengthid=$i;
 		}
-		if($field->name=='viewDate') {
-			$viewdateid=$i;
+		if($field->name=='startViewDate') {
+			$startviewdateid=$i;
+		}
+		if($field->name=='endViewDate') {
+			$endviewdateid=$i;
 		}
 		if($field->name=='remark') {
 			$remarkid=$i;
@@ -239,8 +242,11 @@ function create_works() {
 			if($row[$producerid]!=NULL) {
 				$body.="<li>producer: ".$s_producer."</li>";
 			}
-			if($row[$viewdateid]!=NULL) {
-				$body.="<li>view date: ".$row[$viewdateid]."</li>";
+			if($row[$startviewdateid]!=NULL) {
+				$body.="<li>start view date: ".$row[$startviewdateid]."</li>";
+			}
+			if($row[$endviewdateid]!=NULL) {
+				$body.="<li>end view date: ".$row[$endviewdateid]."</li>";
 			}
 			if($row[$viewerid]!=NULL) {
 				$body.="<li>viewer: ".$s_viewer."</li>";

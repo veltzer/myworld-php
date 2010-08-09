@@ -23,3 +23,5 @@ There is no admin panel to configure as of yet.
 = 0.0.1 =
 
 * First version.
+
+* works: viewDate -> startViewDate + endViewDate.
