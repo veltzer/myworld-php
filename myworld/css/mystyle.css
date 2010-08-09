@@ -1,17 +1,7 @@
 /*
-body {
-	margin: 10px auto;
-	width: 570px;
-	font: 75%/120% Arial, Helvetica, sans-serif;
-}
-*/
-/*
-.accordion2 {
-	width: 480px;
-	border-bottom: solid 1px #c4c4c4;
-}
-	*/
-.accordion2 h3 {
+ * These are the styles for the accordion
+ */
+div.myacc_header {
 	background: #e9e7e7 url(images/arrow-square.gif) no-repeat right -51px;
 	padding: 7px 15px;
 	margin: 0;
@@ -20,13 +10,13 @@ body {
 	border-bottom: none;
 	cursor: pointer;
 }
-.accordion2 h3:hover {
+div.myacc_header:hover {
 	background-color: #e3e2e2;
 }
-.accordion2 h3.active {
+div.myacc_header.active {
 	background-position: right 5px;
 }
-.accordion2 div {
+div.myacc_body {
 	background: #f7f7f7;
 	margin: 0;
 	padding: 10px 15px 20px;

@@ -39,3 +39,10 @@ blog content:
 - check what's the status of a hebrew spell checker in my blog...
 	(do I have one ? does it work? what about the english one ?)
 - add images to my political posts (the hebrew ones).
+
+database:
+=========
+- separate views from TbWkWorks.
+- separate reviews from TbWkWorks.
+- separate urls for TbWkWorks.
+- add tags to TbWkWorks.

@@ -56,19 +56,19 @@ function get_audio_player($url,$title,$composer,$poet) {
  * JQuery helpers start here
  */
 function multi_accordion_start() {
-	return "<div class='accordion2'>\n";
+	return "<div class=\"myacc\">\n";
 }
 
 function multi_accordion_header($header) {
-	return "<h3>{$header}</h3>";
+	return "<div class=\"myacc_header\">{$header}</div>";
 }
 
 function multi_accordion_body($body) {
-	return "<div>{$body}</div>";
+	return "<div class=\"myacc_body\">{$body}</div>";
 }
 
 function multi_accordion_entry($header,$body) {
-	return "<h3>{$header}</h3>\n<div>{$body}</div>\n";
+	return "<div class=\"myacc_entry\"><div class=\"myacc_header\">{$header}</div>\n<div class=\"myacc_body\">{$body}</div></div>\n";
 }
 
 function multi_accordion_end() {
