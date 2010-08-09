@@ -31,10 +31,13 @@ ALL:=$(ALL) $(MYTHEME_THEME_ZIP)
 all: $(ALL)
 
 $(MYHEB_PLUGIN_ZIP): $(MYHEB_PLUGIN_FILES)
+	-rm -f $@
 	zip --quiet -r $@ $(MYHEB_PLUGIN_NAME)
 $(MYWORLD_PLUGIN_ZIP): $(MYWORLD_PLUGIN_FILES)
+	-rm -f $@
 	zip --quiet -r $@ $(MYWORLD_PLUGIN_NAME)
 $(MYTHEME_THEME_ZIP): $(MYTHEME_THEME_FILES)
+	-rm -f $@
 	zip --quiet -r $@ $(MYTHEME_THEME_NAME)
 
 .PHONY: install
