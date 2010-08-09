@@ -228,10 +228,10 @@ function create_works() {
 				$body.="<li>creator: ".$s_creator."</li>";
 			}
 			if($row[$lengthid]!=NULL) {
-				$body.="<li>length: ".$row[$lengthid]."</li>";
+				$body.="<li>length: ".$s_length."</li>";
 			}
 			if($row[$sizeid]!=NULL) {
-				$body.="<li>size: ".$row[$sizeid]."</li>";
+				$body.="<li>size: ".$s_size."</li>";
 			}
 			if($row[$typeid]!=NULL) {
 				$body.="<li>type: ".$s_type."</li>";
