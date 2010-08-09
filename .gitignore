@@ -5,3 +5,4 @@
 # *.[oa]
 # *~
 target/*
+import/images/companies/target/*
