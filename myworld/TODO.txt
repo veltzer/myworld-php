@@ -1,8 +1,33 @@
-- import all company images into my database.
+- import all company images into my database and get it out of the plugin folder.
 - GetBlob.php should be based on include/blob.php
 	and so should be lilypond fragment.
 	There I would have sugar functions for creating a link for a blog
 	and extracting the data of a blob requested.
-- add google analytics to GetBlob.php.
+- add google analytics or any other type of analytics I am using to GetBlob.php.
 
-- audio playing looks bad for hebrew titles. fix it. 
+Lilypond section
+================
+- audio playing looks bad for hebrew titles. fix it.
+- add links to performances embedded as youtube videos.
+
+Calendar project:
+=================
+- add my own events table in the database.
+	An event:
+		begin time, end time, name, company affiliated, course affiliated
+	import historical data.
+- show events from date to date in the blog under "calendar".
+
+- in the future improve the UI to look like the real professional calendars.
+
+Company cloud project, company histogram project
+================================================
+- Create a cloud of the companies that I teach with the icons of the companies.
+Size of the icon is the number of hours I taught that company.
+- Do the same for my courses.
+- Create a company historgram and course histogram (same as above).
+
+About page:
+===========
+The links in the about page should come from the database under some kind of
+tag like "web presense".
