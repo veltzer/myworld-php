@@ -1,8 +1,8 @@
 # variables
 
-SRC_DIR:=src/
-BIG_DIR:=target/big/
-SMA_DIR:=target/sma/
+SRC_DIR:=images/companies/src/
+BIG_DIR:=images/companies/target/big/
+SMA_DIR:=images/companies/target/sma/
 
 FILES_SRC:=$(shell find $(SRC_DIR) -type f)
 ALL_TARGETS:=
