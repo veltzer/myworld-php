@@ -31,7 +31,7 @@ function create_courses() {
 function create_consulting() {
 	$res="";
 	// sending query
-	$query=sprintf("SELECT name,remark,url,imagePath FROM TbBsCompanies where funcConsulting order by name asc");
+	$query=sprintf("SELECT id,name,slug,remark,url FROM TbBsCompanies where funcConsulting order by name asc");
 	$result=mysql_query($query);
 	assert($result);
 
@@ -43,10 +43,12 @@ function create_consulting() {
 	$res.="</tr>\n";
 
 	while($row=mysql_fetch_assoc($result)) {
+		$id=$row["id"];
 		$name=$row["name"];
+		$slug=$row["slug"];
 		$remark=$row["remark"];
+		$link_img=link_to_direct("GetBlob.php?table=TbBsCompanies&sfield=id&id={$id}&field=smallImage&type=image/png&name_field=slug");
 		$url=$row["url"];
-		$imagePath=link_to_resource($row["imagePath"]);
 		if($url!=NULL) {
 			$name="<a href='{$url}'>{$name}</a>";
 		}
@@ -56,7 +58,7 @@ function create_consulting() {
 		$res.="</tr>";
 		$res.="<td>{$name}</td>";
 		$res.="<td>{$remark}</td>";
-		$res.="<td><img src='{$imagePath}'/></td>";
+		$res.="<td><img src='{$link_img}'/></td>";
 		$res.="</tr>\n";
 	}
 	assert(mysql_free_result($result));
@@ -67,7 +69,7 @@ function create_consulting() {
 function create_teaching() {
 	$res="";
 	// sending query
-	$query=sprintf("SELECT name,remark,url,imagePath FROM TbBsCompanies where funcTeaching order by name asc");
+	$query=sprintf("SELECT id,name,slug,remark,url FROM TbBsCompanies where funcTeaching order by name asc");
 	$result=mysql_query($query);
 	assert($result);
 
@@ -79,10 +81,12 @@ function create_teaching() {
 	$res.="</tr>\n";
 
 	while($row=mysql_fetch_assoc($result)) {
+		$id=$row["id"];
 		$name=$row["name"];
+		$slug=$row["slug"];
 		$remark=$row["remark"];
+		$link_img=link_to_direct("GetBlob.php?table=TbBsCompanies&sfield=id&id={$id}&field=smallImage&type=image/png&name_field=slug");
 		$url=$row["url"];
-		$imagePath=link_to_resource($row["imagePath"]);
 		if($url!=NULL) {
 			$name="<a href='{$url}'>{$name}</a>";
 		}
@@ -92,7 +96,7 @@ function create_teaching() {
 		$res.="</tr>";
 		$res.="<td>{$name}</td>";
 		$res.="<td>{$remark}</td>";
-		$res.="<td><img src='{$imagePath}'/></td>";
+		$res.="<td><img src='{$link_img}'/></td>";
 		$res.="</tr>\n";
 	}
 	assert(mysql_free_result($result));
@@ -103,7 +107,7 @@ function create_teaching() {
 function create_certification() {
 	$res="";
 	// sending query
-	$query=sprintf("SELECT name,url,imagePath,fromDate FROM TbBsCompanies where funcCertification order by name asc");
+	$query=sprintf("SELECT id,name,slug,url,fromDate FROM TbBsCompanies where funcCertification order by name asc");
 	$result=mysql_query($query);
 	assert($result);
 
@@ -115,14 +119,16 @@ function create_certification() {
 	$res.="</tr>\n";
 	// printing table rows
 	while($row=mysql_fetch_assoc($result)) {
+		$id=$row["id"];
 		$name=$row["name"];
+		$slug=$row["slug"];
 		$url=$row["url"];
-		$imagePath=link_to_resource($row["imagePath"]);
 		$fromDate=$row["fromDate"];
+		$link_img=link_to_direct("GetBlob.php?table=TbBsCompanies&sfield=id&id={$id}&field=smallImage&type=image/png&name_field=slug");
 		$res.="</tr>";
 		$res.="<td><a href='{$url}'>{$name}</a></td>";
 		$res.="<td>{$fromDate}</td>";
-		$res.="<td><img src='{$imagePath}'/></td>";
+		$res.="<td><img src='{$link_img}'/></td>";
 		$res.="</tr>\n";
 	}
 	assert(mysql_free_result($result));

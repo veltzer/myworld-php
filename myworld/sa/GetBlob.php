@@ -15,10 +15,10 @@ $p_field = $_GET['field'];
 $p_name_field = $_GET['name_field'];
 $p_type = $_GET['type'];
 
-$debug=1;
+$debug=0;
 
 # security...
-assert($p_table=='TbMsLilypond');
+assert($p_table=='TbMsLilypond' || $p_table=='TbBsCompanies');
 assert($p_sfield=='id' || $p_sfield=='uuid');
 #assert($p_field=='ly' || $p_field=='pdf' || $p_field=='ps' || $p_field=='midi');
 
