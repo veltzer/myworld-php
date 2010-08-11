@@ -93,12 +93,13 @@ function hebrew4wp_onload() {
 		var el = elements[i];
 
 		//If this particular element bears the CSS class name "entry", or if this is an H2 element
-		if((el.className != null && el.className.indexOf("entry") != -1) || el.tagName.toLowerCase() == "h2") {
+		if((el.className != null && el.className.indexOf("post-title") != -1) || el.tagName.toLowerCase() == "a") { // from h2
 			var entryHTML = el.innerHTML;
 
 			if(hebrew4wp_is_rtl_text(entryHTML)) {
 				//If any RTL characters are found, set the element's DIR attribute to "right-to-left".	
 				el.dir = "rtl";
+				//el.childNodes[0].style.textAlign="right";
 			}
 		}
 	}

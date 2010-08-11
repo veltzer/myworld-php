@@ -33,7 +33,7 @@ function myheb_the_title($content) {
 	}
 	return $content;
 }
-//add_filter('the_title','myheb_the_title',-10);
+add_filter('the_title','myheb_the_title',-10);
 
 /*
  * The function that hooks into WP to substitute content
@@ -44,7 +44,7 @@ function myheb_the_content($content) {
 	}
 	return $content;
 }
-//add_filter('the_content','myheb_the_content',-10);
+add_filter('the_content','myheb_the_content',-10);
 
 /*
  * The function that hooks into WP to substitute excerpts
@@ -55,15 +55,15 @@ function myheb_the_excerpt($content) {
 	}
 	return $content;
 }
-//add_filter('the_excerpt','myheb_the_excerpt',-10);
+add_filter('the_excerpt','myheb_the_excerpt',-10);
 
 /*
  * Add our own style sheet at the css part of the document
  */
 function myheb_wp_head() {
-	$url_js=plugins_url('javascript/hebrew4wp_10.js',__FILE__);
-	echo "<script type='text/javascript' src='{$url_js}'></script>'\n";
-	//$url_css=plugins_url('css/myheb.css',__FILE__);
-	//echo "<link rel='stylesheet' id='myheb-css' href='{$url_css}' type='text/css' media='screen' />\n";
+	//$url_js=plugins_url('javascript/hebrew4wp_10.js',__FILE__);
+	//echo "<script type='text/javascript' src='{$url_js}'></script>'\n";
+	$url_css=plugins_url('css/myheb.css',__FILE__);
+	echo "<link rel='stylesheet' id='myheb-css' href='{$url_css}' type='text/css' media='screen' />\n";
 }
 add_action('wp_head','myheb_wp_head');
