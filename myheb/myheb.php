@@ -3,21 +3,22 @@
 Plugin Name: MyHeb
 Plugin URI: http://veltzer.net/
 Description: MyHeb plugin for WordPress
-Version: 0.0.1
+Version: 0.0.2
 Author: Mark Veltzer <mark.veltzer@gmail.com> 
 Author URI: http://www.veltzer.net 
 */
 
 /*
- * The function that is called when displaying titles of articles
- *
- * Check if the title is hebrew and if so wrap it in the right tags...
+ * This is the core detection function...
  */
 function myheb_is_hebrew($string) {
 	//return ereg("^[א-ת\s\;\,\.\?\*\:]*$",$string,$regs);
 	return ereg("[א-ת]",$string,$regs);
 }
 
+/*
+ * Wrap content in a hebrew div
+ */
 function myheb_wrap_in_div($content,$class) {
 	$content="<div class='".$class."'>".$content."</div>";
 	return $content;
@@ -55,3 +56,12 @@ function myheb_the_excerpt($content) {
 	return $content;
 }
 add_filter('the_excerpt','myheb_the_excerpt',-10);
+
+/*
+ * Add our own style sheet at the css part of the document
+ */
+function myheb_wp_head() {
+	$url=plugins_url('css/style.css',__FILE__);
+	echo "<link rel='stylesheet' id='myheb-css' href='{$url}' type='text/css' media='screen' />\n";
+}
+add_action('wp_head','myheb_wp_head');

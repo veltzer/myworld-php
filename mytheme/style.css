@@ -299,19 +299,3 @@ dl, dd, dt {
 code {
 	font-weight: bold;
 }
-
-/* hebrew stuff starts here... */
-/* This next line is not required...
- * :lang(he) { direction: rtl; text-align:right; } */
-.hebtitle {
-	direction: rtl;
-	text-align: right;
-}
-.hebcontent {
-	direction: rtl;
-	text-align: right;
-}
-.hebexcerpt {
-	direction: rtl;
-	text-align: right;
-}
