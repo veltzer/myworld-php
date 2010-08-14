@@ -4,7 +4,7 @@ function create_lilypond() {
 	$show_style="div";
 	$res="";
 	// sending query
-	$query=sprintf("SELECT id,uuid,title,subtitle,composer,poet,style,piece,copyright FROM TbMsLilypond");
+	$query=sprintf("SELECT id,uuid,title,subtitle,composer,poet,style,piece,copyright,ly is not null as ly,pdf is not null as pdf,ps is not null as ps,midi is not null as midi,wav is not null as wav,mp3 is not null as mp3,ogg is not null as ogg FROM TbMsLilypond");
 	$result=mysql_query($query);
 	assert($result);
 
@@ -107,7 +107,29 @@ function create_lilypond() {
 			if($row["copyright"]!=NULL) {
 				$body.="<li>copyright: ${s_copyright}</li>";
 			}
-			$body.="<li>links: ${s_a_ly}, ${s_a_pdf}, ${s_a_ps}, ${s_a_midi}, ${s_a_wav}, ${s_a_mp3}, ${s_a_ogg}</li>";
+			$links=array();
+			if($row["ly"]!=0) {
+				array_push($links,$s_a_ly);
+			}
+			if($row["pdf"]!=0) {
+				array_push($links,$s_a_pdf);
+			}
+			if($row["ps"]!=0) {
+				array_push($links,$s_a_ps);
+			}
+			if($row["midi"]!=0) {
+				array_push($links,$s_a_midi);
+			}
+			if($row["wav"]!=0) {
+				array_push($links,$s_a_wav);
+			}
+			if($row["mp3"]!=0) {
+				array_push($links,$s_a_mp3);
+			}
+			if($row["ogg"]!=0) {
+				array_push($links,$s_a_ogg);
+			}
+			$body.="<li>links: ".join(", ",$links)."</li>";
 			$body.="<li>uuid: ${s_uuid}</li>";
 			$body.="</ul>";
 			# lets put a link to play the audio, currently it looks like the
