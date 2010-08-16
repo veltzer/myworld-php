@@ -26,3 +26,5 @@ disadvantages of this approach. An example makefile.
 
 - blog about updating the full wordpress distribution.
 	(about secrurity of it).
+
+- blog about cd ripping tools in linux (get the results of my small research into the matter).
