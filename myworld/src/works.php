@@ -75,7 +75,7 @@ function create_works() {
 	assert(mysql_free_result($result));
 
 	// sending query
-	$query=sprintf("SELECT id,creatorId,name,length,size,typeId,producerId,startViewDate,endViewDate,viewerId,locationId,remark,rating,review FROM TbWkWork");
+	$query=sprintf("SELECT id,creatorId,name,length,size,chapters,typeId,producerId,startViewDate,endViewDate,viewerId,locationId,remark,rating,review FROM TbWkWork");
 	//$query=sprintf("SELECT * FROM TbWkWork");
 	$result=mysql_query($query);
 	assert($result);
@@ -103,11 +103,14 @@ function create_works() {
 		if($field->name=='creatorId') {
 			$creatorid=$i;
 		}
+		if($field->name=='length') {
+			$lengthid=$i;
+		}
 		if($field->name=='size') {
 			$sizeid=$i;
 		}
-		if($field->name=='length') {
-			$lengthid=$i;
+		if($field->name=='chapters') {
+			$chaptersid=$i;
 		}
 		if($field->name=='startViewDate') {
 			$startviewdateid=$i;
@@ -235,6 +238,9 @@ function create_works() {
 			}
 			if($row[$sizeid]!=NULL) {
 				$body.="<li>size: ".$s_size."</li>";
+			}
+			if($row[$chaptersid]!=NULL) {
+				$body.="<li>chapters: ".$row[$chaptersid]."</li>";
 			}
 			if($row[$typeid]!=NULL) {
 				$body.="<li>type: ".$s_type."</li>";
