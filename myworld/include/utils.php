@@ -75,4 +75,17 @@ function multi_accordion_end() {
 	return "</div>\n";
 }
 
+/* functions for embedding stuff from youtube */
+function youtube_embed($youtube_id,$size_factor) {
+	$width=480*$size_factor;
+	$height=385*$size_factor;
+	# this is taken from going over to youtube, seeing a movie and pussing the "embed"
+	# button which gave me this text...
+	return "<object width=\"$width\" height=\"$height\"><param name=\"movie\" value=\"http://www.youtube.com/v/$youtube_id?fs=1&amp;hl=en_US\"></param><param name=\"allowFullScreen\" value=\"true\"></param><param name=\"allowscriptaccess\" value=\"always\"></param><embed src=\"http://www.youtube.com/v/$youtube_id?fs=1&amp;hl=en_US\" type=\"application/x-shockwave-flash\" allowscriptaccess=\"always\" allowfullscreen=\"true\" width=\"$width\" height=\"$height\"></embed></object>";
+}
+
+function youtube_id_to_url($youtube_id) {
+	return "http://www.youtube.com/v/$youtube_id";
+}
+
 ?>

@@ -4,7 +4,7 @@ function create_lilypond() {
 	$show_style="div";
 	$res="";
 	// sending query
-	$query=sprintf("SELECT id,uuid,title,subtitle,composer,poet,style,piece,copyright,ly is not null as ly,pdf is not null as pdf,ps is not null as ps,midi is not null as midi,wav is not null as wav,mp3 is not null as mp3,ogg is not null as ogg FROM TbMsLilypond");
+	$query=sprintf("SELECT id,uuid,title,subtitle,composer,poet,style,piece,copyright,ly is not null as ly,pdf is not null as pdf,ps is not null as ps,midi is not null as midi,wav is not null as wav,mp3 is not null as mp3,ogg is not null as ogg,id_youtube FROM TbMsLilypond");
 	$result=mysql_query($query);
 	assert($result);
 
@@ -56,7 +56,8 @@ function create_lilypond() {
 		$s_a_wav="<a href='{$link_wav}'>wav</a>";
 		$s_a_mp3="<a href='{$link_mp3}'>mp3</a>";
 		$s_a_ogg="<a href='{$link_ogg}'>ogg</a>";
-		
+		$s_id_youtube=$row["id_youtube"];
+
 		if($show_style=="table") {
 			$res.="<tr>";
 			$res.="<td>{$s_uuid}</td>";
@@ -135,13 +136,17 @@ function create_lilypond() {
 			# lets put a link to play the audio, currently it looks like the
 			# audio plugin can only play mp3 so that's the only link that we
 			# put...
-			$body.="You can play the automatically generated mp3 file here...";
+			$body.="You can play the automatically generated mp3 file here...<br/>";
 			$body.=get_audio_player(
 				$link_mp3,
 				$row["title"],
 				$row["composer"],
 				$row["poet"]
 			);
+			if($row["id_youtube"]!=NULL) {
+				$body.="Here is a youtube performance of this song that I like...<br/>";
+				$body.=youtube_embed($s_id_youtube,0.5);
+			}
 			$res.=multi_accordion_entry($header,$body);
 		}
 	}
