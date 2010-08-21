@@ -4,7 +4,7 @@ function create_lilypond() {
 	$show_style="div";
 	$res="";
 	// sending query
-	$query=sprintf("SELECT id,uuid,title,subtitle,composer,poet,style,piece,copyright,id_youtube FROM TbMsLilypond");
+	$query=sprintf("SELECT id,uuid,title,subtitle,composer,poet,style,piece,copyright,idyoutube FROM TbMsLilypond");
 	$result=mysql_query($query);
 	assert($result);
 
@@ -56,7 +56,7 @@ function create_lilypond() {
 		$s_a_wav="<a href='{$link_wav}'>wav</a>";
 		$s_a_mp3="<a href='{$link_mp3}'>mp3</a>";
 		$s_a_ogg="<a href='{$link_ogg}'>ogg</a>";
-		$s_id_youtube=$row["id_youtube"];
+		$s_idyoutube=$row["idyoutube"];
 
 		if($show_style=="table") {
 			$res.="<tr>";
@@ -131,9 +131,9 @@ function create_lilypond() {
 				$row["composer"],
 				$row["poet"]
 			);
-			if($row["id_youtube"]!=NULL) {
+			if($row["idyoutube"]!=NULL) {
 				$body.="Here is a youtube performance of this song that I like...<br/>";
-				$body.=youtube_embed($s_id_youtube,0.5);
+				$body.=youtube_embed($s_idyoutube,0.5);
 			}
 			$res.=multi_accordion_entry($header,$body);
 		}
