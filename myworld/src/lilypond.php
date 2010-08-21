@@ -4,7 +4,7 @@ function create_lilypond() {
 	$show_style="div";
 	$res="";
 	// sending query
-	$query=sprintf("SELECT id,uuid,title,subtitle,composer,poet,style,piece,copyright,idyoutube FROM TbMsLilypond");
+	$query=sprintf("SELECT id,uuid,title,subtitle,composer,poet,style,piece,copyright,pages,idyoutube FROM TbMsLilypond");
 	$result=mysql_query($query);
 	assert($result);
 
@@ -42,6 +42,7 @@ function create_lilypond() {
 		$s_style=val_or_na($row["style"]);
 		$s_piece=val_or_na($row["piece"]);
 		$s_copyright=val_or_na($row["copyright"]);
+		$s_pages=val_or_na($row["pages"]);
 		$link_ly=link_to_direct('GetRsBlob.php?slug='.$s_uuid.'-ly');
 		$link_pdf=link_to_direct('GetRsBlob.php?slug='.$s_uuid.'-pdf');
 		$link_ps=link_to_direct('GetRsBlob.php?slug='.$s_uuid.'-ps');
@@ -107,6 +108,9 @@ function create_lilypond() {
 			}
 			if($row["copyright"]!=NULL) {
 				$body.="<li>copyright: ${s_copyright}</li>";
+			}
+			if($row["pages"]!=NULL) {
+				$body.="<li>pages: ${s_pages}</li>";
 			}
 			$links=array();
 			# TODO: only add the links if I have the blobs...
