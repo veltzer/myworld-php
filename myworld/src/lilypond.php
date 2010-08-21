@@ -4,7 +4,7 @@ function create_lilypond() {
 	$show_style="div";
 	$res="";
 	// sending query
-	$query=sprintf("SELECT id,uuid,title,subtitle,composer,poet,style,piece,copyright,ly is not null as ly,pdf is not null as pdf,ps is not null as ps,midi is not null as midi,wav is not null as wav,mp3 is not null as mp3,ogg is not null as ogg,id_youtube FROM TbMsLilypond");
+	$query=sprintf("SELECT id,uuid,title,subtitle,composer,poet,style,piece,copyright,id_youtube FROM TbMsLilypond");
 	$result=mysql_query($query);
 	assert($result);
 
@@ -42,13 +42,13 @@ function create_lilypond() {
 		$s_style=val_or_na($row["style"]);
 		$s_piece=val_or_na($row["piece"]);
 		$s_copyright=val_or_na($row["copyright"]);
-		$link_ly=link_to_direct("GetBlob.php?table=TbMsLilypond&sfield=uuid&id=$s_uuid&field=ly&type=text/plain&name_field=filebasename");
-		$link_pdf=link_to_direct("GetBlob.php?table=TbMsLilypond&sfield=uuid&id=$s_uuid&field=pdf&type=application/pdf&name_field=filebasename");
-		$link_ps=link_to_direct("GetBlob.php?table=TbMsLilypond&sfield=uuid&id=$s_uuid&field=ps&type=application/postscript&name_field=filebasename");
-		$link_midi=link_to_direct("GetBlob.php?table=TbMsLilypond&sfield=uuid&id=$s_uuid&field=midi&type=audio/midi&name_field=filebasename");
-		$link_wav=link_to_direct("GetBlob.php?table=TbMsLilypond&sfield=uuid&id=$s_uuid&field=wav&type=audio/x-wav&name_field=filebasename");
-		$link_mp3=link_to_direct("GetBlob.php?table=TbMsLilypond&sfield=uuid&id=$s_uuid&field=mp3&type=audio/mpeg&name_field=filebasename");
-		$link_ogg=link_to_direct("GetBlob.php?table=TbMsLilypond&sfield=uuid&id=$s_uuid&field=ogg&type=audio/ogg&name_field=filebasename");
+		$link_ly=link_to_direct('GetRsBlob.php?slug='.$s_uuid.'-ly');
+		$link_pdf=link_to_direct('GetRsBlob.php?slug='.$s_uuid.'-pdf');
+		$link_ps=link_to_direct('GetRsBlob.php?slug='.$s_uuid.'-ps');
+		$link_midi=link_to_direct('GetRsBlob.php?slug='.$s_uuid.'-midi');
+		$link_wav=link_to_direct('GetRsBlob.php?slug='.$s_uuid.'-wav');
+		$link_mp3=link_to_direct('GetRsBlob.php?slug='.$s_uuid.'-mp3');
+		$link_ogg=link_to_direct('GetRsBlob.php?slug='.$s_uuid.'-ogg');
 		$s_a_ly="<a href='{$link_ly}'>ly</a>";
 		$s_a_pdf="<a href='{$link_pdf}'>pdf</a>";
 		$s_a_ps="<a href='{$link_ps}'>ps</a>";
@@ -109,27 +109,15 @@ function create_lilypond() {
 				$body.="<li>copyright: ${s_copyright}</li>";
 			}
 			$links=array();
-			if($row["ly"]!=0) {
-				array_push($links,$s_a_ly);
-			}
-			if($row["pdf"]!=0) {
-				array_push($links,$s_a_pdf);
-			}
-			if($row["ps"]!=0) {
-				array_push($links,$s_a_ps);
-			}
-			if($row["midi"]!=0) {
-				array_push($links,$s_a_midi);
-			}
-			if($row["wav"]!=0) {
-				array_push($links,$s_a_wav);
-			}
-			if($row["mp3"]!=0) {
-				array_push($links,$s_a_mp3);
-			}
-			if($row["ogg"]!=0) {
-				array_push($links,$s_a_ogg);
-			}
+			# TODO: only add the links if I have the blobs...
+			array_push($links,$s_a_ly);
+			array_push($links,$s_a_pdf);
+			array_push($links,$s_a_ps);
+			array_push($links,$s_a_midi);
+			array_push($links,$s_a_wav);
+			array_push($links,$s_a_mp3);
+			array_push($links,$s_a_ogg);
+
 			$body.="<li>links: ".join(", ",$links)."</li>";
 			$body.="<li>uuid: ${s_uuid}</li>";
 			$body.="</ul>";
