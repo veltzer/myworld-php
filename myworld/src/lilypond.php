@@ -122,6 +122,14 @@ function create_lilypond() {
 			array_push($links,$s_a_mp3);
 			array_push($links,$s_a_ogg);
 
+			# lets look and add links to the pngs...
+			for($i=0; $i<$s_pages; $i++) {
+				$j=$i+1;
+				$link=link_to_direct('GetRsBlob.php?slug='.$s_uuid.'-png'.$j);
+				$link='<a href=\''.$link.'\'>png'.$j.'</a>';
+				array_push($links,$link);
+			}
+
 			$body.="<li>links: ".join(", ",$links)."</li>";
 			$body.="<li>uuid: ${s_uuid}</li>";
 			$body.="</ul>";
