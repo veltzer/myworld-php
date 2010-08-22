@@ -63,6 +63,9 @@ if(!class_exists('MyWorld')) {
 				case "test":
 					$ret="שלום";
 					break;
+				case "ted_embed":
+					$ret=ted_embed("fakeid");
+					break;
 				default:
 					$ret="[$what] is unknown";
 					break;
@@ -76,8 +79,8 @@ if(!class_exists('MyWorld')) {
 		 * The function that hooks into WP to substitute content
 		 */
 		function the_content($content) {
-			$pattern = "/\[myworld:\s*([^\]]+)\s*\]/";
-			preg_match_all( $pattern, $content, $tags );
+			$pattern="/\[myworld:\s*([^\]]+)\s*\]/";
+			preg_match_all($pattern,$content,$tags);
 			foreach( $tags[0] as $k=>$cnt ) {
 				$content=str_replace($cnt,$this->create_content($tags[1][$k]),$content);
 			}

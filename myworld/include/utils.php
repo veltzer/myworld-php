@@ -53,26 +53,26 @@ function get_audio_player($url,$title,$composer,$poet) {
 }
 
 /*
- * JQuery helpers start here
+ * Multi according JQuery implementation
  */
 function multi_accordion_start() {
-	return "<div class=\"myacc\">\n";
+	return '<div class="myacc">';
 }
 
 function multi_accordion_header($header) {
-	return "<div class=\"myacc_header\">{$header}</div>";
+	return '<div class="myacc_header">'.$header.'</div>';
 }
 
 function multi_accordion_body($body) {
-	return "<div class=\"myacc_body\">{$body}</div>";
+	return '<div class="myacc_body">'.$body.'</div>';
 }
 
 function multi_accordion_entry($header,$body) {
-	return "<div class=\"myacc_entry\"><div class=\"myacc_header\">{$header}</div>\n<div class=\"myacc_body\">{$body}</div></div>\n";
+	return '<div class="myacc_entry"><div class="myacc_header">'.$header.'</div><div class="myacc_body">'.$body.'</div></div>';
 }
 
 function multi_accordion_end() {
-	return "</div>\n";
+	return '</div>';
 }
 
 /* functions for embedding stuff from youtube */
@@ -86,6 +86,11 @@ function youtube_embed($youtube_id,$size_factor) {
 
 function youtube_id_to_url($youtube_id) {
 	return "http://www.youtube.com/v/$youtube_id";
+}
+
+/* function for embedding a ted video */
+function ted_embed($tedid) {
+	return '<!--copy and paste--><object width="446" height="326"><param name="movie" value="http://video.ted.com/assets/player/swf/EmbedPlayer.swf"></param><param name="allowFullScreen" value="true" /><param name="allowScriptAccess" value="always"/><param name="wmode" value="transparent"></param><param name="bgColor" value="#ffffff"></param> <param name="flashvars" value="vu=http://video.ted.com/talks/dynamic/JeffreySkoll_2007-medium.flv&su=http://images.ted.com/images/ted/tedindex/embed-posters/JeffreySkoll-2007.embed_thumbnail.jpg&vw=432&vh=240&ap=0&ti=170&introDuration=15330&adDuration=4000&postAdDuration=830&adKeys=talk=jeff_skoll_makes_movies_that_make_change;year=2007;theme=media_that_matters;theme=master_storytellers;theme=the_creative_spark;theme=not_business_as_usual;event=TED2007;&preAdTag=tconf.ted/embed;tile=1;sz=512x288;" /><embed src="http://video.ted.com/assets/player/swf/EmbedPlayer.swf" pluginspace="http://www.macromedia.com/go/getflashplayer" type="application/x-shockwave-flash" wmode="transparent" bgColor="#ffffff" width="446" height="326" allowFullScreen="true" allowScriptAccess="always" flashvars="vu=http://video.ted.com/talks/dynamic/JeffreySkoll_2007-medium.flv&su=http://images.ted.com/images/ted/tedindex/embed-posters/JeffreySkoll-2007.embed_thumbnail.jpg&vw=432&vh=240&ap=0&ti=170&introDuration=15330&adDuration=4000&postAdDuration=830&adKeys=talk=jeff_skoll_makes_movies_that_make_change;year=2007;theme=media_that_matters;theme=master_storytellers;theme=the_creative_spark;theme=not_business_as_usual;event=TED2007;"></embed></object>';
 }
 
 ?>
