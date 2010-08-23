@@ -1,6 +1,5 @@
 build and folders:
 ==================
-- separate the import to it's own project.
 - add gpp support for the misc folder.
 - the wp_script should pass through gpp.
 
