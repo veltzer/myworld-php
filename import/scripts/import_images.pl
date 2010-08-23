@@ -4,6 +4,13 @@
 #
 # Currently it handles:
 # - small company images
+#
+# TODO:
+# - only import images which are not in the database.
+# - import should be database driven and not disk driven
+# (which means we should first query the database for missing images and then
+# find them on the disk and import them. Then, as bonus, we could also print a message
+# if there were images on the disk which were not imported).
 
 use strict;
 use diagnostics;
@@ -14,12 +21,20 @@ use File::Basename qw();
 use Perl6::Slurp qw();
 
 # parameters
+
+# table to update
 my($param_table)="TbBsCompanies";
+# field to update
 my($param_field_update)="smallImage";
+# field by which to do the update...
 my($param_field_name)="slug";
-
+# should we debug the script ?
 my($debug)=0;
+# print stats at the end ?
+my($stats)=1;
 
+# here starts the script...
+my($imported)=0;
 my($dbh);
 
 sub handle_error() {
@@ -57,6 +72,7 @@ for(my($i)=0;$i<@list;$i++) {
 	if($rows!=1) {
 		die("wrong number of rows ($rows)");
 	}
+	$imported++;
 }
 my($sql)="select count(*) from $param_table where $param_field_update is null";
 my($sth)=$dbh->prepare($sql);
@@ -72,3 +88,7 @@ $sth->finish();
 $dbh->commit();
 # disconnect from the database
 $dbh->disconnect();
+
+if($stats) {
+	print "imported is [$imported]\n";
+}
