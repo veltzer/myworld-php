@@ -5,17 +5,20 @@ jQuery(document).ready(function() {
 		jQuery(this).toggleClass("active");
 	});
 	// this is the calendar support fuction
-	var date = new Date();
-	var d = date.getDate();
-	var m = date.getMonth();
-	var y = date.getFullYear();
 	jQuery('#calendar').fullCalendar({
 		editable: false,
-		events: [
-			{
-				title: 'All Day Event',
-				start: new Date(y, m, 1)
-			},
-		]
+		events: jQuery.fullCalendar.gcalFeed('http://www.google.com/calendar/feeds/usa__en%40holiday.calendar.google.com/public/basic'),
+		eventClick: function(event) {
+			// opens events in a popup window
+			window.open(event.url, 'gcalevent', 'width=700,height=600');
+			return false;
+		},
+		loading: function(bool) {
+			if (bool) {
+				jQuery('#loading').show();
+			}else{
+				jQuery('#loading').hide();
+			}
+		},
 	});
 });

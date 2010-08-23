@@ -76,7 +76,10 @@ function multi_accordion_end() {
 }
 
 function calendar() {
-	return '<div id="calendar"></div>';
+	$ret="";
+	$ret.='<div id="loading" style="display:none">loading...</div>';
+	$ret.='<div id="calendar"></div>';
+	return $ret;
 }
 
 /* functions for embedding stuff from youtube */

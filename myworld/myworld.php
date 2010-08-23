@@ -104,16 +104,11 @@ if(!class_exists('MyWorld')) {
 
 		/*
 		 * This function will add my javascript code
+		 *
+		 * Note: my javascript code and css MUST come at the end since
+		 * they override any other stuff (especially the css...)
 		 */
 		function wp_head() {
-			// This next line is supposed to work but it doesn't...
-			//wp_enqueue_script('myworld', plugins_url('javascript/myworld.js', __FILE__), array('jquery'), '1.0');
-			// I used direct inclusion like below...
-			echo "<script type='text/javascript' src='".plugins_url('javascript/myworld.js?ver=',__FILE__).$this->version."'></script>'\n";
-			// and now for the style sheet...
-			echo "<link rel='stylesheet' id='myworld-css' href='".plugins_url('css/myworld.css?ver=',__FILE__).$this->version."' type='text/css' media='screen' />\n";
-			echo "<link rel='SHORTCUT ICON' type='image/x-icon' href='".plugins_url('resources/favicon.ico',__FILE__)."' />\n";
-
 			// jquery and jquery ui
 			echo "<script type='text/javascript' src='".plugins_url('javascript/jquery/jquery.js?ver=',__FILE__).$this->version."'></script>'\n";
 			echo "<script type='text/javascript' src='".plugins_url('javascript/jquery/jquery-ui-custom.js?ver=',__FILE__).$this->version."'></script>'\n";
@@ -121,6 +116,15 @@ if(!class_exists('MyWorld')) {
 			// full calendar stuff
 			echo "<link rel='stylesheet' id='fullcalendar-css' href='".plugins_url('javascript/fullcalendar/fullcalendar.css?ver=',__FILE__).$this->version."' type='text/css' media='screen' />\n";
 			echo "<script type='text/javascript' src='".plugins_url('javascript/fullcalendar/fullcalendar.min.js?ver=',__FILE__).$this->version."'></script>'\n";
+			echo "<script type='text/javascript' src='".plugins_url('javascript/fullcalendar/gcal.js?ver=',__FILE__).$this->version."'></script>'\n";
+			
+			// This next line is supposed to work but it doesn't...
+			//wp_enqueue_script('myworld', plugins_url('javascript/myworld.js', __FILE__), array('jquery'), '1.0');
+			// I used direct inclusion like below...
+			echo "<script type='text/javascript' src='".plugins_url('javascript/myworld.js?ver=',__FILE__).$this->version."'></script>'\n";
+			// and now for the style sheet...
+			echo "<link rel='stylesheet' id='myworld-css' href='".plugins_url('css/myworld.css?ver=',__FILE__).$this->version."' type='text/css' media='screen' />\n";
+			echo "<link rel='SHORTCUT ICON' type='image/x-icon' href='".plugins_url('resources/favicon.ico',__FILE__)."' />\n";
 		}
 
 		function MyWorld() {

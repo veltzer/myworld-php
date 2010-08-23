@@ -37,3 +37,17 @@ p.audioplayer_container {
 	width: 100%;
 }
 */
+
+/* calendar css */
+.fc-content {
+	/* override the default value for calendar */
+	clear: none;
+}
+.fc-event-title {
+	color: #FFFFFF;
+}
+#loading {
+	position: absolute;
+	top: 5px;
+	right: 5px;
+}
