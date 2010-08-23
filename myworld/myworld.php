@@ -39,9 +39,9 @@ if(!class_exists('MyWorld')) {
 		/*
 		 * The function that creates dynamic content
 		 */
-		function create_content($what) {
+		function create_content($name,$extra) {
 			db_connect();
-			switch($what) {
+			switch($name) {
 				case "courses":
 					$ret=create_courses();
 					break;
@@ -63,11 +63,14 @@ if(!class_exists('MyWorld')) {
 				case "test":
 					$ret="שלום";
 					break;
+				case "echo":
+					$ret=$extra;
+					break;
 				case "ted_embed":
-					$ret=ted_embed("fakeid");
+					$ret=ted_embed($extra["id"]);
 					break;
 				default:
-					$ret="[$what] is unknown";
+					$ret="[$name] is unknown";
 					break;
 			}
 			#$ret="<br/>$ret<br/>";
@@ -79,10 +82,19 @@ if(!class_exists('MyWorld')) {
 		 * The function that hooks into WP to substitute content
 		 */
 		function the_content($content) {
-			$pattern="/\[myworld:\s*([^\]]+)\s*\]/";
+			$pattern="/\[myworld:\s*([_\w]+)\s*([_\w]*)\s*\]/";
 			preg_match_all($pattern,$content,$tags);
-			foreach( $tags[0] as $k=>$cnt ) {
-				$content=str_replace($cnt,$this->create_content($tags[1][$k]),$content);
+			foreach( $tags[0] as $k=>$old_content ) {
+				$name=$tags[1][$k];
+				$extra=$tags[2][$k];
+				$extra_array=split(',',$extra);
+				$extra_hash=array();
+				foreach ($extra_array as $val) {
+					$pair=split('=',$val);	
+					$extra_hash[$pair[0]]=$pair[1];
+				}
+				$new_content=$this->create_content($name,$extra_hash);
+				$content=str_replace($old_content,$new_content,$content);
 			}
 			return $content;
 		}
