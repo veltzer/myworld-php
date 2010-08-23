@@ -75,6 +75,10 @@ function multi_accordion_end() {
 	return '</div>';
 }
 
+function calendar() {
+	return '<div id="calendar"></div>';
+}
+
 /* functions for embedding stuff from youtube */
 function youtube_embed($youtube_id,$size_factor) {
 	$width=480*$size_factor;
