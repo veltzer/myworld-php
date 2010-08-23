@@ -18,7 +18,7 @@ $p_start="2009-08-24 01:32:40";
 $p_end="2011-08-24 01:32:40";
 # connect to the database
 db_connect();
-$query=sprintf('SELECT id,name,url,start,end FROM TbEvent where start > "%s" and end < "%s"',
+$query=sprintf('SELECT id,title,url,start,end FROM TbEvent where start > "%s" and end < "%s"',
 	mysql_real_escape_string($p_start),
 	mysql_real_escape_string($p_end)
 );
