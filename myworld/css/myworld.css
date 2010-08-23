@@ -39,13 +39,18 @@ p.audioplayer_container {
 */
 
 /* calendar css */
+
+/* override the default value for calendar which demands no floating things left
+ * or right of it which is bad for wordpress */ 
 .fc-content {
-	/* override the default value for calendar */
 	clear: none;
 }
+/* white as the color of events instead of my default blue which makes the events
+ * invisible */
 .fc-event-title {
 	color: #FFFFFF;
 }
+/* This is the loading indicator which is at the corner of the screen */
 #loading {
 	position: absolute;
 	top: 5px;
