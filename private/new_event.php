@@ -9,17 +9,20 @@ check_params($params);
  */
 require("utils.php");
 db_connect();
-$title="new event";
-$start="2010-08-25 01:42:54";
-$end="2010-08-25 01:42:54";
-$url="http://foo.com";
-$query=sprintf("insert into TbEvent (title,start,end,url) values(%s,%s,%s,%s)",
-	mysql_real_escape_string($title),
+$company=$_POST['company'];
+$course=$_POST['course'];
+$start_date=$_POST['start_date'];
+$end_date=$_POST['end_date'];
+$start_time=$_POST['start_time'];
+$end_time=$_POST['end_time'];
+$query=sprintf("insert into TbEvent (company,course,start,end) values('%s','%s','%s','%s')",
+	mysql_real_escape_string($company),
+	mysql_real_escape_string($course),
 	mysql_real_escape_string($start),
-	mysql_real_escape_string($end),
-	mysql_real_escape_string($url)
+	mysql_real_escape_string($end)
 );
 $result=mysql_query($query);
+echo "query is ".$query;
 assert($result);
 db_disconnect();
 echo "all is ok";

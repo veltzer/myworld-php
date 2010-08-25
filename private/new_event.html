@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-		<title>Demo Contact Form - Submit Without Page Refresh using jQuery</title>
+		<title>Submit a new teaching event</title>
 		<script src="jquery/jquery.js"></script>
 		<script src="new_event.js"></script>
 	</head>
@@ -10,18 +10,22 @@
 		<div id="contact_form">
 			<form name="contact" method="post" action="">
 				<fieldset>
-					<label for="name" id="name_label">Name</label>
-					<input type="text" name="name" id="name" size="30" value="" class="text-input" />
-					<label class="error" for="name" id="name_error">This field is required.</label>
+					<label for="company" id="company_label">Company</label>
+					<input type="text" name="company" id="company" size="30" value="" class="text-input" />
+					<label class="error" for="company" id="company_error">This field is required.</label>
+					<br/>
+					<label for="course" id="course_label">Company</label>
+					<input type="text" name="course" id="course" size="30" value="" class="text-input" />
+					<label class="error" for="course" id="course_error">This field is required.</label>
 					<br/>
 
-					<label for="email" id="email_label">Return Email</label>
-					<input type="text" name="email" id="email" size="30" value="" class="text-input" />
-					<label class="error" for="email" id="email_error">This field is required.</label>
+					<label for="from" id="from_label">From</label>
+					<input type="text" name="from" id="from" size="30" value="" class="text-input" />
+					<label class="error" for="from" id="from_error">This field is required.</label>
 					<br/>
-					<label for="phone" id="phone_label">Return Phone</label>
-					<input type="text" name="phone" id="phone" size="30" value="" class="text-input" />
-					<label class="error" for="phone" id="phone_error">This field is required.</label>
+					<label for="to" id="to_label">To</label>
+					<input type="text" name="to" id="to" size="30" value="" class="text-input" />
+					<label class="error" for="to" id="to_error">This field is required.</label>
 					<br />
 					<input type="submit" name="submit" class="button" id="submit_btn" value="Send" />
 				</fieldset>

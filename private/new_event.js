@@ -1,4 +1,11 @@
-jQuery(function() {
+jQuery(document).ready(function() {
+	$("#company").autocomplete({
+		source: "getList.php?name=company",
+		minLength: 2,
+		select: function(event, ui) {
+			log(ui.item ? ("Selected: " + ui.item.value + " aka " + ui.item.id) : "Nothing selected, input was " + this.value);
+		}
+	});
 	jQuery('.error').hide();
 	jQuery('input.text-input').css({backgroundColor:"#FFFFFF"});
 	jQuery('input.text-input').focus(function(){
@@ -39,16 +46,14 @@ jQuery(function() {
 			type: "POST",
 			url: "new_event.php",
 			data: dataString,
-			error: function() {
-				jQuery('#message').html("error");
+			error: function(data) {
+				jQuery('#message').html("error"+data);
 			},
-			success: function() {
-				jQuery('#message').html("ok");
+			success: function(data) {
+				jQuery('#message').html("ok"+data);
 			}
 		});
 		return false;
 	});
-});
-jQuery(document).ready(function(){
 	jQuery("input#name").select().focus();
 });
