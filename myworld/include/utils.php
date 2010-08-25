@@ -171,7 +171,7 @@ function printDebug($string) {
 	}
 }
 // echo a result set in json style...
-function result_echo_json($result) {
+function my_json_encode($result) {
 	// iterate over every row
 	while ($row = mysql_fetch_assoc($result)) {
 		// for every field in the result..
@@ -188,6 +188,6 @@ function result_echo_json($result) {
 		$rows[] = $row;
 	}
 	// JSON-ify all rows together as one big array
-	echo json_encode($rows);
+	return json_encode($rows);
 }
 ?>

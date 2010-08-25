@@ -3,6 +3,7 @@
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 		<title>Submit a new teaching event</title>
+		<link rel="stylesheet" type="text/css" href="jquery/css/ui-lightness/jquery-ui-1.8.4.custom.css">
 		<script src="jquery/jquery.js"></script>
 		<script src="jquery/jquery-ui.js"></script>
 		<script src="new_event.js"></script>
@@ -11,11 +12,13 @@
 		<div id="contact_form">
 			<form name="contact" method="post" action="">
 				<fieldset>
+					<div class="ui-widget">
 					<label for="company" id="company_label">Company</label>
 					<input type="text" name="company" id="company" size="30" value="" class="text-input" />
 					<label class="error" for="company" id="company_error">This field is required.</label>
+					</div>
 					<br/>
-					<label for="course" id="course_label">Company</label>
+					<label for="course" id="course_label">Course</label>
 					<input type="text" name="course" id="course" size="30" value="" class="text-input" />
 					<label class="error" for="course" id="course_error">This field is required.</label>
 					<br/>
