@@ -1,6 +1,11 @@
 jQuery(document).ready(function() {
+	function log(message) {
+		$("<div/>").text(message).prependTo("#log");
+		$("#log").attr("scrollTop", 0);
+	}
 	$("#company").autocomplete({
-		source: "GetList.php?name=company",
+		//source: "GetList.php",
+		source: "dummy.php",
 		minLength: 2,
 		select: function(event, ui) {
 			log(ui.item ? ("Selected: " + ui.item.value + " aka " + ui.item.id) : "Nothing selected, input was " + this.value);

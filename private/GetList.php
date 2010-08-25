@@ -2,8 +2,8 @@
 require('utils.php');
 $prefix=$_GET['term'];
 db_connect();
-$query=sprintf('select id,name from TbBsCompanies WHERE name REGEXP "^%s"',
-	mysql_real_escape_string($prefix),
+$query=sprintf('select * from TbBsCompanies WHERE name REGEXP "^%s"',
+	mysql_real_escape_string($prefix)
 );
 $result=mysql_query($query);
 assert($result);
