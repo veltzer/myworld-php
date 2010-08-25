@@ -1,3 +1,14 @@
+now:
+====
+new event system:
+=================
+make completion of company names work.
+make completion of courses work.
+add icon for company selected.
+add icon for course selected.
+use date/time selection boxes for from and to.
+I cannot see errors from mysql - fix it.
+
 build and folders:
 ==================
 - add gpp support for the misc folder.
