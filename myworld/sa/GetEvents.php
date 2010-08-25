@@ -6,8 +6,6 @@
 
 require("setup.php");
 my_include("include/utils.php");
-my_include("include/db.php");
-my_include("include/na.php");
 
 # do you want to debug this script
 $debug=0;

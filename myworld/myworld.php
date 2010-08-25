@@ -23,8 +23,6 @@ function link_to_resource($resource) {
 	return WP_PLUGIN_URL."/myworld/resources/".$resource;
 }
 
-my_include("include/db.php");
-my_include("include/na.php");
 my_include("include/utils.php");
 my_include("src/business.php");
 my_include("src/works.php");

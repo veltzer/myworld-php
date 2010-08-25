@@ -5,8 +5,6 @@
 
 require("setup.php");
 my_include("include/utils.php");
-my_include("include/db.php");
-my_include("include/na.php");
 
 $p_table = $_GET['table'];
 $p_sfield = $_GET['sfield'];
