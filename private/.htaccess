@@ -1,0 +1,4 @@
+AuthName "Marks blog private area"
+AuthType Basic
+AuthUserFile /var/www/private/.htpasswd
+require valid-user
