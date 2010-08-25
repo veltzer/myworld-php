@@ -1,6 +1,6 @@
 jQuery(document).ready(function() {
 	$("#company").autocomplete({
-		source: "getList.php?name=company",
+		source: "GetList.php?name=company",
 		minLength: 2,
 		select: function(event, ui) {
 			log(ui.item ? ("Selected: " + ui.item.value + " aka " + ui.item.id) : "Nothing selected, input was " + this.value);
