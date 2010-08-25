@@ -1,8 +1,14 @@
 # parameters for this makefile...
 # target directory where all will be installed...
 WEB_ROOT:=/var/www
+# user to be used to access the application
+WEB_USER:=mark
+# password (generated using makepasswd)
+WEB_PASSWORD:=MrGQ0GwhH
 # blog directory within the target directory...
 WP_DIR:=$(WEB_ROOT)/blog
+# private directory...
+WP_DIR_PRIVATE:=$(WEB_ROOT)/private
 # where are plugins to be installed in wordpress...
 PLUGIN_DIR:=$(WP_DIR)/wp-content/plugins
 # where are themes to be installed in wordpress...
@@ -71,6 +77,11 @@ install:
 	sudo cp -r $(MYTHEME_THEME_NAME) $(THEME_DIR)
 	sudo cp misc/rss.png $(WP_DIR)/wp-includes/images/rss.png
 	sudo cp misc/htaccess $(WEB_ROOT)/.htaccess
+	# now install the private folder
+	sudo rm -rf $(WEB_DIR_PRIVATE) # remove the old folder
+	sudo mkdir $(WEB_DIR_PRIVATE) # create the folder
+	sudo htpasswd -bc $(WEB_DIR_PRIVATE)/.htpasswd $(WEB_USER) $(WEB_PASSWORD) 2> /dev/null # set security
+	sudo cp -r private $(WEB_DIR_PRIVATE) # copy to the target 
 
 .PHONY: clean
 clean:
