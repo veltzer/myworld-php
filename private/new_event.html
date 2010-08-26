@@ -7,35 +7,37 @@
 		<script src="jquery/jquery.js"></script>
 		<script src="jquery/jquery-ui.js"></script>
 		<script src="new_event.js"></script>
+		<link rel="stylesheet" type="text/css" href="new_event.css">
 	</head>
-	<body>
-		<div id="contact_form">
-			<form name="contact" method="post" action="">
-				<fieldset>
-					<div class="ui-widget">
-					<label for="company" id="company_label">Company</label>
-					<input type="text" name="company" id="company" size="30" value="" class="text-input" />
-					<label class="error" for="company" id="company_error">This field is required.</label>
-					</div>
-					<br/>
-					<label for="course" id="course_label">Course</label>
-					<input type="text" name="course" id="course" size="30" value="" class="text-input" />
-					<label class="error" for="course" id="course_error">This field is required.</label>
-					<br/>
-
-					<label for="from" id="from_label">From</label>
-					<input type="text" name="from" id="from" size="30" value="" class="text-input" />
-					<label class="error" for="from" id="from_error">This field is required.</label>
-					<br/>
-					<label for="to" id="to_label">To</label>
-					<input type="text" name="to" id="to" size="30" value="" class="text-input" />
-					<label class="error" for="to" id="to_error">This field is required.</label>
-					<br />
-					<input type="submit" name="submit" class="button" id="submit_btn" value="Send" />
-				</fieldset>
-			</form>
-		</div>
-		<div id="message"></div>
-		<div id="log" style="height: 200px; width: 300px; overflow: auto;" class="ui-widget-content"></div>
+	<body class="ui-widget">
+		<!-- div class="ui-widget"-->
+		<form>
+		<fieldset class="fields">
+		<legend>Event details</legend>
+		<ol>
+		<li>
+		<label for="company" id="company_label">Company</label>
+		<input type="text" name="company" id="company"/>
+		</li>
+		<li>
+		<label for="course" id="course_label">Course</label>
+		<input type="text" name="course" id="course"/>
+		</li>
+		<li>
+		<label for="from_date" id="from_label">From</label>
+		<input type="text" name="from_date" id="from_date" />
+		</li>
+		<li>
+		<label for="to_date" id="to_label">To</label>
+		<input type="text" name="to_date" id="to_date" />
+		</li>
+		</ol>
+		</fieldset>
+		<fieldset class="submit" >
+		<input type="submit" class="submit" name="submit" id="submit" value="Send" />
+		</fieldset>
+		</form>
+		<div id="log" style="height: 300px; width: 100%; overflow: auto;" class="ui-widget-content"></div>
+		<!--/div-->
 	</body>
 </html>

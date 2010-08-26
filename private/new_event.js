@@ -1,4 +1,6 @@
 jQuery(document).ready(function() {
+	$("#from_date").datepicker();
+	$("#to_date").datepicker();
 	function log(message) {
 		$("<div/>").text(message).prependTo("#log");
 		$("#log").attr("scrollTop", 0);
@@ -7,10 +9,13 @@ jQuery(document).ready(function() {
 		//source: "GetList.php",
 		source: "dummy.php",
 		minLength: 2,
+		/*
 		select: function(event, ui) {
 			log(ui.item ? ("Selected: " + ui.item.value + " aka " + ui.item.id) : "Nothing selected, input was " + this.value);
 		}
+		*/
 	});
+	/*
 	jQuery('.error').hide();
 	jQuery('input.text-input').css({backgroundColor:"#FFFFFF"});
 	jQuery('input.text-input').focus(function(){
@@ -23,42 +28,35 @@ jQuery(document).ready(function() {
 		jQuery(this).width = 200;
 		//jQuery(this).animate({ width:"200px"}, 1000); // enlarge width
 	});
-	jQuery(".button").click(function() {
+	jQuery("input#name").select().focus();
+	*/
+	jQuery("#submit").click(function() {
 		// validate and process form
 		// first hide any error messages
 		jQuery('.error').hide();
-		var name = jQuery("input#name").val();
-		if (name == "") {
-			jQuery("label#name_error").show();
-			jQuery("input#name").focus();
-			return false;
-		}
-		var email = jQuery("input#email").val();
-		if (email == "") {
-			jQuery("label#email_error").show();
-			jQuery("input#email").focus();
-			return false;
-		}
-		var phone = jQuery("input#phone").val();
-		if (phone == "") {
-			jQuery("label#phone_error").show();
-			jQuery("input#phone").focus();
-			return false;
-		}
-		var dataString = 'name='+ name + '&email=' + email + '&phone=' + phone;
+		var dataString='';
+		var p_company=jQuery("input#company").val();
+		dataString+='company='+p_company;
+		var p_course=jQuery("input#course").val();
+		dataString+='&course='+p_course;
+		var p_from_date=jQuery("input#from_date").val();
+		dataString+='&from_date='+p_from_date;
+		var p_to_date=jQuery("input#to_date").val();
+		dataString+='&to_date='+p_to_date;
 		//alert (dataString);return false;
 		jQuery.ajax({
 			type: "POST",
 			url: "new_event.php",
 			data: dataString,
 			error: function(data) {
-				jQuery('#message').html("error"+data);
+				log(data);
+				//jQuery('#message').html("error"+data);
 			},
 			success: function(data) {
-				jQuery('#message').html("ok"+data);
+				log(data);
+				//jQuery('#message').html("ok"+data);
 			}
 		});
 		return false;
 	});
-	jQuery("input#name").select().focus();
 });
