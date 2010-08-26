@@ -10,26 +10,27 @@
 		<link rel="stylesheet" type="text/css" href="new_event.css">
 	</head>
 	<body class="ui-widget">
-		<!-- div class="ui-widget"-->
 		<form>
 		<fieldset class="fields">
 		<legend>Event details</legend>
 		<ol>
 		<li>
 		<label for="company" id="company_label">Company</label>
-		<input type="text" name="company" id="company"/>
+		<input class="inputfield" type="text" name="company" id="company"/>
+		<input type="hidden" id="company-id"/>
 		</li>
 		<li>
 		<label for="course" id="course_label">Course</label>
-		<input type="text" name="course" id="course"/>
+		<input class="inputfield" type="text" name="course" id="course"/>
+		<input type="hidden" id="course-id"/>
 		</li>
 		<li>
-		<label for="from_date" id="from_label">From</label>
-		<input type="text" name="from_date" id="from_date" />
+		<label for="from_date" id="from_label">From Date</label>
+		<input class="inputfield" type="text" name="from_date" id="from_date" />
 		</li>
 		<li>
-		<label for="to_date" id="to_label">To</label>
-		<input type="text" name="to_date" id="to_date" />
+		<label for="to_date" id="to_label">To Date</label>
+		<input class="inputfield" type="text" name="to_date" id="to_date" />
 		</li>
 		</ol>
 		</fieldset>
@@ -38,6 +39,5 @@
 		</fieldset>
 		</form>
 		<div id="log" style="height: 300px; width: 100%; overflow: auto;" class="ui-widget-content"></div>
-		<!--/div-->
 	</body>
 </html>

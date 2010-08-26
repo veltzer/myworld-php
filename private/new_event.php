@@ -8,6 +8,7 @@ push($params,'to_time');
 check_params($params);
  */
 require("utils.php");
+utils_init();
 db_connect();
 $debug=1;
 
