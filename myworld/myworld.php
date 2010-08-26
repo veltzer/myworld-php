@@ -88,10 +88,10 @@ if(!class_exists('MyWorld')) {
 			foreach( $tags[0] as $k=>$old_content ) {
 				$name=$tags[1][$k];
 				$extra=$tags[2][$k];
-				$extra_array=split(',',$extra);
+				$extra_array=preg_split('\,',$extra);
 				$extra_hash=array();
 				foreach ($extra_array as $val) {
-					$pair=split('=',$val);	
+					$pair=preg_split('\=',$val);	
 					$extra_hash[$pair[0]]=$pair[1];
 				}
 				$new_content=$this->create_content($name,$extra_hash);

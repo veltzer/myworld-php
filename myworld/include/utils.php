@@ -25,9 +25,11 @@ function assert_setup() {
 	ini_set("display_errors",1);
 }
 
-function db_connect() {
+function utils_init() {
 	assert_setup();
+}
 
+function db_connect() {
 	$db_host='localhost';
 	$db_user='mark';
 	$db_pwd='';
