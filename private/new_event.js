@@ -6,28 +6,28 @@ jQuery(document).ready(function() {
 		$("#log").attr("scrollTop", 0);
 	}
 	$("#company").autocomplete({
-		//source: "GetList.php",
-		source: "dummy.php",
+		source: "GetList.php",
+		//source: "dummy.php",
 		minLength: 2,
-		/*
 		select: function(event, ui) {
 			log(ui.item ? ("Selected: " + ui.item.value + " aka " + ui.item.id) : "Nothing selected, input was " + this.value);
 		}
-		*/
 	});
 	/*
 	jQuery('.error').hide();
-	jQuery('input.text-input').css({backgroundColor:"#FFFFFF"});
-	jQuery('input.text-input').focus(function(){
+	*/
+	jQuery('input').css({backgroundColor:"#FFFFFF"});
+	jQuery('input').focus(function(){
 		jQuery(this).css({backgroundColor:"#FFDDAA"});
-		jQuery(this).width = 600;
+		//jQuery(this).width = 600;
 		//jQuery(this).animate({ width:"600px"}, 1000); // enlarge width
 	});
-	jQuery('input.text-input').blur(function(){
+	jQuery('input').blur(function(){
 		jQuery(this).css({backgroundColor:"#FFFFFF"});
-		jQuery(this).width = 200;
+		//jQuery(this).width = 200;
 		//jQuery(this).animate({ width:"200px"}, 1000); // enlarge width
 	});
+	/*
 	jQuery("input#name").select().focus();
 	*/
 	jQuery("#submit").click(function() {
