@@ -2,12 +2,14 @@ now:
 ====
 new event system:
 =================
-make completion of company names work.
-make completion of courses work.
-add icon for company selected.
-add icon for course selected.
-use date/time selection boxes for from and to.
-I cannot see errors from mysql - fix it.
+- get companies at the begining and not everytime.
+- get courses at the begining and not everytime.
+- auto collection of values for submit.
+- reporting of errors.
+- display icons in the selection boxes.
+- turn the selection boxes into combos.
+- add time selection boxes.
+- disable the submit button when there are errors.
 
 build and folders:
 ==================
