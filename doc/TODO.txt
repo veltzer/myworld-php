@@ -2,14 +2,11 @@ now:
 ====
 new event system:
 =================
-- get companies at the begining and not everytime.
-- get courses at the begining and not everytime.
-- auto collection of values for submit.
-- reporting of errors.
+- reporting of errors and disable of button of submit in relation to errors.
 - display icons in the selection boxes.
 - turn the selection boxes into combos.
 - add time selection boxes.
-- disable the submit button when there are errors.
+- make the insert finally work!!!
 
 build and folders:
 ==================

@@ -13,21 +13,29 @@ jQuery(document).ready(function() {
 		// scroll to the bottom
 		jQuery("#log").attr("scrollTop", jQuery("#log").attr("scrollHeight"));
 	}
-	jQuery("#course").autocomplete({
-		source: "GetList.php?type=courses",
-		minLength: 0,
-		select: function(event, ui) {
-			log(ui.item ? ("Course selected: " + ui.item.value + " aka " + ui.item.id) : "Nothing selected, input was " + this.value);
-			jQuery("#submit").enable();
-		}
+	jQuery("#course").disable();
+	jQuery.getJSON('GetList.php?type=course_all', function(data) {
+		jQuery("#course").autocomplete({
+			source: data,
+			minLength: 2,
+			select: function(event, ui) {
+				log(ui.item ? ("Course selected: " + ui.item.value + " aka " + ui.item.id) : "Nothing selected, input was " + this.value);
+				jQuery("#submit").enable();
+			}
+		});
+		jQuery("#course").enable();
 	});
-	jQuery("#company").autocomplete({
-		source: "GetList.php?type=companies",
-		minLength: 0,
-		select: function(event, ui) {
-			log(ui.item ? ("Company selected: " + ui.item.value + " aka " + ui.item.id) : "Nothing selected, input was " + this.value);
-			jQuery("#submit").enable();
-		}
+	jQuery("#company").disable();
+	jQuery.getJSON('GetList.php?type=company_all', function(data) {
+		jQuery("#company").autocomplete({
+			source: data,
+			minLength: 2,
+			select: function(event, ui) {
+				log(ui.item ? ("Company selected: " + ui.item.value + " aka " + ui.item.id) : "Nothing selected, input was " + this.value);
+				jQuery("#submit").enable();
+			}
+		});
+		jQuery("#company").enable();
 	});
 	// set styles for focus on the field currently being filled...
 	jQuery('.inputfield').css({backgroundColor:"#FFFFFF"});
