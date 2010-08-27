@@ -211,4 +211,26 @@ function my_json_encode($result) {
 	// JSON-ify all rows together as one big array
 	return json_encode($rows);
 }
+
+function get_full_name($hash) {
+	$arr=array();
+	$firstname=$hash['firstname'];
+	$surname=$hash['surname'];
+	$othername=$hash['othername'];
+	$ordinal=$hash['ordinal'];
+	if($firstname!=NULL) {
+		array_push($arr,$firstname);
+	}
+	if($othername!=NULL) {
+		array_push($arr,$othername);
+	}
+	if($surname!=NULL) {
+		array_push($arr,$surname);
+	}
+	if($ordinal!=NULL) {
+		array_push($arr,$ordinal);
+	}
+	return join(' ',$arr);
+}
+
 ?>

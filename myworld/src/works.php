@@ -3,31 +3,10 @@
 # TODO:
 # Make this script go through the groups tables to render the creators and viewers.
 
-function get_full_name($persons,$id) {
-	$arr=array();
-	$firstname=$persons[$id]['firstname'];
-	$surname=$persons[$id]['surname'];
-	$othername=$persons[$id]['othername'];
-	$ordinal=$persons[$id]['ordinal'];
-	if($firstname!=NULL) {
-		array_push($arr,$firstname);
-	}
-	if($othername!=NULL) {
-		array_push($arr,$othername);
-	}
-	if($surname!=NULL) {
-		array_push($arr,$surname);
-	}
-	if($ordinal!=NULL) {
-		array_push($arr,$ordinal);
-	}
-	return join(" ",$arr);
-}
-
 function create_works() {
-	$res="";
+	$res='';
 	// sending query
-	$query=sprintf("SELECT * FROM TbWkProducer");
+	$query=sprintf('SELECT * FROM TbWkProducer');
 	$result=mysql_query($query);
 	assert($result);
 	$producers=array();
@@ -39,7 +18,7 @@ function create_works() {
 	assert(mysql_free_result($result));
 
 	// sending query
-	$query=sprintf("SELECT * FROM TbWkWorkType");
+	$query=sprintf('SELECT * FROM TbWkWorkType');
 	$result=mysql_query($query);
 	assert($result);
 	$types=array();
@@ -51,7 +30,7 @@ function create_works() {
 	assert(mysql_free_result($result));
 
 	// sending query
-	$query=sprintf("SELECT * FROM TbLcNamed");
+	$query=sprintf('SELECT * FROM TbLcNamed');
 	$result=mysql_query($query);
 	assert($result);
 	$locations=array();
@@ -63,7 +42,7 @@ function create_works() {
 	assert(mysql_free_result($result));
 
 	// sending query
-	$query=sprintf("SELECT * FROM TbIdPerson");
+	$query=sprintf('SELECT * FROM TbIdPerson');
 	$result=mysql_query($query);
 	assert($result);
 	$persons=array();
@@ -75,8 +54,8 @@ function create_works() {
 	assert(mysql_free_result($result));
 
 	// sending query
-	$query=sprintf("SELECT id,creatorId,name,length,size,chapters,typeId,producerId,startViewDate,endViewDate,viewerId,locationId,remark,rating,review FROM TbWkWork");
-	//$query=sprintf("SELECT * FROM TbWkWork");
+	$query=sprintf('SELECT id,creatorId,name,length,size,chapters,typeId,producerId,startViewDate,endViewDate,viewerId,locationId,remark,rating,review FROM TbWkWork');
+	//$query=sprintf('SELECT * FROM TbWkWork');
 	$result=mysql_query($query);
 	assert($result);
 
@@ -128,46 +107,46 @@ function create_works() {
 			$reviewid=$i;
 		}
 	}
-	$show_style="div";
-	//$show_style="table";
-	if($show_style=="table") {
+	$show_style='div';
+	//$show_style='table';
+	if($show_style=='table') {
 		$res.=get_start_table();
 		// printing table headers
-		$res.="<tr>\n";
+		$res.='<tr>';
 		for($i=0; $i<$fields_num; $i++) {
 			$field=mysql_fetch_field($result,$i);
 			$name=$field->name;
 			if($field->name=='producerId') {
-				$name="producer";
+				$name='producer';
 			}
 			if($field->name=='viewerId') {
-				$name="viewer";
+				$name='viewer';
 			}
 			if($field->name=='locationId') {
-				$name="location";
+				$name='location';
 			}
 			if($field->name=='typeId') {
-				$name="type";
+				$name='type';
 			}
 			if($field->name=='creatorId') {
-				$name="creator";
+				$name='creator';
 			}
-			$res.="<td>{$name}</td>";
+			$res.='<td>'.$name.'</td>';
 		}
-		$res.="</tr>\n";
+		$res.='</tr>';
 	}
-	if($show_style=="div") {
+	if($show_style=='div') {
 		$res.=multi_accordion_start();
 	}
 	// printing table rows
 	while($row=mysql_fetch_row($result))
 	{
 		#handle producers
-		#<a href="url">Link text</a>
+		#<a href='url'>Link text</a>
 		if($row[$producerid]!=NULL) {
 			$url=$producers[$row[$producerid]]['url'];
 			$name=$producers[$row[$producerid]]['name'];
-			$s_producer="<a href='{$url}'>{$name}</a>";
+			$s_producer='<a href=\''.$url.'\'>'.$name.'</a>';
 		} else {
 			$s_producer=get_na_string();
 		}
@@ -183,12 +162,12 @@ function create_works() {
 			$s_location=get_na_string();
 		}
 		if($row[$viewerid]!=NULL) {
-			$s_viewer=get_full_name($persons,$row[$viewerid]);
+			$s_viewer=get_full_name($persons[$row[$viewerid]]);
 		} else {
 			$s_viewer=get_na_string();
 		}
 		if($row[$creatorid]!=NULL) {
-			$s_creator=get_full_name($persons,$row[$creatorid]);
+			$s_creator=get_full_name($persons[$row[$creatorid]]);
 		} else {
 			$s_creator=get_na_string();
 		}
@@ -199,22 +178,22 @@ function create_works() {
 			$s_length=formatTimeperiod($row[$lengthid]);
 		}
 
-		if($show_style=="table") {
-			$res.="<tr>";
+		if($show_style=='table') {
+			$res.='<tr>';
 			// $row is array... foreach( .. ) puts every element
 			// of $row to $cell variable
 			foreach($row as $cell) {
 				if($cell==NULL) {
 					$cell=get_na_string();
 				}
-				$res.="<td>$cell</td>";
+				$res.='<td>'.$cell.'</td>';
 			}
-			$res.="</tr>\n";
+			$res.='</tr>';
 		}
-		if($show_style=="div") {
+		if($show_style=='div') {
 			if($row[$nameid]!=NULL) {
 				if($row[$creatorid]!=NULL) {
-					$header=$row[$nameid]." / ".$s_creator;
+					$header=$row[$nameid].' / '.$s_creator;
 				} else {
 					$header=$row[$nameid];
 				}
@@ -222,129 +201,129 @@ function create_works() {
 				if($row[$creatorid]!=NULL) {
 					$header=$s_creator;
 				} else {
-					$header="Huh?!?";
+					$header='Huh?!?';
 				}
 			}
-			$body="";
-			$body.="<ul>";
+			$body='';
+			$body.='<ul>';
 			if($row[$nameid]!=NULL) {
-				$body.="<li>name: ".$row[$nameid]."</li>";
+				$body.='<li>name: '.$row[$nameid].'</li>';
 			}
 			if($row[$creatorid]!=NULL) {
-				$body.="<li>creator: ".$s_creator."</li>";
+				$body.='<li>creator: '.$s_creator.'</li>';
 			}
 			if($row[$lengthid]!=NULL) {
-				$body.="<li>length: ".$s_length."</li>";
+				$body.='<li>length: '.$s_length.'</li>';
 			}
 			if($row[$sizeid]!=NULL) {
-				$body.="<li>size: ".$s_size."</li>";
+				$body.='<li>size: '.$s_size.'</li>';
 			}
 			if($row[$chaptersid]!=NULL) {
-				$body.="<li>chapters: ".$row[$chaptersid]."</li>";
+				$body.='<li>chapters: '.$row[$chaptersid].'</li>';
 			}
 			if($row[$typeid]!=NULL) {
-				$body.="<li>type: ".$s_type."</li>";
+				$body.='<li>type: '.$s_type.'</li>';
 			}
 			if($row[$producerid]!=NULL) {
-				$body.="<li>producer: ".$s_producer."</li>";
+				$body.='<li>producer: '.$s_producer.'</li>';
 			}
 			if($row[$startviewdateid]!=NULL) {
-				$body.="<li>start view date: ".$row[$startviewdateid]."</li>";
+				$body.='<li>start view date: '.$row[$startviewdateid].'</li>';
 			}
 			if($row[$endviewdateid]!=NULL) {
-				$body.="<li>end view date: ".$row[$endviewdateid]."</li>";
+				$body.='<li>end view date: '.$row[$endviewdateid].'</li>';
 			}
 			if($row[$viewerid]!=NULL) {
-				$body.="<li>viewer: ".$s_viewer."</li>";
+				$body.='<li>viewer: '.$s_viewer.'</li>';
 			}
 			if($row[$locationid]!=NULL) {
-				$body.="<li>location: ".$s_location."</li>";
+				$body.='<li>location: '.$s_location.'</li>';
 			}
 			if($row[$remarkid]!=NULL) {
-				$body.="<li>remark: ".$row[$remarkid]."</li>";
+				$body.='<li>remark: '.$row[$remarkid].'</li>';
 			}
 			if($row[$ratingid]!=NULL) {
-				$body.="<li>rating: ".$row[$ratingid]."</li>";
+				$body.='<li>rating: '.$row[$ratingid].'</li>';
 			}
 			if($row[$reviewid]!=NULL) {
-				$body.="<li>review: ".$row[$reviewid]."</li>";
+				$body.='<li>review: '.$row[$reviewid].'</li>';
 			}
-			$body.="</ul>";
+			$body.='</ul>';
 			$res.=multi_accordion_entry($header,$body);
 		}
 	}
 	assert(mysql_free_result($result));
-	if($show_style=="table") {
-		$res.="</table>";
+	if($show_style=='table') {
+		$res.='</table>';
 	}
-	if($show_style=="div") {
+	if($show_style=='div') {
 		$res.=multi_accordion_end();
 	}
 
-	$res.="Some statistics...<br/>";
-	$table="TbWkWork";
+	$res.='Some statistics...<br/>';
+	$table='TbWkWork';
 
-	$query=sprintf("SELECT count(*) FROM %s",mysql_real_escape_string($table));
+	$query=sprintf('SELECT count(*) FROM %s',mysql_real_escape_string($table));
 	$result=mysql_query($query);
 	assert($result);
 	$row=mysql_fetch_row($result);
-	$res.=$query.' = '.$row[0]."<br/>";
+	$res.=$query.' = '.$row[0].'<br/>';
 	assert(mysql_free_result($result));
 
-	$query=sprintf("SELECT avg(rating) FROM %s",mysql_real_escape_string($table));
+	$query=sprintf('SELECT avg(rating) FROM %s',mysql_real_escape_string($table));
 	$result=mysql_query($query);
 	assert($result);
 	$row=mysql_fetch_row($result);
-	$res.=$query.' = '.$row[0]."<br/>";
+	$res.=$query.' = '.$row[0].'<br/>';
 	assert(mysql_free_result($result));
 
-	$query=sprintf("SELECT count(distinct rating) FROM %s",mysql_real_escape_string($table));
+	$query=sprintf('SELECT count(distinct rating) FROM %s',mysql_real_escape_string($table));
 	$result=mysql_query($query);
 	assert($result);
 	$row=mysql_fetch_row($result);
-	$res.=$query.' = '.$row[0]."<br/>";
+	$res.=$query.' = '.$row[0].'<br/>';
 	assert(mysql_free_result($result));
 
-	$query=sprintf("SELECT count(distinct viewerId) FROM %s",mysql_real_escape_string($table));
+	$query=sprintf('SELECT count(distinct viewerId) FROM %s',mysql_real_escape_string($table));
 	$result=mysql_query($query);
 	assert($result);
 	$row=mysql_fetch_row($result);
-	$res.=$query.' = '.$row[0]."<br/>";
+	$res.=$query.' = '.$row[0].'<br/>';
 	assert(mysql_free_result($result));
 
-	$query=sprintf("SELECT count(distinct locationId) FROM %s",mysql_real_escape_string($table));
+	$query=sprintf('SELECT count(distinct locationId) FROM %s',mysql_real_escape_string($table));
 	$result=mysql_query($query);
 	assert($result);
 	$row=mysql_fetch_row($result);
-	$res.=$query.' = '.$row[0]."<br/>";
+	$res.=$query.' = '.$row[0].'<br/>';
 	assert(mysql_free_result($result));
 
-	$query=sprintf("SELECT count(distinct creatorId) from %s",mysql_real_escape_string($table));
+	$query=sprintf('SELECT count(distinct creatorId) from %s',mysql_real_escape_string($table));
 	$result=mysql_query($query);
 	assert($result);
 	$row=mysql_fetch_row($result);
-	$res.=$query.' = '.$row[0]."<br/>";
+	$res.=$query.' = '.$row[0].'<br/>';
 	assert(mysql_free_result($result));
 
-	$query=sprintf("SELECT sum(length) from %s",mysql_real_escape_string($table));
+	$query=sprintf('SELECT sum(length) from %s',mysql_real_escape_string($table));
 	$result=mysql_query($query);
 	assert($result);
 	$row=mysql_fetch_row($result);
-	$res.=$query.' = '.formatTimeperiod($row[0])."<br/>";
+	$res.=$query.' = '.formatTimeperiod($row[0]).'<br/>';
 	assert(mysql_free_result($result));
 
-	$query=sprintf("SELECT sum(size) from %s",mysql_real_escape_string($table));
+	$query=sprintf('SELECT sum(size) from %s',mysql_real_escape_string($table));
 	$result=mysql_query($query);
 	assert($result);
 	$row=mysql_fetch_row($result);
-	$res.=$query.' = '.formatSize($row[0])."<br/>";
+	$res.=$query.' = '.formatSize($row[0]).'<br/>';
 	assert(mysql_free_result($result));
 
-	$query=sprintf("SELECT count(distinct typeId) from %s",mysql_real_escape_string($table));
+	$query=sprintf('SELECT count(distinct typeId) from %s',mysql_real_escape_string($table));
 	$result=mysql_query($query);
 	assert($result);
 	$row=mysql_fetch_row($result);
-	$res.=$query.' = '.$row[0]."<br/>";
+	$res.=$query.' = '.$row[0].'<br/>';
 	assert(mysql_free_result($result));
 
 	return $res;
