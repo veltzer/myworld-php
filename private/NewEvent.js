@@ -59,7 +59,7 @@ jQuery(document).ready(function() {
 		log("submitting: "+dataString);
 		jQuery.ajax({
 			type: "POST",
-			url: "new_event.php",
+			url: "NewEvent.php",
 			data: dataString,
 			error: function(data) {
 				log(data);
