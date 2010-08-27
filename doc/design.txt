@@ -9,3 +9,14 @@ Goals:
 Policy
 ======
 - all includes are root oriented (from php downwards...) - is this still relevant ?!?
+
+The event system:
+=================
+What is an event?
+	A set of time-spans (each time space will have start and end and possibly more data).
+	An attached set of companies.
+	An attached set of courses.
+	A set of participants.
+	A name,remark, url, description, location and possibly some more data.
+	A creator.
+	A calendar to which it is attached.

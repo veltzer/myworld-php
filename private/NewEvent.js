@@ -31,44 +31,29 @@ jQuery(document).ready(function() {
 	// construct two date pickers
 	jQuery("#from_date").datepicker();
 	jQuery("#to_date").datepicker();
-	function reload_company() {
-		jQuery("#company").disable();
-		jQuery("#company").val('getting data...');
-		jQuery.getJSON('GetList.php?type=company_all', function(data) {
-			jQuery("#company").autocomplete({
+	function reload(id,table) {
+		jQuery(id).disable();
+		jQuery(id).val('getting data...');
+		jQuery.getJSON('GetList.php?table='+table, function(data) {
+			jQuery(id).autocomplete({
 				source: data,
 				minLength: 2,
 				select: function(event, ui) {
-					log(ui.item ? ("Company selected: " + ui.item.value + " aka " + ui.item.id) : "Nothing selected, input was " + this.value);
+					log(ui.item ? (id+" selected: " + ui.item.value + " aka " + ui.item.id) : "Nothing selected, input was " + this.value);
 				}
 			});
 			// now company can be selected
-			jQuery("#company").enable();
+			jQuery(id).enable();
 			// set error state as non selected
-			jQuery("#company").val(data[0].label);
+			jQuery(id).val(data[0].label);
 		});
 	}
-	reload_company();
-	function reload_course() {
-		jQuery("#course").disable();
-		jQuery("#course").val('getting data...');
-		jQuery.getJSON('GetList.php?type=course_all', function(data) {
-			jQuery("#course").autocomplete({
-				source: data,
-				minLength: 2,
-				select: function(event, ui) {
-					log(ui.item ? ("Course selected: " + ui.item.value + " aka " + ui.item.id) : "Nothing selected, input was " + this.value);
-				}
-			});
-			// now course can be selected
-			jQuery("#course").enable();
-			// set error state as non selected
-			jQuery("#course").val(data[0].label);
-		});
-	}
-	reload_course();
-	jQuery("#reload_company").click(reload_company);
-	jQuery("#reload_course").click(reload_course);
+	reload("#calendar","TbClCalendar");
+	reload("#company","TbBsCompanies");
+	reload("#course","TbBsCourses");
+	jQuery("#reload_calendar").click(function() { reload("#calendar","TbClCalendar");} );
+	jQuery("#reload_company").click(function() { reload("#company","TbBsCompanies");} );
+	jQuery("#reload_course").click(function() { reload("#course","TbBsCourses");} );
 	// set focus to the first input field
 	//jQuery("input#company").select().focus();
 	// disable sumbit on first entering the form
