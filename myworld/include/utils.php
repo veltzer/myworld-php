@@ -48,6 +48,16 @@ function db_disconnect() {
 	assert(mysql_close($link));
 }
 
+function my_mysql_query($query) {
+	$result=mysql_query($query);
+	if(!$result) {
+		header('HTTP/1.1 500 Internal Server Error');
+		$msg='mysql error: '.mysql_errno().': '.mysql_error();
+		trigger_error($msg,E_USER_ERROR);
+	}
+	return $result;
+}
+
 function get_na_string() {
 	return "N/A";
 }

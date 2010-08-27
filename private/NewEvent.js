@@ -34,26 +34,39 @@ jQuery(document).ready(function() {
 	function reload(id,table) {
 		jQuery(id).disable();
 		jQuery(id).val('getting data...');
-		jQuery.getJSON('GetList.php?table='+table, function(data) {
-			jQuery(id).autocomplete({
-				source: data,
-				minLength: 2,
-				select: function(event, ui) {
-					log(ui.item ? (id+" selected: " + ui.item.value + " aka " + ui.item.id) : "Nothing selected, input was " + this.value);
-				}
-			});
-			// now company can be selected
-			jQuery(id).enable();
-			// set error state as non selected
-			jQuery(id).val(data[0].label);
+		jQuery.ajax({
+			url: 'GetList.php?table='+table,
+			dataType: 'json',
+			//data: data,
+			success: function(data, textStatus, XMLHttpRequest) {
+				jQuery(id).autocomplete({
+					source: data,
+					minLength: 2,
+					select: function(event, ui) {
+						log(ui.item ? (id+" selected: " + ui.item.value + " aka " + ui.item.id) : "Nothing selected, input was " + this.value);
+					}
+				});
+				// now company can be selected
+				jQuery(id).enable();
+				// set error state as non selected
+				jQuery(id).val(data[0].label);
+			},
+			error: function(XMLHttpRequest, textStatus, errorThrown) {
+				log("ajax error: "+errorThrown+','+textStatus+','+XMLHttpRequest.responseText);
+				jQuery(id).val('ERROR IN GETTING DATA');
+			}
 		});
 	}
 	reload("#calendar","TbClCalendar");
 	reload("#company","TbBsCompanies");
 	reload("#course","TbBsCourses");
+	reload("#location","TbLcNamed");
+	reload("#creator","TbIdPerson");
 	jQuery("#reload_calendar").click(function() { reload("#calendar","TbClCalendar");} );
 	jQuery("#reload_company").click(function() { reload("#company","TbBsCompanies");} );
 	jQuery("#reload_course").click(function() { reload("#course","TbBsCourses");} );
+	jQuery("#reload_location").click(function() { reload("#location","TbLcNamed");} );
+	jQuery("#reload_creator").click(function() { reload("#creator","TbIdPerson");} );
 	// set focus to the first input field
 	//jQuery("input#company").select().focus();
 	// disable sumbit on first entering the form
