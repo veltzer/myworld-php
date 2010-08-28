@@ -14,9 +14,6 @@ disadvantages of this approach. An example makefile.
 - an anti Oracle post:
 	http://linuxtoday.com/news_story.php3?ltsn=2010-07-29-011-35-NW-BZ
 
-- a post about the scripts to open and close wordpress for any type of operation.
-	also talk about what I have in doc/WordPressUpgrade.txt
-
 - talk about increasing the size of uploads for wordpress. Review the following topics:
 	- info.php - how to see your current limits.
 	- changin the system wide php.ini.
@@ -28,3 +25,5 @@ disadvantages of this approach. An example makefile.
 	(about secrurity of it).
 
 - blog about cd ripping tools in linux (get the results of my small research into the matter).
+
+- blog entry about the right way to call "system" in perl.
