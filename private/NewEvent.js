@@ -6,16 +6,20 @@ jQuery(document).ready(function() {
 	jQuery.fn.enable=function() {
 		jQuery(this).attr("disabled", false);
 	}
-	jQuery.fn.error=function() {
-		jQuery(this).val('ERROR IN GETTING DATA');
+	jQuery.fn.error=function(msg) {
+		jQuery(this).val(msg);
+		jQuery(this).addClass("error");
+	}
+	jQuery.fn.setval=function(val) {
+		jQuery(this).val(val);
+		jQuery(this).removeClass("error");
 	}
 	// set styles for focus on the field currently being filled...
-	jQuery('.inputfield').css({backgroundColor:"#FFFFFF"});
 	jQuery('.inputfield').focus(function(){
-		jQuery(this).css({backgroundColor:"#EB8F00"});
+		jQuery(this).addClass("focus");
 	});
 	jQuery('.inputfield').blur(function(){
-		jQuery(this).css({backgroundColor:"#FFFFFF"});
+		jQuery(this).removeClass("focus");
 	});
 	// general logging function
 	function log(message) {
@@ -55,7 +59,7 @@ jQuery(document).ready(function() {
 				// now company can be selected
 				jQuery(id).enable();
 				// set error state as non selected
-				jQuery(id).val(data[0].label);
+				jQuery(id).setval(data[0].label);
 			},
 			error: function(XMLHttpRequest, textStatus, errorThrown) {
 				log("ajax error: "+errorThrown+','+textStatus+','+XMLHttpRequest.responseText);

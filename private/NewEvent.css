@@ -24,6 +24,13 @@ fieldset.submit {
 	border-style: none;  
 }
 
+.focus {
+	background: #EB8F00;
+}
+.error {
+	background: #D73030;
+}
+
 label {    
 	float: left;    
 	width: 10em;    
