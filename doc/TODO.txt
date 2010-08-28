@@ -2,6 +2,8 @@ now:
 ====
 new event system:
 =================
+- color errors inside the fields (CANNOT GET AJAX) in red.
+- color errors in the log in red.
 - reporting of errors and disable of button of submit in relation to errors.
 - display icons in the selection boxes.
 - turn the selection boxes into combos.
