@@ -2,11 +2,10 @@ now:
 ====
 new event system:
 =================
-- color errors in the log in red.
 - reporting of errors and disable of button of submit in relation to errors.
 - display icons in the selection boxes.
 - turn the selection boxes into combos.
-- add time selection boxes.
+- add multi selection of (times and dates),(courses),(comanies).
 - make the insert finally work!!!
 
 build and folders:
