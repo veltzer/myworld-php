@@ -14,6 +14,19 @@ jQuery(document).ready(function() {
 		jQuery(this).val(val);
 		jQuery(this).removeClass("error");
 	}
+	// general logging function
+	jQuery.fn.log=function(message,error) {
+		// create new element
+		var element=jQuery("<div/>").text(message);
+		// add error class if this is an error
+		if(error) {
+			element.addClass("error");
+		}
+		// add the message to the log
+		jQuery(this).append(element);
+		// scroll to the bottom
+		jQuery(this).attr("scrollTop",jQuery(this).attr("scrollHeight"));
+	}
 	// set styles for focus on the field currently being filled...
 	jQuery('.inputfield').focus(function(){
 		jQuery(this).addClass("focus");
@@ -21,18 +34,11 @@ jQuery(document).ready(function() {
 	jQuery('.inputfield').blur(function(){
 		jQuery(this).removeClass("focus");
 	});
-	// general logging function
-	function log(message) {
-		// add the message to the log
-		jQuery("<div/>").text(message).appendTo("#log");
-		// scroll to the bottom
-		jQuery("#log").attr("scrollTop", jQuery("#log").attr("scrollHeight"));
-	}
 	jQuery(document).ajaxSend(function(event,request,settings) {
-		log('ajaxStart '+settings.url);
+		jQuery("#log").log('ajaxStart '+settings.url,false);
 	});
 	jQuery(document).ajaxComplete(function(event,request,settings) {
-		log('ajaxComplete '+settings.url);
+		jQuery("#log").log('ajaxComplete '+settings.url,false);
 	});
 
 	// construct two date pickers
@@ -53,7 +59,7 @@ jQuery(document).ready(function() {
 					source: data,
 					minLength: 2,
 					select: function(event, ui) {
-						log(ui.item ? (id+" selected: " + ui.item.value + " aka " + ui.item.id) : "Nothing selected, input was " + this.value);
+						jQuery("#log").log(ui.item ? (id+" selected: " + ui.item.value + " aka " + ui.item.id) : "Nothing selected, input was " + this.value,false);
 					}
 				});
 				// now company can be selected
@@ -62,7 +68,7 @@ jQuery(document).ready(function() {
 				jQuery(id).setval(data[0].label);
 			},
 			error: function(XMLHttpRequest, textStatus, errorThrown) {
-				log("ajax error: "+errorThrown+','+textStatus+','+XMLHttpRequest.responseText);
+				jQuery("#log").log("ajax error: "+errorThrown+','+textStatus+','+XMLHttpRequest.responseText,true);
 				jQuery(id).error('ERROR IN GETTING DATA');
 			}
 		});
@@ -88,17 +94,18 @@ jQuery(document).ready(function() {
 		// I don't have any such validations at the moment.
 		// serialize all data (this is a jQuery function)
 		var dataString=$('#myform').serialize();
-		log("submitting: "+dataString);
+		jQuery("#log").log("submitting: "+dataString,false);
 		jQuery.ajax({
 			type: "POST",
 			url: "NewEvent.php",
 			data: dataString,
+			// only on error
 			error: function(data) {
-				log(data);
+				jQuery("#log").log(data,true);
 			},
 			// only on success
 			success: function(data) {
-				log(data);
+				jQuery("#log").log(data,false);
 			},
 			// function which is called on erorr on success
 			complete: function() {
