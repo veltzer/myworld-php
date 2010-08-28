@@ -3,6 +3,7 @@ require('utils.php');
 utils_init();
 $table=$_GET['table'];
 if($table=='TbIdPerson') {
+	error("fake error");
 	$rows=get_person_data();
 	$response=json_encode($rows);
 } else {

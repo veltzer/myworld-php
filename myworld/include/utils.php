@@ -61,13 +61,17 @@ function db_disconnect() {
 	}
 }
 
+# function that gets an error message and triggers an error for the whole page
+function error($msg) {
+	header('HTTP/1.1 500 Internal Server Error');
+	trigger_error($msg,E_USER_ERROR);
+}
+
 function my_mysql_query($query) {
 	db_connect();
 	$result=mysql_query($query);
 	if(!$result) {
-		header('HTTP/1.1 500 Internal Server Error');
-		$msg='mysql error: '.mysql_errno().': '.mysql_error();
-		trigger_error($msg,E_USER_ERROR);
+		error('mysql error: '.mysql_errno().': '.mysql_error());
 	}
 	return $result;
 }

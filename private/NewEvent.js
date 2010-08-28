@@ -6,6 +6,9 @@ jQuery(document).ready(function() {
 	jQuery.fn.enable=function() {
 		jQuery(this).attr("disabled", false);
 	}
+	jQuery.fn.error=function() {
+		jQuery(this).val('ERROR IN GETTING DATA');
+	}
 	// set styles for focus on the field currently being filled...
 	jQuery('.inputfield').css({backgroundColor:"#FFFFFF"});
 	jQuery('.inputfield').focus(function(){
@@ -56,7 +59,7 @@ jQuery(document).ready(function() {
 			},
 			error: function(XMLHttpRequest, textStatus, errorThrown) {
 				log("ajax error: "+errorThrown+','+textStatus+','+XMLHttpRequest.responseText);
-				jQuery(id).val('ERROR IN GETTING DATA');
+				jQuery(id).error('ERROR IN GETTING DATA');
 			}
 		});
 	}
