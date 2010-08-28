@@ -4,8 +4,10 @@
 		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 		<title>Submit a new teaching event</title>
 		<link rel="stylesheet" type="text/css" href="jquery/css/ui-lightness/jquery-ui-1.8.4.custom.css">
+		<link rel="stylesheet" type="text/css" href="jquery/css/jquery.timepicker.css">
 		<script src="jquery/jquery.js"></script>
 		<script src="jquery/jquery-ui.js"></script>
+		<script src="jquery/jquery.jtimepicker.js"></script>
 		<script src="NewEvent.js"></script>
 		<link rel="stylesheet" type="text/css" href="NewEvent.css">
 	</head>
@@ -47,12 +49,22 @@
 		<label for="to_date" id="to_label">To Date</label>
 		<input class="inputfield" type="text" name="to_date" id="to_date" />
 		</li>
+		<li>
+		<label for="from_time" id="from_label">From Time</label>
+		<div id="from_time"></div><br/>
+		<!--input class="inputfield" type="text" name="from_time" id="from_time" /-->
+		</li>
+		<li>
+		<label for="to_time" id="to_label">To Time</label>
+		<div id="to_time"></div><br/>
+		<!--input class="inputfield" type="text" name="to_time" id="to_time" /-->
+		</li>
 		</ol>
 		</fieldset>
 		<fieldset class="submit" >
 		<input type="submit" class="submit" name="submit" id="submit" value="Send" />
 		</fieldset>
 		</form>
-		<div id="log" style="height: 300px; width: 100%; overflow: auto;" class="ui-widget-content"></div>
+		<div id="log" class="ui-widget-content"></div>
 	</body>
 </html>

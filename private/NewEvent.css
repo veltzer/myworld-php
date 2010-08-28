@@ -15,7 +15,7 @@ legend {
 }  
 fieldset ol {  
 	padding: 1em 1em 0 1em;  
-	list-style: none;  
+	list-style: none;
 }  
 fieldset li {  
 	padding-bottom: 1em;  
@@ -32,4 +32,13 @@ label {
 }
 fieldset.fields input {
 	width: 20em;
+}
+fieldset.fields div {
+	width: 20em;
+}
+
+#log {
+	height: 200px;
+	width: 100%;
+	overflow: auto;
 }

@@ -31,6 +31,9 @@ jQuery(document).ready(function() {
 	// construct two date pickers
 	jQuery("#from_date").datepicker();
 	jQuery("#to_date").datepicker();
+	var init={ "secView":false };
+	jQuery('#from_time').jtimepicker(init);
+	jQuery('#to_time').jtimepicker(init);
 	function reload(id,table) {
 		jQuery(id).disable();
 		jQuery(id).val('getting data...');
