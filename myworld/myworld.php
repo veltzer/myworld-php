@@ -83,15 +83,15 @@ if(!class_exists('MyWorld')) {
 		 * The function that hooks into WP to substitute content
 		 */
 		function the_content($content) {
-			$pattern="/\[myworld:\s*([_\w]+)\s*([_\w]*)\s*\]/";
+			$pattern="/\[myworld:\s*([_\w,]+)\s*\]/";
 			preg_match_all($pattern,$content,$tags);
 			foreach( $tags[0] as $k=>$old_content ) {
-				$name=$tags[1][$k];
-				$extra=$tags[2][$k];
-				$extra_array=preg_split('\,',$extra);
+				$full=$tags[1][$k];
+				$extra_array=preg_split('/,/',$full);
 				$extra_hash=array();
+				$name=array_shift($extra_array);
 				foreach ($extra_array as $val) {
-					$pair=preg_split('\=',$val);	
+					$pair=preg_split('/=/',$val);	
 					$extra_hash[$pair[0]]=$pair[1];
 				}
 				$new_content=$this->create_content($name,$extra_hash);
