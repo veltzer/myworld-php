@@ -27,3 +27,5 @@ disadvantages of this approach. An example makefile.
 - blog about cd ripping tools in linux (get the results of my small research into the matter).
 
 - blog entry about the right way to call "system" in perl.
+
+- post about using buildroot to build an embedded system.
