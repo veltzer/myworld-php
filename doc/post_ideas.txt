@@ -29,3 +29,5 @@ disadvantages of this approach. An example makefile.
 - blog entry about the right way to call "system" in perl.
 
 - post about using buildroot to build an embedded system.
+
+- post about recording your desktop in linux.
