@@ -31,3 +31,6 @@ disadvantages of this approach. An example makefile.
 - post about using buildroot to build an embedded system.
 
 - post about recording your desktop in linux.
+
+- blog about how to create a simple root jail for an application.
+                mantion sash installation.
