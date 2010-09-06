@@ -14,3 +14,13 @@ Here is how to upgrade wordpress...
 	(in my case the rss icon) of the default installation of wp.
 	If so, then override them again (hopefuly you save them before
 	this whole process of upgrade began...).
+
+Icons for people in wordpress
+=============================
+summary:
+wordpress uses something called gravatars to show images of people.
+The gravatars site serves an image per email.
+I am signed up to the gravatars site (actually I signed up to wordpress.com and through
+it I'm signed up to the gravatars site).
+I confirmed my email (mark.veltzer@gmail.com) and uploaded my image there.
+Now everywhere I respond with "mark.veltzer@gmail.com" I'm supposed to see my image (including in my own blog).

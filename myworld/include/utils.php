@@ -58,6 +58,7 @@ function db_disconnect() {
 	global $link;
 	if($link!=NULL) {
 		assert(mysql_close($link));
+		$link=NULL;
 	}
 }
 
