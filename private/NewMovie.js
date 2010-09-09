@@ -14,16 +14,16 @@ jQuery(document).ready(function() {
 	var init={
 		'name': 'Rating',
 		'initMsg': 'put the rating (1-10) here',
-		'table':'TbRating',
+		'url':'GetList.php?table=TbRating',
 	};
-	jQuery('#rating').jsqlfield(init);
+	jQuery('#rating').jurlfield(init);
 
 	var init={
 		'name': 'Location',
 		'initMsg': 'put the location where you saw the movie',
-		'table':'TbLcNamed',
+		'url':'GetList.php?table=TbLcNamed',
 	};
-	jQuery('#location').jsqlfield(init);
+	jQuery('#location').jurlfield(init);
 
 	var init={
 		'name':'Review',

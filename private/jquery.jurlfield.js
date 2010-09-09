@@ -2,17 +2,17 @@
  */
 (function($) {
 	$.fn.extend({
-		jsqlfield: function(options) {
+		jurlfield: function(options) {
 			var defaults = {
-				table: null,
+				url: null,
 				addLabel: true,
 				name: 'NoName',
 				initMsg: 'must put value here',
 				activeClass: 'focus',
 			};
 			var o=$.extend(defaults, options);
-			if(o.table==null) {
-				alert('must supply table name');
+			if(o.url==null) {
+				alert('must supply a url');
 			}
 			return this.each(function() {
 				if(o.addLabel==true) {
@@ -59,7 +59,7 @@
 				w_input.disable();
 				w_input.val('getting data...');
 				jQuery.ajax({
-					url: 'GetList.php?table='+o.table,
+					url: o.url,
 					dataType: 'json',
 					//data: data,
 					success: function(data, textStatus, XMLHttpRequest) {
