@@ -16,6 +16,9 @@ jQuery(document).ready(function() {
 	}
 	// general logging function
 	jQuery.fn.log=function(message,error) {
+		//var ownName = arguments.callee.toString();
+		//ownName = ownName.substr('function '.length);        // trim off "function "
+		//ownName = ownName.substr(0, ownName.indexOf('('));        // trim off everything after the function name
 		// create new element
 		var element=jQuery('<div/>').text(message);
 		// add error class if this is an error
@@ -26,6 +29,10 @@ jQuery(document).ready(function() {
 		jQuery(this).append(element);
 		// scroll to the bottom
 		jQuery(this).attr('scrollTop',jQuery(this).attr('scrollHeight'));
+	}
+	// a short cut function assuming that you have a #log area
+	jQuery.log=function(message,error) {
+		return jQuery('#log').log(message,error);
 	}
 	// set styles for focus on the field currently being filled...
 	jQuery('.inputfield').focus(function(){
@@ -105,3 +112,7 @@ jQuery(document).ready(function() {
 		return false;
 	});
 });
+// redefine the alert function so that we would not use it by mistake
+function alert(msg) {
+	jQuery.log(msg);
+}
