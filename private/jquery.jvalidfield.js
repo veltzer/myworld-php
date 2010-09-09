@@ -9,8 +9,9 @@
 				inputtype: 'text',
 				name: 'No name',
 				initMsg: 'put some text here',
-				activeClass: 'active',
+				activeClass: 'focus',
 				mustInput: true,
+				rows: 10,
 			};
 			var o=$.extend(defaults, options);
 			return this.each(function() {
@@ -18,8 +19,7 @@
 					$('<label>',{
 					}).html(o.name).appendTo(this);
 				}
-				var w_input=$('<'+o.type+'>',{
-					type: o.inputtype,
+				var attrs={
 					val: o.initMsg,
 					focusin: function() {
 						$(this).addClass(o.activeClass);
@@ -35,17 +35,20 @@
 								$(this).data('initState',true);
 								$(this).val(o.initMsg);
 							}
-						}		
-						if($(this).data('initState')) {
-							if($(this).val()!='') {
+						} else {
+							if($(this).data('initState')) {
 								$(this).data('initState',false);
-							} else {
-								$(this).data('initState',true);
-								$(this).val(o.initMsg);
 							}
 						}
-					}
-				});
+					},
+				}
+				if(o.type=='input') {
+					attrs.type=o.inputtype;
+				}
+				if(o.type=='textarea') {
+					attrs.rows=o.rows;
+				}
+				var w_input=$('<'+o.type+'>',attrs);
 				w_input.data('initState',true);
 				w_input.appendTo(this);
 			});

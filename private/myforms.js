@@ -35,12 +35,6 @@ jQuery(document).ready(function() {
 		return jQuery('#log').log(message,error);
 	}
 	// set styles for focus on the field currently being filled...
-	jQuery('.inputfield').focus(function(){
-		jQuery(this).addClass('focus');
-	});
-	jQuery('.inputfield').blur(function(){
-		jQuery(this).removeClass('focus');
-	});
 	jQuery(document).ajaxSend(function(event,request,settings) {
 		jQuery('#log').log('ajaxStart '+settings.url,false);
 	});
@@ -48,37 +42,6 @@ jQuery(document).ready(function() {
 		jQuery('#log').log('ajaxComplete '+settings.url,false);
 	});
 
-	jQuery.fn.reload=function(table) {
-		jQuery(this).disable();
-		jQuery(this).val('getting data...');
-		var id=jQuery(this);
-		jQuery.ajax({
-			url: 'GetList.php?table='+table,
-			dataType: 'json',
-			//data: data,
-			success: function(data, textStatus, XMLHttpRequest) {
-				id.autocomplete({
-					source: data,
-					minLength: 2,
-					select: function(event, ui) {
-						jQuery('#log').log(ui.item ? (id+' selected: ' + ui.item.value + ' aka ' + ui.item.id) : 'Nothing selected, input was ' + this.value,false);
-					},
-					change: function(event, ui) {
-						jQuery('#log').log(ui.item ? (id+' change: ' + ui.item.value + ' aka ' + ui.item.id) : 'Nothing selected, input was ' + this.value,false);
-					}
-				});
-				// now field can be selected
-				id.enable();
-				// set error state as non selected
-				id.setval('');
-				id.setval(data[0].label);
-			},
-			error: function(XMLHttpRequest, textStatus, errorThrown) {
-				jQuery('#log').log('ajax error: '+errorThrown+','+textStatus+','+XMLHttpRequest.responseText,true);
-				id.error('ERROR IN GETTING DATA');
-			}
-		});
-	}
 	// set focus to the first input field
 	//jQuery('input#company').select().focus();
 	// disable sumbit on first entering the form
