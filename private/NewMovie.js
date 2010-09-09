@@ -2,12 +2,14 @@ jQuery(document).ready(function() {
 	var init={
 		'name':'Name',
 		'initMsg': 'put the name of the movie here',
+		'regex' : /.+/,
 	};
 	jQuery('#name').jvalidfield(init);
 
 	var init={
 		'name':'Imdbid',
 		'initMsg': 'put the imdbid here',
+		'regex' : /^\d{6}$/,
 	};
 	jQuery('#imdbid').jvalidfield(init);
 	
@@ -29,6 +31,7 @@ jQuery(document).ready(function() {
 		'name':'Review',
 		'initMsg': 'Put your review here',
 		'type': 'textarea',
+		'regex' : /.+/,
 	};
 	jQuery('#review').jvalidfield(init);
 });

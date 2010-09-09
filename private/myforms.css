@@ -30,6 +30,9 @@ fieldset.submit {
 .error {
 	background: #D73030;
 }
+.validation_error {
+	color: #D73030;
+}
 .inline_image {
 	height : 1em;
 }

@@ -1,5 +1,11 @@
 now:
 ====
+new movie system:
+=================
+add error indicators.
+selection boxes should be combos.
+control focus movement, after review should go to submit and back to name.
+
 new event system:
 =================
 - reporting of errors and disable of button of submit in relation to errors.
