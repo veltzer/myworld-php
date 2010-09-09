@@ -14,6 +14,18 @@ jQuery(document).ready(function() {
 		jQuery(this).val(val);
 		jQuery(this).removeClass('error');
 	}
+	jQuery.fn.setError=function(errormsg) {
+		var widget=jQuery(this);
+		var w_error=widget.data('w_error');
+		w_error.html(errormsg);
+		widget.data('error',true);
+        }
+	jQuery.fn.setOk=function() {
+		var widget=jQuery(this);
+		var w_error=widget.data('w_error');
+		w_error.html('');
+		widget.data('error',false);
+	}
 	// general logging function
 	jQuery.fn.log=function(message,error) {
 		//var ownName = arguments.callee.toString();

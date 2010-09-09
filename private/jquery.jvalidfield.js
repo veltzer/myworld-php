@@ -3,18 +3,6 @@
  * You can pass any regexp to validate against.
  */
 jQuery(document).ready(function() {
-	jQuery.fn.setError=function(errormsg) {
-		var widget=jQuery(this);
-		var w_error=widget.data('w_error');
-		w_error.html(errormsg);
-		widget.data('error',true);
-        }
-	jQuery.fn.setOk=function() {
-		var widget=jQuery(this);
-		var w_error=widget.data('w_error');
-		w_error.html('');
-		widget.data('error',false);
-	}
 	jQuery.fn.doFocusin=function() {
 		var widget=jQuery(this);
 		var w_input=widget.data('w_input');
@@ -38,16 +26,20 @@ jQuery(document).ready(function() {
 		var widget=jQuery(this);
 		var options=widget.data('options');
 		var w_input=widget.data('w_input');
+		if(widget.data('initState')==true) {
+			widget.setError('no data entered');
+			return;
+		}
 		if(options.regex.test(w_input.val())) {
 			widget.setOk();
 		} else {
-			widget.setError('regex error');
+			widget.setError('regex error '+options.regex);
 		}
 	}
 	jQuery.fn.extend({
 		jvalidfield: function(options) {
 			var defaults = {
-				regex: '',
+				regex: /.*/,
 				addLabel: true,
 				type: 'input',
 				inputtype: 'text',
@@ -61,10 +53,12 @@ jQuery(document).ready(function() {
 			var o=jQuery.extend(defaults, options);
 			return this.each(function() {
 				var widget=jQuery(this);
+				widget.data('options',o);
+
 				if(o.addLabel==true) {
 					var w_label=jQuery('<label>',{}).html(o.name).appendTo(this);
+					widget.data('w_label',w_label);
 				}
-				widget.data('options',o);
 				var attrs={
 					val: o.initMsg,
 					focusin: function() {
@@ -76,18 +70,6 @@ jQuery(document).ready(function() {
 					keyup: function() {
 						widget.validate();
 					},
-						/*
-						if(jQuery(this).val()=='') {
-							if(o.mustInput) {
-								jQuery(this).data('initState',true);
-								jQuery(this).val(o.initMsg);
-							}
-						} else {
-							if(jQuery(this).data('initState')) {
-								jQuery(this).data('initState',false);
-							}
-						}
-						*/
 				}
 				if(o.type=='input') {
 					attrs.type=o.inputtype;
@@ -97,18 +79,16 @@ jQuery(document).ready(function() {
 				}
 				var w_input=jQuery('<'+o.type+'>',attrs);
 				w_input.appendTo(this);
-				
+				widget.data('w_input',w_input);
+
 				var w_error=jQuery('<span>',{
 					'class': 'validation_error',
 				});
 				w_error.appendTo(this);
-				
-				widget.data('initState',true);
-
 				widget.data('w_error',w_error);
-				widget.data('w_input',w_input);
-				widget.data('w_label',w_label);
-				//widget.validate();
+
+				widget.data('initState',true);
+				widget.validate();
 			});
 		}
 	});

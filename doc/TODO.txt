@@ -2,9 +2,11 @@ now:
 ====
 new movie system:
 =================
-add error indicators.
+there is a problem with the styles (classes). Move between the fields and you will see
+	the problem. I think it's because I am not using the jqueryui classes right.
 selection boxes should be combos.
 control focus movement, after review should go to submit and back to name.
+add date on which the movie was seen.
 
 new event system:
 =================
