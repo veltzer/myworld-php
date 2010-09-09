@@ -1,7 +1,7 @@
 /*
  */
-(function($) {
-	$.fn.extend({
+jQuery(document).ready(function() {
+	jQuery.fn.extend({
 		jvalidfield: function(options) {
 			var defaults = {
 				addLabel: true,
@@ -13,31 +13,31 @@
 				mustInput: true,
 				rows: 10,
 			};
-			var o=$.extend(defaults, options);
+			var o=jQuery.extend(defaults, options);
 			return this.each(function() {
 				if(o.addLabel==true) {
-					$('<label>',{
+					jQuery('<label>',{
 					}).html(o.name).appendTo(this);
 				}
 				var attrs={
 					val: o.initMsg,
 					focusin: function() {
-						$(this).addClass(o.activeClass);
-						if($(this).data('initState')) {
+						jQuery(this).addClass(o.activeClass);
+						if(jQuery(this).data('initState')) {
 							// reset the value
-							$(this).val('');
+							jQuery(this).val('');
 						}
 					},
 					focusout: function() {
-						$(this).removeClass(o.activeClass);
-						if($(this).val()=='') {
+						jQuery(this).removeClass(o.activeClass);
+						if(jQuery(this).val()=='') {
 							if(o.mustInput) {
-								$(this).data('initState',true);
-								$(this).val(o.initMsg);
+								jQuery(this).data('initState',true);
+								jQuery(this).val(o.initMsg);
 							}
 						} else {
-							if($(this).data('initState')) {
-								$(this).data('initState',false);
+							if(jQuery(this).data('initState')) {
+								jQuery(this).data('initState',false);
 							}
 						}
 					},
@@ -48,10 +48,10 @@
 				if(o.type=='textarea') {
 					attrs.rows=o.rows;
 				}
-				var w_input=$('<'+o.type+'>',attrs);
+				var w_input=jQuery('<'+o.type+'>',attrs);
 				w_input.data('initState',true);
 				w_input.appendTo(this);
 			});
 		}
 	});
-})(jQuery);
+});

@@ -1,7 +1,9 @@
 /*
+ * This is a combo field that gets its value from the server
+ * and offers auto complete capabilities
  */
-(function($) {
-	$.fn.extend({
+jQuery(document).ready(function() {
+	jQuery.fn.extend({
 		jurlfield: function(options) {
 			var defaults = {
 				url: null,
@@ -10,39 +12,39 @@
 				initMsg: 'must put value here',
 				activeClass: 'focus',
 			};
-			var o=$.extend(defaults, options);
+			var o=jQuery.extend(defaults, options);
 			if(o.url==null) {
 				alert('must supply a url');
 			}
 			return this.each(function() {
 				if(o.addLabel==true) {
-					$('<label>',{
+					jQuery('<label>',{
 					}).html(o.name).appendTo(this);
 				}
 				var attrs={
 					val: o.initMsg,
 					focusin: function() {
-						$(this).addClass(o.activeClass);
-						if($(this).data('initState')) {
+						jQuery(this).addClass(o.activeClass);
+						if(jQuery(this).data('initState')) {
 							// reset the value
-							$(this).val('');
+							jQuery(this).val('');
 						}
 					},
 					focusout: function() {
-						$(this).removeClass(o.activeClass);
-						if($(this).val()=='') {
+						jQuery(this).removeClass(o.activeClass);
+						if(jQuery(this).val()=='') {
 							if(o.mustInput) {
-								$(this).data('initState',true);
-								$(this).val(o.initMsg);
+								jQuery(this).data('initState',true);
+								jQuery(this).val(o.initMsg);
 							}
 						} else {
-							if($(this).data('initState')) {
-								$(this).data('initState',false);
+							if(jQuery(this).data('initState')) {
+								jQuery(this).data('initState',false);
 							}
 						}
 					},
 				}
-				var w_input=$('<input>',attrs);
+				var w_input=jQuery('<input>',attrs);
 				w_input.autocomplete({
 					//source: data,
 					minLength: 2,
@@ -84,8 +86,8 @@
 						// need to do ajax again...
 					},
 				};
-				$('<img>',attrs).appendTo(this);
+				jQuery('<img>',attrs).appendTo(this);
 			});
 		}
 	});
-})(jQuery);
+});
