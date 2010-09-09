@@ -1,0 +1,43 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<title>Submit a new teaching event</title>
+		<link rel="stylesheet" type="text/css" href="jquery/css/ui-lightness/jquery-ui-1.8.4.custom.css">
+		<link rel="stylesheet" type="text/css" href="jquery/css/jquery.timepicker.css">
+		<script src="jquery/jquery.js"></script>
+		<script src="jquery/jquery-ui.js"></script>
+		<script src="jquery/jquery.jtimepicker.js"></script>
+		<script src="myforms.js"></script>
+		<script src="NewMovie.js"></script>
+		<link rel="stylesheet" type="text/css" href="myforms.css">
+	</head>
+	<body class="ui-widget">
+		<form id="myform">
+		<fieldset class="fields">
+		<legend>Movie details</legend>
+		<ol>
+		<li>
+		<label for="imdbid" id="imdbid_label">Imdbid</label>
+		<input class="inputfield" type="text" name="imdbid" id="imdbid"/>
+		<img id="reload_calendar" src="images/reload.jpg" class="inline_image"/>
+		</li>
+		<li>
+		<label for="location" id="location_label">Location</label>
+		<input class="inputfield" type="text" name="location" id="location"/>
+		<img id="reload_location" src="images/reload.jpg" class="inline_image"/>
+		</li>
+		<li>
+		<label for="rating" id="rating_label">Rating</label>
+		<input class="inputfield" type="text" name="rating" id="rating"/>
+		<img id="reload_rating" src="images/reload.jpg" class="inline_image"/>
+		</li>
+		</ol>
+		</fieldset>
+		<fieldset class="submit" >
+		<input type="submit" class="submit" name="submit" id="submit" value="Send" />
+		</fieldset>
+		</form>
+		<div id="log" class="ui-widget-content"></div>
+	</body>
+</html>

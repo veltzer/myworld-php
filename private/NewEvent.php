@@ -1,15 +1,6 @@
 <?php
-/*
-$params=array();
-push($params,'from_date');
-push($params,'from_time');
-push($params,'to_date');
-push($params,'to_time');
-check_params($params);
- */
 require("utils.php");
 utils_init();
-db_connect();
 $debug=1;
 
 if($debug) {
@@ -39,9 +30,6 @@ $query=sprintf("insert into TbEvent (company,course,start,end) values('%s','%s',
 if($debug) {
 	echo "query is ".$query;
 }
-if(!mysql_query($query)) {
-	die('error: '.mysql_error());
-}
-db_disconnect();
+my_mysql_query($query);
 echo "new event successfully inserted";
 ?>
