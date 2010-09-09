@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-		<title>Submit a new teaching event</title>
+		<title>Submit a new movie seen</title>
 		<link rel="stylesheet" type="text/css" href="jquery/css/ui-lightness/jquery-ui-1.8.4.custom.css">
 		<link rel="stylesheet" type="text/css" href="jquery/css/jquery.timepicker.css">
 		<script src="jquery/jquery.js"></script>
@@ -18,9 +18,12 @@
 		<legend>Movie details</legend>
 		<ol>
 		<li>
+		<label for="name" id="name_label">Name</label>
+		<input class="inputfield" type="text" name="name" id="name"/>
+		</li>
+		<li>
 		<label for="imdbid" id="imdbid_label">Imdbid</label>
 		<input class="inputfield" type="text" name="imdbid" id="imdbid"/>
-		<img id="reload_calendar" src="images/reload.jpg" class="inline_image"/>
 		</li>
 		<li>
 		<label for="location" id="location_label">Location</label>
@@ -31,6 +34,10 @@
 		<label for="rating" id="rating_label">Rating</label>
 		<input class="inputfield" type="text" name="rating" id="rating"/>
 		<img id="reload_rating" src="images/reload.jpg" class="inline_image"/>
+		</li>
+		<li>
+		<label for="review" id="review_label">Review</label>
+		<textarea name="text" rows="10">Put your review here</textarea>
 		</li>
 		</ol>
 		</fieldset>

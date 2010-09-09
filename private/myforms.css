@@ -43,6 +43,9 @@ label {
 fieldset.fields input {
 	width: 20em;
 }
+fieldset.fields textarea {
+	width: 20em;
+}
 fieldset.fields div {
 	width: 20em;
 }
