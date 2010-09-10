@@ -2,6 +2,8 @@ now:
 ====
 new movie system:
 =================
+turn my jvalid to a widget.
+
 better encapsulate the methods.
 
 selection boxes should be combos.
