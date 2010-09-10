@@ -12,9 +12,7 @@ jQuery(document).ready(function() {
 			inputtype: 'text',
 			name: 'No name',
 			initMsg: 'put some text here',
-			mustInput: true,
 			rows: 10,
-			initError: true,
 			initState: true,
 			initval: null,
 			validate: function(widget,value) {
