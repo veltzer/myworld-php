@@ -30,18 +30,22 @@ jQuery(document).ready(function() {
 	jQuery('#date').jvalidfield(init);
 
 	var init={
+		'type':'select',
 		'name':'Rating',
 		'initMsg':'put the rating (1-10) here',
 		'url':'GetList.php?table=TbRating',
+		'initval':6,
 	};
-	jQuery('#rating').jurlfield(init);
+	jQuery('#rating').jvalidfield(init);
 
 	var init={
+		'type':'select',
 		'name':'Location',
 		'initMsg':'put the location where you saw the movie',
 		'url':'GetList.php?table=TbLcNamed',
+		'initval':6,
 	};
-	jQuery('#location').jurlfield(init);
+	jQuery('#location').jvalidfield(init);
 
 	var init={
 		'name':'Review',

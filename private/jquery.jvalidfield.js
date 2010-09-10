@@ -4,7 +4,7 @@
  * If you validate vs a regex then just pass the regex.
  */
 jQuery(document).ready(function() {
-	jQuery.widget("ui.jvalidfield",{
+	jQuery.widget('ui.jvalidfield',{
 		options:{
 			regex:null,
 			addLabel:true,
@@ -15,6 +15,7 @@ jQuery(document).ready(function() {
 			rows:10,
 			initState:true,
 			initval:null,
+			url:null,
 			validate:function(widget,value) {
 				return widget.options.regex.test(value);
 			},
@@ -44,6 +45,9 @@ jQuery(document).ready(function() {
 			this.validate();
 		},
 		validate:function() {
+			if(this.options.type=='select') {
+				return;
+			}
 			if(this.options.initState==true) {
 				this.setError('no data entered');
 				return;
@@ -54,6 +58,38 @@ jQuery(document).ready(function() {
 				var error=this.options.validate_error(this,this.w_input.val());
 				this.setError(error);
 			}
+		},
+		adddata:function(data) {
+			// TODO: clear all previous options
+			// add new options in
+			for(x in data) {
+				jQuery('<option>',{
+					'value':data[x].id
+				}).html(data[x].label).appendTo(this.w_input);
+			}
+			this.w_input.enable();
+			if(this.options.initval==null) {
+				this.w_input.val(data[0].id);
+			} else {
+				this.w_input.val(this.options.initval);
+			}
+		},
+		fetch:function() {
+			this.setOk();
+			this.w_input.disable();
+			this.w_input.val('getting data...');
+			var widget=this;
+			jQuery.ajax({
+				url: this.options.url,
+				dataType: 'json',
+				success: function(data, textStatus, XMLHttpRequest) {
+					widget.adddata(data);
+				},
+				error: function(XMLHttpRequest, textStatus, errorThrown) {
+					jQuery.log('ajax error: '+errorThrown+','+textStatus+','+XMLHttpRequest.responseText,true);
+					widget.setError('ERROR IN GETTING DATA');
+				}
+			});
 		},
 		_create:function() {
 			this.element.addClass('ui-widget');
@@ -90,11 +126,28 @@ jQuery(document).ready(function() {
 			this.w_input.addClass('anyinput');
 			this.w_input.appendTo(this.element);
 
+			// add the reload button
+			if(this.options.type=='select') {
+				var attrs={
+					'src': 'images/reload.jpg',
+					click: function() {
+						widget.fetch();
+					},
+				};
+				this.w_img=jQuery('<img>',attrs);
+				this.w_img.addClass('inline_image');
+				this.w_img.appendTo(this.element);
+			}
+
 			this.w_error=jQuery('<label>');
 			this.w_error.addClass('validation_error');
 			this.w_error.appendTo(this.element);
 
-			this.validate();
+			if(this.options.type=='select') {
+				this.fetch();
+			} else {
+				this.validate();
+			}
 		},
 	});
 });
