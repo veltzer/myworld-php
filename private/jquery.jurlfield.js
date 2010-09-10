@@ -7,7 +7,7 @@ jQuery(document).ready(function() {
 		var widget=jQuery(this);
 		var w_input=widget.data('w_input');
 		var options=widget.data('options');
-		w_input.addClass(options.activeClass);
+		widget.addClass(options.activeClass);
 		if(widget.data('initState')) {
 			// reset the value
 			w_input.val('');
@@ -18,7 +18,7 @@ jQuery(document).ready(function() {
 		var widget=jQuery(this);
 		var w_input=widget.data('w_input');
 		var options=widget.data('options');
-		w_input.removeClass(options.activeClass);
+		widget.removeClass(options.activeClass);
 		if(w_input.val()=='') {
 			if(options.mustInput) {
 				widget.data('initState',true);
@@ -70,11 +70,13 @@ jQuery(document).ready(function() {
 			}
 			return this.each(function() {
 				var widget=jQuery(this);
+				widget.addClass('ui-widget');
 				widget.data('options',o);
 				if(o.addLabel==true) {
 					var w_label=jQuery('<label>');
 					w_label.html(o.name);
 					w_label.appendTo(widget);
+					w_label.addClass('fieldlabel');
 					widget.data('w_label',w_label);
 				}
 				var attrs={
@@ -87,6 +89,7 @@ jQuery(document).ready(function() {
 					},
 				}
 				var w_input=jQuery('<input>',attrs);
+				w_input.addClass('anyinput');
 				w_input.autocomplete({
 					minLength: 2,
 					select: function(event, ui) {
@@ -110,10 +113,9 @@ jQuery(document).ready(function() {
 				};
 				var w_img=jQuery('<img>',attrs).appendTo(this);
 				widget.data('w_img',w_img);
-				
-				var w_error=jQuery('<span>',{
-					'class': 'validation_error',
-				});
+
+				var w_error=jQuery('<label>');
+				w_error.addClass('validation_error');
 				w_error.appendTo(widget);
 				widget.data('w_error',w_error);
 

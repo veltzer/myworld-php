@@ -7,7 +7,7 @@ jQuery(document).ready(function() {
 		var widget=jQuery(this);
 		var w_input=widget.data('w_input');
 		var options=widget.data('options');
-		w_input.addClass(options.activeClass);
+		widget.addClass(options.activeClass);
 		if(widget.data('initState')==true) {
 			// reset the value
 			w_input.val('');
@@ -19,7 +19,7 @@ jQuery(document).ready(function() {
 		var widget=jQuery(this);
 		var w_input=widget.data('w_input');
 		var options=widget.data('options');
-		w_input.removeClass(options.activeClass);
+		widget.removeClass(options.activeClass);
 		widget.validate();
 	}
 	jQuery.fn.validate=function() {
@@ -53,10 +53,12 @@ jQuery(document).ready(function() {
 			var o=jQuery.extend(defaults, options);
 			return this.each(function() {
 				var widget=jQuery(this);
+				widget.addClass('ui-widget');
 				widget.data('options',o);
 
 				if(o.addLabel==true) {
 					var w_label=jQuery('<label>',{}).html(o.name).appendTo(this);
+					w_label.addClass('fieldlabel');
 					widget.data('w_label',w_label);
 				}
 				var attrs={
@@ -78,12 +80,12 @@ jQuery(document).ready(function() {
 					attrs.rows=o.rows;
 				}
 				var w_input=jQuery('<'+o.type+'>',attrs);
+				w_input.addClass('anyinput');
 				w_input.appendTo(this);
 				widget.data('w_input',w_input);
 
-				var w_error=jQuery('<span>',{
-					'class': 'validation_error',
-				});
+				var w_error=jQuery('<label>');
+				w_error.addClass('validation_error');
 				w_error.appendTo(this);
 				widget.data('w_error',w_error);
 

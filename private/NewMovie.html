@@ -14,23 +14,21 @@
 		<script src='NewMovie.js'></script>
 		<link rel='stylesheet' type='text/css' href='myforms.css'>
 	</head>
-	<body class='ui-widget'>
+	<body>
 		<form id='myform'>
 		<fieldset class='fields'>
 		<legend>Movie details</legend>
-		<ol>
-		<li id='name'/>
-		<li id='imdbid'/>
-		<li id='date'/>
-		<li id='location'/>
-		<li id='rating'/>
-		<li id='review'/>
-		</ol>
+		<div id='name'></div>
+		<div id='imdbid'></div>
+		<div id='date'></div>
+		<div id='location'></div>
+		<div id='rating'></div>
+		<div id='review'></div>
 		</fieldset>
 		<fieldset class='submit' >
 		<input type='submit' class='submit' name='submit' id='submit' value='Send' />
 		</fieldset>
 		</form>
-		<div id='log' class='ui-widget-content'></div>
+		<div id='log' style='height:200px; width:100%; overflow:auto;' class='ui-widget-content'></div>
 	</body>
 </html>

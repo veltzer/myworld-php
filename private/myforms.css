@@ -1,63 +1,24 @@
-/*
-label {    
-	display: block;  
-}
-*/
-
-fieldset {  
-	margin: 1.5em 0 0 0;  
-	padding: 0;  
-}  
-legend {  
-	margin-left: 1em;  
-	color: #000000;  
-	font-weight: bold;  
-}  
-fieldset ol {  
-	padding: 1em 1em 0 1em;  
-	list-style: none;
-}  
-fieldset li {  
-	padding-bottom: 1em;  
-}  
-fieldset.submit {  
-	border-style: none;  
-}
-
-/* this is the style for fields in focus */
+/* this is the style for fields in focus (this is the entire line) */
 .focus {
-	background: #EB8F00;
+	background:#EB8F00;
 }
-/*
-.error {
-	background: #D73030;
+/* this is the label in front of the field */
+.fieldlabel {
+	float:left;
+	width:10em;
+	margin-right:1em;
+	text-align:right;
 }
-*/
-.validation_error {
-	color: #D73030;
+/* this is any input component */
+.anyinput {
+	width:20em;
 }
+/* this is the reload image */
 .inline_image {
-	height : 1em;
+	height:1em;
 }
-
-label {    
-	float: left;    
-	width: 10em;    
-	margin-right: 1em;  
-	text-align: right;
-}
-fieldset.fields input {
-	width: 20em;
-}
-fieldset.fields textarea {
-	width: 20em;
-}
-fieldset.fields div {
-	width: 20em;
-}
-
-#log {
-	height: 200px;
-	width: 100%;
-	overflow: auto;
+/* this is for the small red errors */
+.validation_error {
+	color:#D73030;
+	width:10em;
 }
