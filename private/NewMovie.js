@@ -50,6 +50,4 @@ jQuery(document).ready(function() {
 		'regex':/.+/,
 	};
 	jQuery('#review').jvalidfield(init);
-
-	jQuery('#combobox').combobox();
 });
