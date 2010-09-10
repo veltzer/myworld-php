@@ -50,16 +50,20 @@ jQuery(document).ready(function() {
 		},
 		doFocusout:function() {
 			this.element.removeClass('focus');
-			this.validate();
+			// no need to validate here since we do it on every keystroke...
+			//this.validate();
 		},
 		validate:function() {
+			// no need to validate selects...
 			if(this.options.type=='select') {
 				return;
 			}
+			// at init we are in error always..
 			if(this.options.initState==true) {
 				this.setError('no data entered');
 				return;
 			}
+			// call the users validation and error functions
 			if(this.options.validate(this,this.w_input.val())) {
 				this.setOk();
 			} else {
