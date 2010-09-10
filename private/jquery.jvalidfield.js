@@ -60,7 +60,8 @@ jQuery(document).ready(function() {
 			}
 		},
 		adddata:function(data) {
-			// TODO:clear all previous options
+			// clear all previous options
+			this.w_input.html('');
 			// add new options in
 			for(x in data) {
 				jQuery('<option>',{
