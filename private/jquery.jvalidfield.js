@@ -37,16 +37,16 @@ jQuery(document).ready(function() {
 			}
 		},
 		setInformation:function(msg) {
-			this.w_msg.removeClass('validation_error');
+			this.w_msg.removeClass('errortext');
 			this.w_msg.html(msg);
 		},
 		setError:function(msg) {
 			this.w_msg.html(msg);
-			this.w_msg.addClass('validation_error');
+			this.w_msg.addClass('errortext');
 			this.error=true;
 		},
 		setOk:function() {
-			this.w_msg.removeClass('validation_error');
+			this.w_msg.removeClass('errortext');
 			this.w_msg.html('');
 			this.error=false;
 		},

@@ -1,9 +1,14 @@
 jQuery(document).ready(function() {
 	var init={
+	};
+	var logger=jQuery('#log').jlogger(init);
+
+	var init={
 		'name':'Name',
 		'initState':true,
 		'initMsg':'put the name of the movie here',
 		'regex':/.+/,
+		'logger':logger,
 	};
 	jQuery('#name').jvalidfield(init);
 
@@ -12,6 +17,7 @@ jQuery(document).ready(function() {
 		'initState':true,
 		'initMsg':'put the imdbid here',
 		'regex':/^\d{7}$/,
+		'logger':logger,
 	};
 	jQuery('#imdbid').jvalidfield(init);
 	
@@ -29,6 +35,7 @@ jQuery(document).ready(function() {
 		},
 		'initval':new Date(),
 		'initState':false,
+		'logger':logger,
 	};
 	jQuery('#date').jvalidfield(init);
 
@@ -41,6 +48,7 @@ jQuery(document).ready(function() {
 		//'url':'GetList.php?table=TbFoobar',
 		'url':'GetList.php?table=TbRating',
 		'initval':6,
+		'logger':logger,
 	};
 	jQuery('#rating').jvalidfield(init);
 
@@ -51,6 +59,7 @@ jQuery(document).ready(function() {
 		'initMsg':'put the location where you saw the movie',
 		'url':'GetList.php?table=TbLcNamed',
 		'initval':6,
+		'logger':logger,
 	};
 	jQuery('#location').jvalidfield(init);
 
@@ -60,6 +69,14 @@ jQuery(document).ready(function() {
 		'initMsg':'Put your review here',
 		'type':'textarea',
 		'regex':/.+/,
+		'logger':logger,
 	};
 	jQuery('#review').jvalidfield(init);
+
+	var init={
+		'name':'Send',
+		'url':'foobar.php',
+		'logger':logger,
+	};
+	jQuery('#submit').jsubmit(init);
 });

@@ -18,7 +18,7 @@
 	height:1em;
 }
 /* this is for the small red errors */
-.validation_error {
+.errortext {
 	color:#D73030;
 	width:10em;
 }

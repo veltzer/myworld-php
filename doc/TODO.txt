@@ -10,6 +10,7 @@ whenever an imdb id is inserted, go fetch the movie data from the server
 add spell checking for the reviews.
 do the date box better (add a special widget with a "now" button and +/- buttons).
 
+do the submit button as a widget.
 do the submit button tied to them all.
 
 date selection box ideas:
