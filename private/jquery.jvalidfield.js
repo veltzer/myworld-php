@@ -15,6 +15,7 @@ jQuery(document).ready(function() {
 			initState:true,
 			initval:null,
 			url:null,
+			log:false,
 			render:function(data) {
 				return data.label;
 			},
@@ -24,6 +25,11 @@ jQuery(document).ready(function() {
 			validate_error:function(widget,value) {
 				return 'regex error '+widget.options.regex;
 			},
+		},
+		log:function(msg,error) {
+			if(this.options.log==true) {
+				jQuery.log(msg,error);
+			}
 		},
 		setInformation:function(msg) {
 			this.w_msg.removeClass('validation_error');
@@ -71,6 +77,12 @@ jQuery(document).ready(function() {
 				this.setError(error);
 			}
 		},
+		disable:function() {
+			this.w_input.attr('disabled',true);
+		},
+		enable:function() {
+			this.w_input.attr('disabled',false);
+		},
 		adddata:function(data) {
 			// clear all previous options
 			this.w_input.html('');
@@ -80,7 +92,7 @@ jQuery(document).ready(function() {
 					'value':data[x].id
 				}).html(this.options.render(data[x])).appendTo(this.w_input);
 			}
-			this.w_input.enable();
+			this.enable();
 			if(this.options.initval==null) {
 				this.w_input.val(data[0].id);
 			} else {
@@ -89,7 +101,7 @@ jQuery(document).ready(function() {
 		},
 		fetch:function() {
 			this.setOk();
-			this.w_input.disable();
+			this.disable();
 			this.setInformation('getting data');
 			var widget=this;
 			jQuery.ajax({
@@ -100,12 +112,12 @@ jQuery(document).ready(function() {
 						widget.setOk();
 						widget.adddata(data);
 					} else {
-						jQuery.log('ajax null:'+textStatus+','+XMLHttpRequest.responseText,true);
+						widget.log('ajax null:'+textStatus+','+XMLHttpRequest.responseText,true);
 						widget.setError('ERROR IN GETTING DATA');
 					}
 				},
 				error:function(XMLHttpRequest, textStatus, errorThrown) {
-					jQuery.log('ajax error:'+errorThrown+','+textStatus+','+XMLHttpRequest.responseText,true);
+					widget.log('ajax error:'+errorThrown+','+textStatus+','+XMLHttpRequest.responseText,true);
 					widget.setError('ERROR IN GETTING DATA');
 				}
 			});

@@ -1,31 +1,4 @@
 jQuery(document).ready(function() {
-	// enhance jQuery to have disable/enable functions
-	jQuery.fn.disable=function() {
-		jQuery(this).attr('disabled',true);
-	}
-	jQuery.fn.enable=function() {
-		jQuery(this).attr('disabled',false);
-	}
-	jQuery.fn.error=function(msg) {
-		jQuery(this).val(msg);
-		jQuery(this).addClass('error');
-	}
-	jQuery.fn.setval=function(val) {
-		jQuery(this).val(val);
-		jQuery(this).removeClass('error');
-	}
-	jQuery.fn.setError=function(errormsg) {
-		var widget=jQuery(this);
-		var w_error=widget.data('w_error');
-		w_error.html(errormsg);
-		widget.data('error',true);
-        }
-	jQuery.fn.setOk=function() {
-		var widget=jQuery(this);
-		var w_error=widget.data('w_error');
-		w_error.html('');
-		widget.data('error',false);
-	}
 	// general logging function
 	jQuery.fn.log=function(message,error) {
 		//var ownName = arguments.callee.toString();
@@ -57,10 +30,10 @@ jQuery(document).ready(function() {
 	// set focus to the first input field
 	//jQuery('input#company').select().focus();
 	// disable sumbit on first entering the form
-	jQuery('#submit').disable();
+	//jQuery('#submit').disable();
 	jQuery('#submit').click(function() {
 		// disable the submit button to prevent double sumbit
-		jQuery('#submit').disable();
+		//jQuery('#submit').disable();
 		// multi validations (validations involving several fields)
 		// I don't have any such validations at the moment.
 		// serialize all data (this is a jQuery function)
@@ -81,7 +54,7 @@ jQuery(document).ready(function() {
 			// function which is called on erorr on success
 			complete: function() {
 				// TODO: need to check for validations
-				jQuery('#submit').enable();
+				//jQuery('#submit').enable();
 			}
 		});
 		return false;
