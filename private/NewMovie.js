@@ -24,6 +24,8 @@ jQuery(document).ready(function() {
 		'validate_error':function(widget,value) {
 			return 'could not parse date object';
 		},
+		'initval':new Date(),
+		'initState':false,
 	};
 	jQuery('#date').jvalidfield(init);
 

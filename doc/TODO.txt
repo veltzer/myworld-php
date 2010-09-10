@@ -2,14 +2,17 @@ now:
 ====
 new movie system:
 =================
-turn my jvalid to a widget.
-
-better encapsulate the methods.
-
+turn my jurl to a widget.
 selection boxes should be combos.
+
 add spell checking for the reviews.
 do the date box better (add a special widget with a "now" button).
 do the submit button tied to them all.
+
+date selection box ideas:
+=========================
+add the following buttons: day+, day-, hour+, hour-, etc...
+This will allow the user to manipulate the day easily.
 
 there is a problem with the styles (classes). Move between the fields and you will see
 	the problem. I think it's because I am not using the jqueryui classes right.

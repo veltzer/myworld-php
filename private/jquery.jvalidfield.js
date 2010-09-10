@@ -1,6 +1,7 @@
 /*
  * This is a validating field.
- * You can pass any regexp to validate against.
+ * You can pass any function to validate against.
+ * If you validate vs a regex then just pass the regex.
  */
 jQuery(document).ready(function() {
 	jQuery.widget("ui.jvalidfield",{
@@ -15,6 +16,7 @@ jQuery(document).ready(function() {
 			rows: 10,
 			initError: true,
 			initState: true,
+			initval: null,
 			validate: function(widget,value) {
 				return widget.options.regex.test(value);
 			},
@@ -65,7 +67,6 @@ jQuery(document).ready(function() {
 				this.w_label.appendTo(this.element);
 			}
 			var attrs={
-				val: this.options.initMsg,
 				focusin: function() {
 					widget.doFocusin();
 				},
@@ -76,6 +77,11 @@ jQuery(document).ready(function() {
 					widget.validate();
 				},
 			};
+			if(this.options.initState==true) {
+				attrs.val=this.options.initMsg;
+			} else {
+				attrs.val=this.options.initval;
+			}
 			if(this.options.type=='input') {
 				attrs.type=this.options.inputtype;
 			}
