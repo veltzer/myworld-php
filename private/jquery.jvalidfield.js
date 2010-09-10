@@ -6,16 +6,16 @@
 jQuery(document).ready(function() {
 	jQuery.widget("ui.jvalidfield",{
 		options:{
-			regex: null,
-			addLabel: true,
-			type: 'input',
-			inputtype: 'text',
-			name: 'No name',
-			initMsg: 'put some text here',
-			rows: 10,
-			initState: true,
-			initval: null,
-			validate: function(widget,value) {
+			regex:null,
+			addLabel:true,
+			type:'input',
+			inputtype:'text',
+			name:'No name',
+			initMsg:'put some text here',
+			rows:10,
+			initState:true,
+			initval:null,
+			validate:function(widget,value) {
 				return widget.options.regex.test(value);
 			},
 			validate_error:function(widget,value) {
@@ -65,13 +65,13 @@ jQuery(document).ready(function() {
 				this.w_label.appendTo(this.element);
 			}
 			var attrs={
-				focusin: function() {
+				focusin:function() {
 					widget.doFocusin();
 				},
-				focusout: function() {
+				focusout:function() {
 					widget.doFocusout();
 				},
-				keyup: function() {
+				keyup:function() {
 					widget.validate();
 				},
 			};
