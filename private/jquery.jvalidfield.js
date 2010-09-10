@@ -7,7 +7,6 @@ jQuery(document).ready(function() {
 	jQuery.widget('ui.jvalidfield',{
 		options:{
 			regex:null,
-			addLabel:true,
 			type:'input',
 			inputtype:'text',
 			name:'No name',
@@ -16,6 +15,9 @@ jQuery(document).ready(function() {
 			initState:true,
 			initval:null,
 			url:null,
+			render:function(data) {
+				return data.label;
+			},
 			validate:function(widget,value) {
 				return widget.options.regex.test(value);
 			},
@@ -23,12 +25,18 @@ jQuery(document).ready(function() {
 				return 'regex error '+widget.options.regex;
 			},
 		},
-		setError:function(errormsg) {
-			this.w_error.html(errormsg);
+		setInformation:function(msg) {
+			this.w_msg.removeClass('validation_error');
+			this.w_msg.html(msg);
+		},
+		setError:function(msg) {
+			this.w_msg.html(msg);
+			this.w_msg.addClass('validation_error');
 			this.error=true;
 		},
 		setOk:function() {
-			this.w_error.html('');
+			this.w_msg.removeClass('validation_error');
+			this.w_msg.html('');
 			this.error=false;
 		},
 		doFocusin:function() {
@@ -66,7 +74,7 @@ jQuery(document).ready(function() {
 			for(x in data) {
 				jQuery('<option>',{
 					'value':data[x].id
-				}).html(data[x].label).appendTo(this.w_input);
+				}).html(this.options.render(data[x])).appendTo(this.w_input);
 			}
 			this.w_input.enable();
 			if(this.options.initval==null) {
@@ -78,8 +86,7 @@ jQuery(document).ready(function() {
 		fetch:function() {
 			this.setOk();
 			this.w_input.disable();
-			//this.w_input.val('getting data...');
-			this.setError('getting data');
+			this.setInformation('getting data');
 			var widget=this;
 			jQuery.ajax({
 				url:this.options.url,
@@ -100,14 +107,18 @@ jQuery(document).ready(function() {
 			});
 		},
 		_create:function() {
+			// comply with jquery ui ?!?
 			this.element.addClass('ui-widget');
+			// this variable is injected into the closure...
 			var widget=this;
-			if(this.options.addLabel==true) {
-				this.w_label=jQuery('<label>');
-				this.w_label.html(this.options.name);
-				this.w_label.addClass('fieldlabel');
-				this.w_label.appendTo(this.element);
-			}
+
+			// add the label
+			this.w_label=jQuery('<label>');
+			this.w_label.html(this.options.name);
+			this.w_label.addClass('fieldlabel');
+			this.w_label.appendTo(this.element);
+
+			// add the input control
 			var attrs={
 				focusin:function() {
 					widget.doFocusin();
@@ -134,7 +145,7 @@ jQuery(document).ready(function() {
 			this.w_input.addClass('anyinput');
 			this.w_input.appendTo(this.element);
 
-			// add the reload button
+			// add the reload button (this is only for selects)
 			if(this.options.type=='select') {
 				var attrs={
 					'src':'images/reload.jpg',
@@ -147,10 +158,12 @@ jQuery(document).ready(function() {
 				this.w_img.appendTo(this.element);
 			}
 
-			this.w_error=jQuery('<label>');
-			this.w_error.addClass('validation_error');
-			this.w_error.appendTo(this.element);
+			// add the message label
+			this.w_msg=jQuery('<label>');
+			this.w_msg.appendTo(this.element);
 
+			// for selects we need to fetch the data,
+			// for inputs we need to validate...
 			if(this.options.type=='select') {
 				this.fetch();
 			} else {
