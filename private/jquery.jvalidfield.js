@@ -6,29 +6,34 @@
 jQuery(document).ready(function() {
 	jQuery.widget('ui.jvalidfield',{
 		options:{
+			// regex must be set for text inputs
 			regex:null,
 			type:'input',
 			inputtype:'text',
 			name:'No name',
-			initMsg:'put some text here',
+			initMsg:null,
 			rows:10,
-			initState:true,
+			initState:false,
 			initval:null,
 			url:null,
-			log:false,
+			// set if you want this widget to log into your logger
+			logger:null,
+			// override if you want your own rendering function
 			render:function(data) {
 				return data.label;
 			},
+			// override if you want your own validation function
 			validate:function(widget,value) {
 				return widget.options.regex.test(value);
 			},
+			// override if you want your own validation error function
 			validate_error:function(widget,value) {
 				return 'regex error '+widget.options.regex;
 			},
 		},
 		log:function(msg,error) {
-			if(this.options.log==true) {
-				jQuery.log(msg,error);
+			if(this.options.logger!=null) {
+				this.options.logger.log(msg,error);
 			}
 		},
 		setInformation:function(msg) {

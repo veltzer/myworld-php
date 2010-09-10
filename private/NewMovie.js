@@ -1,6 +1,7 @@
 jQuery(document).ready(function() {
 	var init={
 		'name':'Name',
+		'initState':true,
 		'initMsg':'put the name of the movie here',
 		'regex':/.+/,
 	};
@@ -8,6 +9,7 @@ jQuery(document).ready(function() {
 
 	var init={
 		'name':'Imdbid',
+		'initState':true,
 		'initMsg':'put the imdbid here',
 		'regex':/^\d{7}$/,
 	};
@@ -15,6 +17,7 @@ jQuery(document).ready(function() {
 	
 	var init={
 		'name':'Date',
+		'initState':true,
 		'initMsg':'put the date seen here',
 		'regex':/.+/,
 		'validate':function(widget,value) {
@@ -32,6 +35,7 @@ jQuery(document).ready(function() {
 	var init={
 		'type':'select',
 		'name':'Rating',
+		'initState':true,
 		'initMsg':'put the rating (1-10) here',
 		// this is for testing errors in Ajax...
 		//'url':'GetList.php?table=TbFoobar',
@@ -43,6 +47,7 @@ jQuery(document).ready(function() {
 	var init={
 		'type':'select',
 		'name':'Location',
+		'initState':true,
 		'initMsg':'put the location where you saw the movie',
 		'url':'GetList.php?table=TbLcNamed',
 		'initval':6,
@@ -51,6 +56,7 @@ jQuery(document).ready(function() {
 
 	var init={
 		'name':'Review',
+		'initState':true,
 		'initMsg':'Put your review here',
 		'type':'textarea',
 		'regex':/.+/,
