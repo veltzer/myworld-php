@@ -9,10 +9,17 @@ jQuery(document).ready(function() {
 	var init={
 		'name':'Imdbid',
 		'initMsg': 'put the imdbid here',
-		'regex' : /^\d{6}$/,
+		'regex' : /^\d{7}$/,
 	};
 	jQuery('#imdbid').jvalidfield(init);
 	
+	var init={
+		'name':'Date',
+		'initMsg': 'put the date seen here',
+		'regex' : /.+/,
+	};
+	jQuery('#date').jvalidfield(init);
+
 	var init={
 		'name': 'Rating',
 		'initMsg': 'put the rating (1-10) here',

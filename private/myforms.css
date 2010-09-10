@@ -24,12 +24,15 @@ fieldset.submit {
 	border-style: none;  
 }
 
+/* this is the style for fields in focus */
 .focus {
 	background: #EB8F00;
 }
+/*
 .error {
 	background: #D73030;
 }
+*/
 .validation_error {
 	color: #D73030;
 }
