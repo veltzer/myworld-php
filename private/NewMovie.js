@@ -33,6 +33,8 @@ jQuery(document).ready(function() {
 		'type':'select',
 		'name':'Rating',
 		'initMsg':'put the rating (1-10) here',
+		// this is for testing errors in Ajax...
+		//'url':'GetList.php?table=TbFoobar',
 		'url':'GetList.php?table=TbRating',
 		'initval':6,
 	};

@@ -60,7 +60,7 @@ jQuery(document).ready(function() {
 			}
 		},
 		adddata:function(data) {
-			// TODO: clear all previous options
+			// TODO:clear all previous options
 			// add new options in
 			for(x in data) {
 				jQuery('<option>',{
@@ -77,16 +77,23 @@ jQuery(document).ready(function() {
 		fetch:function() {
 			this.setOk();
 			this.w_input.disable();
-			this.w_input.val('getting data...');
+			//this.w_input.val('getting data...');
+			this.setError('getting data');
 			var widget=this;
 			jQuery.ajax({
-				url: this.options.url,
-				dataType: 'json',
-				success: function(data, textStatus, XMLHttpRequest) {
-					widget.adddata(data);
+				url:this.options.url,
+				dataType:'json',
+				success:function(data, textStatus, XMLHttpRequest) {
+					if(data!=null) {
+						widget.setOk();
+						widget.adddata(data);
+					} else {
+						jQuery.log('ajax null:'+textStatus+','+XMLHttpRequest.responseText,true);
+						widget.setError('ERROR IN GETTING DATA');
+					}
 				},
-				error: function(XMLHttpRequest, textStatus, errorThrown) {
-					jQuery.log('ajax error: '+errorThrown+','+textStatus+','+XMLHttpRequest.responseText,true);
+				error:function(XMLHttpRequest, textStatus, errorThrown) {
+					jQuery.log('ajax error:'+errorThrown+','+textStatus+','+XMLHttpRequest.responseText,true);
 					widget.setError('ERROR IN GETTING DATA');
 				}
 			});
@@ -129,8 +136,8 @@ jQuery(document).ready(function() {
 			// add the reload button
 			if(this.options.type=='select') {
 				var attrs={
-					'src': 'images/reload.jpg',
-					click: function() {
+					'src':'images/reload.jpg',
+					click:function() {
 						widget.fetch();
 					},
 				};

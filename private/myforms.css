@@ -22,3 +22,7 @@
 	color:#D73030;
 	width:10em;
 }
+/* errors for the logger */
+.error {
+	background:#D73030;
+}

@@ -1,10 +1,10 @@
 jQuery(document).ready(function() {
 	// enhance jQuery to have disable/enable functions
 	jQuery.fn.disable=function() {
-		jQuery(this).attr('disabled', true);
+		jQuery(this).attr('disabled',true);
 	}
 	jQuery.fn.enable=function() {
-		jQuery(this).attr('disabled', false);
+		jQuery(this).attr('disabled',false);
 	}
 	jQuery.fn.error=function(msg) {
 		jQuery(this).val(msg);
@@ -30,9 +30,9 @@ jQuery(document).ready(function() {
 	jQuery.fn.log=function(message,error) {
 		//var ownName = arguments.callee.toString();
 		//ownName = ownName.substr('function '.length);        // trim off "function "
-		//ownName = ownName.substr(0, ownName.indexOf('('));        // trim off everything after the function name
+		//ownName = ownName.substr(0,ownName.indexOf('('));        // trim off everything after the function name
 		// create new element
-		var element=jQuery('<div/>').text(message);
+		var element=jQuery('<div>').text(message);
 		// add error class if this is an error
 		if(error) {
 			element.addClass('error');
