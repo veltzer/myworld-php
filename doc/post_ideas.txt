@@ -37,3 +37,5 @@ disadvantages of this approach. An example makefile.
 
 - blog about my .htaccess file at the root of my site for wordpress which is a better
 	fit if you have more than just wordpress on your site.
+
+- blog about how to access firefox and chrome stored passwords from the command line.
