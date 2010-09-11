@@ -40,6 +40,18 @@ function create_works() {
 	#debug: print the array...
 	#print_r($locations);
 	assert(mysql_free_result($result));
+	
+	// sending query
+	$query=sprintf('SELECT * FROM TbDevice');
+	$result=mysql_query($query);
+	assert($result);
+	$devices=array();
+	while($row=mysql_fetch_assoc($result)) {
+		$devices[$row['id']]=$row;
+	}
+	#debug: print the array...
+	#print_r($devices);
+	assert(mysql_free_result($result));
 
 	// sending query
 	$query=sprintf('SELECT * FROM TbIdPerson');
@@ -54,7 +66,7 @@ function create_works() {
 	assert(mysql_free_result($result));
 
 	// sending query
-	$query=sprintf('SELECT id,creatorId,name,length,size,chapters,typeId,producerId,startViewDate,endViewDate,viewerId,locationId,remark,rating,review FROM TbWkWork');
+	$query=sprintf('SELECT id,creatorId,name,length,size,chapters,typeId,producerId,startViewDate,endViewDate,viewerId,locationId,deviceId,remark,rating,review FROM TbWkWork');
 	//$query=sprintf('SELECT * FROM TbWkWork');
 	$result=mysql_query($query);
 	assert($result);
@@ -75,6 +87,9 @@ function create_works() {
 		}
 		if($field->name=='locationId') {
 			$locationid=$i;
+		}
+		if($field->name=='deviceId') {
+			$deviceid=$i;
 		}
 		if($field->name=='typeId') {
 			$typeid=$i;
@@ -125,6 +140,9 @@ function create_works() {
 			if($field->name=='locationId') {
 				$name='location';
 			}
+			if($field->name=='deviceId') {
+				$name='device';
+			}
 			if($field->name=='typeId') {
 				$name='type';
 			}
@@ -160,6 +178,11 @@ function create_works() {
 			$s_location=$locations[$row[$locationid]]['name'];
 		} else {
 			$s_location=get_na_string();
+		}
+		if($row[$deviceid]!=NULL) {
+			$s_device=$devices[$row[$deviceid]]['name'];
+		} else {
+			$s_device=get_na_string();
 		}
 		if($row[$viewerid]!=NULL) {
 			$s_viewer=get_full_name($persons[$row[$viewerid]]);
@@ -238,6 +261,9 @@ function create_works() {
 			}
 			if($row[$locationid]!=NULL) {
 				$body.='<li>location: '.$s_location.'</li>';
+			}
+			if($row[$deviceid]!=NULL) {
+				$body.='<li>device: '.$s_device.'</li>';
 			}
 			if($row[$remarkid]!=NULL) {
 				$body.='<li>remark: '.$row[$remarkid].'</li>';

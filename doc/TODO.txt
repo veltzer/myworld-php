@@ -1,5 +1,8 @@
 now:
 ====
+start using the new device table and don't mix location with device.
+	this should be done at the works table.
+
 new movie system:
 =================
 fix the fact that moving past a select changes it's value.
