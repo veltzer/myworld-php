@@ -55,11 +55,15 @@ function db_connect() {
 }
 
 function db_disconnect() {
+	// TODO: this code is in remark because it causes wordpress issues
+	// fix it!
+	/*
 	global $link;
 	if($link!=NULL) {
 		assert(mysql_close($link));
 		$link=NULL;
 	}
+	 */
 }
 
 # function that gets an error message and triggers an error for the whole page
