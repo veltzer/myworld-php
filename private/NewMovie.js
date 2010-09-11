@@ -45,9 +45,8 @@ jQuery(document).ready(function() {
 		'initState':true,
 		'initMsg':'put the rating (1-10) here',
 		// this is for testing errors in Ajax...
-		//'url':'GetList.php?table=TbFoobar',
-		'url':'GetList.php?table=TbRating',
-		'initval':6,
+		//'url':'GetData.php?type=TbFoobar',
+		'url':'GetData.php?type=TbRating',
 		'logger':'#log',
 	};
 	jQuery('#rating').jvalidfield(init);
@@ -57,8 +56,7 @@ jQuery(document).ready(function() {
 		'name':'Location',
 		'initState':true,
 		'initMsg':'put the location where you saw the movie',
-		'url':'GetList.php?table=TbLcNamed',
-		'initval':6,
+		'url':'GetData.php?type=TbLcNamed',
 		'logger':'#log',
 	};
 	jQuery('#location').jvalidfield(init);
@@ -68,8 +66,7 @@ jQuery(document).ready(function() {
 		'name':'Device',
 		'initState':true,
 		'initMsg':'put the device on which you saw the movie',
-		'url':'GetList.php?table=TbDevice',
-		'initval':6,
+		'url':'GetData.php?type=video_devices',
 		'logger':'#log',
 	};
 	jQuery('#device').jvalidfield(init);

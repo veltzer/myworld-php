@@ -95,6 +95,14 @@ function my_get_post($field) {
 	}
 }
 
+function my_get_get($field) {
+	if(array_key_exists($field,$_GET)) {
+		return $_GET[$field];
+	} else {
+		error('must have field ['.$field.']');
+	}
+}
+
 function get_na_string() {
 	return 'N/A';
 }

@@ -77,7 +77,7 @@ jQuery(document).ready(function() {
 			}
 			// call the users validation and error functions
 			if(this.options.validate(this,this.w_input.val())) {
-				this.setOk();
+				this.setOk('validated');
 			} else {
 				var error=this.options.validate_error(this,this.w_input.val());
 				this.setError(error);
@@ -106,7 +106,6 @@ jQuery(document).ready(function() {
 			}
 		},
 		fetch:function() {
-			this.setOk();
 			this.disable();
 			this.setInformation('getting data');
 			var widget=this;
@@ -116,7 +115,7 @@ jQuery(document).ready(function() {
 				dataType:'json',
 				success:function(data,textStatus,XMLHttpRequest) {
 					if(data!=null) {
-						widget.setOk();
+						widget.setOk('got data');
 						widget.adddata(data);
 					} else {
 						widget.log('ajax null:'+textStatus+','+XMLHttpRequest.responseText,true);
