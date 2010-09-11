@@ -89,7 +89,7 @@ jQuery(document).ready(function() {
 				// only on error
 				error:function(XMLHttpRequest,textStatus,errorThrown) {
 					widget.log('ajax error:'+errorThrown+','+textStatus+','+XMLHttpRequest.responseText,true);
-					widget.setError('ERROR IN GETTING DATA');
+					widget.setError('error in submit');
 				},
 				// only on success
 				success:function(data,textStatus,XMLHttpRequest) {
@@ -97,7 +97,7 @@ jQuery(document).ready(function() {
 						widget.setOk('submit ok, server said ['+data+']');
 					} else {
 						widget.log('ajax null:'+textStatus+','+XMLHttpRequest.responseText,true);
-						widget.setError('ERROR IN GETTING DATA');
+						widget.setError('error in submit');
 					}
 				},
 				// function which is called on erorr on success

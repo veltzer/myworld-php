@@ -7,14 +7,11 @@ if($debug) {
 }
 
 # parameters for this script...
-$imdbid=$_POST['imdbid'];
-assert('$imdbid!=NULL');
-$locationid=$_POST['locationid'];
-assert('$locationid!=NULL');
-$rank=$_POST['rank'];
-assert('$rank!=NULL');
-$review=$_POST['review'];
-assert('$review!=NULL');
+$imdbid=my_get_post('imdbid');
+$locationid=my_get_post('locationid');
+$rank=my_get_post('rank');
+$review=my_get_post('review');
+//$=my_get_post('');
 
 $query=sprintf("insert into TbWorks () values('%s','%s','%s','%s')",
 	mysql_real_escape_string($imdbid),

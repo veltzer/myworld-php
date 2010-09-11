@@ -77,6 +77,20 @@ function my_mysql_query($query) {
 	return $result;
 }
 
+function my_assert($val,$reason) {
+	if(!$val) {
+		error('assert error: '.$reason);
+	}
+}
+
+function my_get_post($field) {
+	if(array_key_exists($field,$_POST)) {
+		return $_POST[$field];
+	} else {
+		error('must have field ['.$field.']');
+	}
+}
+
 function get_na_string() {
 	return 'N/A';
 }

@@ -75,7 +75,7 @@ jQuery(document).ready(function() {
 
 	var init={
 		'name':'Send',
-		'url':'foobar.php',
+		'url':'NewMovie.php',
 		'logger':'#log',
 		'formid':'#myform',
 	};

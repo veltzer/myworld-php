@@ -1,15 +1,16 @@
 # BEGIN WordPress
 <IfModule mod_rewrite.c>
 RewriteEngine On
-#RewriteBase /
-#RewriteCond %{REQUEST_FILENAME} !-f
-#RewriteCond %{REQUEST_FILENAME} !-d
-#RewriteCond %{REQUEST_FILENAME} !-f
-#RewriteRule . /blog/index.php [L]
-# see http://www.yourhtmlsource.com/sitemanagement/urlrewriting.html for working with
-# mod_rewrite
-# anyone who does not supply a url (just the name of the site) should get the blog
-RewriteRule ^$ /blog/index.php 
+# the next rule is for wordpress and means that any uri which is not found on the file system
+# (could be a resource) should be redirected to the blog. But the URI must start with blog (my
+# addition).
+RewriteBase /
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_URI} ^/blog/
+RewriteRule . /blog/index.php [L]
+# this means that if anyone comes to the root of my site he will be redirected to blog...
+RedirectMatch ^/$ /blog/
 </IfModule>
 # END WordPress
 
