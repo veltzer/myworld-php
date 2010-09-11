@@ -2,6 +2,11 @@ now:
 ====
 new movie system:
 =================
+the submit button does NOT submit anything!!!
+	fix it.
+do the submit button tied to them all.
+	(not valid until they all are validated and prints help about validations)
+
 fix the fact that moving past a select changes it's value.
 style my new selection widget.
 allow descriptions on LocationsLcNamed, return them in the json object
@@ -10,9 +15,6 @@ whenever an imdb id is inserted, go fetch the movie data from the server
 	(use phpimdb) and show it on the page.
 add spell checking for the reviews.
 do the date box better (add a special widget with a "now" button and +/- buttons).
-
-do the submit button as a widget.
-do the submit button tied to them all.
 
 date selection box ideas:
 =========================
