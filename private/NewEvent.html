@@ -1,72 +1,50 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
+<html xmlns='http://www.w3.org/1999/xhtml'>
 	<head>
-		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<meta http-equiv='Content-Type' content='text/html; charset=utf-8' />
 		<title>Submit a new teaching event</title>
-		<link rel="stylesheet" type="text/css" href="jquery/css/ui-lightness/jquery-ui-1.8.4.custom.css">
-		<link rel="stylesheet" type="text/css" href="jquery/css/jquery.timepicker.css">
-		<script src="jquery/jquery.js"></script>
-		<script src="jquery/jquery-ui.js"></script>
-		<script src="jquery/jquery.jtimepicker.js"></script>
-		<script src="myforms.js"></script>
-		<script src="NewEvent.js"></script>
-		<link rel="stylesheet" type="text/css" href="myforms.css">
+		<link rel='stylesheet' type='text/css' href='jquery/css/ui-lightness/jquery-ui-1.8.4.custom.css'>
+		<link rel='stylesheet' type='text/css' href='jquery/css/jquery.timepicker.css'>
+		<script src='jquery/jquery.js'></script>
+		<script src='jquery/jquery-ui.js'></script>
+		<script src='jquery/jquery.jtimepicker.js'></script>
+		<script src='jquery.jvalidfield.js'></script>
+		<script src='jquery.jurlfield.js'></script>
+		<script src='jquery.jcombobox.js'></script>
+		<script src='jquery.jsubmit.js'></script>
+		<script src='jquery.jlogger.js'></script>
+		<script src='NewEvent.js'></script>
+		<script src='myforms.js'></script>
+		<link rel='stylesheet' type='text/css' href='myforms.css'>
 	</head>
-	<body class="ui-widget">
-		<form id="myform">
-		<fieldset class="fields">
+	<body class='ui-widget'>
+		<form id='myform'>
+		<fieldset>
 		<legend>Event details</legend>
-		<ol>
-		<li>
-		<label for="calendar" id="calendar_label">Calendar</label>
-		<input class="inputfield" type="text" name="calendar" id="calendar"/>
-		<!--span id="reload_calendar">reload...</span-->
-		<img id="reload_calendar" src="images/reload.jpg" class="inline_image"/>
-		</li>
-		<li>
-		<label for="company" id="company_label">Company</label>
-		<input class="inputfield" type="text" name="company" id="company"/>
-		<img id="reload_company" src="images/reload.jpg" class="inline_image"/>
-		</li>
-		<li>
-		<label for="course" id="course_label">Course</label>
-		<input class="inputfield" type="text" name="course" id="course"/>
-		<img id="reload_course" src="images/reload.jpg" class="inline_image"/>
-		</li>
-		<li>
-		<label for="location" id="location_label">Location</label>
-		<input class="inputfield" type="text" name="location" id="location"/>
-		<img id="reload_location" src="images/reload.jpg" class="inline_image"/>
-		</li>
-		<li>
-		<label for="creator" id="creator_label">Creator</label>
-		<input class="inputfield" type="text" name="creator" id="creator"/>
-		<img id="reload_creator" src="images/reload.jpg" class="inline_image"/>
-		</li>
-		<li>
-		<label for="from_date" id="from_label">From Date</label>
-		<input class="inputfield" type="text" name="from_date" id="from_date" />
-		</li>
-		<li>
-		<label for="to_date" id="to_label">To Date</label>
-		<input class="inputfield" type="text" name="to_date" id="to_date" />
-		</li>
-		<li>
-		<label for="from_time" id="from_label">From Time</label>
-		<div id="from_time"></div><br/>
-		<!--input class="inputfield" type="text" name="from_time" id="from_time" /-->
-		</li>
-		<li>
-		<label for="to_time" id="to_label">To Time</label>
-		<div id="to_time"></div><br/>
-		<!--input class="inputfield" type="text" name="to_time" id="to_time" /-->
-		</li>
-		</ol>
-		</fieldset>
-		<fieldset class="submit" >
-		<input type="submit" class="submit" name="submit" id="submit" value="Send" />
+		<div id='calendar'></div>
+		<div id='company'></div>
+		<div id='course'></div>
+		<div id='location'></div>
+		<div id='creator'></div>
+		<div>
+		<label class='fieldlabel' for='from_date' id='from_label'>From Date</label>
+		<input class='fieldinput' type='text' name='from_date' id='from_date' />
+		</div>
+		<div>
+		<label class='fieldlabel' for='to_date' id='to_label'>To Date</label>
+		<input class='fieldinput' type='text' name='to_date' id='to_date' />
+		</div>
+		<div>
+		<label class='fieldlabel' for='from_time' id='from_label'>From Time</label>
+		<div class='fieldinput' id='from_time'></div>
+		</div><br/><br/>
+		<div>
+		<label class='fieldlabel' for='to_time' id='to_label'>To Time</label>
+		<div class='fieldinput' id='to_time'></div>
+		</div><br/><br/>
+		<div id='send'></div>
 		</fieldset>
 		</form>
-		<div id="log" class="ui-widget-content"></div>
+		<div id='log' style='height:200px; width:100%; overflow:auto;' class='ui-widget-content'></div>
 	</body>
 </html>

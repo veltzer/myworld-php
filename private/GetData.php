@@ -19,7 +19,7 @@ if($type=='TbIdPerson') {
 	$response=json_encode($rows);
 	$handled=1;
 }
-if($type=='TbLcNamed' || $type=='TbRating') {
+if($type=='TbLcNamed' || $type=='TbRating' || $type=='TbClCalendar' || $type=='TbBsCompanies' || $type=='TbBsCourses') {
 	$query=sprintf('select id,name as label,name as value from %s',
 		mysql_real_escape_string($type)
 	);

@@ -8,18 +8,12 @@ if($debug) {
 }
 
 # parameters for this script...
-$company=$_POST['company'];
-assert('$company!=NULL');
-$course=$_POST['course'];
-assert('$course!=NULL');
-$start_date=$_POST['start_date'];
-assert('$start_date!=NULL');
-$end_date=$_POST['end_date'];
-assert('$end_date!=NULL');
-$start_time=$_POST['start_time'];
-assert('$start_time!=NULL');
-$end_time=$_POST['end_time'];
-assert('$end_time!=NULL');
+$company=my_get_post('company','must have company name');
+$course=my_get_post('course','must have course name');
+$start_date=my_get_post('start_date','must have start date');
+$end_date=my_get_post('end_date','must have end date');
+$start_time=my_get_post('start_time','must have start time');
+$end_time=my_get_post('end_time','must have end time');
 
 $query=sprintf("insert into TbEvent (company,course,start,end) values('%s','%s','%s','%s')",
 	mysql_real_escape_string($company),
