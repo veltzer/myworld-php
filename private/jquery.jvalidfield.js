@@ -34,7 +34,7 @@ jQuery(document).ready(function() {
 		},
 		log:function(msg,error) {
 			if(this.options.logger!=null) {
-				this.options.logger.log(msg,error);
+				jQuery(this.options.logger).jlogger('log',msg,error);
 			}
 		},
 		setInformation:function(msg) {
@@ -46,9 +46,9 @@ jQuery(document).ready(function() {
 			this.w_msg.addClass('errortext');
 			this.error=true;
 		},
-		setOk:function() {
+		setOk:function(msg) {
 			this.w_msg.removeClass('errortext');
-			this.w_msg.html('');
+			this.w_msg.html(msg);
 			this.error=false;
 		},
 		doFocusin:function() {
