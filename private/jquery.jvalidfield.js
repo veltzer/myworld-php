@@ -61,7 +61,7 @@ jQuery(document).ready(function() {
 			}
 		},
 		doFocusout:function() {
-			this.element.removeClass('focus');
+			this.element.removeClass('fieldfocus');
 			// no need to validate here since we do it on every keystroke...
 			//this.validate();
 		},

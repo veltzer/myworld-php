@@ -1,7 +1,5 @@
 now:
 ====
-PROTECT my private folder with a password.
-
 new movie system:
 =================
 style my new selection widget.

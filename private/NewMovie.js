@@ -62,6 +62,17 @@ jQuery(document).ready(function() {
 		'logger':'#log',
 	};
 	jQuery('#location').jvalidfield(init);
+	
+	var init={
+		'type':'select',
+		'name':'Device',
+		'initState':true,
+		'initMsg':'put the device on which you saw the movie',
+		'url':'GetList.php?table=TbDevice',
+		'initval':6,
+		'logger':'#log',
+	};
+	jQuery('#device').jvalidfield(init);
 
 	var init={
 		'name':'Review',
