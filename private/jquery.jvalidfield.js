@@ -15,6 +15,7 @@ jQuery(document).ready(function() {
 			rows:10,
 			initState:false,
 			initval:null,
+			httptype:'GET',
 			url:null,
 			// set if you want this widget to log into your logger
 			logger:null,
@@ -51,7 +52,7 @@ jQuery(document).ready(function() {
 			this.error=false;
 		},
 		doFocusin:function() {
-			this.element.addClass('focus');
+			this.element.addClass('fieldfocus');
 			if(this.options.initState==true) {
 				// reset the value
 				this.w_input.val('');
@@ -110,9 +111,10 @@ jQuery(document).ready(function() {
 			this.setInformation('getting data');
 			var widget=this;
 			jQuery.ajax({
+				type:this.options.httptype,
 				url:this.options.url,
 				dataType:'json',
-				success:function(data, textStatus, XMLHttpRequest) {
+				success:function(data,textStatus,XMLHttpRequest) {
 					if(data!=null) {
 						widget.setOk();
 						widget.adddata(data);
@@ -121,7 +123,7 @@ jQuery(document).ready(function() {
 						widget.setError('ERROR IN GETTING DATA');
 					}
 				},
-				error:function(XMLHttpRequest, textStatus, errorThrown) {
+				error:function(XMLHttpRequest,textStatus,errorThrown) {
 					widget.log('ajax error:'+errorThrown+','+textStatus+','+XMLHttpRequest.responseText,true);
 					widget.setError('ERROR IN GETTING DATA');
 				}
@@ -163,7 +165,7 @@ jQuery(document).ready(function() {
 				attrs.rows=this.options.rows;
 			}
 			this.w_input=jQuery('<'+this.options.type+'>',attrs);
-			this.w_input.addClass('anyinput');
+			this.w_input.addClass('fieldinput');
 			this.w_input.appendTo(this.element);
 
 			// add the reload button (this is only for selects)
@@ -175,12 +177,13 @@ jQuery(document).ready(function() {
 					},
 				};
 				this.w_img=jQuery('<img>',attrs);
-				this.w_img.addClass('inline_image');
+				this.w_img.addClass('fieldimage');
 				this.w_img.appendTo(this.element);
 			}
 
 			// add the message label
 			this.w_msg=jQuery('<label>');
+			this.w_msg.addClass('fieldmsg');
 			this.w_msg.appendTo(this.element);
 
 			// for selects we need to fetch the data,

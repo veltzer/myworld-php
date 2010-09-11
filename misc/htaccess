@@ -1,10 +1,15 @@
 # BEGIN WordPress
 <IfModule mod_rewrite.c>
 RewriteEngine On
-RewriteBase /
-RewriteCond %{REQUEST_FILENAME} !-f
-RewriteCond %{REQUEST_FILENAME} !-d
-RewriteRule . /blog/index.php [L]
+#RewriteBase /
+#RewriteCond %{REQUEST_FILENAME} !-f
+#RewriteCond %{REQUEST_FILENAME} !-d
+#RewriteCond %{REQUEST_FILENAME} !-f
+#RewriteRule . /blog/index.php [L]
+# see http://www.yourhtmlsource.com/sitemanagement/urlrewriting.html for working with
+# mod_rewrite
+# anyone who does not supply a url (just the name of the site) should get the blog
+RewriteRule ^$ /blog/index.php 
 </IfModule>
 # END WordPress
 

@@ -9,6 +9,7 @@
 jQuery(document).ready(function() {
 	jQuery.widget('ui.jsubmit',{
 		options:{
+			// text that will appear on the button
 			name:null,
 			// set if you want this widget to log into your logger
 			logger:null,
@@ -27,8 +28,7 @@ jQuery(document).ready(function() {
 		},
 		log:function(msg,error) {
 			if(this.options.logger!=null) {
-				//this.options.logger.log(msg,error);
-				mydebug(this.options.logger);
+				jQuery(this.options.logger).jlogger('log',msg,error);
 			}
 		},
 		setInformation:function(msg) {
@@ -40,9 +40,9 @@ jQuery(document).ready(function() {
 			this.w_msg.addClass('errortext');
 			this.error=true;
 		},
-		setOk:function() {
+		setOk:function(msg) {
 			this.w_msg.removeClass('errortext');
-			this.w_msg.html('');
+			this.w_msg.html(msg);
 			this.error=false;
 		},
 		_create:function() {
@@ -50,14 +50,23 @@ jQuery(document).ready(function() {
 			this.element.addClass('ui-widget');
 			// this variable is injected into the closure...
 			var widget=this;
+
+			//TODO:
+			// if critical data was not supplied in the options
+			// then croak...
 			
 			// add the button and connect it to the submit method
 			this.w_button=jQuery('<button>');
 			this.w_button.html(this.options.name);
-			this.w_button.addClass('submit');
+			//this.w_button.addClass('submit');
 			this.w_button.appendTo(this.element);
 			this.w_button.click(function() {
 				widget.submit();
+			});
+
+			// prevent submit of the form... 
+			jQuery(this.options.formid).submit(function() {
+				return false;
 			});
 
 			// add the message label
@@ -78,14 +87,18 @@ jQuery(document).ready(function() {
 				url:this.options.url,
 				data:dataString,
 				// only on error
-				error:function(data) {
-					widget.log(data,true);
-					widget.setError(data,true);
+				error:function(XMLHttpRequest,textStatus,errorThrown) {
+					widget.log('ajax error:'+errorThrown+','+textStatus+','+XMLHttpRequest.responseText,true);
+					widget.setError('ERROR IN GETTING DATA');
 				},
 				// only on success
-				success:function(data) {
-					widget.log(data,false);
-					widget.setOk();
+				success:function(data,textStatus,XMLHttpRequest) {
+					if(data!=null) {
+						widget.setOk('submit ok, server said ['+data+']');
+					} else {
+						widget.log('ajax null:'+textStatus+','+XMLHttpRequest.responseText,true);
+						widget.setError('ERROR IN GETTING DATA');
+					}
 				},
 				// function which is called on erorr on success
 				complete:function() {

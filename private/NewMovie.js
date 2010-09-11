@@ -76,7 +76,8 @@ jQuery(document).ready(function() {
 	var init={
 		'name':'Send',
 		'url':'foobar.php',
-		'logger':logger,
+		'logger':'#log',
+		'formid':'#myform',
 	};
-	jQuery('#submit').jsubmit(init);
+	jQuery('#send').jsubmit(init);
 });

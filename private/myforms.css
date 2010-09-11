@@ -1,5 +1,5 @@
 /* this is the style for fields in focus (this is the entire line) */
-.focus {
+.fieldfocus {
 	background:#EB8F00;
 }
 /* this is the label in front of the field */
@@ -10,19 +10,18 @@
 	text-align:right;
 }
 /* this is any input component */
-.anyinput {
+.fieldinput {
 	width:20em;
 }
 /* this is the reload image */
-.inline_image {
+.fieldimage {
 	height:1em;
 }
 /* this is for the small red errors */
-.errortext {
-	color:#D73030;
+.fieldmsg {
 	width:10em;
 }
-/* errors for the logger */
-.error {
-	background:#D73030;
+/* general style to be applied to errors */
+.errortext {
+	color:#D73030;
 }

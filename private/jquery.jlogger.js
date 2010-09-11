@@ -12,7 +12,7 @@ jQuery(document).ready(function() {
 			var element=jQuery('<div>').text(message);
 			// add error class if this is an error
 			if(error) {
-				element.addClass('error');
+				element.addClass('errortext');
 			}
 			// add the message to the log
 			this.element.append(element);
@@ -31,7 +31,7 @@ jQuery(document).ready(function() {
 			});
 			// redefine the alert function so that we would not use it by mistake
 			alert=function(msg) {
-				widget.log(msg);
+				widget.log(msg,false);
 			}
 		},
 	});
