@@ -16,65 +16,68 @@ function my_include($file) {
 }
 
 function link_to_direct($direct_page) {
-	return WP_PLUGIN_URL."/myworld/sa/".$direct_page;
+	return WP_PLUGIN_URL.'/myworld/sa/'.$direct_page;
 }
 
 function link_to_resource($resource) {
-	return WP_PLUGIN_URL."/myworld/resources/".$resource;
+	return WP_PLUGIN_URL.'/myworld/resources/'.$resource;
 }
 
-my_include("include/utils.php");
-my_include("src/business.php");
-my_include("src/works.php");
-my_include("src/lilypond.php");
+my_include('include/utils.php');
+my_include('src/business.php');
+my_include('src/works.php');
+my_include('src/lilypond.php');
 
 if(!class_exists('MyWorld')) {
 	class MyWorld { 
 		/*
 		 * Our own version number
 		 */
-		var $version = "0.0.1";
+		var $version = '0.0.1';
 		/*
 		 * The function that creates dynamic content
 		 */
 		function create_content($name,$extra) {
 			db_connect();
 			switch($name) {
-				case "courses":
+				case 'courses':
 					$ret=create_courses();
 					break;
-				case "consulting":
+				case 'consulting':
 					$ret=create_consulting();
 					break;
-				case "teaching":
+				case 'teaching':
 					$ret=create_teaching();
 					break;
-				case "certification":
+				case 'certification':
 					$ret=create_certification();
 					break;
-				case "works":
-					$ret=create_works();
+				case 'works':
+					$ret=create_works('audio');
 					break;
-				case "lilypond":
+				case 'movies':
+					$ret=create_works('video');
+					break;
+				case 'lilypond':
 					$ret=create_lilypond();
 					break;
-				case "test":
-					$ret="שלום";
+				case 'test':
+					$ret='שלום';
 					break;
-				case "echo":
+				case 'echo':
 					$ret=$extra;
 					break;
-				case "ted_embed":
-					$ret=ted_embed($extra["id"]);
+				case 'ted_embed':
+					$ret=ted_embed($extra['id']);
 					break;
-				case "calendar":
+				case 'calendar':
 					$ret=calendar();
 					break;
 				default:
-					$ret="[$name] is unknown";
+					$ret='[$name] is unknown';
 					break;
 			}
-			#$ret="<br/>$ret<br/>";
+			#$ret='<br/>$ret<br/>';
 			db_disconnect();
 			return $ret;
 		}
@@ -83,7 +86,7 @@ if(!class_exists('MyWorld')) {
 		 * The function that hooks into WP to substitute content
 		 */
 		function the_content($content) {
-			$pattern="/\[myworld:\s*([_\w,]+)\s*\]/";
+			$pattern='/\[myworld:\s*([_\w,]+)\s*\]/';
 			preg_match_all($pattern,$content,$tags);
 			foreach( $tags[0] as $k=>$old_content ) {
 				$full=$tags[1][$k];
