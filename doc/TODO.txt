@@ -2,8 +2,6 @@ now:
 ====
 new movie system:
 =================
-do the submit button tied to them all.
-	(not valid until they all are validated and prints help about validations)
 the submit button does NOT submit anything!!!
 	fix it.
 
