@@ -13,6 +13,7 @@ jQuery(document).ready(function() {
 			type:'input',
 			inputtype:'text',
 			name:'No name',
+			sname:null,
 			initMsg:null,
 			rows:10,
 			initState:false,
@@ -147,6 +148,12 @@ jQuery(document).ready(function() {
 			this.id=running_id;
 			running_id++;
 
+			// check that certain options have been passed
+			if(this.options.sname==null) {
+				throw 'must declare sname attribute';
+			}
+			// TODO
+
 			// add the label
 			this.w_label=jQuery('<label>');
 			this.w_label.html(this.options.name);
@@ -164,6 +171,7 @@ jQuery(document).ready(function() {
 				keyup:function() {
 					widget.validate();
 				},
+				'name':this.options.sname,
 			};
 			if(this.options.initState==true) {
 				attrs.val=this.options.initMsg;

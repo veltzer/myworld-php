@@ -22,6 +22,7 @@ jQuery(document).ready(function() {
 		'regex':/.+/,
 		'logger':'#log',
 		'submit':'#send',
+		'sname':'name',
 	};
 	jQuery('#name').jvalidfield(init);
 
@@ -32,6 +33,7 @@ jQuery(document).ready(function() {
 		'regex':/^\d{7}$/,
 		'logger':'#log',
 		'submit':'#send',
+		'sname':'imdbid',
 	};
 	jQuery('#imdbid').jvalidfield(init);
 	
@@ -51,6 +53,7 @@ jQuery(document).ready(function() {
 		'initState':false,
 		'logger':'#log',
 		'submit':'#send',
+		'sname':'date',
 	};
 	jQuery('#date').jvalidfield(init);
 
@@ -64,6 +67,7 @@ jQuery(document).ready(function() {
 		'url':'GetData.php?type=TbRating',
 		'logger':'#log',
 		'submit':'#send',
+		'sname':'rating',
 	};
 	jQuery('#rating').jvalidfield(init);
 
@@ -75,6 +79,7 @@ jQuery(document).ready(function() {
 		'url':'GetData.php?type=video_places',
 		'logger':'#log',
 		'submit':'#send',
+		'sname':'locationid',
 	};
 	jQuery('#location').jvalidfield(init);
 	
@@ -86,6 +91,7 @@ jQuery(document).ready(function() {
 		'url':'GetData.php?type=video_devices',
 		'logger':'#log',
 		'submit':'#send',
+		'sname':'deviceid',
 	};
 	jQuery('#device').jvalidfield(init);
 
@@ -97,6 +103,7 @@ jQuery(document).ready(function() {
 		'regex':/.+/,
 		'logger':'#log',
 		'submit':'#send',
+		'sname':'review',
 	};
 	jQuery('#review').jvalidfield(init);
 });
