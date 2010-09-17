@@ -171,6 +171,8 @@ jQuery(document).ready(function() {
 				keyup:function() {
 					widget.validate();
 				},
+				// this attribute is neccessary since form serialization
+				// is submitting according to this name
 				'name':this.options.sname,
 			};
 			if(this.options.initState==true) {
