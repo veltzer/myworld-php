@@ -86,7 +86,21 @@ function my_mysql_query_one($query) {
 	$result=my_mysql_query($query);
 	$row=mysql_fetch_array($result,MYSQL_NUM);
 	$ret=$row[0];
-	mysql_free_result($result);
+	assert(mysql_free_result($result));
+	return $ret;
+}
+
+// do a query and return a hash of the results by key...
+function my_mysql_query_hash($query,$hash_key) {
+	db_connect();
+	$result=my_mysql_query($query);
+	$ret=array();
+	while($row=mysql_fetch_assoc($result)) {
+		$ret[$row[$hash_key]]=$row;
+	}
+	#debug: print the array...
+	#print_r($ret);
+	assert(mysql_free_result($result));
 	return $ret;
 }
 
