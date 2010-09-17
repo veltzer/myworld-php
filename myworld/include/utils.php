@@ -81,6 +81,27 @@ function my_mysql_query($query) {
 	return $result;
 }
 
+function my_mysql_query_one($query) {
+	db_connect();
+	$result=my_mysql_query($query);
+	$row=mysql_fetch_array($result,MYSQL_NUM);
+	$ret=$row[0];
+	mysql_free_result($result);
+	return $ret;
+}
+
+function phpdate_to_mysqldate($phpdate) {
+	return date('Y-m-d H:i:s',$phpdate);
+}
+
+function javascriptdate_to_phpdate($javascriptdate) {
+	return strtotime($javascriptdate);
+}
+
+function javascriptdate_to_mysqldate($javascriptdate) {
+	return phpdate_to_mysqldate(javascriptdate_to_phpdate($javascriptdate));
+}
+
 function my_assert($val,$reason) {
 	if(!$val) {
 		error('assert error: '.$reason);
