@@ -56,7 +56,7 @@ jQuery(document).ready(function() {
 		'name':'Location',
 		'initState':true,
 		'initMsg':'put the location where you saw the movie',
-		'url':'GetData.php?type=TbLcNamed',
+		'url':'GetData.php?type=video_places',
 		'logger':'#log',
 	};
 	jQuery('#location').jvalidfield(init);

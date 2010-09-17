@@ -13,6 +13,12 @@ if($type=='video_devices') {
 	$response=my_json_encode($result);
 	$handled=1;
 }
+if($type=='video_places') {
+	$query=sprintf('select id,name as label,name as value from TbLcNamed where isVideo=1');
+	$result=my_mysql_query($query);
+	$response=my_json_encode($result);
+	$handled=1;
+}
 if($type=='TbIdPerson') {
 	//error("fake error");
 	$rows=get_person_data();

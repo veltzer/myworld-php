@@ -2,10 +2,10 @@ now:
 ====
 new movie system:
 =================
-the submit button does NOT submit anything!!!
-	fix it.
 do the submit button tied to them all.
 	(not valid until they all are validated and prints help about validations)
+the submit button does NOT submit anything!!!
+	fix it.
 
 fix the fact that moving past a select changes it's value.
 style my new selection widget.
