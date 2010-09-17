@@ -1,7 +1,19 @@
 jQuery(document).ready(function() {
+	// order of creating is important here...
+	// since widgets use the logger and submit then they must
+	// be created BEFORE the widgets...
+
 	var init={
 	};
 	jQuery('#log').jlogger(init);
+	
+	var init={
+		'name':'Send',
+		'url':'NewMovie.php',
+		'logger':'#log',
+		'formid':'#myform',
+	};
+	jQuery('#send').jsubmit(init);
 
 	var init={
 		'name':'Name',
@@ -9,6 +21,7 @@ jQuery(document).ready(function() {
 		'initMsg':'put the name of the movie here',
 		'regex':/.+/,
 		'logger':'#log',
+		'submit':'#send',
 	};
 	jQuery('#name').jvalidfield(init);
 
@@ -18,6 +31,7 @@ jQuery(document).ready(function() {
 		'initMsg':'put the imdbid here',
 		'regex':/^\d{7}$/,
 		'logger':'#log',
+		'submit':'#send',
 	};
 	jQuery('#imdbid').jvalidfield(init);
 	
@@ -36,6 +50,7 @@ jQuery(document).ready(function() {
 		'initval':new Date(),
 		'initState':false,
 		'logger':'#log',
+		'submit':'#send',
 	};
 	jQuery('#date').jvalidfield(init);
 
@@ -48,6 +63,7 @@ jQuery(document).ready(function() {
 		//'url':'GetData.php?type=TbFoobar',
 		'url':'GetData.php?type=TbRating',
 		'logger':'#log',
+		'submit':'#send',
 	};
 	jQuery('#rating').jvalidfield(init);
 
@@ -58,6 +74,7 @@ jQuery(document).ready(function() {
 		'initMsg':'put the location where you saw the movie',
 		'url':'GetData.php?type=video_places',
 		'logger':'#log',
+		'submit':'#send',
 	};
 	jQuery('#location').jvalidfield(init);
 	
@@ -68,6 +85,7 @@ jQuery(document).ready(function() {
 		'initMsg':'put the device on which you saw the movie',
 		'url':'GetData.php?type=video_devices',
 		'logger':'#log',
+		'submit':'#send',
 	};
 	jQuery('#device').jvalidfield(init);
 
@@ -78,14 +96,7 @@ jQuery(document).ready(function() {
 		'type':'textarea',
 		'regex':/.+/,
 		'logger':'#log',
+		'submit':'#send',
 	};
 	jQuery('#review').jvalidfield(init);
-
-	var init={
-		'name':'Send',
-		'url':'NewMovie.php',
-		'logger':'#log',
-		'formid':'#myform',
-	};
-	jQuery('#send').jsubmit(init);
 });

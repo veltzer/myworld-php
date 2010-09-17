@@ -7,6 +7,32 @@
  * of errors in order to be disabled.
  */
 jQuery(document).ready(function() {
+	// an object to store error states for various objects
+	function Errors() {
+		this.errors=[];
+		this.num_errors=0;
+	}
+	Errors.prototype.report=function(id,state) {
+		if(state) {
+			if(id in this.errors) {
+				// nothing to do - id is already in error
+			} else {
+				this.errors[id]=undefined;
+				this.num_errors++;
+			}
+		} else {
+			if(id in this.errors) {
+				delete this.errors[id];
+				this.num_errors--;
+			} else {
+				// nothing to do - id was not in error
+			}
+		}
+	}
+	Errors.prototype.getNumErrors=function() {
+		return this.num_errors;
+	}
+
 	jQuery.widget('ui.jsubmit',{
 		options:{
 			// text that will appear on the button
@@ -45,11 +71,34 @@ jQuery(document).ready(function() {
 			this.w_msg.html(msg);
 			this.error=false;
 		},
+		updateStatus:function(force) {
+			var num_errors=this.errors.getNumErrors();
+			var newStatus=(num_errors>0);
+			if(newStatus!=this.error || force) {
+				if(newStatus) {
+					this.setError("errors exist "+this.errors.getNumErrors());
+					this.disable();
+				} else {
+					this.setOk("all is ok");
+					this.enable();
+				}
+			}
+		},
+		report:function(id,state) {
+			//this.log("got report for "+id+","+state);
+			this.errors.report(id,state);
+			this.updateStatus(true);
+			//this.log("num errors is "+this.errors.getNumErrors());
+		},
 		_create:function() {
 			// comply with jquery ui ?!?
 			this.element.addClass('ui-widget');
 			// this variable is injected into the closure...
 			var widget=this;
+			// number of errors is zero when creating...
+			this.errors=new Errors();
+			// at creationg errors are false
+			this.error=false;
 
 			//TODO:
 			// if critical data was not supplied in the options
@@ -72,6 +121,8 @@ jQuery(document).ready(function() {
 			// add the message label
 			this.w_msg=jQuery('<label>');
 			this.w_msg.appendTo(this.element);
+
+			this.updateStatus(true);
 		},
 		submit:function() {
 			// for closure issues

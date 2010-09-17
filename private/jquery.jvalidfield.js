@@ -4,9 +4,11 @@
  * If you validate vs a regex then just pass the regex.
  */
 jQuery(document).ready(function() {
+	var running_id=0;
 	jQuery.widget('ui.jvalidfield',{
 		options:{
 			// regex must be set for text inputs
+			id:0,
 			regex:null,
 			type:'input',
 			inputtype:'text',
@@ -31,10 +33,16 @@ jQuery(document).ready(function() {
 			validate_error:function(widget,value) {
 				return 'regex error '+widget.options.regex;
 			},
+			submit:null,
 		},
 		log:function(msg,error) {
 			if(this.options.logger!=null) {
 				jQuery(this.options.logger).jlogger('log',msg,error);
+			}
+		},
+		report:function(state) {
+			if(this.options.submit!=null) {
+				jQuery(this.options.submit).jsubmit('report',this.id,state);
 			}
 		},
 		setInformation:function(msg) {
@@ -45,11 +53,13 @@ jQuery(document).ready(function() {
 			this.w_msg.html(msg);
 			this.w_msg.addClass('errortext');
 			this.error=true;
+			this.report(true);
 		},
 		setOk:function(msg) {
 			this.w_msg.removeClass('errortext');
 			this.w_msg.html(msg);
 			this.error=false;
+			this.report(false);
 		},
 		doFocusin:function() {
 			this.element.addClass('fieldfocus');
@@ -133,6 +143,9 @@ jQuery(document).ready(function() {
 			this.element.addClass('ui-widget');
 			// this variable is injected into the closure...
 			var widget=this;
+			// set an id
+			this.id=running_id;
+			running_id++;
 
 			// add the label
 			this.w_label=jQuery('<label>');
