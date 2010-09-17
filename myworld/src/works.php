@@ -22,7 +22,7 @@ function create_works() {
 	$persons=my_mysql_query_hash('SELECT * FROM TbIdPerson','id');
 
 	// sending query
-	$query=sprintf('SELECT id,creatorId,name,imdbid,length,size,chapters,typeId,producerId,startViewDate,endViewDate,viewerId,locationId,deviceId,remark,rating,review FROM TbWkWork');
+	$query=sprintf('SELECT TbWkWork.id,TbWkWork.creatorId,TbWkWork.name,TbWkWork.imdbid,TbWkWork.length,TbWkWork.size,TbWkWork.chapters,TbWkWork.typeId,TbWkWork.producerId,TbWkWork.startViewDate,TbWkWork.endViewDate,TbWkWork.viewerId,TbWkWork.locationId,TbWkWork.deviceId,TbWkWork.remark,TbWkWork.rating,TbWkWork.review FROM TbWkWork,TbWkWorkType where TbWkWork.typeId=TbWkWorkType.id and TbWkWorkType.isAudio=1');
 	//$query=sprintf('SELECT * FROM TbWkWork');
 	$result=my_mysql_query($query);
 
