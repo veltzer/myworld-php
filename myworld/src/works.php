@@ -3,12 +3,6 @@
 # TODO:
 # Make this script go through the groups tables to render the creators and viewers.
 
-function prep_producer() {
-}
-
-function format_producer($producerid) {
-}
-
 function make_stat($query,$func) {
 	$res=my_mysql_query_one($query);
 	if($func!=null) {
@@ -100,7 +94,6 @@ function create_works() {
 			$s_producer=get_na_string();
 		}
 		if($row[$typeid]!=NULL) {
-			$name=$types[$row[$typeid]]['name'];
 			$s_type=$types[$row[$typeid]]['name'];
 		} else {
 			$s_type=get_na_string();
@@ -131,8 +124,6 @@ function create_works() {
 		if($row[$lengthid]!=NULL) {
 			$s_length=formatTimeperiod($row[$lengthid]);
 		}
-
-
 		if($row[$nameid]!=NULL) {
 			if($row[$creatorid]!=NULL) {
 				$header=$row[$nameid].' / '.$s_creator;
@@ -146,6 +137,7 @@ function create_works() {
 				$header='Huh?!?';
 			}
 		}
+
 		$body='';
 		$body.='<ul>';
 		if($row[$nameid]!=NULL) {
