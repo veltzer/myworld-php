@@ -58,6 +58,9 @@ if(!class_exists('MyWorld')) {
 				case 'movies':
 					$ret=create_works('video');
 					break;
+				case 'stats':
+					$ret=create_stats();
+					break;
 				case 'lilypond':
 					$ret=create_lilypond();
 					break;

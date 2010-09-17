@@ -197,8 +197,11 @@ function create_works($type) {
 	}
 	assert(mysql_free_result($result));
 	$res.=multi_accordion_end();
+	return $res;
+}
 
-	$res.='Some statistics...<br/>';
+function create_stats() {
+	$res='';
 	$res.=make_stat('SELECT count(*) FROM TbWkWork',null);
 	$res.=make_stat('SELECT avg(rating) FROM TbWkWork',null);
 	$res.=make_stat('SELECT count(distinct rating) FROM TbWkWork',null);
@@ -210,7 +213,6 @@ function create_works($type) {
 	$res.=make_stat('SELECT sum(length) from TbWkWork',formatTimeperiod);
 	$res.=make_stat('SELECT sum(size) from TbWkWork',formatSize);
 	$res.=make_stat('SELECT count(distinct typeId) from TbWkWork',null);
-
 	return $res;
 }
 
