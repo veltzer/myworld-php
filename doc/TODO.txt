@@ -2,8 +2,7 @@ now:
 ====
 new movie system:
 =================
-the submit button does NOT submit anything!!!
-	fix it.
+see that data goes into the database...
 
 fix the fact that moving past a select changes it's value.
 style my new selection widget.

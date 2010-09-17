@@ -163,12 +163,17 @@ jQuery(document).ready(function() {
 			// add the input control
 			var attrs={
 				focusin:function() {
+					widget.validate();
 					widget.doFocusin();
 				},
 				focusout:function() {
+					widget.validate();
 					widget.doFocusout();
 				},
 				keyup:function() {
+					widget.validate();
+				},
+				change:function() {
 					widget.validate();
 				},
 				// this attribute is neccessary since form serialization
