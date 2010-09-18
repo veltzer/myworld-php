@@ -1,7 +1,17 @@
 now:
 ====
-new movie system:
+pages to be done:
 =================
+- add person - a page that adds a person to the system.
+	Name, middle name, last name.
+- add person to work
+	a page that adds a person as a contributor to a work.
+- add review - a page that adds a review to a work.
+	(by me, ofcourse).
+- add view - a page that adds a view to a work.
+
+new movie page:
+===============
 fix the fact that moving past a select changes it's value.
 style my new selection widget.
 allow descriptions on LocationsLcNamed, return them in the json object
@@ -20,8 +30,8 @@ there is a problem with the styles (classes). Move between the fields and you wi
 	the problem. I think it's because I am not using the jqueryui classes right.
 control focus movement, after review should go to submit and back to name.
 
-new event system:
-=================
+new event page:
+===============
 - reporting of errors and disable of button of submit in relation to errors.
 - display icons in the selection boxes.
 - turn the selection boxes into combos.
@@ -81,3 +91,4 @@ database:
 - separate reviews from TbWkWorks.
 - separate urls for TbWkWorks.
 - add tags to TbWkWorks.
+- separate ids from TbWkWorks.
