@@ -1,5 +1,9 @@
 now:
 ====
+code quality:
+=============
+- organize the files in public (it's a mess).
+
 pages to be done:
 =================
 - add person - a page that adds a person to the system.

@@ -11,6 +11,8 @@ RewriteCond %{REQUEST_URI} ^/blog/
 RewriteRule . /blog/index.php [L]
 # this means that if anyone comes to the root of my site he will be redirected to blog...
 RedirectMatch ^/$ /blog/
+# this redirects favicon.ico to the myworld plugin...
+RedirectMatch ^/favicon.ico$ /blog/wp-content/plugins/myworld/resources/favicon.ico
 </IfModule>
 # END WordPress
 
