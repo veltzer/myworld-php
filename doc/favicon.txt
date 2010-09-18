@@ -12,10 +12,24 @@ a way for a page to set it's own favicon.
 	echo "<link rel='SHORTCUT ICON' type='image/x-icon' href='".plugins_url('resources/favicon.ico',__FILE__)."' />\n";
 - This is how I got to the current situation: the favicon is part of the plugin (still not in the database) but has nothing to do with the build system. Better.
 
+What about favicon in areas which are not of the blog?
+======================================================
+several options:
+1. drop a copy of 'favicon.ico' in the root of the site (usually /var/www).
+	This is not nice since there needs to be some way of automatically doing it
+	and it duplicates the icon.
+2. create an mod_rewrite rule which does "favicon.ico -> where it really is".
+
+Solution (2) is more flexible since it lends itself to ultimately storing the favicon
+in the database (which is where we want to go...).
+That's why it was chosen.
+
 What is yet to do ?
 - put the favicon in the database.
 - put the right link to the GetBlob.php script instead of it's name.
 - get it out of the plugin (make the plugin lighter).
+	and put the download url in the plugin.
+- put the same download url in the htaccess file.
 
 references:
 http://wordpress.org/extend/plugins/favicons/
