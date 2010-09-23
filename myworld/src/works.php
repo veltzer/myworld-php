@@ -23,9 +23,9 @@ function create_works($type) {
 
 	// sending query
 	if($type=='audio') {
-		$query=sprintf('SELECT TbWkWork.id,TbWkWork.creatorId,TbWkWork.name,TbWkWork.imdbid,TbWkWork.length,TbWkWork.size,TbWkWork.chapters,TbWkWork.typeId,TbWkWork.producerId,TbWkWork.startViewDate,TbWkWork.endViewDate,TbWkWork.viewerId,TbWkWork.locationId,TbWkWork.deviceId,TbWkWork.rating,TbWkWork.review FROM TbWkWork,TbWkWorkType where TbWkWork.typeId=TbWkWorkType.id and TbWkWorkType.isAudio=1 order by TbWkWork.endViewDate');
+		$query=sprintf('SELECT TbWkWork.id,TbWkWork.creatorId,TbWkWork.name,TbWkWork.imdbid,TbWkWork.length,TbWkWork.size,TbWkWork.chapters,TbWkWork.typeId,TbWkWork.producerId,TbWkWork.startViewDate,TbWkWork.endViewDate,TbWkWork.viewerId,TbWkWork.locationId,TbWkWork.deviceId FROM TbWkWork,TbWkWorkType where TbWkWork.typeId=TbWkWorkType.id and TbWkWorkType.isAudio=1 order by TbWkWork.endViewDate');
 	} else {
-		$query=sprintf('SELECT TbWkWork.id,TbWkWork.creatorId,TbWkWork.name,TbWkWork.imdbid,TbWkWork.length,TbWkWork.size,TbWkWork.chapters,TbWkWork.typeId,TbWkWork.producerId,TbWkWork.startViewDate,TbWkWork.endViewDate,TbWkWork.viewerId,TbWkWork.locationId,TbWkWork.deviceId,TbWkWork.rating,TbWkWork.review FROM TbWkWork,TbWkWorkType where TbWkWork.typeId=TbWkWorkType.id and TbWkWorkType.isVideo=1 order by TbWkWork.endViewDate');
+		$query=sprintf('SELECT TbWkWork.id,TbWkWork.creatorId,TbWkWork.name,TbWkWork.imdbid,TbWkWork.length,TbWkWork.size,TbWkWork.chapters,TbWkWork.typeId,TbWkWork.producerId,TbWkWork.startViewDate,TbWkWork.endViewDate,TbWkWork.viewerId,TbWkWork.locationId,TbWkWork.deviceId FROM TbWkWork,TbWkWorkType where TbWkWork.typeId=TbWkWorkType.id and TbWkWorkType.isVideo=1 order by TbWkWork.endViewDate');
 	}
 	//$query=sprintf('SELECT * FROM TbWkWork');
 	$result=my_mysql_query($query);
@@ -70,12 +70,6 @@ function create_works($type) {
 		}
 		if($field->name=='endViewDate') {
 			$endviewdateid=$i;
-		}
-		if($field->name=='rating') {
-			$ratingid=$i;
-		}
-		if($field->name=='review') {
-			$reviewid=$i;
 		}
 		if($field->name=='imdbid') {
 			$imdbidid=$i;
@@ -180,12 +174,6 @@ function create_works($type) {
 		if($row[$deviceid]!=NULL) {
 			$body.='<li>device: '.$s_device.'</li>';
 		}
-		if($row[$ratingid]!=NULL) {
-			$body.='<li>rating: '.$row[$ratingid].'</li>';
-		}
-		if($row[$reviewid]!=NULL) {
-			$body.='<li>review: '.$row[$reviewid].'</li>';
-		}
 		$body.='</ul>';
 		$res.=multi_accordion_entry($header,$body);
 	}
@@ -197,16 +185,16 @@ function create_works($type) {
 function create_stats() {
 	$res='';
 	$res.=make_stat('SELECT count(*) FROM TbWkWork',null);
-	$res.=make_stat('SELECT avg(rating) FROM TbWkWork',null);
-	$res.=make_stat('SELECT count(distinct rating) FROM TbWkWork',null);
-	$res.=make_stat('SELECT avg(rating) FROM TbWkWork',null);
-	$res.=make_stat('SELECT count(distinct rating) FROM TbWkWork',null);
 	$res.=make_stat('SELECT count(distinct viewerId) FROM TbWkWork',null);
 	$res.=make_stat('SELECT count(distinct locationId) FROM TbWkWork',null);
 	$res.=make_stat('SELECT count(distinct creatorId) from TbWkWork',null);
 	$res.=make_stat('SELECT sum(length) from TbWkWork',formatTimeperiod);
 	$res.=make_stat('SELECT sum(size) from TbWkWork',formatSize);
 	$res.=make_stat('SELECT count(distinct typeId) from TbWkWork',null);
+
+	# rating stats
+	$res.=make_stat('SELECT avg(rating) FROM TbWkWorkReview',null);
+	$res.=make_stat('SELECT count(distinct rating) FROM TbWkWorkReview',null);
 	return $res;
 }
 
