@@ -1,5 +1,7 @@
 now:
 ====
+	add roles to TbWkWorkContrib (right now only lecturer,author,producer).
+		match them right.
 	bring back:
 		names of people and links, producer names and links.
 		imdb ids and links, ttc ids and links,
