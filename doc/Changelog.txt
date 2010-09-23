@@ -1,1 +1,2 @@
 - brought reviews back to presentation layer.
+- views are now separated from the work. YES!!!

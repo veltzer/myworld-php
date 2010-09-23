@@ -2,13 +2,6 @@ now:
 ====
 	write a script that allows me to separate stuff to a new table.
 
-	separate these fields from the TbWkWork table into TbWkWorkView
-		startViewDate
-		endViewDate
-		viewwerId
-		locationId
-		deviceId
-
 	import all lectures in my audio archive into works.
 		How do I decide if they are TTC ? I Don't know.
 		How do I decide if they are audio books ? I Don't know.

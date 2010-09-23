@@ -28,7 +28,7 @@ function create_works($type) {
 	} else {
 		$add='TbWkWorkType.isVideo=1';
 	}
-	$query=sprintf('SELECT TbWkWork.id,TbWkWork.creatorId,TbWkWork.name,TbWkWork.imdbid,TbWkWork.length,TbWkWork.size,TbWkWork.chapters,TbWkWork.typeId,TbWkWork.producerId,TbWkWork.startViewDate,TbWkWork.endViewDate,TbWkWork.viewerId,TbWkWork.locationId,TbWkWork.deviceId,TbWkWorkReview.rating,TbWkWorkReview.review,TbWkWorkReview.reviewDate FROM TbWkWork,TbWkWorkType,TbWkWorkReview where TbWkWork.typeId=TbWkWorkType.id and TbWkWorkReview.workId=TbWkWork.id and %s order by TbWkWork.endViewDate',$add);
+	$query=sprintf('SELECT TbWkWork.id,TbWkWork.creatorId,TbWkWork.name,TbWkWork.imdbid,TbWkWork.length,TbWkWork.size,TbWkWork.chapters,TbWkWork.typeId,TbWkWork.producerId,TbWkWorkView.startViewDate,TbWkWorkView.endViewDate,TbWkWorkView.viewerId,TbWkWorkView.locationId,TbWkWorkView.deviceId,TbWkWorkReview.rating,TbWkWorkReview.review,TbWkWorkReview.reviewDate FROM TbWkWork,TbWkWorkType,TbWkWorkReview,TbWkWorkView where TbWkWork.typeId=TbWkWorkType.id and TbWkWorkReview.workId=TbWkWork.id and TbWkWorkView.workId=TbWkWork.id and %s order by TbWkWorkView.endViewDate',$add);
 	//$query=sprintf('SELECT * FROM TbWkWork');
 	$result=my_mysql_query($query);
 
@@ -40,23 +40,8 @@ function create_works($type) {
 		if($field->name=='name') {
 			$nameid=$i;
 		}
-		if($field->name=='producerId') {
-			$producerid=$i;
-		}
-		if($field->name=='viewerId') {
-			$viewerid=$i;
-		}
-		if($field->name=='locationId') {
-			$locationid=$i;
-		}
-		if($field->name=='deviceId') {
-			$deviceid=$i;
-		}
 		if($field->name=='typeId') {
 			$typeid=$i;
-		}
-		if($field->name=='creatorId') {
-			$creatorid=$i;
 		}
 		if($field->name=='length') {
 			$lengthid=$i;
@@ -67,16 +52,33 @@ function create_works($type) {
 		if($field->name=='chapters') {
 			$chaptersid=$i;
 		}
+		if($field->name=='imdbid') {
+			$imdbidid=$i;
+		}
+		# the ugly fields that will go someday...
+		if($field->name=='creatorId') {
+			$creatorid=$i;
+		}
+		if($field->name=='producerId') {
+			$producerid=$i;
+		}
+		# view table
 		if($field->name=='startViewDate') {
 			$startviewdateid=$i;
 		}
 		if($field->name=='endViewDate') {
 			$endviewdateid=$i;
 		}
-		if($field->name=='imdbid') {
-			$imdbidid=$i;
+		if($field->name=='viewerId') {
+			$viewerid=$i;
 		}
-		# review tables
+		if($field->name=='locationId') {
+			$locationid=$i;
+		}
+		if($field->name=='deviceId') {
+			$deviceid=$i;
+		}
+		# review table
 		if($field->name=='rating') {
 			$ratingid=$i;
 		}
@@ -171,6 +173,7 @@ function create_works($type) {
 		if($row[$producerid]!=NULL) {
 			$body.='<li>producer: '.$s_producer.'</li>';
 		}
+		# view stuff
 		if($row[$startviewdateid]!=NULL) {
 			$body.='<li>start view date: '.$row[$startviewdateid].'</li>';
 		}
@@ -206,15 +209,20 @@ function create_works($type) {
 
 function create_stats() {
 	$res='';
-	$res.=make_stat('SELECT count(*) FROM TbWkWork',null);
-	$res.=make_stat('SELECT count(distinct viewerId) FROM TbWkWork',null);
-	$res.=make_stat('SELECT count(distinct locationId) FROM TbWkWork',null);
+
+	# work stats
 	$res.=make_stat('SELECT count(distinct creatorId) from TbWkWork',null);
 	$res.=make_stat('SELECT sum(length) from TbWkWork',formatTimeperiod);
 	$res.=make_stat('SELECT sum(size) from TbWkWork',formatSize);
 	$res.=make_stat('SELECT count(distinct typeId) from TbWkWork',null);
 
-	# rating stats
+	# view stats
+	$res.=make_stat('SELECT count(*) FROM TbWkWorkView',null);
+	$res.=make_stat('SELECT count(distinct viewerId) FROM TbWkWorkView',null);
+	$res.=make_stat('SELECT count(distinct locationId) FROM TbWkWorkView',null);
+	$res.=make_stat('SELECT count(distinct deviceId) FROM TbWkWorkView',null);
+
+	# review stats
 	$res.=make_stat('SELECT avg(rating) FROM TbWkWorkReview',null);
 	$res.=make_stat('SELECT count(distinct rating) FROM TbWkWorkReview',null);
 	return $res;
