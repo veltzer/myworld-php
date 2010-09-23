@@ -1,7 +1,8 @@
 now:
 ====
-	bring back names of people, imdb ids and links, ttc ids and links,
-		producer names and links.
+	bring back:
+		names of people and links, producer names and links.
+		imdb ids and links, ttc ids and links,
 
 	import all lectures in my audio archive into works.
 		How do I decide if they are TTC ? I Don't know.
