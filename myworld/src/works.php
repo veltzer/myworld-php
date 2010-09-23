@@ -20,13 +20,15 @@ function create_works($type) {
 	$locations=my_mysql_query_hash('SELECT * FROM TbLcNamed','id');
 	$devices=my_mysql_query_hash('SELECT * FROM TbDevice','id');
 	$persons=my_mysql_query_hash('SELECT * FROM TbIdPerson','id');
+	#$works=my_mysql_query_hash('SELECT * FROM TbWkWork','id');
 
 	// sending query
 	if($type=='audio') {
-		$query=sprintf('SELECT TbWkWork.id,TbWkWork.creatorId,TbWkWork.name,TbWkWork.imdbid,TbWkWork.length,TbWkWork.size,TbWkWork.chapters,TbWkWork.typeId,TbWkWork.producerId,TbWkWork.startViewDate,TbWkWork.endViewDate,TbWkWork.viewerId,TbWkWork.locationId,TbWkWork.deviceId FROM TbWkWork,TbWkWorkType where TbWkWork.typeId=TbWkWorkType.id and TbWkWorkType.isAudio=1 order by TbWkWork.endViewDate');
+		$add='TbWkWorkType.isAudio=1';
 	} else {
-		$query=sprintf('SELECT TbWkWork.id,TbWkWork.creatorId,TbWkWork.name,TbWkWork.imdbid,TbWkWork.length,TbWkWork.size,TbWkWork.chapters,TbWkWork.typeId,TbWkWork.producerId,TbWkWork.startViewDate,TbWkWork.endViewDate,TbWkWork.viewerId,TbWkWork.locationId,TbWkWork.deviceId FROM TbWkWork,TbWkWorkType where TbWkWork.typeId=TbWkWorkType.id and TbWkWorkType.isVideo=1 order by TbWkWork.endViewDate');
+		$add='TbWkWorkType.isVideo=1';
 	}
+	$query=sprintf('SELECT TbWkWork.id,TbWkWork.creatorId,TbWkWork.name,TbWkWork.imdbid,TbWkWork.length,TbWkWork.size,TbWkWork.chapters,TbWkWork.typeId,TbWkWork.producerId,TbWkWork.startViewDate,TbWkWork.endViewDate,TbWkWork.viewerId,TbWkWork.locationId,TbWkWork.deviceId,TbWkWorkReview.rating,TbWkWorkReview.review,TbWkWorkReview.reviewDate FROM TbWkWork,TbWkWorkType,TbWkWorkReview where TbWkWork.typeId=TbWkWorkType.id and TbWkWorkReview.workId=TbWkWork.id and %s order by TbWkWork.endViewDate',$add);
 	//$query=sprintf('SELECT * FROM TbWkWork');
 	$result=my_mysql_query($query);
 
@@ -73,6 +75,16 @@ function create_works($type) {
 		}
 		if($field->name=='imdbid') {
 			$imdbidid=$i;
+		}
+		# review tables
+		if($field->name=='rating') {
+			$ratingid=$i;
+		}
+		if($field->name=='review') {
+			$reviewid=$i;
+		}
+		if($field->name=='reviewDate') {
+			$reviewdateid=$i;
 		}
 	}
 	$res.=multi_accordion_start();
@@ -173,6 +185,16 @@ function create_works($type) {
 		}
 		if($row[$deviceid]!=NULL) {
 			$body.='<li>device: '.$s_device.'</li>';
+		}
+		# review stuff
+		if($row[$ratingid]!=NULL) {
+			$body.='<li>rating: '.$row[$ratingid].'</li>';
+		}
+		if($row[$reviewid]!=NULL) {
+			$body.='<li>review: '.$row[$reviewid].'</li>';
+		}
+		if($row[$reviewdateid]!=NULL) {
+			$body.='<li>review date: '.$row[$reviewdateid].'</li>';
 		}
 		$body.='</ul>';
 		$res.=multi_accordion_entry($header,$body);
