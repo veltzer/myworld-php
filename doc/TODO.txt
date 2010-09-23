@@ -17,6 +17,9 @@ now:
 		use that to enter the lectures that I am now hearing (the Russian
 			Revolution).
 
+mysql wrappers:
+===============
+- add debug facility to see the queries they generate.
 
 code quality:
 =============
