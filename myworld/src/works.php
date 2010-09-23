@@ -23,9 +23,9 @@ function create_works($type) {
 
 	// sending query
 	if($type=='audio') {
-		$query=sprintf('SELECT TbWkWork.id,TbWkWork.creatorId,TbWkWork.name,TbWkWork.imdbid,TbWkWork.length,TbWkWork.size,TbWkWork.chapters,TbWkWork.typeId,TbWkWork.producerId,TbWkWork.startViewDate,TbWkWork.endViewDate,TbWkWork.viewerId,TbWkWork.locationId,TbWkWork.deviceId,TbWkWork.remark,TbWkWork.rating,TbWkWork.review FROM TbWkWork,TbWkWorkType where TbWkWork.typeId=TbWkWorkType.id and TbWkWorkType.isAudio=1 order by TbWkWork.endViewDate');
+		$query=sprintf('SELECT TbWkWork.id,TbWkWork.creatorId,TbWkWork.name,TbWkWork.imdbid,TbWkWork.length,TbWkWork.size,TbWkWork.chapters,TbWkWork.typeId,TbWkWork.producerId,TbWkWork.startViewDate,TbWkWork.endViewDate,TbWkWork.viewerId,TbWkWork.locationId,TbWkWork.deviceId,TbWkWork.rating,TbWkWork.review FROM TbWkWork,TbWkWorkType where TbWkWork.typeId=TbWkWorkType.id and TbWkWorkType.isAudio=1 order by TbWkWork.endViewDate');
 	} else {
-		$query=sprintf('SELECT TbWkWork.id,TbWkWork.creatorId,TbWkWork.name,TbWkWork.imdbid,TbWkWork.length,TbWkWork.size,TbWkWork.chapters,TbWkWork.typeId,TbWkWork.producerId,TbWkWork.startViewDate,TbWkWork.endViewDate,TbWkWork.viewerId,TbWkWork.locationId,TbWkWork.deviceId,TbWkWork.remark,TbWkWork.rating,TbWkWork.review FROM TbWkWork,TbWkWorkType where TbWkWork.typeId=TbWkWorkType.id and TbWkWorkType.isVideo=1 order by TbWkWork.endViewDate');
+		$query=sprintf('SELECT TbWkWork.id,TbWkWork.creatorId,TbWkWork.name,TbWkWork.imdbid,TbWkWork.length,TbWkWork.size,TbWkWork.chapters,TbWkWork.typeId,TbWkWork.producerId,TbWkWork.startViewDate,TbWkWork.endViewDate,TbWkWork.viewerId,TbWkWork.locationId,TbWkWork.deviceId,TbWkWork.rating,TbWkWork.review FROM TbWkWork,TbWkWorkType where TbWkWork.typeId=TbWkWorkType.id and TbWkWorkType.isVideo=1 order by TbWkWork.endViewDate');
 	}
 	//$query=sprintf('SELECT * FROM TbWkWork');
 	$result=my_mysql_query($query);
@@ -70,9 +70,6 @@ function create_works($type) {
 		}
 		if($field->name=='endViewDate') {
 			$endviewdateid=$i;
-		}
-		if($field->name=='remark') {
-			$remarkid=$i;
 		}
 		if($field->name=='rating') {
 			$ratingid=$i;
@@ -182,9 +179,6 @@ function create_works($type) {
 		}
 		if($row[$deviceid]!=NULL) {
 			$body.='<li>device: '.$s_device.'</li>';
-		}
-		if($row[$remarkid]!=NULL) {
-			$body.='<li>remark: '.$row[$remarkid].'</li>';
 		}
 		if($row[$ratingid]!=NULL) {
 			$body.='<li>rating: '.$row[$ratingid].'</li>';
