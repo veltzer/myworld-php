@@ -15,7 +15,6 @@ function create_works($type) {
 	$res='';
 
 	// collecting data from other tables...
-	$producers=my_mysql_query_hash('SELECT * FROM TbWkProducer','id');
 	$types=my_mysql_query_hash('SELECT * FROM TbWkWorkType','id');
 	$locations=my_mysql_query_hash('SELECT * FROM TbLcNamed','id');
 	$devices=my_mysql_query_hash('SELECT * FROM TbDevice','id');
@@ -28,7 +27,7 @@ function create_works($type) {
 	} else {
 		$add='TbWkWorkType.isVideo=1';
 	}
-	$query=sprintf('SELECT TbWkWork.id,TbWkWork.creatorId,TbWkWork.name,TbWkWork.imdbid,TbWkWork.length,TbWkWork.size,TbWkWork.chapters,TbWkWork.typeId,TbWkWork.producerId,TbWkWorkView.startViewDate,TbWkWorkView.endViewDate,TbWkWorkView.viewerId,TbWkWorkView.locationId,TbWkWorkView.deviceId,TbWkWorkReview.rating,TbWkWorkReview.review,TbWkWorkReview.reviewDate FROM TbWkWork,TbWkWorkType,TbWkWorkReview,TbWkWorkView where TbWkWork.typeId=TbWkWorkType.id and TbWkWorkReview.workId=TbWkWork.id and TbWkWorkView.workId=TbWkWork.id and %s order by TbWkWorkView.endViewDate',$add);
+	$query=sprintf('SELECT TbWkWork.id,TbWkWork.name,TbWkWork.length,TbWkWork.size,TbWkWork.chapters,TbWkWork.typeId,TbWkWorkView.startViewDate,TbWkWorkView.endViewDate,TbWkWorkView.viewerId,TbWkWorkView.locationId,TbWkWorkView.deviceId,TbWkWorkReview.rating,TbWkWorkReview.review,TbWkWorkReview.reviewDate FROM TbWkWork,TbWkWorkType,TbWkWorkReview,TbWkWorkView where TbWkWork.typeId=TbWkWorkType.id and TbWkWorkReview.workId=TbWkWork.id and TbWkWorkView.workId=TbWkWork.id and %s order by TbWkWorkView.endViewDate',$add);
 	//$query=sprintf('SELECT * FROM TbWkWork');
 	$result=my_mysql_query($query);
 
@@ -51,16 +50,6 @@ function create_works($type) {
 		}
 		if($field->name=='chapters') {
 			$chaptersid=$i;
-		}
-		if($field->name=='imdbid') {
-			$imdbidid=$i;
-		}
-		# the ugly fields that will go someday...
-		if($field->name=='creatorId') {
-			$creatorid=$i;
-		}
-		if($field->name=='producerId') {
-			$producerid=$i;
 		}
 		# view table
 		if($field->name=='startViewDate') {
@@ -93,15 +82,6 @@ function create_works($type) {
 	// printing table rows
 	while($row=mysql_fetch_row($result))
 	{
-		#handle producers
-		#<a href='url'>Link text</a>
-		if($row[$producerid]!=NULL) {
-			$url=$producers[$row[$producerid]]['url'];
-			$name=$producers[$row[$producerid]]['name'];
-			$s_producer='<a href=\''.$url.'\'>'.$name.'</a>';
-		} else {
-			$s_producer=get_na_string();
-		}
 		if($row[$typeid]!=NULL) {
 			$s_type=$types[$row[$typeid]]['name'];
 		} else {
@@ -122,11 +102,6 @@ function create_works($type) {
 		} else {
 			$s_viewer=get_na_string();
 		}
-		if($row[$creatorid]!=NULL) {
-			$s_creator=get_full_name($persons[$row[$creatorid]]);
-		} else {
-			$s_creator=get_na_string();
-		}
 		if($row[$sizeid]!=NULL) {
 			$s_size=formatSize($row[$sizeid]);
 		}
@@ -134,29 +109,15 @@ function create_works($type) {
 			$s_length=formatTimeperiod($row[$lengthid]);
 		}
 		if($row[$nameid]!=NULL) {
-			if($row[$creatorid]!=NULL) {
-				$header=$row[$nameid].' / '.$s_creator;
-			} else {
-				$header=$row[$nameid];
-			}
+			$header=$row[$nameid];
 		} else {
-			if($row[$creatorid]!=NULL) {
-				$header=$s_creator;
-			} else {
-				$header='Huh?!?';
-			}
+			$header='No Name';
 		}
 
 		$body='';
 		$body.='<ul>';
 		if($row[$nameid]!=NULL) {
 			$body.='<li>name: '.$row[$nameid].'</li>';
-		}
-		if($row[$imdbidid]!=NULL) {
-			$body.='<li>imdbid: '.$row[$imdbidid].'</li>';
-		}
-		if($row[$creatorid]!=NULL) {
-			$body.='<li>creator: '.$s_creator.'</li>';
 		}
 		if($row[$lengthid]!=NULL) {
 			$body.='<li>length: '.$s_length.'</li>';
@@ -169,9 +130,6 @@ function create_works($type) {
 		}
 		if($row[$typeid]!=NULL) {
 			$body.='<li>type: '.$s_type.'</li>';
-		}
-		if($row[$producerid]!=NULL) {
-			$body.='<li>producer: '.$s_producer.'</li>';
 		}
 		# view stuff
 		if($row[$startviewdateid]!=NULL) {
@@ -211,7 +169,6 @@ function create_stats() {
 	$res='';
 
 	# work stats
-	$res.=make_stat('SELECT count(distinct creatorId) from TbWkWork',null);
 	$res.=make_stat('SELECT sum(length) from TbWkWork',formatTimeperiod);
 	$res.=make_stat('SELECT sum(size) from TbWkWork',formatSize);
 	$res.=make_stat('SELECT count(distinct typeId) from TbWkWork',null);

@@ -20,9 +20,11 @@ $p_review=my_get_post('review');
 
 $p_typeid=my_mysql_query_one('select id from TbWkWorkType where name=\'video movie\'');
 $p_viewerid=my_mysql_query_one('select id from TbIdPerson where firstname=\'Mark\' and surname=\'Veltzer\'');
+$p_externalid=my_mysql_query_one('select id from TbWkWorkExternal where name=\'imdb\'');
 
-$query=sprintf('insert into TbWkWork (name,imdbid,typeId) values(\'%s\',\'%s\',\'%s\')',
+$query=sprintf('insert into TbWkWork (name,externalId,externalCode,typeId) values(\'%s\',\'%s\',\'%s\',\'%s\')',
 	mysql_real_escape_string($p_name),
+	mysql_real_escape_string($p_externalId),
 	mysql_real_escape_string($p_imdbid),
 	mysql_real_escape_string($p_typeid)
 );

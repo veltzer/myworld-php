@@ -1,10 +1,14 @@
 now:
 ====
-	write a script that allows me to separate stuff to a new table.
+	bring back names of people, imdb ids and links, ttc ids and links,
+		producer names and links.
 
 	import all lectures in my audio archive into works.
 		How do I decide if they are TTC ? I Don't know.
 		How do I decide if they are audio books ? I Don't know.
+
+	write a script that allows me to separate stuff to a new table.
+
 
 	do a dialog for entering a lecture.
 		use that to enter the lectures that I am now hearing (the Russian
