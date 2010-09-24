@@ -19,6 +19,7 @@ function create_works($type) {
 	$locations=my_mysql_query_hash('SELECT * FROM TbLcNamed','id');
 	$devices=my_mysql_query_hash('SELECT * FROM TbDevice','id');
 	$persons=my_mysql_query_hash('SELECT * FROM TbIdPerson','id');
+	$external=my_mysql_query_hash('SELECT * FROM TbWkWorkExternal','id');
 	#$works=my_mysql_query_hash('SELECT * FROM TbWkWork','id');
 
 	// sending query
@@ -27,7 +28,7 @@ function create_works($type) {
 	} else {
 		$add='TbWkWorkType.isVideo=1';
 	}
-	$query=sprintf('SELECT TbWkWork.id,TbWkWork.name,TbWkWork.length,TbWkWork.size,TbWkWork.chapters,TbWkWork.typeId,TbWkWorkView.startViewDate,TbWkWorkView.endViewDate,TbWkWorkView.viewerId,TbWkWorkView.locationId,TbWkWorkView.deviceId,TbWkWorkReview.rating,TbWkWorkReview.review,TbWkWorkReview.reviewDate FROM TbWkWork,TbWkWorkType,TbWkWorkReview,TbWkWorkView where TbWkWork.typeId=TbWkWorkType.id and TbWkWorkReview.workId=TbWkWork.id and TbWkWorkView.workId=TbWkWork.id and %s order by TbWkWorkView.endViewDate',$add);
+	$query=sprintf('SELECT TbWkWork.id,TbWkWork.externalCode,TbWkWork.externalId,TbWkWork.name,TbWkWork.length,TbWkWork.size,TbWkWork.chapters,TbWkWork.typeId,TbWkWorkView.startViewDate,TbWkWorkView.endViewDate,TbWkWorkView.viewerId,TbWkWorkView.locationId,TbWkWorkView.deviceId,TbWkWorkReview.rating,TbWkWorkReview.review,TbWkWorkReview.reviewDate FROM TbWkWork,TbWkWorkType,TbWkWorkReview,TbWkWorkView where TbWkWork.typeId=TbWkWorkType.id and TbWkWorkReview.workId=TbWkWork.id and TbWkWorkView.workId=TbWkWork.id and %s order by TbWkWorkView.endViewDate',$add);
 	//$query=sprintf('SELECT * FROM TbWkWork');
 	$result=my_mysql_query($query);
 
@@ -50,6 +51,12 @@ function create_works($type) {
 		}
 		if($field->name=='chapters') {
 			$chaptersid=$i;
+		}
+		if($field->name=='externalCode') {
+			$externalcodeid=$i;
+		}
+		if($field->name=='externalId') {
+			$externalidid=$i;
 		}
 		# view table
 		if($field->name=='startViewDate') {
@@ -130,6 +137,16 @@ function create_works($type) {
 		}
 		if($row[$typeid]!=NULL) {
 			$body.='<li>type: '.$s_type.'</li>';
+		}
+		# external stuff
+		if($row[$externalcodeid]!=NULL && $row[$externalidid]!=NULL) {
+			$externalcode=$row[$externalcodeid];
+			$externalid=$row[$externalidid];
+			$externalname=$external[$externalid]['name'];
+			$externalidname=$external[$externalid]['idname'];
+			$link=get_external_href($externalname,$externalcode);
+			$link='<a href=\''.$link.'\'>'.$externalidname.': '.$externalcode.'</a>';
+			$body.='<li>'.$link.'</li>';
 		}
 		# view stuff
 		if($row[$startviewdateid]!=NULL) {
