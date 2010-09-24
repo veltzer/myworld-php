@@ -1,7 +1,9 @@
 now:
 ====
+	see another movie and mark it.
 	bring back:
 		names of people and links, producer names and links.
+		using queries - not using any oo framework.
 
 	import all lectures in my audio archive into works.
 		How do I decide if they are TTC ? I Don't know.
