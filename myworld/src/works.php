@@ -15,12 +15,28 @@ function create_works($type) {
 	$res='';
 
 	// collecting data from other tables...
+	$contrib=my_mysql_query_hash('SELECT * FROM TbWkWorkContrib','id');
 	$types=my_mysql_query_hash('SELECT * FROM TbWkWorkType','id');
 	$locations=my_mysql_query_hash('SELECT * FROM TbLcNamed','id');
 	$devices=my_mysql_query_hash('SELECT * FROM TbDevice','id');
 	$persons=my_mysql_query_hash('SELECT * FROM TbIdPerson','id');
 	$external=my_mysql_query_hash('SELECT * FROM TbWkWorkExternal','id');
+	$contribtype=my_mysql_query_hash('SELECT * FROM TbWkWorkContribType','id');
 	#$works=my_mysql_query_hash('SELECT * FROM TbWkWork','id');
+
+	# create a hash table of lists of contributors
+	$work_contrib=array();
+	$role_contrib=array();
+	foreach($contrib as $id => $row) {
+		$workId=$row['workId'];
+		$personId=$row['personId'];
+		$typeId=$row['typeId'];
+		if(!isset($work_contrib[$workId])) {
+			$work_contrib[$workId]=array();
+		}
+		$work_contrib[$workId][]=$personId;
+		$role_contrib[$workId][]=$typeId;
+	}
 
 	// sending query
 	if($type=='audio') {
@@ -37,6 +53,9 @@ function create_works($type) {
 	// analyzing positions of ids in the data
 	for($i=0; $i<$fields_num; $i++) {
 		$field=mysql_fetch_field($result,$i);
+		if($field->name=='id') {
+			$idid=$i;
+		}
 		if($field->name=='name') {
 			$nameid=$i;
 		}
@@ -120,9 +139,22 @@ function create_works($type) {
 		} else {
 			$header='No Name';
 		}
+		# append contributors to the header...
+		$cont_array=array();
+		foreach($work_contrib[$row[$idid]] as $personId) {
+			$cont_array[]=get_full_name($persons[$personId]);
+		}
+		if(count($cont_array)>0) {
+			$header.=' / '.join($cont_array,' ');
+		}
 
 		$body='';
 		$body.='<ul>';
+		/*
+		if($row[$idid]!=NULL) {
+			$body.='<li>id: '.$row[$idid].'</li>';
+		}
+		*/
 		if($row[$nameid]!=NULL) {
 			$body.='<li>name: '.$row[$nameid].'</li>';
 		}
@@ -174,6 +206,16 @@ function create_works($type) {
 		if($row[$reviewdateid]!=NULL) {
 			$body.='<li>review date: '.$row[$reviewdateid].'</li>';
 		}
+		# contributor stuff
+		$j=0;
+		foreach($work_contrib[$row[$idid]] as $personId) {
+			$name=get_full_name($persons[$personId]);
+			$roleid=$role_contrib[$row[$idid]][$j];
+			$role_name=$contribtype[$roleid]['name'];
+			$body.='<li>'.$role_name.': '.$name.'</li>';
+			$j++;
+		}
+
 		$body.='</ul>';
 		$res.=multi_accordion_entry($header,$body);
 	}
