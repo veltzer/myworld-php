@@ -20,6 +20,7 @@ function create_works($type) {
 	$locations=my_mysql_query_hash('SELECT * FROM TbLcNamed','id');
 	$devices=my_mysql_query_hash('SELECT * FROM TbDevice','id');
 	$persons=my_mysql_query_hash('SELECT * FROM TbIdPerson','id');
+	$organizations=my_mysql_query_hash('SELECT * FROM TbOrganization','id');
 	$external=my_mysql_query_hash('SELECT * FROM TbWkWorkExternal','id');
 	$contribtype=my_mysql_query_hash('SELECT * FROM TbWkWorkContribType','id');
 	#$works=my_mysql_query_hash('SELECT * FROM TbWkWork','id');
@@ -27,15 +28,27 @@ function create_works($type) {
 	# create a hash table of lists of contributors
 	$work_contrib=array();
 	$role_contrib=array();
+	$work_contrib_org=array();
+	$role_contrib_org=array();
 	foreach($contrib as $id => $row) {
 		$workId=$row['workId'];
 		$personId=$row['personId'];
+		$organizationId=$row['organizationId'];
 		$typeId=$row['typeId'];
-		if(!isset($work_contrib[$workId])) {
-			$work_contrib[$workId]=array();
+		if($personId!=NULL) {
+			if(!isset($work_contrib[$workId])) {
+				$work_contrib[$workId]=array();
+			}
+			$work_contrib[$workId][]=$personId;
+			$role_contrib[$workId][]=$typeId;
 		}
-		$work_contrib[$workId][]=$personId;
-		$role_contrib[$workId][]=$typeId;
+		if($organizationId!=NULL) {
+			if(!isset($work_contrib_org[$workId])) {
+				$work_contrib_org[$workId]=array();
+			}
+			$work_contrib_org[$workId][]=$organizationId;
+			$role_contrib_org[$workId][]=$typeId;
+		}
 	}
 
 	// sending query
@@ -139,7 +152,7 @@ function create_works($type) {
 		} else {
 			$header='No Name';
 		}
-		# append contributors to the header...
+		# append contributors to the header...(do not include organizations)
 		$cont_array=array();
 		foreach($work_contrib[$row[$idid]] as $personId) {
 			$cont_array[]=get_full_name($persons[$personId]);
@@ -213,6 +226,15 @@ function create_works($type) {
 			$roleid=$role_contrib[$row[$idid]][$j];
 			$role_name=$contribtype[$roleid]['name'];
 			$body.='<li>'.$role_name.': '.$name.'</li>';
+			$j++;
+		}
+		$j=0;
+		foreach($work_contrib_org[$row[$idid]] as $organizationId) {
+			$name=$organizations[$organizationId]['name'];
+			$url=$organizations[$organizationId]['url'];
+			$roleid=$role_contrib_org[$row[$idid]][$j];
+			$role_name=$contribtype[$roleid]['name'];
+			$body.='<li>'.$role_name.': '.'<a href=\''.$url.'\'>'.$name.'</a></li>';
 			$j++;
 		}
 
