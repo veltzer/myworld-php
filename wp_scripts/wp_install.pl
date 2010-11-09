@@ -15,5 +15,3 @@ use diagnostics;
 # parameters...
 my($target_dir)="/var/www";
 my($subfolder)="blog2";
-
-my($
