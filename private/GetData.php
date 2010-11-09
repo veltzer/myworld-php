@@ -20,7 +20,6 @@ if($type=='video_places') {
 	$handled=1;
 }
 if($type=='TbIdPerson') {
-	//error("fake error");
 	$rows=get_person_data();
 	$response=json_encode($rows);
 	$handled=1;

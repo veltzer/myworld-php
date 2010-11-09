@@ -2,10 +2,14 @@
  * This is a validating field.
  * You can pass any function to validate against.
  * If you validate vs a regex then just pass the regex.
+ *
+ * TODO:
+ * - remove the running id business or rewrite it better...
  */
 jQuery(document).ready(function() {
 	var running_id=0;
 	jQuery.widget('ui.jvalidfield',{
+		// options
 		options:{
 			// regex must be set for text inputs
 			id:0,
@@ -13,6 +17,7 @@ jQuery(document).ready(function() {
 			type:'input',
 			inputtype:'text',
 			name:'No name',
+			// submit name
 			sname:null,
 			initMsg:null,
 			rows:10,
@@ -139,6 +144,7 @@ jQuery(document).ready(function() {
 				}
 			});
 		},
+		// constructor
 		_create:function() {
 			// comply with jquery ui ?!?
 			this.element.addClass('ui-widget');
@@ -152,7 +158,6 @@ jQuery(document).ready(function() {
 			if(this.options.sname==null) {
 				throw 'must declare sname attribute';
 			}
-			// TODO
 
 			// add the label
 			this.w_label=jQuery('<label>');

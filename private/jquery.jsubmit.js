@@ -34,6 +34,7 @@ jQuery(document).ready(function() {
 	}
 
 	jQuery.widget('ui.jsubmit',{
+		// options
 		options:{
 			// text that will appear on the button
 			name:null,
@@ -90,6 +91,7 @@ jQuery(document).ready(function() {
 			this.updateStatus(true);
 			//this.log("num errors is "+this.errors.getNumErrors());
 		},
+		// constructor
 		_create:function() {
 			// comply with jquery ui ?!?
 			this.element.addClass('ui-widget');

@@ -1,5 +1,10 @@
 jQuery(document).ready(function() {
 	jQuery.widget("ui.combobox",{
+		// options
+		options:{
+			name:null,
+		},
+		// constructor
 		_create: function(options) {
 			var self=this;
 			var select = this.element.hide(),

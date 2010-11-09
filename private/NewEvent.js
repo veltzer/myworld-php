@@ -19,6 +19,7 @@ jQuery(document).ready(function() {
 		'name':'Calendar',
 		'url':'GetData.php?type=TbClCalendar',
 		'logger':'#log',
+		'sname':'name',
 	};
 	jQuery('#calendar').jvalidfield(init);
 	

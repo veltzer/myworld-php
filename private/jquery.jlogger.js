@@ -1,7 +1,24 @@
 jQuery(document).ready(function() {
 	jQuery.widget('ui.jlogger',{
+		// options
 		options:{
 			name:null,
+		},
+		// constructor
+		_create:function() {
+			// closure
+			var widget=this;
+			// intercept ajax
+			jQuery(document).ajaxSend(function(event,request,settings) {
+				widget.log('ajaxStart '+settings.url,false);
+			});
+			jQuery(document).ajaxComplete(function(event,request,settings) {
+				widget.log('ajaxComplete '+settings.url,false);
+			});
+			// redefine the alert function so that we would not use it by mistake
+			alert=function(msg) {
+				widget.log(msg,false);
+			}
 		},
 		// general logging function
 		log:function(message,error) {
@@ -18,21 +35,6 @@ jQuery(document).ready(function() {
 			this.element.append(element);
 			// scroll to the bottom
 			this.element.attr('scrollTop',this.element.attr('scrollHeight'));
-		},
-		_create:function() {
-			// closure
-			var widget=this;
-			// intercept ajax
-			jQuery(document).ajaxSend(function(event,request,settings) {
-				widget.log('ajaxStart '+settings.url,false);
-			});
-			jQuery(document).ajaxComplete(function(event,request,settings) {
-				widget.log('ajaxComplete '+settings.url,false);
-			});
-			// redefine the alert function so that we would not use it by mistake
-			alert=function(msg) {
-				widget.log(msg,false);
-			}
 		},
 	});
 });
