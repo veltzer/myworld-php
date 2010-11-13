@@ -1,0 +1,7 @@
+Go to the jquery-ui site and download it.
+unzip it and only take the js and css folders.
+Replace EVERYTHING under my own jquery folder with these two folders.
+Go to pages using it and change three links:
+	- jquery.js
+	- jquery-ui.js
+	- jquery-ui theme link.
