@@ -38,9 +38,9 @@ jQuery(document).ready(function() {
 		w_input.disable();
 		w_input.val('getting data...');
 		jQuery.ajax({
-			url: options.url,
-			dataType: 'json',
-			success: function(data, textStatus, XMLHttpRequest) {
+			url:options.url,
+			dataType:'json',
+			success:function(data, textStatus, XMLHttpRequest) {
 					w_input.autocomplete('option','source',data);
 					w_input.enable();
 					w_input.val('');
@@ -49,20 +49,20 @@ jQuery(document).ready(function() {
 					//w_input.setval(o.initMsg);
 					//id.setval(data[0].label);
 			},
-			error: function(XMLHttpRequest, textStatus, errorThrown) {
+			error:function(XMLHttpRequest, textStatus, errorThrown) {
 				jQuery.log('ajax error: '+errorThrown+','+textStatus+','+XMLHttpRequest.responseText,true);
 				widget.OnError('ERROR IN GETTING DATA');
 			}
 		});
 	}
 	jQuery.fn.extend({
-		jurlfield: function(options) {
+		jurlfield:function(options) {
 			var defaults = {
-				url: null,
-				addLabel: true,
-				name: 'NoName',
-				initMsg: 'must put value here',
-				activeClass: 'focus',
+				url:null,
+				addLabel:true,
+				name:'NoName',
+				initMsg:'must put value here',
+				activeClass:'focus',
 			};
 			var o=jQuery.extend(defaults, options);
 			if(o.url==null) {
@@ -80,23 +80,23 @@ jQuery(document).ready(function() {
 					widget.data('w_label',w_label);
 				}
 				var attrs={
-					val: o.initMsg,
-					focusin: function() {
+					val:o.initMsg,
+					focusin:function() {
 						widget.doUrlFocusin();
 					},
-					focusout: function() {
+					focusout:function() {
 						widget.doUrlFocusout();
 					},
 				}
 				var w_input=jQuery('<input>',attrs);
 				w_input.addClass('anyinput');
 				w_input.autocomplete({
-					minLength: 2,
-					select: function(event, ui) {
-						jQuery.log(ui.item ? (w_input+' selected: ' + ui.item.value + ' aka ' + ui.item.id) : 'Nothing selected, input was ' + this.value,false);
+					minLength:2,
+					select:function(event, ui) {
+						jQuery.log(ui.item ? (w_input+' selected: ' + ui.item.value + ' aka ' + ui.item.id):'Nothing selected, input was ' + this.value,false);
 					},
-					change: function(event, ui) {
-						jQuery.log(ui.item ? (w_input+' change: ' + ui.item.value + ' aka ' + ui.item.id) : 'Nothing selected, input was ' + this.value,false);
+					change:function(event, ui) {
+						jQuery.log(ui.item ? (w_input+' change: ' + ui.item.value + ' aka ' + ui.item.id):'Nothing selected, input was ' + this.value,false);
 					}
 				});
 				w_input.data('initState',true);
@@ -105,9 +105,9 @@ jQuery(document).ready(function() {
 
 				// add the reload image
 				var attrs={
-					'src': 'images/reload.jpg',
-					'class': 'inline_image',
-					click: function() {
+					'src':'images/reload.jpg',
+					'class':'inline_image',
+					click:function() {
 						widget.reload();
 					},
 				};
