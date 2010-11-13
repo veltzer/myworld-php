@@ -1,6 +1,13 @@
 /* this is the style for fields in focus (this is the entire line) */
+/*.fieldfocus .ui-tabs-nav .ui-helper-reset .ui-helper-clearfix .ui-widget-header .ui-corner-all {} */
+/* .fieldfocus .ui-widget-header {}
+ */
 .fieldfocus {
-	background:#EB8F00;
+	background:#EB8F00; 
+	background:url("images/ui-bg_gloss-wave_35_f6a828_500x100.png") repeat-x scroll 50% 50% #F6A828;
+	border:1px solid #E78F08;
+	color:#FFFFFF;
+	font-weight:bold;
 }
 /* this is the label in front of the field */
 .fieldlabel {
