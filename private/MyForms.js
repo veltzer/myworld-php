@@ -151,4 +151,40 @@ jQuery(document).ready(function() {
 	init.name='Creator';
 	jQuery('#event_creator').jvalidfield(init);
 
+	// person stuff starts here
+
+	var init={
+		'name':'Send',
+		'url':'NewPerson.php',
+		'logger':'#log',
+		'formid':'#person_form',
+	};
+	jQuery('#person_send').jsubmit(init);
+
+	var init={
+		'name':'First Name',
+		'sname':'firstname',
+		'initState':false,
+		'regex':/^\w*$/,
+		'logger':'#log',
+		'submit':'#person_send',
+	};
+	jQuery('#person_firstname').jvalidfield(init);
+
+	init.name='Sur Name';
+	init.sname='surname';
+	jQuery('#person_surname').jvalidfield(init);
+
+	init.name='Other Name';
+	init.sname='othername';
+	jQuery('#person_othername').jvalidfield(init);
+
+	init.name='Remark';
+	init.sname='remark';
+	jQuery('#person_remark').jvalidfield(init);
+
+	init.name='Ordinal';
+	init.sname='ordinal';
+	init.regex=/^\d*$/;
+	jQuery('#person_ordinal').jvalidfield(init);
 });
