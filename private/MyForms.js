@@ -111,8 +111,8 @@ jQuery(document).ready(function() {
 
 	// the time pickers
 	var init={ 'secView':false };
-	jQuery('#event_from_time').jtimepicker(init);
-	jQuery('#event_to_time').jtimepicker(init);
+	//jQuery('#event_from_time').jtimepicker(init);
+	//jQuery('#event_to_time').jtimepicker(init);
 
 	// my own fields (from the database)
 	var init={
