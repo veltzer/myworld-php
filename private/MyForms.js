@@ -104,6 +104,15 @@ jQuery(document).ready(function() {
 	jQuery('#movie_review').jvalidfield(init);
 	
 	// event stuff starts here...
+	
+	// first create the event send button
+	var init={
+		'name':'Send',
+		'url':'NewEvent.php',
+		'logger':'#log',
+		'formid':'#event_form',
+	};
+	jQuery('#event_send').jsubmit(init);
 
 	// construct two date pickers
 	jQuery('#event_from_date').datepicker();
@@ -118,10 +127,12 @@ jQuery(document).ready(function() {
 	var init={
 		'type':'select',
 		'name':'Calendar',
-		'url':'GetData.php?type=TbClCalendar',
 		'logger':'#log',
 		'sname':'name',
+		'submit':'#event_send',
 	};
+
+	init.url='GetData.php?type=TbClCalendar';
 	jQuery('#event_calendar').jvalidfield(init);
 	
 	init.url='GetData.php?type=TbBsCompanies';
@@ -140,11 +151,4 @@ jQuery(document).ready(function() {
 	init.name='Creator';
 	jQuery('#event_creator').jvalidfield(init);
 	
-	var init={
-		'name':'Send',
-		'url':'NewEvent.php',
-		'logger':'#log',
-		'formid':'#event_form',
-	};
-	jQuery('#event_send').jsubmit(init);
 });
