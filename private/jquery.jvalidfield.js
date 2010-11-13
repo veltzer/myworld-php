@@ -5,6 +5,9 @@
  *
  * TODO:
  * - remove the running id business or rewrite it better...
+ * - in a select state this widget should have an option to declare
+ *   	this value invalid until the user actually puts in a value.
+ *   	This should even be the default behaviour.
  */
 jQuery(document).ready(function() {
 	var running_id=0;

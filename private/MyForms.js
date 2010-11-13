@@ -78,7 +78,7 @@ jQuery(document).ready(function() {
 		'submit':'#movie_send',
 	};
 	jQuery('#movie_location').jvalidfield(init);
-	
+
 	var init={
 		'type':'select',
 		'name':'Device',
@@ -102,9 +102,9 @@ jQuery(document).ready(function() {
 		'submit':'#movie_send',
 	};
 	jQuery('#movie_review').jvalidfield(init);
-	
+
 	// event stuff starts here...
-	
+
 	// first create the event send button
 	var init={
 		'name':'Send',
@@ -134,21 +134,21 @@ jQuery(document).ready(function() {
 
 	init.url='GetData.php?type=TbClCalendar';
 	jQuery('#event_calendar').jvalidfield(init);
-	
+
 	init.url='GetData.php?type=TbBsCompanies';
 	init.name='Company';
 	jQuery('#event_company').jvalidfield(init);
-	
+
 	init.url='GetData.php?type=TbBsCourses';
 	init.name='Course';
 	jQuery('#event_course').jvalidfield(init);
-	
+
 	init.url='GetData.php?type=TbLcNamed';
 	init.name='Location';
 	jQuery('#event_location').jvalidfield(init);
-	
+
 	init.url='GetData.php?type=TbIdPerson';
 	init.name='Creator';
 	jQuery('#event_creator').jvalidfield(init);
-	
+
 });
