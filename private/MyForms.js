@@ -246,4 +246,49 @@ jQuery(document).ready(function() {
 	};
 	jQuery('#work_externalcode').jvalidfield(init);
 
+	// person -> work starts here
+	
+	var init={
+		'name':'Send',
+		'url':'NewPersonWork.php',
+		'logger':'#log',
+		'formid':'#personwork_form',
+	};
+	jQuery('#personwork_send').jsubmit(init);
+	
+	var init={
+		'type':'select',
+		'name':'Work Id',
+		'sname':'workId',
+		'initState':true,
+		'initMsg':'Put the work Id here',
+		'url':'GetData.php?type=TbWkWork',
+		'logger':'#log',
+		'submit':'#personwork_send',
+	};
+	jQuery('#personwork_workid').jvalidfield(init);
+	
+	var init={
+		'type':'select',
+		'name':'Person Id',
+		'sname':'personId',
+		'initState':true,
+		'initMsg':'Put the person Id here',
+		'url':'GetData.php?type=TbIdPerson',
+		'logger':'#log',
+		'submit':'#personwork_send',
+	};
+	jQuery('#personwork_personid').jvalidfield(init);
+	
+	var init={
+		'type':'select',
+		'name':'Type Id',
+		'sname':'typeId',
+		'initState':true,
+		'initMsg':'Put the type Id here',
+		'url':'GetData.php?type=TbWkWorkContribType',
+		'logger':'#log',
+		'submit':'#personwork_send',
+	};
+	jQuery('#personwork_typeid').jvalidfield(init);
 });
