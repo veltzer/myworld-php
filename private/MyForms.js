@@ -177,10 +177,12 @@ jQuery(document).ready(function() {
 
 	init.name='Other Name';
 	init.sname='othername';
+	init.regex=/^[\w\.]*$/;
 	jQuery('#person_othername').jvalidfield(init);
 
 	init.name='Remark';
 	init.sname='remark';
+	init.regex=/^[\w\. ]*$/;
 	jQuery('#person_remark').jvalidfield(init);
 
 	init.name='Ordinal';

@@ -130,6 +130,22 @@ function my_get_post($field) {
 	}
 }
 
+function my_get_post_or_null($field) {
+	$val=my_get_post($field);
+	if($val=='') {
+		$val=NULL;
+	}
+	return $val;
+}
+
+function my_mysql_real_escape_string($str) {
+	if($str!=NULL) {
+		return '\''.mysql_real_escape_string($str).'\'';
+	} else {
+		return 'NULL';
+	}
+}
+
 function my_get_get($field) {
 	if(array_key_exists($field,$_GET)) {
 		return $_GET[$field];
