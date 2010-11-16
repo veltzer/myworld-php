@@ -116,3 +116,10 @@ new work page:
 - external code should be validated according to it's type (imdb, ttc, whatever).
 - by default the selector for external code id should be non selected which means that the
 	external code box should be disabled and the value submitted for it should be null.
+
+new person->work page:
+======================
+- add organization id.
+- check to see that the user either put an organization or a person (but not both!).
+- allow to collect a number of roles.
+- allow auto comletion on all fields.
