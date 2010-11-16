@@ -189,4 +189,61 @@ jQuery(document).ready(function() {
 	init.sname='ordinal';
 	init.regex=/^\d*$/;
 	jQuery('#person_ordinal').jvalidfield(init);
+
+	// work stuff starts here
+
+	var init={
+		'name':'Send',
+		'url':'NewWork.php',
+		'logger':'#log',
+		'formid':'#work_form',
+	};
+	jQuery('#work_send').jsubmit(init);
+
+	var init={
+		'name':'Name',
+		'sname':'name',
+		'initState':true,
+		'initMsg':'Put the name of the work here',
+		'regex':/^\w+$/,
+		'logger':'#log',
+		'submit':'#work_send',
+	};
+	jQuery('#work_name').jvalidfield(init);
+
+	var init={
+		'type':'select',
+		'name':'Type',
+		'sname':'typeId',
+		'initState':true,
+		'initMsg':'Put type type of work here',
+		'url':'GetData.php?type=TbWkWorkType',
+		'logger':'#log',
+		'submit':'#work_send',
+	};
+	jQuery('#work_typeid').jvalidfield(init);
+
+	var init={
+		'type':'select',
+		'name':'External Id',
+		'sname':'externalId',
+		'initState':true,
+		'initMsg':'Put the type of external id here',
+		'url':'GetData.php?type=TbWkWorkExternal',
+		'logger':'#log',
+		'submit':'#work_send',
+	};
+	jQuery('#work_externalid').jvalidfield(init);
+
+	var init={
+		'name':'External Code',
+		'sname':'externalCode',
+		'initState':true,
+		'initMsg':'Put the external code here',
+		'regex':/^\w*$/,
+		'logger':'#log',
+		'submit':'#work_send',
+	};
+	jQuery('#work_externalcode').jvalidfield(init);
+
 });
