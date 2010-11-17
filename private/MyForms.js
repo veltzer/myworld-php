@@ -258,7 +258,7 @@ jQuery(document).ready(function() {
 	
 	var init={
 		'type':'select',
-		'name':'Work Id',
+		'name':'Work',
 		'sname':'workId',
 		'initState':true,
 		'initMsg':'Put the work Id here',
@@ -270,7 +270,7 @@ jQuery(document).ready(function() {
 	
 	var init={
 		'type':'select',
-		'name':'Person Id',
+		'name':'Person',
 		'sname':'personId',
 		'initState':true,
 		'initMsg':'Put the person Id here',
@@ -282,7 +282,7 @@ jQuery(document).ready(function() {
 	
 	var init={
 		'type':'select',
-		'name':'Type Id',
+		'name':'Type',
 		'sname':'typeId',
 		'initState':true,
 		'initMsg':'Put the type Id here',

@@ -77,19 +77,20 @@ jQuery(document).ready(function() {
 			var newStatus=(num_errors>0);
 			if(newStatus!=this.error || force) {
 				if(newStatus) {
-					this.setError("errors exist "+this.errors.getNumErrors());
+					this.setError('errors exist '+this.errors.getNumErrors());
 					this.disable();
 				} else {
-					this.setOk("all is ok");
+					//this.setOk('all is ok');
+					this.setOk('');
 					this.enable();
 				}
 			}
 		},
 		report:function(id,state) {
-			//this.log("got report for "+id+","+state);
+			//this.log('got report for '+id+','+state);
 			this.errors.report(id,state);
 			this.updateStatus(true);
-			//this.log("num errors is "+this.errors.getNumErrors());
+			//this.log('num errors is '+this.errors.getNumErrors());
 		},
 		// constructor
 		_create:function() {
