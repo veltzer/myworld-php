@@ -18,10 +18,10 @@ jQuery(document).ready(function() {
 
 	var init={
 		'name':'Name',
+		'sname':'name',
 		'initState':true,
 		'initMsg':'put the name of the movie here',
 		'regex':/.+/,
-		'sname':'name',
 		'logger':'#log',
 		'submit':'#movie_send',
 	};
@@ -29,10 +29,10 @@ jQuery(document).ready(function() {
 
 	var init={
 		'name':'Imdbid',
+		'sname':'imdbid',
 		'initState':true,
 		'initMsg':'put the imdbid here',
 		'regex':/^\d{7}$/,
-		'sname':'imdbid',
 		'logger':'#log',
 		'submit':'#movie_send',
 	};
@@ -40,10 +40,10 @@ jQuery(document).ready(function() {
 
 	var init={
 		'name':'Date',
+		'sname':'date',
 		'initState':false,
 		'initMsg':'put the date seen here',
 		'regex':/.+/,
-		'sname':'date',
 		'validate':function(widget,value) {
 			var t=Date.parse(value);
 			return !isNaN(t);
@@ -59,10 +59,10 @@ jQuery(document).ready(function() {
 
 	var init={
 		'name':'Rating',
+		'sname':'rating',
 		'initState':true,
 		'initMsg':'put the rating (1-10) here',
 		'url':'GetData.php?type=TbRating',
-		'sname':'rating',
 		'type':'select',
 	};
 	jQuery('#movie_rating').jvalidfield(init);
@@ -70,10 +70,10 @@ jQuery(document).ready(function() {
 	var init={
 		'type':'select',
 		'name':'Location',
+		'sname':'locationId',
 		'initState':true,
 		'initMsg':'put the location where you saw the movie',
 		'url':'GetData.php?type=video_places',
-		'sname':'locationid',
 		'logger':'#log',
 		'submit':'#movie_send',
 	};
@@ -82,10 +82,10 @@ jQuery(document).ready(function() {
 	var init={
 		'type':'select',
 		'name':'Device',
+		'sname':'deviceid',
 		'initState':true,
 		'initMsg':'put the device on which you saw the movie',
 		'url':'GetData.php?type=video_devices',
-		'sname':'deviceid',
 		'logger':'#log',
 		'submit':'#movie_send',
 	};
@@ -93,11 +93,11 @@ jQuery(document).ready(function() {
 
 	var init={
 		'name':'Review',
+		'sname':'review',
 		'initState':true,
 		'initMsg':'Put your review here',
 		'type':'textarea',
 		'regex':/.+/,
-		'sname':'review',
 		'logger':'#log',
 		'submit':'#movie_send',
 	};
@@ -127,8 +127,8 @@ jQuery(document).ready(function() {
 	var init={
 		'type':'select',
 		'name':'Calendar',
-		'logger':'#log',
 		'sname':'name',
+		'logger':'#log',
 		'submit':'#event_send',
 	};
 
@@ -247,7 +247,7 @@ jQuery(document).ready(function() {
 	jQuery('#work_externalcode').jvalidfield(init);
 
 	// person -> work starts here
-	
+
 	var init={
 		'name':'Send',
 		'url':'NewPersonWork.php',
@@ -255,7 +255,7 @@ jQuery(document).ready(function() {
 		'formid':'#personwork_form',
 	};
 	jQuery('#personwork_send').jsubmit(init);
-	
+
 	var init={
 		'type':'select',
 		'name':'Work',
@@ -267,7 +267,7 @@ jQuery(document).ready(function() {
 		'submit':'#personwork_send',
 	};
 	jQuery('#personwork_workid').jvalidfield(init);
-	
+
 	var init={
 		'type':'select',
 		'name':'Person',
@@ -279,7 +279,7 @@ jQuery(document).ready(function() {
 		'submit':'#personwork_send',
 	};
 	jQuery('#personwork_personid').jvalidfield(init);
-	
+
 	var init={
 		'type':'select',
 		'name':'Type',
@@ -291,4 +291,92 @@ jQuery(document).ready(function() {
 		'submit':'#personwork_send',
 	};
 	jQuery('#personwork_typeid').jvalidfield(init);
+
+	// workview stuff starts here
+	
+	var init={
+		'name':'Send',
+		'url':'NewWorkView.php',
+		'logger':'#log',
+		'formid':'#workview_form',
+	};
+	jQuery('#workview_send').jsubmit(init);
+	
+	var init={
+		'type':'select',
+		'name':'Work',
+		'sname':'workId',
+		'initState':true,
+		'initMsg':'Put the work Id here',
+		'url':'GetData.php?type=TbWkWork',
+		'logger':'#log',
+		'submit':'#workview_send',
+	};
+	jQuery('#workview_workid').jvalidfield(init);
+	
+	var init={
+		'name':'Date',
+		'sname':'date',
+		'initState':false,
+		'initMsg':'put the date seen here',
+		'regex':/.+/,
+		'validate':function(widget,value) {
+			var t=Date.parse(value);
+			return !isNaN(t);
+		},
+		'validate_error':function(widget,value) {
+			return 'could not parse date object';
+		},
+		'initval':new Date(),
+		'logger':'#log',
+		'submit':'#workview_send',
+	};
+	jQuery('#workview_date').jvalidfield(init);
+	
+	var init={
+		'type':'select',
+		'name':'Location',
+		'sname':'locationId',
+		'initState':true,
+		'initMsg':'put the location where you saw the movie',
+		'url':'GetData.php?type=TbLcNamed',
+		'logger':'#log',
+		'submit':'#workview_send',
+	};
+	jQuery('#workview_locationid').jvalidfield(init);
+	
+	var init={
+		'type':'select',
+		'name':'Device',
+		'sname':'deviceId',
+		'initState':true,
+		'initMsg':'put the device on which you saw the movie',
+		'url':'GetData.php?type=TbDevice',
+		'logger':'#log',
+		'submit':'#workview_send',
+	};
+	jQuery('#workview_deviceid').jvalidfield(init);
+	
+	var init={
+		'type':'select',
+		'name':'Rating',
+		'sname':'rating',
+		'initState':true,
+		'initMsg':'put the rating (1-10) here',
+		'url':'GetData.php?type=TbRating',
+		'submit':'#workview_send',
+	};
+	jQuery('#workview_rating').jvalidfield(init);
+	
+	var init={
+		'name':'Review',
+		'sname':'review',
+		'initState':true,
+		'initMsg':'Put your review here',
+		'type':'textarea',
+		'regex':/.+/,
+		'logger':'#log',
+		'submit':'#workview_send',
+	};
+	jQuery('#workview_review').jvalidfield(init);
 });
