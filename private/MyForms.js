@@ -261,7 +261,7 @@ jQuery(document).ready(function() {
 		'name':'Work',
 		'sname':'workId',
 		'initState':true,
-		'initMsg':'Put the work Id here',
+		'initMsg':'Put the work id here',
 		'url':'GetData.php?type=TbWkWork',
 		'logger':'#log',
 		'submit':'#personwork_send',
@@ -273,7 +273,7 @@ jQuery(document).ready(function() {
 		'name':'Person',
 		'sname':'personId',
 		'initState':true,
-		'initMsg':'Put the person Id here',
+		'initMsg':'Put the person id here',
 		'url':'GetData.php?type=TbIdPerson',
 		'logger':'#log',
 		'submit':'#personwork_send',
@@ -285,12 +285,58 @@ jQuery(document).ready(function() {
 		'name':'Type',
 		'sname':'typeId',
 		'initState':true,
-		'initMsg':'Put the type Id here',
+		'initMsg':'Put the type id here',
 		'url':'GetData.php?type=TbWkWorkContribType',
 		'logger':'#log',
 		'submit':'#personwork_send',
 	};
 	jQuery('#personwork_typeid').jvalidfield(init);
+
+	// organization -> work stuff
+	
+	var init={
+		'name':'Send',
+		'url':'NewOrganizationWork.php',
+		'logger':'#log',
+		'formid':'#orgwork_form',
+	};
+	jQuery('#orgwork_send').jsubmit(init);
+
+	var init={
+		'type':'select',
+		'name':'Work',
+		'sname':'workId',
+		'initState':true,
+		'initMsg':'Put the work id here',
+		'url':'GetData.php?type=TbWkWork',
+		'logger':'#log',
+		'submit':'#orgwork_send',
+	};
+	jQuery('#orgwork_workid').jvalidfield(init);
+
+	var init={
+		'type':'select',
+		'name':'Organization',
+		'sname':'organizationId',
+		'initState':true,
+		'initMsg':'Put the organization id here',
+		'url':'GetData.php?type=TbOrganization',
+		'logger':'#log',
+		'submit':'#orgwork_send',
+	};
+	jQuery('#orgwork_organizationid').jvalidfield(init);
+
+	var init={
+		'type':'select',
+		'name':'Type',
+		'sname':'typeId',
+		'initState':true,
+		'initMsg':'Put the type id here',
+		'url':'GetData.php?type=TbWkWorkContribType',
+		'logger':'#log',
+		'submit':'#orgwork_send',
+	};
+	jQuery('#orgwork_typeid').jvalidfield(init);
 
 	// workview stuff starts here
 	
@@ -307,7 +353,7 @@ jQuery(document).ready(function() {
 		'name':'Work',
 		'sname':'workId',
 		'initState':true,
-		'initMsg':'Put the work Id here',
+		'initMsg':'Put the work id here',
 		'url':'GetData.php?type=TbWkWork',
 		'logger':'#log',
 		'submit':'#workview_send',
