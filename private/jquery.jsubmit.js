@@ -77,7 +77,7 @@ jQuery(document).ready(function() {
 			var newStatus=(num_errors>0);
 			if(newStatus!=this.error || force) {
 				if(newStatus) {
-					this.setError('errors exist '+this.errors.getNumErrors());
+					this.setError(this.errors.getNumErrors()+' errors exist ');
 					this.disable();
 				} else {
 					//this.setOk('all is ok');
