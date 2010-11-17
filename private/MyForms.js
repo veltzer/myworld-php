@@ -82,7 +82,7 @@ jQuery(document).ready(function() {
 	var init={
 		'type':'select',
 		'name':'Device',
-		'sname':'deviceid',
+		'sname':'deviceId',
 		'initState':true,
 		'initMsg':'put the device on which you saw the movie',
 		'url':'GetData.php?type=video_devices',
