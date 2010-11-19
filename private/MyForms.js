@@ -229,7 +229,7 @@ jQuery(document).ready(function() {
 		'sname':'externalId',
 		'initState':true,
 		'initMsg':'Put the type of external id here',
-		'url':'GetData.php?type=TbWkWorkExternal',
+		'url':'GetData.php?type=TbExternalType',
 		'logger':'#log',
 		'submit':'#work_send',
 	};

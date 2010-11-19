@@ -20,7 +20,7 @@ $p_review=my_get_post('review');
 
 $p_typeId=my_mysql_query_one('select id from TbWkWorkType where name=\'video movie\'');
 $p_viewerId=my_mysql_query_one('select id from TbIdPerson where firstname=\'Mark\' and surname=\'Veltzer\'');
-$p_externalId=my_mysql_query_one('select id from TbWkWorkExternal where name=\'imdb\'');
+$p_externalId=my_mysql_query_one('select id from TbExternalType where name=\'imdb\'');
 
 // TODO: do all three next queries in a single transaction...
 

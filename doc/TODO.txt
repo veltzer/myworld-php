@@ -22,43 +22,16 @@ code quality:
 =============
 - organize the files in public (it's a mess).
 
-pages to be done:
-=================
-- add person - a page that adds a person to the system.
-	Name, middle name, last name.
-- add person to work
-	a page that adds a person as a contributor to a work.
-- add review - a page that adds a review to a work.
-	(by me, ofcourse).
-- add view - a page that adds a view to a work.
-
-new movie page:
-===============
-fix the fact that moving past a select changes it's value.
-style my new selection widget.
-allow descriptions on LocationsLcNamed, return them in the json object
-	and render them with a _render function.
-whenever an imdb id is inserted, go fetch the movie data from the server
-	(use phpimdb) and show it on the page.
-add spell checking for the reviews.
-do the date box better (add a special widget with a "now" button and +/- buttons).
-
 date selection box ideas:
 =========================
 add the following buttons: day+, day-, hour+, hour-, etc...
 This will allow the user to manipulate the day easily.
 
+look and feel:
+==============
 there is a problem with the styles (classes). Move between the fields and you will see
 	the problem. I think it's because I am not using the jqueryui classes right.
 control focus movement, after review should go to submit and back to name.
-
-new event page:
-===============
-- reporting of errors and disable of button of submit in relation to errors.
-- display icons in the selection boxes.
-- turn the selection boxes into combos.
-- add multi selection of (times and dates),(courses),(comanies).
-- make the insert finally work!!!
 
 build and folders:
 ==================
@@ -107,10 +80,6 @@ blog content:
 	(do I have one ? does it work? what about the english one ?)
 - add images to my political posts (the hebrew ones).
 
-database structure:
-===================
-- separate ids from TbWkWorks.
-
 new work page:
 ==============
 - external code should be validated according to it's type (imdb, ttc, whatever).
@@ -123,3 +92,28 @@ new person->work page:
 - check to see that the user either put an organization or a person (but not both!).
 - allow to collect a number of roles.
 - allow auto comletion on all fields.
+
+new event page:
+===============
+- reporting of errors and disable of button of submit in relation to errors.
+- display icons in the selection boxes.
+- turn the selection boxes into combos.
+- add multi selection of (times and dates),(courses),(comanies).
+- make the insert finally work!!!
+
+new movie page:
+===============
+fix the fact that moving past a select changes it's value.
+style my new selection widget.
+allow descriptions on LocationsLcNamed, return them in the json object
+	and render them with a _render function.
+whenever an imdb id is inserted, go fetch the movie data from the server
+	(use phpimdb) and show it on the page.
+add spell checking for the reviews.
+do the date box better (add a special widget with a "now" button and +/- buttons).
+
+
+Schema changes:
+===============
+have each work be able to be associated with many external types.
+have each person be able to be associated with many external types.

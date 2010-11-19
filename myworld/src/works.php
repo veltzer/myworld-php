@@ -21,7 +21,7 @@ function create_works($type) {
 	$devices=my_mysql_query_hash('SELECT * FROM TbDevice','id');
 	$persons=my_mysql_query_hash('SELECT * FROM TbIdPerson','id');
 	$organizations=my_mysql_query_hash('SELECT * FROM TbOrganization','id');
-	$external=my_mysql_query_hash('SELECT * FROM TbWkWorkExternal','id');
+	$external=my_mysql_query_hash('SELECT * FROM TbExternalType','id');
 	$contribtype=my_mysql_query_hash('SELECT * FROM TbWkWorkContribType','id');
 	#$works=my_mysql_query_hash('SELECT * FROM TbWkWork','id');
 
