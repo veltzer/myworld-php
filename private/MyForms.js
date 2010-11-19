@@ -224,7 +224,7 @@ jQuery(document).ready(function() {
 	jQuery('#work_typeid').jvalidfield(init);
 
 	// work -> external stuff
-	
+
 	var init={
 		'name':'Send',
 		'url':'NewWorkExternal.php',
@@ -255,7 +255,7 @@ jQuery(document).ready(function() {
 		'submit':'#workexternal_send',
 	};
 	jQuery('#workexternal_externalcode').jvalidfield(init);
-	
+
 	var init={
 		'type':'select',
 		'name':'Work',
@@ -267,6 +267,51 @@ jQuery(document).ready(function() {
 		'submit':'#workexternal_send',
 	};
 	jQuery('#workexternal_workid').jvalidfield(init);
+
+	// person -> external stuff
+
+	var init={
+		'name':'Send',
+		'url':'NewPersonExternal.php',
+		'logger':'#log',
+		'formid':'#personexternal_form',
+	};
+	jQuery('#personexternal_send').jsubmit(init);
+
+	var init={
+		'type':'select',
+		'name':'External Id',
+		'sname':'externalId',
+		'initState':true,
+		'initMsg':'Put the type of external id here',
+		'url':'GetData.php?type=TbExternalType',
+		'logger':'#log',
+		'submit':'#personexternal_send',
+	};
+	jQuery('#personexternal_externalid').jvalidfield(init);
+
+	var init={
+		'name':'External Code',
+		'sname':'externalCode',
+		'initState':true,
+		'initMsg':'Put the external code here',
+		'regex':/^\w*$/,
+		'logger':'#log',
+		'submit':'#personexternal_send',
+	};
+	jQuery('#personexternal_externalcode').jvalidfield(init);
+
+	var init={
+		'type':'select',
+		'name':'Person',
+		'sname':'personId',
+		'initState':true,
+		'initMsg':'Put the person id here',
+		'url':'GetData.php?type=TbIdPerson',
+		'logger':'#log',
+		'submit':'#personexternal_send',
+	};
+	jQuery('#personexternal_personid').jvalidfield(init);
 
 	// person -> work starts here
 
@@ -315,7 +360,7 @@ jQuery(document).ready(function() {
 	jQuery('#personwork_typeid').jvalidfield(init);
 
 	// organization -> work stuff
-	
+
 	var init={
 		'name':'Send',
 		'url':'NewOrganizationWork.php',
@@ -361,7 +406,7 @@ jQuery(document).ready(function() {
 	jQuery('#orgwork_typeid').jvalidfield(init);
 
 	// workview stuff starts here
-	
+
 	var init={
 		'name':'Send',
 		'url':'NewWorkView.php',
@@ -369,7 +414,7 @@ jQuery(document).ready(function() {
 		'formid':'#workview_form',
 	};
 	jQuery('#workview_send').jsubmit(init);
-	
+
 	var init={
 		'type':'select',
 		'name':'Work',
@@ -381,7 +426,7 @@ jQuery(document).ready(function() {
 		'submit':'#workview_send',
 	};
 	jQuery('#workview_workid').jvalidfield(init);
-	
+
 	var init={
 		'name':'Date',
 		'sname':'date',
@@ -400,7 +445,7 @@ jQuery(document).ready(function() {
 		'submit':'#workview_send',
 	};
 	jQuery('#workview_date').jvalidfield(init);
-	
+
 	var init={
 		'type':'select',
 		'name':'Location',
@@ -412,7 +457,7 @@ jQuery(document).ready(function() {
 		'submit':'#workview_send',
 	};
 	jQuery('#workview_locationid').jvalidfield(init);
-	
+
 	var init={
 		'type':'select',
 		'name':'Device',
@@ -424,7 +469,7 @@ jQuery(document).ready(function() {
 		'submit':'#workview_send',
 	};
 	jQuery('#workview_deviceid').jvalidfield(init);
-	
+
 	var init={
 		'type':'select',
 		'name':'Rating',
@@ -435,7 +480,7 @@ jQuery(document).ready(function() {
 		'submit':'#workview_send',
 	};
 	jQuery('#workview_rating').jvalidfield(init);
-	
+
 	var init={
 		'name':'Review',
 		'sname':'review',

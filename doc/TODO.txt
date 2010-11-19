@@ -114,4 +114,4 @@ do the date box better (add a special widget with a "now" button and +/- buttons
 
 Schema changes:
 ===============
-have each person be able to be associated with many external types.
+unite TbBsCompanies and TbOrganization.
