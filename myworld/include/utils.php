@@ -267,6 +267,9 @@ function get_external_href($external_name,$external_id) {
 	if($external_name=='youtube') {
 		return 'http://www.youtube.com/v/'.$external_id;
 	}
+	if($external_name=='amazon') {
+		return 'http://www.amazon.com/gp/product/'.$external_id.'/';
+	}
 	error('what external name is ['.$external_name.']');
 }
 
