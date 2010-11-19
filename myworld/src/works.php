@@ -51,6 +51,16 @@ function create_works($type) {
 			$role_contrib_org[$workId][]=$typeId;
 		}
 	}
+	# create a hash table of external ids
+	$workexternal_externalid=array();
+	$workexternal_externalcode=array();
+	foreach($workexternal as $id => $row) {
+		$workId=$row['workId'];
+		$externalId=$row['externalId'];
+		$externalCode=$row['externalCode'];
+		$workexternal_externalid[$workId][]=$externalId;
+		$workexternal_externalcode[$workId][]=$externalCode;
+	}
 
 	// sending query
 	if($type=='audio') {
@@ -180,18 +190,6 @@ function create_works($type) {
 		if($row[$typeid]!=NULL) {
 			$body.='<li>type: '.$s_type.'</li>';
 		}
-		/*
-		# external stuff
-		if($row[$externalcodeid]!=NULL && $row[$externalidid]!=NULL) {
-			$externalcode=$row[$externalcodeid];
-			$externalid=$row[$externalidid];
-			$externalname=$external[$externalid]['name'];
-			$externalidname=$external[$externalid]['idname'];
-			$link=get_external_href($externalname,$externalcode);
-			$link='<a href=\''.$link.'\'>'.$externalidname.': '.$externalcode.'</a>';
-			$body.='<li>'.$link.'</li>';
-		}
-		 */
 		# view stuff
 		if($row[$startviewdateid]!=NULL) {
 			$body.='<li>start view date: '.$row[$startviewdateid].'</li>';
@@ -236,7 +234,17 @@ function create_works($type) {
 			$body.='<li>'.$role_name.': '.'<a href=\''.$url.'\'>'.$name.'</a></li>';
 			$j++;
 		}
-
+		# external stuff
+		$j=0;
+		foreach($workexternal_externalid[$row[$idid]] as $externalid) {
+			$externalcode=$workexternal_externalcode[$row[$idid]][$j];
+			$externalname=$external[$externalid]['name'];
+			$externalidname=$external[$externalid]['idname'];
+			$link=get_external_href($externalname,$externalcode);
+			$link='<a href=\''.$link.'\'>'.$externalidname.': '.$externalcode.'</a>';
+			$body.='<li>'.$link.'</li>';
+			$j++;
+		}
 		$body.='</ul>';
 		$res.=multi_accordion_entry($header,$body);
 	}

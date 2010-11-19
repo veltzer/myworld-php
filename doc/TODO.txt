@@ -1,7 +1,5 @@
 now:
 ====
-	bring back external printing to my blog.
-
 	import all lectures in my audio archive into works.
 		How do I decide if they are TTC ? I Don't know.
 		How do I decide if they are audio books ? I Don't know.
@@ -113,7 +111,6 @@ whenever an imdb id is inserted, go fetch the movie data from the server
 	(use phpimdb) and show it on the page.
 add spell checking for the reviews.
 do the date box better (add a special widget with a "now" button and +/- buttons).
-
 
 Schema changes:
 ===============
