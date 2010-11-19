@@ -1,5 +1,7 @@
 now:
 ====
+	bring back external printing to my blog.
+
 	import all lectures in my audio archive into works.
 		How do I decide if they are TTC ? I Don't know.
 		How do I decide if they are audio books ? I Don't know.
@@ -115,5 +117,4 @@ do the date box better (add a special widget with a "now" button and +/- buttons
 
 Schema changes:
 ===============
-have each work be able to be associated with many external types.
 have each person be able to be associated with many external types.

@@ -162,11 +162,9 @@ function create_works($type) {
 
 		$body='';
 		$body.='<ul>';
-		/*
 		if($row[$idid]!=NULL) {
 			$body.='<li>id: '.$row[$idid].'</li>';
 		}
-		*/
 		if($row[$nameid]!=NULL) {
 			$body.='<li>name: '.$row[$nameid].'</li>';
 		}
