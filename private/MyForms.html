@@ -17,15 +17,16 @@
 	<body>
 		<div id="tabs">
 			<ul>
-				<li><a href="#tabs-1">New Movie</a></li>
-				<li><a href="#tabs-2">New Event</a></li>
-				<li><a href="#tabs-3">New Person</a></li>
-				<li><a href="#tabs-4">New Work</a></li>
-				<li><a href="#tabs-5">Person->Work</a></li>
-				<li><a href="#tabs-6">Org->Work</a></li>
-				<li><a href="#tabs-7">New WorkView</a></li>
+				<li><a href="#tabs-movie">New Movie</a></li>
+				<li><a href="#tabs-event">New Event</a></li>
+				<li><a href="#tabs-person">New Person</a></li>
+				<li><a href="#tabs-work">New Work</a></li>
+				<li><a href="#tabs-workexternal">Work->External</a></li>
+				<li><a href="#tabs-personwork">Person->Work</a></li>
+				<li><a href="#tabs-orgwork">Org->Work</a></li>
+				<li><a href="#tabs-workview">New WorkView</a></li>
 			</ul>
-			<div id="tabs-1">
+			<div id="tabs-movie">
 				<form id='movie_form'>
 					<div id='movie_name'></div>
 					<div id='movie_imdbid'></div>
@@ -37,7 +38,7 @@
 					<div id='movie_send'></div>
 				</form>
 			</div>
-			<div id="tabs-2">
+			<div id="tabs-event">
 				<form id='event_form'>
 					<div id='event_calendar'></div>
 					<div id='event_company'></div>
@@ -63,7 +64,7 @@
 					<div id='event_send'></div>
 				</form>
 			</div>
-			<div id="tabs-3">
+			<div id="tabs-person">
 				<form id='person_form'>
 					<div id='person_firstname'></div>
 					<div id='person_surname'></div>
@@ -73,16 +74,22 @@
 					<div id='person_send'></div>
 				</form>
 			</div>
-			<div id="tabs-4">
+			<div id="tabs-work">
 				<form id='work_form'>
 					<div id='work_name'></div>
 					<div id='work_typeid'></div>
-					<div id='work_externalid'></div>
-					<div id='work_externalcode'></div>
 					<div id='work_send'></div>
 				</form>
 			</div>
-			<div id="tabs-5">
+			<div id="tabs-workexternal">
+				<form id='workexternal_form'>
+					<div id='workexternal_workid'></div>
+					<div id='workexternal_externalid'></div>
+					<div id='workexternal_externalcode'></div>
+					<div id='workexternal_send'></div>
+				</form>
+			</div>
+			<div id="tabs-personwork">
 				<form id='personwork_form'>
 					<div id='personwork_workid'></div>
 					<div id='personwork_personid'></div>
@@ -90,7 +97,7 @@
 					<div id='personwork_send'></div>
 				</form>
 			</div>
-			<div id="tabs-6">
+			<div id="tabs-orgwork">
 				<form id='orgwork_form'>
 					<div id='orgwork_workid'></div>
 					<div id='orgwork_organizationid'></div>
@@ -98,7 +105,7 @@
 					<div id='orgwork_send'></div>
 				</form>
 			</div>
-			<div id="tabs-7">
+			<div id="tabs-workview">
 				<form id='workview_form'>
 					<!--div id='work_personid'></div-->
 					<div id='workview_workid'></div>

@@ -24,30 +24,39 @@ $p_externalId=my_mysql_query_one('select id from TbExternalType where name=\'imd
 
 // TODO: do all three next queries in a single transaction...
 
-$query=sprintf('insert into TbWkWork (name,externalId,externalCode,typeId) values(\'%s\',\'%s\',\'%s\',\'%s\')',
-	mysql_real_escape_string($p_name),
-	mysql_real_escape_string($p_externalId),
-	mysql_real_escape_string($p_imdbid),
-	mysql_real_escape_string($p_typeId)
+// insert the actual work
+$query=sprintf('insert into TbWkWork (name,typeId) values(%s,%s)',
+	my_mysql_real_escape_string($p_name),
+	my_mysql_real_escape_string($p_typeId)
 );
 my_mysql_query($query);
 $p_workId=mysql_insert_id();
+// insert an external imdb id
+$query=sprintf('insert into TbWkWorkExternal (workId,externalId,externalCode) values(%s,%s,%s)',
+	my_mysql_real_escape_string($p_workId),
+	my_mysql_real_escape_string($p_externalId),
+	my_mysql_real_escape_string($p_imdbid)
+);
+my_mysql_query($query);
+$p_externalId=mysql_insert_id();
 // insert a new view
-$query=sprintf('insert into TbWkWorkView (endViewDate,locationId,deviceId,viewerId,workId) values(\'%s\',\'%s\',\'%s\',\'%s\',\'%s\')',
-	mysql_real_escape_string($p_date),
-	mysql_real_escape_string($p_locationId),
-	mysql_real_escape_string($p_deviceId),
-	mysql_real_escape_string($p_viewerId),
-	mysql_real_escape_string($p_workId)
+$query=sprintf('insert into TbWkWorkView (endViewDate,locationId,deviceId,viewerId,workId) values(%s,%s,%s,%s,%s)',
+	my_mysql_real_escape_string($p_date),
+	my_mysql_real_escape_string($p_locationId),
+	my_mysql_real_escape_string($p_deviceId),
+	my_mysql_real_escape_string($p_viewerId),
+	my_mysql_real_escape_string($p_workId)
 );
 my_mysql_query($query);
+$p_workviewid=mysql_insert_id();
 // insert a new review
-$query=sprintf('insert into TbWkWorkReview (rating,review,reviewDate,workId) values(\'%s\',\'%s\',\'%s\',\'%s\')',
-	mysql_real_escape_string($p_rating),
-	mysql_real_escape_string($p_review),
-	mysql_real_escape_string($p_date),
-	mysql_real_escape_string($p_workId)
+$query=sprintf('insert into TbWkWorkReview (rating,review,reviewDate,workId) values(%s,%s,%s,%s)',
+	my_mysql_real_escape_string($p_rating),
+	my_mysql_real_escape_string($p_review),
+	my_mysql_real_escape_string($p_date),
+	my_mysql_real_escape_string($p_workId)
 );
 my_mysql_query($query);
-echo 'new movie, view and review successfully inserted';
+$p_workreviewid=mysql_insert_id();
+echo "new work [$p_workId], external [$p_externalId], view [$p_workviewid], review [$p_workreviewid] successfully inserted";
 ?>

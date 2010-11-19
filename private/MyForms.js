@@ -223,6 +223,16 @@ jQuery(document).ready(function() {
 	};
 	jQuery('#work_typeid').jvalidfield(init);
 
+	// work -> external stuff
+	
+	var init={
+		'name':'Send',
+		'url':'NewWorkExternal.php',
+		'logger':'#log',
+		'formid':'#workexternal_form',
+	};
+	jQuery('#workexternal_send').jsubmit(init);
+
 	var init={
 		'type':'select',
 		'name':'External Id',
@@ -231,9 +241,9 @@ jQuery(document).ready(function() {
 		'initMsg':'Put the type of external id here',
 		'url':'GetData.php?type=TbExternalType',
 		'logger':'#log',
-		'submit':'#work_send',
+		'submit':'#workexternal_send',
 	};
-	jQuery('#work_externalid').jvalidfield(init);
+	jQuery('#workexternal_externalid').jvalidfield(init);
 
 	var init={
 		'name':'External Code',
@@ -242,9 +252,21 @@ jQuery(document).ready(function() {
 		'initMsg':'Put the external code here',
 		'regex':/^\w*$/,
 		'logger':'#log',
-		'submit':'#work_send',
+		'submit':'#workexternal_send',
 	};
-	jQuery('#work_externalcode').jvalidfield(init);
+	jQuery('#workexternal_externalcode').jvalidfield(init);
+	
+	var init={
+		'type':'select',
+		'name':'Work',
+		'sname':'workId',
+		'initState':true,
+		'initMsg':'Put the work id here',
+		'url':'GetData.php?type=TbWkWork',
+		'logger':'#log',
+		'submit':'#workexternal_send',
+	};
+	jQuery('#workexternal_workid').jvalidfield(init);
 
 	// person -> work starts here
 
