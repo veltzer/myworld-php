@@ -302,6 +302,9 @@ function get_external_href($external_name,$external_id) {
 	if($external_name=='picasa') {
 		return 'http://picasaweb.google.com/'.$external_id;
 	}
+	if($external_name=='youtube') {
+		return 'http://www.youtube.com/user/'.$external_id;
+	}
 	error('what external name is ['.$external_name.']');
 }
 

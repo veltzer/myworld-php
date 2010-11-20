@@ -115,3 +115,4 @@ do the date box better (add a special widget with a "now" button and +/- buttons
 Schema changes:
 ===============
 unite TbBsCompanies and TbOrganization.
+add images to people.
