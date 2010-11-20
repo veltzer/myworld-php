@@ -273,4 +273,9 @@ function create_stats() {
 	return $res;
 }
 
+function create_person($firstname,$surname) {
+	$res="this is a $firstname,$surname person";
+	return $res;
+}
+
 ?>

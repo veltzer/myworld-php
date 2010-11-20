@@ -40,6 +40,12 @@ if(!class_exists('MyWorld')) {
 		function create_content($name,$extra) {
 			db_connect();
 			switch($name) {
+				case 'person':
+					// TODO: throw error if parameters are not there...
+					$firstname=$extra['firstname'];
+					$surname=$extra['surname'];
+					$ret=create_person($firstname,$surname);
+					break;
 				case 'courses':
 					$ret=create_courses();
 					break;
@@ -89,16 +95,17 @@ if(!class_exists('MyWorld')) {
 		 * The function that hooks into WP to substitute content
 		 */
 		function the_content($content) {
-			$pattern='/\[myworld:\s*([_\w,]+)\s*\]/';
+			$pattern='/\[myworld:\s*(.+)\s*\]/';
 			preg_match_all($pattern,$content,$tags);
 			foreach( $tags[0] as $k=>$old_content ) {
 				$full=$tags[1][$k];
 				$extra_array=preg_split('/,/',$full);
 				$extra_hash=array();
-				$name=array_shift($extra_array);
+				// the first is always the name of the content
+				$name=trim(array_shift($extra_array));
 				foreach ($extra_array as $val) {
 					$pair=preg_split('/=/',$val);	
-					$extra_hash[$pair[0]]=$pair[1];
+					$extra_hash[trim($pair[0])]=trim($pair[1]);
 				}
 				$new_content=$this->create_content($name,$extra_hash);
 				$content=str_replace($old_content,$new_content,$content);
