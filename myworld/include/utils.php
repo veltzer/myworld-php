@@ -90,6 +90,17 @@ function my_mysql_query_one($query) {
 	return $ret;
 }
 
+// do a query expecting one row as result (throw exception if not so). Return only that one
+// row...
+function my_mysql_query_one_row($query) {
+	db_connect();
+	$result=my_mysql_query($query);
+	$row=mysql_fetch_assoc($result);
+	// TODO: throw exception if there are more results...
+	assert(mysql_free_result($result));
+	return $row;
+}
+
 // do a query and return a hash of the results by key...
 function my_mysql_query_hash($query,$hash_key) {
 	db_connect();
@@ -270,6 +281,27 @@ function get_external_href($external_name,$external_id) {
 	if($external_name=='amazon') {
 		return 'http://www.amazon.com/gp/product/'.$external_id.'/';
 	}
+	if($external_name=='blog') {
+		return $external_id;
+	}
+	if($external_name=='website') {
+		return $external_id;
+	}
+	if($external_name=='facebook') {
+		return 'http://www.facebook.com/'.$external_id;
+	}
+	if($external_name=='linkedin') {
+		return 'http://il.linkedin.com/in/'.$external_id;
+	}
+	if($external_name=='twitter') {
+		return 'http://twitter.com/'.$external_id;
+	}
+	if($external_name=='google') {
+		return 'http://www.google.com/profiles/'.$external_id;
+	}
+	if($external_name=='picasa') {
+		return 'http://picasaweb.google.com/'.$external_id;
+	}
 	error('what external name is ['.$external_name.']');
 }
 
@@ -321,11 +353,11 @@ function my_json_encode($result) {
 }
 
 function get_full_name($hash) {
-	$arr=array();
 	$firstname=$hash['firstname'];
 	$surname=$hash['surname'];
 	$othername=$hash['othername'];
 	$ordinal=$hash['ordinal'];
+	$arr=array();
 	if($firstname!=NULL) {
 		array_push($arr,$firstname);
 	}

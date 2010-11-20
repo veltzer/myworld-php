@@ -1,8 +1,5 @@
 <?php
 
-# TODO:
-# Make this script go through the groups tables to render the creators and viewers.
-
 function make_stat($query,$func) {
 	$res=my_mysql_query_one($query);
 	if($func!=null) {
@@ -274,7 +271,34 @@ function create_stats() {
 }
 
 function create_person($firstname,$surname) {
-	$res="this is a $firstname,$surname person";
+	$res='';
+	$external=my_mysql_query_hash('SELECT * FROM TbExternalType','id');
+	$query=sprintf('SELECT * FROM TbIdPerson where firstname=%s and surname=%s',
+		my_mysql_real_escape_string($firstname),
+		my_mysql_real_escape_string($surname)
+	);
+	$row=my_mysql_query_one_row($query);
+	$id=$row['id'];
+	$res.='<ul>';
+	$res.='<li>id: '.$id.'</li>';
+	$res.='<li>Name: '.get_full_name($row).'</li>';
+	// handle externals
+	$query=sprintf('SELECT * FROM TbIdPersonExternal where personId=%s',
+		my_mysql_real_escape_string($id)
+	);
+	$result=my_mysql_query($query);
+	while($row=mysql_fetch_assoc($result)) {
+		$externalcode=$row['externalCode'];
+		$externalid=$row['externalId'];
+		$externalname=$external[$externalid]['name'];
+		$externalidname=$external[$externalid]['idname'];
+		$link=get_external_href($externalname,$externalcode);
+		$link='<a href=\''.$link.'\'>'.$externalidname.': '.$externalcode.'</a>';
+		$res.='<li>'.$link.'</li>';
+	}
+	assert(mysql_free_result($result));
+	// finish up
+	$res.='</ul>';
 	return $res;
 }
 
