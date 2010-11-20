@@ -275,7 +275,7 @@ function get_external_href($external_name,$external_id) {
 	if($external_name=='TTC') {
 		return 'http://www.teach12.com/ttcx/coursedesclong2.aspx?cid='.$external_id;
 	}
-	if($external_name=='youtube') {
+	if($external_name=='youtube_vid') {
 		return 'http://www.youtube.com/v/'.$external_id;
 	}
 	if($external_name=='amazon') {
@@ -304,6 +304,9 @@ function get_external_href($external_name,$external_id) {
 	}
 	if($external_name=='youtube') {
 		return 'http://www.youtube.com/user/'.$external_id;
+	}
+	if($external_name=='ted') {
+		return 'http://www.ted.com/profiles/view/id/'.$external_id;
 	}
 	error('what external name is ['.$external_name.']');
 }
