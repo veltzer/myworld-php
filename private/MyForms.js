@@ -250,7 +250,7 @@ jQuery(document).ready(function() {
 		'sname':'externalCode',
 		'initState':true,
 		'initMsg':'Put the external code here',
-		'regex':/^\w*$/,
+		'regex':/^.*$/,
 		'logger':'#log',
 		'submit':'#workexternal_send',
 	};
@@ -295,7 +295,7 @@ jQuery(document).ready(function() {
 		'sname':'externalCode',
 		'initState':true,
 		'initMsg':'Put the external code here',
-		'regex':/^\w*$/,
+		'regex':/^.*$/,
 		'logger':'#log',
 		'submit':'#personexternal_send',
 	};
