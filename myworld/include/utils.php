@@ -308,6 +308,9 @@ function get_external_href($external_name,$external_id) {
 	if($external_name=='ted') {
 		return 'http://www.ted.com/profiles/view/id/'.$external_id;
 	}
+	if($external_name=='google_reader') {
+		return 'http://www.google.com/reader/shared/'.$external_id;
+	}
 	error('what external name is ['.$external_name.']');
 }
 
