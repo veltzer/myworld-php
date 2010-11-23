@@ -311,6 +311,9 @@ function get_external_href($external_name,$external_id) {
 	if($external_name=='google_reader') {
 		return 'http://www.google.com/reader/shared/'.$external_id;
 	}
+	if($external_name=='scribd') {
+		return 'http://www.scribd.com/'.$external_id;
+	}
 	error('what external name is ['.$external_name.']');
 }
 
