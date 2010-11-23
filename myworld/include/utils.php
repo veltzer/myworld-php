@@ -314,6 +314,9 @@ function get_external_href($external_name,$external_id) {
 	if($external_name=='scribd') {
 		return 'http://www.scribd.com/'.$external_id;
 	}
+	if($external_name=='hi5') {
+		return 'http://www.hi5.com/friend/profile/displayProfile.do?userid='.$external_id;
+	}
 	error('what external name is ['.$external_name.']');
 }
 
