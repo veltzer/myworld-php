@@ -205,7 +205,7 @@ jQuery(document).ready(function() {
 		'sname':'name',
 		'initState':true,
 		'initMsg':'Put the name of the work here',
-		'regex':/^[\w \-\:]+$/,
+		'regex':/^[\w \-\:\,]+$/,
 		'logger':'#log',
 		'submit':'#work_send',
 	};
