@@ -269,55 +269,62 @@ function youtube_embed($youtube_id,$size_factor) {
 }
 
 function get_external_href($external_name,$external_id) {
-	if($external_name=='imdb') {
-		return 'http://www.imdb.com/title/tt'.$external_id.'/';
+	switch($external_name) {
+		case 'imdb':
+			return 'http://www.imdb.com/title/tt'.$external_id.'/';
+			break;
+		case 'TTC':
+			return 'http://www.teach12.com/ttcx/coursedesclong2.aspx?cid='.$external_id;
+			break;
+		case 'youtube_vid':
+			return 'http://www.youtube.com/v/'.$external_id;
+			break;
+		case 'amazon':
+			return 'http://www.amazon.com/gp/product/'.$external_id.'/';
+			break;
+		case 'blog':
+			return $external_id;
+			break;
+		case 'website':
+			return $external_id;
+			break;
+		case 'url':
+			return $external_id;
+			break;
+		case 'facebook':
+			return 'http://www.facebook.com/'.$external_id;
+			break;
+		case 'linkedin':
+			return 'http://il.linkedin.com/in/'.$external_id;
+			break;
+		case 'twitter':
+			return 'http://twitter.com/'.$external_id;
+			break;
+		case 'google':
+			return 'http://www.google.com/profiles/'.$external_id;
+			break;
+		case 'picasa':
+			return 'http://picasaweb.google.com/'.$external_id;
+			break;
+		case 'youtube':
+			return 'http://www.youtube.com/user/'.$external_id;
+			break;
+		case 'ted':
+			return 'http://www.ted.com/profiles/view/id/'.$external_id;
+			break;
+		case 'google_reader':
+			return 'http://www.google.com/reader/shared/'.$external_id;
+			break;
+		case 'scribd':
+			return 'http://www.scribd.com/'.$external_id;
+			break;
+		case 'hi5':
+			return 'http://www.hi5.com/friend/profile/displayProfile.do?userid='.$external_id;
+			break;
+		default:
+			error('what external name is ['.$external_name.']');
+			break;
 	}
-	if($external_name=='TTC') {
-		return 'http://www.teach12.com/ttcx/coursedesclong2.aspx?cid='.$external_id;
-	}
-	if($external_name=='youtube_vid') {
-		return 'http://www.youtube.com/v/'.$external_id;
-	}
-	if($external_name=='amazon') {
-		return 'http://www.amazon.com/gp/product/'.$external_id.'/';
-	}
-	if($external_name=='blog') {
-		return $external_id;
-	}
-	if($external_name=='website') {
-		return $external_id;
-	}
-	if($external_name=='facebook') {
-		return 'http://www.facebook.com/'.$external_id;
-	}
-	if($external_name=='linkedin') {
-		return 'http://il.linkedin.com/in/'.$external_id;
-	}
-	if($external_name=='twitter') {
-		return 'http://twitter.com/'.$external_id;
-	}
-	if($external_name=='google') {
-		return 'http://www.google.com/profiles/'.$external_id;
-	}
-	if($external_name=='picasa') {
-		return 'http://picasaweb.google.com/'.$external_id;
-	}
-	if($external_name=='youtube') {
-		return 'http://www.youtube.com/user/'.$external_id;
-	}
-	if($external_name=='ted') {
-		return 'http://www.ted.com/profiles/view/id/'.$external_id;
-	}
-	if($external_name=='google_reader') {
-		return 'http://www.google.com/reader/shared/'.$external_id;
-	}
-	if($external_name=='scribd') {
-		return 'http://www.scribd.com/'.$external_id;
-	}
-	if($external_name=='hi5') {
-		return 'http://www.hi5.com/friend/profile/displayProfile.do?userid='.$external_id;
-	}
-	error('what external name is ['.$external_name.']');
 }
 
 /* function for embedding a ted video */

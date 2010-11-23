@@ -59,10 +59,8 @@ if(!class_exists('MyWorld')) {
 					$ret=create_certification();
 					break;
 				case 'works':
-					$ret=create_works('audio');
-					break;
-				case 'movies':
-					$ret=create_works('video');
+					$type=$extra['type'];
+					$ret=create_works($type);
 					break;
 				case 'stats':
 					$ret=create_stats();

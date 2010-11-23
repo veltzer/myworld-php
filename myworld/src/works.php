@@ -60,14 +60,25 @@ function create_works($type) {
 	}
 
 	// sending query
-	if($type=='audio') {
-		$add='TbWkWorkType.isAudio=1';
-		$order='asc';
-		$limit=300;
-	} else {
-		$add='TbWkWorkType.isVideo=1';
-		$order='desc';
-		$limit=10;
+	switch($type) {
+		case 'audio':
+			$add='TbWkWorkType.isAudio=1';
+			$order='asc';
+			$limit=300;
+			break;
+		case 'video':
+			$add='TbWkWorkType.isVideo=1';
+			$order='desc';
+			$limit=10;
+			break;
+		case 'text':
+			$add='TbWkWorkType.isText=1';
+			$order='asc';
+			$limit=300;
+			break;
+		default:
+			error('what type is ['.$type.']');
+			break;
 	}
 	$query=sprintf('SELECT TbWkWork.id,TbWkWork.name,TbWkWork.length,TbWkWork.size,TbWkWork.chapters,TbWkWork.typeId,TbWkWorkView.startViewDate,TbWkWorkView.endViewDate,TbWkWorkView.viewerId,TbWkWorkView.locationId,TbWkWorkView.deviceId,TbWkWorkReview.rating,TbWkWorkReview.review,TbWkWorkReview.reviewDate FROM TbWkWork,TbWkWorkType,TbWkWorkReview,TbWkWorkView where TbWkWork.typeId=TbWkWorkType.id and TbWkWorkReview.workId=TbWkWork.id and TbWkWorkView.workId=TbWkWork.id and %s order by TbWkWorkView.endViewDate %s limit %s',$add,$order,$limit);
 	//$query=sprintf('SELECT * FROM TbWkWork');
