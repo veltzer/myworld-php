@@ -118,6 +118,15 @@ function my_mysql_query_hash($query,$hash_key) {
 	return $ret;
 }
 
+function my_mysql_start_transaction() {
+	mysql_query('SET AUTOCOMMIT=0');
+	mysql_query('START TRANSACTION');
+}
+
+function my_mysql_commit() {
+	mysql_query('COMMIT');
+}
+
 function phpdate_to_mysqldate($phpdate) {
 	return date('Y-m-d H:i:s',$phpdate);
 }

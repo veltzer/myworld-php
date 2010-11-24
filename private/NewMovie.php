@@ -17,6 +17,8 @@ $p_review=my_get_post('review');
 
 // this is a line you can use for debugging...
 //error('query not yet implemented');
+//
+my_mysql_start_transaction();
 
 $p_typeId=my_mysql_query_one('select id from TbWkWorkType where name=\'video movie\'');
 $p_viewerId=my_mysql_query_one('select id from TbIdPerson where firstname=\'Mark\' and surname=\'Veltzer\'');
@@ -50,13 +52,16 @@ $query=sprintf('insert into TbWkWorkView (endViewDate,locationId,deviceId,viewer
 my_mysql_query($query);
 $p_workviewid=mysql_insert_id();
 // insert a new review
-$query=sprintf('insert into TbWkWorkReview (rating,review,reviewDate,workId) values(%s,%s,%s,%s)',
+$query=sprintf('insert into TbWkWorkReview (rating,review,reviewDate,workId,reviewerId) values(%s,%s,%s,%s,%s)',
 	my_mysql_real_escape_string($p_rating),
 	my_mysql_real_escape_string($p_review),
 	my_mysql_real_escape_string($p_date),
-	my_mysql_real_escape_string($p_workId)
+	my_mysql_real_escape_string($p_workId),
+	my_mysql_real_escape_string($p_viewerId)
 );
 my_mysql_query($query);
 $p_workreviewid=mysql_insert_id();
 echo "new work [$p_workId], external [$p_externalId], view [$p_workviewid], review [$p_workreviewid] successfully inserted";
+
+my_mysql_commit();
 ?>
