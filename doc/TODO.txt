@@ -117,7 +117,14 @@ whenever an imdb id is inserted, go fetch the movie data from the server
 add spell checking for the reviews.
 do the date box better (add a special widget with a "now" button and +/- buttons).
 
+new company page:
+=================
+import company images into my database (originals and biggs too).
+create a "new company" dialog.
+remove the importing of company data script.
+add the imageUrl data for all the companies that I already have.
+
 Schema changes:
 ===============
 unite TbBsCompanies and TbOrganization.
-add images to people.
+add images to people either by file upload or url.
