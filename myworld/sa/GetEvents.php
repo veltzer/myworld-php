@@ -15,7 +15,7 @@ $debug=0;
 $p_start="2009-08-24 01:32:40";
 $p_end="2011-08-24 01:32:40";
 # connect to the database
-db_connect();
+my_mysql_connect();
 $query=sprintf('SELECT id,title,url,start,end FROM TbEvent where start > "%s" and end < "%s"',
 	mysql_real_escape_string($p_start),
 	mysql_real_escape_string($p_end)
@@ -30,5 +30,5 @@ if($debug) {
 	printDebug($result);
 }
 result_echo_json($result);
-db_disconnect();
+my_mysql_disconnect();
 ?>

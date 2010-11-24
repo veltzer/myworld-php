@@ -20,7 +20,7 @@ assert($p_table=='TbMsLilypond' || $p_table=='TbBsCompanies');
 assert($p_sfield=='id' || $p_sfield=='uuid');
 #assert($p_field=='ly' || $p_field=='pdf' || $p_field=='ps' || $p_field=='midi');
 
-db_connect();
+my_mysql_connect();
 $query=sprintf('SELECT %s,%s FROM %s where %s=%s',
 	mysql_real_escape_string($p_field),
 	mysql_real_escape_string($p_name_field),
@@ -47,6 +47,6 @@ header('Cache-Control: no-cache');
 header('Content-Length: '.$fileLength);
 header('Content-Disposition: attachment; filename='.$fileName.'.'.$p_field);
 echo $fileContent;
-db_disconnect();
+my_mysql_disconnect();
 
 ?>

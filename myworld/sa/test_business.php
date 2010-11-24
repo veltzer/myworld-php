@@ -12,12 +12,12 @@ require("setup.php");
 my_include("include/utils.php");
 my_include("src/business.php");
 
-db_connect();
+my_mysql_connect();
 echo create_courses();
 echo create_consulting();
 echo create_teaching();
 echo create_certification();
-db_disconnect();
+my_mysql_disconnect();
 
 ?>
 </body></html>

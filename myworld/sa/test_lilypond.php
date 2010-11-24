@@ -12,9 +12,9 @@ require("setup.php");
 my_include("include/utils.php");
 my_include("src/lilypond.php");
 
-db_connect();
+my_mysql_connect();
 echo create_lilypond();
-db_disconnect();
+my_mysql_disconnect();
 
 ?>
 </body></html>

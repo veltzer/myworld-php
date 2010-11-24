@@ -27,19 +27,14 @@ function assert_setup() {
 
 function utils_init() {
 	assert_setup();
-	db_connect();
+	my_mysql_connect();
 }
 
 function utils_finish() {
-	db_disconnect();
+	my_mysql_disconnect();
 }
 
-function db_init() {
-	global $link;
-	$line=NULL;
-}
-
-function db_connect() {
+function my_mysql_connect() {
 	global $link;
 	if($link==NULL) {
 		$db_host='localhost';
@@ -49,12 +44,14 @@ function db_connect() {
 		$link=mysql_connect($db_host,$db_user,$db_pwd);
 		assert($link);
 		assert(mysql_select_db($database));
-		# I'm not sure if I need this...
+		my_mysql_query('SET AUTOCOMMIT=0');
+		# I'm not sure if I need this, probably not since
+		# I've been running a long time without it...
 		//assert(mysql_set_charset('utf8',$link));
 	}
 }
 
-function db_disconnect() {
+function my_mysql_disconnect() {
 	// TODO: this code is in remark because it causes wordpress issues
 	// fix it!
 	/*
@@ -73,7 +70,6 @@ function error($msg) {
 }
 
 function my_mysql_query($query) {
-	db_connect();
 	$result=mysql_query($query);
 	if(!$result) {
 		error('mysql error: '.mysql_errno().': '.mysql_error());
@@ -82,7 +78,6 @@ function my_mysql_query($query) {
 }
 
 function my_mysql_query_one($query) {
-	db_connect();
 	$result=my_mysql_query($query);
 	# we should only get one result...
 	assert(mysql_num_rows($result)==1);
@@ -95,7 +90,6 @@ function my_mysql_query_one($query) {
 // do a query expecting one row as result (throw exception if not so). Return only that one
 // row...
 function my_mysql_query_one_row($query) {
-	db_connect();
 	$result=my_mysql_query($query);
 	# we should only get one result...
 	assert(mysql_num_rows($result)==1);
@@ -106,7 +100,6 @@ function my_mysql_query_one_row($query) {
 
 // do a query and return a hash of the results by key...
 function my_mysql_query_hash($query,$hash_key) {
-	db_connect();
 	$result=my_mysql_query($query);
 	$ret=array();
 	while($row=mysql_fetch_assoc($result)) {
@@ -119,12 +112,11 @@ function my_mysql_query_hash($query,$hash_key) {
 }
 
 function my_mysql_start_transaction() {
-	mysql_query('SET AUTOCOMMIT=0');
-	mysql_query('START TRANSACTION');
+	my_mysql_query('START TRANSACTION');
 }
 
 function my_mysql_commit() {
-	mysql_query('COMMIT');
+	my_mysql_query('COMMIT');
 }
 
 function phpdate_to_mysqldate($phpdate) {

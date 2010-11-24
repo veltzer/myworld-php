@@ -10,7 +10,7 @@ $p_slug = $_GET['slug'];
 
 $debug=0;
 
-db_connect();
+my_mysql_connect();
 $query=sprintf("SELECT id,name,slug,mime,data FROM TbRsBlob where slug=\"%s\"",
 	mysql_real_escape_string($p_slug)
 );
@@ -40,6 +40,6 @@ header("Cache-Control: no-cache");
 header("Content-Length: ".strlen($r_data));
 header("Content-Disposition: attachment; filename=$r_name");
 echo $r_data;
-db_disconnect();
+my_mysql_disconnect();
 
 ?>

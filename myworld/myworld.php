@@ -38,7 +38,7 @@ if(!class_exists('MyWorld')) {
 		 * The function that creates dynamic content
 		 */
 		function create_content($name,$extra) {
-			db_connect();
+			my_mysql_connect();
 			switch($name) {
 				case 'person':
 					// TODO: throw error if parameters are not there...
@@ -85,7 +85,7 @@ if(!class_exists('MyWorld')) {
 					break;
 			}
 			#$ret='<br/>$ret<br/>';
-			db_disconnect();
+			my_mysql_disconnect();
 			return $ret;
 		}
 
