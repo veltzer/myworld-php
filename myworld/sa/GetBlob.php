@@ -3,8 +3,8 @@
 // url to use this script:
 // http://veltzer.net/~mark/php/pages/GetBlob.php?table=TbMsLilypond&id=5&field=pdf&type=application/pdf&name_field=filebasename
 
-require("setup.php");
-my_include("include/utils.php");
+require('setup.php');
+my_include('include/utils.php');
 
 $p_table = $_GET['table'];
 $p_sfield = $_GET['sfield'];
@@ -21,23 +21,20 @@ assert($p_sfield=='id' || $p_sfield=='uuid');
 #assert($p_field=='ly' || $p_field=='pdf' || $p_field=='ps' || $p_field=='midi');
 
 db_connect();
-$query=sprintf("SELECT %s,%s FROM %s where %s=\"%s\"",
+$query=sprintf('SELECT %s,%s FROM %s where %s=%s',
 	mysql_real_escape_string($p_field),
 	mysql_real_escape_string($p_name_field),
 	mysql_real_escape_string($p_table),
 	mysql_real_escape_string($p_sfield),
-	mysql_real_escape_string($p_id)
+	my_mysql_real_escape_string($p_id)
 );
-if($debug==1) {
-	echo $query."<br/>";
+if($debug) {
+	echo $query.'<br/>';
 }
-$result=mysql_query($query);
-# make sure we really have a result
-assert($result);
-# we should only get one result...
-assert(mysql_num_rows($result)==1);
-$fileContent=@mysql_result($result,0,$p_field);
-$fileName=@mysql_result($result,0,$p_name_field);
+$result=my_mysql_query_one_row($query);
+$fileContent=$result[$p_field];
+$fileName=$result[$p_name_field];
+$fileLength=strlen($fileContent);
 # You can see more HTTP headers that may improve stuff in
 # http://en.wikipedia.org/wiki/List_of_HTTP_headers
 # ideas are: Content-MD5, Content-Length, Last-Modified
@@ -45,10 +42,10 @@ $fileName=@mysql_result($result,0,$p_name_field);
 # command line and compared the headers that you are generating
 # with the headers that a regular content generates by using
 # the web server...
-header("Content-type: $p_type");
-header("Cache-Control: no-cache");
-header("Content-Length: ".strlen($fileContent));
-header("Content-Disposition: attachment; filename=$fileName.$p_field");
+header('Content-type: '.$p_type);
+header('Cache-Control: no-cache');
+header('Content-Length: '.$fileLength);
+header('Content-Disposition: attachment; filename='.$fileName.'.'.$p_field);
 echo $fileContent;
 db_disconnect();
 

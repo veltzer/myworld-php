@@ -84,6 +84,8 @@ function my_mysql_query($query) {
 function my_mysql_query_one($query) {
 	db_connect();
 	$result=my_mysql_query($query);
+	# we should only get one result...
+	assert(mysql_num_rows($result)==1);
 	$row=mysql_fetch_array($result,MYSQL_NUM);
 	$ret=$row[0];
 	assert(mysql_free_result($result));
@@ -95,8 +97,9 @@ function my_mysql_query_one($query) {
 function my_mysql_query_one_row($query) {
 	db_connect();
 	$result=my_mysql_query($query);
+	# we should only get one result...
+	assert(mysql_num_rows($result)==1);
 	$row=mysql_fetch_assoc($result);
-	// TODO: throw exception if there are more results...
 	assert(mysql_free_result($result));
 	return $row;
 }
