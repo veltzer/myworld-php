@@ -69,7 +69,7 @@ function create_works($type) {
 		case 'video':
 			$add='TbWkWorkType.isVideo=1';
 			$order='desc';
-			$limit=10;
+			$limit=300;
 			break;
 		case 'text':
 			$add='TbWkWorkType.isText=1';
