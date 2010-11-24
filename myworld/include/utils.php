@@ -321,6 +321,9 @@ function get_external_href($external_name,$external_id) {
 		case 'hi5':
 			return 'http://www.hi5.com/friend/profile/displayProfile.do?userid='.$external_id;
 			break;
+		case 'digg':
+			return 'http://digg.com/'.$external_id;
+			break;
 		default:
 			error('what external name is ['.$external_name.']');
 			break;
