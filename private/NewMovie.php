@@ -61,7 +61,7 @@ $query=sprintf('insert into TbWkWorkReview (rating,review,reviewDate,workId,revi
 );
 my_mysql_query($query);
 $p_workreviewid=mysql_insert_id();
-echo "new work [$p_workId], external [$p_externalId], view [$p_workviewid], review [$p_workreviewid] successfully inserted";
-
 my_mysql_commit();
+
+echo "new work [$p_workId], external [$p_externalId], view [$p_workviewid], review [$p_workreviewid] successfully inserted";
 ?>

@@ -14,6 +14,8 @@ $p_deviceId=my_get_post('deviceId');
 $p_rating=my_get_post('rating');
 $p_review=my_get_post('review');
 
+my_mysql_start_transaction();
+
 // this is a line you can use for debugging...
 //error('query not yet implemented');
 
@@ -40,5 +42,7 @@ $query=sprintf('insert into TbWkWorkReview (rating,review,reviewDate,workId) val
 );
 my_mysql_query($query);
 $p_insertworkreviewid=mysql_insert_id();
+my_mysql_commit();
+
 echo "view [{$p_insertworkviewid}] and review [{$p_insertworkreviewid}] successfully inserted";
 ?>

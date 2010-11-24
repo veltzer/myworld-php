@@ -13,6 +13,8 @@ $p_othername=my_get_post_or_null('othername');
 $p_ordinal=my_get_post_or_null('ordinal');
 $p_remark=my_get_post_or_null('remark');
 
+my_mysql_start_transaction();
+
 $query=sprintf('insert into TbIdPerson (firstname,surname,othername,ordinal,remark) values(%s,%s,%s,%s,%s)',
 	my_mysql_real_escape_string($p_firstname),
 	my_mysql_real_escape_string($p_surname),
@@ -22,5 +24,7 @@ $query=sprintf('insert into TbIdPerson (firstname,surname,othername,ordinal,rema
 );
 my_mysql_query($query);
 $p_id=mysql_insert_id();
+my_mysql_commit();
+
 echo 'new person successfully inserted with id ['.$p_id.']';
 ?>

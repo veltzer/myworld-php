@@ -15,6 +15,8 @@ $end_date=my_get_post('end_date','must have end date');
 $start_time=my_get_post('start_time','must have start time');
 $end_time=my_get_post('end_time','must have end time');
 
+my_mysql_start_transaction();
+
 $query=sprintf("insert into TbEvent (company,course,start,end) values('%s','%s','%s','%s')",
 	mysql_real_escape_string($company),
 	mysql_real_escape_string($course),
@@ -25,5 +27,8 @@ if($debug) {
 	echo "query is ".$query;
 }
 my_mysql_query($query);
-echo "new event successfully inserted";
+$p_eventid=mysql_insert_id();
+my_mysql_commit();
+
+echo 'new event successfully inserted with id ['.$p_eventid.']';
 ?>
