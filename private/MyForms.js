@@ -492,4 +492,69 @@ jQuery(document).ready(function() {
 		'submit':'#workview_send',
 	};
 	jQuery('#workview_review').jvalidfield(init);
+	
+	// done stuff starts here
+	
+	var init={
+		'name':'Send',
+		'url':'NewDone.php',
+		'logger':'#log',
+		'formid':'#done_form',
+	};
+	jQuery('#done_send').jsubmit(init);
+	
+	var init={
+		'name':'End Date',
+		'sname':'end',
+		'initState':false,
+		'initMsg':'end of activity date here',
+		'regex':/.+/,
+		'validate':function(widget,value) {
+			var t=Date.parse(value);
+			return !isNaN(t);
+		},
+		'validate_error':function(widget,value) {
+			return 'could not parse date object';
+		},
+		'initval':new Date(),
+		'logger':'#log',
+		'submit':'#done_send',
+	};
+	jQuery('#done_end').jvalidfield(init);
+	
+	var init={
+		'type':'select',
+		'name':'Location',
+		'sname':'locationId',
+		'initState':true,
+		'initMsg':'put the location where the activity took place',
+		'url':'GetData.php?type=TbLcNamed',
+		'logger':'#log',
+		'submit':'#done_send',
+	};
+	jQuery('#done_locationid').jvalidfield(init);
+	
+	var init={
+		'type':'select',
+		'name':'Activity',
+		'sname':'activityId',
+		'initState':true,
+		'initMsg':'what is the activity type',
+		'url':'GetData.php?type=TbTdActivity',
+		'logger':'#log',
+		'submit':'#done_send',
+	};
+	jQuery('#done_activityid').jvalidfield(init);
+	
+	var init={
+		'name':'Remark',
+		'sname':'remark',
+		'initState':true,
+		'initMsg':'Put your remark here',
+		'type':'textarea',
+		'regex':/^.*$/,
+		'logger':'#log',
+		'submit':'#done_send',
+	};
+	jQuery('#done_remark').jvalidfield(init);
 });
