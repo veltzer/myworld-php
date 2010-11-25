@@ -573,7 +573,7 @@ jQuery(document).ready(function() {
 		'sname':'name',
 		'initState':true,
 		'initMsg':'Put the name of the work here',
-		'regex':/^[\w \-\:\,]+$/,
+		'regex':/^[\w \-\:\,\(\)_]+$/,
 		'logger':'#log',
 		'submit':'#workviewreview_send',
 	};
