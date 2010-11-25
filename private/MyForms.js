@@ -58,16 +58,6 @@ jQuery(document).ready(function() {
 	jQuery('#movie_date').jvalidfield(init);
 
 	var init={
-		'name':'Rating',
-		'sname':'rating',
-		'initState':true,
-		'initMsg':'put the rating (1-10) here',
-		'url':'GetData.php?type=TbRating',
-		'type':'select',
-	};
-	jQuery('#movie_rating').jvalidfield(init);
-
-	var init={
 		'type':'select',
 		'name':'Location',
 		'sname':'locationId',
@@ -90,6 +80,16 @@ jQuery(document).ready(function() {
 		'submit':'#movie_send',
 	};
 	jQuery('#movie_device').jvalidfield(init);
+
+	var init={
+		'name':'Rating',
+		'sname':'ratingId',
+		'initState':true,
+		'initMsg':'put the rating (1-10) here',
+		'url':'GetData.php?type=TbRating',
+		'type':'select',
+	};
+	jQuery('#movie_ratingid').jvalidfield(init);
 
 	var init={
 		'name':'Review',
@@ -235,6 +235,18 @@ jQuery(document).ready(function() {
 
 	var init={
 		'type':'select',
+		'name':'Work',
+		'sname':'workId',
+		'initState':true,
+		'initMsg':'Put the work id here',
+		'url':'GetData.php?type=TbWkWork',
+		'logger':'#log',
+		'submit':'#workexternal_send',
+	};
+	jQuery('#workexternal_workid').jvalidfield(init);
+
+	var init={
+		'type':'select',
 		'name':'External Id',
 		'sname':'externalId',
 		'initState':true,
@@ -255,18 +267,6 @@ jQuery(document).ready(function() {
 		'submit':'#workexternal_send',
 	};
 	jQuery('#workexternal_externalcode').jvalidfield(init);
-
-	var init={
-		'type':'select',
-		'name':'Work',
-		'sname':'workId',
-		'initState':true,
-		'initMsg':'Put the work id here',
-		'url':'GetData.php?type=TbWkWork',
-		'logger':'#log',
-		'submit':'#workexternal_send',
-	};
-	jQuery('#workexternal_workid').jvalidfield(init);
 
 	// person -> external stuff
 
@@ -473,13 +473,13 @@ jQuery(document).ready(function() {
 	var init={
 		'type':'select',
 		'name':'Rating',
-		'sname':'rating',
+		'sname':'ratingId',
 		'initState':true,
 		'initMsg':'put the rating (1-10) here',
 		'url':'GetData.php?type=TbRating',
 		'submit':'#workview_send',
 	};
-	jQuery('#workview_rating').jvalidfield(init);
+	jQuery('#workview_ratingId').jvalidfield(init);
 
 	var init={
 		'name':'Review',
@@ -492,9 +492,9 @@ jQuery(document).ready(function() {
 		'submit':'#workview_send',
 	};
 	jQuery('#workview_review').jvalidfield(init);
-	
+
 	// done stuff starts here
-	
+
 	var init={
 		'name':'Send',
 		'url':'NewDone.php',
@@ -502,7 +502,7 @@ jQuery(document).ready(function() {
 		'formid':'#done_form',
 	};
 	jQuery('#done_send').jsubmit(init);
-	
+
 	var init={
 		'name':'End Date',
 		'sname':'end',
@@ -521,7 +521,7 @@ jQuery(document).ready(function() {
 		'submit':'#done_send',
 	};
 	jQuery('#done_end').jvalidfield(init);
-	
+
 	var init={
 		'type':'select',
 		'name':'Location',
@@ -533,7 +533,7 @@ jQuery(document).ready(function() {
 		'submit':'#done_send',
 	};
 	jQuery('#done_locationid').jvalidfield(init);
-	
+
 	var init={
 		'type':'select',
 		'name':'Activity',
@@ -545,7 +545,7 @@ jQuery(document).ready(function() {
 		'submit':'#done_send',
 	};
 	jQuery('#done_activityid').jvalidfield(init);
-	
+
 	var init={
 		'name':'Remark',
 		'sname':'remark',
@@ -557,4 +557,156 @@ jQuery(document).ready(function() {
 		'submit':'#done_send',
 	};
 	jQuery('#done_remark').jvalidfield(init);
+
+	// workviewreview stuff starts here
+
+	var init={
+		'name':'Send',
+		'url':'NewWorkViewReview.php',
+		'logger':'#log',
+		'formid':'#workviewreview_form',
+	};
+	jQuery('#workviewreview_send').jsubmit(init);
+
+	var init={
+		'name':'Name',
+		'sname':'name',
+		'initState':true,
+		'initMsg':'Put the name of the work here',
+		'regex':/^[\w \-\:\,]+$/,
+		'logger':'#log',
+		'submit':'#workviewreview_send',
+	};
+	jQuery('#workviewreview_name').jvalidfield(init);
+
+	var init={
+		'type':'select',
+		'name':'Type',
+		'sname':'typeId',
+		'initState':true,
+		'initMsg':'Put type type of work here',
+		'url':'GetData.php?type=TbWkWorkType',
+		'logger':'#log',
+		'submit':'#workviewreview_send',
+	};
+	jQuery('#workviewreview_typeid').jvalidfield(init);
+	
+	var init={
+		'type':'select',
+		'name':'External Id',
+		'sname':'externalId',
+		'initState':true,
+		'initMsg':'Put the type of external id here',
+		'url':'GetData.php?type=TbExternalType',
+		'logger':'#log',
+		'submit':'#workviewreview_send',
+	};
+	jQuery('#workviewreview_externalid').jvalidfield(init);
+
+	var init={
+		'name':'External Code',
+		'sname':'externalCode',
+		'initState':true,
+		'initMsg':'Put the external code here',
+		'regex':/^.*$/,
+		'logger':'#log',
+		'submit':'#workviewreview_send',
+	};
+	jQuery('#workviewreview_externalcode').jvalidfield(init);
+	
+	var init={
+		'name':'Start date',
+		'sname':'start',
+		'initState':false,
+		'initMsg':'put the start date here',
+		'regex':/.+/,
+		'validate':function(widget,value) {
+			var t=Date.parse(value);
+			return !isNaN(t);
+		},
+		'validate_error':function(widget,value) {
+			return 'could not parse date object';
+		},
+		'initval':new Date(),
+		'logger':'#log',
+		'submit':'#workviewreview_send',
+	};
+	jQuery('#workviewreview_start').jvalidfield(init);
+	
+	var init={
+		'name':'End date',
+		'sname':'end',
+		'initState':false,
+		'initMsg':'put the end date here',
+		'regex':/.+/,
+		'validate':function(widget,value) {
+			var t=Date.parse(value);
+			return !isNaN(t);
+		},
+		'validate_error':function(widget,value) {
+			return 'could not parse date object';
+		},
+		'initval':new Date(),
+		'logger':'#log',
+		'submit':'#workviewreview_send',
+	};
+	jQuery('#workviewreview_end').jvalidfield(init);
+
+	var init={
+		'type':'select',
+		'name':'Person',
+		'sname':'personId',
+		'initState':true,
+		'initMsg':'Put the person id here',
+		'url':'GetData.php?type=TbIdPerson',
+		'logger':'#log',
+		'submit':'#workviewreview_send',
+	};
+	jQuery('#workviewreview_personid').jvalidfield(init);
+	
+	var init={
+		'type':'select',
+		'name':'Location',
+		'sname':'locationId',
+		'initState':true,
+		'initMsg':'put the location where you viewed the work',
+		'url':'GetData.php?type=TbLcNamed',
+		'logger':'#log',
+		'submit':'#workviewreview_send',
+	};
+	jQuery('#workviewreview_locationid').jvalidfield(init);
+
+	var init={
+		'type':'select',
+		'name':'Device',
+		'sname':'deviceId',
+		'initState':true,
+		'initMsg':'put the device on which you saw the movie',
+		'url':'GetData.php?type=TbDevice',
+		'logger':'#log',
+		'submit':'#workviewreview_send',
+	};
+	jQuery('#workviewreview_deviceid').jvalidfield(init);
+
+	var init={
+		'name':'Rating',
+		'sname':'ratingId',
+		'initState':true,
+		'initMsg':'put the rating (1-10) here',
+		'url':'GetData.php?type=TbRating',
+		'type':'select',
+	};
+	jQuery('#workviewreview_ratingid').jvalidfield(init);
+
+	var init={
+		'name':'Review',
+		'sname':'review',
+		'initState':true,
+		'initMsg':'Put your review here',
+		'type':'textarea',
+		'regex':/.+/,
+		'logger':'#log',
+		'submit':'#workviewreview_send',
+	};
+	jQuery('#workviewreview_review').jvalidfield(init);
 });

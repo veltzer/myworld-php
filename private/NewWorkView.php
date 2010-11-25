@@ -11,7 +11,7 @@ $p_workId=my_get_post('workId');
 $p_date=javascriptdate_to_mysqldate(my_get_post('date'));
 $p_locationId=my_get_post('locationId');
 $p_deviceId=my_get_post('deviceId');
-$p_rating=my_get_post('rating');
+$p_ratingId=my_get_post('ratingId');
 $p_review=my_get_post('review');
 
 my_mysql_start_transaction();
@@ -34,8 +34,8 @@ $query=sprintf('insert into TbWkWorkView (endViewDate,locationId,deviceId,viewer
 my_mysql_query($query);
 $p_insertworkviewid=mysql_insert_id();
 // insert a new review
-$query=sprintf('insert into TbWkWorkReview (rating,review,reviewDate,workId) values(%s,%s,%s,%s)',
-	my_mysql_real_escape_string($p_rating),
+$query=sprintf('insert into TbWkWorkReview (ratingId,review,reviewDate,workId) values(%s,%s,%s,%s)',
+	my_mysql_real_escape_string($p_ratingId),
 	my_mysql_real_escape_string($p_review),
 	my_mysql_real_escape_string($p_date),
 	my_mysql_real_escape_string($p_workId)

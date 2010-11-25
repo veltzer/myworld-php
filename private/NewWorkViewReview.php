@@ -8,21 +8,17 @@ if($debug) {
 
 # parameters for this script...
 $p_name=my_get_post('name');
-$p_imdbid=my_get_post('imdbid');
-$p_date=javascriptdate_to_mysqldate(my_get_post('date'));
+$p_typeId=my_get_post_or_null('typeId');
+$p_externalId=my_get_post('externalId');
+$p_externalCode=my_get_post('externalCode');
+$p_start=javascriptdate_to_mysqldate(my_get_post('start'));
+$p_end=javascriptdate_to_mysqldate(my_get_post('end'));
 $p_locationId=my_get_post('locationId');
 $p_deviceId=my_get_post('deviceId');
 $p_ratingId=my_get_post('ratingId');
 $p_review=my_get_post('review');
 
-// this is a line you can use for debugging...
-//error('query not yet implemented');
-//
 my_mysql_start_transaction();
-
-$p_typeId=my_mysql_query_one('select id from TbWkWorkType where name=\'video movie\'');
-$p_viewerId=my_mysql_query_one('select id from TbIdPerson where firstname=\'Mark\' and surname=\'Veltzer\'');
-$p_externalId=my_mysql_query_one('select id from TbExternalType where name=\'imdb\'');
 
 // insert the actual work
 $query=sprintf('insert into TbWkWork (name,typeId) values(%s,%s)',
@@ -35,27 +31,28 @@ $p_workId=mysql_insert_id();
 $query=sprintf('insert into TbWkWorkExternal (workId,externalId,externalCode) values(%s,%s,%s)',
 	my_mysql_real_escape_string($p_workId),
 	my_mysql_real_escape_string($p_externalId),
-	my_mysql_real_escape_string($p_imdbid)
+	my_mysql_real_escape_string($p_externalCode)
 );
 my_mysql_query($query);
 $p_externalId=mysql_insert_id();
 // insert a new view
-$query=sprintf('insert into TbWkWorkView (endViewDate,locationId,deviceId,viewerId,workId) values(%s,%s,%s,%s,%s)',
-	my_mysql_real_escape_string($p_date),
+$query=sprintf('insert into TbWkWorkView (workId,startViewDate,endViewDate,personId,locationId,deviceId) values(%s,%s,%s,%s,%s)',
+	my_mysql_real_escape_string($p_workId),
+	my_mysql_real_escape_string($p_start),
+	my_mysql_real_escape_string($p_end),
+	my_mysql_real_escape_string($p_personId),
 	my_mysql_real_escape_string($p_locationId),
-	my_mysql_real_escape_string($p_deviceId),
-	my_mysql_real_escape_string($p_viewerId),
-	my_mysql_real_escape_string($p_workId)
+	my_mysql_real_escape_string($p_deviceId)
 );
 my_mysql_query($query);
 $p_workviewid=mysql_insert_id();
 // insert a new review
-$query=sprintf('insert into TbWkWorkReview (ratingId,review,reviewDate,workId,reviewerId) values(%s,%s,%s,%s,%s)',
+$query=sprintf('insert into TbWkWorkReview (workId,ratingId,review,reviewDate,workId,reviewerId) values(%s,%s,%s,%s,%s)',
+	my_mysql_real_escape_string($p_workId),
 	my_mysql_real_escape_string($p_ratingId),
 	my_mysql_real_escape_string($p_review),
 	my_mysql_real_escape_string($p_date),
-	my_mysql_real_escape_string($p_workId),
-	my_mysql_real_escape_string($p_viewerId)
+	my_mysql_real_escape_string($p_personId)
 );
 my_mysql_query($query);
 $p_workreviewid=mysql_insert_id();
