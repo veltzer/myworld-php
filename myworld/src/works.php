@@ -80,7 +80,7 @@ function create_works($type) {
 			error('what type is ['.$type.']');
 			break;
 	}
-	$query=sprintf('SELECT TbWkWork.id,TbWkWork.name,TbWkWork.length,TbWkWork.size,TbWkWork.chapters,TbWkWork.typeId,TbWkWorkView.startViewDate,TbWkWorkView.endViewDate,TbWkWorkView.viewerId,TbWkWorkView.locationId,TbWkWorkView.deviceId,TbWkWorkReview.rating,TbWkWorkReview.review,TbWkWorkReview.reviewDate FROM TbWkWork,TbWkWorkType,TbWkWorkReview,TbWkWorkView where TbWkWork.typeId=TbWkWorkType.id and TbWkWorkReview.workId=TbWkWork.id and TbWkWorkView.workId=TbWkWork.id and %s order by TbWkWorkView.endViewDate %s limit %s',$add,$order,$limit);
+	$query=sprintf('SELECT TbWkWork.id,TbWkWork.name,TbWkWork.length,TbWkWork.size,TbWkWork.chapters,TbWkWork.typeId,TbWkWorkView.startViewDate,TbWkWorkView.endViewDate,TbWkWorkView.viewerId,TbWkWorkView.locationId,TbWkWorkView.deviceId,TbWkWorkReview.ratingId,TbWkWorkReview.review,TbWkWorkReview.reviewDate FROM TbWkWork,TbWkWorkType,TbWkWorkReview,TbWkWorkView where TbWkWork.typeId=TbWkWorkType.id and TbWkWorkReview.workId=TbWkWork.id and TbWkWorkView.workId=TbWkWork.id and %s order by TbWkWorkView.endViewDate %s limit %s',$add,$order,$limit);
 	//$query=sprintf('SELECT * FROM TbWkWork');
 	$result=my_mysql_query($query);
 
@@ -124,7 +124,7 @@ function create_works($type) {
 			$deviceid=$i;
 		}
 		# review table
-		if($field->name=='rating') {
+		if($field->name=='ratingId') {
 			$ratingid=$i;
 		}
 		if($field->name=='review') {
@@ -276,8 +276,8 @@ function create_stats() {
 	$res.=make_stat('SELECT count(distinct deviceId) FROM TbWkWorkView',null);
 
 	# review stats
-	$res.=make_stat('SELECT avg(rating) FROM TbWkWorkReview',null);
-	$res.=make_stat('SELECT count(distinct rating) FROM TbWkWorkReview',null);
+	$res.=make_stat('SELECT avg(ratingId) FROM TbWkWorkReview',null);
+	$res.=make_stat('SELECT count(distinct ratingId) FROM TbWkWorkReview',null);
 	return $res;
 }
 

@@ -479,7 +479,7 @@ jQuery(document).ready(function() {
 		'url':'GetData.php?type=TbRating',
 		'submit':'#workview_send',
 	};
-	jQuery('#workview_ratingId').jvalidfield(init);
+	jQuery('#workview_ratingid').jvalidfield(init);
 
 	var init={
 		'name':'Review',
@@ -621,6 +621,9 @@ jQuery(document).ready(function() {
 		'initMsg':'put the start date here',
 		'regex':/.+/,
 		'validate':function(widget,value) {
+			if(value=='') {
+				return True;
+			}
 			var t=Date.parse(value);
 			return !isNaN(t);
 		},
