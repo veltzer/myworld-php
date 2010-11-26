@@ -129,3 +129,7 @@ Schema changes:
 unite TbBsCompanies and TbOrganization.
 add images to people either by file upload or url.
 in TbWkWorkView change [start|end]ViewDate to [start|end].
+
+Misc issues:
+============
+UTF doesn't show well in titles of articles. Check it out.
