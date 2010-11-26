@@ -122,6 +122,16 @@ jQuery(document).ready(function() {
 	//var init={ 'secView':false };
 	//jQuery('#event_from_time').jtimepicker(init);
 	//jQuery('#event_to_time').jtimepicker(init);
+	
+	var init={
+		'name':'Name',
+		'sname':'name',
+		'initState':false,
+		'regex':/^\w*$/,
+		'logger':'#log',
+		'submit':'#event_send',
+	};
+	jQuery('#event_name').jvalidfield(init);
 
 	// my own fields (from the database)
 	var init={
@@ -133,23 +143,35 @@ jQuery(document).ready(function() {
 	};
 
 	init.url='GetData.php?type=TbClCalendar';
-	jQuery('#event_calendar').jvalidfield(init);
+	jQuery('#event_calendarid').jvalidfield(init);
 
 	init.url='GetData.php?type=TbBsCompanies';
 	init.name='Company';
-	jQuery('#event_company').jvalidfield(init);
+	jQuery('#event_companyid').jvalidfield(init);
 
 	init.url='GetData.php?type=TbBsCourses';
 	init.name='Course';
-	jQuery('#event_course').jvalidfield(init);
+	jQuery('#event_courseid').jvalidfield(init);
 
 	init.url='GetData.php?type=TbLcNamed';
 	init.name='Location';
-	jQuery('#event_location').jvalidfield(init);
+	jQuery('#event_locationid').jvalidfield(init);
 
 	init.url='GetData.php?type=TbIdPerson';
-	init.name='Creator';
-	jQuery('#event_creator').jvalidfield(init);
+	init.name='Person';
+	jQuery('#event_personid').jvalidfield(init);
+	
+	var init={
+		'name':'Remark',
+		'sname':'remark',
+		'initState':false,
+		'initMsg':'Put your remark here',
+		'type':'textarea',
+		'regex':/^.*$/,
+		'logger':'#log',
+		'submit':'#event_send',
+	};
+	jQuery('#event_remark').jvalidfield(init);
 
 	// person stuff starts here
 

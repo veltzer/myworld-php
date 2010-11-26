@@ -8,24 +8,25 @@ if($debug) {
 }
 
 # parameters for this script...
-$company=my_get_post('company','must have company name');
-$course=my_get_post('course','must have course name');
-$start_date=my_get_post('start_date','must have start date');
-$end_date=my_get_post('end_date','must have end date');
-$start_time=my_get_post('start_time','must have start time');
-$end_time=my_get_post('end_time','must have end time');
+$p_name=my_get_post('name');
+$p_calendarIy=my_get_post('calendarId');
+$p_companIy=my_get_post('companyId');
+$p_courseId=my_get_post('courseId');
+$p_locationId=my_get_post('locationId');
+$p_personId=my_get_post('personId');
+$p_remark=my_get_post('remark');
 
 my_mysql_start_transaction();
 
-$query=sprintf("insert into TbEvent (company,course,start,end) values('%s','%s','%s','%s')",
-	mysql_real_escape_string($company),
-	mysql_real_escape_string($course),
-	mysql_real_escape_string($start),
-	mysql_real_escape_string($end)
+$query=sprintf("insert into TbEvent (name,calendarId,companyId,courseId,locationId,personId,remark) values(%s,%s,%s,%s,%s,%s,%s)",
+	my_mysql_real_escape_string($p_name),
+	my_mysql_real_escape_string($p_calendarId),
+	my_mysql_real_escape_string($p_companyId),
+	my_mysql_real_escape_string($p_courseId),
+	my_mysql_real_escape_string($p_locationId),
+	my_mysql_real_escape_string($p_personId),
+	my_mysql_real_escape_string($p_remark)
 );
-if($debug) {
-	echo "query is ".$query;
-}
 my_mysql_query($query);
 $p_eventid=mysql_insert_id();
 my_mysql_commit();
