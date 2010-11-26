@@ -658,7 +658,7 @@ jQuery(document).ready(function() {
 
 	var init={
 		'type':'select',
-		'name':'Person',
+		'name':'Viewing person',
 		'sname':'personId',
 		'initState':true,
 		'initMsg':'Put the person id here',
