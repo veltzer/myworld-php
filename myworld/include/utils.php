@@ -45,10 +45,12 @@ function my_mysql_connect() {
 		assert($link);
 		assert(mysql_select_db($database));
 		my_mysql_query('SET AUTOCOMMIT=0');
-		# I'm not sure if I need this, probably not since
-		# I've been running a long time without it...
-		# This does not seem to help with selecting hebrew from the db either...
-		//assert(mysql_set_charset('utf8',$link));
+		# I need this because the default client configuration is for latin1.
+		# The thing is that this config is hard to detect since if you turn it
+		# off then inserting AND extracting from the db in hebrew will WORK and
+		# the data in the command line mysql client will look ok but in fact it is
+		# not UTF in the db. USE THIS!!!
+		assert(mysql_set_charset('utf8',$link));
 	}
 }
 
