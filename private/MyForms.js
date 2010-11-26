@@ -67,7 +67,7 @@ jQuery(document).ready(function() {
 		'logger':'#log',
 		'submit':'#movie_send',
 	};
-	jQuery('#movie_location').jvalidfield(init);
+	jQuery('#movie_locationid').jvalidfield(init);
 
 	var init={
 		'type':'select',
@@ -79,7 +79,7 @@ jQuery(document).ready(function() {
 		'logger':'#log',
 		'submit':'#movie_send',
 	};
-	jQuery('#movie_device').jvalidfield(init);
+	jQuery('#movie_deviceid').jvalidfield(init);
 
 	var init={
 		'name':'Rating',
