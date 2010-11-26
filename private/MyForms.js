@@ -571,7 +571,7 @@ jQuery(document).ready(function() {
 	var init={
 		'name':'Remark',
 		'sname':'remark',
-		'initState':true,
+		'initState':false,
 		'initMsg':'Put your remark here',
 		'type':'textarea',
 		'regex':/^.*$/,
