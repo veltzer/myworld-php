@@ -47,6 +47,7 @@ function my_mysql_connect() {
 		my_mysql_query('SET AUTOCOMMIT=0');
 		# I'm not sure if I need this, probably not since
 		# I've been running a long time without it...
+		# This does not seem to help with selecting hebrew from the db either...
 		//assert(mysql_set_charset('utf8',$link));
 	}
 }
