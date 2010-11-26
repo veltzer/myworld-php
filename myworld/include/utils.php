@@ -330,7 +330,7 @@ function get_external_href($external_name,$external_id) {
 			return 'http://digg.com/'.$external_id;
 			break;
 		case 'plaxo':
-			return 'http://www.plaxo.com/profile/show/'.$expternal_id;
+			return 'http://www.plaxo.com/profile/show/'.$external_id;
 			break;
 		default:
 			error('what external name is ['.$external_name.']');
