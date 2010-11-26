@@ -115,11 +115,11 @@ jQuery(document).ready(function() {
 	jQuery('#event_send').jsubmit(init);
 
 	// construct two date pickers
-	jQuery('#event_from_date').datepicker();
-	jQuery('#event_to_date').datepicker();
+	//jQuery('#event_from_date').datepicker();
+	//jQuery('#event_to_date').datepicker();
 
 	// the time pickers
-	var init={ 'secView':false };
+	//var init={ 'secView':false };
 	//jQuery('#event_from_time').jtimepicker(init);
 	//jQuery('#event_to_time').jtimepicker(init);
 
