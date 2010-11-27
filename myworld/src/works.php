@@ -14,7 +14,7 @@ function create_works($type) {
 	// collecting data from other tables...
 	$contrib=my_mysql_query_hash('SELECT * FROM TbWkWorkContrib','id');
 	$types=my_mysql_query_hash('SELECT * FROM TbWkWorkType','id');
-	$locations=my_mysql_query_hash('SELECT * FROM TbLcNamed','id');
+	$locations=my_mysql_query_hash('SELECT * FROM TbLocation','id');
 	$devices=my_mysql_query_hash('SELECT * FROM TbDevice','id');
 	$persons=my_mysql_query_hash('SELECT * FROM TbIdPerson','id');
 	$organizations=my_mysql_query_hash('SELECT * FROM TbOrganization','id');

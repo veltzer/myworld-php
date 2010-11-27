@@ -14,7 +14,7 @@ if($type=='video_devices') {
 	$handled=1;
 }
 if($type=='video_places') {
-	$query=sprintf('select id,name as label,name as value from TbLcNamed where isVideo=1');
+	$query=sprintf('select id,name as label,name as value from TbLocation where isVideo=1');
 	$result=my_mysql_query($query);
 	$response=my_json_encode($result);
 	$handled=1;
@@ -24,7 +24,7 @@ if($type=='TbIdPerson') {
 	$response=json_encode($rows);
 	$handled=1;
 }
-if($type=='TbLcNamed' || $type=='TbRating' || $type=='TbClCalendar' || $type=='TbBsCompanies' || $type=='TbBsCourses' || $type=='TbExternalType' || $type=='TbWkWorkType' || $type=='TbWkWork' || $type=='TbWkWorkContribType' || $type=='TbDevice' || $type=='TbOrganization' || $type=='TbTdActivity') {
+if($type=='TbLocation' || $type=='TbRating' || $type=='TbClCalendar' || $type=='TbBsCompanies' || $type=='TbBsCourses' || $type=='TbExternalType' || $type=='TbWkWorkType' || $type=='TbWkWork' || $type=='TbWkWorkContribType' || $type=='TbDevice' || $type=='TbOrganization' || $type=='TbTdActivity') {
 	$query=sprintf('select id,name as label,name as value from %s',
 		mysql_real_escape_string($type)
 	);

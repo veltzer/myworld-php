@@ -153,7 +153,7 @@ jQuery(document).ready(function() {
 	init.name='Course';
 	jQuery('#event_courseid').jvalidfield(init);
 
-	init.url='GetData.php?type=TbLcNamed';
+	init.url='GetData.php?type=TbLocation';
 	init.name='Location';
 	jQuery('#event_locationid').jvalidfield(init);
 
@@ -476,7 +476,7 @@ jQuery(document).ready(function() {
 		'sname':'locationId',
 		'initState':true,
 		'initMsg':'put the location where you saw the movie',
-		'url':'GetData.php?type=TbLcNamed',
+		'url':'GetData.php?type=TbLocation',
 		'logger':'#log',
 		'submit':'#workview_send',
 	};
@@ -552,7 +552,7 @@ jQuery(document).ready(function() {
 		'sname':'locationId',
 		'initState':true,
 		'initMsg':'put the location where the activity took place',
-		'url':'GetData.php?type=TbLcNamed',
+		'url':'GetData.php?type=TbLocation',
 		'logger':'#log',
 		'submit':'#done_send',
 	};
@@ -698,7 +698,7 @@ jQuery(document).ready(function() {
 		'sname':'locationId',
 		'initState':true,
 		'initMsg':'put the location where you viewed the work',
-		'url':'GetData.php?type=TbLcNamed',
+		'url':'GetData.php?type=TbLocation',
 		'logger':'#log',
 		'submit':'#workviewreview_send',
 	};
