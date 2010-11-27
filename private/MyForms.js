@@ -51,7 +51,7 @@ jQuery(document).ready(function() {
 		'validate_error':function(widget,value) {
 			return 'could not parse date object';
 		},
-		'initval':new Date(),
+		'initVal':new Date(),
 		'logger':'#log',
 		'submit':'#movie_send',
 	};
@@ -122,7 +122,7 @@ jQuery(document).ready(function() {
 	//var init={ 'secView':false };
 	//jQuery('#event_from_time').jtimepicker(init);
 	//jQuery('#event_to_time').jtimepicker(init);
-	
+
 	var init={
 		'name':'Name',
 		'sname':'name',
@@ -159,8 +159,10 @@ jQuery(document).ready(function() {
 
 	init.url='GetData.php?type=TbIdPerson';
 	init.name='Person';
+	init.initVal=1;
 	jQuery('#event_personid').jvalidfield(init);
-	
+	delete init.initVal;
+
 	var init={
 		'name':'Remark',
 		'sname':'remark',
@@ -462,7 +464,7 @@ jQuery(document).ready(function() {
 		'validate_error':function(widget,value) {
 			return 'could not parse date object';
 		},
-		'initval':new Date(),
+		'initVal':new Date(),
 		'logger':'#log',
 		'submit':'#workview_send',
 	};
@@ -538,7 +540,7 @@ jQuery(document).ready(function() {
 		'validate_error':function(widget,value) {
 			return 'could not parse date object';
 		},
-		'initval':new Date(),
+		'initVal':new Date(),
 		'logger':'#log',
 		'submit':'#done_send',
 	};
@@ -613,7 +615,7 @@ jQuery(document).ready(function() {
 		'submit':'#workviewreview_send',
 	};
 	jQuery('#workviewreview_typeid').jvalidfield(init);
-	
+
 	var init={
 		'type':'select',
 		'name':'External Id',
@@ -636,7 +638,7 @@ jQuery(document).ready(function() {
 		'submit':'#workviewreview_send',
 	};
 	jQuery('#workviewreview_externalcode').jvalidfield(init);
-	
+
 	var init={
 		'name':'Start date',
 		'sname':'start',
@@ -653,12 +655,12 @@ jQuery(document).ready(function() {
 		'validate_error':function(widget,value) {
 			return 'could not parse date object';
 		},
-		'initval':new Date(),
+		'initVal':new Date(),
 		'logger':'#log',
 		'submit':'#workviewreview_send',
 	};
 	jQuery('#workviewreview_start').jvalidfield(init);
-	
+
 	var init={
 		'name':'End date',
 		'sname':'end',
@@ -672,7 +674,7 @@ jQuery(document).ready(function() {
 		'validate_error':function(widget,value) {
 			return 'could not parse date object';
 		},
-		'initval':new Date(),
+		'initVal':new Date(),
 		'logger':'#log',
 		'submit':'#workviewreview_send',
 	};
@@ -689,7 +691,7 @@ jQuery(document).ready(function() {
 		'submit':'#workviewreview_send',
 	};
 	jQuery('#workviewreview_personid').jvalidfield(init);
-	
+
 	var init={
 		'type':'select',
 		'name':'Location',

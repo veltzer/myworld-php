@@ -25,7 +25,7 @@ jQuery(document).ready(function() {
 			initMsg:null,
 			rows:10,
 			initState:false,
-			initval:null,
+			initVal:null,
 			httptype:'GET',
 			url:null,
 			// set if you want this widget to log into your logger
@@ -119,10 +119,10 @@ jQuery(document).ready(function() {
 				}).html(this.options.render(data[x])).appendTo(this.w_input);
 			}
 			this.enable();
-			if(this.options.initval==null) {
+			if(this.options.initVal==null) {
 				this.w_input.val(data[0].id);
 			} else {
-				this.w_input.val(this.options.initval);
+				this.w_input.val(this.options.initVal);
 			}
 		},
 		fetch:function() {
@@ -193,7 +193,7 @@ jQuery(document).ready(function() {
 			if(this.options.initState==true) {
 				attrs.val=this.options.initMsg;
 			} else {
-				attrs.val=this.options.initval;
+				attrs.val=this.options.initVal;
 			}
 			if(this.options.type=='input') {
 				attrs.type=this.options.inputtype;
