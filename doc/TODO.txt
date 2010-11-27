@@ -1,3 +1,10 @@
+Location support:
+=================
+add x,y position to locations.
+add street, city, whatever to locations.
+add dialog to add new locations.
+add dialog to edit a loction.
+
 now:
 ====
 	import all lectures in my audio archive into works.
