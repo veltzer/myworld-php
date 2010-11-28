@@ -334,6 +334,9 @@ function get_external_href($external_name,$external_id) {
 		case 'plaxo':
 			return 'http://www.plaxo.com/profile/show/'.$external_id;
 			break;
+		case 'yahoo':
+			return 'http://profiles.yahoo.com/'.$external_id;
+			break;
 		default:
 			error('what external name is ['.$external_name.']');
 			break;
