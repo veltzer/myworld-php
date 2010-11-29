@@ -20,7 +20,7 @@ now:
 
 Social site support
 ===================
-add support for flickr, reddit, imdb.
+add support for flickr, reddit, imdb, fora.tv
 
 php layer:
 ==========
