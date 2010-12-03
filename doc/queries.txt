@@ -1,0 +1,4 @@
+Here are some queries which may be of interest in myworld:
+
+show all work types in the database:
+select distinct(TbWkWorkType.name) from TbWkWork, TbWkWorkType where TbWkWork.typeId=TbWkWorkType.id;
