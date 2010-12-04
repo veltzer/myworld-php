@@ -77,6 +77,7 @@ function my_mysql_query($query) {
 	if(!$result) {
 		error('mysql error: '.mysql_errno().': '.mysql_error());
 	}
+	#error_log('my_mysql_query doing query ['.$query.']',0);
 	return $result;
 }
 

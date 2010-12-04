@@ -438,6 +438,18 @@ jQuery(document).ready(function() {
 		'formid':'#workview_form',
 	};
 	jQuery('#workview_send').jsubmit(init);
+	
+	var init={
+		'type':'select',
+		'name':'Viewing person',
+		'sname':'personId',
+		'initState':true,
+		'initMsg':'Put the person id here',
+		'url':'GetData.php?type=TbIdPerson',
+		'logger':'#log',
+		'submit':'#workview_send',
+	};
+	jQuery('#workview_personid').jvalidfield(init);
 
 	var init={
 		'type':'select',

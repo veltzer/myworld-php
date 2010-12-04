@@ -36,6 +36,7 @@ function create_works($type) {
 		if($personId!=NULL) {
 			if(!isset($work_contrib[$workId])) {
 				$work_contrib[$workId]=array();
+				$role_contrib[$workId]=array();
 			}
 			$work_contrib[$workId][]=$personId;
 			$role_contrib[$workId][]=$typeId;
@@ -43,6 +44,7 @@ function create_works($type) {
 		if($organizationId!=NULL) {
 			if(!isset($work_contrib_org[$workId])) {
 				$work_contrib_org[$workId]=array();
+				$role_contrib_org[$workId]=array();
 			}
 			$work_contrib_org[$workId][]=$organizationId;
 			$role_contrib_org[$workId][]=$typeId;
@@ -173,12 +175,14 @@ function create_works($type) {
 			$header='No Name';
 		}
 		# append contributors to the header...(do not include organizations)
-		$cont_array=array();
-		foreach($work_contrib[$row[$idid]] as $personId) {
-			$cont_array[]=get_full_name($persons[$personId]);
-		}
-		if(count($cont_array)>0) {
-			$header.=' / '.join($cont_array,' ');
+		if(isset($work_contrib[$row[$idid]])) {
+			$cont_array=array();
+			foreach($work_contrib[$row[$idid]] as $personId) {
+				$cont_array[]=get_full_name($persons[$personId]);
+			}
+			if(count($cont_array)>0) {
+				$header.=' / '.join($cont_array,' ');
+			}
 		}
 
 		$body='';
@@ -228,22 +232,26 @@ function create_works($type) {
 			$body.='<li>review date: '.$row[$reviewdateid].'</li>';
 		}
 		# contributor stuff
-		$j=0;
-		foreach($work_contrib[$row[$idid]] as $personId) {
-			$name=get_full_name($persons[$personId]);
-			$roleid=$role_contrib[$row[$idid]][$j];
-			$role_name=$contribtype[$roleid]['name'];
-			$body.='<li>'.$role_name.': '.$name.'</li>';
-			$j++;
+		if(isset($work_contrib[$row[$idid]])) {
+			$j=0;
+			foreach($work_contrib[$row[$idid]] as $personId) {
+				$name=get_full_name($persons[$personId]);
+				$roleid=$role_contrib[$row[$idid]][$j];
+				$role_name=$contribtype[$roleid]['name'];
+				$body.='<li>'.$role_name.': '.$name.'</li>';
+				$j++;
+			}
 		}
-		$j=0;
-		foreach($work_contrib_org[$row[$idid]] as $organizationId) {
-			$name=$organizations[$organizationId]['name'];
-			$url=$organizations[$organizationId]['url'];
-			$roleid=$role_contrib_org[$row[$idid]][$j];
-			$role_name=$contribtype[$roleid]['name'];
-			$body.='<li>'.$role_name.': '.'<a href=\''.$url.'\'>'.$name.'</a></li>';
-			$j++;
+		if(isset($work_contrib_org[$row[$idid]])) {
+			$j=0;
+			foreach($work_contrib_org[$row[$idid]] as $organizationId) {
+				$name=$organizations[$organizationId]['name'];
+				$url=$organizations[$organizationId]['url'];
+				$roleid=$role_contrib_org[$row[$idid]][$j];
+				$role_name=$contribtype[$roleid]['name'];
+				$body.='<li>'.$role_name.': '.'<a href=\''.$url.'\'>'.$name.'</a></li>';
+				$j++;
+			}
 		}
 		# external stuff
 		$j=0;
