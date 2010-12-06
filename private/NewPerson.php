@@ -7,6 +7,7 @@ if($debug) {
 }
 
 # parameters for this script...
+$p_honorific=my_get_post_or_null('honorific');
 $p_firstname=my_get_post_or_null('firstname');
 $p_surname=my_get_post_or_null('surname');
 $p_othername=my_get_post_or_null('othername');
@@ -15,7 +16,8 @@ $p_remark=my_get_post_or_null('remark');
 
 my_mysql_start_transaction();
 
-$query=sprintf('insert into TbIdPerson (firstname,surname,othername,ordinal,remark) values(%s,%s,%s,%s,%s)',
+$query=sprintf('insert into TbIdPerson (honorific,firstname,surname,othername,ordinal,remark) values(%s,%s,%s,%s,%s,%s)',
+	my_mysql_real_escape_string($p_honorific),
 	my_mysql_real_escape_string($p_firstname),
 	my_mysql_real_escape_string($p_surname),
 	my_mysql_real_escape_string($p_othername),

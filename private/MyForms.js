@@ -186,16 +186,20 @@ jQuery(document).ready(function() {
 	jQuery('#person_send').jsubmit(init);
 
 	var init={
-		'name':'First Name',
-		'sname':'firstname',
+		'name':'Honorific',
+		'sname':'honorific',
 		'initState':false,
 		'regex':/^\w*$/,
 		'logger':'#log',
 		'submit':'#person_send',
 	};
+	jQuery('#person_honorific').jvalidfield(init);
+
+	init.name='First Name';
+	init.sname='firstname';
 	jQuery('#person_firstname').jvalidfield(init);
 
-	init.name='Sur Name';
+	init.name='Surname';
 	init.sname='surname';
 	jQuery('#person_surname').jvalidfield(init);
 
