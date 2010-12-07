@@ -181,7 +181,7 @@ function create_works($type) {
 				$cont_array[]=get_full_name($persons[$personId]);
 			}
 			if(count($cont_array)>0) {
-				$header.=' / '.join($cont_array,' ');
+				$header.=' / '.join($cont_array,', ');
 			}
 		}
 
