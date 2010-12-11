@@ -55,7 +55,7 @@ jQuery(document).ready(function() {
 		'logger':'#log',
 		'submit':'#movie_send',
 	};
-	jQuery('#movie_date').jvalidfield(init);
+	jQuery('#movie_date').jdatetimefield(init);
 
 	var init={
 		'type':'select',
@@ -484,7 +484,7 @@ jQuery(document).ready(function() {
 		'logger':'#log',
 		'submit':'#workview_send',
 	};
-	jQuery('#workview_date').jvalidfield(init);
+	jQuery('#workview_date').jdatetimefield(init);
 
 	var init={
 		'type':'select',
@@ -560,7 +560,7 @@ jQuery(document).ready(function() {
 		'logger':'#log',
 		'submit':'#done_send',
 	};
-	jQuery('#done_end').jvalidfield(init);
+	jQuery('#done_end').jdatetimefield(init);
 
 	var init={
 		'type':'select',
@@ -675,7 +675,7 @@ jQuery(document).ready(function() {
 		'logger':'#log',
 		'submit':'#workviewreview_send',
 	};
-	jQuery('#workviewreview_start').jvalidfield(init);
+	jQuery('#workviewreview_start').jdatetimefield(init);
 
 	var init={
 		'name':'End date',
@@ -694,7 +694,7 @@ jQuery(document).ready(function() {
 		'logger':'#log',
 		'submit':'#workviewreview_send',
 	};
-	jQuery('#workviewreview_end').jvalidfield(init);
+	jQuery('#workviewreview_end').jdatetimefield(init);
 
 	var init={
 		'type':'select',
