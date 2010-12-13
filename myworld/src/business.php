@@ -7,9 +7,8 @@
 function create_courses() {
 	$res="";
 	// sending query
-	$query=sprintf("SELECT id,name FROM TbBsCourses");
-	$result=mysql_query($query);
-	assert($result);
+	$query=sprintf("SELECT id,name FROM TbBsCourses order by name asc");
+	$result=my_mysql_query($query);
 
 	$res.=get_start_table();
 	$res.="<tr>";
@@ -32,8 +31,7 @@ function create_consulting() {
 	$res="";
 	// sending query
 	$query=sprintf("SELECT id,name,slug,remark,url FROM TbBsCompanies where funcConsulting order by name asc");
-	$result=mysql_query($query);
-	assert($result);
+	$result=my_mysql_query($query);
 
 	$res.=get_start_table();
 	$res.="<tr>";
