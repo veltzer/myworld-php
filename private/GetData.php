@@ -8,13 +8,13 @@ if($type=='jsondata') {
 	$handled=1;
 }
 if($type=='video_devices') {
-	$query=sprintf('select id,name as label,name as value from TbDevice where isVideo=1');
+	$query=sprintf('select id,name as label,name as value from TbDevice where isVideo=1 order by name');
 	$result=my_mysql_query($query);
 	$response=my_json_encode($result);
 	$handled=1;
 }
 if($type=='video_places') {
-	$query=sprintf('select id,name as label,name as value from TbLocation where isVideo=1');
+	$query=sprintf('select id,name as label,name as value from TbLocation where isVideo=1 order by name');
 	$result=my_mysql_query($query);
 	$response=my_json_encode($result);
 	$handled=1;
@@ -25,7 +25,7 @@ if($type=='TbIdPerson') {
 	$handled=1;
 }
 if($type=='TbLocation' || $type=='TbRating' || $type=='TbClCalendar' || $type=='TbBsCompanies' || $type=='TbBsCourses' || $type=='TbExternalType' || $type=='TbWkWorkType' || $type=='TbWkWork' || $type=='TbWkWorkContribType' || $type=='TbDevice' || $type=='TbOrganization' || $type=='TbTdActivity') {
-	$query=sprintf('select id,name as label,name as value from %s',
+	$query=sprintf('select id,name as label,name as value from %s order by name',
 		mysql_real_escape_string($type)
 	);
 	$result=my_mysql_query($query);

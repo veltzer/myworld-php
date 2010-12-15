@@ -15,6 +15,19 @@ jQuery(document).ready(function() {
 		'formid':'#movie_form',
 	};
 	jQuery('#movie_send').jsubmit(init);
+	
+	var init={
+		'type':'select',
+		'name':'Person',
+		'sname':'personId',
+		'initState':false,
+		'initMsg':'Put the person id here',
+		'initVal':1,
+		'url':'GetData.php?type=TbIdPerson',
+		'logger':'#log',
+		'submit':'#movie_send',
+	};
+	jQuery('#movie_personid').jvalidfield(init);
 
 	var init={
 		'name':'Name',
@@ -447,8 +460,9 @@ jQuery(document).ready(function() {
 		'type':'select',
 		'name':'Viewing person',
 		'sname':'personId',
-		'initState':true,
+		'initState':false,
 		'initMsg':'Put the person id here',
+		'initVal':1,
 		'url':'GetData.php?type=TbIdPerson',
 		'logger':'#log',
 		'submit':'#workview_send',
@@ -700,8 +714,9 @@ jQuery(document).ready(function() {
 		'type':'select',
 		'name':'Viewing person',
 		'sname':'personId',
-		'initState':true,
+		'initState':false,
 		'initMsg':'Put the person id here',
+		'initVal':1,
 		'url':'GetData.php?type=TbIdPerson',
 		'logger':'#log',
 		'submit':'#workviewreview_send',
