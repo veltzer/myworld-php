@@ -54,13 +54,6 @@ jQuery(document).ready(function() {
 	var init={
 		'name':'Date',
 		'sname':'date',
-		'initState':false,
-		'initMsg':'put the date seen here',
-		'regex':/.+/,
-		'validate':function(widget,value) {
-			var t=Date.parse(value);
-			return !isNaN(t);
-		},
 		'logger':'#log',
 		'submit':'#movie_send',
 	};
@@ -480,13 +473,6 @@ jQuery(document).ready(function() {
 	var init={
 		'name':'Date',
 		'sname':'date',
-		'initState':false,
-		'initMsg':'put the date seen here',
-		'regex':/.+/,
-		'validate':function(widget,value) {
-			var t=Date.parse(value);
-			return !isNaN(t);
-		},
 		'logger':'#log',
 		'submit':'#workview_send',
 	};
@@ -552,13 +538,6 @@ jQuery(document).ready(function() {
 	var init={
 		'name':'End Date',
 		'sname':'end',
-		'initState':false,
-		'initMsg':'end of activity date here',
-		'regex':/.+/,
-		'validate':function(widget,value) {
-			var t=Date.parse(value);
-			return !isNaN(t);
-		},
 		'logger':'#log',
 		'submit':'#done_send',
 	};
@@ -660,16 +639,6 @@ jQuery(document).ready(function() {
 	var init={
 		'name':'Start date',
 		'sname':'start',
-		'initState':false,
-		'initMsg':'put the start date here',
-		'regex':/.+/,
-		'validate':function(widget,value) {
-			if(value=='') {
-				return True;
-			}
-			var t=Date.parse(value);
-			return !isNaN(t);
-		},
 		'logger':'#log',
 		'submit':'#workviewreview_send',
 	};
@@ -678,13 +647,6 @@ jQuery(document).ready(function() {
 	var init={
 		'name':'End date',
 		'sname':'end',
-		'initState':false,
-		'initMsg':'put the end date here',
-		'regex':/.+/,
-		'validate':function(widget,value) {
-			var t=Date.parse(value);
-			return !isNaN(t);
-		},
 		'logger':'#log',
 		'submit':'#workviewreview_send',
 	};

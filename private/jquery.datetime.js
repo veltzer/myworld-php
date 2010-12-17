@@ -6,9 +6,7 @@ jQuery(document).ready(function() {
 	jQuery.widget('ui.datetime',{
 		// options
 		options:{
-			// regex must be set for text inputs
 			id:0,
-			regex:null,
 			type:'input',
 			inputtype:'text',
 			name:'No name',
@@ -28,7 +26,11 @@ jQuery(document).ready(function() {
 			},
 			// override if you want your own validation function
 			validate:function(widget,value) {
-				return widget.options.regex.test(value);
+				//if(value=='') {
+				//	return True;
+				//}
+				var t=Date.parse(value);
+				return !isNaN(t);
 			},
 			// override if you want your own validation error function
 			validate_error:function(widget,value) {
