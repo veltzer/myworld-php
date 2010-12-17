@@ -45,7 +45,7 @@ jQuery(document).ready(function() {
 		},
 		report:function(state) {
 			if(this.options.submit!=null) {
-				jQuery(this.options.submit).submit('report',this.id,state);
+				jQuery(this.options.submit).jsubmit('report',this.id,state);
 			}
 		},
 		setInformation:function(msg) {

@@ -33,7 +33,7 @@ jQuery(document).ready(function() {
 		return this.num_errors;
 	}
 
-	jQuery.widget('ui.submit',{
+	jQuery.widget('ui.jsubmit',{
 		// options
 		options:{
 			// text that will appear on the button

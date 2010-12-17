@@ -14,7 +14,7 @@ jQuery(document).ready(function() {
 		'logger':'#log',
 		'formid':'#movie_form',
 	};
-	jQuery('#movie_send').submit(init);
+	jQuery('#movie_send').jsubmit(init);
 	
 	var init={
 		'type':'select',
@@ -114,7 +114,7 @@ jQuery(document).ready(function() {
 		'logger':'#log',
 		'formid':'#event_form',
 	};
-	jQuery('#event_send').submit(init);
+	jQuery('#event_send').jsubmit(init);
 
 	// construct two date pickers
 	//jQuery('#event_from_date').datepicker();
@@ -185,7 +185,7 @@ jQuery(document).ready(function() {
 		'logger':'#log',
 		'formid':'#person_form',
 	};
-	jQuery('#person_send').submit(init);
+	jQuery('#person_send').jsubmit(init);
 
 	var init={
 		'name':'Honorific',
@@ -228,7 +228,7 @@ jQuery(document).ready(function() {
 		'logger':'#log',
 		'formid':'#work_form',
 	};
-	jQuery('#work_send').submit(init);
+	jQuery('#work_send').jsubmit(init);
 
 	var init={
 		'name':'Name',
@@ -261,7 +261,7 @@ jQuery(document).ready(function() {
 		'logger':'#log',
 		'formid':'#workexternal_form',
 	};
-	jQuery('#workexternal_send').submit(init);
+	jQuery('#workexternal_send').jsubmit(init);
 
 	var init={
 		'type':'select',
@@ -306,7 +306,7 @@ jQuery(document).ready(function() {
 		'logger':'#log',
 		'formid':'#personexternal_form',
 	};
-	jQuery('#personexternal_send').submit(init);
+	jQuery('#personexternal_send').jsubmit(init);
 
 	var init={
 		'type':'select',
@@ -351,7 +351,7 @@ jQuery(document).ready(function() {
 		'logger':'#log',
 		'formid':'#personwork_form',
 	};
-	jQuery('#personwork_send').submit(init);
+	jQuery('#personwork_send').jsubmit(init);
 
 	var init={
 		'type':'select',
@@ -397,7 +397,7 @@ jQuery(document).ready(function() {
 		'logger':'#log',
 		'formid':'#orgwork_form',
 	};
-	jQuery('#orgwork_send').submit(init);
+	jQuery('#orgwork_send').jsubmit(init);
 
 	var init={
 		'type':'select',
@@ -443,7 +443,7 @@ jQuery(document).ready(function() {
 		'logger':'#log',
 		'formid':'#workview_form',
 	};
-	jQuery('#workview_send').submit(init);
+	jQuery('#workview_send').jsubmit(init);
 	
 	var init={
 		'type':'select',
@@ -533,7 +533,7 @@ jQuery(document).ready(function() {
 		'logger':'#log',
 		'formid':'#done_form',
 	};
-	jQuery('#done_send').submit(init);
+	jQuery('#done_send').jsubmit(init);
 
 	var init={
 		'name':'End Date',
@@ -587,7 +587,7 @@ jQuery(document).ready(function() {
 		'logger':'#log',
 		'formid':'#workviewreview_form',
 	};
-	jQuery('#workviewreview_send').submit(init);
+	jQuery('#workviewreview_send').jsubmit(init);
 
 	var init={
 		'name':'Name',
