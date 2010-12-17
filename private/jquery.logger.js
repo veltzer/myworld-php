@@ -1,5 +1,5 @@
 jQuery(document).ready(function() {
-	jQuery.widget('ui.jlogger',{
+	jQuery.widget('ui.logger',{
 		// options
 		options:{
 			name:null,

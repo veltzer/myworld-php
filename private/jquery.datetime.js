@@ -3,7 +3,7 @@
  */
 jQuery(document).ready(function() {
 	var running_id=0;
-	jQuery.widget('ui.jdatetimefield',{
+	jQuery.widget('ui.datetime',{
 		// options
 		options:{
 			// regex must be set for text inputs
@@ -17,7 +17,7 @@ jQuery(document).ready(function() {
 			initMsg:null,
 			rows:10,
 			initState:false,
-			initVal:null,
+			initVal:new Date(),
 			httptype:'GET',
 			url:null,
 			// set if you want this widget to log into your logger
@@ -32,18 +32,18 @@ jQuery(document).ready(function() {
 			},
 			// override if you want your own validation error function
 			validate_error:function(widget,value) {
-				return 'regex error '+widget.options.regex;
+				return 'could not parse date object';
 			},
 			submit:null,
 		},
 		log:function(msg,error) {
 			if(this.options.logger!=null) {
-				jQuery(this.options.logger).jlogger('log',msg,error);
+				jQuery(this.options.logger).logger('log',msg,error);
 			}
 		},
 		report:function(state) {
 			if(this.options.submit!=null) {
-				jQuery(this.options.submit).jsubmit('report',this.id,state);
+				jQuery(this.options.submit).submit('report',this.id,state);
 			}
 		},
 		setInformation:function(msg) {
