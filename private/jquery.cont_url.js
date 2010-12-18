@@ -56,7 +56,7 @@ jQuery(document).ready(function() {
 		});
 	}
 	jQuery.fn.extend({
-		url:function(options) {
+		cont_url:function(options) {
 			var defaults = {
 				url:null,
 				addLabel:true,

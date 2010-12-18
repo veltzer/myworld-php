@@ -11,7 +11,7 @@
  */
 jQuery(document).ready(function() {
 	var running_id=0;
-	jQuery.widget('ui.valid',{
+	jQuery.widget('ui.cont_valid',{
 		// options
 		options:{
 			id:0,
@@ -46,12 +46,12 @@ jQuery(document).ready(function() {
 		},
 		log:function(msg,error) {
 			if(this.options.logger!=null) {
-				jQuery(this.options.logger).logger('log',msg,error);
+				jQuery(this.options.logger).cont_logger('log',msg,error);
 			}
 		},
 		report:function(state) {
 			if(this.options.submit!=null) {
-				jQuery(this.options.submit).jsubmit('report',this.id,state);
+				jQuery(this.options.submit).cont_submit('report',this.id,state);
 			}
 		},
 		setInformation:function(msg) {

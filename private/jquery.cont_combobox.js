@@ -1,5 +1,5 @@
 jQuery(document).ready(function() {
-	jQuery.widget("ui.combobox",{
+	jQuery.widget("ui.cont_combobox",{
 		// options
 		options:{
 			name:null,

@@ -6,7 +6,7 @@ jQuery(document).ready(function() {
 	// since widgets use the logger and submit then they must
 	// be created BEFORE the widgets...
 
-	jQuery('#log').logger();
+	jQuery('#log').cont_logger();
 
 	var init={
 		'name':'Send',
@@ -14,7 +14,7 @@ jQuery(document).ready(function() {
 		'logger':'#log',
 		'formid':'#movie_form',
 	};
-	jQuery('#movie_send').jsubmit(init);
+	jQuery('#movie_send').cont_submit(init);
 	
 	var init={
 		'type':'select',
@@ -27,7 +27,7 @@ jQuery(document).ready(function() {
 		'logger':'#log',
 		'submit':'#movie_send',
 	};
-	jQuery('#movie_personid').valid(init);
+	jQuery('#movie_personid').cont_valid(init);
 
 	var init={
 		'name':'Name',
@@ -38,7 +38,7 @@ jQuery(document).ready(function() {
 		'logger':'#log',
 		'submit':'#movie_send',
 	};
-	jQuery('#movie_name').valid(init);
+	jQuery('#movie_name').cont_valid(init);
 
 	var init={
 		'name':'Imdbid',
@@ -49,7 +49,7 @@ jQuery(document).ready(function() {
 		'logger':'#log',
 		'submit':'#movie_send',
 	};
-	jQuery('#movie_imdbid').valid(init);
+	jQuery('#movie_imdbid').cont_valid(init);
 
 	var init={
 		'name':'Date',
@@ -57,7 +57,7 @@ jQuery(document).ready(function() {
 		'logger':'#log',
 		'submit':'#movie_send',
 	};
-	jQuery('#movie_date').datetime(init);
+	jQuery('#movie_date').cont_datetime(init);
 
 	var init={
 		'type':'select',
@@ -69,7 +69,7 @@ jQuery(document).ready(function() {
 		'logger':'#log',
 		'submit':'#movie_send',
 	};
-	jQuery('#movie_locationid').valid(init);
+	jQuery('#movie_locationid').cont_valid(init);
 
 	var init={
 		'type':'select',
@@ -81,7 +81,7 @@ jQuery(document).ready(function() {
 		'logger':'#log',
 		'submit':'#movie_send',
 	};
-	jQuery('#movie_deviceid').valid(init);
+	jQuery('#movie_deviceid').cont_valid(init);
 
 	var init={
 		'name':'Rating',
@@ -91,7 +91,7 @@ jQuery(document).ready(function() {
 		'url':'GetData.php?type=TbRating',
 		'type':'select',
 	};
-	jQuery('#movie_ratingid').valid(init);
+	jQuery('#movie_ratingid').cont_valid(init);
 
 	var init={
 		'name':'Review',
@@ -103,7 +103,7 @@ jQuery(document).ready(function() {
 		'logger':'#log',
 		'submit':'#movie_send',
 	};
-	jQuery('#movie_review').valid(init);
+	jQuery('#movie_review').cont_valid(init);
 
 	// event stuff starts here...
 
@@ -114,7 +114,7 @@ jQuery(document).ready(function() {
 		'logger':'#log',
 		'formid':'#event_form',
 	};
-	jQuery('#event_send').jsubmit(init);
+	jQuery('#event_send').cont_submit(init);
 
 	// construct two date pickers
 	//jQuery('#event_from_date').datepicker();
@@ -133,7 +133,7 @@ jQuery(document).ready(function() {
 		'logger':'#log',
 		'submit':'#event_send',
 	};
-	jQuery('#event_name').valid(init);
+	jQuery('#event_name').cont_valid(init);
 
 	// my own fields (from the database)
 	var init={
@@ -145,24 +145,24 @@ jQuery(document).ready(function() {
 	};
 
 	init.url='GetData.php?type=TbClCalendar';
-	jQuery('#event_calendarid').valid(init);
+	jQuery('#event_calendarid').cont_valid(init);
 
 	init.url='GetData.php?type=TbBsCompanies';
 	init.name='Company';
-	jQuery('#event_companyid').valid(init);
+	jQuery('#event_companyid').cont_valid(init);
 
 	init.url='GetData.php?type=TbBsCourses';
 	init.name='Course';
-	jQuery('#event_courseid').valid(init);
+	jQuery('#event_courseid').cont_valid(init);
 
 	init.url='GetData.php?type=TbLocation';
 	init.name='Location';
-	jQuery('#event_locationid').valid(init);
+	jQuery('#event_locationid').cont_valid(init);
 
 	init.url='GetData.php?type=TbIdPerson';
 	init.name='Person';
 	init.initVal=1;
-	jQuery('#event_personid').valid(init);
+	jQuery('#event_personid').cont_valid(init);
 	delete init.initVal;
 
 	var init={
@@ -175,7 +175,7 @@ jQuery(document).ready(function() {
 		'logger':'#log',
 		'submit':'#event_send',
 	};
-	jQuery('#event_remark').valid(init);
+	jQuery('#event_remark').cont_valid(init);
 
 	// person stuff starts here
 
@@ -185,7 +185,7 @@ jQuery(document).ready(function() {
 		'logger':'#log',
 		'formid':'#person_form',
 	};
-	jQuery('#person_send').jsubmit(init);
+	jQuery('#person_send').cont_submit(init);
 
 	var init={
 		'name':'Honorific',
@@ -195,30 +195,30 @@ jQuery(document).ready(function() {
 		'logger':'#log',
 		'submit':'#person_send',
 	};
-	jQuery('#person_honorific').valid(init);
+	jQuery('#person_honorific').cont_valid(init);
 
 	init.name='First Name';
 	init.sname='firstname';
-	jQuery('#person_firstname').valid(init);
+	jQuery('#person_firstname').cont_valid(init);
 
 	init.name='Surname';
 	init.sname='surname';
-	jQuery('#person_surname').valid(init);
+	jQuery('#person_surname').cont_valid(init);
 
 	init.name='Other Name';
 	init.sname='othername';
 	init.regex=/^[\w\.]*$/;
-	jQuery('#person_othername').valid(init);
+	jQuery('#person_othername').cont_valid(init);
 
 	init.name='Remark';
 	init.sname='remark';
 	init.regex=/^[\w\. ]*$/;
-	jQuery('#person_remark').valid(init);
+	jQuery('#person_remark').cont_valid(init);
 
 	init.name='Ordinal';
 	init.sname='ordinal';
 	init.regex=/^\d*$/;
-	jQuery('#person_ordinal').valid(init);
+	jQuery('#person_ordinal').cont_valid(init);
 
 	// work stuff starts here
 
@@ -228,7 +228,7 @@ jQuery(document).ready(function() {
 		'logger':'#log',
 		'formid':'#work_form',
 	};
-	jQuery('#work_send').jsubmit(init);
+	jQuery('#work_send').cont_submit(init);
 
 	var init={
 		'name':'Name',
@@ -239,7 +239,7 @@ jQuery(document).ready(function() {
 		'logger':'#log',
 		'submit':'#work_send',
 	};
-	jQuery('#work_name').valid(init);
+	jQuery('#work_name').cont_valid(init);
 
 	var init={
 		'type':'select',
@@ -251,7 +251,7 @@ jQuery(document).ready(function() {
 		'logger':'#log',
 		'submit':'#work_send',
 	};
-	jQuery('#work_typeid').valid(init);
+	jQuery('#work_typeid').cont_valid(init);
 
 	// work -> external stuff
 
@@ -261,7 +261,7 @@ jQuery(document).ready(function() {
 		'logger':'#log',
 		'formid':'#workexternal_form',
 	};
-	jQuery('#workexternal_send').jsubmit(init);
+	jQuery('#workexternal_send').cont_submit(init);
 
 	var init={
 		'type':'select',
@@ -273,7 +273,7 @@ jQuery(document).ready(function() {
 		'logger':'#log',
 		'submit':'#workexternal_send',
 	};
-	jQuery('#workexternal_workid').valid(init);
+	jQuery('#workexternal_workid').cont_valid(init);
 
 	var init={
 		'type':'select',
@@ -285,7 +285,7 @@ jQuery(document).ready(function() {
 		'logger':'#log',
 		'submit':'#workexternal_send',
 	};
-	jQuery('#workexternal_externalid').valid(init);
+	jQuery('#workexternal_externalid').cont_valid(init);
 
 	var init={
 		'name':'External Code',
@@ -296,7 +296,7 @@ jQuery(document).ready(function() {
 		'logger':'#log',
 		'submit':'#workexternal_send',
 	};
-	jQuery('#workexternal_externalcode').valid(init);
+	jQuery('#workexternal_externalcode').cont_valid(init);
 
 	// person -> external stuff
 
@@ -306,7 +306,7 @@ jQuery(document).ready(function() {
 		'logger':'#log',
 		'formid':'#personexternal_form',
 	};
-	jQuery('#personexternal_send').jsubmit(init);
+	jQuery('#personexternal_send').cont_submit(init);
 
 	var init={
 		'type':'select',
@@ -318,7 +318,7 @@ jQuery(document).ready(function() {
 		'logger':'#log',
 		'submit':'#personexternal_send',
 	};
-	jQuery('#personexternal_externalid').valid(init);
+	jQuery('#personexternal_externalid').cont_valid(init);
 
 	var init={
 		'name':'External Code',
@@ -329,7 +329,7 @@ jQuery(document).ready(function() {
 		'logger':'#log',
 		'submit':'#personexternal_send',
 	};
-	jQuery('#personexternal_externalcode').valid(init);
+	jQuery('#personexternal_externalcode').cont_valid(init);
 
 	var init={
 		'type':'select',
@@ -341,7 +341,7 @@ jQuery(document).ready(function() {
 		'logger':'#log',
 		'submit':'#personexternal_send',
 	};
-	jQuery('#personexternal_personid').valid(init);
+	jQuery('#personexternal_personid').cont_valid(init);
 
 	// person -> work starts here
 
@@ -351,7 +351,7 @@ jQuery(document).ready(function() {
 		'logger':'#log',
 		'formid':'#personwork_form',
 	};
-	jQuery('#personwork_send').jsubmit(init);
+	jQuery('#personwork_send').cont_submit(init);
 
 	var init={
 		'type':'select',
@@ -363,7 +363,7 @@ jQuery(document).ready(function() {
 		'logger':'#log',
 		'submit':'#personwork_send',
 	};
-	jQuery('#personwork_workid').valid(init);
+	jQuery('#personwork_workid').cont_valid(init);
 
 	var init={
 		'type':'select',
@@ -375,7 +375,7 @@ jQuery(document).ready(function() {
 		'logger':'#log',
 		'submit':'#personwork_send',
 	};
-	jQuery('#personwork_personid').valid(init);
+	jQuery('#personwork_personid').cont_valid(init);
 
 	var init={
 		'type':'select',
@@ -387,7 +387,7 @@ jQuery(document).ready(function() {
 		'logger':'#log',
 		'submit':'#personwork_send',
 	};
-	jQuery('#personwork_typeid').valid(init);
+	jQuery('#personwork_typeid').cont_valid(init);
 
 	// organization -> work stuff
 
@@ -397,7 +397,7 @@ jQuery(document).ready(function() {
 		'logger':'#log',
 		'formid':'#orgwork_form',
 	};
-	jQuery('#orgwork_send').jsubmit(init);
+	jQuery('#orgwork_send').cont_submit(init);
 
 	var init={
 		'type':'select',
@@ -409,7 +409,7 @@ jQuery(document).ready(function() {
 		'logger':'#log',
 		'submit':'#orgwork_send',
 	};
-	jQuery('#orgwork_workid').valid(init);
+	jQuery('#orgwork_workid').cont_valid(init);
 
 	var init={
 		'type':'select',
@@ -421,7 +421,7 @@ jQuery(document).ready(function() {
 		'logger':'#log',
 		'submit':'#orgwork_send',
 	};
-	jQuery('#orgwork_organizationid').valid(init);
+	jQuery('#orgwork_organizationid').cont_valid(init);
 
 	var init={
 		'type':'select',
@@ -433,7 +433,7 @@ jQuery(document).ready(function() {
 		'logger':'#log',
 		'submit':'#orgwork_send',
 	};
-	jQuery('#orgwork_typeid').valid(init);
+	jQuery('#orgwork_typeid').cont_valid(init);
 
 	// workview stuff starts here
 
@@ -443,7 +443,7 @@ jQuery(document).ready(function() {
 		'logger':'#log',
 		'formid':'#workview_form',
 	};
-	jQuery('#workview_send').jsubmit(init);
+	jQuery('#workview_send').cont_submit(init);
 	
 	var init={
 		'type':'select',
@@ -456,7 +456,7 @@ jQuery(document).ready(function() {
 		'logger':'#log',
 		'submit':'#workview_send',
 	};
-	jQuery('#workview_personid').valid(init);
+	jQuery('#workview_personid').cont_valid(init);
 
 	var init={
 		'type':'select',
@@ -468,7 +468,7 @@ jQuery(document).ready(function() {
 		'logger':'#log',
 		'submit':'#workview_send',
 	};
-	jQuery('#workview_workid').valid(init);
+	jQuery('#workview_workid').cont_valid(init);
 
 	var init={
 		'name':'Date',
@@ -476,7 +476,7 @@ jQuery(document).ready(function() {
 		'logger':'#log',
 		'submit':'#workview_send',
 	};
-	jQuery('#workview_date').datetime(init);
+	jQuery('#workview_date').cont_datetime(init);
 
 	var init={
 		'type':'select',
@@ -488,7 +488,7 @@ jQuery(document).ready(function() {
 		'logger':'#log',
 		'submit':'#workview_send',
 	};
-	jQuery('#workview_locationid').valid(init);
+	jQuery('#workview_locationid').cont_valid(init);
 
 	var init={
 		'type':'select',
@@ -500,7 +500,7 @@ jQuery(document).ready(function() {
 		'logger':'#log',
 		'submit':'#workview_send',
 	};
-	jQuery('#workview_deviceid').valid(init);
+	jQuery('#workview_deviceid').cont_valid(init);
 
 	var init={
 		'type':'select',
@@ -511,7 +511,7 @@ jQuery(document).ready(function() {
 		'url':'GetData.php?type=TbRating',
 		'submit':'#workview_send',
 	};
-	jQuery('#workview_ratingid').valid(init);
+	jQuery('#workview_ratingid').cont_valid(init);
 
 	var init={
 		'name':'Review',
@@ -523,7 +523,7 @@ jQuery(document).ready(function() {
 		'logger':'#log',
 		'submit':'#workview_send',
 	};
-	jQuery('#workview_review').valid(init);
+	jQuery('#workview_review').cont_valid(init);
 
 	// done stuff starts here
 
@@ -533,7 +533,7 @@ jQuery(document).ready(function() {
 		'logger':'#log',
 		'formid':'#done_form',
 	};
-	jQuery('#done_send').jsubmit(init);
+	jQuery('#done_send').cont_submit(init);
 
 	var init={
 		'name':'End Date',
@@ -541,7 +541,7 @@ jQuery(document).ready(function() {
 		'logger':'#log',
 		'submit':'#done_send',
 	};
-	jQuery('#done_end').datetime(init);
+	jQuery('#done_end').cont_datetime(init);
 
 	var init={
 		'type':'select',
@@ -553,7 +553,7 @@ jQuery(document).ready(function() {
 		'logger':'#log',
 		'submit':'#done_send',
 	};
-	jQuery('#done_locationid').valid(init);
+	jQuery('#done_locationid').cont_valid(init);
 
 	var init={
 		'type':'select',
@@ -565,7 +565,7 @@ jQuery(document).ready(function() {
 		'logger':'#log',
 		'submit':'#done_send',
 	};
-	jQuery('#done_activityid').valid(init);
+	jQuery('#done_activityid').cont_valid(init);
 
 	var init={
 		'name':'Remark',
@@ -577,7 +577,7 @@ jQuery(document).ready(function() {
 		'logger':'#log',
 		'submit':'#done_send',
 	};
-	jQuery('#done_remark').valid(init);
+	jQuery('#done_remark').cont_valid(init);
 
 	// workviewreview stuff starts here
 
@@ -587,7 +587,7 @@ jQuery(document).ready(function() {
 		'logger':'#log',
 		'formid':'#workviewreview_form',
 	};
-	jQuery('#workviewreview_send').jsubmit(init);
+	jQuery('#workviewreview_send').cont_submit(init);
 
 	var init={
 		'name':'Name',
@@ -599,7 +599,7 @@ jQuery(document).ready(function() {
 		'logger':'#log',
 		'submit':'#workviewreview_send',
 	};
-	jQuery('#workviewreview_name').valid(init);
+	jQuery('#workviewreview_name').cont_valid(init);
 
 	var init={
 		'type':'select',
@@ -611,7 +611,7 @@ jQuery(document).ready(function() {
 		'logger':'#log',
 		'submit':'#workviewreview_send',
 	};
-	jQuery('#workviewreview_typeid').valid(init);
+	jQuery('#workviewreview_typeid').cont_valid(init);
 
 	var init={
 		'type':'select',
@@ -623,7 +623,7 @@ jQuery(document).ready(function() {
 		'logger':'#log',
 		'submit':'#workviewreview_send',
 	};
-	jQuery('#workviewreview_externalid').valid(init);
+	jQuery('#workviewreview_externalid').cont_valid(init);
 
 	var init={
 		'name':'External Code',
@@ -634,7 +634,7 @@ jQuery(document).ready(function() {
 		'logger':'#log',
 		'submit':'#workviewreview_send',
 	};
-	jQuery('#workviewreview_externalcode').valid(init);
+	jQuery('#workviewreview_externalcode').cont_valid(init);
 
 	var init={
 		'name':'Start date',
@@ -642,7 +642,7 @@ jQuery(document).ready(function() {
 		'logger':'#log',
 		'submit':'#workviewreview_send',
 	};
-	jQuery('#workviewreview_start').datetime(init);
+	jQuery('#workviewreview_start').cont_datetime(init);
 
 	var init={
 		'name':'End date',
@@ -650,7 +650,7 @@ jQuery(document).ready(function() {
 		'logger':'#log',
 		'submit':'#workviewreview_send',
 	};
-	jQuery('#workviewreview_end').datetime(init);
+	jQuery('#workviewreview_end').cont_datetime(init);
 
 	var init={
 		'type':'select',
@@ -663,7 +663,7 @@ jQuery(document).ready(function() {
 		'logger':'#log',
 		'submit':'#workviewreview_send',
 	};
-	jQuery('#workviewreview_personid').valid(init);
+	jQuery('#workviewreview_personid').cont_valid(init);
 
 	var init={
 		'type':'select',
@@ -675,7 +675,7 @@ jQuery(document).ready(function() {
 		'logger':'#log',
 		'submit':'#workviewreview_send',
 	};
-	jQuery('#workviewreview_locationid').valid(init);
+	jQuery('#workviewreview_locationid').cont_valid(init);
 
 	var init={
 		'type':'select',
@@ -687,7 +687,7 @@ jQuery(document).ready(function() {
 		'logger':'#log',
 		'submit':'#workviewreview_send',
 	};
-	jQuery('#workviewreview_deviceid').valid(init);
+	jQuery('#workviewreview_deviceid').cont_valid(init);
 
 	var init={
 		'name':'Rating',
@@ -697,7 +697,7 @@ jQuery(document).ready(function() {
 		'url':'GetData.php?type=TbRating',
 		'type':'select',
 	};
-	jQuery('#workviewreview_ratingid').valid(init);
+	jQuery('#workviewreview_ratingid').cont_valid(init);
 
 	var init={
 		'name':'Review',
@@ -709,5 +709,5 @@ jQuery(document).ready(function() {
 		'logger':'#log',
 		'submit':'#workviewreview_send',
 	};
-	jQuery('#workviewreview_review').valid(init);
+	jQuery('#workviewreview_review').cont_valid(init);
 });
