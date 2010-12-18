@@ -338,6 +338,9 @@ function get_external_href($external_name,$external_id) {
 		case 'yahoo':
 			return 'http://profiles.yahoo.com/'.$external_id;
 			break;
+		case 'github':
+			return 'https://github.com/'.$external_id;
+			break;
 		default:
 			error('what external name is ['.$external_name.']');
 			break;
