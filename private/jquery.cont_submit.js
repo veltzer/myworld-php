@@ -55,7 +55,7 @@ jQuery(document).ready(function() {
 		},
 		log:function(msg,error) {
 			if(this.options.logger!=null) {
-				jQuery(this.options.logger).logger('log',msg,error);
+				jQuery(this.options.logger).cont_logger('log',msg,error);
 			}
 		},
 		setInformation:function(msg) {
