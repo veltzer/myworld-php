@@ -3,3 +3,4 @@
 - hacked creatorId and producerId from TbWkWork.
 - brought back imdb ids and ttc ids
 - got ridd of the person group table.
+- renamed all my controllers to cont_[name].

@@ -20,3 +20,8 @@ What is an event?
 	A name,remark, url, description, location and possibly some more data.
 	A creator.
 	A calendar to which it is attached.
+
+
+The jQuery widget design descisions:
+====================================
+- controls will be called cont_[name] to make them easy to find.
