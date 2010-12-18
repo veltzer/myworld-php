@@ -344,6 +344,9 @@ function get_external_href($external_name,$external_id) {
 		case 'sourceforge':
 			return 'https://sourceforge.net/users/'.$external_id;
 			break;
+		case 'imdb_user':
+			return 'http://www.imdb.com/user/ur'.$external_id.'/';
+			break;
 		default:
 			error('what external name is ['.$external_name.']');
 			break;
