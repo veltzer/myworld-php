@@ -117,13 +117,21 @@ jQuery(document).ready(function() {
 	jQuery('#event_send').cont_submit(init);
 
 	// construct two date pickers
-	//jQuery('#event_from_date').datepicker();
-	//jQuery('#event_to_date').datepicker();
+	init.sname='from_date';
+	init.name='From Date';
+	jQuery('#event_from_date').cont_datepicker(init);
+	init.sname='to_date';
+	init.name='To Date';
+	jQuery('#event_to_date').cont_datepicker(init);
 
 	// the time pickers
 	//var init={ 'secView':false };
-	//jQuery('#event_from_time').jtimepicker(init);
-	//jQuery('#event_to_time').jtimepicker(init);
+	init.sname='from_time';
+	init.name='From time';
+	jQuery('#event_from_time').cont_time(init);
+	init.sname='to_time';
+	init.name='To Time';
+	jQuery('#event_to_time').cont_time(init);
 
 	var init={
 		'name':'Name',

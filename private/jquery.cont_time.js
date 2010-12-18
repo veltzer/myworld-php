@@ -16,7 +16,7 @@ jQuery(document).ready(function() {
 		options:{
 			id:0,
 			// regex must be set for text inputs
-			regex:null,
+			regex:/\d\d\:\d\d/,
 			type:'input',
 			inputtype:'text',
 			name:'No name',
