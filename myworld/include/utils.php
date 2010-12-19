@@ -347,6 +347,9 @@ function get_external_href($external_name,$external_id) {
 		case 'imdb_user':
 			return 'http://www.imdb.com/user/ur'.$external_id.'/';
 			break;
+		case 'amazon_user':
+			return 'http://www.amazon.com/gp/pdp/profile/'.$external_id;
+			break;
 		default:
 			error('what external name is ['.$external_name.']');
 			break;
