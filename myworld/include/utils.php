@@ -350,6 +350,9 @@ function get_external_href($external_name,$external_id) {
 		case 'amazon_user':
 			return 'http://www.amazon.com/gp/pdp/profile/'.$external_id;
 			break;
+		case 'cpan':
+			return 'http://search.cpan.org/~'.$external_id.'/';
+			break;
 		default:
 			error('what external name is ['.$external_name.']');
 			break;
