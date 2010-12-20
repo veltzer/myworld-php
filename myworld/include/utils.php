@@ -353,6 +353,9 @@ function get_external_href($external_name,$external_id) {
 		case 'cpan':
 			return 'http://search.cpan.org/~'.$external_id.'/';
 			break;
+		case 'advogato':
+			return 'http://advogato.org/person/'.$external_id.'/';
+			break;
 		default:
 			error('what external name is ['.$external_name.']');
 			break;
