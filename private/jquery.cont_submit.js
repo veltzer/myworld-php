@@ -33,7 +33,7 @@ jQuery(document).ready(function() {
 		return this.num_errors;
 	}
 
-	jQuery.widget('ui.jsubmit',{
+	jQuery.widget('ui.cont_submit',{
 		// options
 		options:{
 			// text that will appear on the button
@@ -55,7 +55,7 @@ jQuery(document).ready(function() {
 		},
 		log:function(msg,error) {
 			if(this.options.logger!=null) {
-				jQuery(this.options.logger).jlogger('log',msg,error);
+				jQuery(this.options.logger).cont_logger('log',msg,error);
 			}
 		},
 		setInformation:function(msg) {

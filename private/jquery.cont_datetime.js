@@ -1,22 +1,12 @@
 /*
- * This is a validating field.
- * You can pass any function to validate against.
- * If you validate vs a regex then just pass the regex.
- *
- * TODO:
- * - remove the running id business or rewrite it better...
- * - in a select state this widget should have an option to declare
- *   	this value invalid until the user actually puts in a value.
- *   	This should even be the default behaviour.
+ * This is a datetime field...
  */
 jQuery(document).ready(function() {
 	var running_id=0;
-	jQuery.widget('ui.jvalidfield',{
+	jQuery.widget('ui.cont_datetime',{
 		// options
 		options:{
-			// regex must be set for text inputs
 			id:0,
-			regex:null,
 			type:'input',
 			inputtype:'text',
 			name:'No name',
@@ -25,7 +15,7 @@ jQuery(document).ready(function() {
 			initMsg:null,
 			rows:10,
 			initState:false,
-			initVal:null,
+			initVal:new Date(),
 			httptype:'GET',
 			url:null,
 			// set if you want this widget to log into your logger
@@ -36,22 +26,26 @@ jQuery(document).ready(function() {
 			},
 			// override if you want your own validation function
 			validate:function(widget,value) {
-				return widget.options.regex.test(value);
+				//if(value=='') {
+				//	return True;
+				//}
+				var t=Date.parse(value);
+				return !isNaN(t);
 			},
 			// override if you want your own validation error function
 			validate_error:function(widget,value) {
-				return 'regex error '+widget.options.regex;
+				return 'could not parse date object';
 			},
 			submit:null,
 		},
 		log:function(msg,error) {
 			if(this.options.logger!=null) {
-				jQuery(this.options.logger).jlogger('log',msg,error);
+				jQuery(this.options.logger).cont_logger('log',msg,error);
 			}
 		},
 		report:function(state) {
 			if(this.options.submit!=null) {
-				jQuery(this.options.submit).jsubmit('report',this.id,state);
+				jQuery(this.options.submit).cont_submit('report',this.id,state);
 			}
 		},
 		setInformation:function(msg) {

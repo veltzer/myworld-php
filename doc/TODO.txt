@@ -141,7 +141,15 @@ Schema changes:
 unite TbBsCompanies and TbOrganization.
 add images to people either by file upload or url.
 in TbWkWorkView change [start|end]ViewDate to [start|end].
+have the ability to have many persons connected with a single view.
+have the ability to have many persons connected with a single review.
 
 Misc issues:
 ============
 UTF doesn't show well in titles of articles. Check it out.
+
+courses:
+========
+add category to courses. Perl should be:
+	perl, programming
+	perl, advanced programming.

@@ -7,6 +7,7 @@ if($debug) {
 }
 
 # parameters for this script...
+$p_personId=my_get_post('personId');
 $p_name=my_get_post('name');
 $p_imdbid=my_get_post('imdbid');
 $p_date=javascriptdate_to_mysqldate(my_get_post('date'));
@@ -21,7 +22,6 @@ $p_review=my_get_post('review');
 my_mysql_start_transaction();
 
 $p_typeId=my_mysql_query_one('select id from TbWkWorkType where name=\'video movie\'');
-$p_viewerId=my_mysql_query_one('select id from TbIdPerson where firstname=\'Mark\' and surname=\'Veltzer\'');
 $p_externalId=my_mysql_query_one('select id from TbExternalType where name=\'imdb\'');
 
 // insert the actual work
@@ -44,7 +44,7 @@ $query=sprintf('insert into TbWkWorkView (endViewDate,locationId,deviceId,viewer
 	my_mysql_real_escape_string($p_date),
 	my_mysql_real_escape_string($p_locationId),
 	my_mysql_real_escape_string($p_deviceId),
-	my_mysql_real_escape_string($p_viewerId),
+	my_mysql_real_escape_string($p_personId),
 	my_mysql_real_escape_string($p_workId)
 );
 my_mysql_query($query);
@@ -55,7 +55,7 @@ $query=sprintf('insert into TbWkWorkReview (ratingId,review,reviewDate,workId,re
 	my_mysql_real_escape_string($p_review),
 	my_mysql_real_escape_string($p_date),
 	my_mysql_real_escape_string($p_workId),
-	my_mysql_real_escape_string($p_viewerId)
+	my_mysql_real_escape_string($p_personId)
 );
 my_mysql_query($query);
 $p_workreviewid=mysql_insert_id();

@@ -1,5 +1,5 @@
 jQuery(document).ready(function() {
-	jQuery.widget('ui.jlogger',{
+	jQuery.widget('ui.cont_logger',{
 		// options
 		options:{
 			name:null,
@@ -23,8 +23,8 @@ jQuery(document).ready(function() {
 		// general logging function
 		log:function(message,error) {
 			//var ownName = arguments.callee.toString();
-			//ownName = ownName.substr('function '.length);        // trim off 'function '
-			//ownName = ownName.substr(0,ownName.indexOf('('));        // trim off everything after the function name
+			//ownName = ownName.substr('function '.length); // trim off 'function '
+			//ownName = ownName.substr(0,ownName.indexOf('(')); // trim off everything after the function name
 			// create new element
 			var element=jQuery('<div>').text(message);
 			// add error class if this is an error

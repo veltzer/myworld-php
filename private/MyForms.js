@@ -6,7 +6,7 @@ jQuery(document).ready(function() {
 	// since widgets use the logger and submit then they must
 	// be created BEFORE the widgets...
 
-	jQuery('#log').jlogger();
+	jQuery('#log').cont_logger();
 
 	var init={
 		'name':'Send',
@@ -14,7 +14,20 @@ jQuery(document).ready(function() {
 		'logger':'#log',
 		'formid':'#movie_form',
 	};
-	jQuery('#movie_send').jsubmit(init);
+	jQuery('#movie_send').cont_submit(init);
+	
+	var init={
+		'type':'select',
+		'name':'Person',
+		'sname':'personId',
+		'initState':false,
+		'initMsg':'Put the person id here',
+		'initVal':1,
+		'url':'GetData.php?type=TbIdPerson',
+		'logger':'#log',
+		'submit':'#movie_send',
+	};
+	jQuery('#movie_personid').cont_valid(init);
 
 	var init={
 		'name':'Name',
@@ -25,7 +38,7 @@ jQuery(document).ready(function() {
 		'logger':'#log',
 		'submit':'#movie_send',
 	};
-	jQuery('#movie_name').jvalidfield(init);
+	jQuery('#movie_name').cont_valid(init);
 
 	var init={
 		'name':'Imdbid',
@@ -36,26 +49,15 @@ jQuery(document).ready(function() {
 		'logger':'#log',
 		'submit':'#movie_send',
 	};
-	jQuery('#movie_imdbid').jvalidfield(init);
+	jQuery('#movie_imdbid').cont_valid(init);
 
 	var init={
 		'name':'Date',
 		'sname':'date',
-		'initState':false,
-		'initMsg':'put the date seen here',
-		'regex':/.+/,
-		'validate':function(widget,value) {
-			var t=Date.parse(value);
-			return !isNaN(t);
-		},
-		'validate_error':function(widget,value) {
-			return 'could not parse date object';
-		},
-		'initVal':new Date(),
 		'logger':'#log',
 		'submit':'#movie_send',
 	};
-	jQuery('#movie_date').jdatetimefield(init);
+	jQuery('#movie_date').cont_datetime(init);
 
 	var init={
 		'type':'select',
@@ -67,7 +69,7 @@ jQuery(document).ready(function() {
 		'logger':'#log',
 		'submit':'#movie_send',
 	};
-	jQuery('#movie_locationid').jvalidfield(init);
+	jQuery('#movie_locationid').cont_valid(init);
 
 	var init={
 		'type':'select',
@@ -79,7 +81,7 @@ jQuery(document).ready(function() {
 		'logger':'#log',
 		'submit':'#movie_send',
 	};
-	jQuery('#movie_deviceid').jvalidfield(init);
+	jQuery('#movie_deviceid').cont_valid(init);
 
 	var init={
 		'name':'Rating',
@@ -89,7 +91,7 @@ jQuery(document).ready(function() {
 		'url':'GetData.php?type=TbRating',
 		'type':'select',
 	};
-	jQuery('#movie_ratingid').jvalidfield(init);
+	jQuery('#movie_ratingid').cont_valid(init);
 
 	var init={
 		'name':'Review',
@@ -101,7 +103,7 @@ jQuery(document).ready(function() {
 		'logger':'#log',
 		'submit':'#movie_send',
 	};
-	jQuery('#movie_review').jvalidfield(init);
+	jQuery('#movie_review').cont_valid(init);
 
 	// event stuff starts here...
 
@@ -112,16 +114,24 @@ jQuery(document).ready(function() {
 		'logger':'#log',
 		'formid':'#event_form',
 	};
-	jQuery('#event_send').jsubmit(init);
+	jQuery('#event_send').cont_submit(init);
 
 	// construct two date pickers
-	//jQuery('#event_from_date').datepicker();
-	//jQuery('#event_to_date').datepicker();
+	init.sname='from_date';
+	init.name='From Date';
+	jQuery('#event_from_date').cont_datepicker(init);
+	init.sname='to_date';
+	init.name='To Date';
+	jQuery('#event_to_date').cont_datepicker(init);
 
 	// the time pickers
 	//var init={ 'secView':false };
-	//jQuery('#event_from_time').jtimepicker(init);
-	//jQuery('#event_to_time').jtimepicker(init);
+	init.sname='from_time';
+	init.name='From time';
+	jQuery('#event_from_time').cont_time(init);
+	init.sname='to_time';
+	init.name='To Time';
+	jQuery('#event_to_time').cont_time(init);
 
 	var init={
 		'name':'Name',
@@ -131,7 +141,7 @@ jQuery(document).ready(function() {
 		'logger':'#log',
 		'submit':'#event_send',
 	};
-	jQuery('#event_name').jvalidfield(init);
+	jQuery('#event_name').cont_valid(init);
 
 	// my own fields (from the database)
 	var init={
@@ -143,24 +153,24 @@ jQuery(document).ready(function() {
 	};
 
 	init.url='GetData.php?type=TbClCalendar';
-	jQuery('#event_calendarid').jvalidfield(init);
+	jQuery('#event_calendarid').cont_valid(init);
 
 	init.url='GetData.php?type=TbBsCompanies';
 	init.name='Company';
-	jQuery('#event_companyid').jvalidfield(init);
+	jQuery('#event_companyid').cont_valid(init);
 
 	init.url='GetData.php?type=TbBsCourses';
 	init.name='Course';
-	jQuery('#event_courseid').jvalidfield(init);
+	jQuery('#event_courseid').cont_valid(init);
 
 	init.url='GetData.php?type=TbLocation';
 	init.name='Location';
-	jQuery('#event_locationid').jvalidfield(init);
+	jQuery('#event_locationid').cont_valid(init);
 
 	init.url='GetData.php?type=TbIdPerson';
 	init.name='Person';
 	init.initVal=1;
-	jQuery('#event_personid').jvalidfield(init);
+	jQuery('#event_personid').cont_valid(init);
 	delete init.initVal;
 
 	var init={
@@ -173,7 +183,7 @@ jQuery(document).ready(function() {
 		'logger':'#log',
 		'submit':'#event_send',
 	};
-	jQuery('#event_remark').jvalidfield(init);
+	jQuery('#event_remark').cont_valid(init);
 
 	// person stuff starts here
 
@@ -183,7 +193,7 @@ jQuery(document).ready(function() {
 		'logger':'#log',
 		'formid':'#person_form',
 	};
-	jQuery('#person_send').jsubmit(init);
+	jQuery('#person_send').cont_submit(init);
 
 	var init={
 		'name':'Honorific',
@@ -193,30 +203,30 @@ jQuery(document).ready(function() {
 		'logger':'#log',
 		'submit':'#person_send',
 	};
-	jQuery('#person_honorific').jvalidfield(init);
+	jQuery('#person_honorific').cont_valid(init);
 
 	init.name='First Name';
 	init.sname='firstname';
-	jQuery('#person_firstname').jvalidfield(init);
+	jQuery('#person_firstname').cont_valid(init);
 
 	init.name='Surname';
 	init.sname='surname';
-	jQuery('#person_surname').jvalidfield(init);
+	jQuery('#person_surname').cont_valid(init);
 
 	init.name='Other Name';
 	init.sname='othername';
 	init.regex=/^[\w\.]*$/;
-	jQuery('#person_othername').jvalidfield(init);
+	jQuery('#person_othername').cont_valid(init);
 
 	init.name='Remark';
 	init.sname='remark';
 	init.regex=/^[\w\. ]*$/;
-	jQuery('#person_remark').jvalidfield(init);
+	jQuery('#person_remark').cont_valid(init);
 
 	init.name='Ordinal';
 	init.sname='ordinal';
 	init.regex=/^\d*$/;
-	jQuery('#person_ordinal').jvalidfield(init);
+	jQuery('#person_ordinal').cont_valid(init);
 
 	// work stuff starts here
 
@@ -226,7 +236,7 @@ jQuery(document).ready(function() {
 		'logger':'#log',
 		'formid':'#work_form',
 	};
-	jQuery('#work_send').jsubmit(init);
+	jQuery('#work_send').cont_submit(init);
 
 	var init={
 		'name':'Name',
@@ -237,7 +247,7 @@ jQuery(document).ready(function() {
 		'logger':'#log',
 		'submit':'#work_send',
 	};
-	jQuery('#work_name').jvalidfield(init);
+	jQuery('#work_name').cont_valid(init);
 
 	var init={
 		'type':'select',
@@ -249,7 +259,7 @@ jQuery(document).ready(function() {
 		'logger':'#log',
 		'submit':'#work_send',
 	};
-	jQuery('#work_typeid').jvalidfield(init);
+	jQuery('#work_typeid').cont_valid(init);
 
 	// work -> external stuff
 
@@ -259,7 +269,7 @@ jQuery(document).ready(function() {
 		'logger':'#log',
 		'formid':'#workexternal_form',
 	};
-	jQuery('#workexternal_send').jsubmit(init);
+	jQuery('#workexternal_send').cont_submit(init);
 
 	var init={
 		'type':'select',
@@ -271,7 +281,7 @@ jQuery(document).ready(function() {
 		'logger':'#log',
 		'submit':'#workexternal_send',
 	};
-	jQuery('#workexternal_workid').jvalidfield(init);
+	jQuery('#workexternal_workid').cont_valid(init);
 
 	var init={
 		'type':'select',
@@ -283,7 +293,7 @@ jQuery(document).ready(function() {
 		'logger':'#log',
 		'submit':'#workexternal_send',
 	};
-	jQuery('#workexternal_externalid').jvalidfield(init);
+	jQuery('#workexternal_externalid').cont_valid(init);
 
 	var init={
 		'name':'External Code',
@@ -294,7 +304,7 @@ jQuery(document).ready(function() {
 		'logger':'#log',
 		'submit':'#workexternal_send',
 	};
-	jQuery('#workexternal_externalcode').jvalidfield(init);
+	jQuery('#workexternal_externalcode').cont_valid(init);
 
 	// person -> external stuff
 
@@ -304,7 +314,7 @@ jQuery(document).ready(function() {
 		'logger':'#log',
 		'formid':'#personexternal_form',
 	};
-	jQuery('#personexternal_send').jsubmit(init);
+	jQuery('#personexternal_send').cont_submit(init);
 
 	var init={
 		'type':'select',
@@ -316,7 +326,7 @@ jQuery(document).ready(function() {
 		'logger':'#log',
 		'submit':'#personexternal_send',
 	};
-	jQuery('#personexternal_externalid').jvalidfield(init);
+	jQuery('#personexternal_externalid').cont_valid(init);
 
 	var init={
 		'name':'External Code',
@@ -327,7 +337,7 @@ jQuery(document).ready(function() {
 		'logger':'#log',
 		'submit':'#personexternal_send',
 	};
-	jQuery('#personexternal_externalcode').jvalidfield(init);
+	jQuery('#personexternal_externalcode').cont_valid(init);
 
 	var init={
 		'type':'select',
@@ -339,7 +349,7 @@ jQuery(document).ready(function() {
 		'logger':'#log',
 		'submit':'#personexternal_send',
 	};
-	jQuery('#personexternal_personid').jvalidfield(init);
+	jQuery('#personexternal_personid').cont_valid(init);
 
 	// person -> work starts here
 
@@ -349,7 +359,7 @@ jQuery(document).ready(function() {
 		'logger':'#log',
 		'formid':'#personwork_form',
 	};
-	jQuery('#personwork_send').jsubmit(init);
+	jQuery('#personwork_send').cont_submit(init);
 
 	var init={
 		'type':'select',
@@ -361,7 +371,7 @@ jQuery(document).ready(function() {
 		'logger':'#log',
 		'submit':'#personwork_send',
 	};
-	jQuery('#personwork_workid').jvalidfield(init);
+	jQuery('#personwork_workid').cont_valid(init);
 
 	var init={
 		'type':'select',
@@ -373,7 +383,7 @@ jQuery(document).ready(function() {
 		'logger':'#log',
 		'submit':'#personwork_send',
 	};
-	jQuery('#personwork_personid').jvalidfield(init);
+	jQuery('#personwork_personid').cont_valid(init);
 
 	var init={
 		'type':'select',
@@ -385,7 +395,7 @@ jQuery(document).ready(function() {
 		'logger':'#log',
 		'submit':'#personwork_send',
 	};
-	jQuery('#personwork_typeid').jvalidfield(init);
+	jQuery('#personwork_typeid').cont_valid(init);
 
 	// organization -> work stuff
 
@@ -395,7 +405,7 @@ jQuery(document).ready(function() {
 		'logger':'#log',
 		'formid':'#orgwork_form',
 	};
-	jQuery('#orgwork_send').jsubmit(init);
+	jQuery('#orgwork_send').cont_submit(init);
 
 	var init={
 		'type':'select',
@@ -407,7 +417,7 @@ jQuery(document).ready(function() {
 		'logger':'#log',
 		'submit':'#orgwork_send',
 	};
-	jQuery('#orgwork_workid').jvalidfield(init);
+	jQuery('#orgwork_workid').cont_valid(init);
 
 	var init={
 		'type':'select',
@@ -419,7 +429,7 @@ jQuery(document).ready(function() {
 		'logger':'#log',
 		'submit':'#orgwork_send',
 	};
-	jQuery('#orgwork_organizationid').jvalidfield(init);
+	jQuery('#orgwork_organizationid').cont_valid(init);
 
 	var init={
 		'type':'select',
@@ -431,7 +441,7 @@ jQuery(document).ready(function() {
 		'logger':'#log',
 		'submit':'#orgwork_send',
 	};
-	jQuery('#orgwork_typeid').jvalidfield(init);
+	jQuery('#orgwork_typeid').cont_valid(init);
 
 	// workview stuff starts here
 
@@ -441,19 +451,20 @@ jQuery(document).ready(function() {
 		'logger':'#log',
 		'formid':'#workview_form',
 	};
-	jQuery('#workview_send').jsubmit(init);
+	jQuery('#workview_send').cont_submit(init);
 	
 	var init={
 		'type':'select',
 		'name':'Viewing person',
 		'sname':'personId',
-		'initState':true,
+		'initState':false,
 		'initMsg':'Put the person id here',
+		'initVal':1,
 		'url':'GetData.php?type=TbIdPerson',
 		'logger':'#log',
 		'submit':'#workview_send',
 	};
-	jQuery('#workview_personid').jvalidfield(init);
+	jQuery('#workview_personid').cont_valid(init);
 
 	var init={
 		'type':'select',
@@ -465,26 +476,15 @@ jQuery(document).ready(function() {
 		'logger':'#log',
 		'submit':'#workview_send',
 	};
-	jQuery('#workview_workid').jvalidfield(init);
+	jQuery('#workview_workid').cont_valid(init);
 
 	var init={
 		'name':'Date',
 		'sname':'date',
-		'initState':false,
-		'initMsg':'put the date seen here',
-		'regex':/.+/,
-		'validate':function(widget,value) {
-			var t=Date.parse(value);
-			return !isNaN(t);
-		},
-		'validate_error':function(widget,value) {
-			return 'could not parse date object';
-		},
-		'initVal':new Date(),
 		'logger':'#log',
 		'submit':'#workview_send',
 	};
-	jQuery('#workview_date').jdatetimefield(init);
+	jQuery('#workview_date').cont_datetime(init);
 
 	var init={
 		'type':'select',
@@ -496,7 +496,7 @@ jQuery(document).ready(function() {
 		'logger':'#log',
 		'submit':'#workview_send',
 	};
-	jQuery('#workview_locationid').jvalidfield(init);
+	jQuery('#workview_locationid').cont_valid(init);
 
 	var init={
 		'type':'select',
@@ -508,7 +508,7 @@ jQuery(document).ready(function() {
 		'logger':'#log',
 		'submit':'#workview_send',
 	};
-	jQuery('#workview_deviceid').jvalidfield(init);
+	jQuery('#workview_deviceid').cont_valid(init);
 
 	var init={
 		'type':'select',
@@ -519,7 +519,7 @@ jQuery(document).ready(function() {
 		'url':'GetData.php?type=TbRating',
 		'submit':'#workview_send',
 	};
-	jQuery('#workview_ratingid').jvalidfield(init);
+	jQuery('#workview_ratingid').cont_valid(init);
 
 	var init={
 		'name':'Review',
@@ -531,7 +531,7 @@ jQuery(document).ready(function() {
 		'logger':'#log',
 		'submit':'#workview_send',
 	};
-	jQuery('#workview_review').jvalidfield(init);
+	jQuery('#workview_review').cont_valid(init);
 
 	// done stuff starts here
 
@@ -541,26 +541,15 @@ jQuery(document).ready(function() {
 		'logger':'#log',
 		'formid':'#done_form',
 	};
-	jQuery('#done_send').jsubmit(init);
+	jQuery('#done_send').cont_submit(init);
 
 	var init={
 		'name':'End Date',
 		'sname':'end',
-		'initState':false,
-		'initMsg':'end of activity date here',
-		'regex':/.+/,
-		'validate':function(widget,value) {
-			var t=Date.parse(value);
-			return !isNaN(t);
-		},
-		'validate_error':function(widget,value) {
-			return 'could not parse date object';
-		},
-		'initVal':new Date(),
 		'logger':'#log',
 		'submit':'#done_send',
 	};
-	jQuery('#done_end').jdatetimefield(init);
+	jQuery('#done_end').cont_datetime(init);
 
 	var init={
 		'type':'select',
@@ -572,7 +561,7 @@ jQuery(document).ready(function() {
 		'logger':'#log',
 		'submit':'#done_send',
 	};
-	jQuery('#done_locationid').jvalidfield(init);
+	jQuery('#done_locationid').cont_valid(init);
 
 	var init={
 		'type':'select',
@@ -584,7 +573,7 @@ jQuery(document).ready(function() {
 		'logger':'#log',
 		'submit':'#done_send',
 	};
-	jQuery('#done_activityid').jvalidfield(init);
+	jQuery('#done_activityid').cont_valid(init);
 
 	var init={
 		'name':'Remark',
@@ -596,7 +585,7 @@ jQuery(document).ready(function() {
 		'logger':'#log',
 		'submit':'#done_send',
 	};
-	jQuery('#done_remark').jvalidfield(init);
+	jQuery('#done_remark').cont_valid(init);
 
 	// workviewreview stuff starts here
 
@@ -606,7 +595,7 @@ jQuery(document).ready(function() {
 		'logger':'#log',
 		'formid':'#workviewreview_form',
 	};
-	jQuery('#workviewreview_send').jsubmit(init);
+	jQuery('#workviewreview_send').cont_submit(init);
 
 	var init={
 		'name':'Name',
@@ -618,7 +607,7 @@ jQuery(document).ready(function() {
 		'logger':'#log',
 		'submit':'#workviewreview_send',
 	};
-	jQuery('#workviewreview_name').jvalidfield(init);
+	jQuery('#workviewreview_name').cont_valid(init);
 
 	var init={
 		'type':'select',
@@ -630,7 +619,7 @@ jQuery(document).ready(function() {
 		'logger':'#log',
 		'submit':'#workviewreview_send',
 	};
-	jQuery('#workviewreview_typeid').jvalidfield(init);
+	jQuery('#workviewreview_typeid').cont_valid(init);
 
 	var init={
 		'type':'select',
@@ -642,7 +631,7 @@ jQuery(document).ready(function() {
 		'logger':'#log',
 		'submit':'#workviewreview_send',
 	};
-	jQuery('#workviewreview_externalid').jvalidfield(init);
+	jQuery('#workviewreview_externalid').cont_valid(init);
 
 	var init={
 		'name':'External Code',
@@ -653,60 +642,36 @@ jQuery(document).ready(function() {
 		'logger':'#log',
 		'submit':'#workviewreview_send',
 	};
-	jQuery('#workviewreview_externalcode').jvalidfield(init);
+	jQuery('#workviewreview_externalcode').cont_valid(init);
 
 	var init={
 		'name':'Start date',
 		'sname':'start',
-		'initState':false,
-		'initMsg':'put the start date here',
-		'regex':/.+/,
-		'validate':function(widget,value) {
-			if(value=='') {
-				return True;
-			}
-			var t=Date.parse(value);
-			return !isNaN(t);
-		},
-		'validate_error':function(widget,value) {
-			return 'could not parse date object';
-		},
-		'initVal':new Date(),
 		'logger':'#log',
 		'submit':'#workviewreview_send',
 	};
-	jQuery('#workviewreview_start').jdatetimefield(init);
+	jQuery('#workviewreview_start').cont_datetime(init);
 
 	var init={
 		'name':'End date',
 		'sname':'end',
-		'initState':false,
-		'initMsg':'put the end date here',
-		'regex':/.+/,
-		'validate':function(widget,value) {
-			var t=Date.parse(value);
-			return !isNaN(t);
-		},
-		'validate_error':function(widget,value) {
-			return 'could not parse date object';
-		},
-		'initVal':new Date(),
 		'logger':'#log',
 		'submit':'#workviewreview_send',
 	};
-	jQuery('#workviewreview_end').jdatetimefield(init);
+	jQuery('#workviewreview_end').cont_datetime(init);
 
 	var init={
 		'type':'select',
 		'name':'Viewing person',
 		'sname':'personId',
-		'initState':true,
+		'initState':false,
 		'initMsg':'Put the person id here',
+		'initVal':1,
 		'url':'GetData.php?type=TbIdPerson',
 		'logger':'#log',
 		'submit':'#workviewreview_send',
 	};
-	jQuery('#workviewreview_personid').jvalidfield(init);
+	jQuery('#workviewreview_personid').cont_valid(init);
 
 	var init={
 		'type':'select',
@@ -718,7 +683,7 @@ jQuery(document).ready(function() {
 		'logger':'#log',
 		'submit':'#workviewreview_send',
 	};
-	jQuery('#workviewreview_locationid').jvalidfield(init);
+	jQuery('#workviewreview_locationid').cont_valid(init);
 
 	var init={
 		'type':'select',
@@ -730,7 +695,7 @@ jQuery(document).ready(function() {
 		'logger':'#log',
 		'submit':'#workviewreview_send',
 	};
-	jQuery('#workviewreview_deviceid').jvalidfield(init);
+	jQuery('#workviewreview_deviceid').cont_valid(init);
 
 	var init={
 		'name':'Rating',
@@ -740,7 +705,7 @@ jQuery(document).ready(function() {
 		'url':'GetData.php?type=TbRating',
 		'type':'select',
 	};
-	jQuery('#workviewreview_ratingid').jvalidfield(init);
+	jQuery('#workviewreview_ratingid').cont_valid(init);
 
 	var init={
 		'name':'Review',
@@ -752,5 +717,5 @@ jQuery(document).ready(function() {
 		'logger':'#log',
 		'submit':'#workviewreview_send',
 	};
-	jQuery('#workviewreview_review').jvalidfield(init);
+	jQuery('#workviewreview_review').cont_valid(init);
 });
