@@ -1,22 +1,27 @@
+now:
+====
+	import all lectures in my audio archive into works.
+		How do I decide if they are TTC ? I Don't know.
+		How do I decide if they are audio books ? I Don't know.
+	write a script that allows me to separate stuff to a new table.
+
+notes support:
+==============
+add a notes subsystem.
+notes are just arbitrary length pieces of text.
+They will be stored as blobs in the database.
+They will be editable by an outside editor easily.
+They will be searchable (full text searching using some kind of facility).
+They will have tags assigned to them.
+	Copy ideas from how wordpress uses tags.
+import all of my computer notes into that system.
+
 Location support:
 =================
 add x,y position to locations.
 add street, city, whatever to locations.
 add dialog to add new locations.
 add dialog to edit a loction.
-
-now:
-====
-	import all lectures in my audio archive into works.
-		How do I decide if they are TTC ? I Don't know.
-		How do I decide if they are audio books ? I Don't know.
-
-	write a script that allows me to separate stuff to a new table.
-
-	do a dialog for entering a lecture.
-		use that to enter the lectures that I am now hearing (the Russian
-			Revolution).
-
 
 Social site support
 ===================
@@ -32,7 +37,7 @@ mysql wrappers:
 
 code quality:
 =============
-- organize the files in public (it's a mess).
+- organize the files in the /public folder (it's a mess).
 
 date selection box ideas:
 =========================
