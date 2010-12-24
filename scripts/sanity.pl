@@ -12,6 +12,8 @@ use DBI;
 # 3. no works without reviews.
 # 4. no works without lenghts.
 # 5. no person without single group representing him.
+# 6. no works without people involved (at least one).
+# 7. no person without external id of some sort (at least one).
 # more to come...
 
 my($dbh)=DBI->connect('dbi:mysql:myworld','','',{

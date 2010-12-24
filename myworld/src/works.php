@@ -267,7 +267,7 @@ function create_works($type) {
 		$body.='</ul>';
 		$res.=multi_accordion_entry($header,$body);
 	}
-	assert(mysql_free_result($result));
+	my_mysql_free_result($result);
 	$res.=multi_accordion_end();
 	return $res;
 }
@@ -356,7 +356,7 @@ function create_person($firstname,$surname) {
 		$link='<a href=\''.$link.'\'>'.$externalidname.': '.$externalcode.'</a>';
 		$res.='<li>'.$link.'</li>';
 	}
-	assert(mysql_free_result($result));
+	my_mysql_free_result($result);
 	// finish up
 	$res.='</ul>';
 	return $res;

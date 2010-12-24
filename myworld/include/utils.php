@@ -72,6 +72,10 @@ function error($msg) {
 	trigger_error($msg,E_USER_ERROR);
 }
 
+function my_mysql_free_result($result)) {
+	my_mysql_free_result($result);
+}
+
 function my_mysql_query($query) {
 	$result=mysql_query($query);
 	if(!$result) {
@@ -87,7 +91,7 @@ function my_mysql_query_one($query) {
 	assert(mysql_num_rows($result)==1);
 	$row=mysql_fetch_array($result,MYSQL_NUM);
 	$ret=$row[0];
-	assert(mysql_free_result($result));
+	my_mysql_free_result($result);
 	return $ret;
 }
 
@@ -98,7 +102,7 @@ function my_mysql_query_one_row($query) {
 	# we should only get one result...
 	assert(mysql_num_rows($result)==1);
 	$row=mysql_fetch_assoc($result);
-	assert(mysql_free_result($result));
+	my_mysql_free_result($result);
 	return $row;
 }
 
@@ -111,7 +115,7 @@ function my_mysql_query_hash($query,$hash_key) {
 	}
 	#debug: print the array...
 	#print_r($ret);
-	assert(mysql_free_result($result));
+	my_mysql_free_result($result);
 	return $ret;
 }
 

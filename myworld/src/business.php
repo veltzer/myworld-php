@@ -25,7 +25,7 @@ function create_courses() {
 		$res.='<td>'.$name.'</td>';
 		$res.='</tr>';
 	}
-	assert(mysql_free_result($result));
+	my_mysql_free_result($result);
 	$res.='</table>';
 	return $res;
 }
@@ -62,7 +62,7 @@ function create_consulting() {
 		$res.='<td><img src=\''.$link_img.'\'/></td>';
 		$res.='</tr>';
 	}
-	assert(mysql_free_result($result));
+	my_mysql_free_result($result);
 	$res.='</table>';
 	return $res;
 }
@@ -100,7 +100,7 @@ function create_teaching() {
 		$res.='<td><img src=\''.$link_img.'\'/></td>';
 		$res.='</tr>';
 	}
-	assert(mysql_free_result($result));
+	my_mysql_free_result($result);
 	$res.='</table>';
 	return $res;
 }
@@ -132,7 +132,7 @@ function create_certification() {
 		$res.='<td><img src=\''.$link_img.'\'/></td>';
 		$res.='</tr>';
 	}
-	assert(mysql_free_result($result));
+	my_mysql_free_result($result);
 	$res.='</table>';
 	return $res;
 }

@@ -150,7 +150,7 @@ function create_lilypond() {
 			$res.=multi_accordion_entry($header,$body);
 		}
 	}
-	assert(mysql_free_result($result));
+	my_mysql_free_result($result);
 	if($show_style=="table") {
 		$res.="</table>";
 	}

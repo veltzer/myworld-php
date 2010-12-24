@@ -6,3 +6,4 @@
 - renamed all my controllers to cont_[name].
 - documented design descision to move to groups.
 - works and reviews now refer to groups and not to persons.
+- added my_mysql_free_result API and checked that it is used all over.
