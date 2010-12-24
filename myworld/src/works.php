@@ -17,6 +17,7 @@ function create_works($type) {
 	$locations=my_mysql_query_hash('SELECT * FROM TbLocation','id');
 	$devices=my_mysql_query_hash('SELECT * FROM TbDevice','id');
 	$persons=my_mysql_query_hash('SELECT * FROM TbIdPerson','id');
+	$personexternal=my_mysql_query_hash('SELECT * FROM TbIdPersonExternal','id');
 	$organizations=my_mysql_query_hash('SELECT * FROM TbOrganization','id');
 	$external=my_mysql_query_hash('SELECT * FROM TbExternalType','id');
 	$workexternal=my_mysql_query_hash('SELECT * FROM TbWkWorkExternal','id');
@@ -50,7 +51,7 @@ function create_works($type) {
 			$role_contrib_org[$workId][]=$typeId;
 		}
 	}
-	# create a hash table of external ids
+	# create a hash table of external ids for works
 	$workexternal_externalid=array();
 	$workexternal_externalcode=array();
 	foreach($workexternal as $id => $row) {
@@ -59,6 +60,16 @@ function create_works($type) {
 		$externalCode=$row['externalCode'];
 		$workexternal_externalid[$workId][]=$externalId;
 		$workexternal_externalcode[$workId][]=$externalCode;
+	}
+	# create a hash table of external ids for people
+	$personexternal_externalid=array();
+	$personexternal_externalcode=array();
+	foreach($personexternal as $id => $row) {
+		$personId=$row['personId'];
+		$externalId=$row['externalId'];
+		$externalCode=$row['externalCode'];
+		$personexternal_externalid[$personId][]=$externalId;
+		$personexternal_externalcode[$personId][]=$externalCode;
 	}
 
 	// sending query
@@ -238,8 +249,19 @@ function create_works($type) {
 				$name=get_full_name($persons[$personId]);
 				$roleid=$role_contrib[$row[$idid]][$j];
 				$role_name=$contribtype[$roleid]['name'];
-				$body.='<li>'.$role_name.': '.$name.'</li>';
+				$body.='<li>'.$role_name.': '.$name;
 				$j++;
+				$e=0;
+				foreach($personexternal_externalid[$personId] as $externalid) {
+					$externalcode=$personexternal_externalcode[$personId][$e];
+					$externalname=$external[$externalid]['name'];
+					$externalidname=$external[$externalid]['idname'];
+					$link=get_external_href($externalname,$externalcode);
+					$link='<a href=\''.$link.'\'>'.$externalidname.': '.$externalcode.'</a>';
+					$body.=' '.$link;
+					$e++;
+				}
+				$body.='</li>';
 			}
 		}
 		if(isset($work_contrib_org[$row[$idid]])) {
