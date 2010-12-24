@@ -144,7 +144,6 @@ add the imageUrl data for all the companies that I already have.
 
 Schema changes:
 ===============
-unite TbBsCompanies and TbOrganization.
 add images to people either by file upload or url.
 in TbWkWorkView change [start|end]ViewDate to [start|end].
 have the ability to have many persons connected with a single view.

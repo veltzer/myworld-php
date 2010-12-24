@@ -16,7 +16,7 @@ $p_type = $_GET['type'];
 $debug=0;
 
 # security...
-assert($p_table=='TbMsLilypond' || $p_table=='TbBsCompanies');
+assert($p_table=='TbMsLilypond' || $p_table=='TbOrganization');
 assert($p_sfield=='id' || $p_sfield=='uuid');
 #assert($p_field=='ly' || $p_field=='pdf' || $p_field=='ps' || $p_field=='midi');
 

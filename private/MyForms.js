@@ -155,7 +155,7 @@ jQuery(document).ready(function() {
 	init.url='GetData.php?type=TbClCalendar';
 	jQuery('#event_calendarid').cont_valid(init);
 
-	init.url='GetData.php?type=TbBsCompanies';
+	init.url='GetData.php?type=TbOrganization';
 	init.name='Company';
 	jQuery('#event_companyid').cont_valid(init);
 

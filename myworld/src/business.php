@@ -33,7 +33,7 @@ function create_courses() {
 function create_consulting() {
 	$res='';
 	// sending query
-	$query=sprintf('SELECT id,name,slug,remark,url FROM TbBsCompanies where funcConsulting order by name asc');
+	$query=sprintf('SELECT id,name,slug,remark,url FROM TbOrganization where funcConsulting order by name asc');
 	$result=my_mysql_query($query);
 
 	$res.=get_start_table();
@@ -48,7 +48,7 @@ function create_consulting() {
 		$name=$row['name'];
 		$slug=$row['slug'];
 		$remark=$row['remark'];
-		$link_img=link_to_direct('GetBlob.php?table=TbBsCompanies&sfield=id&id='.$id.'&field=smallImage&type=image/png&name_field=slug');
+		$link_img=link_to_direct('GetBlob.php?table=TbOrganization&sfield=id&id='.$id.'&field=smallImage&type=image/png&name_field=slug');
 		$url=$row['url'];
 		if($url!=NULL) {
 			$name='<a href=\''.$url.'\'>'.$name.'</a>';
@@ -70,7 +70,7 @@ function create_consulting() {
 function create_teaching() {
 	$res='';
 	// sending query
-	$query=sprintf('SELECT id,name,slug,remark,url FROM TbBsCompanies where funcTeaching order by name asc');
+	$query=sprintf('SELECT id,name,slug,remark,url FROM TbOrganization where funcTeaching order by name asc');
 	$result=mysql_query($query);
 	assert($result);
 
@@ -86,7 +86,7 @@ function create_teaching() {
 		$name=$row['name'];
 		$slug=$row['slug'];
 		$remark=$row['remark'];
-		$link_img=link_to_direct('GetBlob.php?table=TbBsCompanies&sfield=id&id='.$id.'&field=smallImage&type=image/png&name_field=slug');
+		$link_img=link_to_direct('GetBlob.php?table=TbOrganization&sfield=id&id='.$id.'&field=smallImage&type=image/png&name_field=slug');
 		$url=$row['url'];
 		if($url!=NULL) {
 			$name='<a href=\''.$url.'\'>'.$name.'</a>';
@@ -108,7 +108,7 @@ function create_teaching() {
 function create_certification() {
 	$res='';
 	// sending query
-	$query=sprintf('SELECT id,name,slug,url,fromDate FROM TbBsCompanies where funcCertification order by name asc');
+	$query=sprintf('SELECT id,name,slug,url,fromDate FROM TbOrganization where funcCertification order by name asc');
 	$result=mysql_query($query);
 	assert($result);
 
@@ -125,7 +125,7 @@ function create_certification() {
 		$slug=$row['slug'];
 		$url=$row['url'];
 		$fromDate=$row['fromDate'];
-		$link_img=link_to_direct('GetBlob.php?table=TbBsCompanies&sfield=id&id='.$id.'&field=smallImage&type=image/png&name_field=slug');
+		$link_img=link_to_direct('GetBlob.php?table=TbOrganization&sfield=id&id='.$id.'&field=smallImage&type=image/png&name_field=slug');
 		$res.='</tr>';
 		$res.='<td><a href=\''.$url.'\'>'.$name.'</a></td>';
 		$res.='<td>'.$fromDate.'</td>';
