@@ -72,8 +72,8 @@ function error($msg) {
 	trigger_error($msg,E_USER_ERROR);
 }
 
-function my_mysql_free_result($result)) {
-	my_mysql_free_result($result);
+function my_mysql_free_result($result) {
+	assert(mysql_free_result($result));
 }
 
 function my_mysql_query($query) {
