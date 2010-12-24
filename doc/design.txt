@@ -10,6 +10,9 @@ Policy
 ======
 - all includes are root oriented (from php downwards...) - is this still relevant ?!?
 
+The database
+============
+
 The event system:
 =================
 What is an event?
@@ -20,6 +23,19 @@ What is an event?
 	A name,remark, url, description, location and possibly some more data.
 	A creator.
 	A calendar to which it is attached.
+
+Should we have person groups ?
+==============================
+For:
+	- if I see lots of movies with David then I will only create the group once
+	and keep refering to it.
+
+Against:
+	- each time I create a person I also have to create a group of 1 in order to refer
+	to him ?!?
+
+Descision:
+	For.
 
 
 The jQuery widget design descisions:

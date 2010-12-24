@@ -4,3 +4,5 @@
 - brought back imdb ids and ttc ids
 - got ridd of the person group table.
 - renamed all my controllers to cont_[name].
+- documented design descision to move to groups.
+- works and reviews now refer to groups and not to persons.

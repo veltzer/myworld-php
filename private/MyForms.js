@@ -199,7 +199,7 @@ jQuery(document).ready(function() {
 		'name':'Honorific',
 		'sname':'honorific',
 		'initState':false,
-		'regex':/^\w*$/,
+		'regex':/^[\w\.]*$/,
 		'logger':'#log',
 		'submit':'#person_send',
 	};
