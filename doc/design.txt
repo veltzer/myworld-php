@@ -41,3 +41,19 @@ Descision:
 The jQuery widget design descisions:
 ====================================
 - controls will be called cont_[name] to make them easy to find.
+
+Myworld database design:
+========================
+Question: should all tables be named Tb something ?
+	yes.
+
+pro:
+	to easily identify them in the code.
+aginst:
+	make queries cumbersome.
+
+Question: should fields be named f_something ?
+pro:
+	to easily identify them in the code.
+aginst:
+	make queries cumbersome.
