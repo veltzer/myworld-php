@@ -3,7 +3,7 @@
 function create_lilypond() {
 	$res='';
 	// sending query
-	$query=sprintf('SELECT id,uuid,title,subtitle,composer,poet,style,piece,copyright,pages,idyoutube FROM TbMsLilypond');
+	$query=sprintf('SELECT id,uuid,title,subtitle,composer,poet,style,piece,copyright,pages,idyoutube FROM TbMsLilypond order by title asc');
 	$result=my_mysql_query($query);
 
 	$res.=multi_accordion_start();
@@ -44,6 +44,9 @@ function create_lilypond() {
 		}
 		$body='';
 		$body.='<ul>';
+		if($row['id']!=NULL) {
+			$body.='<li>id: '.$id.'</li>';
+		}
 		if($row['title']!=NULL) {
 			$body.='<li>title: '.$s_title.'</li>';
 		}
