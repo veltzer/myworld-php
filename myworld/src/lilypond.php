@@ -3,7 +3,7 @@
 function create_lilypond() {
 	$res='';
 	// sending query
-	$query=sprintf('SELECT id,uuid,title,subtitle,composer,poet,style,piece,copyright,pages,idyoutube FROM TbMsLilypond order by title asc');
+	$query=sprintf('SELECT id,uuid,title,subtitle,composer,poet,style,piece,copyright,pages,idyoutube,epdfs FROM TbMsLilypond order by title asc');
 	$result=my_mysql_query($query);
 
 	$res.=multi_accordion_start();
@@ -19,6 +19,7 @@ function create_lilypond() {
 		$s_piece=val_or_na($row['piece']);
 		$s_copyright=val_or_na($row['copyright']);
 		$s_pages=val_or_na($row['pages']);
+		$s_epdfs=val_or_na($row['epdfs']);
 		$link_ly=link_to_direct('GetRsBlob.php?slug='.$s_uuid.'-ly');
 		$link_pdf=link_to_direct('GetRsBlob.php?slug='.$s_uuid.'-pdf');
 		$link_ps=link_to_direct('GetRsBlob.php?slug='.$s_uuid.'-ps');
@@ -71,6 +72,9 @@ function create_lilypond() {
 		if($row['pages']!=NULL) {
 			$body.='<li>pages: '.$s_pages.'</li>';
 		}
+		if($row['epdfs']!=NULL) {
+			$body.='<li>epdfs: '.$s_epdfs.'</li>';
+		}
 		$links=array();
 		# TODO: only add the links if I have the blobs...
 		array_push($links,$s_a_ly);
@@ -82,10 +86,15 @@ function create_lilypond() {
 		array_push($links,$s_a_ogg);
 
 		# lets look and add links to the pngs...
-		for($i=0; $i<$s_pages; $i++) {
+		for($i=0;$i<$s_pages;$i++) {
 			$j=$i+1;
 			$link=link_to_direct('GetRsBlob.php?slug='.$s_uuid.'-png'.$j);
 			$link='<a href=\''.$link.'\'>png'.$j.'</a>';
+			array_push($links,$link);
+		}
+		for($i=0;$i<$s_epdfs;$i++) {
+			$link=link_to_direct('GetRsBlob.php?slug='.$s_uuid.'-epdf'.$i);
+			$link='<a href=\''.$link.'\'>epdf'.$i.'</a>';
 			array_push($links,$link);
 		}
 
