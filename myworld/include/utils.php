@@ -363,6 +363,9 @@ function get_external_href($external_name,$external_id) {
 		case 'about.me':
 			return 'http://about.me/'.$external_id.'/';
 			break;
+		case 'tripit':
+			return 'http://www.tripit.com/people/'.$external_id;
+			break;
 		default:
 			error('what external name is ['.$external_name.']');
 			break;
