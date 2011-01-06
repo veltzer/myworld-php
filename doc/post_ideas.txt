@@ -41,3 +41,6 @@ disadvantages of this approach. An example makefile.
 - blog about how to access firefox and chrome stored passwords from the command line.
 
 - blog about how to configure email for your own domain. Running of postfix, running of spamassasin, configuring /etc/postfix/main.cf. Especially talke about /etc/aliases and newaliases(1). The right configuration being to reject any unknown users and to redirect email from root, postmaster, webmaster and other known accounts to the real administrative user (who is usually not root).
+
+- post about how to shut down the display power:
+	xset dpms force suspend
