@@ -11,6 +11,11 @@ now:
 		How do I decide if they are audio books ? I Don't know.
 	write a script that allows me to separate stuff to a new table.
 
+statistics:
+===========
+use open chart http://teethgrinder.co.uk/open-flash-chart/ to show stats from my database.
+doesnt matter which for now.
+
 notes support:
 ==============
 add a notes subsystem.
