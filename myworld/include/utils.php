@@ -423,11 +423,15 @@ function my_json_encode($result) {
 }
 
 function get_full_name($hash) {
+	$honorific=$hash['honorific'];
 	$firstname=$hash['firstname'];
 	$surname=$hash['surname'];
 	$othername=$hash['othername'];
 	$ordinal=$hash['ordinal'];
 	$arr=array();
+	if($honorific!=NULL) {
+		array_push($arr,$honorific);
+	}
 	if($firstname!=NULL) {
 		array_push($arr,$firstname);
 	}
