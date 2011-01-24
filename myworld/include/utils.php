@@ -448,7 +448,7 @@ function get_full_name($hash) {
 }
 
 function get_person_data() {
-	$query=sprintf('select id,firstname,surname,othername,ordinal from TbIdPerson');
+	$query=sprintf('select id,honorific,firstname,surname,othername,ordinal from TbIdPerson');
 	$result=my_mysql_query($query);
 	while($row=mysql_fetch_assoc($result)) {
 		$row['label']=get_full_name($row);
