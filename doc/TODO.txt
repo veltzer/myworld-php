@@ -15,6 +15,7 @@ statistics:
 ===========
 use open chart http://teethgrinder.co.uk/open-flash-chart/ to show stats from my database.
 doesnt matter which for now.
+use the canvas API in HTML5 to show stats on my pages.
 
 notes support:
 ==============
@@ -151,6 +152,8 @@ Schema changes:
 ===============
 add images to people either by file upload or url.
 in TbWkWorkView change [start|end]ViewDate to [start|end].
+make TbWkWorkView viewer be a single person and not a ref to TbIdGrp.
+get ridd of the TbIdGrp tables (if no one is using them).
 have the ability to have many persons connected with a single view.
 have the ability to have many persons connected with a single review.
 
