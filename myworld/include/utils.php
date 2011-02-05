@@ -394,6 +394,7 @@ function isCli() {
 	}
 }
 
+/* function to print debug information correctly for cli and non cli mode */
 function printDebug($string) {
 	if(isCli()) {
 		echo $string."\n";
