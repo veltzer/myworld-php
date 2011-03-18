@@ -369,6 +369,9 @@ function get_external_href($external_name,$external_id) {
 		case 'ibmdw':
 			return 'https://www.ibm.com/developerworks/mydeveloperworks/profiles/html/profileView.do?key='.$external_id.'&lang=en';
 			break;
+		case 'wikipedia':
+			return 'http://en.wikipedia.org/wiki/'.$external_id;
+			break;
 		default:
 			error('what external name is ['.$external_name.']');
 			break;
