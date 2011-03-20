@@ -113,7 +113,7 @@ function create_lilypond() {
 		);
 		if($row['idyoutube']!=NULL) {
 			$body.='Here is a youtube performance of this song that I like...<br/>';
-			$body.=youtube_embed($s_idyoutube,0.5);
+			$body.=embed_youtube($s_idyoutube,0.5);
 		}
 		$res.=multi_accordion_entry($header,$body);
 	}

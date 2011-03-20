@@ -1,5 +1,6 @@
 <?php
 
+/* assertion */
 function assert_callcack($file, $line, $expr) {
 	//echo 'assertion failed<br/>';
 	//echo 'file is '.$file.'<br/>';
@@ -9,6 +10,7 @@ function assert_callcack($file, $line, $expr) {
 	//throw new Exception($file.$line.$message);
 }
 
+/* assertion */
 function assert_setup() {
 	# call our own assert function
 	assert_options(ASSERT_CALLBACK,'assert_callcack');
@@ -25,15 +27,52 @@ function assert_setup() {
 	ini_set('display_errors',1);
 }
 
+/* function that gets an error message and triggers an error for the whole page */
+function error($msg) {
+	header('HTTP/1.1 500 Internal Server Error');
+	trigger_error($msg,E_USER_ERROR);
+}
+
+/* function to know whether we are running on the command line */
+function isCli() {
+	if(php_sapi_name() == 'cli' && empty($_SERVER['REMOTE_ADDR'])) {
+		return true;
+	} else {
+		return false;
+	}
+}
+
+/* function to print debug information correctly for cli and non cli mode */
+function printDebug($string) {
+	if(isCli()) {
+		echo $string."\n";
+	} else {
+		echo $string.'<br/>';
+	}
+}
+
+/* my own assertion with my own error printing function */
+function my_assert($val,$reason) {
+	if(!$val) {
+		error('assert error: '.$reason);
+	}
+}
+
+/* initialize the utils system */
 function utils_init() {
 	assert_setup();
 	my_mysql_connect();
 }
 
+/* finalize the utils system */
 function utils_finish() {
 	my_mysql_disconnect();
 }
 
+/* wrapper around mysql connect
+ * This adds transactino mode and throws an exception if something goes wrong.
+ * It also moves the connection to utf8
+ */
 function my_mysql_connect() {
 	global $link;
 	if($link==NULL) {
@@ -54,6 +93,7 @@ function my_mysql_connect() {
 	}
 }
 
+/* disconnect from mysql */
 function my_mysql_disconnect() {
 	// TODO: this code is in remark because it causes wordpress issues
 	// fix it!
@@ -66,16 +106,12 @@ function my_mysql_disconnect() {
 	 */
 }
 
-# function that gets an error message and triggers an error for the whole page
-function error($msg) {
-	header('HTTP/1.1 500 Internal Server Error');
-	trigger_error($msg,E_USER_ERROR);
-}
-
+/* free a result set from mysql */
 function my_mysql_free_result($result) {
 	assert(mysql_free_result($result));
 }
 
+/* A wrapper for mysql_query */
 function my_mysql_query($query) {
 	$result=mysql_query($query);
 	if(!$result) {
@@ -85,6 +121,7 @@ function my_mysql_query($query) {
 	return $result;
 }
 
+/* A query which is assertained to return 1 result */
 function my_mysql_query_one($query) {
 	$result=my_mysql_query($query);
 	# we should only get one result...
@@ -95,8 +132,8 @@ function my_mysql_query_one($query) {
 	return $ret;
 }
 
-// do a query expecting one row as result (throw exception if not so). Return only that one
-// row...
+/* do a query expecting one row as result (throw exception if not so). Return only that one
+ * row... */
 function my_mysql_query_one_row($query) {
 	$result=my_mysql_query($query);
 	# we should only get one result...
@@ -106,7 +143,7 @@ function my_mysql_query_one_row($query) {
 	return $row;
 }
 
-// do a query and return a hash of the results by key...
+/* do a query and return a hash of the results by key... */
 function my_mysql_query_hash($query,$hash_key) {
 	$result=my_mysql_query($query);
 	$ret=array();
@@ -119,30 +156,38 @@ function my_mysql_query_hash($query,$hash_key) {
 	return $ret;
 }
 
+/* start transaction */
 function my_mysql_start_transaction() {
 	my_mysql_query('START TRANSACTION');
 }
 
+/* commit a transaction */
 function my_mysql_commit() {
 	my_mysql_query('COMMIT');
 }
 
+/* escape strings in my own style */
+function my_mysql_real_escape_string($str) {
+	if($str!=NULL) {
+		return '\''.mysql_real_escape_string($str).'\'';
+	} else {
+		return 'NULL';
+	}
+}
+
+/* convert php dates to mysql */
 function phpdate_to_mysqldate($phpdate) {
 	return date('Y-m-d H:i:s',$phpdate);
 }
 
+/* convert javascript dates to php dates */
 function javascriptdate_to_phpdate($javascriptdate) {
 	return strtotime($javascriptdate);
 }
 
+/* convert javascript dates to mysql dates */
 function javascriptdate_to_mysqldate($javascriptdate) {
 	return phpdate_to_mysqldate(javascriptdate_to_phpdate($javascriptdate));
-}
-
-function my_assert($val,$reason) {
-	if(!$val) {
-		error('assert error: '.$reason);
-	}
 }
 
 function my_get_post($field) {
@@ -161,14 +206,6 @@ function my_get_post_or_null($field) {
 	return $val;
 }
 
-function my_mysql_real_escape_string($str) {
-	if($str!=NULL) {
-		return '\''.mysql_real_escape_string($str).'\'';
-	} else {
-		return 'NULL';
-	}
-}
-
 function my_get_get($field) {
 	if(array_key_exists($field,$_GET)) {
 		return $_GET[$field];
@@ -177,10 +214,12 @@ function my_get_get($field) {
 	}
 }
 
+/* a string to be printed when there is no data to print */
 function get_na_string() {
 	return 'N/A';
 }
-# function that returns 'N/A' or the string according to whether the string is NULL
+
+/* function that returns 'N/A' or the string according to whether the string is NULL */
 function val_or_na($val) {
 	if($val==NULL) {
 		return get_na_string();
@@ -189,13 +228,14 @@ function val_or_na($val) {
 	}
 }
 
-# input is in bytes
+/* convert bytes to something which is printable on screen */
 function formatSize($size) {
 	$units=array('B','KB','MB','GB','TB');
 	for ($i = 0; $size > 1024; $i++) { $size /= 1024; }
 	return round($size, 2).' '.$units[$i];
 }
-# input is in seconds
+
+/* convert seconds to something which is printable on screen */
 function formatTimeperiod($size) {
 	$units=array('secs','mins','hrs','days','months','years');
 	$mults=array(60,60,24,30,12);
@@ -207,77 +247,44 @@ function formatTimeperiod($size) {
 	return round($size, 2).' '.$units[$i];
 }
 
-/* Function to start an HTML table for you */
-function get_start_table() {
-	#return '<table style='empty-cells:show;width:100%;' border='1'>';
-	return '<table style=\'empty-cells:show;width:100%;\'>';
-}
-
-/* Function to put an audio player for a clip */
-// check out: http://wpaudioplayer.com/frequently-asked-questions
-function get_audio_player($url,$title,$composer,$poet) {
-	$str='[audio:'.$url.'|titles='.$title;
-	if($composer!=NULL || $poet!=NULL) {
-		if($composer!=NULL) {
-			if($poet!=NULL) {
-				if($composer!=$poet) {
-					$artists=$composer.' - '.$poet;
-				} else {
-					$artists=$composer;
-				}
-			} else {
-				$artists=$composer;
-			}
-		} else {
-			if($poet!=NULL) {
-				$artists=$poet;
-			} else {
-				$artists='';
-			}
+/* echo a result set in json style... */
+function my_json_encode($result) {
+	// iterate over every row
+	while ($row = mysql_fetch_assoc($result)) {
+		// for every field in the result..
+		for ($i=0; $i < mysql_num_fields($result); $i++) {
+			$info = mysql_fetch_field($result, $i);
+			$type = $info->type;
+			// cast for real
+			if ($type == 'real')
+				$row[$info->name] = doubleval($row[$info->name]);
+			// cast for int
+			if ($type == 'int')
+				$row[$info->name] = intval($row[$info->name]);
 		}
-		$str.='|artists='.$artists;
+		$rows[] = $row;
 	}
-	$str.=']';
-	return $str;
-}
-
-/*
- * Multi according JQuery implementation
- */
-function multi_accordion_start() {
-	return '<div class=\'myacc\'>';
-}
-
-function multi_accordion_header($header) {
-	return '<div class=\'myacc_header\'>'.$header.'</div>';
-}
-
-function multi_accordion_body($body) {
-	return '<div class=\'myacc_body\'>'.$body.'</div>';
-}
-
-function multi_accordion_entry($header,$body) {
-	return '<div class=\'myacc_entry\'><div class=\'myacc_header\'>'.$header.'</div><div class=\'myacc_body\'>'.$body.'</div></div>';
-}
-
-function multi_accordion_end() {
-	return '</div>';
-}
-
-function calendar() {
-	$ret='';
-	$ret.='<div id=\'loading\' style=\'display:none\'>loading...</div>';
-	$ret.='<div id=\'calendar\'></div>';
-	return $ret;
+	// JSON-ify all rows together as one big array
+	return json_encode($rows);
 }
 
 /* functions for embedding stuff from youtube */
-function youtube_embed($youtube_id,$size_factor) {
+function embed_youtube($youtube_id,$size_factor) {
 	$width=480*$size_factor;
 	$height=385*$size_factor;
 	# this is taken from going over to youtube, seeing a movie and pussing the 'embed'
 	# button which gave me this text...
 	return '<object width=\''.$width.'\' height=\''.$height.'\'><param name=\'movie\' value=\'http://www.youtube.com/v/'.$youtube_id.'?fs=1&amp;hl=en_US\'></param><param name=\'allowFullScreen\' value=\'true\'></param><param name=\'allowscriptaccess\' value=\'always\'></param><embed src=\'http://www.youtube.com/v/'.$youtube_id.'?fs=1&amp;hl=en_US\' type=\'application/x-shockwave-flash\' allowscriptaccess=\'always\' allowfullscreen=\'true\' width=\''.$width.'\' height=\''.$height.'\'></embed></object>';
+}
+
+/* function for embedding a ted video */
+function embed_ted($tedid) {
+	$width=446;
+	$height=326;
+	#$vid='http://video.ted.com/talks/dynamic/JeffreySkoll_2007-medium.flv';
+	$vid='http://video.ted.com/talks/dynamic/JeffreySkoll_2007-small.flv';
+	$jpg='http://images.ted.com/images/ted/tedindex/embed-posters/JeffreySkoll-2007.embed_thumbnail.jpg';
+	return '<!--copy and paste--><object width=\''.$width.'\' height=\''.$height.'\'><param name=\'movie\' value=\'http://video.ted.com/assets/player/swf/EmbedPlayer.swf\'></param><param name=\'allowFullScreen\' value=\'true\' /><param name=\'allowScriptAccess\' value=\'always\'/><param name=\'wmode\' value=\'transparent\'></param><param name=\'bgColor\' value=\'#ffffff\'></param> <param name=\'flashvars\' value=\''.$vid.'&su='.$jpg.'&vw=432&vh=240&ap=0&ti=170&introDuration=15330&adDuration=4000&postAdDuration=830&adKeys=talk=jeff_skoll_makes_movies_that_make_change;year=2007;theme=media_that_matters;theme=master_storytellers;theme=the_creative_spark;theme=not_business_as_usual;event=TED2007;&preAdTag=tconf.ted/embed;tile=1;sz=512x288;\' /><embed src=\'http://video.ted.com/assets/player/swf/EmbedPlayer.swf\' pluginspace=\'http://www.macromedia.com/go/getflashplayer\' type=\'application/x-shockwave-flash\' wmode=\'transparent\' bgColor=\'#ffffff\' width=\''.$width.'\' height=\''.$height.'\' allowFullScreen=\'true\' allowScriptAccess=\'always\' flashvars=\'vu='.$vid.'&su='.$jpg.'&vw=432&vh=240&ap=0&ti=170&introDuration=15330&adDuration=4000&postAdDuration=830&adKeys=talk=jeff_skoll_makes_movies_that_make_change;year=2007;theme=media_that_matters;theme=master_storytellers;theme=the_creative_spark;theme=not_business_as_usual;event=TED2007;\'></embed></object>';
 }
 
 function get_external_href($external_name,$external_id) {
@@ -376,54 +383,6 @@ function get_external_href($external_name,$external_id) {
 			error('what external name is ['.$external_name.']');
 			break;
 	}
-}
-
-/* function for embedding a ted video */
-function ted_embed($tedid) {
-	$width=446;
-	$height=326;
-	#$vid='http://video.ted.com/talks/dynamic/JeffreySkoll_2007-medium.flv';
-	$vid='http://video.ted.com/talks/dynamic/JeffreySkoll_2007-small.flv';
-	$jpg='http://images.ted.com/images/ted/tedindex/embed-posters/JeffreySkoll-2007.embed_thumbnail.jpg';
-	return '<!--copy and paste--><object width=\''.$width.'\' height=\''.$height.'\'><param name=\'movie\' value=\'http://video.ted.com/assets/player/swf/EmbedPlayer.swf\'></param><param name=\'allowFullScreen\' value=\'true\' /><param name=\'allowScriptAccess\' value=\'always\'/><param name=\'wmode\' value=\'transparent\'></param><param name=\'bgColor\' value=\'#ffffff\'></param> <param name=\'flashvars\' value=\''.$vid.'&su='.$jpg.'&vw=432&vh=240&ap=0&ti=170&introDuration=15330&adDuration=4000&postAdDuration=830&adKeys=talk=jeff_skoll_makes_movies_that_make_change;year=2007;theme=media_that_matters;theme=master_storytellers;theme=the_creative_spark;theme=not_business_as_usual;event=TED2007;&preAdTag=tconf.ted/embed;tile=1;sz=512x288;\' /><embed src=\'http://video.ted.com/assets/player/swf/EmbedPlayer.swf\' pluginspace=\'http://www.macromedia.com/go/getflashplayer\' type=\'application/x-shockwave-flash\' wmode=\'transparent\' bgColor=\'#ffffff\' width=\''.$width.'\' height=\''.$height.'\' allowFullScreen=\'true\' allowScriptAccess=\'always\' flashvars=\'vu='.$vid.'&su='.$jpg.'&vw=432&vh=240&ap=0&ti=170&introDuration=15330&adDuration=4000&postAdDuration=830&adKeys=talk=jeff_skoll_makes_movies_that_make_change;year=2007;theme=media_that_matters;theme=master_storytellers;theme=the_creative_spark;theme=not_business_as_usual;event=TED2007;\'></embed></object>';
-}
-
-/* function to know whether we are running on the command line */
-function isCli() {
-	if(php_sapi_name() == 'cli' && empty($_SERVER['REMOTE_ADDR'])) {
-		return true;
-	} else {
-		return false;
-	}
-}
-
-/* function to print debug information correctly for cli and non cli mode */
-function printDebug($string) {
-	if(isCli()) {
-		echo $string."\n";
-	} else {
-		echo $string.'<br/>';
-	}
-}
-// echo a result set in json style...
-function my_json_encode($result) {
-	// iterate over every row
-	while ($row = mysql_fetch_assoc($result)) {
-		// for every field in the result..
-		for ($i=0; $i < mysql_num_fields($result); $i++) {
-			$info = mysql_fetch_field($result, $i);
-			$type = $info->type;
-			// cast for real
-			if ($type == 'real')
-				$row[$info->name] = doubleval($row[$info->name]);
-			// cast for int
-			if ($type == 'int')
-				$row[$info->name] = intval($row[$info->name]);
-		}
-		$rows[] = $row;
-	}
-	// JSON-ify all rows together as one big array
-	return json_encode($rows);
 }
 
 function get_full_name($hash) {

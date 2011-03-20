@@ -16,7 +16,7 @@ Calendar project:
 	An event:
 		begin time, end time, name, company affiliated, course affiliated
 	import historical data.
-- show events from date to date in the blog under "calendar".
+- show events from date to date in the blog under 'calendar'.
 
 - in the future improve the UI to look like the real professional calendars.
 
@@ -30,4 +30,4 @@ Size of the icon is the number of hours I taught that company.
 About page:
 ===========
 The links in the about page should come from the database under some kind of
-tag like "web presense".
+tag like 'web presense'.

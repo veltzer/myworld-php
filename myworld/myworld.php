@@ -24,9 +24,14 @@ function link_to_resource($resource) {
 }
 
 my_include('include/utils.php');
+my_include('src/accordion.php');
+my_include('src/audio.php');
 my_include('src/business.php');
-my_include('src/works.php');
+my_include('src/calendar.php');
+my_include('src/helloworld.php');
 my_include('src/lilypond.php');
+my_include('src/table.php');
+my_include('src/works.php');
 
 if(!class_exists('MyWorld')) {
 	class MyWorld { 
@@ -68,17 +73,20 @@ if(!class_exists('MyWorld')) {
 				case 'lilypond':
 					$ret=create_lilypond();
 					break;
-				case 'test':
-					$ret='שלום';
+				case 'calendar':
+					$ret=create_calendar();
+					break;
+				case 'embed_ted':
+					$ret=embed_ted($extra['id']);
+					break;
+				case 'helloworld':
+					$ret=create_helloworld();
 					break;
 				case 'echo':
 					$ret=$extra;
 					break;
-				case 'ted_embed':
-					$ret=ted_embed($extra['id']);
-					break;
-				case 'calendar':
-					$ret=calendar();
+				case 'test':
+					$ret='שלום';
 					break;
 				default:
 					$ret='[$name] is unknown';
@@ -112,27 +120,34 @@ if(!class_exists('MyWorld')) {
 		}
 
 		/*
-		 * This function will add my javascript code
+		 * This function will adds any javascript code that I need and also my own.
+		 * It addition it handles style sheets and favicon stuff.
 		 *
-		 * Note: my javascript code and css MUST come at the end since
+		 * Notes:
+		 * - My javascript code and css MUST come at the end since
 		 * they override any other stuff (especially the css...)
+		 * - This next line is supposed to work but it doesn't...
+		 * wp_enqueue_script('myworld', plugins_url('javascript/myworld.js', __FILE__), array('jquery'), '1.0');
+		 * That is why the next section uses direct inclusion instead.
 		 */
 		function wp_head() {
-			// jquery and jquery ui
+			// jquery
 			echo "<script type='text/javascript' src='".plugins_url('javascript/jquery/jquery.js?ver=',__FILE__).$this->version."'></script>\n";
+			// jquery ui
 			echo "<script type='text/javascript' src='".plugins_url('javascript/jquery/jquery-ui-custom.js?ver=',__FILE__).$this->version."'></script>\n";
 
 			// full calendar stuff
 			echo "<link rel='stylesheet' id='fullcalendar-css' href='".plugins_url('javascript/fullcalendar/fullcalendar.css?ver=',__FILE__).$this->version."' type='text/css' media='screen' />\n";
 			echo "<script type='text/javascript' src='".plugins_url('javascript/fullcalendar/fullcalendar.min.js?ver=',__FILE__).$this->version."'></script>\n";
 			echo "<script type='text/javascript' src='".plugins_url('javascript/fullcalendar/gcal.js?ver=',__FILE__).$this->version."'></script>\n";
-			
-			// This next line is supposed to work but it doesn't...
-			//wp_enqueue_script('myworld', plugins_url('javascript/myworld.js', __FILE__), array('jquery'), '1.0');
-			// I used direct inclusion like below...
+			// high charts stuff
+			echo "<script type='text/javascript' src='".plugins_url('javascript/highcharts/highcharts.js?ver=',__FILE__).$this->version."'></script>\n";
+
+			// myworld javascript
 			echo "<script type='text/javascript' src='".plugins_url('javascript/myworld.js?ver=',__FILE__).$this->version."'></script>\n";
 			// and now for the style sheet...
 			echo "<link rel='stylesheet' id='myworld-css' href='".plugins_url('css/myworld.css?ver=',__FILE__).$this->version."' type='text/css' media='screen' />\n";
+			// favicon
 			echo "<link rel='SHORTCUT ICON' type='image/x-icon' href='".plugins_url('resources/favicon.ico',__FILE__)."' />\n";
 		}
 

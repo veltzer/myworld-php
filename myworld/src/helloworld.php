@@ -1,7 +1,7 @@
 <?php
 
 function create_helloworld() {
-	return "Hello World!"."<br/>";
+	return 'Hello World!<br/>';
 }
 
 ?>
