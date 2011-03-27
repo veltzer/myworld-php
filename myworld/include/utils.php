@@ -292,8 +292,11 @@ function get_external_href($external_name,$external_id) {
 		case 'imdb':
 			return 'http://www.imdb.com/title/tt'.$external_id.'/';
 			break;
-		case 'TTC':
+		case 'TTC course':
 			return 'http://www.teach12.com/ttcx/coursedesclong2.aspx?cid='.$external_id;
+			break;
+		case 'TTC professor':
+			return 'http://www.teach12.com/tgc/professors/professor_detail.aspx?pid='.$external_id;
 			break;
 		case 'youtube_vid':
 			return 'http://www.youtube.com/v/'.$external_id;
