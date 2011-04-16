@@ -15,7 +15,7 @@ jQuery(document).ready(function() {
 		'formid':'#movie_form',
 	};
 	jQuery('#movie_send').cont_submit(init);
-	
+
 	var init={
 		'type':'select',
 		'name':'Person',
@@ -260,7 +260,7 @@ jQuery(document).ready(function() {
 		'submit':'#work_send',
 	};
 	jQuery('#work_typeid').cont_valid(init);
-	
+
 	var init={
 		'type':'select',
 		'name':'Language',
@@ -465,7 +465,7 @@ jQuery(document).ready(function() {
 		'formid':'#workview_form',
 	};
 	jQuery('#workview_send').cont_submit(init);
-	
+
 	var init={
 		'type':'select',
 		'name':'Viewing person',
@@ -522,6 +522,19 @@ jQuery(document).ready(function() {
 		'submit':'#workview_send',
 	};
 	jQuery('#workview_deviceid').cont_valid(init);
+
+	var init={
+		'type':'select',
+		'name':'Language',
+		'sname':'languageId',
+		'initState':true,
+		'initMsg':'Put language of work here',
+		'initVal':144, // this is english from the languages table (ugly!!!)
+		'url':'GetData.php?type=TbLanguage',
+		'logger':'#log',
+		'submit':'#workview_send',
+	};
+	jQuery('#workview_languageid').cont_valid(init);
 
 	var init={
 		'type':'select',
