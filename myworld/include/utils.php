@@ -313,6 +313,12 @@ function get_external_href($external_name,$external_id) {
 		case 'url':
 			return $external_id;
 			break;
+		case 'homepage':
+			return $external_id;
+			break;
+		case 'profile':
+			return $external_id;
+			break;
 		case 'facebook':
 			return 'http://www.facebook.com/'.$external_id;
 			break;
