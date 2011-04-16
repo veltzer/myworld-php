@@ -64,6 +64,12 @@ function create_works($type) {
 	# create a hash table of external ids for people
 	$personexternal_externalid=array();
 	$personexternal_externalcode=array();
+	# create an empty entry for every person
+	foreach($persons as $id => $row) {
+		$personexternal_externalid[$id]=array();
+		$personexternal_externalcode[$id]=array();
+	}
+	# fill with external ids
 	foreach($personexternal as $id => $row) {
 		$personId=$row['personId'];
 		$externalId=$row['externalId'];
@@ -277,14 +283,16 @@ function create_works($type) {
 		}
 		# external stuff
 		$j=0;
-		foreach($workexternal_externalid[$row[$idid]] as $externalid) {
-			$externalcode=$workexternal_externalcode[$row[$idid]][$j];
-			$externalname=$external[$externalid]['name'];
-			$externalidname=$external[$externalid]['idname'];
-			$link=get_external_href($externalname,$externalcode);
-			$link='<a href=\''.$link.'\'>'.$externalidname.': '.$externalcode.'</a>';
-			$body.='<li>'.$link.'</li>';
-			$j++;
+		if(isset($workexternal_externalid[$row[$idid]])) {
+			foreach($workexternal_externalid[$row[$idid]] as $externalid) {
+				$externalcode=$workexternal_externalcode[$row[$idid]][$j];
+				$externalname=$external[$externalid]['name'];
+				$externalidname=$external[$externalid]['idname'];
+				$link=get_external_href($externalname,$externalcode);
+				$link='<a href=\''.$link.'\'>'.$externalidname.': '.$externalcode.'</a>';
+				$body.='<li>'.$link.'</li>';
+				$j++;
+			}
 		}
 		$body.='</ul>';
 		$res.=multi_accordion_entry($header,$body);
