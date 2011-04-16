@@ -382,6 +382,12 @@ function get_external_href($external_name,$external_id) {
 		case 'wikipedia':
 			return 'http://en.wikipedia.org/wiki/'.$external_id;
 			break;
+		case 'personal eid':
+			return 'http://personal.org/eid/'.$external_id;
+			break;
+		case 'personal rid':
+			return 'http://personal.org/rid/'.$external_id;
+			break;
 		default:
 			error('what external name is ['.$external_name.']');
 			break;
