@@ -254,12 +254,25 @@ jQuery(document).ready(function() {
 		'name':'Type',
 		'sname':'typeId',
 		'initState':true,
-		'initMsg':'Put type type of work here',
+		'initMsg':'Put type of work here',
 		'url':'GetData.php?type=TbWkWorkType',
 		'logger':'#log',
 		'submit':'#work_send',
 	};
 	jQuery('#work_typeid').cont_valid(init);
+	
+	var init={
+		'type':'select',
+		'name':'Language',
+		'sname':'languageId',
+		'initState':true,
+		'initMsg':'Put language of work here',
+		'initVal':144, // this is english from the languages table (ugly!!!)
+		'url':'GetData.php?type=TbLanguage',
+		'logger':'#log',
+		'submit':'#work_send',
+	};
+	jQuery('#work_languageid').cont_valid(init);
 
 	// work -> external stuff
 
