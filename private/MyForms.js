@@ -199,7 +199,8 @@ jQuery(document).ready(function() {
 		'name':'Honorific',
 		'sname':'honorific',
 		'initState':false,
-		'regex':/^[\w\.]*$/,
+		//'regex':/^[\w\.]*$/,
+		'regex':/.+/, // because they can be in hebrew
 		'logger':'#log',
 		'submit':'#person_send',
 	};
@@ -215,12 +216,12 @@ jQuery(document).ready(function() {
 
 	init.name='Other Name';
 	init.sname='othername';
-	init.regex=/^[\w\.]*$/;
+	//init.regex=/^[\w\.]*$/;
 	jQuery('#person_othername').cont_valid(init);
 
 	init.name='Remark';
 	init.sname='remark';
-	init.regex=/^[\w\. ]*$/;
+	//init.regex=/^[\w\. ]*$/;
 	jQuery('#person_remark').cont_valid(init);
 
 	init.name='Ordinal';
