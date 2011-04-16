@@ -200,7 +200,7 @@ jQuery(document).ready(function() {
 		'sname':'honorific',
 		'initState':false,
 		//'regex':/^[\w\.]*$/,
-		'regex':/.+/, // because they can be in hebrew
+		'regex':/.*/, // because they can be in hebrew
 		'logger':'#log',
 		'submit':'#person_send',
 	};
