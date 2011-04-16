@@ -34,7 +34,7 @@ jQuery(document).ready(function() {
 		'sname':'name',
 		'initState':true,
 		'initMsg':'put the name of the movie here',
-		'regex':/.+/,
+		'regex':/.+/, // because they can be in hebrew
 		'logger':'#log',
 		'submit':'#movie_send',
 	};
@@ -243,7 +243,8 @@ jQuery(document).ready(function() {
 		'sname':'name',
 		'initState':true,
 		'initMsg':'Put the name of the work here',
-		'regex':/^[\w \-\:\,\']+$/,
+		//'regex':/^[\w \-\:\,\']+$/,
+		'regex':/.+/, // because they can be in hebrew
 		'logger':'#log',
 		'submit':'#work_send',
 	};
