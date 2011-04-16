@@ -341,6 +341,9 @@ function get_external_href($external_name,$external_id) {
 		case 'ted':
 			return 'http://www.ted.com/profiles/view/id/'.$external_id;
 			break;
+		case 'ted_speaker':
+			return 'http://www.ted.com/speakers/'.$external_id.'.html';
+			break;
 		case 'google_reader':
 			return 'http://www.google.com/reader/shared/'.$external_id;
 			break;
