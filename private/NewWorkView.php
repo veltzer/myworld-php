@@ -12,18 +12,18 @@ $p_workId=my_get_post('workId');
 $p_date=javascriptdate_to_mysqldate(my_get_post('date'));
 $p_locationId=my_get_post('locationId');
 $p_deviceId=my_get_post('deviceId');
-$p_languageId=my_get_post('languageId');
+$p_langId=my_get_post('langId');
 $p_ratingId=my_get_post('ratingId');
 $p_review=my_get_post('review');
 
 my_mysql_start_transaction();
 
 // insert a new view
-$query=sprintf('insert into TbWkWorkView (endViewDate,locationId,deviceId,languageId,viewerId,workId) values(%s,%s,%s,%s,%s,%s)',
+$query=sprintf('insert into TbWkWorkView (endViewDate,locationId,deviceId,langId,viewerId,workId) values(%s,%s,%s,%s,%s,%s)',
 	my_mysql_real_escape_string($p_date),
 	my_mysql_real_escape_string($p_locationId),
 	my_mysql_real_escape_string($p_deviceId),
-	my_mysql_real_escape_string($p_languageId),
+	my_mysql_real_escape_string($p_langId),
 	my_mysql_real_escape_string($p_personId),
 	my_mysql_real_escape_string($p_workId)
 );

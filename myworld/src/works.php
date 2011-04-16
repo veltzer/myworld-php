@@ -16,6 +16,7 @@ function create_works($type) {
 	$types=my_mysql_query_hash('SELECT * FROM TbWkWorkType','id');
 	$locations=my_mysql_query_hash('SELECT * FROM TbLocation','id');
 	$devices=my_mysql_query_hash('SELECT * FROM TbDevice','id');
+	$languages=my_mysql_query_hash('SELECT * FROM TbLanguage','id');
 	$persons=my_mysql_query_hash('SELECT * FROM TbIdPerson','id');
 	$personexternal=my_mysql_query_hash('SELECT * FROM TbIdPersonExternal','id');
 	$organizations=my_mysql_query_hash('SELECT * FROM TbOrganization','id');
@@ -102,7 +103,7 @@ function create_works($type) {
 			//error('what type is ['.$type.']');
 			break;
 	}
-	$query=sprintf('SELECT TbWkWork.id,TbWkWork.name,TbWkWork.length,TbWkWork.size,TbWkWork.chapters,TbWkWork.typeId,TbWkWorkView.startViewDate,TbWkWorkView.endViewDate,TbWkWorkView.viewerId,TbWkWorkView.locationId,TbWkWorkView.deviceId,TbWkWorkReview.ratingId,TbWkWorkReview.review,TbWkWorkReview.reviewDate FROM TbWkWork,TbWkWorkType,TbWkWorkReview,TbWkWorkView WHERE TbWkWork.typeId=TbWkWorkType.id AND TbWkWorkReview.workId=TbWkWork.id AND TbWkWorkView.workId=TbWkWork.id AND %s order by TbWkWorkView.endViewDate %s limit %s',$add,$order,$limit);
+	$query=sprintf('SELECT TbWkWork.id,TbWkWork.name,TbWkWork.length,TbWkWork.size,TbWkWork.chapters,TbWkWork.typeId,TbWkWork.languageId,TbWkWorkView.startViewDate,TbWkWorkView.endViewDate,TbWkWorkView.viewerId,TbWkWorkView.locationId,TbWkWorkView.deviceId,TbWkWorkView.langId,TbWkWorkReview.ratingId,TbWkWorkReview.review,TbWkWorkReview.reviewDate FROM TbWkWork,TbWkWorkType,TbWkWorkReview,TbWkWorkView WHERE TbWkWork.typeId=TbWkWorkType.id AND TbWkWorkReview.workId=TbWkWork.id AND TbWkWorkView.workId=TbWkWork.id AND %s order by TbWkWorkView.endViewDate %s limit %s',$add,$order,$limit);
 	//$query=sprintf('SELECT * FROM TbWkWork');
 	$result=my_mysql_query($query);
 
@@ -119,6 +120,9 @@ function create_works($type) {
 		}
 		if($field->name=='typeId') {
 			$typeid=$i;
+		}
+		if($field->name=='languageId') {
+			$languageid=$i;
 		}
 		if($field->name=='length') {
 			$lengthid=$i;
@@ -145,6 +149,9 @@ function create_works($type) {
 		if($field->name=='deviceId') {
 			$deviceid=$i;
 		}
+		if($field->name=='langId') {
+			$langid=$i;
+		}
 		# review table
 		if($field->name=='ratingId') {
 			$ratingid=$i;
@@ -165,6 +172,11 @@ function create_works($type) {
 		} else {
 			$s_type=get_na_string();
 		}
+		if($row[$languageid]!=NULL) {
+			$s_language=$languages[$row[$languageid]]['name'];
+		} else {
+			$s_language=get_na_string();
+		}
 		if($row[$locationid]!=NULL) {
 			$s_location=$locations[$row[$locationid]]['name'];
 		} else {
@@ -174,6 +186,11 @@ function create_works($type) {
 			$s_device=$devices[$row[$deviceid]]['name'];
 		} else {
 			$s_device=get_na_string();
+		}
+		if($row[$langid]!=NULL) {
+			$s_lang=$languages[$row[$langid]]['name'];
+		} else {
+			$s_lang=get_na_string();
 		}
 		if($row[$viewerid]!=NULL) {
 			$s_viewer=get_full_name($persons[$row[$viewerid]]);
@@ -222,6 +239,9 @@ function create_works($type) {
 		if($row[$typeid]!=NULL) {
 			$body.='<li>type: '.$s_type.'</li>';
 		}
+		if($row[$languageid]!=NULL) {
+			$body.='<li>language: '.$s_language.'</li>';
+		}
 		# view stuff
 		if($row[$startviewdateid]!=NULL) {
 			$body.='<li>start view date: '.$row[$startviewdateid].'</li>';
@@ -237,6 +257,9 @@ function create_works($type) {
 		}
 		if($row[$deviceid]!=NULL) {
 			$body.='<li>device: '.$s_device.'</li>';
+		}
+		if($row[$langid]!=NULL) {
+			$body.='<li>lang: '.$s_lang.'</li>';
 		}
 		# review stuff
 		if($row[$ratingid]!=NULL) {

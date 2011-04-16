@@ -526,7 +526,7 @@ jQuery(document).ready(function() {
 	var init={
 		'type':'select',
 		'name':'Language',
-		'sname':'languageId',
+		'sname':'langId',
 		'initState':true,
 		'initMsg':'Put language of work here',
 		'initVal':144, // this is english from the languages table (ugly!!!)
@@ -534,7 +534,7 @@ jQuery(document).ready(function() {
 		'logger':'#log',
 		'submit':'#workview_send',
 	};
-	jQuery('#workview_languageid').cont_valid(init);
+	jQuery('#workview_langid').cont_valid(init);
 
 	var init={
 		'type':'select',
