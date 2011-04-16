@@ -117,6 +117,7 @@ function my_mysql_query($query) {
 	if(!$result) {
 		error('mysql error: '.mysql_errno().': '.mysql_error());
 	}
+	#built in php function to do logging...
 	#error_log('my_mysql_query doing query ['.$query.']',0);
 	return $result;
 }
