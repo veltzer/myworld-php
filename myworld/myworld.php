@@ -30,6 +30,7 @@ my_include('src/business.php');
 my_include('src/calendar.php');
 my_include('src/helloworld.php');
 my_include('src/lilypond.php');
+my_include('src/music.php');
 my_include('src/table.php');
 my_include('src/works.php');
 
@@ -72,6 +73,9 @@ if(!class_exists('MyWorld')) {
 					break;
 				case 'lilypond':
 					$ret=create_lilypond();
+					break;
+				case 'music':
+					$ret=create_music();
 					break;
 				case 'calendar':
 					$ret=create_calendar();
