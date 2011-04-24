@@ -2,30 +2,25 @@
 
 function create_music() {
 	$res='';
-	$query=sprintf('SELECT id,title,artist FROM TbMsHearing ORDER BY date DSC LIMIT 30');
+	$query=sprintf('SELECT id,title,track,artist,album,comment,year,genre,filename,date FROM TbMsHearing ORDER BY date DESC LIMIT 30');
 	$result=my_mysql_query($query);
 
 	$res.=multi_accordion_start();
 
 	while($row=mysql_fetch_assoc($result)) {
-		$id=$row['id'];
-		$s_title=$row['title'];
-		$s_artist=$row['artist'];
-		$s_subtitle=val_or_na($row['subtitle']);
-		$s_composer=val_or_na($row['composer']);
-		$s_poet=val_or_na($row['poet']);
-		$s_style=val_or_na($row['style']);
-		$s_piece=val_or_na($row['piece']);
-		$s_copyright=val_or_na($row['copyright']);
-		$s_pages=val_or_na($row['pages']);
-		$s_epdfs=val_or_na($row['epdfs']);
-
-		$header=$row['title'].' / '.$row['artist'];
+		$header=$row['title'].' / '.$row['album'].' / '.$row['artist'];
 		$body='';
 		$body.='<ul>';
 		$body.='<li>id: '.$row['id'].'</li>';
 		$body.='<li>title: '.$row['title'].'</li>';
+		$body.='<li>track: '.$row['track'].'</li>';
 		$body.='<li>artist: '.$row['artist'].'</li>';
+		$body.='<li>album: '.$row['album'].'</li>';
+		$body.='<li>comment: '.$row['comment'].'</li>';
+		$body.='<li>year: '.$row['year'].'</li>';
+		$body.='<li>genre: '.$row['genre'].'</li>';
+		$body.='<li>filename: '.$row['filename'].'</li>';
+		$body.='<li>date: '.$row['date'].'</li>';
 		$body.='</ul>';
 		$res.=multi_accordion_entry($header,$body);
 	}
