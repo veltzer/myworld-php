@@ -65,8 +65,7 @@ if(!class_exists('MyWorld')) {
 					$ret=create_certification();
 					break;
 				case 'works':
-					$type=$extra['type'];
-					$ret=create_works($type);
+					$ret=create_works($extra);
 					break;
 				case 'stats':
 					$ret=create_stats();
