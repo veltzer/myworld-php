@@ -43,13 +43,13 @@ if(!class_exists('MyWorld')) {
 		/*
 		 * The function that creates dynamic content
 		 */
-		function create_content($name,$extra) {
+		function create_content($name,$params) {
 			my_mysql_connect();
 			switch($name) {
 				case 'person':
 					// TODO: throw error if parameters are not there...
-					$firstname=$extra['firstname'];
-					$surname=$extra['surname'];
+					$firstname=$params['firstname'];
+					$surname=$params['surname'];
 					$ret=create_person($firstname,$surname);
 					break;
 				case 'courses':
@@ -65,7 +65,7 @@ if(!class_exists('MyWorld')) {
 					$ret=create_certification();
 					break;
 				case 'works':
-					$ret=create_works($extra);
+					$ret=create_works($params);
 					break;
 				case 'stats':
 					$ret=create_stats();
@@ -80,13 +80,13 @@ if(!class_exists('MyWorld')) {
 					$ret=create_calendar();
 					break;
 				case 'embed_ted':
-					$ret=embed_ted($extra['id']);
+					$ret=embed_ted($params['id']);
 					break;
 				case 'helloworld':
 					$ret=create_helloworld();
 					break;
 				case 'echo':
-					$ret=$extra;
+					$ret=$params;
 					break;
 				case 'test':
 					$ret='שלום';

@@ -104,8 +104,9 @@ function create_works($params) {
 			//error('what type is ['.$type.']');
 			break;
 	}
-	if(isset($extra['limit'])) {
-		$limit=$extra['limit'];
+	//error_log(var_export($params,true),0);
+	if(array_key_exists('limit',$params)) {
+		$limit=$params['limit'];
 	}
 	$query=sprintf('SELECT TbWkWork.id,TbWkWork.name,TbWkWork.length,TbWkWork.size,TbWkWork.chapters,TbWkWork.typeId,TbWkWork.languageId,TbWkWorkView.startViewDate,TbWkWorkView.endViewDate,TbWkWorkView.viewerId,TbWkWorkView.locationId,TbWkWorkView.deviceId,TbWkWorkView.langId,TbWkWorkReview.ratingId,TbWkWorkReview.review,TbWkWorkReview.reviewDate FROM TbWkWork,TbWkWorkType,TbWkWorkReview,TbWkWorkView WHERE TbWkWork.typeId=TbWkWorkType.id AND TbWkWorkReview.workId=TbWkWork.id AND TbWkWorkView.workId=TbWkWork.id AND %s order by TbWkWorkView.endViewDate %s LIMIT %s',$add,$order,$limit);
 	//$query=sprintf('SELECT * FROM TbWkWork');
