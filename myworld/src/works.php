@@ -330,7 +330,7 @@ function create_works($params) {
 	return $res;
 }
 
-function create_stats() {
+function create_stats($params) {
 	$res='';
 	# lets get my id
 	$p_viewerId=my_mysql_query_one('SELECT id FROM TbIdPerson WHERE firstname=\'Mark\' AND surname=\'Veltzer\'');
@@ -388,7 +388,9 @@ function create_stats() {
 	return $res;
 }
 
-function create_person($firstname,$surname) {
+function create_person($params) {
+	$firstname=$params['firstname'];
+	$surname=$params['surname'];
 	$res='';
 	$external=my_mysql_query_hash('SELECT * FROM TbExternalType','id');
 	$query=sprintf('SELECT * FROM TbIdPerson WHERE firstname=%s AND surname=%s',

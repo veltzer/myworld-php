@@ -10,7 +10,8 @@ header("Content-type: text/html; charset=UTF-8");
 
 require("setup.php");
 my_include("src/helloworld.php");
-echo create_helloworld();
+$params=array();
+echo create_helloworld($params);
 
 ?>
 </body></html>

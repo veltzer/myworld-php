@@ -1,6 +1,6 @@
 <?php
 
-function create_music() {
+function create_music($params) {
 	$res='';
 	$query=sprintf('SELECT id,title,track,artist,album,comment,year,genre,filename,date FROM TbMsHearing ORDER BY date DESC LIMIT 30');
 	$result=my_mysql_query($query);

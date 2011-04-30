@@ -13,10 +13,11 @@ my_include("include/utils.php");
 my_include("src/business.php");
 
 my_mysql_connect();
-echo create_courses();
-echo create_consulting();
-echo create_teaching();
-echo create_certification();
+$params=array();
+echo create_courses($params);
+echo create_consulting($params);
+echo create_teaching($params);
+echo create_certification($params);
 my_mysql_disconnect();
 
 ?>

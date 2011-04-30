@@ -4,7 +4,7 @@
 # get the queries out of here and into a query manager...
 # Handle creation of tables via my own class.
 
-function create_courses() {
+function create_courses($params) {
 	$res='';
 	// sending query
 	$query=sprintf('SELECT id,category,name FROM TbBsCourses order by category,name asc');
@@ -30,7 +30,7 @@ function create_courses() {
 	return $res;
 }
 
-function create_consulting() {
+function create_consulting($params) {
 	$res='';
 	// sending query
 	$query=sprintf('SELECT id,name,slug,remark,url FROM TbOrganization where funcConsulting order by name asc');
@@ -67,7 +67,7 @@ function create_consulting() {
 	return $res;
 }
 
-function create_teaching() {
+function create_teaching($params) {
 	$res='';
 	// sending query
 	$query=sprintf('SELECT id,name,slug,remark,url FROM TbOrganization where funcTeaching order by name asc');
@@ -105,7 +105,7 @@ function create_teaching() {
 	return $res;
 }
 
-function create_certification() {
+function create_certification($params) {
 	$res='';
 	// sending query
 	$query=sprintf('SELECT id,name,slug,url,fromDate FROM TbOrganization where funcCertification order by name asc');

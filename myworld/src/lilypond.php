@@ -1,6 +1,6 @@
 <?php
 
-function create_lilypond() {
+function create_lilypond($params) {
 	$res='';
 	// sending query
 	$query=sprintf('SELECT id,uuid,title,subtitle,composer,poet,style,piece,copyright,pages,idyoutube,epdfs FROM TbMsLilypond order by title asc');

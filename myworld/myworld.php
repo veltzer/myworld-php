@@ -39,63 +39,13 @@ if(!class_exists('MyWorld')) {
 		/*
 		 * Our own version number
 		 */
-		var $version = '0.0.1';
+		var $version = '0.0.2';
 		/*
 		 * The function that creates dynamic content
 		 */
 		function create_content($name,$params) {
 			my_mysql_connect();
-			switch($name) {
-				case 'person':
-					// TODO: throw error if parameters are not there...
-					$firstname=$params['firstname'];
-					$surname=$params['surname'];
-					$ret=create_person($firstname,$surname);
-					break;
-				case 'courses':
-					$ret=create_courses();
-					break;
-				case 'consulting':
-					$ret=create_consulting();
-					break;
-				case 'teaching':
-					$ret=create_teaching();
-					break;
-				case 'certification':
-					$ret=create_certification();
-					break;
-				case 'works':
-					$ret=create_works($params);
-					break;
-				case 'stats':
-					$ret=create_stats();
-					break;
-				case 'lilypond':
-					$ret=create_lilypond();
-					break;
-				case 'music':
-					$ret=create_music();
-					break;
-				case 'calendar':
-					$ret=create_calendar();
-					break;
-				case 'embed_ted':
-					$ret=embed_ted($params['id']);
-					break;
-				case 'helloworld':
-					$ret=create_helloworld();
-					break;
-				case 'echo':
-					$ret=$params;
-					break;
-				case 'test':
-					$ret='שלום';
-					break;
-				default:
-					$ret='[$name] is unknown';
-					break;
-			}
-			#$ret='<br/>$ret<br/>';
+			$ret=call_user_func('create_'.$name,$params);
 			my_mysql_disconnect();
 			return $ret;
 		}
