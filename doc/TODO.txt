@@ -62,10 +62,11 @@ there is a problem with the styles (classes). Move between the fields and you wi
 	the problem. I think it's because I am not using the jqueryui classes right.
 control focus movement, after review should go to submit and back to name.
 
-build and folders:
-==================
-- add gpp support for the misc folder.
-- the wp_script should pass through gpp.
+build:
+======
+- add gpp support for the misc folder (also has hardcoded paths).
+- the wp_script should pass through gpp (it repeats the blog dir and other variables a lot).
+- the version number of plugins appear in many source files. Add gpp support for that as well.
 
 publication
 ===========

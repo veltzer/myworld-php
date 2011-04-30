@@ -4,7 +4,7 @@
 // http://veltzer.net/~mark/php/pages/GetBlob.php?table=TbMsLilypond&id=5&field=pdf&type=application/pdf&name_field=filebasename
 
 require('setup.php');
-my_include('include/utils.php');
+my_include('src/utils.php');
 
 $p_table = $_GET['table'];
 $p_sfield = $_GET['sfield'];

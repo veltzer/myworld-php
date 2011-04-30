@@ -3,7 +3,7 @@
 Plugin Name: MyWorld
 Plugin URI: http://veltzer.net/
 Description: MyWorld plugin for WordPress
-Version: 0.0.1
+Version: 0.0.2
 Author: Mark Veltzer <mark.veltzer@gmail.com> 
 Author URI: http://www.veltzer.net 
 */
@@ -23,7 +23,7 @@ function link_to_resource($resource) {
 	return WP_PLUGIN_URL.'/myworld/resources/'.$resource;
 }
 
-my_include('include/utils.php');
+my_include('src/utils.php');
 my_include('src/accordion.php');
 my_include('src/audio.php');
 my_include('src/business.php');

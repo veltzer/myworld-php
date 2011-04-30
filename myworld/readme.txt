@@ -3,7 +3,7 @@ Contributors: Mark Veltzer <mark.veltzer@gmail.com>
 Tags: myworld
 Requires at least: 3.0
 Tested up to: 3.0.1
-Stable tag: 0.0.1
+Stable tag: 0.0.2
 
 MyWorld plugin to WordPress.
 
@@ -25,3 +25,7 @@ There is no admin panel to configure as of yet.
 * First version.
 
 * works: viewDate -> startViewDate + endViewDate.
+
+= 0.0.2 =
+
+* Much better. Can show lots of myworld stats.

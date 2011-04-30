@@ -84,7 +84,7 @@ install:
 	# now install the private folder
 	sudo rm -rf $(WEB_DIR_PRIVATE) # remove the old folder
 	sudo cp -r private $(WEB_DIR_PRIVATE) # copy to the target
-	sudo cp $(MYWORLD_PLUGIN_NAME)/include/* $(WEB_DIR_PRIVATE) # copy support code
+	sudo cp $(MYWORLD_PLUGIN_NAME)/src/* $(WEB_DIR_PRIVATE) # copy support code
 
 .PHONY: clean
 clean:
