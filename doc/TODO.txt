@@ -161,3 +161,7 @@ have the ability to have many persons connected with a single review.
 Misc issues:
 ============
 UTF doesn't show well in titles of articles. Check it out.
+
+javascript:
+===========
+take a loot at: myworld/javascript/myworld.js - the calendar part should be part of the calendar support and not of myworld in general.
