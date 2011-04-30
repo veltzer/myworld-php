@@ -23,16 +23,10 @@ function link_to_resource($resource) {
 	return WP_PLUGIN_URL.'/myworld/resources/'.$resource;
 }
 
-my_include('src/utils.php');
-my_include('src/accordion.php');
-my_include('src/audio.php');
-my_include('src/business.php');
-my_include('src/calendar.php');
-my_include('src/helloworld.php');
-my_include('src/lilypond.php');
-my_include('src/music.php');
-my_include('src/table.php');
-my_include('src/works.php');
+/* lets include all php files in 'src'... */
+foreach(glob(plugin_dir_path(__FILE__).'src/*.php') as $filename) {
+	include_once($filename);
+}
 
 if(!class_exists('MyWorld')) {
 	class MyWorld { 

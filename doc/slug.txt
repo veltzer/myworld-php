@@ -1,3 +1,6 @@
 slug is a very friendly string that can be used to identify something from an outside system
 different from a uuid which is usually quite long (although could be made to look friendly) but
 has no sense.
+
+slug is used in myworld quite a bit to keep external links to blobs and other system resources stable.
+Currently it is used for blobs.
