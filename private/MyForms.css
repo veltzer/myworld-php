@@ -4,7 +4,7 @@
  */
 .fieldfocus {
 	background:#EB8F00; 
-	background:url("images/ui-bg_gloss-wave_35_f6a828_500x100.png") repeat-x scroll 50% 50% #F6A828;
+	background:url("jquery/css/ui-lightness/images/ui-bg_gloss-wave_35_f6a828_500x100.png") repeat-x scroll 50% 50% #F6A828;
 	border:1px solid #E78F08;
 	color:#FFFFFF;
 	font-weight:bold;

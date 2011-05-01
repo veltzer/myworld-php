@@ -1,13 +1,5 @@
 <?php
 
-function make_stat($query,$func,$desc) {
-	$res=my_mysql_query_one($query);
-	if($func!=null) {
-		$res=$func($res);
-	}
-	return $desc.' ('.$query.' )= '.$res.'<br/>';
-}
-
 function create_works($params) {
 	$type=$params['type'];
 	$res='';
@@ -385,6 +377,30 @@ function create_stats($params) {
 		my_mysql_real_escape_string($p_viewerId)
 	);
 	$res.=make_stat($query,null,'average rating');
+	return $res;
+}
+
+function create_movie_stats($params) {
+	$res='';
+	# lets get my id
+	$p_viewerId=my_mysql_query_one('SELECT id FROM TbIdPerson WHERE firstname=\'Mark\' AND surname=\'Veltzer\'');
+
+	# number of movies seen 
+	$query=sprintf('SELECT COUNT(*) FROM TbWkWorkView WHERE TbWkWorkView.viewerId=%s',
+		my_mysql_real_escape_string($p_viewerId)
+	);
+	$res.=make_stat($query,null,'number of views');
+
+	# total size of all movies together...
+	$query=sprintf('SELECT COUNT(DISTINCT workId) FROM TbWkWorkView WHERE TbWkWorkView.viewerId=%s',
+		my_mysql_real_escape_string($p_viewerId)
+	);
+
+	# more ideas:
+	# average rating for movies.
+	# number of distinct ratings for movies.
+	# minimum rating for movie.
+	# maximum rating for movie.
 	return $res;
 }
 

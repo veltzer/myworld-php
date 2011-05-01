@@ -450,4 +450,13 @@ function get_person_data() {
 	return $rows;
 }
 
+/* generic function to print a statistics line */
+function make_stat($query,$func,$desc) {
+	$res=my_mysql_query_one($query);
+	if($func!=null) {
+		$res=$func($res);
+	}
+	return $desc.' ('.$query.' )= '.$res.'<br/>';
+}
+
 ?>
