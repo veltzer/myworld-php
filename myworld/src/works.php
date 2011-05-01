@@ -395,6 +395,7 @@ function create_movie_stats($params) {
 	$query=sprintf('SELECT COUNT(DISTINCT workId) FROM TbWkWorkView WHERE TbWkWorkView.viewerId=%s',
 		my_mysql_real_escape_string($p_viewerId)
 	);
+	$res.=make_stat($query,null,'number of distinct views');
 
 	# more ideas:
 	# average rating for movies.
