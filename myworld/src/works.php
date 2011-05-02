@@ -445,6 +445,26 @@ function create_movie_stats($params) {
 	);
 	$res.=make_stat($query,null,'number of distinct ratings of all movies reviewed');
 
+	$query=sprintf('SELECT COUNT(DISTINCT TbWkWorkView.deviceId) FROM TbWkWorkView, TbWkWork, TbWkWorkType WHERE TbWkWorkView.viewerId=%s AND TbWkWorkView.workId=TbWkWork.id AND TbWkWork.typeId=TbWkWorkType.id AND TbWkWorkType.name=\'video movie\'',
+		my_mysql_real_escape_string($p_viewerId)
+	);
+	$res.=make_stat($query,null,'number of distinct devices used to watch them');
+
+	$query=sprintf('SELECT TbDevice.name,COUNT(TbDevice.name) FROM TbWkWorkView, TbWkWork, TbWkWorkType, TbDevice WHERE TbWkWorkView.viewerId=%s AND TbWkWorkView.workId=TbWkWork.id AND TbWkWork.typeId=TbWkWorkType.id AND TbWkWorkType.name=\'video movie\' AND TbDevice.id=TbWkWorkView.deviceId GROUP BY TbDevice.name',
+		my_mysql_real_escape_string($p_viewerId)
+	);
+	$res.=make_table($query,'number of views per device');
+
+	$query=sprintf('SELECT COUNT(DISTINCT TbWkWorkView.locationId) FROM TbWkWorkView, TbWkWork, TbWkWorkType WHERE TbWkWorkView.viewerId=%s AND TbWkWorkView.workId=TbWkWork.id AND TbWkWork.typeId=TbWkWorkType.id AND TbWkWorkType.name=\'video movie\'',
+		my_mysql_real_escape_string($p_viewerId)
+	);
+	$res.=make_stat($query,null,'number of distinct location used to watch them');
+
+	$query=sprintf('SELECT TbLocation.name,COUNT(TbLocation.name) FROM TbWkWorkView, TbWkWork, TbWkWorkType, TbLocation WHERE TbWkWorkView.viewerId=%s AND TbWkWorkView.workId=TbWkWork.id AND TbWkWork.typeId=TbWkWorkType.id AND TbWkWorkType.name=\'video movie\' AND TbLocation.id=TbWkWorkView.locationId GROUP BY TbLocation.name',
+		my_mysql_real_escape_string($p_viewerId)
+	);
+	$res.=make_table($query,'number of views per location');
+
 	return $res;
 }
 

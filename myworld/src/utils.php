@@ -452,11 +452,40 @@ function get_person_data() {
 
 /* generic function to print a statistics line */
 function make_stat($query,$func,$desc) {
-	$res=my_mysql_query_one($query);
+	$result=my_mysql_query_one($query);
 	if($func!=null) {
-		$res=$func($res);
+		$result=$func($result);
 	}
-	return '<a title="'.$query.'">'.$desc.' = '.$res.'</a><br/>';
+	return '<a title="'.$query.'">'.$desc.' = '.$result.'</a><br/>';
+}
+/* generic function to print a table */
+function make_table($query,$desc) {
+	$result=my_mysql_query($query);
+	$res='';
+	$res.='<a title="'.$query.'">'.$desc.'</a>';
+	$res.='<table><tbody>';
+	$first=true;
+	while($row=mysql_fetch_assoc($result)) {
+		if($first) {
+			$res.='<tr>';
+			# iterate the result and print the headers...
+			foreach($row as $k => $v) {
+				$res.='<td>'.$k.'</td>';
+			}
+			$first=false;
+			$res.='</tr>';
+		}
+		$res.='<tr>';
+		# iterate the result and print the content
+		foreach($row as $k => $v) {
+			$res.='<td>'.$v.'</td>';
+		}
+		$res.='</tr>';
+	}
+	$res.='</tbody></table>';
+	$res.='<br/>';
+	my_mysql_free_result($result);
+	return $res;
 }
 
 ?>
