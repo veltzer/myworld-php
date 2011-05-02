@@ -456,7 +456,7 @@ function make_stat($query,$func,$desc) {
 	if($func!=null) {
 		$res=$func($res);
 	}
-	return $desc.' ('.$query.' )= '.$res.'<br/>';
+	return '<a title="'.$query.'">'.$desc.' = '.$res.'</a><br/>';
 }
 
 ?>

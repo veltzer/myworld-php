@@ -342,22 +342,22 @@ function create_stats($params) {
 		my_mysql_real_escape_string($p_viewerId)
 	);
 	$res.=make_stat($query,null,'number of distinct viewers');
-	
+
 	$query=sprintf('SELECT COUNT(DISTINCT TbWkWork.typeId) FROM TbWkWorkView,TbWkWork WHERE TbWkWorkView.viewerId=%s AND TbWkWorkView.workId=TbWkWork.id',
 		my_mysql_real_escape_string($p_viewerId)
 	);
 	$res.=make_stat($query,null,'number of distinct work types');
-	
+
 	$query=sprintf('SELECT COUNT(DISTINCT locationId) FROM TbWkWorkView WHERE TbWkWorkView.viewerId=%s',
 		my_mysql_real_escape_string($p_viewerId)
 	);
 	$res.=make_stat($query,null,'number of distinct locations');
-	
+
 	$query=sprintf('SELECT COUNT(DISTINCT deviceId) FROM TbWkWorkView WHERE TbWkWorkView.viewerId=%s',
 		my_mysql_real_escape_string($p_viewerId)
 	);
 	$res.=make_stat($query,null,'number of distinct devices');
-	
+
 	$query=sprintf('SELECT COUNT(DISTINCT ratingId) FROM TbWkWorkReview WHERE TbWkWorkReview.reviewerId=%s',
 		my_mysql_real_escape_string($p_viewerId)
 	);
@@ -385,23 +385,51 @@ function create_movie_stats($params) {
 	# lets get my id
 	$p_viewerId=my_mysql_query_one('SELECT id FROM TbIdPerson WHERE firstname=\'Mark\' AND surname=\'Veltzer\'');
 
-	# number of movies seen 
-	$query=sprintf('SELECT COUNT(*) FROM TbWkWorkView WHERE TbWkWorkView.viewerId=%s',
+	$query=sprintf('SELECT COUNT(*) FROM TbWkWorkView,TbWkWork, TbWkWorkType WHERE TbWkWorkView.viewerId=%s AND TbWkWorkView.workId=TbWkWork.id AND TbWkWork.typeId=TbWkWorkType.id AND TbWkWorkType.name=\'video movie\'',
 		my_mysql_real_escape_string($p_viewerId)
 	);
-	$res.=make_stat($query,null,'number of views');
+	$res.=make_stat($query,null,'number of movies seen');
 
-	# total size of all movies together...
-	$query=sprintf('SELECT COUNT(DISTINCT workId) FROM TbWkWorkView WHERE TbWkWorkView.viewerId=%s',
+	$query=sprintf('SELECT COUNT(DISTINCT TbWkWork.id) FROM TbWkWorkView,TbWkWork, TbWkWorkType WHERE TbWkWorkView.viewerId=%s AND TbWkWorkView.workId=TbWkWork.id AND TbWkWork.typeId=TbWkWorkType.id AND TbWkWorkType.name=\'video movie\'',
 		my_mysql_real_escape_string($p_viewerId)
 	);
-	$res.=make_stat($query,null,'number of distinct views');
+	$res.=make_stat($query,null,'number of distinct movies seen');
 
-	# more ideas:
-	# average rating for movies.
-	# number of distinct ratings for movies.
-	# minimum rating for movie.
-	# maximum rating for movie.
+	$query=sprintf('SELECT count(*) FROM TbWkWorkView,TbWkWork, TbWkWorkType WHERE TbWkWorkView.viewerId=%s AND TbWkWorkView.workId=TbWkWork.id AND TbWkWork.typeId=TbWkWorkType.id AND TbWkWorkType.name=\'video movie\' AND TbWkWork.length is null',
+		my_mysql_real_escape_string($p_viewerId)
+	);
+	$res.=make_stat($query,null,'number of movies without length');
+
+	$query=sprintf('SELECT SUM(TbWkWork.length) FROM TbWkWorkView,TbWkWork, TbWkWorkType WHERE TbWkWorkView.viewerId=%s AND TbWkWorkView.workId=TbWkWork.id AND TbWkWork.typeId=TbWkWorkType.id AND TbWkWorkType.name=\'video movie\' AND TbWkWork.length is not null',
+		my_mysql_real_escape_string($p_viewerId)
+	);
+	$res.=make_stat($query,formatTimeperiod,'length of all movies seen');
+
+	$query=sprintf('SELECT AVG(TbWkWork.length) FROM TbWkWorkView,TbWkWork, TbWkWorkType WHERE TbWkWorkView.viewerId=%s AND TbWkWorkView.workId=TbWkWork.id AND TbWkWork.typeId=TbWkWorkType.id AND TbWkWorkType.name=\'video movie\' AND TbWkWork.length is not null',
+		my_mysql_real_escape_string($p_viewerId)
+	);
+	$res.=make_stat($query,formatTimeperiod,'average length of all movies seen');
+
+	$query=sprintf('SELECT AVG(TbRating.value) FROM TbRating, TbWkWorkReview, TbWkWork, TbWkWorkType WHERE TbWkWorkReview.reviewerId=%s AND TbWkWorkReview.workId=TbWkWork.id AND TbWkWork.typeId=TbWkWorkType.id AND TbWkWorkType.name=\'video movie\' AND TbWkWorkReview.ratingId=TbRating.id',
+		my_mysql_real_escape_string($p_viewerId)
+	);
+	$res.=make_stat($query,null,'average rating of all movies reviewed');
+
+	$query=sprintf('SELECT MIN(TbRating.value) FROM TbRating, TbWkWorkReview, TbWkWork, TbWkWorkType WHERE TbWkWorkReview.reviewerId=%s AND TbWkWorkReview.workId=TbWkWork.id AND TbWkWork.typeId=TbWkWorkType.id AND TbWkWorkType.name=\'video movie\' AND TbWkWorkReview.ratingId=TbRating.id',
+		my_mysql_real_escape_string($p_viewerId)
+	);
+	$res.=make_stat($query,null,'minimum rating of all movies reviewed');
+
+	$query=sprintf('SELECT MAX(TbRating.value) FROM TbRating, TbWkWorkReview, TbWkWork, TbWkWorkType WHERE TbWkWorkReview.reviewerId=%s AND TbWkWorkReview.workId=TbWkWork.id AND TbWkWork.typeId=TbWkWorkType.id AND TbWkWorkType.name=\'video movie\' AND TbWkWorkReview.ratingId=TbRating.id',
+		my_mysql_real_escape_string($p_viewerId)
+	);
+	$res.=make_stat($query,null,'maximum rating of all movies reviewed');
+
+	$query=sprintf('SELECT COUNT(DISTINCT TbRating.id) FROM TbRating, TbWkWorkReview, TbWkWork, TbWkWorkType WHERE TbWkWorkReview.reviewerId=%s AND TbWkWorkReview.workId=TbWkWork.id AND TbWkWork.typeId=TbWkWorkType.id AND TbWkWorkType.name=\'video movie\' AND TbWkWorkReview.ratingId=TbRating.id',
+		my_mysql_real_escape_string($p_viewerId)
+	);
+	$res.=make_stat($query,null,'number of distinct ratings of all movies reviewed');
+
 	return $res;
 }
 
