@@ -1,12 +1,15 @@
 <?php
-
 function create_music($params) {
+	$limit=50;
+	if(array_key_exists('limit',$params)) {
+		$limit=$params['limit'];
+	}
 	$res='';
-	$query=sprintf('SELECT id,title,track,artist,album,comment,year,genre,filename,date FROM TbMsHearing ORDER BY date DESC LIMIT 30');
+	$query=sprintf('SELECT id,title,track,artist,album,comment,year,genre,filename,date FROM TbMsHearing ORDER BY date DESC LIMIT %s',
+		$limit
+	);
 	$result=my_mysql_query($query);
-
 	$res.=multi_accordion_start();
-
 	while($row=mysql_fetch_assoc($result)) {
 		$header=$row['title'].' / '.$row['album'].' / '.$row['artist'];
 		$body='';
