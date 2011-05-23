@@ -1,7 +1,20 @@
 <?php
 
 function create_works($params) {
+	// debugging aid that was removed...
+	//error_log(var_export($params,true),0);
+	// TODO: throw error if type param does not exist
 	$type=$params['type'];
+	if(array_key_exists('limit',$params)) {
+		$limit=$params['limit'];
+	} else {
+		$limit=100000; // limitless
+	}
+	if(array_key_exists('order',$params)) {
+		$limit=$params['order'];
+	} else {
+		$order='desc';
+	}
 	$res='';
 
 	// collecting other table data ...
@@ -76,29 +89,16 @@ function create_works($params) {
 	switch($type) {
 		case 'audio':
 			$add='TbWkWorkType.isAudio=1';
-			$order='desc';
-			$limit=300;
 			break;
 		case 'video':
 			$add='TbWkWorkType.isVideo=1';
-			$order='desc';
-			$limit=300;
 			break;
 		case 'text':
 			$add='TbWkWorkType.isText=1';
-			$order='desc';
-			$limit=300;
 			break;
 		default:
 			$add='TbWkWorkType.name=\''.$type.'\'';
-			$order='desc';
-			$limit=300;
-			//error('what type is ['.$type.']');
 			break;
-	}
-	//error_log(var_export($params,true),0);
-	if(array_key_exists('limit',$params)) {
-		$limit=$params['limit'];
 	}
 	$query=sprintf('SELECT TbWkWork.id,TbWkWork.name,TbWkWork.length,TbWkWork.size,TbWkWork.chapters,TbWkWork.typeId,TbWkWork.languageId,TbWkWorkView.startViewDate,TbWkWorkView.endViewDate,TbWkWorkView.viewerId,TbWkWorkView.locationId,TbWkWorkView.deviceId,TbWkWorkView.langId,TbWkWorkReview.ratingId,TbWkWorkReview.review,TbWkWorkReview.reviewDate FROM TbWkWork,TbWkWorkType,TbWkWorkReview,TbWkWorkView WHERE TbWkWork.typeId=TbWkWorkType.id AND TbWkWorkReview.workId=TbWkWork.id AND TbWkWorkView.workId=TbWkWork.id AND %s order by TbWkWorkView.endViewDate %s LIMIT %s',$add,$order,$limit);
 	//$query=sprintf('SELECT * FROM TbWkWork');
