@@ -9,6 +9,8 @@ WEB_PASSWORD:=MrGQ0GwhH
 WP_DIR:=$(WEB_ROOT)/blog
 # private directory...
 WEB_DIR_PRIVATE:=$(WEB_ROOT)/private
+# public directory...
+WEB_DIR_PUBLIC:=$(WEB_ROOT)/public
 # where are plugins to be installed in wordpress...
 PLUGIN_DIR:=$(WP_DIR)/wp-content/plugins
 # where are themes to be installed in wordpress...
@@ -85,6 +87,9 @@ install:
 	sudo rm -rf $(WEB_DIR_PRIVATE) # remove the old folder
 	sudo cp -r private $(WEB_DIR_PRIVATE) # copy to the target
 	sudo cp $(MYWORLD_PLUGIN_NAME)/src/* $(WEB_DIR_PRIVATE) # copy support code
+	# now install the public folder
+	sudo rm -rf $(WEB_DIR_PUBLIC) # remove the old folder
+	sudo cp -r public $(WEB_DIR_PUBLIC) # copy to the target
 
 .PHONY: clean
 clean:

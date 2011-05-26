@@ -1,0 +1,57 @@
+<html>
+<head>
+<title>Hello, Lazy Tree!</title>
+<script src="dojo/dojo/dojo.js" djConfig="parseOnLoad:true"></script>
+<style type="text/css">
+	@import "dojo/dijit/themes/tundra/tundra.css";
+	@import "dojo/dojo/resources/dojo.css";
+</style>
+<script type="text/javascript" language="Javascript">
+	dojo.require("dijit.tree.ForestStoreModel");
+	dojo.require("dojox.data.QueryReadStore");
+	dojo.require("dijit.Tree");
+	dojo.provide("my.ForestStoreModel");
+	dojo.declare("my.ForestStoreModel", dijit.tree.ForestStoreModel, {
+		getChildren: function(parentItem, complete_cb, error_cb) {
+			var root="/";
+			var mypath
+			if (parentItem.root == true) {
+				mypath = root;
+			}
+			else {
+				mypath = this.store.getValue(parentItem, 'path');
+			}
+			this.store.fetch({ query: {path: mypath+root},
+				onComplete: complete_cb,
+				onError: error_cb
+			});
+
+			// Call superclasses' getChildren
+			return this.inherited(arguments);
+		}
+	});
+</script>
+</head>
+	<body class="tundra">
+		<div dojoType="dojox.data.QueryReadStore"
+			url="hello_tree_lazy.php"
+			jsId="treeStore">
+		</div>
+		<div dojoType="my.ForestStoreModel"
+			store="treeStore"
+			rootId="/"
+			rootLabel="/"
+			query="{ path: '/' }"
+			childrenAttrs="children"
+			jsId="treeModel">
+		</div>
+		<div dojoType="dijit.Tree"
+			model="treeModel"
+			jsId="itemTree"
+			persist="false">
+			<script type="dojo/method" event="onClick" args="item">
+				alert('you clicked: ' + treeStore.getLabel(item));
+			</script>
+		</div>
+	</body>
+</html>
