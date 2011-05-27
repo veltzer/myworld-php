@@ -43,12 +43,19 @@ function isCli() {
 }
 
 /* function to print debug information correctly for cli and non cli mode */
+/* this is client side debugging */
 function printDebug($string) {
 	if(isCli()) {
 		echo $string."\n";
 	} else {
 		echo $string.'<br/>';
 	}
+}
+
+/* function to do server side logging */
+function printServer($string) {
+	#built in php function to do logging...
+	error_log('log from php ['.$string.']',0);
 }
 
 /* my own assertion with my own error printing function */
@@ -117,8 +124,6 @@ function my_mysql_query($query) {
 	if(!$result) {
 		error('mysql error: '.mysql_errno().': '.mysql_error());
 	}
-	#built in php function to do logging...
-	#error_log('my_mysql_query doing query ['.$query.']',0);
 	return $result;
 }
 
@@ -293,132 +298,24 @@ function create_ted($params) {
 	return embed_ted($params['id']);
 }
 
-function get_external_href($external_name,$external_id) {
-	switch($external_name) {
-		case 'imdb':
-			return 'http://www.imdb.com/title/tt'.$external_id.'/';
-			break;
-		case 'TTC course':
-			return 'http://www.teach12.com/ttcx/coursedesclong2.aspx?cid='.$external_id;
-			break;
-		case 'TTC professor':
-			return 'http://www.teach12.com/tgc/professors/professor_detail.aspx?pid='.$external_id;
-			break;
-		case 'youtube_vid':
-			return 'http://www.youtube.com/v/'.$external_id;
-			break;
-		case 'amazon':
-			return 'http://www.amazon.com/gp/product/'.$external_id.'/';
-			break;
-		case 'blog':
-			return $external_id;
-			break;
-		case 'website':
-			return $external_id;
-			break;
-		case 'url':
-			return $external_id;
-			break;
-		case 'homepage':
-			return $external_id;
-			break;
-		case 'profile':
-			return $external_id;
-			break;
-		case 'facebook':
-			return 'http://www.facebook.com/'.$external_id;
-			break;
-		case 'linkedin':
-			return 'http://il.linkedin.com/in/'.$external_id;
-			break;
-		case 'twitter':
-			return 'http://twitter.com/'.$external_id;
-			break;
-		case 'google':
-			return 'http://www.google.com/profiles/'.$external_id;
-			break;
-		case 'picasa':
-			return 'http://picasaweb.google.com/'.$external_id;
-			break;
-		case 'youtube':
-			return 'http://www.youtube.com/user/'.$external_id;
-			break;
-		case 'ted':
-			return 'http://www.ted.com/profiles/view/id/'.$external_id;
-			break;
-		case 'ted_speaker':
-			return 'http://www.ted.com/speakers/'.$external_id.'.html';
-			break;
-		case 'google_reader':
-			return 'http://www.google.com/reader/shared/'.$external_id;
-			break;
-		case 'scribd':
-			return 'http://www.scribd.com/'.$external_id;
-			break;
-		case 'hi5':
-			return 'http://www.hi5.com/friend/profile/displayProfile.do?userid='.$external_id;
-			break;
-		case 'digg':
-			return 'http://digg.com/'.$external_id;
-			break;
-		case 'plaxo':
-			return 'http://www.plaxo.com/profile/show/'.$external_id;
-			break;
-		case 'yahoo':
-			return 'http://profiles.yahoo.com/'.$external_id;
-			break;
-		case 'github':
-			return 'https://github.com/'.$external_id;
-			break;
-		case 'sourceforge':
-			return 'https://sourceforge.net/users/'.$external_id;
-			break;
-		case 'imdb_user':
-			return 'http://www.imdb.com/user/ur'.$external_id.'/';
-			break;
-		case 'amazon_user':
-			return 'http://www.amazon.com/gp/pdp/profile/'.$external_id;
-			break;
-		case 'cpan':
-			return 'http://search.cpan.org/~'.$external_id.'/';
-			break;
-		case 'advogato':
-			return 'http://advogato.org/person/'.$external_id.'/';
-			break;
-		case 'about.me':
-			return 'http://about.me/'.$external_id.'/';
-			break;
-		case 'tripit':
-			return 'http://www.tripit.com/people/'.$external_id;
-			break;
-		case 'ibmdw':
-			return 'https://www.ibm.com/developerworks/mydeveloperworks/profiles/html/profileView.do?key='.$external_id.'&lang=en';
-			break;
-		case 'en_wikipedia':
-			return 'http://en.wikipedia.org/wiki/'.$external_id;
-			break;
-		case 'gitorious':
-			return 'https://gitorious.org/~'.$external_id;
-			break;
-		case 'icq':
-			return 'http://www.icq.com/people/'.$external_id;
-			break;
-		case 'ISBN':
-			return 'http://isbn.org/find='.$external_id;
-			break;
-		case 'he_wikipedia':
-			return 'http://he.wikipedia.org/wiki/'.$external_id;
-			break;
-		case 'personal eid':
-			return 'http://personal.org/eid/'.$external_id;
-			break;
-		case 'personal rid':
-			return 'http://personal.org/rid/'.$external_id;
-			break;
-		default:
-			error('what external name is ['.$external_name.']');
-			break;
+// this is an example of a simple php string templating solution using the 'str_replace' function...
+function template_it($str,$vars) {
+	foreach($vars as $k => $v) {
+		$str=str_replace("\$$k",$v,$str);
 	}
+	return $str;
+}
+
+function get_external_href($external_name,$external_id) {
+	// TODO: this is very bad performance, always going to the database...
+	$external_templates=my_mysql_query_hash('SELECT name,template FROM TbExternalType','name');
+	$template=$external_templates[$external_name]['template'];
+	//printServer("template is [$template]");
+	$vars=array();
+	$vars['external_id']=$external_id;
+	$result=template_it($template,$vars);
+	//printServer("result is [$result]");
+	return $result;
 }
 
 function get_full_name($hash) {
