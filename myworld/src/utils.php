@@ -397,6 +397,9 @@ function get_external_href($external_name,$external_id) {
 		case 'en_wikipedia':
 			return 'http://en.wikipedia.org/wiki/'.$external_id;
 			break;
+		case 'gitorious':
+			return 'https://gitorious.org/~'.$external_id;
+			break;
 		case 'icq':
 			return 'http://www.icq.com/people/'.$external_id;
 			break;
