@@ -377,6 +377,16 @@ function create_stats($params) {
 		my_mysql_real_escape_string($p_viewerId)
 	);
 	$res.=make_stat($query,null,'average rating');
+	
+	$query=sprintf('SELECT MAX(TbWkWorkReview.ratingId) FROM TbWkWorkReview WHERE TbWkWorkReview.reviewerId=%s',
+		my_mysql_real_escape_string($p_viewerId)
+	);
+	$res.=make_stat($query,null,'maxium rating');
+	
+	$query=sprintf('SELECT MIN(TbWkWorkReview.ratingId) FROM TbWkWorkReview WHERE TbWkWorkReview.reviewerId=%s',
+		my_mysql_real_escape_string($p_viewerId)
+	);
+	$res.=make_stat($query,null,'minimum rating');
 	return $res;
 }
 
