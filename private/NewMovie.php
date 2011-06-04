@@ -40,15 +40,21 @@ $query=sprintf('insert into TbWkWorkExternal (workId,externalId,externalCode) va
 my_mysql_query($query);
 $p_externalId=mysql_insert_id();
 // insert a new view
-$query=sprintf('insert into TbWkWorkView (endViewDate,locationId,deviceId,viewerId,workId) values(%s,%s,%s,%s,%s)',
+$query=sprintf('insert into TbWkWorkView (endViewDate,locationId,deviceId,workId) values(%s,%s,%s,%s)',
 	my_mysql_real_escape_string($p_date),
 	my_mysql_real_escape_string($p_locationId),
 	my_mysql_real_escape_string($p_deviceId),
-	my_mysql_real_escape_string($p_personId),
 	my_mysql_real_escape_string($p_workId)
 );
 my_mysql_query($query);
 $p_workviewid=mysql_insert_id();
+// insert the viewer
+$query=sprintf('insert into TbWkWorkViewPerson (viewerId,viewId) values(%s,%s)',
+	my_mysql_real_escape_string($p_personId),
+	my_mysql_real_escape_string($p_workviewid)
+);
+my_mysql_query($query);
+$p_workviewpersonid=mysql_insert_id();
 // insert a new review
 $query=sprintf('insert into TbWkWorkReview (ratingId,review,reviewDate,workId,reviewerId) values(%s,%s,%s,%s,%s)',
 	my_mysql_real_escape_string($p_ratingId),
@@ -61,5 +67,5 @@ my_mysql_query($query);
 $p_workreviewid=mysql_insert_id();
 my_mysql_commit();
 
-echo "new work [$p_workId], external [$p_externalId], view [$p_workviewid], review [$p_workreviewid] successfully inserted";
+echo "new work [$p_workId], external [$p_externalId], view [$p_workviewid], viewperson[$p_workviewpersonid], review [$p_workreviewid] successfully inserted";
 ?>
