@@ -22,7 +22,7 @@ $p_review=my_get_post('review');
 my_mysql_start_transaction();
 
 $p_typeId=my_mysql_query_one('select id from TbWkWorkType where name=\'video movie\'');
-$p_externalId=my_mysql_query_one('select id from TbExternalType where name=\'imdb\'');
+$p_externalId=my_mysql_query_one('select id from TbExternalType where name=\'imdb_title\'');
 
 // insert the actual work
 $query=sprintf('insert into TbWkWork (name,typeId) values(%s,%s)',

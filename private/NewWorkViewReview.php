@@ -34,7 +34,7 @@ $query=sprintf('insert into TbWkWork (name,typeId) values(%s,%s)',
 );
 my_mysql_query($query);
 $p_workId=mysql_insert_id();
-// insert an external imdb id
+// insert an external id
 $query=sprintf('insert into TbWkWorkExternal (workId,externalId,externalCode) values(%s,%s,%s)',
 	my_mysql_real_escape_string($p_workId),
 	my_mysql_real_escape_string($p_externalId),
