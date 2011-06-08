@@ -196,16 +196,22 @@ jQuery(document).ready(function() {
 	jQuery('#person_send').cont_submit(init);
 
 	var init={
+		'type':'select',
 		'name':'Honorific',
-		'sname':'honorific',
-		'initState':false,
-		//'regex':/^[\w\.]*$/,
-		'regex':/.*/, // because they can be in hebrew
+		'sname':'honorificId',
+		'initVal':1, // this is the None value from the TbIdHonorific table (TODO)
+		'url':'GetData.php?type=TbIdHonorific',
 		'logger':'#log',
 		'submit':'#person_send',
 	};
-	jQuery('#person_honorific').cont_valid(init);
+	jQuery('#person_honorificId').cont_valid(init);
 
+	var init={
+		'logger':'#log',
+		'submit':'#person_send',
+		//'regex':/^[\w\.]*$/,
+		'regex':/.*/, // because they can be in hebrew
+	};
 	init.name='First Name';
 	init.sname='firstname';
 	jQuery('#person_firstname').cont_valid(init);
@@ -269,7 +275,7 @@ jQuery(document).ready(function() {
 		'sname':'languageId',
 		'initState':true,
 		'initMsg':'Put language of work here',
-		'initVal':144, // this is english from the languages table (ugly!!!)
+		'initVal':144, // this is english from the languages table and is ugly (TODO)
 		'url':'GetData.php?type=TbLanguage',
 		'logger':'#log',
 		'submit':'#work_send',

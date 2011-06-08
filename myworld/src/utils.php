@@ -318,15 +318,15 @@ function get_external_href($external_name,$external_id) {
 	return $result;
 }
 
-function get_full_name($hash) {
-	$honorific=$hash['honorific'];
+function get_full_name($hash,$honorifics_hash) {
+	$honorificId=$hash['honorificId'];
 	$firstname=$hash['firstname'];
 	$surname=$hash['surname'];
 	$othername=$hash['othername'];
 	$ordinal=$hash['ordinal'];
 	$arr=array();
-	if($honorific!=NULL) {
-		array_push($arr,$honorific);
+	if($honorificId!=NULL) {
+		#array_push($arr,$honorifics_hash[$honorificId]);
 	}
 	if($firstname!=NULL) {
 		array_push($arr,$firstname);
@@ -344,10 +344,11 @@ function get_full_name($hash) {
 }
 
 function get_person_data() {
-	$query=sprintf('select id,honorific,firstname,surname,othername,ordinal from TbIdPerson order by firstname,surname');
+	$honorifics_hash=my_mysql_query_hash('SELECT * FROM TbIdHonorific','id');
+	$query=sprintf('select id,honorificId,firstname,surname,othername,ordinal from TbIdPerson order by firstname,surname');
 	$result=my_mysql_query($query);
 	while($row=mysql_fetch_assoc($result)) {
-		$row['label']=get_full_name($row);
+		$row['label']=get_full_name($row,$honorifics_hash);
 		$rows[]=$row;
 	}
 	return $rows;

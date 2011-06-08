@@ -18,6 +18,7 @@ function create_works($params) {
 	$res='';
 
 	// collecting other table data ...
+	$honorifics=my_mysql_query_hash('SELECT * FROM TbIdHonorific','id');
 	$contrib=my_mysql_query_hash('SELECT * FROM TbWkWorkContrib','id');
 	$types=my_mysql_query_hash('SELECT * FROM TbWkWorkType','id');
 	$locations=my_mysql_query_hash('SELECT * FROM TbLocation','id');
@@ -190,7 +191,7 @@ function create_works($params) {
 			$s_lang=get_na_string();
 		}
 		if($row[$viewerid]!=NULL) {
-			$s_viewer=get_full_name($persons[$row[$viewerid]]);
+			$s_viewer=get_full_name($persons[$row[$viewerid]],$honorifics);
 		} else {
 			$s_viewer=get_na_string();
 		}
@@ -209,7 +210,7 @@ function create_works($params) {
 		if(isset($work_contrib[$row[$idid]])) {
 			$cont_array=array();
 			foreach($work_contrib[$row[$idid]] as $personId) {
-				$cont_array[]=get_full_name($persons[$personId]);
+				$cont_array[]=get_full_name($persons[$personId],$honorifics);
 			}
 			if(count($cont_array)>0) {
 				$header.=' / '.join($cont_array,', ');
@@ -272,7 +273,7 @@ function create_works($params) {
 		if(isset($work_contrib[$row[$idid]])) {
 			$j=0;
 			foreach($work_contrib[$row[$idid]] as $personId) {
-				$name=get_full_name($persons[$personId]);
+				$name=get_full_name($persons[$personId],$honorifics);
 				$roleid=$role_contrib[$row[$idid]][$j];
 				$role_name=$contribtype[$roleid]['name'];
 				$body.='<li>'.$role_name.': '.$name;
@@ -491,7 +492,7 @@ function create_person($params) {
 	$id=$row['id'];
 	$res.='<ul>';
 	$res.='<li>id: '.$id.'</li>';
-	$res.='<li>Name: '.get_full_name($row).'</li>';
+	$res.='<li>Name: '.get_full_name($row,$honorifics).'</li>';
 	// handle externals
 	$query=sprintf('SELECT * FROM TbIdPersonExternal WHERE personId=%s',
 		my_mysql_real_escape_string($id)
