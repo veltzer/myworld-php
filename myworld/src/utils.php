@@ -326,7 +326,7 @@ function get_full_name($hash,$honorifics_hash) {
 	$ordinal=$hash['ordinal'];
 	$arr=array();
 	if($honorificId!=NULL) {
-		#array_push($arr,$honorifics_hash[$honorificId]);
+		array_push($arr,$honorifics_hash[$honorificId]['name']);
 	}
 	if($firstname!=NULL) {
 		array_push($arr,$firstname);
