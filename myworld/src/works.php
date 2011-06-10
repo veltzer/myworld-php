@@ -475,6 +475,11 @@ function create_movie_stats($params) {
 		my_mysql_real_escape_string($p_viewerId)
 	);
 	$res.=make_table($query,'number of views per location');
+	
+	$query=sprintf('select AVG(mytab.mycnt) from (select count(*) as mycnt from TbWkWorkViewPerson where TbWkWorkViewPerson.viewId in (select TbWkWorkView.id from TbWkWorkType, TbWkWork, TbWkWorkView where TbWkWork.id=TbWkWorkView.workId and TbWkWorkType.id=TbWkWork.typeId and TbWkWorkType.name=\'video movie\') group by TbWkWorkViewPerson.viewId) as mytab;',
+		my_mysql_real_escape_string($p_viewerId)
+	);
+	$res.=make_stat($query,null,'average number of viewers per view');
 
 	return $res;
 }
