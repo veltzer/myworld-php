@@ -378,12 +378,12 @@ function create_stats($params) {
 		my_mysql_real_escape_string($p_viewerId)
 	);
 	$res.=make_stat($query,null,'average rating');
-	
+
 	$query=sprintf('SELECT MAX(TbWkWorkReview.ratingId) FROM TbWkWorkReview WHERE TbWkWorkReview.reviewerId=%s',
 		my_mysql_real_escape_string($p_viewerId)
 	);
 	$res.=make_stat($query,null,'maxium rating');
-	
+
 	$query=sprintf('SELECT MIN(TbWkWorkReview.ratingId) FROM TbWkWorkReview WHERE TbWkWorkReview.reviewerId=%s',
 		my_mysql_real_escape_string($p_viewerId)
 	);
@@ -406,7 +406,22 @@ function create_movie_stats($params) {
 	);
 	$res.=make_stat($query,null,'number of distinct movies seen');
 
-	$query=sprintf('SELECT count(*) FROM TbWkWorkViewPerson,TbWkWorkView,TbWkWork,TbWkWorkType WHERE TbWkWorkViewPerson.viewerId=%s AND TbWkWorkViewPerson.viewId=TbWkWorkView.id AND TbWkWorkView.workId=TbWkWork.id AND TbWkWork.typeId=TbWkWorkType.id AND TbWkWorkType.name=\'video movie\' AND TbWkWork.length is null',
+	$query=sprintf('SELECT COUNT(*)/COUNT(DISTINCT TbWkWork.id) FROM TbWkWorkViewPerson, TbWkWorkView,TbWkWork, TbWkWorkType WHERE TbWkWorkViewPerson.viewerId=%s AND TbWkWorkViewPerson.viewId=TbWkWorkView.id AND TbWkWorkView.workId=TbWkWork.id AND TbWkWork.typeId=TbWkWorkType.id AND TbWkWorkType.name=\'video movie\'',
+		my_mysql_real_escape_string($p_viewerId)
+	);
+	$res.=make_stat($query,null,'average views per distinct movie');
+
+	$query=sprintf('SELECT MIN(mytbl.mycnt) FROM (select COUNT(*) AS mycnt FROM TbWkWorkViewPerson, TbWkWorkView,TbWkWork, TbWkWorkType WHERE TbWkWorkViewPerson.viewerId=%s AND TbWkWorkViewPerson.viewId=TbWkWorkView.id AND TbWkWorkView.workId=TbWkWork.id AND TbWkWork.typeId=TbWkWorkType.id AND TbWkWorkType.name=\'video movie\' GROUP BY TbWkWork.id) AS mytbl',
+		my_mysql_real_escape_string($p_viewerId)
+	);
+	$res.=make_stat($query,null,'minimum views per distinct movie');
+
+	$query=sprintf('SELECT MAX(mytbl.mycnt) FROM (select COUNT(*) AS mycnt FROM TbWkWorkViewPerson, TbWkWorkView,TbWkWork, TbWkWorkType WHERE TbWkWorkViewPerson.viewerId=%s AND TbWkWorkViewPerson.viewId=TbWkWorkView.id AND TbWkWorkView.workId=TbWkWork.id AND TbWkWork.typeId=TbWkWorkType.id AND TbWkWorkType.name=\'video movie\' GROUP BY TbWkWork.id) AS mytbl',
+		my_mysql_real_escape_string($p_viewerId)
+	);
+	$res.=make_stat($query,null,'maximum views per distinct movie');
+
+	$query=sprintf('SELECT COUNT(*) FROM TbWkWorkViewPerson,TbWkWorkView,TbWkWork,TbWkWorkType WHERE TbWkWorkViewPerson.viewerId=%s AND TbWkWorkViewPerson.viewId=TbWkWorkView.id AND TbWkWorkView.workId=TbWkWork.id AND TbWkWork.typeId=TbWkWorkType.id AND TbWkWorkType.name=\'video movie\' AND TbWkWork.length is null',
 		my_mysql_real_escape_string($p_viewerId)
 	);
 	$res.=make_stat($query,null,'number of movies without length');
@@ -475,8 +490,8 @@ function create_movie_stats($params) {
 		my_mysql_real_escape_string($p_viewerId)
 	);
 	$res.=make_table($query,'number of views per location');
-	
-	$query=sprintf('select AVG(mytab.mycnt) from (select count(*) as mycnt from TbWkWorkViewPerson where TbWkWorkViewPerson.viewId in (select TbWkWorkView.id from TbWkWorkType, TbWkWork, TbWkWorkView where TbWkWork.id=TbWkWorkView.workId and TbWkWorkType.id=TbWkWork.typeId and TbWkWorkType.name=\'video movie\') group by TbWkWorkViewPerson.viewId) as mytab;',
+
+	$query=sprintf('select AVG(mytab.mycnt) from (select COUNT(*) AS mycnt from TbWkWorkViewPerson where TbWkWorkViewPerson.viewId in (select TbWkWorkView.id from TbWkWorkType, TbWkWork, TbWkWorkView where TbWkWork.id=TbWkWorkView.workId and TbWkWorkType.id=TbWkWork.typeId and TbWkWorkType.name=\'video movie\') GROUP BY TbWkWorkViewPerson.viewId) AS mytab;',
 		my_mysql_real_escape_string($p_viewerId)
 	);
 	$res.=make_stat($query,null,'average number of viewers per view');
