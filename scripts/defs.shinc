@@ -1,0 +1,2 @@
+BLOGDIR=/var/www/blog/
+HTACCESS=/var/www/.htaccess
