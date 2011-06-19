@@ -15,3 +15,5 @@ use diagnostics;
 # parameters...
 my($target_dir)='/var/www';
 my($subfolder)='blog2';
+
+print "This script is not yet written....\n";
