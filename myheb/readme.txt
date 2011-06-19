@@ -2,8 +2,8 @@
 Contributors: mark.veltzer@gmail.com
 Tags: myheb, hebrew, multi language, rtl
 Requires at least: 3.0
-Tested up to: 3.0.1
-Stable tag: 0.0.2
+Tested up to: 3.1.3
+Stable tag: 0.0.3
 
 MyHeb plugin to WordPress.
 
@@ -12,7 +12,7 @@ MyHeb plugin to WordPress.
 This plugin adapts post headings and post content to the
 hebrew language, reversing them. This allows you to manage
 a blog where some of the posts are in hebrew and some of the
-posts are in a different language.
+posts are in a different language (usually English).
 
 Currently the implementation is quite simple - if the content
 or the post header is in hebrew then they will be displayed in RTL,
@@ -24,7 +24,7 @@ What this plugin does not do:
 in it so mixed posts will be turned into RTL.
 
 Ideas for future improvement:
-- each post will have a tag that tells this plugin whether to process it or not.
+- each post will have a tag that tells this plugin whether to reverse it or not.
 
 == Installation ==
 
@@ -41,3 +41,7 @@ These is no configuration panel at the moment.
 0.0.2
 
 * the plugin is now self contained.
+
+0.0.3
+
+* removed cruft

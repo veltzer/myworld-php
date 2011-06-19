@@ -15,3 +15,6 @@ hebrew. Allow the user to say what is hebrew or what is not using a tag.
 
 - take a loot at hebrew4wp at http://hebrew4wp.nadav.org/.
 	Maybe I can get some ideas from there...
+
+- in the css unite the three style so the content of these styles will be written once
+(how do you do that ?!?)

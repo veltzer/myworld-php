@@ -3,7 +3,7 @@
 Plugin Name: MyHeb
 Plugin URI: http://veltzer.net/
 Description: MyHeb plugin for WordPress
-Version: 0.0.2
+Version: 0.0.3
 Author: Mark Veltzer <mark.veltzer@gmail.com> 
 Author URI: http://www.veltzer.net 
 */
@@ -61,8 +61,6 @@ add_filter('the_excerpt','myheb_the_excerpt',-10);
  * Add our own style sheet at the css part of the document
  */
 function myheb_wp_head() {
-	//$url_js=plugins_url('javascript/hebrew4wp_10.js',__FILE__);
-	//echo "<script type='text/javascript' src='{$url_js}'></script>'\n";
 	$url_css=plugins_url('css/myheb.css',__FILE__);
 	echo "<link rel='stylesheet' id='myheb-css' href='{$url_css}' type='text/css' media='screen' />\n";
 }
