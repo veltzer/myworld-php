@@ -127,3 +127,15 @@ clean_manual:
 debug:
 	$(info ALL is $(ALL))
 	$(info CLEAN is $(CLEAN))
+	$(info WEB_ROOT is $(WEB_ROOT))
+	$(info WP_DIR is $(WP_DIR))
+
+.PHONY: install_wp
+install_wp:
+	$(info doing [$@])
+	$(Q)-sudo rm -rf $(WP_DIR)
+	$(Q)sudo mkdir $(WP_DIR)
+	$(Q)sudo chown $$USER.$$USER $(WP_DIR)
+	$(Q)tar --extract --verbose --gunzip --directory $(WP_DIR) --file sources/wp/wordpress.tar.gz --strip-components=1
+	$(Q)cp sources/wp-config.php $(WP_DIR)
+	$(Q)sudo chown -R root.root $(WP_DIR)
