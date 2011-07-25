@@ -1,15 +1,18 @@
 now:
 ====
-	- make the work view and review dialogs show groups and not people.
-	- add a dialog to create a group, give it a name and add people to it.
+install all plugins and not just one when installing the blog.
+get the images and my own mp3's back into the blog.
 
-	- add the ability to have two instances of the same work (one in audio, one in video
-		for instance).
+make the work view and review dialogs show groups and not people.
+add a dialog to create a group, give it a name and add people to it.
 
-	import all lectures in my audio archive into works.
-		How do I decide if they are TTC ? I Don't know.
-		How do I decide if they are audio books ? I Don't know.
-	write a script that allows me to separate stuff to a new table.
+add the ability to have two instances of the same work (one in audio, one in video
+	for instance).
+
+import all lectures in my audio archive into works.
+	How do I decide if they are TTC ? I Don't know.
+	How do I decide if they are audio books ? I Don't know.
+write a script that allows me to separate stuff to a new table.
 
 statistics:
 ===========
