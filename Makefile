@@ -140,3 +140,4 @@ install_wp:
 	$(Q)cp sources/wp-config.php $(WP_DIR)
 	$(Q)unzip sources/plugins/audio-player.2.0.4.1.zip -d $(WP_DIR)/wp-content/plugins
 	$(Q)sudo chown -R root.root $(WP_DIR)
+	$(info doing forget to make install and enable all plugins...)
