@@ -136,8 +136,8 @@ install_wp:
 	$(Q)-sudo rm -rf $(WP_DIR)
 	$(Q)sudo mkdir $(WP_DIR)
 	$(Q)sudo chown $$USER.$$USER $(WP_DIR)
-	$(Q)tar --extract --verbose --gunzip --directory $(WP_DIR) --file sources/wp/wordpress.tar.gz --strip-components=1
+	$(Q)tar --extract --gunzip --directory $(WP_DIR) --file sources/wp/wordpress.tar.gz --strip-components=1
 	$(Q)cp sources/wp-config.php $(WP_DIR)
-	$(Q)unzip sources/plugins/audio-player.2.0.4.1.zip -d $(WP_DIR)/wp-content/plugins
+	$(Q)for x in sources/plugins/*.zip; do unzip -q $$x -d $(WP_DIR)/wp-content/plugins; done
 	$(Q)sudo chown -R root.root $(WP_DIR)
-	$(info doing forget to make install and enable all plugins...)
+	$(info dont forget to make install and enable all plugins...)
