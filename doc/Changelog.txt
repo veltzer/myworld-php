@@ -13,3 +13,4 @@
 - now supporting parameters fully.
 - got ridd of all the includes.
 - now installing plugins when installing the blog.
+- all plugins are now installed properly.

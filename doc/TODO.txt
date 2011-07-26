@@ -1,6 +1,6 @@
 now:
 ====
-install all plugins and not just one when installing the blog.
+get newer versions of all the plugins.
 get the images and my own mp3's back into the blog.
 
 make the work view and review dialogs show groups and not people.

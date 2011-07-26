@@ -140,4 +140,4 @@ install_wp:
 	$(Q)cp sources/wp-config.php $(WP_DIR)
 	$(Q)for x in sources/plugins/*.zip; do unzip -q $$x -d $(WP_DIR)/wp-content/plugins; done
 	$(Q)sudo chown -R root.root $(WP_DIR)
-	$(info dont forget to make install and enable all plugins...)
+	$(info dont forget to make install and enable all plugins and configure them if needed...)
