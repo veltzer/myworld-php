@@ -337,7 +337,7 @@ function create_stats($params) {
 	$query=sprintf('SELECT COUNT(DISTINCT workId) FROM TbWkWorkViewPerson,TbWkWorkView WHERE TbWkWorkViewPerson.viewerId=%s AND TbWkWorkViewPerson.viewId=TbWkWorkView.id',
 		my_mysql_real_escape_string($p_viewerId)
 	);
-	$res.=make_stat($query,null,'number of distinct views');
+	$res.=make_stat($query,null,'number of distinct works');
 
 	$query=sprintf('SELECT COUNT(DISTINCT viewerId) FROM TbWkWorkViewPerson,TbWkWorkView WHERE TbWkWorkViewPerson.viewerId=%s AND TbWkWorkViewPerson.viewId=TbWkWorkView.id',
 		my_mysql_real_escape_string($p_viewerId)
