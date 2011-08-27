@@ -105,11 +105,11 @@ install:
 	$(Q)sudo cp -r $(MYTHEME_THEME_NAME) $(THEME_DIR)
 	$(Q)sudo cp misc/rss.png $(WP_DIR)/wp-includes/images/rss.png
 	$(Q)sudo cp misc/htaccess $(WEB_ROOT)/.htaccess
-	# now install the private folder
+	$(Q)# now install the private folder
 	$(Q)sudo rm -rf $(WEB_DIR_PRIVATE) # remove the old folder
 	$(Q)sudo cp -r private $(WEB_DIR_PRIVATE) # copy to the target
 	$(Q)sudo cp $(MYWORLD_PLUGIN_NAME)/src/* $(WEB_DIR_PRIVATE) # copy support code
-	# now install the public folder
+	$(Q)# now install the public folder
 	$(Q)sudo rm -rf $(WEB_DIR_PUBLIC) # remove the old folder
 	$(Q)sudo cp -r public $(WEB_DIR_PUBLIC) # copy to the target
 
