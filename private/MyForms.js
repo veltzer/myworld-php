@@ -76,9 +76,10 @@ jQuery(document).ready(function() {
 		'type':'select',
 		'name':'Device',
 		'sname':'deviceId',
-		'initState':true,
+		'initState':false,
 		'initMsg':'put the device on which you saw the movie',
 		'url':'GetData.php?type=video_devices',
+		'initVal':9, // 9 stands for dvd/recorder
 		'logger':'#log',
 		'submit':'#movie_send',
 	};
@@ -525,8 +526,9 @@ jQuery(document).ready(function() {
 		'type':'select',
 		'name':'Device',
 		'sname':'deviceId',
-		'initState':true,
+		'initState':false,
 		'initMsg':'put the device on which you saw the movie',
+		'initVal':1, // 1 stands for cowon player
 		'url':'GetData.php?type=TbDevice',
 		'logger':'#log',
 		'submit':'#workview_send',
