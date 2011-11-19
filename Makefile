@@ -108,9 +108,12 @@ install:
 	$(Q)# now install the private folder
 	$(Q)sudo rm -rf $(WEB_DIR_PRIVATE) # remove the old folder
 	$(Q)sudo cp -r private $(WEB_DIR_PRIVATE) # copy to the target
+	$(Q)sudo cp $(MYWORLD_PLUGIN_NAME)/src/utils.php $(WEB_DIR_PRIVATE) # copy support code
 	$(Q)# now install the public folder
 	$(Q)sudo rm -rf $(WEB_DIR_PUBLIC) # remove the old folder
 	$(Q)sudo cp -r public $(WEB_DIR_PUBLIC) # copy to the target
+	$(Q)sudo cp $(MYWORLD_PLUGIN_NAME)/src/utils.php $(WEB_DIR_PUBLIC) # copy support code
+	$(Q)sudo cp private/GetData.php $(WEB_DIR_PUBLIC) # copy support code
 
 .PHONY: clean
 clean:
