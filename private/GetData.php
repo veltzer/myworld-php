@@ -34,7 +34,8 @@ if($type=='video_viewing_year') {
 	$handled=1;
 }
 if($type=='openbook_progress') {
-	$query=sprintf('SELECT DATE_FORMAT(TbGraphData.dt,"%%d%%m%%y") AS id,TbGraphData.value AS value FROM TbGraph, TbGraphData WHERE TbGraph.name=\'openbook_progress\' AND TbGraph.id=TbGraphData.graphId ORDER BY TbGraphData.dt');
+	#$query=sprintf('SELECT DATE_FORMAT(TbGraphData.dt,"%%d%%m%%y") AS id,TbGraphData.value AS value FROM TbGraph, TbGraphData WHERE TbGraph.name=\'openbook_progress\' AND TbGraph.id=TbGraphData.graphId ORDER BY TbGraphData.dt');
+	$query=sprintf('SELECT TbGraphData.id,TbGraphData.value FROM TbGraph, TbGraphData WHERE TbGraph.name=\'openbook_progress\' AND TbGraph.id=TbGraphData.graphId ORDER BY TbGraphData.dt');
 	$result=my_mysql_query($query);
 	# the wrapping is for dojo charting to work...
 	$response='{ label: "id", identifier: "id", items: '.my_json_encode($result).'}';

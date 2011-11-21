@@ -22,7 +22,10 @@ function create_chart($params) {
 				var chart=new dojox.charting.DataChart("chart_$p_id", {
 					// this is needed to make nice columns
 					type: dojox.charting.plot2d.Columns,
+					//type: dojox.charting.plot2d.Lines,
 					// this is needed. default is true and it sucks big time...
+					//scroll:true,
+					//stretchToFit:false,
 					scroll:false,
 					// this is needed for the labels
 					xaxis:{labelFunc:"seriesLabels"},
