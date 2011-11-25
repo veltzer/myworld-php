@@ -86,6 +86,19 @@ jQuery(document).ready(function() {
 	jQuery('#movie_deviceid').cont_valid(init);
 
 	var init={
+		'name':'Remark',
+		'sname':'remark',
+		'initState':true,
+		'initMsg':'Put your remark here',
+		'type':'textarea',
+		'rows':1,
+		'regex':/.*/,
+		'logger':'#log',
+		'submit':'#movie_send',
+	};
+	jQuery('#movie_remark').cont_valid(init);
+
+	var init={
 		'name':'Rating',
 		'sname':'ratingId',
 		'initState':true,
