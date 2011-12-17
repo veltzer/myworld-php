@@ -1,0 +1,4 @@
+more todo in this example:
+- turn the static json file into a php script that shows all of the parameters
+	that are passed to it and generates random data.
+	document how to see the interaction.
