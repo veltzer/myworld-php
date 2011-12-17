@@ -13,7 +13,7 @@ Ext.onReady(function(){
 		model: 'MovieModel',
 		proxy: {
 			type: 'ajax',
-			url: 'paging.php',
+			url: 'Movies.php',
 			reader: {
 				type: 'json',
 				root: 'views',
