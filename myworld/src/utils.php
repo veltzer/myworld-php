@@ -212,6 +212,11 @@ function my_get_post_or_null($field) {
 	return $val;
 }
 
+function debug_params() {
+	print_r($_GET);
+	print_r($_POST);
+}
+
 function my_get_get($field) {
 	if(array_key_exists($field,$_GET)) {
 		return $_GET[$field];
@@ -237,7 +242,7 @@ function val_or_na($val) {
 /* convert bytes to something which is printable on screen */
 function formatSize($size) {
 	$units=array('B','KB','MB','GB','TB');
-	for ($i = 0; $size > 1024; $i++) { $size /= 1024; }
+	for ($i=0;$size>1024;$i++) { $size /= 1024; }
 	return round($size, 2).' '.$units[$i];
 }
 
@@ -256,19 +261,20 @@ function formatTimeperiod($size) {
 /* echo a result set in json style... */
 function my_json_encode($result) {
 	// iterate over every row
-	while ($row = mysql_fetch_assoc($result)) {
+	$rows=array();
+	while($row=mysql_fetch_assoc($result)) {
 		// for every field in the result..
 		for ($i=0; $i < mysql_num_fields($result); $i++) {
-			$info = mysql_fetch_field($result, $i);
-			$type = $info->type;
+			$info=mysql_fetch_field($result, $i);
+			$type=$info->type;
 			// cast for real
 			if ($type == 'real')
-				$row[$info->name] = doubleval($row[$info->name]);
+				$row[$info->name]=doubleval($row[$info->name]);
 			// cast for int
 			if ($type == 'int')
-				$row[$info->name] = intval($row[$info->name]);
+				$row[$info->name]=intval($row[$info->name]);
 		}
-		$rows[] = $row;
+		$rows[]=$row;
 	}
 	// JSON-ify all rows together as one big array
 	return json_encode($rows);
