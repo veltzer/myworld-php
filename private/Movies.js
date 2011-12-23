@@ -8,32 +8,35 @@ Ext.require([
 ]);
 // now for the real code
 Ext.onReady(function(){
+	// next line is needed for tooltips to work...
+	Ext.QuickTips.init();
 	Ext.define('MovieModel', {
 		extend: 'Ext.data.Model',
-			fields: [
-				'id',
-				'name',
-				'length',
-				'size',
-				'chapters',
-				'typeId',
-				'languageId',
-				'startViewDate',
-				'endViewDate',
-				'viewerId',
-				'locationId',
-				'deviceId',
-				'langId',
-				'ratingId',
-				'review',
-				'reviewDate',
-			],
-		idProperty: 'id'
+		fields: [
+			'id',
+			'name',
+			'length',
+			'size',
+			'chapters',
+			'typeId',
+			'languageId',
+			'startViewDate',
+			'endViewDate',
+			'viewerId',
+			'locationId',
+			'deviceId',
+			'langId',
+			'ratingId',
+			'review',
+			'reviewDate',
+		],
+		idProperty: 'id',
 	});
 	var w_store=Ext.create('Ext.data.Store',{
 		autoLoad: false,
 		pageSize: 20,
 		model: 'MovieModel',
+		groupField: 'deviceId',
 		proxy: {
 			type: 'ajax',
 			url: 'Movies.php',
@@ -44,40 +47,67 @@ Ext.onReady(function(){
 			},
 		},
 	});
+	var groupingFeature=Ext.create('Ext.grid.feature.Grouping',{
+		groupHeaderTpl: 'DeviceId: {name} ({rows.length} Item{[values.rows.length > 1 ? "s" : ""]})',
+		disabled: true,
+		// this feature doesnt work right
+		//startCollapsed: true,
+	});
 	var w_grid=Ext.create('Ext.grid.Panel',{
 		title: 'Movies that I have seen',
 		store: w_store,
+		frame: false,
+		border: false,
+		collapsible: true,
+		iconCls: 'icon-grid',
 		columns:[
 			{
 				text: 'Id',
 				dataIndex: 'id',
 				flex: 1,
-	    			hidden: true,
+				hidden: true,
 				sortable: true,
 			},
-	    		{
+			{
 				text: 'Name',
 				dataIndex: 'name',
 				flex: 30,
-	    			hidden: false,
+				hidden: false,
 				sortable: true,
 			},
-	    		{
+			{
 				text: 'View Date',
 				dataIndex: 'endViewDate',
 				flex: 30,
-	    			hidden: false,
+				hidden: false,
 				sortable: true,
 			},
 		],
-	    	dockedItems: [{
-			xtype: 'pagingtoolbar',
-			store: w_store,
-	    		dock: 'bottom',
-			displayInfo: true,
-			displayMsg: 'Displaying movies {0} - {1} of {2}',
-			emptyMsg: 'No movies to display',
-		}],
+		dockedItems: [
+			{
+				xtype: 'pagingtoolbar',
+				store: w_store,
+				dock: 'bottom',
+				displayInfo: true,
+				displayMsg: 'Displaying movies {0} - {1} of {2}',
+				emptyMsg: 'No movies to display',
+			},
+		],
+		bbar: [
+			{
+				text: 'toggle grouping',
+				tooltip: 'bla bla',
+				enableToggle: true,
+				//iconCls: 'icon-clear-group',
+				handler: function() {
+					if(groupingFeature.disabled) {
+						groupingFeature.enable();
+					} else {
+						groupingFeature.disable();
+					}
+				},
+			},
+		],
 		plugins: [{
 			ptype: 'rowexpander',
 			rowBodyTpl: [
@@ -85,6 +115,7 @@ Ext.onReady(function(){
 				'<p><b>Review Date:</b> {reviewDate}</p>',
 			]
 		}],
+		features: [groupingFeature],
 		renderTo: 'movie-grid'
 	});
 	// trigger the data store load, we must do it or no data is displayed
