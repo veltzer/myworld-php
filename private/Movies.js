@@ -10,6 +10,9 @@ Ext.require([
 Ext.onReady(function(){
 	// next line is needed for tooltips to work...
 	Ext.QuickTips.init();
+	// next line causes state to be stored in a cookie...
+	Ext.state.Manager.setProvider(Ext.create('Ext.state.CookieProvider'));
+	// here comes the model...
 	Ext.define('MovieModel', {
 		extend: 'Ext.data.Model',
 		fields: [
@@ -60,6 +63,8 @@ Ext.onReady(function(){
 		border: false,
 		collapsible: true,
 		iconCls: 'icon-grid',
+		// name of cookie to store the grid state in... remove to get code generated state...
+		stateId: 'stateGridExample',
 		columns:[
 			{
 				text: 'Id',
