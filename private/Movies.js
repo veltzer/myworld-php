@@ -8,30 +8,33 @@ Ext.require([
 ]);
 // now for the real code
 Ext.onReady(function(){
+	var useCookie=false;
 	// next line is needed for tooltips to work...
 	Ext.QuickTips.init();
-	// next line causes state to be stored in a cookie...
-	Ext.state.Manager.setProvider(Ext.create('Ext.state.CookieProvider'));
+	if(useCookie) {
+		// next line causes state to be stored in a cookie...
+		Ext.state.Manager.setProvider(Ext.create('Ext.state.CookieProvider'));
+	}
 	// here comes the model...
 	Ext.define('MovieModel', {
 		extend: 'Ext.data.Model',
 		fields: [
-			'id',
-			'name',
-			'length',
-			'size',
-			'chapters',
-			'typeId',
-			'languageId',
-			'startViewDate',
-			'endViewDate',
-			'viewerId',
-			'locationId',
-			'deviceId',
-			'langId',
-			'ratingId',
-			'review',
-			'reviewDate',
+			{name: 'id', type: 'number'},
+			{name: 'name', type: 'string'},
+			{name: 'length', type: 'number'},
+			{name: 'size', type: 'number'},
+			{name: 'chapters', type: 'number'},
+			{name: 'typeId', type: 'number'},
+			{name: 'languageId', type: 'number'},
+			{name: 'startViewDate', type: 'date', dateFormat: 'timestamp'},
+			{name: 'endViewDate', type: 'date', dateFormat: 'timestamp'},
+			{name: 'viewerId', type: 'number'},
+			{name: 'locationId', type: 'number'},
+			{name: 'deviceId', type: 'number'},
+			{name: 'langId', type: 'number'},
+			{name: 'ratingId', type: 'number'},
+			{name: 'review', type: 'string'},
+			{name: 'reviewDate', type: 'date', dateFormat: 'timestamp'},
 		],
 		idProperty: 'id',
 	});
@@ -39,7 +42,8 @@ Ext.onReady(function(){
 		autoLoad: false,
 		pageSize: 20,
 		model: 'MovieModel',
-		groupField: 'deviceId',
+		//groupField: 'deviceId',
+		remoteSort: true,
 		proxy: {
 			type: 'ajax',
 			url: 'Movies.php',
@@ -49,13 +53,21 @@ Ext.onReady(function(){
 				totalProperty: 'total'
 			},
 		},
+		sorters: [
+			{
+				property: 'endViewDate',
+	    			direction: 'DESC',
+			}
+		],
 	});
+	/*
 	var groupingFeature=Ext.create('Ext.grid.feature.Grouping',{
 		groupHeaderTpl: 'DeviceId: {name} ({rows.length} Item{[values.rows.length > 1 ? "s" : ""]})',
 		disabled: true,
 		// this feature doesnt work right
 		//startCollapsed: true,
 	});
+	*/
 	var w_grid=Ext.create('Ext.grid.Panel',{
 		title: 'Movies that I have seen',
 		store: w_store,
@@ -64,7 +76,7 @@ Ext.onReady(function(){
 		collapsible: true,
 		iconCls: 'icon-grid',
 		// name of cookie to store the grid state in... remove to get code generated state...
-		stateId: 'stateGridExample',
+		//stateId: 'stateGridExample',
 		columns:[
 			{
 				text: 'Id',
@@ -98,6 +110,7 @@ Ext.onReady(function(){
 				emptyMsg: 'No movies to display',
 			},
 		],
+		/*
 		bbar: [
 			{
 				text: 'toggle grouping',
@@ -113,6 +126,7 @@ Ext.onReady(function(){
 				},
 			},
 		],
+		*/
 		plugins: [{
 			ptype: 'rowexpander',
 			rowBodyTpl: [
@@ -120,7 +134,7 @@ Ext.onReady(function(){
 				'<p><b>Review Date:</b> {reviewDate}</p>',
 			]
 		}],
-		features: [groupingFeature],
+		//features: [groupingFeature],
 		renderTo: 'movie-grid'
 	});
 	// trigger the data store load, we must do it or no data is displayed

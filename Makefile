@@ -20,6 +20,8 @@ THEME_DIR:=$(WP_DIR)/wp-content/themes
 DO_MAKEDEPS:=1
 # do you want to see the commands executed ?
 DO_MKDBG:=0
+# do you want to compress javascript code ?
+DO_JSCOMPRESS:=1
 # output folder
 OUT:=out
 

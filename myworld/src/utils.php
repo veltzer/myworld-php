@@ -1,6 +1,6 @@
 <?php
 
-/* assertion */
+// assertion callback
 function assert_callcack($file, $line, $expr) {
 	//echo 'assertion failed<br/>';
 	//echo 'file is '.$file.'<br/>';
@@ -10,7 +10,7 @@ function assert_callcack($file, $line, $expr) {
 	//throw new Exception($file.$line.$message);
 }
 
-/* assertion */
+// assertion setup for the whole system
 function assert_setup() {
 	# call our own assert function
 	assert_options(ASSERT_CALLBACK,'assert_callcack');
@@ -50,12 +50,6 @@ function printDebug($string) {
 	} else {
 		echo $string.'<br/>';
 	}
-}
-
-/* function to do server side logging */
-function printServer($string) {
-	#built in php function to do logging...
-	error_log('log from php ['.$string.']',0);
 }
 
 /* my own assertion with my own error printing function */
@@ -212,9 +206,31 @@ function my_get_post_or_null($field) {
 	return $val;
 }
 
+// function to do server side logging
+function debug_print($string) {
+	#built in php function to do logging...
+	error_log('log from php ['.$string.']',0);
+}
+
+// print a line of =========== to start debug session
+function debug_start() {
+	debug_print('=====================================================');
+}
+
+// print both GET and POST params server side
 function debug_params() {
-	print_r($_GET);
-	print_r($_POST);
+	debug_print(serialize($_GET));
+	debug_print(serialize($_POST));
+}
+
+// print GET params server side
+function debug_get() {
+	debug_print(serialize($_GET));
+}
+
+// print POST params server side
+function debug_post() {
+	debug_print(serialize($_POST));
 }
 
 function my_get_get($field) {
@@ -258,8 +274,8 @@ function formatTimeperiod($size) {
 	return round($size, 2).' '.$units[$i];
 }
 
-/* echo a result set in json style... */
-function my_json_encode($result) {
+/* return rows ready for json encoding */
+function my_get_rows($result) {
 	// iterate over every row
 	$rows=array();
 	while($row=mysql_fetch_assoc($result)) {
@@ -276,8 +292,13 @@ function my_json_encode($result) {
 		}
 		$rows[]=$row;
 	}
+	return $rows;
+}
+
+/* echo a result set in json style... */
+function my_json_encode($result) {
 	// JSON-ify all rows together as one big array
-	return json_encode($rows);
+	return json_encode(my_get_rows($result));
 }
 
 /* functions for embedding stuff from youtube */
@@ -316,11 +337,11 @@ function get_external_href($external_name,$external_id) {
 	// TODO: this is very bad performance, always going to the database...
 	$external_templates=my_mysql_query_hash('SELECT name,template FROM TbExternalType','name');
 	$template=$external_templates[$external_name]['template'];
-	//printServer("template is [$template]");
+	//debug_print("template is [$template]");
 	$vars=array();
 	$vars['external_id']=$external_id;
 	$result=template_it($template,$vars);
-	//printServer("result is [$result]");
+	//deubg_print("result is [$result]");
 	return $result;
 }
 
@@ -396,6 +417,19 @@ function make_table($query,$desc) {
 	$res.='<br/>';
 	my_mysql_free_result($result);
 	return $res;
+}
+
+/* create an ORDER BY SQL snipplet from a json object coming from an EXT JS 4 control */
+function create_order_by($p_sort) {
+	if(count($p_sort)>0) {
+		$results=array();
+		foreach($p_sort as $directive) {
+			$results[]=$directive->{'property'}.' '.$directive->{'direction'};
+		}
+		return 'ORDER BY '.join(', ',$results);
+	} else {
+		return '';
+	}
 }
 
 ?>
