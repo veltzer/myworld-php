@@ -11,6 +11,20 @@ Ext.onReady(function(){
 	var useCookie=false;
 	// next line is needed for tooltips to work...
 	Ext.QuickTips.init();
+	// custom function used for length rendering...
+	function render_length(val) {
+		if(val==null || val=='null' || val=='') {
+			return "Length not known";
+		}
+		var units=['secs','mins','hrs','days','months','years'];
+		var mults=[60,60,24,30,12];
+		var i=0;
+		while(val>mults[i]) {
+			val/=mults[i];
+			i++;
+		}
+		return val.toFixed(2)+' '+units[i];
+	}
 	if(useCookie) {
 		// next line causes state to be stored in a cookie...
 		Ext.state.Manager.setProvider(Ext.create('Ext.state.CookieProvider'));
@@ -21,7 +35,7 @@ Ext.onReady(function(){
 		fields: [
 			{name: 'id', type: 'number'},
 			{name: 'name', type: 'string'},
-			{name: 'length', type: 'number'},
+			{name: 'length', type: 'string'},
 			{name: 'size', type: 'number'},
 			{name: 'chapters', type: 'number'},
 			{name: 'typeName', type: 'string'},
@@ -58,7 +72,7 @@ Ext.onReady(function(){
 		sorters: [
 			{
 				property: 'endViewDate',
-	    			direction: 'DESC',
+				direction: 'DESC',
 			}
 		],
 	});
@@ -100,26 +114,27 @@ Ext.onReady(function(){
 				flex: 30,
 				hidden: false,
 				sortable: true,
+				renderer: render_length,
 			},
 			{
 				text: 'Size',
 				dataIndex: 'size',
 				flex: 30,
-				hidden: false,
+				hidden: true,
 				sortable: true,
 			},
 			{
 				text: 'Chapters',
 				dataIndex: 'chapters',
 				flex: 30,
-				hidden: false,
+				hidden: true,
 				sortable: true,
 			},
 			{
 				text: 'Type name',
 				dataIndex: 'typeName',
 				flex: 30,
-				hidden: false,
+				hidden: true,
 				sortable: true,
 			},
 			{
