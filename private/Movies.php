@@ -8,11 +8,56 @@ $p_start=my_get_get('start');
 $p_limit=my_get_get('limit');
 $p_sort=json_decode(my_get_get('sort'));
 # prepare to create the queries...
-$order=create_order_by($p_sort);
-$limit=$p_start.','.$p_limit;
+$sql_order=create_order_by($p_sort);
+$sql_limit='LIMIT '.$p_start.','.$p_limit;
 # form the queries
-$query_data=sprintf('SELECT TbWkWork.id,TbWkWork.name,TbWkWork.length,TbWkWork.size,TbWkWork.chapters,TbWkWork.typeId,TbWkWork.languageId,UNIX_TIMESTAMP(TbWkWorkView.startViewDate) as startViewDate,UNIX_TIMESTAMP(TbWkWorkView.endViewDate) as endViewDate,TbWkWorkViewPerson.viewerId,TbWkWorkView.locationId,TbWkWorkView.deviceId,TbWkWorkView.langId,TbWkWorkReview.ratingId,TbWkWorkReview.review,UNIX_TIMESTAMP(TbWkWorkReview.reviewDate) as reviewDate FROM TbWkWorkViewPerson,TbWkWork,TbWkWorkType,TbWkWorkReview,TbWkWorkView WHERE TbWkWork.typeId=TbWkWorkType.id AND TbWkWorkViewPerson.viewId=TbWkWorkView.id AND TbWkWorkReview.workId=TbWkWork.id AND TbWkWorkView.workId=TbWkWork.id AND TbWkWorkType.name=\'video movie\' %s LIMIT %s',$order,$limit);
-$query_count=sprintf('SELECT COUNT(*) FROM TbWkWorkViewPerson,TbWkWork,TbWkWorkType,TbWkWorkReview,TbWkWorkView WHERE TbWkWork.typeId=TbWkWorkType.id AND TbWkWorkViewPerson.viewId=TbWkWorkView.id AND TbWkWorkReview.workId=TbWkWork.id AND TbWkWorkView.workId=TbWkWork.id AND TbWkWorkType.name=\'video movie\'');
+$sql_select=<<<EOT
+SELECT
+	TbWkWork.id,
+	TbWkWork.name,
+	TbWkWork.length,
+	TbWkWork.size,
+	TbWkWork.chapters,
+	TbWkWorkType.name as typeName,
+	TbIdPerson.firstname as personFirstname,
+	TbIdPerson.surname as personSurname,
+	UNIX_TIMESTAMP(TbWkWorkView.startViewDate) as startViewDate,
+	UNIX_TIMESTAMP(TbWkWorkView.endViewDate) as endViewDate,
+	TbLocation.name as locationName,
+	TbDevice.name as deviceName,
+	TbRating.name as ratingName,
+	TbWkWorkReview.review,
+	UNIX_TIMESTAMP(TbWkWorkReview.reviewDate) as reviewDate
+EOT;
+$sql_frame=<<<EOT
+FROM
+	TbWkWorkViewPerson,
+	TbWkWork,
+	TbWkWorkType,
+	TbWkWorkReview,
+	TbWkWorkView,
+	TbLocation,
+	TbDevice,
+	TbRating,
+	TbIdPerson
+WHERE
+	TbWkWork.typeId=TbWkWorkType.id AND
+	TbWkWorkType.name='video movie' AND
+	TbWkWorkView.locationId=TbLocation.id AND
+	TbWkWorkView.deviceId=TbDevice.id AND
+	TbWkWorkView.workId=TbWkWork.id AND
+	TbWkWorkReview.ratingId=TbRating.id AND
+	TbWkWorkReview.workId=TbWkWork.id AND
+	TbWkWorkViewPerson.viewerId=TbIdPerson.id AND
+	TbWkWorkViewPerson.viewId=TbWkWorkView.id
+EOT;
+$query_data=sprintf('%s %s %s %s',$sql_select,$sql_frame,$sql_order,$sql_limit);
+$query_count=sprintf('%s %s','SELECT COUNT(*)',$sql_frame);
+#logger_start();
+#logger_log($query_data);
+#logger_log($query_count);
+#logger_close();
+#'SELECT COUNT(*) FROM TbWkWorkViewPerson,TbWkWork,TbWkWorkType,TbWkWorkReview,TbWkWorkView WHERE TbWkWork.typeId=TbWkWorkType.id AND TbWkWorkViewPerson.viewId=TbWkWorkView.id AND TbWkWorkReview.workId=TbWkWork.id AND TbWkWorkView.workId=TbWkWork.id AND TbWkWorkType.name=\'video movie\'');
 # get the data...
 $result_obj=my_mysql_query($query_data);
 $result_rows=my_get_rows($result_obj);

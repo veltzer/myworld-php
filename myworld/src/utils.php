@@ -6,7 +6,7 @@ function assert_callcack($file, $line, $expr) {
 	//echo 'file is '.$file.'<br/>';
 	//echo 'line is '.$line.'<br/>';
 	//echo 'message is '.$message.'<br/>';
-	print 'Assertion failed in '.$file.' on line '.$line.': '.$expr.'\n';
+	error_log('Assertion failed in '.$file.' on line '.$line.': '.$expr.'\n');
 	//throw new Exception($file.$line.$message);
 }
 
@@ -61,6 +61,7 @@ function my_assert($val,$reason) {
 
 /* initialize the utils system */
 function utils_init() {
+	logger_setup(false);
 	assert_setup();
 	my_mysql_connect();
 }
@@ -114,6 +115,7 @@ function my_mysql_free_result($result) {
 
 /* A wrapper for mysql_query */
 function my_mysql_query($query) {
+	logger_log($query);
 	$result=mysql_query($query);
 	if(!$result) {
 		error('mysql error: '.mysql_errno().': '.mysql_error());
@@ -231,6 +233,39 @@ function debug_get() {
 // print POST params server side
 function debug_post() {
 	debug_print(serialize($_POST));
+}
+
+function logger_setup($flag) {
+	global $debug;
+	$debug=$flag;
+}
+
+function logger_start() {
+	global $debug;
+	if($debug) {
+		global $handle;
+		// TODO: need to handle errors
+		$handle=fopen('/tmp/phplog.txt','a+');
+	}
+}
+
+function logger_log($msg) {
+	global $debug;
+	if($debug) {
+		global $handle;
+		// TODO: need to handle errors
+		fwrite($handle,$msg);
+		fflush($handle);
+	}
+}
+
+function logger_close() {
+	global $debug;
+	if($debug) {
+		global $handle;
+		// TODO: need to handle errors
+		fclose($handle);
+	}
 }
 
 function my_get_get($field) {
