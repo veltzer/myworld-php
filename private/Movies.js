@@ -1,3 +1,11 @@
+/*
+ * TODO:
+ * - add grid icon at the top
+ * - add multi sort.
+ * - add search.
+ * - add new field type to models (int or null). use it for length.
+ */
+
 // we use the ext-all so we require only stuff that does not exist there...
 Ext.Loader.setConfig({
 	enabled: true
@@ -13,7 +21,7 @@ Ext.onReady(function(){
 	Ext.QuickTips.init();
 	// custom function used for length rendering...
 	function render_length(val) {
-		if(val==null || val=='null' || val=='') {
+		if(val==null) {
 			return "Length not known";
 		}
 		var units=['secs','mins','hrs','days','months','years'];
@@ -25,6 +33,12 @@ Ext.onReady(function(){
 		}
 		return val.toFixed(2)+' '+units[i];
 	}
+	function render_size(val) {
+		if(val==null) {
+			return "Size not known";
+		}
+		return val;
+	}
 	if(useCookie) {
 		// next line causes state to be stored in a cookie...
 		Ext.state.Manager.setProvider(Ext.create('Ext.state.CookieProvider'));
@@ -35,8 +49,8 @@ Ext.onReady(function(){
 		fields: [
 			{name: 'id', type: 'number'},
 			{name: 'name', type: 'string'},
-			{name: 'length', type: 'string'},
-			{name: 'size', type: 'number'},
+			{name: 'length', type: 'auto'},
+			{name: 'size', type: 'auto'},
 			{name: 'chapters', type: 'number'},
 			{name: 'typeName', type: 'string'},
 			{name: 'startViewDate', type: 'date', dateFormat: 'timestamp'},
@@ -49,6 +63,11 @@ Ext.onReady(function(){
 			{name: 'ratingName', type: 'string'},
 			{name: 'review', type: 'string'},
 			{name: 'reviewDate', type: 'date', dateFormat: 'timestamp'},
+			{name: 'fullname',
+				convert: function(value,record) {
+					return record.get('personFirstname')+' '+record.get('personSurname');
+				}
+			}
 		],
 		idProperty: 'id',
 	});
@@ -122,6 +141,7 @@ Ext.onReady(function(){
 				flex: 30,
 				hidden: true,
 				sortable: true,
+				renderer: render_size,
 			},
 			{
 				text: 'Chapters',
@@ -143,6 +163,34 @@ Ext.onReady(function(){
 				flex: 30,
 				hidden: false,
 				sortable: true,
+			},
+			{
+				text: 'Location',
+				dataIndex: 'locationName',
+				flex: 30,
+				hidden: false,
+				sortable: true,
+			},
+			{
+				text: 'Device',
+				dataIndex: 'deviceName',
+				flex: 30,
+				hidden: false,
+				sortable: true,
+			},
+			{
+				text: 'Rating',
+				dataIndex: 'ratingName',
+				flex: 30,
+				hidden: false,
+				sortable: true,
+			},
+			{
+				text: 'Viewer',
+				dataIndex: 'fullname',
+				flex: 30,
+				hidden: true,
+				sortable: false,
 			},
 		],
 		dockedItems: [
