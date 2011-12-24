@@ -27,7 +27,8 @@ SELECT
 	TbDevice.name as deviceName,
 	TbRating.name as ratingName,
 	TbWkWorkReview.review,
-	UNIX_TIMESTAMP(TbWkWorkReview.reviewDate) as reviewDate
+	UNIX_TIMESTAMP(TbWkWorkReview.reviewDate) as reviewDate,
+	TbWkWorkExternal.externalCode
 EOT;
 $sql_frame=<<<EOT
 FROM
@@ -39,8 +40,13 @@ FROM
 	TbLocation,
 	TbDevice,
 	TbRating,
-	TbIdPerson
+	TbIdPerson,
+	TbWkWorkExternal,
+	TbExternalType
 WHERE
+	TbWkWorkExternal.externalId=TbExternalType.id AND
+	TbExternalType.name='imdb_title' AND
+	TbWkWorkExternal.workId=TbWkWork.id AND
 	TbWkWork.typeId=TbWkWorkType.id AND
 	TbWkWorkType.name='video movie' AND
 	TbWkWorkView.locationId=TbLocation.id AND

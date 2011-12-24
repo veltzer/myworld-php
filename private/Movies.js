@@ -3,7 +3,11 @@
  * - add grid icon at the top
  * - add multi sort.
  * - add search.
+ * - handle grouping (client side and server side).
  * - add new field type to models (int or null). use it for length.
+ * - handle resize of the browser nicely.
+ * - make the component always take the same size vertically.
+ * - show sums of various types (length, avg on rating and more).
  */
 
 // we use the ext-all so we require only stuff that does not exist there...
@@ -22,7 +26,7 @@ Ext.onReady(function(){
 	// custom function used for length rendering...
 	function render_length(val) {
 		if(val==null) {
-			return "Length not known";
+			return 'Length not known';
 		}
 		var units=['secs','mins','hrs','days','months','years'];
 		var mults=[60,60,24,30,12];
@@ -35,9 +39,21 @@ Ext.onReady(function(){
 	}
 	function render_size(val) {
 		if(val==null) {
-			return "Size not known";
+			return 'Size not known';
 		}
 		return val;
+	}
+	function render_chapters(val) {
+		if(val==null) {
+			return 'Chapter number not known';
+		}
+		return val;
+	}
+	function render_imdb(val) {
+		if(val==null) {
+			return 'Not available';
+		}
+		return '<a href="http://www.imdb.com/title/tt'+val+'/">'+val+'</a>';
 	}
 	if(useCookie) {
 		// next line causes state to be stored in a cookie...
@@ -51,7 +67,7 @@ Ext.onReady(function(){
 			{name: 'name', type: 'string'},
 			{name: 'length', type: 'auto'},
 			{name: 'size', type: 'auto'},
-			{name: 'chapters', type: 'number'},
+			{name: 'chapters', type: 'auto'},
 			{name: 'typeName', type: 'string'},
 			{name: 'startViewDate', type: 'date', dateFormat: 'timestamp'},
 			{name: 'endViewDate', type: 'date', dateFormat: 'timestamp'},
@@ -67,7 +83,8 @@ Ext.onReady(function(){
 				convert: function(value,record) {
 					return record.get('personFirstname')+' '+record.get('personSurname');
 				}
-			}
+			},
+			{name: 'externalCode', type: 'auto'},
 		],
 		idProperty: 'id',
 	});
@@ -97,7 +114,7 @@ Ext.onReady(function(){
 	});
 	/*
 	var groupingFeature=Ext.create('Ext.grid.feature.Grouping',{
-		groupHeaderTpl: 'DeviceId: {name} ({rows.length} Item{[values.rows.length > 1 ? "s" : ""]})',
+		groupHeaderTpl: 'DeviceId: {name} ({rows.length} Item{[values.rows.length > 1 ? 's' : '']})',
 		disabled: true,
 		// this feature doesnt work right
 		//startCollapsed: true,
@@ -149,6 +166,7 @@ Ext.onReady(function(){
 				flex: 30,
 				hidden: true,
 				sortable: true,
+				renderer: render_chapters,
 			},
 			{
 				text: 'Type name',
@@ -191,6 +209,14 @@ Ext.onReady(function(){
 				flex: 30,
 				hidden: true,
 				sortable: false,
+			},
+			{
+				text: 'imdb id',
+				dataIndex: 'externalCode',
+				flex: 30,
+				hidden: false,
+				sortable: true,
+				renderer: render_imdb,
 			},
 		],
 		dockedItems: [
