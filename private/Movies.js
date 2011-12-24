@@ -43,7 +43,6 @@ Ext.onReady(function(){
 		pageSize: 20,
 		model: 'MovieModel',
 		//groupField: 'deviceId',
-		remoteSort: true,
 		proxy: {
 			type: 'ajax',
 			url: 'Movies.php',
@@ -53,6 +52,9 @@ Ext.onReady(function(){
 				totalProperty: 'total'
 			},
 		},
+		// this means we will sort on the server side...
+		remoteSort: true,
+		// these are the sorters we will send by default...
 		sorters: [
 			{
 				property: 'endViewDate',
