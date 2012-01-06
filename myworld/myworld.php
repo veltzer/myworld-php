@@ -92,6 +92,10 @@ if(!class_exists('MyWorld')) {
 			echo "<script type='text/javascript' src='".plugins_url('javascript/fullcalendar/gcal.js?ver=',__FILE__).$this->version."'></script>\n";
 			// high charts stuff
 			echo "<script type='text/javascript' src='".plugins_url('javascript/highcharts/highcharts.js?ver=',__FILE__).$this->version."'></script>\n";
+			// Ext4, sencha stuff
+			echo "<link rel='stylesheet' type='text/css' href='http://cdn.sencha.io/ext-4.0.7-gpl/resources/css/ext-all.css'/>\n";
+			echo "<script src='http://cdn.sencha.io/ext-4.0.7-gpl/ext-all.js'></script>\n";
+			echo "<script src='".plugins_url('javascript/movies.js')."'></script>\n";
 
 			// myworld javascript
 			echo "<script type='text/javascript' src='".plugins_url('javascript/myworld.js?ver=',__FILE__).$this->version."'></script>\n";

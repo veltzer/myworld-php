@@ -19,7 +19,7 @@ Ext.require([
 	'Ext.ux.RowExpander',
 ]);
 // now for the real code
-Ext.onReady(function(){
+function create_movies(id) {
 	var useCookie=false;
 	// next line is needed for tooltips to work...
 	Ext.QuickTips.init();
@@ -95,7 +95,7 @@ Ext.onReady(function(){
 		//groupField: 'deviceId',
 		proxy: {
 			type: 'ajax',
-			url: 'Movies.php',
+			url: 'movies.php',
 			reader: {
 				type: 'json',
 				root: 'views',
@@ -258,4 +258,4 @@ Ext.onReady(function(){
 	});
 	// trigger the data store load, we must do it or no data is displayed
 	w_store.loadPage(1);
-});
+}
