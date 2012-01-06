@@ -14,7 +14,7 @@
 Ext.Loader.setConfig({
 	enabled: true
 });
-Ext.Loader.setPath('Ext.ux','../wp-content/plugins/myworld/javascript');
+Ext.Loader.setPath('Ext.ux','/public/ux');
 Ext.require([
 	'Ext.ux.RowExpander',
 ]);

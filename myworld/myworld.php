@@ -96,7 +96,7 @@ if(!class_exists('MyWorld')) {
 			// Ext4, sencha stuff
 			echo "<link rel='stylesheet' type='text/css' href='http://cdn.sencha.io/ext-4.0.7-gpl/resources/css/ext-all.css'/>\n";
 			echo "<script src='http://cdn.sencha.io/ext-4.0.7-gpl/ext-all.js'></script>\n";
-			echo "<script src='".plugins_url('javascript/movies.js',__FILE__)."'></script>\n";
+			echo "<script src='/public/movies.js'></script>\n";
 
 			// myworld javascript
 			echo "<script src='".plugins_url('javascript/myworld.js?ver=',__FILE__).$this->version."'></script>\n";
