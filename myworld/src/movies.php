@@ -4,7 +4,6 @@ function create_movies($params) {
 	static $p_id=1;
 	$code=<<<EOD
 		<div id="movies_$p_id">
-			<div id="movies_$p_id"></div>
 		</div>
 		<script>
 			Ext.onReady(function() {

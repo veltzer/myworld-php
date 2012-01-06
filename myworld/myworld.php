@@ -79,26 +79,27 @@ if(!class_exists('MyWorld')) {
 		 */
 		function wp_head() {
 			// jquery
-			echo "<script type='text/javascript' src='".plugins_url('javascript/jquery/jquery.js?ver=',__FILE__).$this->version."'></script>\n";
+			echo "<script src='".plugins_url('javascript/jquery/jquery.js?ver=',__FILE__).$this->version."'></script>\n";
 			// jquery ui
-			echo "<script type='text/javascript' src='".plugins_url('javascript/jquery/jquery-ui-custom.js?ver=',__FILE__).$this->version."'></script>\n";
+			echo "<script src='".plugins_url('javascript/jquery/jquery-ui-custom.js?ver=',__FILE__).$this->version."'></script>\n";
 
 			// dojo via CDN
-			echo "<script src=\"http://ajax.googleapis.com/ajax/libs/dojo/1.6.1/dojo/dojo.xd.js\" type=\"text/javascript\"></script>";
+			//echo "<script src='http://ajax.googleapis.com/ajax/libs/dojo/1.6/dojo/dojo.xd.js'></script>";
+			echo "<script src='http://ajax.googleapis.com/ajax/libs/dojo/1.7/dojo/dojo.js'></script>";
 
 			// full calendar stuff
 			echo "<link rel='stylesheet' id='fullcalendar-css' href='".plugins_url('javascript/fullcalendar/fullcalendar.css?ver=',__FILE__).$this->version."' type='text/css' media='screen' />\n";
-			echo "<script type='text/javascript' src='".plugins_url('javascript/fullcalendar/fullcalendar.min.js?ver=',__FILE__).$this->version."'></script>\n";
-			echo "<script type='text/javascript' src='".plugins_url('javascript/fullcalendar/gcal.js?ver=',__FILE__).$this->version."'></script>\n";
+			echo "<script src='".plugins_url('javascript/fullcalendar/fullcalendar.min.js?ver=',__FILE__).$this->version."'></script>\n";
+			echo "<script src='".plugins_url('javascript/fullcalendar/gcal.js?ver=',__FILE__).$this->version."'></script>\n";
 			// high charts stuff
-			echo "<script type='text/javascript' src='".plugins_url('javascript/highcharts/highcharts.js?ver=',__FILE__).$this->version."'></script>\n";
+			echo "<script src='".plugins_url('javascript/highcharts/highcharts.js?ver=',__FILE__).$this->version."'></script>\n";
 			// Ext4, sencha stuff
 			echo "<link rel='stylesheet' type='text/css' href='http://cdn.sencha.io/ext-4.0.7-gpl/resources/css/ext-all.css'/>\n";
 			echo "<script src='http://cdn.sencha.io/ext-4.0.7-gpl/ext-all.js'></script>\n";
-			echo "<script src='".plugins_url('javascript/movies.js')."'></script>\n";
+			echo "<script src='".plugins_url('javascript/movies.js',__FILE__)."'></script>\n";
 
 			// myworld javascript
-			echo "<script type='text/javascript' src='".plugins_url('javascript/myworld.js?ver=',__FILE__).$this->version."'></script>\n";
+			echo "<script src='".plugins_url('javascript/myworld.js?ver=',__FILE__).$this->version."'></script>\n";
 			// and now for the style sheet...
 			echo "<link rel='stylesheet' id='myworld-css' href='".plugins_url('css/myworld.css?ver=',__FILE__).$this->version."' type='text/css' media='screen' />\n";
 			// favicon

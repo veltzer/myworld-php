@@ -14,12 +14,12 @@
 Ext.Loader.setConfig({
 	enabled: true
 });
-Ext.Loader.setPath('Ext.ux','ux');
+Ext.Loader.setPath('Ext.ux','../wp-content/plugins/myworld/javascript');
 Ext.require([
 	'Ext.ux.RowExpander',
 ]);
 // now for the real code
-function create_movies(id) {
+function create_movies(element_id) {
 	var useCookie=false;
 	// next line is needed for tooltips to work...
 	Ext.QuickTips.init();
@@ -95,7 +95,7 @@ function create_movies(id) {
 		//groupField: 'deviceId',
 		proxy: {
 			type: 'ajax',
-			url: 'movies.php',
+			url: '/public/movies.php',
 			reader: {
 				type: 'json',
 				root: 'views',
@@ -254,7 +254,7 @@ function create_movies(id) {
 			]
 		}],
 		//features: [groupingFeature],
-		renderTo: 'movie-grid'
+		renderTo: element_id,
 	});
 	// trigger the data store load, we must do it or no data is displayed
 	w_store.loadPage(1);
