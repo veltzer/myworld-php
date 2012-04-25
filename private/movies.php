@@ -38,11 +38,14 @@ FROM
 	TbWkWorkReview,
 	TbWkWorkView,
 	TbLocation,
-	TbDevice,
 	TbRating,
+	TbDevice,
 	TbIdPerson,
 	TbWkWorkExternal,
 	TbExternalType
+/*LEFT OUTER JOIN TbWkWorkReview ON
+	TbWkWork.id=TbWkWorkReview.workId AND
+	TbRating.id=TbWkWorkReview.ratingId*/
 WHERE
 	TbWkWorkExternal.externalId=TbExternalType.id AND
 	TbExternalType.name='imdb_title' AND
@@ -59,9 +62,10 @@ WHERE
 EOT;
 $query_data=sprintf('%s %s %s %s',$sql_select,$sql_frame,$sql_order,$sql_limit);
 $query_count=sprintf('%s %s','SELECT COUNT(*)',$sql_frame);
+#logger_setup(true);
 #logger_start();
-#logger_log($query_data);
-#logger_log($query_count);
+#logger_log($query_data."\n");
+#logger_log($query_count."\n");
 #logger_close();
 #'SELECT COUNT(*) FROM TbWkWorkViewPerson,TbWkWork,TbWkWorkType,TbWkWorkReview,TbWkWorkView WHERE TbWkWork.typeId=TbWkWorkType.id AND TbWkWorkViewPerson.viewId=TbWkWorkView.id AND TbWkWorkReview.workId=TbWkWork.id AND TbWkWorkView.workId=TbWkWork.id AND TbWkWorkType.name=\'video movie\'');
 # get the data...
