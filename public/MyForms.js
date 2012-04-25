@@ -8,6 +8,8 @@ jQuery(document).ready(function() {
 
 	jQuery('#log').cont_logger();
 
+	// regular movie
+
 	var init={
 		'name':'Send',
 		'url':'NewMovie.php',
@@ -119,6 +121,98 @@ jQuery(document).ready(function() {
 		'submit':'#movie_send',
 	};
 	jQuery('#movie_review').cont_valid(init);
+
+	// movie without review
+
+	var init={
+		'name':'Send',
+		'url':'NewMovieNoReview.php',
+		'logger':'#log',
+		'formid':'#movienr_form',
+	};
+	jQuery('#movienr_send').cont_submit(init);
+
+	var init={
+		'type':'select',
+		'name':'Person',
+		'sname':'personId',
+		'initState':false,
+		'initMsg':'Put the person id here',
+		'initVal':1,
+		'url':'GetData.php?type=TbIdPerson',
+		'logger':'#log',
+		'submit':'#movienr_send',
+	};
+	jQuery('#movienr_personid').cont_valid(init);
+
+	var init={
+		'name':'Name',
+		'sname':'name',
+		'initState':true,
+		'initMsg':'put the name of the movie here',
+		'regex':/.+/, // because they can be in hebrew
+		'logger':'#log',
+		'submit':'#movienr_send',
+	};
+	jQuery('#movienr_name').cont_valid(init);
+
+	var init={
+		'name':'Imdbid',
+		'sname':'imdbid',
+		'initState':true,
+		'initMsg':'put the imdbid here',
+		'regex':/^\d{7}$/,
+		'logger':'#log',
+		'submit':'#movienr_send',
+	};
+	jQuery('#movienr_imdbid').cont_valid(init);
+
+	var init={
+		'name':'Date',
+		'sname':'date',
+		'logger':'#log',
+		'submit':'#movienr_send',
+	};
+	jQuery('#movienr_date').cont_datetime(init);
+
+	var init={
+		'type':'select',
+		'name':'Location',
+		'sname':'locationId',
+		'initState':false,
+		'initMsg':'put the location where you saw the movie',
+		'initVal':2, // 2 stands for home
+		'url':'GetData.php?type=video_places',
+		'logger':'#log',
+		'submit':'#movienr_send',
+	};
+	jQuery('#movienr_locationid').cont_valid(init);
+
+	var init={
+		'type':'select',
+		'name':'Device',
+		'sname':'deviceId',
+		'initState':false,
+		'initMsg':'put the device on which you saw the movie',
+		'url':'GetData.php?type=video_devices',
+		'initVal':9, // 9 stands for dvd/recorder
+		'logger':'#log',
+		'submit':'#movienr_send',
+	};
+	jQuery('#movienr_deviceid').cont_valid(init);
+
+	var init={
+		'name':'Remark',
+		'sname':'remark',
+		'initState':true,
+		'initMsg':'Put your remark here',
+		'type':'textarea',
+		'rows':1,
+		'regex':/.*/,
+		'logger':'#log',
+		'submit':'#movienr_send',
+	};
+	jQuery('#movienr_remark').cont_valid(init);
 
 	// event stuff starts here...
 
