@@ -92,8 +92,8 @@ if(!class_exists('MyWorld')) {
 			// highcharts stuff
 			echo "<script src='/public/highcharts/highcharts.js'></script>\n";
 			// Ext4(sencha) stuff
-			echo "<link rel='stylesheet' href='http://cdn.sencha.io/ext-4.0.7-gpl/resources/css/ext-all.css'/>\n";
-			echo "<script src='http://cdn.sencha.io/ext-4.0.7-gpl/ext-all.js'></script>\n";
+			//echo "<link rel='stylesheet' href='http://cdn.sencha.io/ext-4.0.7-gpl/resources/css/ext-all.css'/>\n";
+			//echo "<script src='http://cdn.sencha.io/ext-4.0.7-gpl/ext-all.js'></script>\n";
 			// our own javascripts
 			echo "<script src='/public/movies.js'></script>\n";
 			echo "<script src='/public/myworld.js'></script>\n";
