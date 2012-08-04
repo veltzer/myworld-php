@@ -84,6 +84,7 @@ function my_mysql_connect() {
 		$database='myworld';
 		$link=mysql_connect($db_host,$db_user,$db_pwd);
 		assert($link);
+		//assert(mysql_select_db($database,$link));
 		assert(mysql_select_db($database));
 		my_mysql_query('SET AUTOCOMMIT=0');
 		# I need this because the default client configuration is for latin1.
@@ -105,7 +106,13 @@ function my_mysql_disconnect() {
 		assert(mysql_close($link));
 		$link=NULL;
 	}
-	 */
+	*/
+	// TODO: this is UGLY. I should not need to do that...
+	global $link;
+	if($link!=NULL) {
+		assert(mysql_select_db('wordpress'));
+		$link=NULL;
+	}
 }
 
 /* free a result set from mysql */
