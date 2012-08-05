@@ -3,10 +3,14 @@ here are the plugins that I am ACTUALLY using. All other plugins can be removed:
 The names here are in ** folder ** format which means that they are the names
 which are shown if you list the content of $WP/wp-content/plugins
 
-audio-player - for audio plauing
-akismet - for SPAM
-all-in-one-seo-pack - URLS, SEO etc...
-google-analyticator - google analytics.
-kpicasa-gallery - for my picasa albums.
-twitter-widget-pro - for the twitter sidebar
-wp-syntax - for the code snipplets.
+Akismet - for SPAM
+All in One SEO Pack - URLS, SEO etc...
+Google Analyticator - google analytics.
+MyHeb, MyWorld - my own.
+Shashin - for images from picasa and videos from youtube.
+SoundCloud Shortcode - for soundcloud.
+Toppa Plugins Libraries for WordPress - this is a prerequisite for Shashin.
+Twitter Widget Pro - for the twitter sidebar
+WP-Syntax - for the code snipplets.
+
+I install them via the web interface (except my own plugins).
