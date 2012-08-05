@@ -1,0 +1,5 @@
+Adding a new album:
+- go to tools->shashin->picasa/google+
+	Add my album again:
+	https://picasaweb.google.com/mark.veltzer
+- now you can use the album.
