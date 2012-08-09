@@ -12,8 +12,8 @@ function create_courses($params) {
 
 	$res.=get_start_table();
 	$res.='<tr>';
-	$res.='<td>category</td>';
-	$res.='<td>name</td>';
+	$res.='<td style=\'width:20%\'>category</td>';
+	$res.='<td style=\'width:80%\'>name</td>';
 	$res.='</tr>';
 
 	while($row=mysql_fetch_assoc($result)) {
@@ -38,9 +38,9 @@ function create_consulting($params) {
 
 	$res.=get_start_table();
 	$res.='<tr>';
-	$res.='<td>name</td>';
-	$res.='<td>remark</td>';
-	$res.='<td>image</td>';
+	$res.='<td style=\'width:20%\'>name</td>';
+	$res.='<td style=\'width:80%\'>remark</td>';
+	$res.='<td style=\'width:20%\'>image</td>';
 	$res.='</tr>';
 
 	while($row=mysql_fetch_assoc($result)) {
@@ -76,9 +76,9 @@ function create_teaching($params) {
 
 	$res.=get_start_table();
 	$res.='<tr>';
-	$res.='<td>name</td>';
-	$res.='<td>remark</td>';
-	$res.='<td>image</td>';
+	$res.='<td style=\'width:20%\'>name</td>';
+	$res.='<td style=\'width:80%\'>remark</td>';
+	$res.='<td style=\'width:20%\'>image</td>';
 	$res.='</tr>';
 
 	while($row=mysql_fetch_assoc($result)) {
@@ -114,9 +114,9 @@ function create_certification($params) {
 
 	$res.=get_start_table();
 	$res.='<tr>';
-	$res.='<td>type of certification</td>';
-	$res.='<td>date from which I am certified</td>';
-	$res.='<td>image</td>';
+	$res.='<td style=\'width:20%\'>type of certification</td>';
+	$res.='<td style=\'width:80%\'>date from which I am certified</td>';
+	$res.='<td style=\'width:20%\'>image</td>';
 	$res.='</tr>';
 	// printing table rows
 	while($row=mysql_fetch_assoc($result)) {
