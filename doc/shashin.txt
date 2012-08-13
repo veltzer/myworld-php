@@ -3,3 +3,8 @@ Adding a new album:
 	Add my album again:
 	https://picasaweb.google.com/mark.veltzer
 - now you can use the album.
+
+I use shashing with columns="2" because more looks bad on non wide screens (regular desktops,
+	laptops and tablets).
+
+I really should get ridd of shashin, it's not as good as I want it but it's the best I found so far.
