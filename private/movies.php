@@ -58,7 +58,8 @@ WHERE
 	TbWkWorkReview.ratingId=TbRating.id AND
 	TbWkWorkReview.workId=TbWkWork.id AND
 	TbWkWorkViewPerson.viewerId=TbIdPerson.id AND
-	TbWkWorkViewPerson.viewId=TbWkWorkView.id
+	TbWkWorkViewPerson.viewId=TbWkWorkView.id AND
+	TbWkWorkView.endViewDate IS NOT NULL
 EOT;
 $query_data=sprintf('%s %s %s %s',$sql_select,$sql_frame,$sql_order,$sql_limit);
 $query_count=sprintf('%s %s','SELECT COUNT(*)',$sql_frame);
