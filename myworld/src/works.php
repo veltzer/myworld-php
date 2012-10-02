@@ -329,62 +329,62 @@ function create_stats($params) {
 	$p_viewerId=my_mysql_query_one('SELECT id FROM TbIdPerson WHERE firstname=\'Mark\' AND surname=\'Veltzer\'');
 
 	# work stats
-	$query=sprintf('SELECT COUNT(*) FROM TbWkWorkViewPerson,TbWkWorkView WHERE TbWkWorkViewPerson.viewerId=%s AND TbWkWorkViewPerson.viewId=TbWkWorkView.id',
+	$query=sprintf('SELECT COUNT(*) FROM TbWkWorkViewPerson,TbWkWorkView,TbWkWork,TbWkWorkType WHERE TbWkWorkViewPerson.viewerId=%s AND TbWkWorkViewPerson.viewId=TbWkWorkView.id AND TbWkWorkView.workId=TbWkWork.id AND TbWkWork.typeId=TbWkWorkType.id AND TbWkWorkType.isStudy=1',
 		my_mysql_real_escape_string($p_viewerId)
 	);
 	$res.=make_stat($query,null,'number of views');
 
-	$query=sprintf('SELECT COUNT(DISTINCT workId) FROM TbWkWorkViewPerson,TbWkWorkView WHERE TbWkWorkViewPerson.viewerId=%s AND TbWkWorkViewPerson.viewId=TbWkWorkView.id',
+	$query=sprintf('SELECT COUNT(DISTINCT workId) FROM TbWkWorkViewPerson,TbWkWorkView,TbWkWork,TbWkWorkType WHERE TbWkWorkViewPerson.viewerId=%s AND TbWkWorkViewPerson.viewId=TbWkWorkView.id AND TbWkWorkView.workId=TbWkWork.id AND TbWkWorkType.id=TbWkWork.typeId AND TbWkWorkType.isStudy=1',
 		my_mysql_real_escape_string($p_viewerId)
 	);
 	$res.=make_stat($query,null,'number of distinct works');
 
-	$query=sprintf('SELECT COUNT(DISTINCT viewerId) FROM TbWkWorkViewPerson,TbWkWorkView WHERE TbWkWorkViewPerson.viewerId=%s AND TbWkWorkViewPerson.viewId=TbWkWorkView.id',
+	$query=sprintf('SELECT COUNT(DISTINCT viewerId) FROM TbWkWorkViewPerson,TbWkWorkView,TbWkWork,TbWkWorkType WHERE TbWkWorkViewPerson.viewerId=%s AND TbWkWorkViewPerson.viewId=TbWkWorkView.id AND TbWkWorkView.workId=TbWkWork.id AND TbWkWorkType.id=TbWkWork.typeId AND TbWkWorkType.isStudy=1',
 		my_mysql_real_escape_string($p_viewerId)
 	);
 	$res.=make_stat($query,null,'number of distinct viewers');
 
-	$query=sprintf('SELECT COUNT(DISTINCT TbWkWork.typeId) FROM TbWkWorkViewPerson,TbWkWorkView,TbWkWork WHERE TbWkWorkViewPerson.viewerId=%s AND TbWkWorkViewPerson.viewId=TbWkWorkView.id AND TbWkWorkView.workId=TbWkWork.id',
+	$query=sprintf('SELECT COUNT(DISTINCT TbWkWork.typeId) FROM TbWkWorkViewPerson,TbWkWorkView,TbWkWork,TbWkWorkType WHERE TbWkWorkViewPerson.viewerId=%s AND TbWkWorkViewPerson.viewId=TbWkWorkView.id AND TbWkWorkView.workId=TbWkWork.id AND TbWkWorkType.id=TbWkWork.typeId AND TbWkWorkType.isStudy=1',
 		my_mysql_real_escape_string($p_viewerId)
 	);
 	$res.=make_stat($query,null,'number of distinct work types');
 
-	$query=sprintf('SELECT COUNT(DISTINCT locationId) FROM TbWkWorkViewPerson,TbWkWorkView WHERE TbWkWorkViewPerson.viewerId=%s AND TbWkWorkViewPerson.viewId=TbWkWorkView.id',
+	$query=sprintf('SELECT COUNT(DISTINCT locationId) FROM TbWkWorkViewPerson,TbWkWorkView,TbWkWork,TbWkWorkType WHERE TbWkWorkViewPerson.viewerId=%s AND TbWkWorkViewPerson.viewId=TbWkWorkView.id AND TbWkWorkView.workId=TbWkWork.id AND TbWkWorkType.id=TbWkWork.typeId AND TbWkWorkType.isStudy=1',
 		my_mysql_real_escape_string($p_viewerId)
 	);
 	$res.=make_stat($query,null,'number of distinct locations');
 
-	$query=sprintf('SELECT COUNT(DISTINCT deviceId) FROM TbWkWorkViewPerson,TbWkWorkView WHERE TbWkWorkViewPerson.viewerId=%s AND TbWkWorkViewPerson.viewId=TbWkWorkView.id',
+	$query=sprintf('SELECT COUNT(DISTINCT deviceId) FROM TbWkWorkViewPerson,TbWkWorkView,TbWkWork,TbWkWorkType WHERE TbWkWorkViewPerson.viewerId=%s AND TbWkWorkViewPerson.viewId=TbWkWorkView.id AND TbWkWorkView.workId=TbWkWork.id AND TbWkWorkType.id=TbWkWork.typeId AND TbWkWorkType.isStudy=1',
 		my_mysql_real_escape_string($p_viewerId)
 	);
 	$res.=make_stat($query,null,'number of distinct devices');
 
-	$query=sprintf('SELECT COUNT(DISTINCT ratingId) FROM TbWkWorkReview WHERE TbWkWorkReview.reviewerId=%s',
+	$query=sprintf('SELECT COUNT(DISTINCT ratingId) FROM TbWkWorkReview,TbWkWork,TbWkWorkType WHERE TbWkWorkReview.reviewerId=%s AND TbWkWorkReview.workId=TbWkWork.id AND TbWkWork.typeId=TbWkWorkType.id AND TbWkWorkType.isStudy=1',
 		my_mysql_real_escape_string($p_viewerId)
 	);
 	$res.=make_stat($query,null,'number of distinct ratings');
 
-	$query=sprintf('SELECT SUM(TbWkWork.length) FROM TbWkWorkViewPerson,TbWkWork,TbWkWorkView WHERE TbWkWorkViewPerson.viewerId=%s AND TbWkWorkViewPerson.viewId=TbWkWorkView.id AND TbWkWork.id=TbWkWorkView.workId',
+	$query=sprintf('SELECT SUM(TbWkWork.length) FROM TbWkWorkViewPerson,TbWkWork,TbWkWorkView,TbWkWorkType WHERE TbWkWorkViewPerson.viewerId=%s AND TbWkWorkViewPerson.viewId=TbWkWorkView.id AND TbWkWork.id=TbWkWorkView.workId AND TbWkWorkType.id=TbWkWork.typeId AND TbWkWorkType.isStudy=1',
 		my_mysql_real_escape_string($p_viewerId)
 	);
 	$res.=make_stat($query,formatTimeperiod,'total time of works experienced');
 
-	$query=sprintf('SELECT SUM(TbWkWork.size) FROM TbWkWorkViewPerson,TbWkWork,TbWkWorkView WHERE TbWkWorkViewPerson.viewerId=%s AND TbWkWorkViewPerson.viewId=TbWkWorkView.id AND TbWkWork.id=TbWkWorkView.workId',
+	$query=sprintf('SELECT SUM(TbWkWork.size) FROM TbWkWorkViewPerson,TbWkWork,TbWkWorkView,TbWkWorkType WHERE TbWkWorkViewPerson.viewerId=%s AND TbWkWorkViewPerson.viewId=TbWkWorkView.id AND TbWkWork.id=TbWkWorkView.workId AND TbWkWorkType.id=TbWkWork.typeId AND TbWkWorkType.isStudy=1',
 		my_mysql_real_escape_string($p_viewerId)
 	);
 	$res.=make_stat($query,formatSize,'total size of works experienced');
 
-	$query=sprintf('SELECT AVG(TbWkWorkReview.ratingId) FROM TbWkWorkReview WHERE TbWkWorkReview.reviewerId=%s',
+	$query=sprintf('SELECT AVG(TbWkWorkReview.ratingId) FROM TbWkWorkReview,TbWkWork,TbWkWorkType WHERE TbWkWorkReview.reviewerId=%s AND TbWkWorkType.id=TbWkWork.typeId AND TbWkWorkType.isStudy=1 AND TbWkWorkReview.workId=TbWkWork.id',
 		my_mysql_real_escape_string($p_viewerId)
 	);
 	$res.=make_stat($query,null,'average rating');
 
-	$query=sprintf('SELECT MAX(TbWkWorkReview.ratingId) FROM TbWkWorkReview WHERE TbWkWorkReview.reviewerId=%s',
+	$query=sprintf('SELECT MAX(TbWkWorkReview.ratingId) FROM TbWkWorkReview,TbWkWork,TbWkWorkType WHERE TbWkWorkReview.reviewerId=%s AND TbWkWorkType.id=TbWkWork.typeId AND TbWkWorkType.isStudy=1 AND TbWkWorkReview.workId=TbWkWork.id',
 		my_mysql_real_escape_string($p_viewerId)
 	);
 	$res.=make_stat($query,null,'maxium rating');
 
-	$query=sprintf('SELECT MIN(TbWkWorkReview.ratingId) FROM TbWkWorkReview WHERE TbWkWorkReview.reviewerId=%s',
+	$query=sprintf('SELECT MIN(TbWkWorkReview.ratingId) FROM TbWkWorkReview,TbWkWork,TbWkWorkType WHERE TbWkWorkReview.reviewerId=%s AND TbWkWorkType.id=TbWkWork.typeId AND TbWkWorkType.isStudy=1 AND TbWkWorkReview.workId=TbWkWork.id',
 		my_mysql_real_escape_string($p_viewerId)
 	);
 	$res.=make_stat($query,null,'minimum rating');
