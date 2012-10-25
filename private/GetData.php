@@ -47,7 +47,7 @@ if($type=='TbIdPerson') {
 	$handled=1;
 }
 if($type=='TbLocation' || $type=='TbRating' || $type=='TbClCalendar' || $type=='TbBsCourses' || $type=='TbExternalType' || $type=='TbWkWorkType' || $type=='TbWkWork' || $type=='TbWkWorkContribType' || $type=='TbDevice' || $type=='TbOrganization' || $type=='TbTdActivity' || $type=='TbLanguage' || $type=='TbIdHonorific') {
-	$query=sprintf('SELECT id,name AS label,name AS value FROM %s ORDER BY name',
+	$query=sprintf('SELECT id,name AS label,name AS value FROM %s WHERE name IS NOT NULL ORDER BY name',
 		mysql_real_escape_string($type)
 	);
 	$result=my_mysql_query($query);
