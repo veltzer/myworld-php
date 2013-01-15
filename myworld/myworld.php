@@ -95,7 +95,7 @@ if(!class_exists('MyWorld')) {
 			//echo "<link rel='stylesheet' href='http://cdn.sencha.io/ext-4.0.7-gpl/resources/css/ext-all.css'/>\n";
 			//echo "<script src='http://cdn.sencha.io/ext-4.0.7-gpl/ext-all.js'></script>\n";
 			// our own javascripts
-			echo "<script src='/public/movies.js'></script>\n";
+			//echo "<script src='/public/movies.js'></script>\n";
 			echo "<script src='/public/myworld.js'></script>\n";
 			// and now for the style sheet...
 			echo "<link rel='stylesheet' href='".plugins_url('css/myworld.css?ver=',__FILE__).$this->version."'/>\n";
