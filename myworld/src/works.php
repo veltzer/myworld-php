@@ -519,7 +519,7 @@ function create_movie_stats($params) {
 	$query=sprintf('SELECT COUNT(DISTINCT TbWkWorkView.locationId) FROM TbWkWorkViewPerson,TbWkWorkView,TbWkWork,TbWkWorkType WHERE TbWkWorkViewPerson.viewerId=%s AND TbWkWorkViewPerson.viewId=TbWkWorkView.id AND TbWkWorkView.workId=TbWkWork.id AND TbWkWork.typeId=TbWkWorkType.id AND TbWkWorkType.name=\'video movie\'',
 		my_mysql_real_escape_string($p_viewerId)
 	);
-	$res.=make_stat($query,null,'number of distinct location used to watch them');
+	$res.=make_stat($query,null,'number of distinct locations used to watch them');
 
 	$query=sprintf('SELECT TbLocation.name,COUNT(TbLocation.name) FROM TbWkWorkViewPerson,TbWkWorkView,TbWkWork,TbWkWorkType,TbLocation WHERE TbWkWorkViewPerson.viewerId=%s AND TbWkWorkViewPerson.viewId=TbWkWorkView.id AND TbWkWorkView.workId=TbWkWork.id AND TbWkWork.typeId=TbWkWorkType.id AND TbWkWorkType.name=\'video movie\' AND TbLocation.id=TbWkWorkView.locationId GROUP BY TbLocation.name',
 		my_mysql_real_escape_string($p_viewerId)
