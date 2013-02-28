@@ -97,14 +97,17 @@ remake_password:
 	$(Q)htpasswd -bc private/.htpasswd $(WEB_USER) $(WEB_PASSWORD) 2> /dev/null # set security
 
 .PHONY: install
-install:
+install: all
 	$(info doing [$@])
 	$(Q)-sudo rm -rf $(MYHEB_PLUGIN_FULL_DIR)
 	$(Q)sudo cp -r $(MYHEB_PLUGIN_NAME) $(PLUGIN_DIR)
+	$(Q)sudo chown www-data.www-data $(PLUGIN_DIR)/$(MYHEB_PLUGIN_NAME)
 	$(Q)-sudo rm -rf $(MYWORLD_PLUGIN_FULL_DIR)
 	$(Q)sudo cp -r $(MYWORLD_PLUGIN_NAME) $(PLUGIN_DIR)
+	$(Q)sudo chown www-data.www-data $(PLUGIN_DIR)/$(MYWORLD_PLUGIN_NAME)
 	$(Q)-sudo rm -rf $(MYTHEME_THEME_FULL_DIR)
 	$(Q)sudo cp -r $(MYTHEME_THEME_NAME) $(THEME_DIR)
+	$(Q)sudo chown www-data.www-data $(THEME_DIR)/$(MYTHEME_THEME_NAME)
 	$(Q)sudo cp misc/rss.png $(WP_DIR)/wp-includes/images/rss.png
 	$(Q)sudo cp misc/htaccess $(WEB_ROOT)/.htaccess
 	$(Q)# now install the private folder

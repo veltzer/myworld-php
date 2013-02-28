@@ -1,5 +1,4 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
+<html>
 <head>
 <meta http-equiv="Content-Type" content="<?php bloginfo('html_type'); ?>; charset=<?php bloginfo('charset'); ?>" />
 <?php if ( is_single() ) { ?>
@@ -22,15 +21,16 @@
 <div align="center">
 <div id="wrapper">
 <div id="<?php yui_doc() ?>" class="<?php yui_secondary_column() ?>">
+
 <div id="hd">
-	<!--div id="sitemeta">
+	<div id="sitemeta">
 		<ul>
      			<?php wp_register(); ?>
      			<li><?php wp_loginout(); ?></li>
      			<?php wp_meta(); ?>
      			<li class="rss"><a href="<?php bloginfo('rss2_url'); ?>">Subscribe RSS Feed</a></li>
   		</ul>
-	</div-->
+	</div>
 	<div id="titlewrapper">
 		<div id="blogtitle">
 			<h1><a href="<?php echo get_option('home'); ?>/"><?php bloginfo('name'); ?></a></h1><span id="blogdescription"><?php bloginfo('description'); ?></span>
@@ -42,12 +42,11 @@
 			</ul>
 		</div>
 	</div>
-	<div id="newsflash">
+	<!--div id="newsflash">
                 <?php @include (TEMPLATEPATH . "/newsflash.php"); ?>
-	</div>
+	</div-->
+	<!-- some space after the sub titles -->
 	<div class="clear">&nbsp;</div>
 </div>
 
-<div id="sidebar" class="yui-b">
 <?php get_sidebar(); ?>
-</div>

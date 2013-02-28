@@ -51,6 +51,7 @@ form {
 #wrapper {
 	width: 90%;
 	text-align:left;
+	/* float: left; */
 }
 #hd {
 	padding-bottom: 10px;
@@ -128,10 +129,12 @@ form {
 #bd {
 	margin: 0px 230px 0px 0px;
 	color: #505050;
+	/* display: block; */
 }
 #sidebar {
 	font-size: 8pt;
-	width: 200px;
+	/* width: 200px; */
+	width: 10%;
 	float: right;
 	color: #606060;
 	padding-left: 10px;
@@ -151,7 +154,7 @@ form {
 	margin-bottom: 10px;
 	margin-left:5px;
 }
-li.vategories ul {
+li.categories ul {
 	list-style:none outside;
 	margin-top: 10px;
 	margin-bottom: 10px;

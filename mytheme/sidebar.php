@@ -1,3 +1,4 @@
+<div id="sidebar">
 <ul class="sidebar">
 <?php if(!function_exists('dynamic_sidebar') || !dynamic_sidebar() ) : // use widgets otherwise use static ?>
 	<li id="search"><h2>Search</h2>
@@ -47,3 +48,4 @@
 	</li>
 <?php endif; ?>
 </ul>
+</div>
