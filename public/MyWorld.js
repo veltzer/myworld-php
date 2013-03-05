@@ -81,7 +81,8 @@ jQuery(document).ready(function() {
 		'initState':false,
 		'initMsg':'put the device on which you saw the movie',
 		'url':'GetData.php?type=video_devices',
-		'initVal':9, // 9 stands for dvd/recorder
+		//'initVal':9, // stands for dvd/recorder
+		'initVal':16, // stands for YES max HD
 		'logger':'#log',
 		'submit':'#movie_send',
 	};
@@ -195,7 +196,8 @@ jQuery(document).ready(function() {
 		'initState':false,
 		'initMsg':'put the device on which you saw the movie',
 		'url':'GetData.php?type=video_devices',
-		'initVal':9, // 9 stands for dvd/recorder
+		//'initVal':9, // stands for dvd/recorder
+		'initVal':16, // stands for YES max HD
 		'logger':'#log',
 		'submit':'#movienr_send',
 	};
