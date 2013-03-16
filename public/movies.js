@@ -24,7 +24,7 @@ function create_movies(element_id) {
 	// next line is needed for tooltips to work...
 	Ext.QuickTips.init();
 	// custom function used for length rendering...
-	function render_length(val) {
+	function render_length(val,lim,precision) {
 		if(val==null) {
 			return 'Length not known';
 		}
@@ -34,8 +34,14 @@ function create_movies(element_id) {
 		while(val>mults[i]) {
 			val/=mults[i];
 			i++;
+			if(units[i]==lim) {
+				break;
+			}
 		}
-		return val.toFixed(2)+' '+units[i];
+		return val.toFixed(precision)+' '+units[i];
+	}
+	function render_movie_length(val) {
+		return render_length(val,'mins',0);
 	}
 	function render_size(val) {
 		if(val==null) {
@@ -150,7 +156,7 @@ function create_movies(element_id) {
 				flex: 30,
 				hidden: false,
 				sortable: true,
-				renderer: render_length,
+				renderer: render_movie_length,
 			},
 			{
 				text: 'Size',
