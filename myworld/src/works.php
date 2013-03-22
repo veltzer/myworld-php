@@ -491,7 +491,7 @@ function create_movie_stats($params) {
 	);
 	$res.=make_stat($query,formatTimeperiod,'maximum length of all movies seen that have length');
 
-	$query=sprintf('SELECT COUNT(*) FROM TbRating, TbWkWorkReview, TbWkWork, TbWkWorkType WHERE TbWkWorkReview.reviewerId=%s AND TbWkWorkReview.workId=TbWkWork.id AND TbWkWork.typeId=TbWkWorkType.id AND TbWkWorkType.name=\'video movie\' AND TbWkWorkReview.ratingId=TbRating.id',
+	$query=sprintf('SELECT COUNT(*) FROM TbWkWorkReview,TbWkWork,TbWkWorkType WHERE TbWkWorkReview.reviewerId=%s AND TbWkWorkReview.workId=TbWkWork.id AND TbWkWork.typeId=TbWkWorkType.id AND TbWkWorkType.name=\'video movie\'',
 		my_mysql_real_escape_string($p_viewerId)
 	);
 	$res.=make_stat($query,null,'number of movies reviewed');
