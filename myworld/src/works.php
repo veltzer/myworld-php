@@ -396,6 +396,15 @@ function create_movie_stats($params) {
 	# lets get my id
 	$p_viewerId=my_mysql_query_one('SELECT id FROM TbIdPerson WHERE firstname=\'Mark\' AND surname=\'Veltzer\'');
 
+	$query=sprintf('SELECT COUNT(*) FROM TbWkWork,TbWkWorkType WHERE TbWkWork.typeId=TbWkWorkType.id AND TbWkWorkType.name=\'video movie\'');
+	$res.=make_stat($query,null,'number of movies');
+
+	$query=sprintf('SELECT COUNT(*) FROM TbWkWork,TbWkWorkType WHERE TbWkWork.typeId=TbWkWorkType.id AND TbWkWorkType.name=\'video movie\' AND TbWkWork.name IS NULL');
+	$res.=make_stat($query,null,'number of movies whose name IS NULL');
+
+	$query=sprintf('SELECT COUNT(*) FROM TbWkWork,TbWkWorkType WHERE TbWkWork.typeId=TbWkWorkType.id AND TbWkWorkType.name=\'video movie\' AND TbWkWork.name IS NOT NULL');
+	$res.=make_stat($query,null,'number of movies whose name IS NOT NULL');
+
 	$query=sprintf('SELECT COUNT(*) FROM TbWkWorkViewPerson,TbWkWorkView,TbWkWork,TbWkWorkType WHERE TbWkWorkViewPerson.viewerId=%s AND TbWkWorkViewPerson.viewId=TbWkWorkView.id AND TbWkWorkView.workId=TbWkWork.id AND TbWkWork.typeId=TbWkWorkType.id AND TbWkWorkType.name=\'video movie\'',
 		my_mysql_real_escape_string($p_viewerId)
 	);
