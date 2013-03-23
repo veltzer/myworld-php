@@ -410,7 +410,7 @@ function create_movie_stats($params) {
 	);
 	$res.=make_stat($query,null,'number of movies seen');
 
-	$query=sprintf('SELECT COUNT(*) FROM TbWkWorkViewPerson,TbWkWorkView,TbWkWork,TbWkWorkType WHERE TbWkWorkViewPerson.viewerId=%s AND TbWkWorkViewPerson.viewId=TbWkWorkView.id AND TbWkWorkView.workId=TbWkWork.id AND TbWkWork.typeId=TbWkWorkType.id AND TbWkWorkType.name=\'video movie\' AND TbWkWorkView.endViewDate is not NULL',
+	$query=sprintf('SELECT COUNT(*) FROM TbWkWorkViewPerson,TbWkWorkView,TbWkWork,TbWkWorkType WHERE TbWkWorkViewPerson.viewerId=%s AND TbWkWorkViewPerson.viewId=TbWkWorkView.id AND TbWkWorkView.workId=TbWkWork.id AND TbWkWork.typeId=TbWkWorkType.id AND TbWkWorkType.name=\'video movie\' AND TbWkWorkView.endViewDate IS NOT NULL',
 		my_mysql_real_escape_string($p_viewerId)
 	);
 	$res.=make_stat($query,null,'number of movies seen with date');
@@ -425,7 +425,7 @@ function create_movie_stats($params) {
 	);
 	$res.=make_stat($query,null,'number of movies seen with imdbid');
 
-	$query=sprintf('SELECT COUNT(*) FROM TbWkWorkViewPerson,TbWkWorkView,TbWkWork,TbWkWorkType,TbWkWorkReview WHERE TbWkWorkViewPerson.viewerId=%s AND TbWkWorkViewPerson.viewId=TbWkWorkView.id AND TbWkWorkView.workId=TbWkWork.id AND TbWkWork.typeId=TbWkWorkType.id AND TbWkWorkType.name=\'video movie\' AND TbWkWorkReview.workId=TbWkWork.id AND TbWkWorkView.endViewDate is not NULL',
+	$query=sprintf('SELECT COUNT(*) FROM TbWkWorkViewPerson,TbWkWorkView,TbWkWork,TbWkWorkType,TbWkWorkReview WHERE TbWkWorkViewPerson.viewerId=%s AND TbWkWorkViewPerson.viewId=TbWkWorkView.id AND TbWkWorkView.workId=TbWkWork.id AND TbWkWork.typeId=TbWkWorkType.id AND TbWkWorkType.name=\'video movie\' AND TbWkWorkReview.workId=TbWkWork.id AND TbWkWorkView.endViewDate IS NOT NULL',
 		my_mysql_real_escape_string($p_viewerId)
 	);
 	$res.=make_stat($query,null,'number of movies seen with date,review');
@@ -435,7 +435,7 @@ function create_movie_stats($params) {
 	);
 	$res.=make_stat($query,null,'number of movies seen with review,imdbid');
 	
-	$query=sprintf('SELECT COUNT(*) FROM TbWkWorkViewPerson,TbWkWorkView,TbWkWork,TbWkWorkType,TbWkWorkReview,TbWkWorkExternal,TbExternalType WHERE TbWkWorkViewPerson.viewerId=%s AND TbWkWorkViewPerson.viewId=TbWkWorkView.id AND TbWkWorkView.workId=TbWkWork.id AND TbWkWork.typeId=TbWkWorkType.id AND TbWkWorkType.name=\'video movie\' AND TbWkWorkReview.workId=TbWkWork.id AND TbWkWorkView.endViewDate is not NULL AND TbExternalType.name=\'imdb_title\' AND TbWkWorkExternal.workId=TbWkWork.id AND TbWkWorkExternal.externalId=TbExternalType.id AND TbWkWorkExternal.externalCode!=\'0000000\'',
+	$query=sprintf('SELECT COUNT(*) FROM TbWkWorkViewPerson,TbWkWorkView,TbWkWork,TbWkWorkType,TbWkWorkReview,TbWkWorkExternal,TbExternalType WHERE TbWkWorkViewPerson.viewerId=%s AND TbWkWorkViewPerson.viewId=TbWkWorkView.id AND TbWkWorkView.workId=TbWkWork.id AND TbWkWork.typeId=TbWkWorkType.id AND TbWkWorkType.name=\'video movie\' AND TbWkWorkReview.workId=TbWkWork.id AND TbWkWorkView.endViewDate IS NOT NULL AND TbExternalType.name=\'imdb_title\' AND TbWkWorkExternal.workId=TbWkWork.id AND TbWkWorkExternal.externalId=TbExternalType.id AND TbWkWorkExternal.externalCode!=\'0000000\'',
 		my_mysql_real_escape_string($p_viewerId)
 	);
 	$res.=make_stat($query,null,'number of movies seen with date,review,imdbid');
@@ -475,27 +475,27 @@ function create_movie_stats($params) {
 	);
 	$res.=make_stat($query,null,'number of distinct movies seen without length');
 
-	$query=sprintf('SELECT COUNT(*) FROM TbWkWorkViewPerson,TbWkWorkView,TbWkWork,TbWkWorkType WHERE TbWkWorkViewPerson.viewerId=%s AND TbWkWorkViewPerson.viewId=TbWkWorkView.id AND TbWkWorkView.workId=TbWkWork.id AND TbWkWork.typeId=TbWkWorkType.id AND TbWkWorkType.name=\'video movie\' AND TbWkWork.length is not null',
+	$query=sprintf('SELECT COUNT(*) FROM TbWkWorkViewPerson,TbWkWorkView,TbWkWork,TbWkWorkType WHERE TbWkWorkViewPerson.viewerId=%s AND TbWkWorkViewPerson.viewId=TbWkWorkView.id AND TbWkWorkView.workId=TbWkWork.id AND TbWkWork.typeId=TbWkWorkType.id AND TbWkWorkType.name=\'video movie\' AND TbWkWork.length IS NOT NULL',
 		my_mysql_real_escape_string($p_viewerId)
 	);
 	$res.=make_stat($query,null,'number of movies seen that have length');
 
-	$query=sprintf('SELECT SUM(TbWkWork.length) FROM TbWkWorkViewPerson,TbWkWorkView,TbWkWork,TbWkWorkType WHERE TbWkWorkViewPerson.viewerId=%s AND TbWkWorkViewPerson.viewId=TbWkWorkView.id AND TbWkWorkView.workId=TbWkWork.id AND TbWkWork.typeId=TbWkWorkType.id AND TbWkWorkType.name=\'video movie\' AND TbWkWork.length is not null',
+	$query=sprintf('SELECT SUM(TbWkWork.length) FROM TbWkWorkViewPerson,TbWkWorkView,TbWkWork,TbWkWorkType WHERE TbWkWorkViewPerson.viewerId=%s AND TbWkWorkViewPerson.viewId=TbWkWorkView.id AND TbWkWorkView.workId=TbWkWork.id AND TbWkWork.typeId=TbWkWorkType.id AND TbWkWorkType.name=\'video movie\' AND TbWkWork.length IS NOT NULL',
 		my_mysql_real_escape_string($p_viewerId)
 	);
 	$res.=make_stat($query,formatTimeperiod,'total length of all movies seen that have length');
 
-	$query=sprintf('SELECT AVG(TbWkWork.length) FROM TbWkWorkViewPerson,TbWkWorkView,TbWkWork,TbWkWorkType WHERE TbWkWorkViewPerson.viewerId=%s AND TbWkWorkViewPerson.viewId=TbWkWorkView.id AND TbWkWorkView.workId=TbWkWork.id AND TbWkWork.typeId=TbWkWorkType.id AND TbWkWorkType.name=\'video movie\' AND TbWkWork.length is not null',
+	$query=sprintf('SELECT AVG(TbWkWork.length) FROM TbWkWorkViewPerson,TbWkWorkView,TbWkWork,TbWkWorkType WHERE TbWkWorkViewPerson.viewerId=%s AND TbWkWorkViewPerson.viewId=TbWkWorkView.id AND TbWkWorkView.workId=TbWkWork.id AND TbWkWork.typeId=TbWkWorkType.id AND TbWkWorkType.name=\'video movie\' AND TbWkWork.length IS NOT NULL',
 		my_mysql_real_escape_string($p_viewerId)
 	);
 	$res.=make_stat($query,formatTimeperiod,'average length of all movies seen that have length');
 
-	$query=sprintf('SELECT MIN(TbWkWork.length) FROM TbWkWorkViewPerson,TbWkWorkView,TbWkWork,TbWkWorkType WHERE TbWkWorkViewPerson.viewerId=%s AND TbWkWorkViewPerson.viewId=TbWkWorkView.id AND TbWkWorkView.workId=TbWkWork.id AND TbWkWork.typeId=TbWkWorkType.id AND TbWkWorkType.name=\'video movie\' AND TbWkWork.length is not null',
+	$query=sprintf('SELECT MIN(TbWkWork.length) FROM TbWkWorkViewPerson,TbWkWorkView,TbWkWork,TbWkWorkType WHERE TbWkWorkViewPerson.viewerId=%s AND TbWkWorkViewPerson.viewId=TbWkWorkView.id AND TbWkWorkView.workId=TbWkWork.id AND TbWkWork.typeId=TbWkWorkType.id AND TbWkWorkType.name=\'video movie\' AND TbWkWork.length IS NOT NULL',
 		my_mysql_real_escape_string($p_viewerId)
 	);
 	$res.=make_stat($query,formatTimeperiod,'minimum length of all movies seen that have length');
 
-	$query=sprintf('SELECT MAX(TbWkWork.length) FROM TbWkWorkViewPerson,TbWkWorkView,TbWkWork,TbWkWorkType WHERE TbWkWorkViewPerson.viewerId=%s AND TbWkWorkViewPerson.viewId=TbWkWorkView.id AND TbWkWorkView.workId=TbWkWork.id AND TbWkWork.typeId=TbWkWorkType.id AND TbWkWorkType.name=\'video movie\' AND TbWkWork.length is not null',
+	$query=sprintf('SELECT MAX(TbWkWork.length) FROM TbWkWorkViewPerson,TbWkWorkView,TbWkWork,TbWkWorkType WHERE TbWkWorkViewPerson.viewerId=%s AND TbWkWorkViewPerson.viewId=TbWkWorkView.id AND TbWkWorkView.workId=TbWkWork.id AND TbWkWork.typeId=TbWkWorkType.id AND TbWkWorkType.name=\'video movie\' AND TbWkWork.length IS NOT NULL',
 		my_mysql_real_escape_string($p_viewerId)
 	);
 	$res.=make_stat($query,formatTimeperiod,'maximum length of all movies seen that have length');
