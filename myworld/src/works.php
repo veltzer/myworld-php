@@ -497,22 +497,22 @@ function create_movie_stats($params) {
 	$query=sprintf('SELECT COUNT(*) FROM TbWkWorkReview,TbWkWork,TbWkWorkType WHERE TbWkWorkReview.reviewerId=%s AND TbWkWorkReview.workId=TbWkWork.id AND TbWkWork.typeId=TbWkWorkType.id AND TbWkWorkType.name=\'video movie\'',
 		my_mysql_real_escape_string($p_viewerId)
 	);
-	$res.=make_stat($query,null,'number of movies reviewed');
+	$res.=make_stat($query,null,'number of reviews (could be more than number of movies reviewed because one movie could be reviewed more than once)');
 
 	$query=sprintf('SELECT AVG(TbRating.value) FROM TbRating, TbWkWorkReview, TbWkWork, TbWkWorkType WHERE TbWkWorkReview.reviewerId=%s AND TbWkWorkReview.workId=TbWkWork.id AND TbWkWork.typeId=TbWkWorkType.id AND TbWkWorkType.name=\'video movie\' AND TbWkWorkReview.ratingId=TbRating.id',
 		my_mysql_real_escape_string($p_viewerId)
 	);
-	$res.=make_stat($query,null,'average rating of all movies reviewed');
+	$res.=make_stat($query,null,'average rating of all reviews');
 
 	$query=sprintf('SELECT MIN(TbRating.value) FROM TbRating, TbWkWorkReview, TbWkWork, TbWkWorkType WHERE TbWkWorkReview.reviewerId=%s AND TbWkWorkReview.workId=TbWkWork.id AND TbWkWork.typeId=TbWkWorkType.id AND TbWkWorkType.name=\'video movie\' AND TbWkWorkReview.ratingId=TbRating.id',
 		my_mysql_real_escape_string($p_viewerId)
 	);
-	$res.=make_stat($query,null,'minimum rating of all movies reviewed');
+	$res.=make_stat($query,null,'minimum rating of all reviews');
 
 	$query=sprintf('SELECT MAX(TbRating.value) FROM TbRating, TbWkWorkReview, TbWkWork, TbWkWorkType WHERE TbWkWorkReview.reviewerId=%s AND TbWkWorkReview.workId=TbWkWork.id AND TbWkWork.typeId=TbWkWorkType.id AND TbWkWorkType.name=\'video movie\' AND TbWkWorkReview.ratingId=TbRating.id',
 		my_mysql_real_escape_string($p_viewerId)
 	);
-	$res.=make_stat($query,null,'maximum rating of all movies reviewed');
+	$res.=make_stat($query,null,'maximum rating of all reviews');
 
 	$query=sprintf('SELECT COUNT(DISTINCT TbRating.id) FROM TbRating, TbWkWorkReview, TbWkWork, TbWkWorkType WHERE TbWkWorkReview.reviewerId=%s AND TbWkWorkReview.workId=TbWkWork.id AND TbWkWork.typeId=TbWkWorkType.id AND TbWkWorkType.name=\'video movie\' AND TbWkWorkReview.ratingId=TbRating.id',
 		my_mysql_real_escape_string($p_viewerId)
