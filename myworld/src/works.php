@@ -428,7 +428,7 @@ function create_movie_stats($params) {
 		my_mysql_real_escape_string($p_viewerId)
 	);
 	$res.=make_stat($query,null,'number of movies seen with review,imdbid');
-	
+
 	$query=sprintf('SELECT COUNT(*) FROM TbWkWorkViewPerson,TbWkWorkView,TbWkWork,TbWkWorkType,TbWkWorkReview,TbWkWorkExternal,TbExternalType WHERE TbWkWorkViewPerson.viewerId=%s AND TbWkWorkViewPerson.viewId=TbWkWorkView.id AND TbWkWorkView.workId=TbWkWork.id AND TbWkWork.typeId=TbWkWorkType.id AND TbWkWorkType.name=\'video movie\' AND TbWkWorkReview.workId=TbWkWork.id AND TbWkWorkView.endViewDate IS NOT NULL AND TbExternalType.name=\'imdb_title\' AND TbWkWorkExternal.workId=TbWkWork.id AND TbWkWorkExternal.externalId=TbExternalType.id AND TbWkWorkExternal.externalCode!=\'0000000\'',
 		my_mysql_real_escape_string($p_viewerId)
 	);
@@ -497,7 +497,12 @@ function create_movie_stats($params) {
 	$query=sprintf('SELECT COUNT(*) FROM TbWkWorkReview,TbWkWork,TbWkWorkType WHERE TbWkWorkReview.reviewerId=%s AND TbWkWorkReview.workId=TbWkWork.id AND TbWkWork.typeId=TbWkWorkType.id AND TbWkWorkType.name=\'video movie\'',
 		my_mysql_real_escape_string($p_viewerId)
 	);
-	$res.=make_stat($query,null,'number of reviews (could be more than number of movies reviewed because one movie could be reviewed more than once)');
+	$res.=make_stat($query,null,'number of reviews (could be more than number of distinct movies reviewed because one movie could be reviewed more than once)');
+
+	$query=sprintf('SELECT COUNT(DISTINCT TbWkWork.id) FROM TbWkWorkReview,TbWkWork,TbWkWorkType WHERE TbWkWorkReview.reviewerId=%s AND TbWkWorkReview.workId=TbWkWork.id AND TbWkWork.typeId=TbWkWorkType.id AND TbWkWorkType.name=\'video movie\'',
+		my_mysql_real_escape_string($p_viewerId)
+	);
+	$res.=make_stat($query,null,'number of distinct movies reviewed');
 
 	$query=sprintf('SELECT AVG(TbRating.value) FROM TbRating, TbWkWorkReview, TbWkWork, TbWkWorkType WHERE TbWkWorkReview.reviewerId=%s AND TbWkWorkReview.workId=TbWkWork.id AND TbWkWork.typeId=TbWkWorkType.id AND TbWkWorkType.name=\'video movie\' AND TbWkWorkReview.ratingId=TbRating.id',
 		my_mysql_real_escape_string($p_viewerId)
