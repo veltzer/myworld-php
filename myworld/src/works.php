@@ -494,15 +494,10 @@ function create_movie_stats($params) {
 	);
 	$res.=make_stat($query,formatTimeperiod,'maximum length of all movies seen that have length');
 
-	$query=sprintf('SELECT COUNT(*) FROM TbWkWorkReview,TbWkWork,TbWkWorkType WHERE TbWkWorkReview.reviewerId=%s AND TbWkWorkReview.workId=TbWkWork.id AND TbWkWork.typeId=TbWkWorkType.id AND TbWkWorkType.name=\'video movie\'',
-		my_mysql_real_escape_string($p_viewerId)
-	);
-	$res.=make_stat($query,null,'number of reviews (could be more than number of distinct movies reviewed because one movie could be reviewed more than once)');
-
 	$query=sprintf('SELECT COUNT(DISTINCT TbWkWork.id) FROM TbWkWorkReview,TbWkWork,TbWkWorkType WHERE TbWkWorkReview.reviewerId=%s AND TbWkWorkReview.workId=TbWkWork.id AND TbWkWork.typeId=TbWkWorkType.id AND TbWkWorkType.name=\'video movie\'',
 		my_mysql_real_escape_string($p_viewerId)
 	);
-	$res.=make_stat($query,null,'number of distinct movies reviewed');
+	$res.=make_stat($query,null,'number of distinct movies reviewed which is the same as number of reviews since each more can be reviewed at most once');
 
 	$query=sprintf('SELECT AVG(TbRating.value) FROM TbRating, TbWkWorkReview, TbWkWork, TbWkWorkType WHERE TbWkWorkReview.reviewerId=%s AND TbWkWorkReview.workId=TbWkWork.id AND TbWkWork.typeId=TbWkWorkType.id AND TbWkWorkType.name=\'video movie\' AND TbWkWorkReview.ratingId=TbRating.id',
 		my_mysql_real_escape_string($p_viewerId)
