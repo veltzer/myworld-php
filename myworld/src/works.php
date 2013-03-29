@@ -534,10 +534,13 @@ function create_movie_stats($params) {
 	);
 	$res.=make_stat($query,null,'number of distinct locations used to watch them');
 
+	/*
+	 * Remarked for privacy by Mark Veltzer, 3/13
 	$query=sprintf('SELECT TbLocation.name,COUNT(TbLocation.name) FROM TbWkWorkViewPerson,TbWkWorkView,TbWkWork,TbWkWorkType,TbLocation WHERE TbWkWorkViewPerson.viewerId=%s AND TbWkWorkViewPerson.viewId=TbWkWorkView.id AND TbWkWorkView.workId=TbWkWork.id AND TbWkWork.typeId=TbWkWorkType.id AND TbWkWorkType.name=\'video movie\' AND TbLocation.id=TbWkWorkView.locationId GROUP BY TbLocation.name',
 		my_mysql_real_escape_string($p_viewerId)
 	);
 	$res.=make_table($query,'number of views per location');
+	*/
 
 	$query=sprintf('select AVG(mytab.mycnt) from (select COUNT(*) AS mycnt from TbWkWorkViewPerson where TbWkWorkViewPerson.viewId in (select TbWkWorkView.id from TbWkWorkType, TbWkWork, TbWkWorkView where TbWkWork.id=TbWkWorkView.workId and TbWkWorkType.id=TbWkWork.typeId and TbWkWorkType.name=\'video movie\') GROUP BY TbWkWorkViewPerson.viewId) AS mytab;',
 		my_mysql_real_escape_string($p_viewerId)
