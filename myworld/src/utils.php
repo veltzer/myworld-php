@@ -306,8 +306,8 @@ function formatSize($size) {
 
 /* convert seconds to something which is printable on screen */
 function formatTimeperiod($size) {
-	$units=array('secs','mins','hrs','days','months','years');
-	$mults=array(60,60,24,30,12);
+	$units=array('secs','mins','hrs','days','months','years','decades');
+	$mults=array(60,60,24,30,12,10);
 	$i=0;
 	while($size>$mults[$i]) {
 		$size/=$mults[$i];
