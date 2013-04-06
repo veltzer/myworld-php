@@ -547,6 +547,16 @@ function create_movie_stats($params) {
 	);
 	$res.=make_stat($query,null,'average number of viewers per view');
 
+	$query=sprintf('SELECT MIN(mytab.mycnt) FROM (SELECT COUNT(*) AS mycnt FROM TbWkWorkViewPerson WHERE TbWkWorkViewPerson.viewId IN (SELECT TbWkWorkView.id FROM TbWkWorkType, TbWkWork, TbWkWorkView WHERE TbWkWork.id=TbWkWorkView.workId AND TbWkWorkType.id=TbWkWork.typeId AND TbWkWorkType.name=\'video movie\') GROUP BY TbWkWorkViewPerson.viewId) AS mytab;',
+		my_mysql_real_escape_string($p_viewerId)
+	);
+	$res.=make_stat($query,null,'minimum number of viewers per view');
+
+	$query=sprintf('SELECT MAX(mytab.mycnt) FROM (SELECT COUNT(*) AS mycnt FROM TbWkWorkViewPerson WHERE TbWkWorkViewPerson.viewId IN (SELECT TbWkWorkView.id FROM TbWkWorkType, TbWkWork, TbWkWorkView WHERE TbWkWork.id=TbWkWorkView.workId AND TbWkWorkType.id=TbWkWork.typeId AND TbWkWorkType.name=\'video movie\') GROUP BY TbWkWorkViewPerson.viewId) AS mytab;',
+		my_mysql_real_escape_string($p_viewerId)
+	);
+	$res.=make_stat($query,null,'miximum number of viewers per view');
+
 	return $res;
 }
 
