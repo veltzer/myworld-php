@@ -77,19 +77,12 @@ function create_movies(element_id) {
 			{name: 'typeName', type: 'string'},
 			{name: 'startViewDate', type: 'date', dateFormat: 'timestamp'},
 			{name: 'endViewDate', type: 'date', dateFormat: 'timestamp'},
-			{name: 'personFirstname', type: 'string'},
-			{name: 'personSurname', type: 'string'},
 			{name: 'locationName', type: 'string'},
 			{name: 'deviceName', type: 'string'},
 			{name: 'languageName', type: 'string'},
 			{name: 'ratingName', type: 'string'},
 			{name: 'review', type: 'string'},
 			{name: 'reviewDate', type: 'date', dateFormat: 'timestamp'},
-			{name: 'fullname',
-				convert: function(value,record) {
-					return record.get('personFirstname')+' '+record.get('personSurname');
-				}
-			},
 			{name: 'externalCode', type: 'auto'},
 		],
 		idProperty: 'id',
@@ -208,13 +201,6 @@ function create_movies(element_id) {
 				flex: 30,
 				hidden: false,
 				sortable: true,
-			},
-			{
-				text: 'Viewer',
-				dataIndex: 'fullname',
-				flex: 30,
-				hidden: true,
-				sortable: false,
 			},
 			{
 				text: 'imdb id',

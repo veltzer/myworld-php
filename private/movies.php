@@ -19,8 +19,6 @@ SELECT
 	TbWkWork.size,
 	TbWkWork.chapters,
 	TbWkWorkType.name as typeName,
-	TbIdPerson.firstname as personFirstname,
-	TbIdPerson.surname as personSurname,
 	UNIX_TIMESTAMP(TbWkWorkView.startViewDate) as startViewDate,
 	UNIX_TIMESTAMP(TbWkWorkView.endViewDate) as endViewDate,
 	TbLocation.name as locationName,
@@ -32,43 +30,35 @@ SELECT
 EOT;
 $sql_frame=<<<EOT
 FROM
+	TbIdPerson,
 	TbWkWorkViewPerson,
+	TbWkWorkView,
 	TbWkWork,
 	TbWkWorkType,
-	TbWkWorkReview,
-	TbWkWorkView,
 	TbLocation,
 	TbRating,
 	TbDevice,
-	TbIdPerson,
 	TbWkWorkExternal,
-	TbExternalType
-/*LEFT OUTER JOIN TbWkWorkReview ON
-	TbWkWork.id=TbWkWorkReview.workId AND
-	TbRating.id=TbWkWorkReview.ratingId*/
+	TbExternalType,
+	TbWkWorkReview
 WHERE
-	TbWkWorkExternal.externalId=TbExternalType.id AND
-	TbExternalType.name='imdb_title' AND
-	TbWkWorkExternal.workId=TbWkWork.id AND
-	TbWkWork.typeId=TbWkWorkType.id AND
-	TbWkWorkType.name='video movie' AND
+	TbIdPerson.id=1 AND
+	TbIdPerson.id=TbWkWorkViewPerson.viewerId AND
+	TbWkWorkViewPerson.viewId=TbWkWorkView.id AND
 	TbWkWorkView.locationId=TbLocation.id AND
 	TbWkWorkView.deviceId=TbDevice.id AND
+	TbWkWorkView.endViewDate IS NOT NULL AND
 	TbWkWorkView.workId=TbWkWork.id AND
-	TbWkWorkReview.ratingId=TbRating.id AND
-	TbWkWorkReview.workId=TbWkWork.id AND
-	TbWkWorkViewPerson.viewerId=TbIdPerson.id AND
-	TbWkWorkViewPerson.viewId=TbWkWorkView.id AND
-	TbWkWorkView.endViewDate IS NOT NULL
+	TbWkWork.typeId=TbWkWorkType.id AND
+	TbWkWork.id=TbWkWorkExternal.workId AND
+	TbWkWork.id=TbWkWorkReview.workId AND
+	TbWkWorkType.name='video movie' AND
+	TbWkWorkExternal.externalId=TbExternalType.id AND
+	TbExternalType.name='imdb_title' AND
+	TbWkWorkReview.ratingId=TbRating.id
 EOT;
 $query_data=sprintf('%s %s %s %s',$sql_select,$sql_frame,$sql_order,$sql_limit);
 $query_count=sprintf('%s %s','SELECT COUNT(*)',$sql_frame);
-#logger_setup(true);
-#logger_start();
-#logger_log($query_data."\n");
-#logger_log($query_count."\n");
-#logger_close();
-#'SELECT COUNT(*) FROM TbWkWorkViewPerson,TbWkWork,TbWkWorkType,TbWkWorkReview,TbWkWorkView WHERE TbWkWork.typeId=TbWkWorkType.id AND TbWkWorkViewPerson.viewId=TbWkWorkView.id AND TbWkWorkReview.workId=TbWkWork.id AND TbWkWorkView.workId=TbWkWork.id AND TbWkWorkType.name=\'video movie\'');
 # get the data...
 $result_obj=my_mysql_query($query_data);
 $result_rows=my_get_rows($result_obj);

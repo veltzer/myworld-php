@@ -18,13 +18,18 @@ function assert_setup() {
 	assert_options(ASSERT_ACTIVE,1);
 	# make sure that we do not continue execution on failed assertions...
 	assert_options(ASSERT_BAIL,1);
-	# do not show the standard php assert warning (we will do it on our own...)
+	# do not show the standard php assert warning in the php output to the client (we will do it on our own...)
 	assert_options(ASSERT_WARNING,0);
 	# make php be quiet when doing assertions...
-	assert_options(ASSERT_QUIET_EVAL,1);
+	assert_options(ASSERT_QUIET_EVAL,0);
 
 	error_reporting(E_ALL);
-	ini_set('display_errors',1);
+	# dont show errors to the user
+	ini_set('display_errors',0);
+	# log errors instead
+	ini_set('log_errors',1);
+	# error log file
+	ini_set('error_log','/tmp/phperrors.txt');
 }
 
 /* function that gets an error message and triggers an error for the whole page */
@@ -55,14 +60,14 @@ function printDebug($string) {
 /* my own assertion with my own error printing function */
 function my_assert($val,$reason) {
 	if(!$val) {
-		error('assert error: '.$reason);
+		error_log('assert error: '.$reason);
 	}
 }
 
 /* initialize the utils system */
 function utils_init() {
-	logger_setup(false);
 	assert_setup();
+	logger_setup(false);
 	my_mysql_connect();
 }
 
@@ -249,10 +254,11 @@ function logger_setup($flag) {
 
 function logger_start() {
 	global $debug;
+	assert(false);
 	if($debug) {
 		global $handle;
-		// TODO: need to handle errors
 		$handle=fopen('/tmp/phplog.txt','a+');
+		assert($handle!=null);
 	}
 }
 
@@ -260,9 +266,11 @@ function logger_log($msg) {
 	global $debug;
 	if($debug) {
 		global $handle;
-		// TODO: need to handle errors
-		fwrite($handle,$msg);
-		fflush($handle);
+		if($handle!=null) {
+			// TODO: need to handle errors
+			fwrite($handle,$msg);
+			fflush($handle);
+		}
 	}
 }
 
@@ -270,8 +278,10 @@ function logger_close() {
 	global $debug;
 	if($debug) {
 		global $handle;
-		// TODO: need to handle errors
-		fclose($handle);
+		if($handle!=null) {
+			// TODO: need to handle errors
+			fclose($handle);
+		}
 	}
 }
 
