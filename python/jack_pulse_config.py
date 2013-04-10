@@ -16,10 +16,10 @@ def getConfig():
 		print('inifile did not exist, writing it for the first time. find it in {inifile}'.format(**vars()))
 		config=configparser.ConfigParser()
 		config[mysection]={
-			'do_midi_bridge': str(True),
-			'do_load_jack_module': str(True),
-			'do_route_jack': str(True),
-			'do_route_apps': str(True),
+			'do_midi_bridge': 'yes',
+			'do_load_jack_module': 'yes',
+			'do_route_jack': 'yes',
+			'do_route_apps': 'yes',
 		}
 		with open(inifile, 'w') as configfile:
 			config.write(configfile)

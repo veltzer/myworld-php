@@ -1,8 +1,10 @@
-#!/usr/bin/python
+#!/usr/bin/python3
 
 # imports
-import os
+import sys
 import os.path
+sys.path.append(os.path.expanduser('~/install/mypython'))
+import os
 import jack_pulse_config
 
 # configuration

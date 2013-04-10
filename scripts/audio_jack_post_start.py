@@ -15,13 +15,14 @@ TODO:
 """
 
 # imports
-import os
+import sys
 import os.path
+sys.path.append(os.path.expanduser('~/install/mypython'))
+import os
 import multiprocessing
 import subprocess
 import re
 import jack_pulse_config
-
 
 # helpers
 def get_sinks():
