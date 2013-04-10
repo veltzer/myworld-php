@@ -1,0 +1,48 @@
+# This makefile is to produce a few statistics about my music collection and to check it
+#
+# TODO:
+# - why do we have to call the latest.pl script with a full path? It is available
+#   via the command line...
+# - move this script to my music project and not have it lying around here.
+
+# variables
+LATEST:=latest.stamp
+CHECK:=check.stamp
+STATS:=stats.stamp
+ALL_FOLDERS:=by_name by_style
+
+# here we go...
+# This line will run the latest.pl script and will update latest.stamp file...
+# The return value is of no consequence but is needed by make...
+UNNEEDED_VALUE:=$(shell ~/install/bin/utils_latest.pl $(LATEST) $(ALL_FOLDERS))
+
+# everything depends on this...
+ALL_DEP:=Makefile
+
+# targets
+
+.PHONY: all
+all: $(CHECK) $(STATS)
+
+$(CHECK): $(LATEST) $(ALL_DEP)
+	$(info doing [$@])
+	@find $(ALL_FOLDERS) -mindepth 2 -type f -and -not -name "*.mp3"
+	@touch $(CHECK)
+
+$(STATS): $(LATEST) $(ALL_DEP)
+	$(info doing [$@])
+	@ls -lR > lslR.stat
+	@find by_name -mindepth 1 -maxdepth 1 -type d > artists.stat
+	@find $(ALL_FOLDERS) -mindepth 2 -maxdepth 2 -type d > albums.stat
+	@find $(ALL_FOLDERS) -type f -and -name "*.mp3" > songs.stat
+	@du -sh > size.stat
+	@touch $(STATS)
+
+.PHONY: debug
+debug:
+	$(info ALL_FOLDERS is $(ALL_FOLDERS))
+
+.PHONY: clean
+clean:
+	rm -f $(CHECK) $(STATS) $(LATEST)
+	rm -f *.stat
