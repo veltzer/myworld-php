@@ -2,7 +2,6 @@
 
 use strict;
 use diagnostics;
-use lib 'scripts';
 use MyImdb qw();
 use MyUtils qw();
 use DBI qw();

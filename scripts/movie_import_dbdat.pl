@@ -2,7 +2,6 @@
 
 use strict;
 use diagnostics;
-use lib 'scripts';
 use DBI;
 use XML::Twig;
 use Date::Parse;

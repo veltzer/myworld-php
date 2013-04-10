@@ -17,7 +17,6 @@ TODO:
 
 use strict;
 use diagnostics;
-use lib 'scripts';
 use IMDB::Film qw();
 use DBI qw();
 use MyImdb qw();

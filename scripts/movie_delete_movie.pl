@@ -9,7 +9,6 @@ Mind you: this is NOT according to imdbid.
 
 use strict;
 use diagnostics;
-use lib 'scripts';
 use DBI;
 use MyImdb qw();
 use MyUtils qw();

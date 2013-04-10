@@ -8,7 +8,6 @@ This script checks the names of the movies that have imdbs.
 
 use strict;
 use diagnostics;
-use lib 'scripts';
 #use MP3::Info qw();
 #use Video::Info qw();
 #use File::Glob ':glob';

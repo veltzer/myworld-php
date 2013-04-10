@@ -9,7 +9,6 @@ database.
 
 use strict;
 use diagnostics;
-use lib 'scripts';
 use DBI;
 use MyImdb qw();
 use MyUtils qw();

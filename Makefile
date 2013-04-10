@@ -152,3 +152,12 @@ install_wp:
 	$(Q)for x in sources/plugins/*.zip; do unzip -q $$x -d $(WP_DIR)/wp-content/plugins; done
 	$(Q)sudo chown -R root.root $(WP_DIR)
 	$(info dont forget to make install and enable all plugins and configure them if needed...)
+
+# TODO: in 'install_scripts' remove all symlinks in ~/install/bin that already point to these scripts
+.PHONY: install_scripts
+install_scripts:
+	$(Q)for x in scripts/*; do ln -fs $$PWD/$$x ~/install/bin/`basename $$x`;done
+
+.PHONY: install_perl
+install_perl:
+	$(Q)for x in perl/*.pm; do ln -fs $$PWD/$$x ~/install/myperl/`basename $$x`;done

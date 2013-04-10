@@ -8,7 +8,6 @@ This script helps you handle todos associated with viewing.
 
 use strict;
 use diagnostics;
-use lib 'scripts';
 use IMDB::Film qw();
 use DBI qw();
 use MyImdb qw();

@@ -9,7 +9,6 @@ You can give those movies names etc.
 
 use strict;
 use diagnostics;
-use lib 'scripts';
 use IMDB::Film qw();
 use DBI qw();
 use MyImdb qw();

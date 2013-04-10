@@ -2,7 +2,6 @@
 
 use strict;
 use diagnostics;
-use lib 'scripts';
 use XML::Simple qw();
 use LWP::Simple qw();
 use Data::Dumper qw();
