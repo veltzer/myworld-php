@@ -20,13 +20,8 @@ import os.path
 import multiprocessing
 import subprocess
 import re
+import jack_pulse_config
 
-# configuration
-do_midi_bridge=True
-do_load_jack_module=True
-do_route_jack=True
-do_route_apps=True
-rcfile=os.path.expanduser('~/.myjack_run')
 
 # helpers
 def get_sinks():
@@ -38,17 +33,19 @@ def get_sinks():
 			yield int(mymatch.group(1))
 
 # code
+jack_pulse_config.getConfig()
+runfile=os.path.expanduser('~/.myjack_run')
 f_null=open('/dev/null','w')
-if do_midi_bridge:
+if jack_pulse_config.do_midi_bridge:
 	p1=subprocess.Popen('a2jmidi_bridge')
 	p2=subprocess.Popen('j2amidi_bridge')
-	with open(rcfile,'w') as f:
+	with open(runfile,'w') as f:
 		f.write(str(p1.pid)+"\n")
 		f.write(str(p2.pid)+"\n")
-if do_load_jack_module:
+if jack_pulse_config.do_load_jack_module:
 	subprocess.check_call(['pactl','load-module','module-jack-sink','channels=2'],stderr=f_null,stdout=f_null)
-if do_route_jack:
+if jack_pulse_config.do_route_jack:
 	subprocess.check_call(['pacmd','set-default-sink','jack_out'],stderr=f_null,stdout=f_null)
-if do_route_apps:
+if jack_pulse_config.do_route_apps:
 	for index in get_sinks():
 		subprocess.check_call(['pacmd','move-sink-input',str(index),'jack_out'],stderr=f_null,stdout=f_null)

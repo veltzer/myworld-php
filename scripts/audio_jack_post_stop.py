@@ -3,17 +3,15 @@
 # imports
 import os
 import os.path
+import jack_pulse_config
 
 # configuration
-do_midi_bridge=True
-do_load_jack_module=True
-do_route_jack=True
-do_route_apps=True
-rcfile=os.path.expanduser('~/.myjack_run')
+jack_pulse_config.getConfig()
+runfile=os.path.expanduser('~/.myjack_run')
 
 # code
-if do_midi_bridge:
-	with open(rcfile,'r') as f:
+if jack_pulse_config.do_midi_bridge:
+	with open(runfile,'r') as f:
 		p1=int(f.readline().rstrip())
 		p2=int(f.readline().rstrip())
 	os.kill(p1,9)

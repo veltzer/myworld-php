@@ -161,3 +161,6 @@ install_scripts:
 .PHONY: install_perl
 install_perl:
 	$(Q)for x in perl/*.pm; do ln -fs $$PWD/$$x ~/install/myperl/`basename $$x`;done
+.PHONY: install_python
+install_python:
+	$(Q)for x in python/*.py; do ln -fs $$PWD/$$x ~/install/mypython/`basename $$x`;done
