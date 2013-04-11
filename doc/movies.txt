@@ -1,0 +1,6 @@
+quick queries:
+==============
+- to find out if you've seen a movie according to imdbid:
+	SELECT * FROM TbWkWorkExternal WHERE externalCode LIKE "....";
+- to find out if you've seen a movie according to name:
+	SELECT * FROM TbWkWork WHERE name LIKE "....";
