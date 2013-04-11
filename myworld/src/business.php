@@ -49,7 +49,7 @@ function create_consulting($params) {
 		$slug=$row['slug'];
 		$remark=$row['remark'];
 		$imageId=$row['imageId'];
-		$link_img=link_to_direct('GetBlob.php?table=TbImage&select_field=id&select_id='.$imageId.'&data_field=smallData&name_field=slug&mime_field=mime');
+		$link_img=link_to_direct('GetBlob.php?table=TbImage&select_field=id&select_id='.$imageId.'&data_field=smallData&name_field=slug&mime_field=smallMime');
 		$url=$row['url'];
 		if($url!=NULL) {
 			$name='<a href=\''.$url.'\'>'.$name.'</a>';
@@ -88,7 +88,7 @@ function create_teaching($params) {
 		$slug=$row['slug'];
 		$remark=$row['remark'];
 		$imageId=$row['imageId'];
-		$link_img=link_to_direct('GetBlob.php?table=TbImage&select_field=id&select_id='.$imageId.'&data_field=smallData&name_field=slug&mime_field=mime');
+		$link_img=link_to_direct('GetBlob.php?table=TbImage&select_field=id&select_id='.$imageId.'&data_field=smallData&name_field=slug&mime_field=smallMime');
 		$url=$row['url'];
 		if($url!=NULL) {
 			$name='<a href=\''.$url.'\'>'.$name.'</a>';
@@ -128,7 +128,7 @@ function create_certification($params) {
 		$url=$row['url'];
 		$fromDate=$row['fromDate'];
 		$imageId=$row['imageId'];
-		$link_img=link_to_direct('GetBlob.php?table=TbImage&select_field=id&select_id='.$imageId.'&data_field=smallData&name_field=slug&mime_field=mime');
+		$link_img=link_to_direct('GetBlob.php?table=TbImage&select_field=id&select_id='.$imageId.'&data_field=smallData&name_field=slug&mime_field=smallMime');
 		$res.='</tr>';
 		$res.='<td><a href=\''.$url.'\'>'.$name.'</a></td>';
 		$res.='<td>'.$fromDate.'</td>';

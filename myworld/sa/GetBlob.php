@@ -20,7 +20,7 @@ assert($p_table=='TbImage');
 assert($p_select_field=='id');
 assert($p_data_field=='smallData');
 assert($p_name_field=='slug');
-assert($p_mime=='mime');
+assert($p_mime=='smallMime');
 
 my_mysql_connect();
 $query=sprintf('SELECT %s,%s,%s FROM %s where %s=%s',
