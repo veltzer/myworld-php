@@ -1,0 +1,52 @@
+build system:
+=============
+- when doing "make" it should also import stuff into the database.
+	(call the import script).
+
+more data
+=========
+- load mime data into the database.
+- put all the data that I have in the info folder into the database
+	and get ridd of that folder.
+- load the key file from twitter into the database as a blob
+	and use it that way.
+	(create a table of blobs for that with a string as well as int as keys).
+
+PHP stuff
+=========
+- create a php script that shows statistics about the database:
+	lists all tables and shows how many records they have.
+- print length and size in human readable form (are there modules
+	like that in PHP ? find, install and use them).
+	add stats about total size and total length.
+- make the works.php page use groups for real.
+	how do I test that ? Plug in some video data too.
+- each page generated should have statistics about how long
+	it took to generate it.
+
+General development
+===================
+- document how to produce field utilization and cut fields in size.
+- add a flag to make warnings into errors and document it (in the database).
+
+backups:
+========
+- do a php that shows when backups of the db were taken. (TbBackup).
+- allow user of the php to take a backup from the UI.
+
+Future database features (stuff that is currently not even in the database)
+===========================================================================
+- add tags to the works. Make tags be arranged in a graph.
+	if one searches for tag A then he will also find everything that
+	is tagged under B if A->B and everything tagged C if B->C.
+- have a field next to the length of each work saying what was the source for that
+	length.
+- correct the date not to be a string (which date?!?).
+- add images to works and fill them out (and display them ofcourse).
+- names should be per language. This goes for peoples names, work names and other
+	names I have in the database.
+
+Concrete Database changes (database changes in current tables)
+==============================================================
+- multiple viewers per review.
+- have person names in different languages.

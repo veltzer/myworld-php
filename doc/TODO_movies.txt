@@ -1,0 +1,28 @@
+stats problem:
+	the length of all movies seen is not really correct: it does not count movies seen more than once. Add that statistic and make the current one explain itself better.
+	the pagination in my table on the website seems wrong (look at page 30 or so). fix it.
+
+old file problem:
+	there is one minor file in the still not done folder.
+	do it and then get ridd of the whole folder. 
+
+blog:
+	add stat to the blog with movies which imdb could not be found for and those for which it could.
+	add date+imdbid (this is what I want to show) stat to the blog.
+	add description of devices on which I'm seeing movies to the blog.
+	put an update in the text of my movies section about the MaxHD.
+	show movies with no reviews too.
+
+data cleanup:
+	look at highest rated movies and see if they deserve it. Clean it up.
+	do a script that finds doubly linked views (views which are too close together
+	of the same movie). Clean up the data if it finds any.
+
+add script to check director names for films with imdb and director name.
+	(have it put new directory names in).
+	check all director names and fix them up.
+
+length problem in series.
+	Look at "Yes, Minister" as an example. My system deduces
+	it's lenght at 60 mins (which is absurd). The output from Imdb
+	is quite complex and needs to be processed somehow...
