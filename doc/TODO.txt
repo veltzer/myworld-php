@@ -1,3 +1,15 @@
+- make image handling more streamlined:
+	add dialog for new organization to myworld.
+		this one will have:
+			slug
+			name
+			url
+			imageUrl (for where I got the image)
+		it will get the image via HTTP and load it into orig.
+		it will create the big and the small images from it
+		it will insert into two tables: TbOrganization and TbImage
+		and will connect the two.
+
 now:
 ====
 get newer versions of all the plugins.
