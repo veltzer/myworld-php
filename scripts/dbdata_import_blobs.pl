@@ -18,25 +18,29 @@ use Error qw(:try);
 use File::Find qw();
 use File::Basename qw();
 use Perl6::Slurp qw();
+use MIME::Types qw();
+use File::MimeInfo qw();
+use File::Slurp qw();
 
 # parameters
 
 # table to update
-my($param_table)='TbOrganization';
-# field to update
-my($param_field_update)='smallImage';
+my($param_table)='TbImage';
 # field by which to do the update...
 my($param_field_name)='slug';
 # should we debug the script ?
-my($debug)=0;
+my($debug)=1;
 # print stats at the end ?
 my($stats)=1;
+# do work ?
+my($do_work)=1;
 # should we die if there are organizations with no images ?
 my($noimage_die)=1;
 
 # here starts the script...
 my($imported)=0;
 my($dbh);
+
 
 sub handle_error() {
 	my($rc)=$dbh->err;
@@ -50,33 +54,62 @@ $dbh=DBI->connect('dbi:mysql:myworld','','',{
 	AutoCommit => 0,
 	mysql_enable_utf8 => 1,
 });
+#my $mimetypes = MIME::Types->new;
 #$dbh->{HandleError} =\&handle_error;
 
-my(@list)=<images/organizations/target/sma/*.png>;
-for(my($i)=0;$i<@list;$i++) {
-	my($curr)=$list[$i];
-	my($name,$path,$suffix)=File::Basename::fileparse($curr,'.png');
+my(@list_small)=<images/organizations/target/sma/*.png>;
+my(@list_large)=<images/organizations/target/big/*.png>;
+my(@list_orig)=<images/organizations/src/*>;
+for(my($i)=0;$i<@list_small;$i++) {
+	my($curr_small)=$list_small[$i];
+	my($curr_large)=$list_large[$i];
+	my($curr_orig)=$list_orig[$i];
+	my($name,$path,$suffix)=File::Basename::fileparse($curr_small,'.png');
 	if($debug) {
-		print 'curr is ['.$curr.']'."\n";
+		print 'curr_small is ['.$curr_small.']'."\n";
+		print 'curr_large is ['.$curr_large.']'."\n";
+		print 'curr_orig is ['.$curr_orig.']'."\n";
 		print 'name is ['.$name.']'."\n";
 	}
 	# read the file into RAM
-	my($dt_blob);
-	$dt_blob=Perl6::Slurp::slurp($curr);
-
-	my($str)='update '.$param_table.' set '.$param_field_update.'=? where '.$param_field_name.'=?';
+	my($blob_small,$blob_large,$blob_orig);
+	$blob_small=File::Slurp::read_file($curr_small);
+	$blob_large=File::Slurp::read_file($curr_large);
+	$blob_orig=File::Slurp::read_file($curr_orig);
+	# get the mime types
+	my($mime_small)=File::MimeInfo::mimetype($curr_small);
+	my($mime_large)=File::MimeInfo::mimetype($curr_large);
+	my($mime_orig)=File::MimeInfo::mimetype($curr_orig);
 	if($debug) {
-		print 'str is ['.$str.']'."\n";
+		print 'mime_small is ['.$mime_small.']'."\n";
+		print 'mime_large is ['.$mime_large.']'."\n";
+		print 'mime_orig is ['.$mime_orig.']'."\n";
+		print 'length(small) is ['.length($blob_small).']'."\n";
+		print 'length(large) is ['.length($blob_large).']'."\n";
+		print 'length(orig) is ['.length($blob_orig).']'."\n";
 	}
-	my($rows);
-	$rows=$dbh->do($str,undef,$dt_blob,$name);
-	if($rows!=1) {
-		die('wrong number of rows ['.$rows.']');
+
+	my($str_small)='UPDATE '.$param_table.' SET smallData=?,smallMime=? WHERE '.$param_field_name.'=?';
+	my($str_large)='UPDATE '.$param_table.' SET largeData=?,largeMime=? WHERE '.$param_field_name.'=?';
+	my($str_orig)='UPDATE '.$param_table.' SET origData=?,origMime=? WHERE '.$param_field_name.'=?';
+	if($debug) {
+		print 'str_small is ['.$str_small.']'."\n";
+		print 'str_large is ['.$str_large.']'."\n";
+		print 'str_orig is ['.$str_orig.']'."\n";
+	}
+	if($do_work) {
+		my($rows_small,$rows_large,$rows_orig);
+		$rows_small=$dbh->do($str_small,undef,$blob_small,$mime_small,$name);
+		$rows_large=$dbh->do($str_large,undef,$blob_large,$mime_large,$name);
+		$rows_orig=$dbh->do($str_orig,undef,$blob_orig,$mime_orig,$name);
+		if($rows_small!=1 || $rows_large!=1 || $rows_orig!=1) {
+			die('wrong number of rows...');
+		}
 	}
 	$imported++;
 }
-if($noimage_die) {
-	my($sql)='select count(*) from '.$param_table.' where '.$param_field_update.' is null';
+if($noimage_die && $do_work) {
+	my($sql)='SELECT COUNT(*) FROM '.$param_table.' WHERE origData IS NULL';
 	my($sth)=$dbh->prepare($sql);
 	$sth->execute();
 	my(@arr)=$sth->fetchrow_array();
@@ -87,8 +120,10 @@ if($noimage_die) {
 	$sth->finish();
 }
 
-# now commit all the changes...
-$dbh->commit();
+if($do_work) {
+	# now commit all the changes...
+	$dbh->commit();
+}
 # disconnect from the database
 $dbh->disconnect();
 
