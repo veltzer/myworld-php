@@ -33,7 +33,7 @@ function create_courses($params) {
 function create_consulting($params) {
 	$res='';
 	// sending query
-	$query=sprintf('SELECT id,name,slug,remark,url FROM TbOrganization where funcConsulting order by name asc');
+	$query=sprintf('SELECT id,name,slug,imageId,remark,url FROM TbOrganization where funcConsulting order by name asc');
 	$result=my_mysql_query($query);
 
 	$res.=get_start_table();
@@ -48,7 +48,8 @@ function create_consulting($params) {
 		$name=$row['name'];
 		$slug=$row['slug'];
 		$remark=$row['remark'];
-		$link_img=link_to_direct('GetBlob.php?table=TbOrganization&sfield=id&id='.$id.'&field=smallImage&type=image/png&name_field=slug');
+		$imageId=$row['imageId'];
+		$link_img=link_to_direct('GetBlob.php?table=TbImage&select_field=id&select_id='.$imageId.'&data_field=smallData&name_field=slug&mime_field=mime');
 		$url=$row['url'];
 		if($url!=NULL) {
 			$name='<a href=\''.$url.'\'>'.$name.'</a>';
@@ -70,7 +71,7 @@ function create_consulting($params) {
 function create_teaching($params) {
 	$res='';
 	// sending query
-	$query=sprintf('SELECT id,name,slug,remark,url FROM TbOrganization where funcTeaching order by name asc');
+	$query=sprintf('SELECT id,name,slug,imageId,remark,url FROM TbOrganization where funcTeaching order by name asc');
 	$result=mysql_query($query);
 	assert($result);
 
@@ -86,7 +87,8 @@ function create_teaching($params) {
 		$name=$row['name'];
 		$slug=$row['slug'];
 		$remark=$row['remark'];
-		$link_img=link_to_direct('GetBlob.php?table=TbOrganization&sfield=id&id='.$id.'&field=smallImage&type=image/png&name_field=slug');
+		$imageId=$row['imageId'];
+		$link_img=link_to_direct('GetBlob.php?table=TbImage&select_field=id&select_id='.$imageId.'&data_field=smallData&name_field=slug&mime_field=mime');
 		$url=$row['url'];
 		if($url!=NULL) {
 			$name='<a href=\''.$url.'\'>'.$name.'</a>';
@@ -108,7 +110,7 @@ function create_teaching($params) {
 function create_certification($params) {
 	$res='';
 	// sending query
-	$query=sprintf('SELECT id,name,slug,url,fromDate FROM TbOrganization where funcCertification order by name asc');
+	$query=sprintf('SELECT id,name,slug,url,imageId,fromDate FROM TbOrganization where funcCertification order by name asc');
 	$result=mysql_query($query);
 	assert($result);
 
@@ -125,7 +127,8 @@ function create_certification($params) {
 		$slug=$row['slug'];
 		$url=$row['url'];
 		$fromDate=$row['fromDate'];
-		$link_img=link_to_direct('GetBlob.php?table=TbOrganization&sfield=id&id='.$id.'&field=smallImage&type=image/png&name_field=slug');
+		$imageId=$row['imageId'];
+		$link_img=link_to_direct('GetBlob.php?table=TbImage&select_field=id&select_id='.$imageId.'&data_field=smallData&name_field=slug&mime_field=mime');
 		$res.='</tr>';
 		$res.='<td><a href=\''.$url.'\'>'.$name.'</a></td>';
 		$res.='<td>'.$fromDate.'</td>';
