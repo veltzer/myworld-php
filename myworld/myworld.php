@@ -86,11 +86,11 @@ if(!class_exists('MyWorld')) {
 			// dojo
 			echo "<script src='http://ajax.googleapis.com/ajax/libs/dojo/1.7/dojo/dojo.js'></script>";
 			// full calendar stuff
-			echo "<link rel='stylesheet' href='/public/fullcalendar/fullcalendar.css'/>\n";
-			echo "<script src='/public/fullcalendar/fullcalendar.min.js'></script>\n";
-			echo "<script src='/public/fullcalendar/gcal.js'></script>\n";
+			//echo "<link rel='stylesheet' href='/public/fullcalendar/fullcalendar.css'/>\n";
+			//echo "<script src='/public/fullcalendar/fullcalendar.min.js'></script>\n";
+			//echo "<script src='/public/fullcalendar/gcal.js'></script>\n";
 			// highcharts stuff
-			echo "<script src='/public/highcharts/highcharts.js'></script>\n";
+			//echo "<script src='/public/highcharts/highcharts.js'></script>\n";
 			// Ext4(sencha) stuff
 			//echo "<link rel='stylesheet' href='http://cdn.sencha.io/ext-4.0.7-gpl/resources/css/ext-all.css'/>\n";
 			//echo "<script src='http://cdn.sencha.io/ext-4.0.7-gpl/ext-all.js'></script>\n";

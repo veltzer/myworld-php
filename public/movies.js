@@ -94,7 +94,7 @@ function create_movies(element_id) {
 		//groupField: 'deviceId',
 		proxy: {
 			type: 'ajax',
-			url: '/public/movies.php',
+			url: '/public/GetMovies.php',
 			reader: {
 				type: 'json',
 				root: 'views',
