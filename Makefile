@@ -5,7 +5,7 @@ WEB_ROOT:=/var/www
 # user to be used to access the application
 WEB_USER:=mark
 # password (generated using makepasswd)
-WEB_PASSWORD:=MrGQ0GwhH
+WEB_PASSWORD:=$(shell cat ~/.myworldrc | grep WEB_PASSWORD= | cut -d = -f 2)
 # blog directory within the target directory...
 WP_DIR:=$(WEB_ROOT)/blog
 # private directory...
@@ -140,6 +140,7 @@ debug:
 	$(info CLEAN is $(CLEAN))
 	$(info WEB_ROOT is $(WEB_ROOT))
 	$(info WP_DIR is $(WP_DIR))
+	$(info WEB_PASSWORD is $(WEB_PASSWORD))
 
 .PHONY: install_wp
 install_wp:
