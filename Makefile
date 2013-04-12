@@ -5,7 +5,7 @@ WEB_ROOT:=/var/www
 # user to be used to access the application
 WEB_USER:=mark
 # password (generated using makepasswd)
-WEB_PASSWORD:=$(shell cat ~/.myworldrc | grep WEB_PASSWORD= | cut -d = -f 2)
+WEB_PASSWORD:=$(shell cat .myworldrc | grep WEB_PASSWORD= | cut -d = -f 2)
 # blog directory within the target directory...
 WP_DIR:=$(WEB_ROOT)/blog
 # private directory...
