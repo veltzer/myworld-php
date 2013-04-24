@@ -3,6 +3,9 @@
 	<head>
 		<meta http-equiv='Content-Type' content='text/html; charset=utf-8' />
 		<title>MyWorld</title>
+		<?php
+			echo '<link rel="shortcut icon" href="favicon.ico?t='.time().'" />';
+		?>
 		<!-- old libraries
 		<link rel='stylesheet' href='http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/themes/ui-lightness/jquery-ui.css'/>
 		<script src='http://ajax.googleapis.com/ajax/libs/jquery/1.7/jquery.min.js'></script>
