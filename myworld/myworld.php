@@ -100,7 +100,10 @@ if(!class_exists('MyWorld')) {
 			// and now for the style sheet...
 			echo "<link rel='stylesheet' href='".plugins_url('css/myworld.css?ver=',__FILE__).$this->version."'/>\n";
 			// favicon
-			echo "<link rel='SHORTCUT ICON' type='image/x-icon' href='".plugins_url('resources/favicon.ico',__FILE__)."'/>\n";
+			//static version
+			//echo "<link rel='SHORTCUT ICON' type='image/x-icon' href='".plugins_url('resources/favicon.ico',__FILE__)."'/>\n";
+			//dynamic version
+			echo "<link rel='SHORTCUT ICON' type='image/x-icon' href='".plugins_url('resources/favicon.ico',__FILE__)."?t='".time()."'/>\n";
 		}
 
 		function MyWorld() {
