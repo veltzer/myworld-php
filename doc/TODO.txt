@@ -1,3 +1,5 @@
+now:
+====
 - make image handling more streamlined:
 	add dialog for new organization to myworld.
 		this one will have:
