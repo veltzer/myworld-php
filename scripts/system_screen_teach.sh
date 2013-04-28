@@ -10,4 +10,5 @@
 # are two screens, and if so will clone their resolutions.
 # blog about this.
 
-xrandr --output eDP1 --mode 1024x768
+xrandr --output eDP1 --mode 1024x768 --pos 0x0
+xrandr --output VGA1 --mode 1024x768 --pos 0x0
