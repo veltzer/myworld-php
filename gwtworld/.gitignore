@@ -1,4 +1,3 @@
-war/WEB-INF/lib/*.jar
 war/WEB-INF/classes
 gwt-unitCache/*
 .gwt/.gwt-log
