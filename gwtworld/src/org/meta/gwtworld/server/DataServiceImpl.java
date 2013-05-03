@@ -39,6 +39,17 @@ public class DataServiceImpl extends RemoteServiceServlet implements
 		EntityManager em=factory.createEntityManager();
 		CriteriaBuilder qb=em.getCriteriaBuilder();
 		CriteriaQuery<TbIdPerson> c=qb.createQuery(TbIdPerson.class);
+		//Root<TbIdPerson> p=c.from(TbIdPerson.class);
+		//Predicate condition=qb.equal(p.get("firstname"), "Mark");
+		//c.where(condition);
+		TypedQuery<TbIdPerson> tq=em.createQuery(c);
+		return tq.getResultList();
+	}
+	public List<TbIdPerson> getAllMarks() throws IllegalArgumentException {
+		EntityManagerFactory factory=Persistence.createEntityManagerFactory("gwtworld");
+		EntityManager em=factory.createEntityManager();
+		CriteriaBuilder qb=em.getCriteriaBuilder();
+		CriteriaQuery<TbIdPerson> c=qb.createQuery(TbIdPerson.class);
 		Root<TbIdPerson> p=c.from(TbIdPerson.class);
 		Predicate condition=qb.equal(p.get("firstname"), "Mark");
 		c.where(condition);
