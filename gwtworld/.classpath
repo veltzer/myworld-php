@@ -3,22 +3,8 @@
 	<classpathentry kind="src" path="src"/>
 	<classpathentry kind="src" output="test-classes" path="test"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
-	<classpathentry kind="lib" path="war/WEB-INF/lib/gxt-3.0.1.jar"/>
-	<classpathentry kind="lib" path="war/WEB-INF/lib/mysql-connector-java-5.1.16.jar"/>
-	<classpathentry kind="lib" path="war/WEB-INF/lib/org.eclipse.persistence.jpars_2.4.1.v20121003-ad44345.jar"/>
-	<classpathentry kind="lib" path="war/WEB-INF/lib/com.sun.tools.xjc_2.2.0.jar"/>
-	<classpathentry kind="lib" path="war/WEB-INF/lib/com.sun.xml.bind_2.2.0.v201004141950.jar"/>
-	<classpathentry kind="lib" path="war/WEB-INF/lib/eclipselink.jar"/>
-	<classpathentry kind="lib" path="war/WEB-INF/lib/eclipselink-jpa-modelgen_2.4.1.v20121003-ad44345.jar"/>
-	<classpathentry kind="lib" path="war/WEB-INF/lib/javax.activation_1.1.0.v201108011116.jar"/>
-	<classpathentry kind="lib" path="war/WEB-INF/lib/javax.mail_1.4.0.v201005080615.jar"/>
-	<classpathentry kind="lib" path="war/WEB-INF/lib/javax.persistence_2.0.4.v201112161009.jar"/>
-	<classpathentry kind="lib" path="war/WEB-INF/lib/javax.xml.bind_2.2.0.v201105210648.jar"/>
-	<classpathentry kind="lib" path="war/WEB-INF/lib/javax.xml.stream_1.0.1.v201004272200.jar"/>
-	<classpathentry kind="lib" path="war/WEB-INF/lib/validation-api-1.0.0.GA.jar"/>
-	<classpathentry kind="lib" path="war/WEB-INF/lib/gwt-dev.jar"/>
-	<classpathentry kind="lib" path="war/WEB-INF/lib/gwt-user.jar"/>
-	<classpathentry kind="lib" path="war/WEB-INF/lib/validation-api-1.0.0.GA-sources.jar"/>
-	<classpathentry kind="lib" path="lib/gwt-servlet.jar"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/WEB"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/OUTER"/>
+	<classpathentry kind="con" path="com.google.gwt.eclipse.core.GWT_CONTAINER"/>
 	<classpathentry kind="output" path="war/WEB-INF/classes"/>
 </classpath>
