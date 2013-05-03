@@ -5,11 +5,11 @@ import com.sencha.gxt.data.shared.LabelProvider;
 import com.sencha.gxt.data.shared.ModelKeyProvider;
 import com.sencha.gxt.data.shared.PropertyAccess;
 
-public interface PersonProperties extends PropertyAccess<Person> {
+public interface TbIdPersonProperties extends PropertyAccess<TbIdPerson> {
 	@Path("id")
-	ModelKeyProvider<Person> key();
+	ModelKeyProvider<TbIdPerson> key();
 	
-	@Path("fullName")
-	LabelProvider<Person> fullNameLabel();
+	@Path("fullname")
+	LabelProvider<TbIdPerson> fullNameLabel();
 	
 }

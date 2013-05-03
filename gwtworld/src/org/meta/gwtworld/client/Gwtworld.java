@@ -2,8 +2,8 @@ package org.meta.gwtworld.client;
 
 import java.util.List;
 
-import org.meta.gwtworld.client.model.Person;
-import org.meta.gwtworld.client.model.PersonProperties;
+import org.meta.gwtworld.client.model.TbIdPersonProperties;
+import org.meta.gwtworld.client.model.TbIdPerson;
 
 import com.google.gwt.core.client.EntryPoint;
 import com.google.gwt.core.client.GWT;
@@ -70,11 +70,11 @@ public class Gwtworld implements EntryPoint {
 		VerticalLayoutContainer p=new VerticalLayoutContainer();
 		panel.add(p);
 		
-		PersonProperties props = GWT.create(PersonProperties.class);
-	    final ListStore<Person> store = new ListStore<Person>(props.key());
-	    ds.getPersons(new AsyncCallback<List<Person>>() {
+		TbIdPersonProperties props = GWT.create(TbIdPersonProperties.class);
+	    final ListStore<TbIdPerson> store = new ListStore<TbIdPerson>(props.key());
+	    ds.getAllPersons(new AsyncCallback<List<TbIdPerson>>() {
 			@Override
-			public void onSuccess(List<Person> result) {
+			public void onSuccess(List<TbIdPerson> result) {
 				store.addAll(result);
 			}
 			@Override
@@ -83,11 +83,11 @@ public class Gwtworld implements EntryPoint {
 			}
 		});
 	    
-		ComboBox<Person> personCombo=new ComboBox<Person>(store,props.fullNameLabel());
-		personCombo.addValueChangeHandler(new ValueChangeHandler<Person>() {
+		ComboBox<TbIdPerson> personCombo=new ComboBox<TbIdPerson>(store,props.fullNameLabel());
+		personCombo.addValueChangeHandler(new ValueChangeHandler<TbIdPerson>() {
 			
 			@Override
-			public void onValueChange(ValueChangeEvent<Person> event) {
+			public void onValueChange(ValueChangeEvent<TbIdPerson> event) {
 				Info.display("Selected","You selected "+event.getValue());
 			}
 		});
