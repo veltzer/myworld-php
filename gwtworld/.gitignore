@@ -4,3 +4,4 @@ gwt-unitCache
 war/WEB-INF/deploy
 war/gwtworld
 *.war
+.ant-targets-build.xml

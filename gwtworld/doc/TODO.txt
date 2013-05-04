@@ -1,0 +1,2 @@
+- get ridd of the ant build warnings and errors.
+- remote deploy to tomcat.

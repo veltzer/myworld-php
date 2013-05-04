@@ -1,0 +1,65 @@
+<?xml version="1.0"?>
+<app>
+	<!-- note that all properties set here can be overridden on the command line or in local.properties -->
+	<name>gwtworld</name>
+	<ant_version>1.9</ant_version>
+	<tomcat_version>7.0.39</tomcat_version>
+	<mysql_version>5.5.31</mysql_version>
+	<test>
+		<output>
+			<dir location="${basedir}/test-results"/>
+		</output>
+	</test>
+	<compile>
+		<java_version>1.5</java_version>
+		<javadoc>
+			<dir location="${basedir}/javadoc"/>
+		</javadoc>
+		<dist>
+			<dir location="${basedir}/dist"/>
+			<war-deploy-web>wellnet-web</war-deploy-web>
+			<war-web-name>${app.compile.dist.war-deploy-web}.war</war-web-name>
+			<war-web>${app.compile.dist.dir}/${app.compile.dist.war-web-name}</war-web>
+			<path-web>/${app.compile.dist.war-deploy-web}</path-web>
+
+			<war-deploy-contententry>wellnet-contententry</war-deploy-contententry>
+			<war-contententry-name>${app.compile.dist.war-deploy-contententry}.war</war-contententry-name>
+
+			<war-contententry>${app.compile.dist.dir}/${app.compile.dist.war-contententry-name}</war-contententry>
+			<path-contententry>/${app.compile.dist.war-deploy-contententry}</path-contententry>
+		</dist>
+		<build>
+			<dir location="classes"/>
+		</build>
+		<temp>
+			<dir location="temp"/>
+		</temp>
+	</compile>
+	<db>
+		<version>5.0.38-Debian_3-log</version>
+		<driver>com.mysql.jdbc.Driver</driver>
+		<driver_jar>elib/mysql-connector-java-5.0.5-bin.jar</driver_jar>
+		<name>app</name>
+		<url>jdbc:mysql://localhost:3306/${app.db.name}</url>
+		<curl>jdbc:mysql://localhost:3306/mysql</curl>
+		<durl>${app.db.url}</durl>
+		<dcurl>${app.db.curl}</dcurl>
+		<user>wellnet</user>
+		<pass>b3w3lln3t</pass>
+		<admin_user>root</admin_user>
+		<admin_pass></admin_pass>
+	</db>
+	<runtime>
+		<url>http://localhost:8080/manager/text</url>
+		<path>/gwtworld</path>
+		<username>mark</username>
+		<password>mz71p5iq</password>
+		<tomcat_home>/home/mark/install/apache-tomcat-7.0.39</tomcat_home>
+		<webapps_home>${app.runtime.tomcat_home}/webapps</webapps_home>
+		<bootstrap>${app.runtime.tomcat_home}/bin/bootstrap.jar</bootstrap>
+		<showJspStackTraces>true</showJspStackTraces>
+		<!--loglevel>DEBUG</loglevel-->
+		<loglevel>info</loglevel>
+		<logfile>${app.runtime.tomcat_home}/logs/${app.name}.log</logfile>
+	</runtime>
+</app>

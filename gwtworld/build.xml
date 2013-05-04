@@ -1,5 +1,9 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <project name="myworld" default="war" basedir=".">
+	<!-- Properties -->
+	<property file="build_local.properties"/>
+	<xmlproperty file="build_common_properties.xml" semanticAttributes="true"/>
+
 	<!-- Parameters -->
 	<property name="gwt.args" value="" />
 	<property name="gwt.appname" value="gwtworld" />
@@ -12,6 +16,25 @@
 		<pathelement location="war/WEB-INF/classes"/>
 		<fileset dir="war/WEB-INF/lib" includes="**/*.jar"/>
 	</path>
+	<path id="ant-jars">
+		<fileset dir="lib">
+			<include name="catalina-ant.jar"/>
+			<include name="tomcat-coyote.jar"/>
+			<include name="tomcat-util.jar"/>
+		</fileset>
+	</path>
+
+	<!-- New tasks -->
+	<taskdef name="tc-deploy" classname="org.apache.catalina.ant.DeployTask" classpathref="ant-jars"/>
+	<taskdef name="tc-list" classname="org.apache.catalina.ant.ListTask" classpathref="ant-jars"/>
+	<taskdef name="tc-reload" classname="org.apache.catalina.ant.ReloadTask" classpathref="ant-jars"/>
+	<taskdef name="tc-findleaks" classname="org.apache.catalina.ant.FindLeaksTask" classpathref="ant-jars"/>
+	<taskdef name="tc-resources" classname="org.apache.catalina.ant.ResourcesTask" classpathref="ant-jars"/>
+	<taskdef name="tc-start" classname="org.apache.catalina.ant.StartTask" classpathref="ant-jars"/>
+	<taskdef name="tc-stop" classname="org.apache.catalina.ant.StopTask" classpathref="ant-jars"/>
+	<taskdef name="tc-undeploy" classname="org.apache.catalina.ant.UndeployTask" classpathref="ant-jars"/>
+	<taskdef name="tc-validate" classname="org.apache.catalina.ant.ValidatorTask" classpathref="ant-jars"/>
+	<taskdef name="tc-serverinfo" classname="org.apache.catalina.ant.ServerinfoTask" classpathref="ant-jars"/>
 
 	<!-- Targets -->
 	<target name="javac" description="Compile java source to bytecode">
@@ -68,5 +91,82 @@
 		<delete dir="war/WEB-INF/classes" failonerror="false" />
 		<delete dir="war/{gwt.appname}" failonerror="false" />
 		<delete file="${gwt.warfile}" failonerror="false" />
+	</target>
+
+	<!-- remote tasks -->
+	<target name="remote-deploy" depends="war" description="Install web application">
+		<tc-deploy
+			url="${app.runtime.url}"
+			username="${app.runtime.username}"
+			password="${app.runtime.password}"
+			path="${app.runtime.path}"
+			war="${gwt.warfile}"
+		/>
+	</target>
+	<target name="remote-list" depends="" description="List applications on the Tomcat">
+		<tc-list
+			url="${app.runtime.url}"
+			username="${app.runtime.username}"
+			password="${app.runtime.password}"
+		/>
+	</target>
+	<target name="remote-reload" depends="" description="Reload web application">
+		<tc-reload
+			url="${app.runtime.url}"
+			username="${app.runtime.username}"
+			password="${app.runtime.password}"
+			path="${app.runtime.path}"
+		/>
+	</target>
+	<target name="remote-findleaks" depends="" description="Find leaks on the Tomcat">
+		<tc-findleaks
+			url="${app.runtime.url}"
+			username="${app.runtime.username}"
+			password="${app.runtime.password}"
+			path="${app.runtime.path}"
+		/>
+	</target>
+	<target name="remote-resources" depends="" description="List resources on the Tomcat">
+		<tc-resources
+			url="${app.runtime.url}"
+			username="${app.runtime.username}"
+			password="${app.runtime.password}"
+		/>
+	</target>
+	<target name="remote-start" depends="" description="Start the application server">
+		<tc-start
+			url="${app.runtime.url}"
+			username="${app.runtime.username}"
+			password="${app.runtime.password}"
+			path="${app.runtime.path}"
+		/>
+	</target>
+	<target name="remote-stop" depends="" description="Stop the application server">
+		<tc-stop
+			url="${app.runtime.url}"
+			username="${app.runtime.username}"
+			password="${app.runtime.password}"
+			path="${app.runtime.path}"
+		/>
+	</target>
+	<target name="remote-undeploy" depends="" description="Remove web application">
+		<tc-undeploy
+			url="${app.runtime.url}"
+			username="${app.runtime.username}"
+			password="${app.runtime.password}"
+			path="${app.runtime.path}"
+		/>
+	</target>
+	<target name="remote-validate" depends="" description="Validate the application (what is that?)">
+		<tc-validate
+			path="${app.runtime.path}"
+		/>
+	</target>
+	<target name="remote-serverinfo" depends="" description="Show tomcat version">
+		<tc-serverinfo
+			url="${app.runtime.url}"
+			username="${app.runtime.username}"
+			password="${app.runtime.password}"
+		/>
 	</target>
 </project>
