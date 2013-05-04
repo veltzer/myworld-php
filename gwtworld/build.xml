@@ -8,6 +8,7 @@
 	<property name="gwt.appname" value="gwtworld" />
 	<property name="gwt.appxml" value="org.meta.gwtworld.Gwtworld" />
 	<property name="gwt.html" value="Gwtworld.html" />
+	<property name="gwt.warfile" value="${gwt.appname}.war" />
 
 	<path id="project.class.path">
 		<pathelement location="war/WEB-INF/classes"/>
@@ -145,10 +146,11 @@ Test targets suppressed because -junit argument was not specified when running w
 	<target name="hosted" depends="devmode" description="Run development mode (NOTE: the 'hosted' target is deprecated)" />
 	<target name="build" depends="gwtc" description="Build this project" />
 	<target name="war" depends="build" description="Create a war file">
-		<zip destfile="${gwt.appname}" basedir="war"/>
+		<zip destfile="${gwt.warfile}" basedir="war"/>
 	</target>
 	<target name="clean" description="Cleans this project">
 		<delete dir="war/WEB-INF/classes" failonerror="false" />
-		<delete dir="war/foo" failonerror="false" />
+		<delete dir="war/{gwt.appname}" failonerror="false" />
+		<delete file="${gwt.warfile}" failonerror="false" />
 	</target>
 </project>

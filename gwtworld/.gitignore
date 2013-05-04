@@ -3,3 +3,4 @@ gwt-unitCache/*
 .gwt/.gwt-log
 war/WEB-INF/deploy/*
 war/gwtworld
+*.war
