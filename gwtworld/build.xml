@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE project>
 <project name="myworld" default="war" basedir=".">
 	<!-- Properties -->
 	<property file="build_local.properties"/>
@@ -88,14 +89,14 @@
 		<zip destfile="${gwt.warfile}" basedir="war"/>
 	</target>
 	<target name="clean" description="Cleans this project">
-		<delete dir="war/WEB-INF/classes" failonerror="false" />
-		<delete dir="war/WEB-INF/deploy" failonerror="false" />
-		<delete dir="war/${gwt.appname}" failonerror="false" />
-		<delete dir="gwt-unitCache" failonerror="false" />
-		<delete dir="test-classes" failonerror="false" />
-		<delete file="${gwt.warfile}" failonerror="false" />
-		<delete file=".ant-targets-build.xml" failonerror="false" />
-		<delete dir=".gwt" failonerror="false" />
+		<delete dir="war/WEB-INF/classes" failonerror="false" verbose="true"/>
+		<delete dir="war/WEB-INF/deploy" failonerror="false" verbose="true"/>
+		<delete dir="war/${gwt.appname}" failonerror="false" verbose="true"/>
+		<delete dir="gwt-unitCache" failonerror="false" verbose="true"/>
+		<delete dir="test-classes" failonerror="false" verbose="true"/>
+		<delete file="${gwt.warfile}" failonerror="false" verbose="true"/>
+		<delete file=".ant-targets-build.xml" failonerror="false" verbose="true"/>
+		<delete dir=".gwt" failonerror="false" verbose="true"/>
 	</target>
 
 	<!-- remote tasks -->

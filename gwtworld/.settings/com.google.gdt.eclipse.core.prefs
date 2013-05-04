@@ -1,4 +1,5 @@
 eclipse.preferences.version=1
+jarsExcludedFromWebInfLib=
 lastWarOutDir=/home/mark/links/myworld/gwtworld/war
 warSrcDir=war
 warSrcDirIsOutput=false

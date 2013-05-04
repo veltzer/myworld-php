@@ -1,4 +1,5 @@
 <?xml version="1.0"?>
+<!DOCTYPE app>
 <app>
 	<!-- note that all properties set here can be overridden on the command line or in local.properties -->
 	<name>gwtworld</name>
