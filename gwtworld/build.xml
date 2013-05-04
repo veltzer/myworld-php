@@ -89,8 +89,13 @@
 	</target>
 	<target name="clean" description="Cleans this project">
 		<delete dir="war/WEB-INF/classes" failonerror="false" />
-		<delete dir="war/{gwt.appname}" failonerror="false" />
+		<delete dir="war/WEB-INF/deploy" failonerror="false" />
+		<delete dir="war/${gwt.appname}" failonerror="false" />
+		<delete dir="gwt-unitCache" failonerror="false" />
+		<delete dir="test-classes" failonerror="false" />
 		<delete file="${gwt.warfile}" failonerror="false" />
+		<delete file=".ant-targets-build.xml" failonerror="false" />
+		<delete dir=".gwt" failonerror="false" />
 	</target>
 
 	<!-- remote tasks -->
