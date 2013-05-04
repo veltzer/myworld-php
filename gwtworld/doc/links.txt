@@ -1,2 +1,10 @@
 Sencha demos for gxt:
 	http://www.sencha.com/examples/
+maven gwt plugin:
+	http://mojo.codehaus.org/gwt-maven-plugin/
+ant with gwt:
+	http://stackoverflow.com/questions/9234808/create-gwt-compile-rule-for-ant-build-xml
+gwt command line tools:
+	https://developers.google.com/web-toolkit/doc/1.6/RefCommandLineTools#webAppCreator
+maven in 5 minutes:
+	http://maven.apache.org/guides/getting-started/maven-in-five-minutes.html
