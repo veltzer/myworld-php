@@ -8,3 +8,5 @@ gwt command line tools:
 	https://developers.google.com/web-toolkit/doc/1.6/RefCommandLineTools#webAppCreator
 maven in 5 minutes:
 	http://maven.apache.org/guides/getting-started/maven-in-five-minutes.html
+ant/tomcat connection howto:
+	http://tomcat.apache.org/tomcat-7.0-doc/manager-howto.html#Executing%20Manager%20Commands%20With%20Ant

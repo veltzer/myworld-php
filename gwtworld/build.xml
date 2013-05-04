@@ -94,7 +94,7 @@
 	</target>
 
 	<!-- remote tasks -->
-	<target name="remote-deploy" depends="war" description="Install web application">
+	<target name="remote-deploy" depends="" description="Install web application">
 		<tc-deploy
 			url="${app.runtime.url}"
 			username="${app.runtime.username}"
