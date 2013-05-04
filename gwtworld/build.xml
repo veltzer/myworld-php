@@ -175,4 +175,6 @@
 			password="${app.runtime.password}"
 		/>
 	</target>
+	<target name="remote-redeploy" depends="remote-undeploy, remote-deploy" description="Redeploy the app">
+	</target>
 </project>
