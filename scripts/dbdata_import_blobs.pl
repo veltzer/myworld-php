@@ -1,6 +1,6 @@
 #!/usr/bin/perl -w
 
-# this script imports blobs/files into my database.
+# this script a blob into my database.
 #
 # Currently it handles:
 # - small company images
