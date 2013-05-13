@@ -7,6 +7,8 @@ import subprocess
 
 packs=[
 	'yui-compressor', # for compressing javascript
+	'python-pythonmagick', # for inserting blobs into the database
+	'imagemagick', # for convert(1) for image manipulation
 ]
 
 args=['sudo','apt-get','install']
