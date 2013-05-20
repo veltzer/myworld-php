@@ -10,9 +10,6 @@ Policy
 ======
 - all includes are root oriented (from php downwards...) - is this still relevant ?!?
 
-The database
-============
-
 The event system:
 =================
 What is an event?
@@ -24,36 +21,52 @@ What is an event?
 	A creator.
 	A calendar to which it is attached.
 
-Should we have person groups ?
-==============================
-For:
-	- if I see lots of movies with David then I will only create the group once
-	and keep refering to it.
-
-Against:
-	- each time I create a person I also have to create a group of 1 in order to refer
-	to him ?!?
-
-Descision:
-	For.
-
-
 The jQuery widget design descisions:
 ====================================
 - controls will be called cont_[name] to make them easy to find.
 
 Myworld database design:
 ========================
-Question: should all tables be named Tb something ?
-	yes.
+should all tables be named Tb something ?
+for:
+	to easily identify them in the code.
+against:
+	make queries cumbersome.
+descision:
+	for
 
+should fields be named f_something ?
 pro:
 	to easily identify them in the code.
-aginst:
+against:
 	make queries cumbersome.
+descision:
+	against
 
-Question: should fields be named f_something ?
-pro:
-	to easily identify them in the code.
-aginst:
-	make queries cumbersome.
+should we have person groups and only refere to person groups from views ?
+for:
+	if I see lots of movies with David then I will only create the group once
+	and keep refering to it.
+against:
+	each time I create a person I also have to create a group of 1 in order to refer
+	to him ?!?
+descision:
+	for.
+
+slugs are used in myworld quite a bit to keep external links to blobs and other system resources stable.
+currently it is used for blobs.
+
+some database conventions:
+all tables have "id INTEGER NOT NULL AUTO_INCREMENT PRIMARY KEY"
+all tables are TbCamelCase with words which are legal.
+fileds are FdCamelCase with words which are legal. 
+if a field refers to a table Foo it should have the name FdPurposeFooId
+
+table names:
+db - database schema definition in a database.
+id - identity data (contant and person information).
+lc - location data.
+rs - resources: tags, images, texts, colors.
+tv - title/view information.
+wg - word groups.
+wk - works.

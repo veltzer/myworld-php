@@ -14,10 +14,22 @@ Here is how to upgrade wordpress...
 
 Icons for people in wordpress
 =============================
-summary:
 wordpress uses something called gravatars to show images of people.
 The gravatars site serves an image per email.
 I am signed up to the gravatars site (actually I signed up to wordpress.com and through
 it I'm signed up to the gravatars site).
 I confirmed my email (mark.veltzer@gmail.com) and uploaded my image there.
 Now everywhere I respond with "mark.veltzer@gmail.com" I'm supposed to see my image (including in my own blog).
+
+Shashin (picasa albums in wordpress)
+====================================
+Adding a new album:
+- go to tools->shashin->picasa/google+
+	Add my album again:
+	https://picasaweb.google.com/mark.veltzer
+- now you can use the album.
+
+I use shashing with columns="2" because more looks bad on non wide screens (regular desktops,
+	laptops and tablets).
+
+I really should get ridd of shashin, it's not as good as I want it but it's the best I found so far.

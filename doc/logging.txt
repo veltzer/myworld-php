@@ -1,2 +1,0 @@
-If you want to enable logging from my php:
-	Nothing fucking works! php is the worst language ever!
