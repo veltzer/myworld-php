@@ -33,6 +33,8 @@ args=[
 	# to encode it with the same encoder since if you don't you
 	# will get video and audio out of sync...
 	'-oac','lavc',
+	# without this sync will be lost
+	'-of','mpeg',
 	# plug in the subtitles...
 	'-sub',srt,
 	# you can control subtitles but I rather let mencoder do it's
