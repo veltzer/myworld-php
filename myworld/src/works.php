@@ -404,6 +404,11 @@ function create_movie_stats($params) {
 	);
 	$res.=make_stat($query,null,'number of movies views (non distinct)');
 
+	$query=sprintf('SELECT COUNT(DISTINCT TbWkWork.id) FROM TbWkWorkViewPerson,TbWkWorkView,TbWkWork,TbWkWorkType WHERE TbWkWorkViewPerson.viewerId=%s AND TbWkWorkViewPerson.viewId=TbWkWorkView.id AND TbWkWorkView.workId=TbWkWork.id AND TbWkWork.typeId=TbWkWorkType.id AND TbWkWorkType.name=\'video movie\'',
+		my_mysql_real_escape_string($p_viewerId)
+	);
+	$res.=make_stat($query,null,'number of movies views (distinct)');
+
 	$query=sprintf('SELECT COUNT(*) FROM TbWkWorkViewPerson,TbWkWorkView,TbWkWork,TbWkWorkType WHERE TbWkWorkViewPerson.viewerId=%s AND TbWkWorkViewPerson.viewId=TbWkWorkView.id AND TbWkWorkView.workId=TbWkWork.id AND TbWkWork.typeId=TbWkWorkType.id AND TbWkWorkType.name=\'video movie\' AND TbWkWorkView.endViewDate IS NOT NULL',
 		my_mysql_real_escape_string($p_viewerId)
 	);
@@ -419,6 +424,11 @@ function create_movie_stats($params) {
 	);
 	$res.=make_stat($query,null,'number of movies views with imdbid (non distinct)');
 
+	$query=sprintf('SELECT COUNT(DISTINCT TbWkWork.id) FROM TbWkWorkViewPerson,TbWkWorkView,TbWkWork,TbWkWorkType,TbExternalType,TbWkWorkExternal WHERE TbWkWorkViewPerson.viewerId=%s AND TbWkWorkViewPerson.viewId=TbWkWorkView.id AND TbWkWorkView.workId=TbWkWork.id AND TbWkWork.typeId=TbWkWorkType.id AND TbWkWorkType.name=\'video movie\' AND TbExternalType.name=\'imdb_title\' AND TbWkWorkExternal.workId=TbWkWork.id AND TbWkWorkExternal.externalId=TbExternalType.id',
+		my_mysql_real_escape_string($p_viewerId)
+	);
+	$res.=make_stat($query,null,'number of movies views with imdbid (distinct)');
+
 	$query=sprintf('SELECT COUNT(*) FROM TbWkWorkViewPerson,TbWkWorkView,TbWkWork,TbWkWorkType,TbWkWorkReview WHERE TbWkWorkViewPerson.viewerId=%s AND TbWkWorkViewPerson.viewId=TbWkWorkView.id AND TbWkWorkView.workId=TbWkWork.id AND TbWkWork.typeId=TbWkWorkType.id AND TbWkWorkType.name=\'video movie\' AND TbWkWorkReview.workId=TbWkWork.id AND TbWkWorkView.endViewDate IS NOT NULL',
 		my_mysql_real_escape_string($p_viewerId)
 	);
@@ -433,16 +443,6 @@ function create_movie_stats($params) {
 		my_mysql_real_escape_string($p_viewerId)
 	);
 	$res.=make_stat($query,null,'number of movies views with date,review,imdbid (non distinct)');
-
-	$query=sprintf('SELECT COUNT(DISTINCT TbWkWork.id) FROM TbWkWorkViewPerson,TbWkWorkView,TbWkWork,TbWkWorkType WHERE TbWkWorkViewPerson.viewerId=%s AND TbWkWorkViewPerson.viewId=TbWkWorkView.id AND TbWkWorkView.workId=TbWkWork.id AND TbWkWork.typeId=TbWkWorkType.id AND TbWkWorkType.name=\'video movie\'',
-		my_mysql_real_escape_string($p_viewerId)
-	);
-	$res.=make_stat($query,null,'number of distinct movies seen');
-
-	$query=sprintf('SELECT COUNT(DISTINCT TbWkWork.id) FROM TbWkWorkViewPerson,TbWkWorkView,TbWkWork,TbWkWorkType,TbExternalType,TbWkWorkExternal WHERE TbWkWorkViewPerson.viewerId=%s AND TbWkWorkViewPerson.viewId=TbWkWorkView.id AND TbWkWorkView.workId=TbWkWork.id AND TbWkWork.typeId=TbWkWorkType.id AND TbWkWorkType.name=\'video movie\' AND TbExternalType.name=\'imdb_title\' AND TbWkWorkExternal.workId=TbWkWork.id AND TbWkWorkExternal.externalId=TbExternalType.id',
-		my_mysql_real_escape_string($p_viewerId)
-	);
-	$res.=make_stat($query,null,'number of distinct movies seen with imdbid');
 
 	$query=sprintf('SELECT COUNT(*)/COUNT(DISTINCT TbWkWork.id) FROM TbWkWorkViewPerson,TbWkWorkView,TbWkWork,TbWkWorkType WHERE TbWkWorkViewPerson.viewerId=%s AND TbWkWorkViewPerson.viewId=TbWkWorkView.id AND TbWkWorkView.workId=TbWkWork.id AND TbWkWork.typeId=TbWkWorkType.id AND TbWkWorkType.name=\'video movie\'',
 		my_mysql_real_escape_string($p_viewerId)
