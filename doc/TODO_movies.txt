@@ -1,5 +1,6 @@
 stats problem:
-	the length of all movies seen is not really correct: it does not count movies seen more than once. Add that statistic and make the current one explain itself better.
+	the length of all movies seen is not really correct: it does not count movies seen more than once.
+	Add that statistic and make the current one explain itself better.
 	the pagination in my table on the website seems wrong (look at page 30 or so). fix it.
 
 old file problem:
