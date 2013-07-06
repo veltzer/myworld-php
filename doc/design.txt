@@ -70,3 +70,23 @@ rs - resources: tags, images, texts, colors.
 tv - title/view information.
 wg - word groups.
 wk - works.
+
+
+The design of the works subsystem
+=================================
+problems:
+	I cannot have the same work in two different formats.
+	Example: Charles Darwin/On the Origin of Species
+	I have read this one in text and audio format and so I had to insert
+	it twice into the database and as a result had to drop the following:
+	UNIQUE KEY `avoid_dups` (`externalId`,`externalCode`),
+	contraint on the TbWkWorkExternal table.
+	How should we solve this?
+		It looks like we will have to split the Work table into Work and WorkManifestation
+		Work will have the name of the work
+		while WorkManifestation will carry the type.
+		TbWkWorkExternal will keep pointing to Work although we may need external ids
+		for work manifestations as well.
+		This will enable us to bring back the constraint on TbWkWorkExternal.
+		Q: Should work manifestations have unique on (work,type)? No - there could be two
+			audio book recordings of the same book or two prints of the same book.
