@@ -44,6 +44,10 @@ my($dbh)=DBI->connect('dbi:mysql:myworld','','',{
 	PrintError => 1,
 	AutoCommit => 0,
 });
+# this one didn't work for me in order to enable utf-8
+#$dbh->{'mysql_enable_utf8'} = 1;
+# this one did
+$dbh->do(qq{SET NAMES 'utf8';});
 
 # print debug messages ?
 my($debug)=0;
