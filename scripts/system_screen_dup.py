@@ -54,6 +54,7 @@ def find_highest_mode(outputs):
 				break
 		else:
 			return r
+	raise ValueError("no resolution found...")
 def find_all_outputs():
 	outputs=[]
 	# regular expresson to find disconnected|connected devices
