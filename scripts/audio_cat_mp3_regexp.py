@@ -14,21 +14,14 @@ def unite(l, out):
 	subprocess.check_call(args)
 
 lect=0
-for x in range(1,13):
+for x in range(1,25):
 	newx="%02d" % (x,)
 	print(newx)
-	l1=sorted(glob.glob("TTC - Utopia & Terror in the 20th Century CD %s* - 0[0-6] *" % (str(newx),)))
-	l2=sorted(glob.glob("TTC - Utopia & Terror in the 20th Century CD %s* - 0[7-9] *" % (str(newx),)))
-	l3=sorted(glob.glob("TTC - Utopia & Terror in the 20th Century CD %s* - 1[0-2] *" % (str(newx),)))
-	l2.extend(l3)
-	l2=sorted(l2)
-	print(l1)
-	print(l2)
-	assert len(l1)==6
-	assert len(l2)==6
+	l=sorted(glob.glob("%s-*" % (str(newx),)))
+	print(l)
+	assert len(l)==6
 	lect+=1
-	res="lecture%02d.mp3" % (lect)
-	unite(l1, res)
-	lect+=1
-	res="lecture%02d.mp3" % (lect)
-	unite(l2, res)
+	name=l[0][7:]
+	res="%02d - %s" % (lect,name)
+	print("new name is", res)
+	unite(l, res)
