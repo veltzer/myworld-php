@@ -57,8 +57,9 @@ my($sql_no_length)='SELECT TbWkWork.id,TbWkWork.name FROM TbWkWork,TbWkWorkType 
 # this is for all works (even those that were updated)...
 my($sql_all)='SELECT TbWkWork.id,TbWkWork.name FROM TbWkWork,TbWkWorkType WHERE TbWkWork.typeId=TbWkWorkType.id AND TbWkWorkType.name in (\'audio book\',\'audio course\',\'audio lecture\',\'audio show\',\'video course\',\'video movie\')';
 
-#$sql=$sql_all;
+# this is the default
 $sql=$sql_not_updated;
+#$sql=$sql_all;
 #$sql=$sql_no_length;
 
 if($debug) {

@@ -10,8 +10,8 @@ use YAML::Dumper qw();
 use MyImdb qw();
 use IMDB::Film qw();
 
-my $dumper = YAML::Dumper->new;
-$dumper->indent_width(4);
+#my $dumper = YAML::Dumper->new;
+#$dumper->indent_width(4);
 
 if(!@ARGV) {
 	die 'please provide imdbid'."\n";
@@ -24,6 +24,7 @@ if(defined($data)) {
 } else {
 	print 'imdbid ['.$imdbid.'] not found'."\n";
 }
+print 'fetching from IMDB...'."\n";
 my($imdbObj)=new IMDB::Film(crit => $imdbid);
 if($imdbObj->status) {
 	my($title)=$imdbObj->title();
