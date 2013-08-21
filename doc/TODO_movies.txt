@@ -1,3 +1,8 @@
+lenght problem:
+	movies likes 'Silver Linings Playbook' which I have seen seem to have a legnth on imdb
+	but my scripts can't seem to get that lenght. Looks like a bug in one of the perl modules
+	that I am using. Find that problem and fix it.
+
 stats problem:
 	the length of all movies seen is not really correct: it does not count movies seen more than once.
 	Add that statistic and make the current one explain itself better.
