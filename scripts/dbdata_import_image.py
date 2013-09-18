@@ -1,20 +1,19 @@
 #!/usr/bin/python
 
 """
-This application imports images into the database
-
-Example of usage:
-	./dbdata_import_image.py ~/downloads/earlysense.jpg EarlySense earlysense
+This application imports one image into the database
 """
 
 from __future__ import print_function
 import subprocess
-import sys
+import sys # for exit()
 import os
 import MySQLdb
 
 if len(sys.argv)!=4:
-	raise ValueError('usage: [image] [name] [slug]')
+	print('usage: dbdata_import_image.py [image] [name] [slug]')
+	print('example: dbdata_import_image.py earlysense.jpg EarlySense earlysense')
+	sys.exit(1)
 
 filename=sys.argv[1]
 name=sys.argv[2]
