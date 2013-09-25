@@ -74,6 +74,7 @@ function utils_init() {
 /* finalize the utils system */
 function utils_finish() {
 	my_mysql_disconnect();
+	logger_close();
 }
 
 /* wrapper around mysql connect
@@ -128,6 +129,7 @@ function my_mysql_free_result($result) {
 /* A wrapper for mysql_query */
 function my_mysql_query($query) {
 	logger_log($query);
+	logger_log("\n============================\n");
 	$result=mysql_query($query);
 	if(!$result) {
 		error('mysql error: '.mysql_errno().': '.mysql_error());
@@ -247,41 +249,35 @@ function debug_post() {
 	debug_print(serialize($_POST));
 }
 
+/*
+ * Logger functions
+ */
 function logger_setup($flag) {
 	global $debug;
+	global $handle;
 	$debug=$flag;
-}
-
-function logger_start() {
-	global $debug;
-	assert(false);
 	if($debug) {
-		global $handle;
 		$handle=fopen('/tmp/phplog.txt','a+');
-		assert($handle!=null);
+		assert($handle);
 	}
 }
 
 function logger_log($msg) {
 	global $debug;
+	global $handle;
 	if($debug) {
-		global $handle;
-		if($handle!=null) {
-			// TODO: need to handle errors
-			fwrite($handle,$msg);
-			fflush($handle);
-		}
+		// TODO: need to handle errors
+		fwrite($handle,$msg);
+		fflush($handle);
 	}
 }
 
 function logger_close() {
 	global $debug;
+	global $handle;
 	if($debug) {
-		global $handle;
-		if($handle!=null) {
-			// TODO: need to handle errors
-			fclose($handle);
-		}
+		// TODO: need to handle errors
+		fclose($handle);
 	}
 }
 

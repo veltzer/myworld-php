@@ -7,7 +7,7 @@
  * - add new field type to models (int or null). use it for length.
  * - handle resize of the browser nicely.
  * - make the component always take the same size vertically.
- * - show sums of various types (length, avg on rating and more).
+ * - show sums of various types (length, avg of rating and more).
  */
 
 // we use the ext-all so we require only stuff that does not exist there...
@@ -15,9 +15,11 @@ Ext.Loader.setConfig({
 	enabled: true
 });
 Ext.Loader.setPath('Ext.ux','/public/ux');
+/*
 Ext.require([
 	'Ext.ux.RowExpander',
 ]);
+*/
 // now for the real code
 function create_movies(element_id) {
 	var useCookie=false;
@@ -80,9 +82,6 @@ function create_movies(element_id) {
 			{name: 'locationName', type: 'string'},
 			{name: 'deviceName', type: 'string'},
 			{name: 'languageName', type: 'string'},
-			{name: 'ratingName', type: 'string'},
-			{name: 'review', type: 'string'},
-			{name: 'reviewDate', type: 'date', dateFormat: 'timestamp'},
 			{name: 'externalCode', type: 'auto'},
 		],
 		idProperty: 'id',
@@ -196,13 +195,6 @@ function create_movies(element_id) {
 				sortable: true,
 			},
 			{
-				text: 'Rating',
-				dataIndex: 'ratingName',
-				flex: 30,
-				hidden: false,
-				sortable: true,
-			},
-			{
 				text: 'imdb id',
 				dataIndex: 'externalCode',
 				flex: 30,
@@ -238,6 +230,7 @@ function create_movies(element_id) {
 			},
 		],
 		*/
+		/*
 		plugins: [{
 			ptype: 'rowexpander',
 			rowBodyTpl: [
@@ -245,6 +238,7 @@ function create_movies(element_id) {
 				'<p><b>Review Date:</b> {reviewDate}</p>',
 			]
 		}],
+		*/
 		//features: [groupingFeature],
 		renderTo: element_id,
 	});
