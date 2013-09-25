@@ -109,6 +109,15 @@ function create_movies(element_id) {
 				direction: 'DESC',
 			}
 		],
+		// This listener is here to alert the parent window of our size
+		// once the data is loaded. This is only needed if we are in an iframe
+		listeners: {
+			load: {
+				fn:function() {
+					window.parent.alertsize(document.body.scrollHeight)
+				}
+			}
+		},
 	});
 	/*
 	var groupingFeature=Ext.create('Ext.grid.feature.Grouping',{
