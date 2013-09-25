@@ -1,3 +1,7 @@
+Review and rating problem:
+	currently I do not see reviews or ratings for the films I show (if they exist).
+	Have the table show that too in some way.
+
 length problem for regular movies:
 	movies likes 'Silver Linings Playbook' which I have seen seem to have a legnth on imdb
 	but my scripts can't seem to get that lenght. Looks like a bug in one of the perl modules
