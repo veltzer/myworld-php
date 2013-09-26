@@ -20,7 +20,10 @@ function create_movies($params) {
 			// not need to hardcode a size for the iframe in the above 'iframe'
 			// declaration...
 			function alertsize(pixels){
-				document.getElementById('myframe').style.height=pixels+"px";
+				// this small padding is to avoid browsers creating scroll bars around
+				// this iframe.
+				pixels+=32
+				document.getElementById('myframe').style.height=pixels+"px"
 			}
 		</script>
 EOD;
