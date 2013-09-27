@@ -8,7 +8,7 @@
 		<!--script src="http://cdn.sencha.io/ext-4.0.7-gpl/ext-all.js"></script-->
 		<script src="http://cdn.sencha.com/ext-4.1.1-gpl/ext-all.js"></script>
 		<!--script src="http://cdn.sencha.com/ext-4.2.0-gpl/ext-all.js"></script-->
-		<script src="movies.js"></script>
+		<script src="../public/movies.js"></script>
 	</head>
 	<body>
 		<div id="movie-grid"></div>
