@@ -111,6 +111,7 @@ function create_movies(element_id) {
 		],
 		// This listener is here to alert the parent window of our size
 		// once the data is loaded. This is only needed if we are in an iframe
+		/*
 		listeners: {
 			load: {
 				fn:function() {
@@ -118,6 +119,7 @@ function create_movies(element_id) {
 				}
 			}
 		},
+		*/
 	});
 	/*
 	var groupingFeature=Ext.create('Ext.grid.feature.Grouping',{

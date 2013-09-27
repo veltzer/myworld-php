@@ -1,17 +1,21 @@
 <?php
 function create_movies($params) {
-#	// running id for the divs
-#	static $p_id=1;
-#	$code=<<<EOD
-#		<div id="movies_$p_id">
-#		</div>
-#		<script>
-#			Ext.onReady(function() {
-#				create_movies('movies_$p_id');
-#			});
-#		</script>
-#	$p_id++;
-#EOD;
+	// running id for the divs
+	static $p_id=1;
+	$code=<<<EOD
+		<div id="movies_$p_id">
+		</div>
+		<script>
+			Ext.onReady(function() {
+				create_movies('movies_$p_id');
+			});
+		</script>
+EOD;
+	$p_id++;
+	return $code;
+}
+
+function create_movies_iframe($params) {
 	$code=<<<EOD
 		<iframe id="myframe" frameborder="0" src="/public/movies.html" width="100%"></iframe>
 		<script type="text/javascript" language="javascript"> 
