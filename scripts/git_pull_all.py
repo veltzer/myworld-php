@@ -39,7 +39,7 @@ for gitfolder in glob.glob('*/.git'):
 	if not folder in done:
 		project=folder
 		if not os.path.isfile(os.path.join(folder,'.skip')):
-			print('doing nongihub project [{project}]'.format(project=project))
+			print('doing non-github project [{project}]'.format(project=project))
 			os.chdir(folder)
 			subprocess.check_call([
 				'git',
@@ -48,4 +48,4 @@ for gitfolder in glob.glob('*/.git'):
 			])
 			os.chdir('..')
 		else:
-			print('skipping nongihub project [{project}]'.format(project=project))
+			print('skipping non-github project [{project}]'.format(project=project))
