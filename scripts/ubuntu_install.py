@@ -14,3 +14,9 @@ packs=[
 args=['sudo','apt-get','install']
 args.extend(packs)
 subprocess.check_call(args)
+
+subprocess.check_call([
+	'pip',
+	'install',
+	'PyGithub',
+])
