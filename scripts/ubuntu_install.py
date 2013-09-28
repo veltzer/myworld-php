@@ -21,5 +21,6 @@ subprocess.check_call(args)
 subprocess.check_call([
 	'pip',
 	'install',
+	'--user',
 	'PyGithub',
 ])
