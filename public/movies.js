@@ -71,18 +71,18 @@ function create_movies(element_id) {
 	Ext.define('MovieModel', {
 		extend: 'Ext.data.Model',
 		fields: [
-			{name: 'id', type: 'number'},
+			{name: 'viewId', type: 'number'},
 			{name: 'name', type: 'string'},
 			{name: 'length', type: 'auto'},
-			{name: 'size', type: 'auto'},
-			{name: 'chapters', type: 'auto'},
+			//{name: 'size', type: 'auto'},
+			//{name: 'chapters', type: 'auto'},
 			{name: 'typeName', type: 'string'},
-			{name: 'startViewDate', type: 'date', dateFormat: 'timestamp'},
+			//{name: 'startViewDate', type: 'date', dateFormat: 'timestamp'},
 			{name: 'endViewDate', type: 'date', dateFormat: 'timestamp'},
 			{name: 'locationName', type: 'string'},
 			{name: 'deviceName', type: 'string'},
 			{name: 'languageName', type: 'string'},
-			{name: 'externalCode', type: 'auto'},
+			{name: 'imdbId', type: 'auto'},
 		],
 		idProperty: 'id',
 	});
@@ -140,8 +140,8 @@ function create_movies(element_id) {
 		//stateId: 'stateGridExample',
 		columns:[
 			{
-				text: 'Id',
-				dataIndex: 'id',
+				text: 'ViewId',
+				dataIndex: 'viewId',
 				flex: 1,
 				hidden: true,
 				sortable: true,
@@ -161,6 +161,7 @@ function create_movies(element_id) {
 				sortable: true,
 				renderer: render_movie_length,
 			},
+			/*
 			{
 				text: 'Size',
 				dataIndex: 'size',
@@ -177,37 +178,38 @@ function create_movies(element_id) {
 				sortable: true,
 				renderer: render_chapters,
 			},
+			*/
 			{
-				text: 'Type name',
+				text: 'TypeName',
 				dataIndex: 'typeName',
 				flex: 30,
 				hidden: true,
 				sortable: true,
 			},
 			{
-				text: 'View Date',
+				text: 'EndViewDate',
 				dataIndex: 'endViewDate',
 				flex: 30,
 				hidden: false,
 				sortable: true,
 			},
 			{
-				text: 'Location',
+				text: 'LocationName',
 				dataIndex: 'locationName',
 				flex: 30,
 				hidden: false,
 				sortable: true,
 			},
 			{
-				text: 'Device',
+				text: 'DeviceName',
 				dataIndex: 'deviceName',
 				flex: 30,
 				hidden: false,
 				sortable: true,
 			},
 			{
-				text: 'imdb id',
-				dataIndex: 'externalCode',
+				text: 'ImdbId',
+				dataIndex: 'imdbId',
 				flex: 30,
 				hidden: false,
 				sortable: true,
