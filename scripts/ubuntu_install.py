@@ -1,9 +1,12 @@
 #!/usr/bin/python
 
-# this scrip will install all the required packages that you need on
-# ubuntu to compile and work with this package.
+'''
+this scrip will install all the required packages that you need on
+ubuntu to compile and work with this package.
+'''
 
-import subprocess
+from __future__ import print_function
+import subprocess # for check_call
 
 packs=[
 	'yui-compressor', # for compressing javascript
