@@ -1,3 +1,7 @@
+page on blog issues:
+	show more info in the movies table: reviews for the movies and ratings
+	move the movie charts to extjs charts.
+
 Review and rating problem:
 	currently I do not see reviews or ratings for the films I show (if they exist).
 	Have the table show that too in some way.
@@ -20,7 +24,6 @@ blog view of movies:
 	add date+imdbid (this is what I want to show) stat to the blog.
 	add description of devices on which I'm seeing movies to the blog.
 	put an update in the text of my movies section about the MaxHD.
-	show movies with no reviews too.
 
 data cleanup:
 	look at highest rated movies and see if they deserve it. Clean it up.

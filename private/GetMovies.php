@@ -42,7 +42,6 @@ WHERE
 	TbWkWorkViewPerson.viewId=TbWkWorkView.id AND
 	TbWkWorkView.locationId=TbLocation.id AND
 	TbWkWorkView.deviceId=TbDevice.id AND
-	TbWkWorkView.endViewDate IS NOT NULL AND
 	TbWkWorkView.workId=TbWkWork.id AND
 	TbWkWork.typeId=TbWkWorkType.id AND
 	TbWkWork.id=TbWkWorkExternal.workId AND
@@ -50,6 +49,11 @@ WHERE
 	TbWkWorkExternal.externalId=TbExternalType.id AND
 	TbExternalType.name='imdb_title'
 EOT;
+/*
+ * If you want to only should movies that have dates add the following
+ * predicate to the SQL above:
+ * TbWkWorkView.endViewDate IS NOT NULL AND
+ */
 $query_data=sprintf('%s %s %s %s',$sql_select,$sql_frame,$sql_order,$sql_limit);
 $query_count=sprintf('%s %s','SELECT COUNT(*)',$sql_frame);
 # get the data...
