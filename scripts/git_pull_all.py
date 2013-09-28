@@ -8,6 +8,7 @@ import os # for chdir
 import github # for Github
 
 g=github.Github('veltzer','7PEpAqxvse')
+done=set()
 for repo in g.get_user().get_repos():
 	folder=repo.name
 	project=folder
@@ -31,21 +32,20 @@ for repo in g.get_user().get_repos():
 			'clone',
 			repo.clone_url,
 		])
+	done.add(folder)
 
-
-'''
 for gitfolder in glob.glob('*/.git'):
 	folder=os.path.split(gitfolder)[0]
-	project=folder
-	if not os.path.isfile(os.path.join(folder,'.skip')):
-		print('doing [{project}]'.format(project=project))
-		os.chdir(folder)
-		subprocess.check_call([
-			'git',
-			'pull',
-#			'--tags',
-		])
-		os.chdir('..')
-	else:
-		print('skipping [{project}]'.format(project=project))
-'''
+	if not folder in done:
+		project=folder
+		if not os.path.isfile(os.path.join(folder,'.skip')):
+			print('doing nongihub project [{project}]'.format(project=project))
+			os.chdir(folder)
+			subprocess.check_call([
+				'git',
+				'pull',
+				#'--tags',
+			])
+			os.chdir('..')
+		else:
+			print('skipping nongihub project [{project}]'.format(project=project))
