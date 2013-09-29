@@ -135,7 +135,7 @@ function create_movies(element_id) {
 			store: w_store,
 			frame: false,
 			border: false,
-			collapsible: true,
+			//collapsible: true,
 			iconCls: 'icon-grid',
 			// name of cookie to store the grid state in... remove to get code generated state...
 			//stateId: 'stateGridExample',
