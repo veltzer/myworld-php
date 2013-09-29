@@ -11,10 +11,10 @@
  */
 
 // we use the ext-all so we require only stuff that does not exist there...
+/*
 Ext.Loader.setConfig({
 	enabled: true
 });
-/*
 Ext.Loader.setPath('Ext.ux','/public/ux');
 Ext.require([
 	'Ext.ux.RowExpander',
