@@ -4,6 +4,7 @@ jQuery(document).ready(function() {
 		jQuery(this).next("div").slideToggle();
 		jQuery(this).toggleClass("active");
 	});
+	/*
 	// this is the calendar support fuction
 	jQuery('#calendar').fullCalendar({
 		editable: false,
@@ -24,4 +25,5 @@ jQuery(document).ready(function() {
 			}
 		},
 	});
+	*/
 });

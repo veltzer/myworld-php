@@ -29,6 +29,45 @@ function create_chart($params) {
 			<div id="chart_$p_id" $style></div>
 		</div>
 		<script>
+			create_chart("chart_$p_id", $p_max, $p_ticks, "$p_type");
+		</script>
+EOD;
+	$p_id++;
+	$res='';
+	$res.=$sample;
+	return $res;
+}
+
+function create_chart_dojo($params) {
+	if(!array_key_exists('type',$params)) {
+		return '<strong>Error, must pass type</strong>';
+	}
+	if(!array_key_exists('max',$params)) {
+		return '<strong>Error, must pass max</strong>';
+	}
+	if(!array_key_exists('doWidth',$params)) {
+		return '<strong>Error, must pass doWidth</strong>';
+	}
+	$p_doWidth=$params['doWidth'];
+	$p_type=$params['type'];
+	$p_max=$params['max'];
+	$p_ticks=$p_max/10;
+	if($p_doWidth) {
+		if(!array_key_exists('width',$params)) {
+			return '<strong>Error, must pass width</strong>';
+		}
+		$p_width=$params['width'];
+		$style='style="width: '.$p_width.'"';
+	} else {
+		$style='';
+	}
+	// running id for the divs
+	static $p_id=1;
+	$sample=<<<EOD
+		<div id="scroll_$p_id">
+			<div id="chart_$p_id" $style></div>
+		</div>
+		<script>
 			dojo.require('dojox.charting.Chart2D');
 			dojo.require('dojox.charting.widget.Chart2D');
 			dojo.require("dojo.data.ItemFileReadStore");

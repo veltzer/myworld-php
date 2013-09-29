@@ -78,23 +78,28 @@ if(!class_exists('MyWorld')) {
 		 * That is why the next section uses direct inclusion instead.
 		 */
 		function wp_head() {
-			// jquery
+			/*
+			 * Third party javascript libs
+			 */
+			// jquery - need that for the accordion stuff
 			echo "<script src='http://ajax.googleapis.com/ajax/libs/jquery/1.7/jquery.min.js'></script>\n";
 			// jquery ui
-			echo "<link rel='stylesheet' href='http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/themes/ui-lightness/jquery-ui.css'/>\n";
-			echo "<script src='http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/jquery-ui.min.js'></script>\n";
+			//echo "<link rel='stylesheet' href='http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/themes/ui-lightness/jquery-ui.css'/>\n";
+			//echo "<script src='http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/jquery-ui.min.js'></script>\n";
 			// dojo
-			echo "<script src='http://ajax.googleapis.com/ajax/libs/dojo/1.7/dojo/dojo.js'></script>";
+			//echo "<script src='http://ajax.googleapis.com/ajax/libs/dojo/1.7/dojo/dojo.js'></script>";
 			// full calendar stuff
 			//echo "<link rel='stylesheet' href='/public/fullcalendar/fullcalendar.css'/>\n";
 			//echo "<script src='/public/fullcalendar/fullcalendar.min.js'></script>\n";
 			//echo "<script src='/public/fullcalendar/gcal.js'></script>\n";
 			// highcharts stuff
 			//echo "<script src='/public/highcharts/highcharts.js'></script>\n";
-			// Ext4(sencha) stuff
+			// Ext4(sencha) stuff - need that for the movies tab
 			echo "<link rel='stylesheet' href='http://cdn.sencha.io/ext/gpl/4.2.1/resources/css/ext-all.css'/>\n";
 			echo "<script src='http://cdn.sencha.io/ext/gpl/4.2.1/ext-all.js'></script>\n";
+			// this line is to remove the nocss that extjs does on the whole page
 			echo "<script>Ext.onReady(function() { Ext.getBody().removeCls('x-body'); });</script>\n";
+
 			// our own javascripts
 			echo "<script src='/public/movies.js'></script>\n";
 			echo "<script src='/public/myworld.js'></script>\n";
