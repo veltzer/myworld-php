@@ -1,8 +1,8 @@
 page on blog issues:
+	move the movie charts to extjs charts.
 	in the movie table when there is no end view data it should say 'unknown' and not leave
 		a blank entry.
 	show more info in the movies table: reviews for the movies and ratings
-	move the movie charts to extjs charts.
 	publish the views per device as pie chart and not as table.
 
 Review and rating problem:

@@ -134,7 +134,7 @@ function create_movies(element_id) {
 			title: 'Movies that I have seen',
 			store: w_store,
 			frame: false,
-			border: false,
+			border: true,
 			//collapsible: true,
 			iconCls: 'icon-grid',
 			// name of cookie to store the grid state in... remove to get code generated state...
