@@ -33,7 +33,7 @@ my($dbh)=DBI->connect('dbi:mysql:myworld',$user,$password,{
 });
 
 # selecting only works which are audio (selecting all as above will NOT work...)
-my($sql)='select TbWkWork.name from TbWkWork,TbWkWorkType where TbWkWork.typeId=TbWkWorkType.id and TbWkWorkType.name in (\'audio book\',\'audio course\',\'audio lecture\',\'audio show\')';
+my($sql)='select TbWkWork.name from TbWkWork,TbWkWorkType where TbWkWork.typeId=TbWkWorkType.id and TbWkWorkType.name in (\'audio book\',\'audio course\',\'audio lecture\',\'audio show\',\'audio essay\')';
 if($debug) {
 	print 'sql is ['.$sql.']'."\n";
 }
