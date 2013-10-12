@@ -101,6 +101,7 @@ if(!class_exists('MyWorld')) {
 			echo "<script>Ext.onReady(function() { Ext.getBody().removeCls('x-body'); });</script>\n";
 
 			// our own javascripts
+			echo "<script src='/public/myworld_utils.js'></script>\n";
 			echo "<script src='/public/movies.js'></script>\n";
 			echo "<script src='/public/myworld.js'></script>\n";
 			// and now for the style sheet...

@@ -21,7 +21,7 @@ Ext.require([
 ]);
 */
 // now for the real code
-function create_movies(element_id) {
+function create_movies(element) {
 	Ext.onReady(function () {
 		var useCookie=false;
 		// next line is needed for tooltips to work...
@@ -254,14 +254,14 @@ function create_movies(element_id) {
 			}],
 			*/
 			//features: [groupingFeature],
-			renderTo: element_id,
+			renderTo: element,
 		});
 		// trigger the data store load, we must do it or no data is displayed
 		w_store.loadPage(1);
 	});
 }
 
-function create_chart(element_id, max, ticks, type) {
+function create_chart(element, max, ticks, type) {
 	Ext.require('Ext.chart.Chart');
 	Ext.onReady(function () {
 		/*
@@ -269,7 +269,7 @@ function create_chart(element_id, max, ticks, type) {
 			animate: true,
 			shadow: true,
 			//store: mystore,
-			renderTo: element_id,
+			renderTo: element,
 		});
 		*/
 	});

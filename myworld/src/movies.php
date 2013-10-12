@@ -1,17 +1,13 @@
 <?php
 function create_movies($params) {
-	// running id for the divs
-	static $p_id=1;
-	$code=<<<EOD
-		<div id="movies_$p_id">
-		</div>
-		<script>
-			Ext.onReady(function() {
-				create_movies('movies_$p_id');
-			});
-		</script>
+$code=<<<EOD
+	<script>
+		var loc=get_my_location()
+		Ext.onReady(function() {
+			create_movies(create_div_at_location(loc))
+		});
+	</script>
 EOD;
-	$p_id++;
 	return $code;
 }
 
