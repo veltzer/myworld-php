@@ -261,6 +261,13 @@ function create_movies(element) {
 	});
 }
 
+function create_movies_here() {
+	var loc=get_my_location()
+	Ext.onReady(function() {
+		create_movies(create_div_at_location(loc))
+	})
+}
+
 function create_chart(element, max, ticks, type) {
 	Ext.require('Ext.chart.Chart');
 	Ext.onReady(function () {

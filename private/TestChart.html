@@ -7,7 +7,7 @@
 			dojo.require("dojo.data.ItemFileReadStore");
 			dojo.require("dojox.charting.DataChart");
 			dojo.ready(function() {
-				var store=new dojo.data.ItemFileReadStore({url:"GetData.php?type=video_viewing"});
+				var store=new dojo.data.ItemFileReadStore({url:"GetData.php?type=video_viewing_year"});
 				var chart=new dojox.charting.DataChart("chart_id", {
 					// this is needed to make nice columns
 					type: dojox.charting.plot2d.Columns,
@@ -16,7 +16,7 @@
 					// this is needed for the labels
 					xaxis:{labelFunc:"seriesLabels"},
 					// this is needed since y axis is to 10 by default
-					yaxis:{max:60},
+					yaxis:{max:400},
 				});
 				// the last two arguments are needed
 				chart.setStore(store, {}, "value");

@@ -1,14 +1,6 @@
 <?php
 function create_movies($params) {
-$code=<<<EOD
-	<script>
-		var loc=get_my_location()
-		Ext.onReady(function() {
-			create_movies(create_div_at_location(loc))
-		});
-	</script>
-EOD;
-	return $code;
+	return '<script>create_movies_here()</script>';
 }
 
 function create_movies_iframe($params) {
