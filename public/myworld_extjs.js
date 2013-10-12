@@ -264,11 +264,11 @@ function create_movies(element) {
 function create_movies_here() {
 	var loc=get_my_location()
 	Ext.onReady(function() {
-		create_movies(create_div_at_location(loc))
+		create_movies(loc)
 	})
 }
 
-function create_chart(element, max, ticks, type) {
+function create_chart(element, style, max, ticks, type) {
 	Ext.require('Ext.chart.Chart');
 	Ext.onReady(function () {
 		/*
@@ -279,5 +279,12 @@ function create_chart(element, max, ticks, type) {
 			renderTo: element,
 		});
 		*/
+	});
+}
+
+function create_chart_here(style, max ,ticks, type) {
+	var loc=get_my_location();
+	Ext.onReady(function() {
+		create_chart(loc);
 	});
 }

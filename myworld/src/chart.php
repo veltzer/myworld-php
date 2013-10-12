@@ -22,20 +22,8 @@ function create_chart($params) {
 	} else {
 		$style='';
 	}
-	// running id for the divs
-	static $p_id=1;
-	$sample=<<<EOD
-		<div id="scroll_$p_id">
-			<div id="chart_$p_id" $style></div>
-		</div>
-		<script>
-			create_chart("chart_$p_id", $p_max, $p_ticks, "$p_type");
-		</script>
-EOD;
-	$p_id++;
-	$res='';
-	$res.=$sample;
-	return $res;
+	// the next string is in double quotes to allow for variable interpolation
+	return "<script>create_chart_here($style, $p_max, $p_ticks, \"$p_type\")</script>";
 }
 
 function create_chart_dojo($params) {

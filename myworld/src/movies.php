@@ -1,6 +1,7 @@
 <?php
 function create_movies($params) {
-	return '<script>create_movies_here()</script>';
+	// the next string is in double quotes to allow for variable interpolation
+	return "<script>create_movies_here()</script>";
 }
 
 function create_movies_iframe($params) {
