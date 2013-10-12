@@ -74,7 +74,7 @@ if(!class_exists('MyWorld')) {
 		 * - My javascript code and css MUST come at the end since
 		 * they override any other stuff (especially the css...)
 		 * - This next line is supposed to work but it doesn't...
-		 * wp_enqueue_script('myworld', plugins_url('javascript/myworld.js', __FILE__), array('jquery'), '1.0');
+		 * wp_enqueue_script('myworld', plugins_url('javascript/myworld_jquery.js', __FILE__), array('jquery'), '1.0');
 		 * That is why the next section uses direct inclusion instead.
 		 */
 		function wp_head() {
@@ -102,8 +102,8 @@ if(!class_exists('MyWorld')) {
 
 			// our own javascripts
 			echo "<script src='/public/myworld_utils.js'></script>\n";
-			echo "<script src='/public/movies.js'></script>\n";
-			echo "<script src='/public/myworld.js'></script>\n";
+			echo "<script src='/public/myworld_extjs.js'></script>\n";
+			echo "<script src='/public/myworld_jquery.js'></script>\n";
 			// and now for the style sheet...
 			echo "<link rel='stylesheet' href='".plugins_url('css/myworld.css?ver=',__FILE__).$this->version."'/>\n";
 			// favicon

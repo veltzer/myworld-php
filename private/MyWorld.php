@@ -22,7 +22,7 @@
 		<script src='/public/jquery.cont_combobox.js'></script>
 		<script src='/public/jquery.cont_submit.js'></script>
 		<script src='/public/jquery.cont_logger.js'></script>
-		<script src='/public/MyWorld.js'></script>
+		<script src='/public/forms.js'></script>
 		<link rel='stylesheet' type='text/css' href='MyWorld.css'>
 	</head>
 	<body>
