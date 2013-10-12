@@ -9,20 +9,18 @@
  * - make the component always take the same size vertically.
  * - show sums of various types (length, avg of rating and more).
  */
-
-// we use the ext-all so we require only stuff that does not exist there...
-/*
-Ext.Loader.setConfig({
-	enabled: true
-});
-Ext.Loader.setPath('Ext.ux','/public/ux');
-Ext.require([
-	'Ext.ux.RowExpander',
-]);
-*/
-// now for the real code
 function create_movies(element) {
-	Ext.onReady(function () {
+	// next line is needed for the Ext.ux.RowExpander class which is not
+	// in the standard Extjs installation.
+	Ext.Loader.setPath('Ext.ux','/public/ux');
+	Ext.require([
+		'Ext.state.CookieProvider',
+		'Ext.data.Model',
+		'Ext.data.Store',
+		'Ext.grid.feature.Grouping',
+		'Ext.ux.RowExpander',
+		'Ext.grid.Panel'
+	], function() {
 		var useCookie=false;
 		// next line is needed for tooltips to work...
 		Ext.QuickTips.init();
@@ -262,15 +260,12 @@ function create_movies(element) {
 }
 
 function create_movies_here() {
-	var loc=get_my_location()
-	Ext.onReady(function() {
-		create_movies(loc)
-	})
+	var loc=get_my_location();
+	create_movies(loc);
 }
 
-function create_chart(element, style, max, ticks, type) {
-	Ext.require('Ext.chart.Chart');
-	Ext.onReady(function () {
+function create_chart(element, type) {
+	Ext.require('Ext.chart.Chart', function () {
 		/*
 		var chart=Ext.create('Ext.chart.Chart', {
 			animate: true,
@@ -282,9 +277,7 @@ function create_chart(element, style, max, ticks, type) {
 	});
 }
 
-function create_chart_here(style, max ,ticks, type) {
+function create_chart_here(type) {
 	var loc=get_my_location();
-	Ext.onReady(function() {
-		create_chart(loc);
-	});
+	create_chart(loc, type);
 }
