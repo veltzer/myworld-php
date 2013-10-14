@@ -87,7 +87,7 @@ if(!class_exists('MyWorld')) {
 			//echo "<link rel='stylesheet' href='http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/themes/ui-lightness/jquery-ui.css'/>\n";
 			//echo "<script src='http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/jquery-ui.min.js'></script>\n";
 			// dojo
-			//echo "<script src='http://ajax.googleapis.com/ajax/libs/dojo/1.7/dojo/dojo.js'></script>";
+			echo "<script src='http://ajax.googleapis.com/ajax/libs/dojo/1.9.1/dojo/dojo.js'></script>";
 			// full calendar stuff
 			//echo "<link rel='stylesheet' href='/public/fullcalendar/fullcalendar.css'/>\n";
 			//echo "<script src='/public/fullcalendar/fullcalendar.min.js'></script>\n";
@@ -103,6 +103,7 @@ if(!class_exists('MyWorld')) {
 			// our own javascripts
 			echo "<script src='/public/myworld_utils.js'></script>\n";
 			echo "<script src='/public/myworld_extjs.js'></script>\n";
+			echo "<script src='/public/myworld_dojo.js'></script>\n";
 			echo "<script src='/public/myworld_jquery.js'></script>\n";
 			// and now for the style sheet...
 			echo "<link rel='stylesheet' href='".plugins_url('css/myworld.css?ver=',__FILE__).$this->version."'/>\n";

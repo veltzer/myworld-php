@@ -9,9 +9,10 @@
  * - make the component always take the same size vertically.
  * - show sums of various types (length, avg of rating and more).
  */
-function create_movies(element) {
-	// next line is needed for the Ext.ux.RowExpander class which is not
+function create_movies(loc) {
+	// next two lines are needed for the Ext.ux.RowExpander class which is not
 	// in the standard Extjs installation.
+	Ext.Loader.setConfig({enabled: true});
 	Ext.Loader.setPath('Ext.ux','/public/ux');
 	Ext.require([
 		'Ext.state.CookieProvider',
@@ -252,7 +253,7 @@ function create_movies(element) {
 			}],
 			*/
 			//features: [groupingFeature],
-			renderTo: element,
+			renderTo: loc,
 		});
 		// trigger the data store load, we must do it or no data is displayed
 		w_store.loadPage(1);
@@ -264,14 +265,14 @@ function create_movies_here() {
 	create_movies(loc);
 }
 
-function create_chart(element, type) {
+function create_chart(loc, type) {
 	Ext.require('Ext.chart.Chart', function () {
 		/*
 		var chart=Ext.create('Ext.chart.Chart', {
 			animate: true,
 			shadow: true,
 			//store: mystore,
-			renderTo: element,
+			renderTo: loc,
 		});
 		*/
 	});
