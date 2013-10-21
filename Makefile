@@ -116,7 +116,6 @@ install: all
 	$(Q)#sudo chown www-data.www-data $(THEME_DIR)/$(MYTHEME_THEME_NAME)
 	$(Q)sudo chmod -R go+rx $(THEME_DIR)/$(MYTHEME_THEME_NAME)
 	$(Q)sudo cp misc/rss.png $(WP_DIR)/wp-includes/images/rss.png
-	$(Q)sudo cp misc/htaccess $(WEB_ROOT)/.htaccess
 	$(Q)# now install the private folder
 	$(Q)sudo rm -rf $(WEB_DIR_PRIVATE) # remove the old folder
 	$(Q)sudo cp -r private $(WEB_DIR_PRIVATE) # copy to the target
