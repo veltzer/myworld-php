@@ -1,3 +1,4 @@
+/*jsl:import ../myworld_utils.js*/
 /*
 
 This file is part of Ext JS 4
@@ -65,6 +66,9 @@ Ext.define('Ext.ux.RowExpander', {
 
 
     renderer: function(value, metadata, record, rowIdx, colIdx) {
+	fake_use(rowIdx);
+	fake_use(record);
+	fake_use(value);
         if (colIdx === 0) {
             metadata.tdCls = 'x-grid-td-expander';
         }
@@ -139,6 +143,7 @@ Ext.define('Ext.ux.RowExpander', {
     },
 
     getRowBodyFeatureData: function(data, idx, record, orig) {
+	fake_use(idx);
         var o = Ext.grid.feature.RowBody.prototype.getAdditionalData.apply(this, arguments),
             id = this.columnId;
         o.rowBodyColspan = o.rowBodyColspan - 1;
@@ -162,7 +167,7 @@ Ext.define('Ext.ux.RowExpander', {
             viewEl = view.getEl();
             if (this.expandOnEnter) {
                 this.keyNav = Ext.create('Ext.KeyNav', viewEl, {
-                    'enter' : this.onEnter,
+                    enter : this.onEnter,
                     scope: this
                 });
             }
@@ -174,6 +179,7 @@ Ext.define('Ext.ux.RowExpander', {
     },
 
     onEnter: function(e) {
+	fake_use(e);
         var view = this.view,
             ds   = view.store,
             sm   = view.getSelectionModel(),
@@ -216,6 +222,10 @@ Ext.define('Ext.ux.RowExpander', {
     },
 
     onDblClick: function(view, cell, rowIdx, cellIndex, e) {
+	fake_use(view);
+	fake_use(cell);
+	fake_use(cellIndex);
+	fake_use(e);
 
         this.toggleRow(rowIdx);
     },
@@ -235,16 +245,23 @@ Ext.define('Ext.ux.RowExpander', {
             menuDisabled: true,
             cls: Ext.baseCSSPrefix + 'grid-header-special',
             renderer: function(value, metadata) {
+		fake_use(value);
                 metadata.tdCls = Ext.baseCSSPrefix + 'grid-cell-special';
 
                 return '<div class="' + Ext.baseCSSPrefix + 'grid-row-expander">&#160;</div>';
             },
             processEvent: function(type, view, cell, recordIndex, cellIndex, e) {
+		fake_use(recordIndex);
+		fake_use(cellIndex);
+		fake_use(cell);
+		fake_use(view);
                 if (type == "mousedown" && e.getTarget('.x-grid-row-expander')) {
                     var row = e.getTarget('.x-grid-row');
                     toggleRow(row);
                     return selectRowOnExpand;
-                }
+                } else {
+		    return undefined;
+		}
             }
         };
     }

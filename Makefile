@@ -1,5 +1,6 @@
-# parameters for this makefile...
-#################################
+##############
+# PARAMETERS # 
+##############
 # target directory where all will be installed...
 WEB_ROOT:=/var/www
 # user to be used to access the application
@@ -25,9 +26,20 @@ DO_JSCOMPRESS:=1
 # output folder
 OUT:=out
 
-# here starts the makefile...
-#############################
-ALL:=
+# tools
+TOOL_COMPILER:=~/install/closure/compiler.jar
+TOOL_JSMIN:=~/install/jsmin/jsmin
+TOOL_JSDOC:=~/install/jsdoc/jsdoc
+TOOL_JSL:=~/install/jsl/jsl
+TOOL_GJSLINT:=/usr/local/bin/gjslint
+TOOL_YUICOMPRESSOR:=yui-compressor
+
+JSCHECK:=jscheck.stamp
+
+########
+# CODE #
+########
+ALL:=$(JSCHECK)
 CLEAN:=
 
 # silent stuff
@@ -66,9 +78,14 @@ MYTHEME_THEME_ZIP=$(OUT)/themes/mytheme.zip
 CLEAN:=$(CLEAN) $(MYTHEME_THEME_ZIP)
 ALL:=$(ALL) $(MYTHEME_THEME_ZIP)
 
+SOURCES_JS:=$(shell find . -name "*.js")
+
+#########
+# RULES #
+#########
+
 .PHONY: all
 all: $(ALL)
-
 $(MYHEB_PLUGIN_ZIP): $(MYHEB_PLUGIN_FILES) $(ALL_DEP)
 	$(info doing [$@])
 	$(Q)-mkdir -p $(dir $@)
@@ -84,6 +101,12 @@ $(MYTHEME_THEME_ZIP): $(MYTHEME_THEME_FILES) $(ALL_DEP)
 	$(Q)-mkdir -p $(dir $@)
 	$(Q)-rm -f $@
 	$(Q)zip --quiet -r $@ $(MYTHEME_THEME_NAME)
+$(JSCHECK): $(SOURCES_JS) $(ALL_DEP)
+	$(info doing [$@])
+	$(Q)$(TOOL_JSL) --conf=support/jsl.conf --quiet --nologo --nosummary --nofilelisting $(SOURCES_JS)
+	$(Q)#scripts/wrapper.py $(TOOL_GJSLINT) --flagfile support/gjslint.cfg $(SOURCES_JS)
+	$(Q)mkdir -p $(dir $@)
+	$(Q)touch $(JSCHECK)
 
 # list the plugins...
 .PHONY: list
@@ -144,6 +167,7 @@ debug:
 	$(info WEB_ROOT is $(WEB_ROOT))
 	$(info WP_DIR is $(WP_DIR))
 	$(info WEB_PASSWORD is $(WEB_PASSWORD))
+	$(info SOURCES_JS is $(SOURCES_JS))
 
 .PHONY: install_wp
 install_wp:

@@ -1,8 +1,9 @@
+/*jsl:import myworld_utils.js*/
 jQuery(document).ready(function() {
 	jQuery.widget('ui.cont_logger',{
 		// options
 		options:{
-			name:null,
+			name:null
 		},
 		// constructor
 		_create:function() {
@@ -10,15 +11,19 @@ jQuery(document).ready(function() {
 			var widget=this;
 			// intercept ajax
 			jQuery(document).ajaxSend(function(event,request,settings) {
+				fake_use(request);
+				fake_use(event);
 				widget.log('ajaxStart '+settings.url,false);
 			});
 			jQuery(document).ajaxComplete(function(event,request,settings) {
+				fake_use(request);
+				fake_use(event);
 				widget.log('ajaxComplete '+settings.url,false);
 			});
 			// redefine the alert function so that we would not use it by mistake
 			alert=function(msg) {
 				widget.log(msg,false);
-			}
+			};
 		},
 		// general logging function
 		log:function(message,error) {
@@ -35,6 +40,6 @@ jQuery(document).ready(function() {
 			this.element.append(element);
 			// scroll to the bottom
 			this.element.attr('scrollTop',this.element.attr('scrollHeight'));
-		},
+		}
 	});
 });

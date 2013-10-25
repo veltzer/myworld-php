@@ -1,3 +1,5 @@
+/*jsl:import myworld_utils.js*/
+
 /*
  * This is a validating field.
  * You can pass any function to validate against.
@@ -40,9 +42,10 @@ jQuery(document).ready(function() {
 			},
 			// override if you want your own validation error function
 			validate_error:function(widget,value) {
+				fake_use(value);
 				return 'regex error '+widget.options.regex;
 			},
-			submit:null,
+			submit:null
 		},
 		log:function(msg,error) {
 			if(this.options.logger!=null) {
@@ -72,7 +75,7 @@ jQuery(document).ready(function() {
 		},
 		doFocusin:function() {
 			this.element.addClass('fieldfocus');
-			if(this.options.initState==true) {
+			if(this.options.initState===true) {
 				// reset the value
 				this.w_input.val('');
 				this.options.initState=false;
@@ -90,7 +93,7 @@ jQuery(document).ready(function() {
 				return;
 			}
 			// at init we are in error always..
-			if(this.options.initState==true) {
+			if(this.options.initState===true) {
 				this.setError('no data entered');
 				return;
 			}
@@ -113,13 +116,13 @@ jQuery(document).ready(function() {
 			// clear all previous options
 			this.w_input.html('');
 			// add new options in
-			for(x in data) {
+			for(var x in data) {
 				jQuery('<option>',{
-					'value':data[x].id
+					value:data[x].id
 				}).html(this.options.render(data[x])).appendTo(this.w_input);
 			}
 			this.enable();
-			if(this.options.initVal==null) {
+			if(this.options.initVal===null) {
 				this.w_input.val(data[0].id);
 			} else {
 				this.w_input.val(this.options.initVal);
@@ -160,7 +163,7 @@ jQuery(document).ready(function() {
 			running_id++;
 
 			// check that certain options have been passed
-			if(this.options.sname==null) {
+			if(this.options.sname===null) {
 				throw 'must declare sname attribute';
 			}
 
@@ -188,9 +191,9 @@ jQuery(document).ready(function() {
 				},
 				// this attribute is neccessary since form serialization
 				// is submitting according to this name
-				'name':this.options.sname,
+				name:this.options.sname
 			};
-			if(this.options.initState==true) {
+			if(this.options.initState===true) {
 				attrs.val=this.options.initMsg;
 			} else {
 				attrs.val=this.options.initVal;
@@ -207,11 +210,11 @@ jQuery(document).ready(function() {
 
 			// add the reload button (this is only for selects)
 			if(this.options.type=='select') {
-				var attrs={
-					'src':'images/reload.jpg',
+				attrs={
+					src:'images/reload.jpg',
 					click:function() {
 						widget.fetch();
-					},
+					}
 				};
 				this.w_img=jQuery('<img>',attrs);
 				this.w_img.addClass('fieldimage');
@@ -230,6 +233,6 @@ jQuery(document).ready(function() {
 			} else {
 				this.validate();
 			}
-		},
+		}
 	});
 });

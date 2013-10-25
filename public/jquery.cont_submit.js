@@ -1,3 +1,4 @@
+/*jsl:import myworld_utils.js*/
 /*
  * An enahnced submit button that has room to show why it is cannot
  * submit and it's status.
@@ -15,6 +16,7 @@ jQuery(document).ready(function() {
 	Errors.prototype.report=function(id,state) {
 		if(state) {
 			if(id in this.errors) {
+				fake_do();
 				// nothing to do - id is already in error
 			} else {
 				this.errors[id]=undefined;
@@ -25,13 +27,14 @@ jQuery(document).ready(function() {
 				delete this.errors[id];
 				this.num_errors--;
 			} else {
+				fake_do();
 				// nothing to do - id was not in error
 			}
 		}
-	}
+	};
 	Errors.prototype.getNumErrors=function() {
 		return this.num_errors;
-	}
+	};
 
 	jQuery.widget('ui.cont_submit',{
 		// options
@@ -45,7 +48,7 @@ jQuery(document).ready(function() {
 			// the type of submit
 			type:'POST',
 			// the url of submit
-			url:null,
+			url:null
 		},
 		disable:function() {
 			this.w_button.attr('disabled',true);
@@ -157,8 +160,8 @@ jQuery(document).ready(function() {
 				// function which is called on erorr on success
 				complete:function() {
 					widget.enable();
-				},
+				}
 			});
-		},
+		}
 	});
 });

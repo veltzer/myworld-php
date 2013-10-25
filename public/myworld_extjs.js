@@ -1,3 +1,5 @@
+/*jsl:import myworld_utils.js*/
+
 /*
  * TODO:
  * - add grid icon at the top
@@ -27,7 +29,7 @@ function create_movies(loc) {
 		Ext.QuickTips.init();
 		// custom function used for length rendering...
 		function render_length(val,lim,precision) {
-			if(val==null) {
+			if(val===null) {
 				return 'Length not known';
 			}
 			var units=['secs','mins','hrs','days','months','years'];
@@ -45,6 +47,7 @@ function create_movies(loc) {
 		function render_movie_length(val) {
 			return render_length(val,'mins',0);
 		}
+		/*
 		function render_size(val) {
 			if(val==null) {
 				return 'Size not known';
@@ -57,8 +60,9 @@ function create_movies(loc) {
 			}
 			return val;
 		}
+		*/
 		function render_imdb(val) {
-			if(val==null) {
+			if(val===null) {
 				return 'Not available';
 			}
 			return '<a href="http://www.imdb.com/title/tt'+val+'/">'+val+'</a>';
@@ -82,9 +86,9 @@ function create_movies(loc) {
 				{name: 'locationName', type: 'string'},
 				{name: 'deviceName', type: 'string'},
 				{name: 'languageName', type: 'string'},
-				{name: 'imdbId', type: 'auto'},
+				{name: 'imdbId', type: 'auto'}
 			],
-			idProperty: 'id',
+			idProperty: 'id'
 		});
 		var w_store=Ext.create('Ext.data.Store',{
 			autoLoad: false,
@@ -99,7 +103,7 @@ function create_movies(loc) {
 					type: 'json',
 					root: 'views',
 					totalProperty: 'total'
-				},
+				}
 			},
 			// this means we will sort on the server side...
 			remoteSort: true,
@@ -107,9 +111,9 @@ function create_movies(loc) {
 			sorters: [
 				{
 					property: 'endViewDate',
-					direction: 'DESC',
+					direction: 'DESC'
 				}
-			],
+			]
 			// This listener is here to alert the parent window of our size
 			// once the data is loaded. This is only needed if we are in an iframe
 			/*
@@ -130,7 +134,7 @@ function create_movies(loc) {
 			//startCollapsed: true,
 		});
 		*/
-		var w_grid=Ext.create('Ext.grid.Panel',{
+		Ext.create('Ext.grid.Panel',{
 			title: 'Movies that I have seen',
 			store: w_store,
 			frame: false,
@@ -145,21 +149,21 @@ function create_movies(loc) {
 					dataIndex: 'viewId',
 					flex: 1,
 					hidden: true,
-					sortable: true,
+					sortable: true
 				},
 				{
 					text: 'Name',
 					dataIndex: 'name',
 					flex: 30,
 					hidden: false,
-					sortable: true,
+					sortable: true
 				},
 				{
 					text: 'EndViewDate',
 					dataIndex: 'endViewDate',
 					flex: 30,
 					hidden: false,
-					sortable: true,
+					sortable: true
 				},
 				{
 					text: 'Length',
@@ -167,7 +171,7 @@ function create_movies(loc) {
 					flex: 8,
 					hidden: false,
 					sortable: true,
-					renderer: render_movie_length,
+					renderer: render_movie_length
 				},
 				/*
 				{
@@ -176,7 +180,7 @@ function create_movies(loc) {
 					flex: 30,
 					hidden: true,
 					sortable: true,
-					renderer: render_size,
+					renderer: render_size
 				},
 				{
 					text: 'Chapters',
@@ -184,7 +188,7 @@ function create_movies(loc) {
 					flex: 30,
 					hidden: true,
 					sortable: true,
-					renderer: render_chapters,
+					renderer: render_chapters
 				},
 				*/
 				{
@@ -192,21 +196,21 @@ function create_movies(loc) {
 					dataIndex: 'typeName',
 					flex: 15,
 					hidden: true,
-					sortable: true,
+					sortable: true
 				},
 				{
 					text: 'LocationName',
 					dataIndex: 'locationName',
 					flex: 8,
 					hidden: false,
-					sortable: true,
+					sortable: true
 				},
 				{
 					text: 'DeviceName',
 					dataIndex: 'deviceName',
 					flex: 8,
 					hidden: false,
-					sortable: true,
+					sortable: true
 				},
 				{
 					text: 'ImdbId',
@@ -214,8 +218,8 @@ function create_movies(loc) {
 					flex: 5,
 					hidden: false,
 					sortable: true,
-					renderer: render_imdb,
-				},
+					renderer: render_imdb
+				}
 			],
 			dockedItems: [
 				{
@@ -224,8 +228,8 @@ function create_movies(loc) {
 					dock: 'bottom',
 					displayInfo: true,
 					displayMsg: 'Displaying movies {0} - {1} of {2}',
-					emptyMsg: 'No movies to display',
-				},
+					emptyMsg: 'No movies to display'
+				}
 			],
 			/*
 			bbar: [
@@ -254,7 +258,7 @@ function create_movies(loc) {
 			}],
 			*/
 			//features: [groupingFeature],
-			renderTo: loc,
+			renderTo: loc
 		});
 		// trigger the data store load, we must do it or no data is displayed
 		w_store.loadPage(1);
@@ -274,26 +278,27 @@ function create_chart(loc, type) {
 		'Ext.data.Model',
 		'Ext.chart.Chart',
 		'Ext.panel.Panel',
-		'Ext.data.Store',
+		'Ext.data.Store'
 	]
 	, function() {
 		var w_model_year=Ext.define('MovieModel', {
 			extend: 'Ext.data.Model',
 			fields: [
 				{name: 'year', type: 'string'},
-				{name: 'views', type: 'number'},
-			],
+				{name: 'views', type: 'number'}
+			]
 		});
 		var w_model_month=Ext.define('MovieModel', {
 			extend: 'Ext.data.Model',
 			fields: [
 				{name: 'month', type: 'string'},
-				{name: 'views', type: 'number'},
-			],
+				{name: 'views', type: 'number'}
+			]
 		});
 		var url;
 		var w_model;
 		var field;
+		var title;
 		if(type=='video_viewing_year') {
 			url='video_viewing_year_ext';
 			w_model=w_model_year;
@@ -313,9 +318,9 @@ function create_chart(loc, type) {
 				url: '/public/GetData.php?type='+url,
 				reader: {
 					type: 'json',
-					root: 'items',
-				},
-			},
+					root: 'items'
+				}
+			}
 		});
 		var w_chart=Ext.create('Ext.chart.Chart', {
 			animate: true,
@@ -330,12 +335,12 @@ function create_chart(loc, type) {
 				},
 				title: 'Number of movies seen',
 				grid: true,
-				minimum: 0,
+				minimum: 0
 			}, {
 				type: 'Category',
 				position: 'bottom',
 				fields: [ field ],
-				title: title,
+				title: title
 			}],
 			series: [{
 				type: 'column',
@@ -346,6 +351,7 @@ function create_chart(loc, type) {
 					width: 100,
 					height: 28,
 					renderer: function(storeItem, item) {
+						fake_use(item);
 						this.setTitle(storeItem.get(field) + ': ' + storeItem.get('views'));
 					}
 				},
@@ -354,21 +360,21 @@ function create_chart(loc, type) {
 					'text-anchor': 'middle',
 					field: 'views',
 					renderer: Ext.util.Format.numberRenderer('0'),
-					orientation: 'horizonal',
+					orientation: 'horizonal'
 					//color: '#333'
 				},
 				xField: field,
 				yField: 'views'
-			}],
+			}]
 			//renderTo: loc,
 		});
-		var w_panel=Ext.create('Ext.panel.Panel', {
+		Ext.create('Ext.panel.Panel', {
 			title: 'Movie view per year', // title of the panel
 		    	height: 400, // without this the panel will have height of 0 which is not good
 			border: true, // lets have a border to see where the panel deliniates
 			layout: 'fit', // this causes the chart to be displayed in the entire area of the panel
 			items: [ w_chart ], // the chart inside the panel
-			renderTo: loc, // where to put the panel
+			renderTo: loc // where to put the panel
 		});
 	});
 }

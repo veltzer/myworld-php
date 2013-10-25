@@ -1,3 +1,4 @@
+/*jsl:import myworld_utils.js*/
 /*
  * This is a datepicker object.
  * It is a wrapper around the original jquery ui datepicker.
@@ -33,9 +34,10 @@ jQuery(document).ready(function() {
 			},
 			// override if you want your own validation error function
 			validate_error:function(widget,value) {
+				fake_use(value);
 				return 'regex error '+widget.options.regex;
 			},
-			submit:null,
+			submit:null
 		},
 		log:function(msg,error) {
 			if(this.options.logger!=null) {
@@ -65,7 +67,7 @@ jQuery(document).ready(function() {
 		},
 		doFocusin:function() {
 			this.element.addClass('fieldfocus');
-			if(this.options.initState==true) {
+			if(this.options.initState===true) {
 				// reset the value
 				this.w_input.val('');
 				this.options.initState=false;
@@ -94,7 +96,7 @@ jQuery(document).ready(function() {
 			running_id++;
 
 			// check that certain options have been passed
-			if(this.options.sname==null) {
+			if(this.options.sname===null) {
 				throw 'must declare sname attribute';
 			}
 
@@ -110,13 +112,13 @@ jQuery(document).ready(function() {
 				},
 				focusout:function() {
 					widget.doFocusout();
-				},
+				}
 			};
 
 			this.w_input=jQuery('<input>',attrs);
 			this.w_input.addClass('fieldinput');
 			this.w_input.appendTo(this.element);
 			jQuery(this.w_input).datepicker();
-		},
+		}
 	});
 });

@@ -1,4 +1,7 @@
+/*jsl:import myworld_utils.js*/
+
 function create_chart_dojo(loc, max, ticks, type) {
+	fake_use(type);
 	require([
 		'dojox/charting/Chart2D',
 		'dojox/charting/widget/Chart2D',
@@ -7,7 +10,7 @@ function create_chart_dojo(loc, max, ticks, type) {
 		'dojo/data/ItemFileReadStore'
 	], function() {
 		var scroll=new dojox.layout.ScrollPane({
-			orientation: "horizontal",
+			orientation: "horizontal"
 		},loc);
 		scroll.startup();
 		var store=new dojo.data.ItemFileReadStore({url:"/public/GetData.php?type=".type});
@@ -22,7 +25,7 @@ function create_chart_dojo(loc, max, ticks, type) {
 			// this is needed for the labels
 			xaxis:{labelFunc:"seriesLabels"},
 			// this is needed since y axis is to 10 by default
-			yaxis:{max:max, majorTickStep: ticks},
+			yaxis:{max:max, majorTickStep: ticks}
 		});
 		// the last two arguments are needed
 		chart.setStore(store, {}, "value");

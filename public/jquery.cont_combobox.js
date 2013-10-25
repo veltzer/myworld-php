@@ -1,11 +1,13 @@
+/*jsl:import myworld_utils.js*/
 jQuery(document).ready(function() {
 	jQuery.widget("ui.cont_combobox",{
 		// options
 		options:{
-			name:null,
+			name:null
 		},
 		// constructor
 		_create: function(options) {
+			fake_use(options);
 			var self=this;
 			var select = this.element.hide(),
 				selected = select.children( ":selected" ),
@@ -20,7 +22,7 @@ jQuery(document).ready(function() {
 						var matcher = new RegExp( jQuery.ui.autocomplete.escapeRegex(request.term), "i" );
 						response( select.children( "option" ).map(function() {
 							var text = jQuery( this ).text();
-							if ( this.value && ( !request.term || matcher.test(text) ) )
+							if ( this.value && ( !request.term || matcher.test(text) ) ) {
 								return {
 									label: text.replace(
 										new RegExp(
@@ -31,6 +33,9 @@ jQuery(document).ready(function() {
 									value: text,
 									option: this
 								};
+							} else {
+								return null;
+							}
 						}) );
 					},
 					select: function( event, ui ) {
@@ -41,12 +46,15 @@ jQuery(document).ready(function() {
 						});
 					},
 					change: function( event, ui ) {
+						fake_use(event);
 						if ( !ui.item ) {
 							var matcher = new RegExp( "^" + jQuery.ui.autocomplete.escapeRegex( jQuery(this).val() ) + "$", "i" ),
 								valid = false;
 							select.children( "option" ).each(function() {
 								if ( this.value.match( matcher ) ) {
 									this.selected = valid = true;
+									return false;
+								} else {
 									return false;
 								}
 							});
@@ -55,7 +63,11 @@ jQuery(document).ready(function() {
 								jQuery( this ).val( "" );
 								select.val( "" );
 								return false;
+							} else {
+								return false;
 							}
+						} else {
+							return false;
 						}
 					}
 				})
