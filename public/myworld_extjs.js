@@ -13,13 +13,13 @@ function create_movies(loc) {
 	// next two lines are needed for the Ext.ux.RowExpander class which is not
 	// in the standard Extjs installation.
 	Ext.Loader.setConfig({enabled: true});
-	Ext.Loader.setPath('Ext.ux','/public/ux');
+	//Ext.Loader.setPath('Ext.ux','/public/ux');
 	Ext.require([
 		'Ext.state.CookieProvider',
 		'Ext.data.Model',
 		'Ext.data.Store',
 		'Ext.grid.feature.Grouping',
-		'Ext.ux.RowExpander',
+		//'Ext.ux.RowExpander',
 		'Ext.grid.Panel'
 	], function() {
 		var useCookie=false;
@@ -262,7 +262,10 @@ function create_movies(loc) {
 
 function create_movies_here() {
 	var loc=get_my_location();
-	create_movies(loc);
+	// the onReady is needed because inside the innet function we don't do it
+	Ext.onReady(function() {
+		create_movies(loc);
+	});
 }
 
 function create_chart(loc, type) {
@@ -280,5 +283,8 @@ function create_chart(loc, type) {
 
 function create_chart_here(type) {
 	var loc=get_my_location();
-	create_chart(loc, type);
+	// the onReady is needed because inside the innet function we don't do it
+	Ext.onReady(function() {
+		create_chart(loc, type);
+	});
 }
