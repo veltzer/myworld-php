@@ -68,7 +68,7 @@ function create_movies(loc) {
 			Ext.state.Manager.setProvider(Ext.create('Ext.state.CookieProvider'));
 		}
 		// here comes the model...
-		Ext.define('MovieModel', {
+		var w_model=Ext.define('MovieModel', {
 			extend: 'Ext.data.Model',
 			fields: [
 				{name: 'viewId', type: 'number'},
@@ -89,7 +89,8 @@ function create_movies(loc) {
 		var w_store=Ext.create('Ext.data.Store',{
 			autoLoad: false,
 			pageSize: 20,
-			model: 'MovieModel',
+			//model: 'MovieModel',
+			model: w_model,
 			//groupField: 'deviceId',
 			proxy: {
 				type: 'ajax',
@@ -270,35 +271,39 @@ function create_movies_here() {
 
 function create_chart(loc, type) {
 	Ext.require([
-		'Ext.data.JsonStore',
+		'Ext.data.Model',
 		'Ext.chart.Chart',
-		'Ext.panel.Panel'
+		'Ext.panel.Panel',
+		'Ext.data.Store',
 	]
 	, function() {
-		window.generateData = function(n, floor) {
-			var data = [];
-			var p = (Math.random() * 11) + 1;
-			floor = (!floor && floor !== 0)? 20 : floor;
-			for (var i = 0; i < (n || 12); i++) {
-				data.push({
-					name: Ext.Date.monthNames[i % 12],
-					data: Math.floor(Math.max((Math.random() * 100), floor)),
-				});
-			}
-			return data;
-		};
-		window.mystore = Ext.create('Ext.data.JsonStore', {
-			fields: ['name', 'data' ],
-			data: generateData()
+		var w_model=Ext.define('MovieModel', {
+			extend: 'Ext.data.Model',
+			fields: [
+				{name: 'year', type: 'string'},
+				{name: 'views', type: 'number'},
+			],
 		});
-		var chart = Ext.create('Ext.chart.Chart', {
+		var w_store=Ext.create('Ext.data.Store',{
+			autoLoad: true,
+			model: w_model,
+			proxy: {
+				type: 'ajax',
+				url: '/public/GetData.php?type=video_viewing_year_ext',
+				reader: {
+					type: 'json',
+					root: 'items',
+				},
+			},
+		});
+		var w_chart=Ext.create('Ext.chart.Chart', {
 			animate: true,
 			shadow: true,
-			store: mystore,
+			store: w_store,
 			axes: [{
 				type: 'Numeric',
 				position: 'left',
-				fields: ['data'],
+				fields: ['views'],
 				label: {
 					renderer: Ext.util.Format.numberRenderer('0,0')
 				},
@@ -308,8 +313,8 @@ function create_chart(loc, type) {
 			}, {
 				type: 'Category',
 				position: 'bottom',
-				fields: ['name'],
-				title: 'Month of the Year',
+				fields: ['year'],
+				title: 'Year',
 			}],
 			series: [{
 				type: 'column',
@@ -320,44 +325,29 @@ function create_chart(loc, type) {
 					width: 100,
 					height: 28,
 					renderer: function(storeItem, item) {
-						this.setTitle(storeItem.get('name') + ': ' + storeItem.get('data'));
+						this.setTitle(storeItem.get('year') + ': ' + storeItem.get('views'));
 					}
 				},
 				label: {
 					display: 'insideEnd',
 					'text-anchor': 'middle',
-					field: 'data',
+					field: 'views',
 					renderer: Ext.util.Format.numberRenderer('0'),
 					orientation: 'horizonal',
 					//color: '#333'
 				},
-				xField: 'name',
-				yField: 'data'
+				xField: 'year',
+				yField: 'views'
 			}],
 			//renderTo: loc,
 		});
-		var win = Ext.create('Ext.panel.Panel', {
-			title: 'Column Chart',
-		    	height: 400,
-			//autoHeight: true,
-			border: true,
-			layout: 'fit',
-			/*
-			tbar: [{
-				text: 'Save Chart',
-				handler: function() {
-					Ext.MessageBox.confirm('Confirm Download', 'Would you like to download the chart as an image?', function(choice){
-						if(choice == 'yes') {
-							chart.save({
-								type: 'image/png'
-							});
-						}
-					});
-				},
-			}],
-			*/
-			items: [ chart ],
-			renderTo: loc,
+		var w_panel=Ext.create('Ext.panel.Panel', {
+			title: 'Movie view per year', // title of the panel
+		    	height: 400, // without this the panel will have height of 0 which is not good
+			border: true, // lets have a border to see where the panel deliniates
+			layout: 'fit', // this causes the chart to be displayed in the entire area of the panel
+			items: [ w_chart ], // the chart inside the panel
+			renderTo: loc, // where to put the panel
 		});
 	});
 }

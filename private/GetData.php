@@ -8,6 +8,7 @@ $types['video_devices']=1;
 $types['video_places']=1;
 $types['video_viewing_month']=1;
 $types['video_viewing_year']=1;
+$types['video_viewing_year_ext']=1;
 $types['openbook_progress']=1;
 $types['TbIdPerson']=1;
 $types['TbLocation']=1;
@@ -56,6 +57,12 @@ if($type=='video_viewing_year') {
 	# the wrapping is for dojo charting to work...
 	$response='{ label: "id", identifier: "id", items: '.my_json_encode($result).'}';
 }
+if($type=='video_viewing_year_ext') {
+	$query=sprintf('SELECT DATE_FORMAT(TbWkWorkView.endViewDate,"%%Y") AS year,count(*) AS views FROM TbWkWorkViewPerson, TbWkWorkView, TbWkWork, TbWkWorkType WHERE TbWkWorkView.endViewDate is not NULL AND TbWkWorkView.workId=TbWkWork.id AND TbWkWorkViewPerson.viewerId=1 AND TbWkWorkViewPerson.viewId=TbWkWorkView.id AND TbWkWorkType.name="video movie" AND TbWkWorkType.id=TbWkWork.typeId GROUP BY DATE_FORMAT(TbWkWorkView.endViewDate,"%%Y") ORDER BY TbWkWorkView.endViewDate');
+	$result=my_mysql_query($query);
+	# the wrapping is for dojo charting to work...
+	$response='{ items: '.my_json_encode($result).'}';
+}
 if($type=='openbook_progress') {
 	#$query=sprintf('SELECT DATE_FORMAT(TbGraphData.dt,"%%d%%m%%y") AS id,TbGraphData.value AS value FROM TbGraph, TbGraphData WHERE TbGraph.name=\'openbook_progress\' AND TbGraph.id=TbGraphData.graphId ORDER BY TbGraphData.dt');
 	$query=sprintf('SELECT TbGraphData.id,TbGraphData.value FROM TbGraph, TbGraphData WHERE TbGraph.name=\'openbook_progress\' AND TbGraph.id=TbGraphData.graphId ORDER BY TbGraphData.dt');
@@ -74,5 +81,6 @@ if($type=='TbLocation' || $type=='TbRating' || $type=='TbClCalendar' || $type=='
 	$result=my_mysql_query($query);
 	$response=my_json_encode($result);
 }
+echo $response;
 utils_finish();
 ?>
