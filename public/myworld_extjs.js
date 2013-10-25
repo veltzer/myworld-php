@@ -272,10 +272,8 @@ function create_chart(loc, type) {
 	Ext.require([
 		'Ext.data.JsonStore',
 		'Ext.chart.Chart',
-		'Ext.Window',
-		'Ext.layout.container.Fit',
-		'Ext.fx.target.Sprite',
-		'Ext.window.MessageBox'
+		//'Ext.fx.target.Sprite',
+		'Ext.panel.Panel',
 	]
 	, function() {
 		window.generateData = function(n, floor) {
@@ -303,7 +301,6 @@ function create_chart(loc, type) {
 			data: generateData()
 		});
 		var chart = Ext.create('Ext.chart.Chart', {
-			style: 'background:#fff',
 			animate: true,
 			shadow: true,
 			store: mystore,
@@ -345,36 +342,29 @@ function create_chart(loc, type) {
 				},
 				xField: 'name',
 				yField: 'data1'
-			}]
+			}],
+			//renderTo: loc,
 		});
-		var win = Ext.create('Ext.window.Window', {
-			width: 800,
-			height: 600,
-			minHeight: 400,
-			minWidth: 550,
-			hidden: false,
-			maximizable: true,
+		var win = Ext.create('Ext.panel.Panel', {
 			title: 'Column Chart',
-			autoShow: true,
+		    	height: 400,
+			//autoHeight: true,
+			border: true,
 			layout: 'fit',
 			tbar: [{
 				text: 'Save Chart',
 				handler: function() {
-				Ext.MessageBox.confirm('Confirm Download', 'Would you like to download the chart as an image?', function(choice){
-					if(choice == 'yes') {
-						chart.save({
-						type: 'image/png'
-						});
-					}
-				});
-			}
-			}, {
-				text: 'Reload Data',
-				handler: function() {
-				}
+					Ext.MessageBox.confirm('Confirm Download', 'Would you like to download the chart as an image?', function(choice){
+						if(choice == 'yes') {
+							chart.save({
+							type: 'image/png'
+							});
+						}
+					});
+				},
 			}],
-			items: chart,
-			//renderTo: loc,
+			items: [ chart ],
+			renderTo: loc,
 		});
 	});
 }
