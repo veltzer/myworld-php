@@ -277,19 +277,40 @@ function create_chart(loc, type) {
 		'Ext.data.Store',
 	]
 	, function() {
-		var w_model=Ext.define('MovieModel', {
+		var w_model_year=Ext.define('MovieModel', {
 			extend: 'Ext.data.Model',
 			fields: [
 				{name: 'year', type: 'string'},
 				{name: 'views', type: 'number'},
 			],
 		});
+		var w_model_month=Ext.define('MovieModel', {
+			extend: 'Ext.data.Model',
+			fields: [
+				{name: 'month', type: 'string'},
+				{name: 'views', type: 'number'},
+			],
+		});
+		var url;
+		var w_model;
+		var field;
+		if(type=='video_viewing_year') {
+			url='video_viewing_year_ext';
+			w_model=w_model_year;
+			field='year';
+			title='Year';
+		} else {
+			url='video_viewing_month_ext';
+			w_model=w_model_month;
+			field='month';
+			title='Month';
+		}
 		var w_store=Ext.create('Ext.data.Store',{
 			autoLoad: true,
 			model: w_model,
 			proxy: {
 				type: 'ajax',
-				url: '/public/GetData.php?type=video_viewing_year_ext',
+				url: '/public/GetData.php?type='+url,
 				reader: {
 					type: 'json',
 					root: 'items',
@@ -313,8 +334,8 @@ function create_chart(loc, type) {
 			}, {
 				type: 'Category',
 				position: 'bottom',
-				fields: ['year'],
-				title: 'Year',
+				fields: [ field ],
+				title: title,
 			}],
 			series: [{
 				type: 'column',
@@ -325,7 +346,7 @@ function create_chart(loc, type) {
 					width: 100,
 					height: 28,
 					renderer: function(storeItem, item) {
-						this.setTitle(storeItem.get('year') + ': ' + storeItem.get('views'));
+						this.setTitle(storeItem.get(field) + ': ' + storeItem.get('views'));
 					}
 				},
 				label: {
@@ -336,7 +357,7 @@ function create_chart(loc, type) {
 					orientation: 'horizonal',
 					//color: '#333'
 				},
-				xField: 'year',
+				xField: field,
 				yField: 'views'
 			}],
 			//renderTo: loc,

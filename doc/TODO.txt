@@ -1,7 +1,3 @@
-now:
-====
-- put model into the graphs that reads from server.
-
 images
 ======
 - make image handling more streamlined:

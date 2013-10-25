@@ -7,6 +7,7 @@ $types['jsondata']=1;
 $types['video_devices']=1;
 $types['video_places']=1;
 $types['video_viewing_month']=1;
+$types['video_viewing_month_ext']=1;
 $types['video_viewing_year']=1;
 $types['video_viewing_year_ext']=1;
 $types['openbook_progress']=1;
@@ -51,6 +52,11 @@ if($type=='video_viewing_month') {
 	# the wrapping is for dojo charting to work...
 	$response='{ label: "id", identifier: "id", items: '.my_json_encode($result).'}';
 }
+if($type=='video_viewing_month_ext') {
+	$query=sprintf('SELECT DATE_FORMAT(TbWkWorkView.endViewDate,"%%m/%%y") AS month,count(*) AS views FROM TbWkWorkViewPerson, TbWkWorkView, TbWkWork, TbWkWorkType WHERE TbWkWorkView.endViewDate is not NULL AND TbWkWorkView.workId=TbWkWork.id AND TbWkWorkViewPerson.viewerId=1 AND TbWkWorkViewPerson.viewId=TbWkWorkView.id AND TbWkWorkType.name="video movie" AND TbWkWorkType.id=TbWkWork.typeId GROUP BY DATE_FORMAT(TbWkWorkView.endViewDate,"%%m/%%y") ORDER BY TbWkWorkView.endViewDate');
+	$result=my_mysql_query($query);
+	$response='{ items: '.my_json_encode($result).'}';
+}
 if($type=='video_viewing_year') {
 	$query=sprintf('SELECT DATE_FORMAT(TbWkWorkView.endViewDate,"%%Y") AS id,count(*) AS value FROM TbWkWorkViewPerson, TbWkWorkView, TbWkWork, TbWkWorkType WHERE TbWkWorkView.endViewDate is not NULL AND TbWkWorkView.workId=TbWkWork.id AND TbWkWorkViewPerson.viewerId=1 AND TbWkWorkViewPerson.viewId=TbWkWorkView.id AND TbWkWorkType.name="video movie" AND TbWkWorkType.id=TbWkWork.typeId GROUP BY DATE_FORMAT(TbWkWorkView.endViewDate,"%%Y") ORDER BY TbWkWorkView.endViewDate');
 	$result=my_mysql_query($query);
@@ -60,7 +66,6 @@ if($type=='video_viewing_year') {
 if($type=='video_viewing_year_ext') {
 	$query=sprintf('SELECT DATE_FORMAT(TbWkWorkView.endViewDate,"%%Y") AS year,count(*) AS views FROM TbWkWorkViewPerson, TbWkWorkView, TbWkWork, TbWkWorkType WHERE TbWkWorkView.endViewDate is not NULL AND TbWkWorkView.workId=TbWkWork.id AND TbWkWorkViewPerson.viewerId=1 AND TbWkWorkViewPerson.viewId=TbWkWorkView.id AND TbWkWorkType.name="video movie" AND TbWkWorkType.id=TbWkWork.typeId GROUP BY DATE_FORMAT(TbWkWorkView.endViewDate,"%%Y") ORDER BY TbWkWorkView.endViewDate');
 	$result=my_mysql_query($query);
-	# the wrapping is for dojo charting to work...
 	$response='{ items: '.my_json_encode($result).'}';
 }
 if($type=='openbook_progress') {
