@@ -1,5 +1,9 @@
 now:
 ====
+- put model into the graphs that reads from server.
+
+images
+======
 - make image handling more streamlined:
 	add dialog for new organization to myworld.
 		this one will have:
@@ -11,11 +15,6 @@ now:
 		it will create the big and the small images from it
 		it will insert into two tables: TbOrganization and TbImage
 		and will connect the two.
-
-now:
-====
-get newer versions of all the plugins.
-get the images and my own mp3's back into the blog.
 
 make the work view and review dialogs show groups and not people.
 add a dialog to create a group, give it a name and add people to it.

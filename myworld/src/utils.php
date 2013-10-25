@@ -285,6 +285,7 @@ function my_get_get($field) {
 	if(array_key_exists($field,$_GET)) {
 		return $_GET[$field];
 	} else {
+		echo 'need to supply field ['.$field.']';
 		error('must have field ['.$field.']');
 	}
 }

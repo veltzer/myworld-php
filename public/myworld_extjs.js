@@ -272,8 +272,7 @@ function create_chart(loc, type) {
 	Ext.require([
 		'Ext.data.JsonStore',
 		'Ext.chart.Chart',
-		//'Ext.fx.target.Sprite',
-		'Ext.panel.Panel',
+		'Ext.panel.Panel'
 	]
 	, function() {
 		window.generateData = function(n, floor) {
@@ -283,21 +282,13 @@ function create_chart(loc, type) {
 			for (var i = 0; i < (n || 12); i++) {
 				data.push({
 					name: Ext.Date.monthNames[i % 12],
-					data1: Math.floor(Math.max((Math.random() * 100), floor)),
-					data2: Math.floor(Math.max((Math.random() * 100), floor)),
-					data3: Math.floor(Math.max((Math.random() * 100), floor)),
-					data4: Math.floor(Math.max((Math.random() * 100), floor)),
-					data5: Math.floor(Math.max((Math.random() * 100), floor)),
-					data6: Math.floor(Math.max((Math.random() * 100), floor)),
-					data7: Math.floor(Math.max((Math.random() * 100), floor)),
-					data8: Math.floor(Math.max((Math.random() * 100), floor)),
-					data9: Math.floor(Math.max((Math.random() * 100), floor))
+					data: Math.floor(Math.max((Math.random() * 100), floor)),
 				});
 			}
 			return data;
 		};
 		window.mystore = Ext.create('Ext.data.JsonStore', {
-			fields: ['name', 'data1', 'data2', 'data3', 'data4', 'data5', 'data6', 'data7', 'data9', 'data9'],
+			fields: ['name', 'data' ],
 			data: generateData()
 		});
 		var chart = Ext.create('Ext.chart.Chart', {
@@ -307,18 +298,18 @@ function create_chart(loc, type) {
 			axes: [{
 				type: 'Numeric',
 				position: 'left',
-				fields: ['data1'],
+				fields: ['data'],
 				label: {
 					renderer: Ext.util.Format.numberRenderer('0,0')
 				},
-				title: 'Number of Hits',
+				title: 'Number of movies seen',
 				grid: true,
-				minimum: 0
+				minimum: 0,
 			}, {
 				type: 'Category',
 				position: 'bottom',
 				fields: ['name'],
-				title: 'Month of the Year'
+				title: 'Month of the Year',
 			}],
 			series: [{
 				type: 'column',
@@ -326,22 +317,22 @@ function create_chart(loc, type) {
 				highlight: true,
 				tips: {
 					trackMouse: true,
-					width: 140,
+					width: 100,
 					height: 28,
 					renderer: function(storeItem, item) {
-						this.setTitle(storeItem.get('name') + ': ' + storeItem.get('data1') + ' $');
+						this.setTitle(storeItem.get('name') + ': ' + storeItem.get('data'));
 					}
 				},
 				label: {
 					display: 'insideEnd',
 					'text-anchor': 'middle',
-					field: 'data1',
+					field: 'data',
 					renderer: Ext.util.Format.numberRenderer('0'),
-					orientation: 'vertical',
-					color: '#333'
+					orientation: 'horizonal',
+					//color: '#333'
 				},
 				xField: 'name',
-				yField: 'data1'
+				yField: 'data'
 			}],
 			//renderTo: loc,
 		});
@@ -351,18 +342,20 @@ function create_chart(loc, type) {
 			//autoHeight: true,
 			border: true,
 			layout: 'fit',
+			/*
 			tbar: [{
 				text: 'Save Chart',
 				handler: function() {
 					Ext.MessageBox.confirm('Confirm Download', 'Would you like to download the chart as an image?', function(choice){
 						if(choice == 'yes') {
 							chart.save({
-							type: 'image/png'
+								type: 'image/png'
 							});
 						}
 					});
 				},
 			}],
+			*/
 			items: [ chart ],
 			renderTo: loc,
 		});
