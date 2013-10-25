@@ -1,3 +1,8 @@
+<!--
+TODO:
+- If we include everything here (extjs, dojo, jquery, ...) then we get errors in the test.
+	Investigate.
+-->
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
 <html>
 	<head>
@@ -18,35 +23,39 @@
 		<!-- google CDN libraries list is https://developers.google.com/speed/libraries/devguide -->
 
 		<!-- dojo -->
+		<!--
 		<script src='http://ajax.googleapis.com/ajax/libs/dojo/1.9.1/dojo/dojo.js'></script>
+		-->
 
 		<!-- jquery -->
 		<!--script src='http://ajax.googleapis.com/ajax/libs/jquery/1.7/jquery.min.js'></script-->
-		<script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
 		<!--
+		<script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
 		-->
 
 		<!-- our own code -->
 		<script src="../public/myworld_utils.js"></script>
 		<script src="../public/myworld_extjs.js"></script>
 		<!--
-		-->
 		<script src="../public/myworld_dojo.js"></script>
-		<script src="../public/myworld_jquery.js"></script>
+		-->
 		<!--
+		<script src="../public/myworld_jquery.js"></script>
 		-->
 	</head>
 	<body>
 		<script>
 			create_movies_here()
 		</script>
+		<!--
 		<script>
 			create_chart_here()
 		</script>
-		<!--
 		-->
+		<!--
 		<script>
 			create_chart_dojo_here()
 		</script>
+		-->
 	</body>
 </html>
