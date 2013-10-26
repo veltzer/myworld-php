@@ -1,11 +1,20 @@
 /*
  * General javascript utitlities for the myworld plugin
  */
+
+/*jsl:ignore*/
+'use strict';
+/*jsl:end*/
+
+/*jslint browser: true*/
+/*jslint indent: 2*/
+/*jslint vars: true*/
+
 function get_last_elem() {
   // start at the root element
   var target = document.documentElement;
   // find last HTMLElement child node
-  while (target.childNodes.length && target.lastChild.nodeType == 1) {
+  while (target.childNodes.length && target.lastChild.nodeType === 1) {
     target = target.lastChild;
   }
   // target is now the script element

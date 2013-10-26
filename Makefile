@@ -1,5 +1,5 @@
 ##############
-# PARAMETERS # 
+# PARAMETERS #
 ##############
 # target directory where all will be installed...
 WEB_ROOT:=/var/www
@@ -33,6 +33,7 @@ TOOL_JSDOC:=~/install/jsdoc/jsdoc
 TOOL_JSL:=~/install/jsl/jsl
 TOOL_GJSLINT:=~/install/gjslint/gjslint
 TOOL_YUICOMPRESSOR:=yui-compressor
+TOOL_JSLINT:=jslint
 
 JSCHECK:=jscheck.stamp
 
@@ -40,7 +41,7 @@ JSCHECK:=jscheck.stamp
 # CODE #
 ########
 ALL:=$(JSCHECK)
-CLEAN:=
+CLEAN:=$(JSCHECK)
 
 # silent stuff
 ifeq ($(DO_MKDBG),1)
@@ -105,6 +106,10 @@ $(JSCHECK): $(SOURCES_JS) $(ALL_DEP)
 	$(info doing [$@])
 	$(Q)$(TOOL_JSL) --conf=support/jsl.conf --quiet --nologo --nosummary --nofilelisting $(SOURCES_JS)
 	$(Q)scripts/wrapper.py $(TOOL_GJSLINT) --flagfile support/gjslint.cfg $(SOURCES_JS)
+	$(Q)#scripts/wrapper.py jshint --config support/jshint.conf $(SOURCES_JS)
+	$(Q)#scripts/wrapper.py jshint --config support/jshint.conf public/myworld_utils.js
+	$(Q)#scripts/wrapper.py jslint $(SOURCES_JS)
+	$(Q)#scripts/wrapper.py jslint public/myworld_utils.js
 	$(Q)mkdir -p $(dir $@)
 	$(Q)touch $(JSCHECK)
 

@@ -1,5 +1,9 @@
 /*jsl:import myworld_utils.js*/
 
+/*jsl:ignore*/
+'use strict';
+/*jsl:end*/
+
 /*
  * TODO:
  * - add grid icon at the top
