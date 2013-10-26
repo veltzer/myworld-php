@@ -17,9 +17,10 @@ function create_movies(loc) {
   Ext.Loader.setConfig({
     enabled: true
   });
-  // Ext.Loader.setPath('Ext.ux','/public/ux');
+  Ext.Loader.setPath('Ext.ux', '/public/ux');
   Ext.require(['Ext.state.CookieProvider', 'Ext.data.Model', 'Ext.data.Store',
     'Ext.grid.feature.Grouping',
+    // 'Ext.ux.LiveSearchGridPanel',
     // 'Ext.ux.RowExpander',
     'Ext.grid.Panel'], function() {
     var useCookie = false;

@@ -31,7 +31,7 @@ TOOL_COMPILER:=~/install/closure/compiler.jar
 TOOL_JSMIN:=~/install/jsmin/jsmin
 TOOL_JSDOC:=~/install/jsdoc/jsdoc
 TOOL_JSL:=~/install/jsl/jsl
-TOOL_GJSLINT:=/usr/local/bin/gjslint
+TOOL_GJSLINT:=~/install/gjslint/gjslint
 TOOL_YUICOMPRESSOR:=yui-compressor
 
 JSCHECK:=jscheck.stamp
