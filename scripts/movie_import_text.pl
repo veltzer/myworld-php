@@ -46,7 +46,7 @@ sub get_movies() {
 	my($sql,$sth,$rowhashref);
 	$movieNameByImdb={};
 	$movieIdByImdb={};
-	$sql='SELECT TbWkWork.id,TbWkWork.name,TbWkWorkExternal.externalCode FROM TbWkWork,TbWkWorkType,TbWkWorkExternal,TbExternalType WHERE TbWkWork.typeId=TbWkWorkType.id AND TbWkWorkType.name=\'video movie\' AND TbWkWorkExternal.workId=TbWkWork.id AND TbWkWorkExternal.externalId=TbExternalType.id and TbExternalType.name=\'imdb_title\'';
+	$sql='SELECT TbWkWork.id,TbWkWork.name,TbWkWorkExternal.externalCode FROM TbWkWork,TbWkWorkType,TbWkWorkExternal,TbExternalType WHERE TbWkWork.typeId=TbWkWorkType.id AND TbWkWorkType.name=\'video movie\' AND TbWkWorkExternal.workId=TbWkWork.id AND TbWkWorkExternal.externalId=TbExternalType.id and TbExternalType.name=\'imdb_title_id\'';
 	$sth=$dbh->prepare($sql);
 	$sth->execute() or die 'SQL Error: ['.$DBI::errstr.']'."\n";
 	while($rowhashref=$sth->fetchrow_hashref()) {

@@ -44,7 +44,7 @@ WHERE
 	TbWkWork.id=TbWkWorkExternal.workId AND
 	TbWkWorkType.name='video movie' AND
 	TbWkWorkExternal.externalId=TbExternalType.id AND
-	TbExternalType.name='imdb_title'
+	TbExternalType.name='imdb_title_id'
 EOT;
 /*
  * If you want to only should movies that have dates add the following
