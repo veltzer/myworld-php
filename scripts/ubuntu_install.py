@@ -12,6 +12,7 @@ packs=[
 	'yui-compressor', # for compressing javascript
 	'python-pythonmagick', # for inserting blobs into the database
 	'imagemagick', # for convert(1) for image manipulation
+	'python-pip', # so that I could install python packages via pip
 ]
 
 args=['sudo','apt-get','install']
