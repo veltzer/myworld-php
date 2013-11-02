@@ -1,13 +1,13 @@
 page on blog issues:
-	move the movie charts to extjs charts.
-	in the movie table when there is no end view data it should say 'unknown' and not leave
-		a blank entry.
-	show more info in the movies table: reviews for the movies and ratings
 	publish the views per device as pie chart and not as table.
 
 Review and rating problem:
 	currently I do not see reviews or ratings for the films I show (if they exist).
 	Have the table show that too in some way.
+
+Entries in the movies table:
+	in the movie table when there is no end view data it should say 'unknown' and not leave
+		a blank entry.
 
 length problem for regular movies:
 	movies likes 'Silver Linings Playbook' which I have seen seem to have a legnth on imdb
