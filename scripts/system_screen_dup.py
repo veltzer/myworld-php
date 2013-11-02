@@ -9,6 +9,8 @@ I mainly use this script for teaching...
 	Mark Veltzer <mark@veltzer.net>
 
 TODO
+- add a feature by which I could supply a desired resolution and it
+	will be picked if supported by the two screens.
 - blog about this (I don't think people know how to do this programmatically...)
 
 NOTES:
@@ -20,6 +22,7 @@ import subprocess # for check_output
 import re # for compile
 
 # parameters
+
 res=[
 	(1280,1024),
 	(1280,960),
@@ -34,19 +37,26 @@ res=[
 real=True
 checkTwoScreens=True
 doPrint=True
+doUseResolution=False
+resolutionToUse=(1024, 768)
+
+# functions start here
 
 class Output:
-	def __init__(self,name):
+	def __init__(self, name):
 		self.name=name
 		self.resolutions=set()
-	def addResolution(self,x,y):
+	def addResolution(self, x, y):
 		self.resolutions.add((x,y))
+	def supports(self, resolution):
+		return resolution in self.resolutions
 
 def run(args):
 	if real:
 		subprocess.check_output(args)
 	else:
 		print(args)
+
 def find_highest_mode(outputs):
 	for r in res:
 		for output in outputs:
@@ -55,6 +65,7 @@ def find_highest_mode(outputs):
 		else:
 			return r
 	raise ValueError("no resolution found...")
+
 def find_all_outputs():
 	outputs=[]
 	# regular expresson to find disconnected|connected devices
@@ -72,6 +83,7 @@ def find_all_outputs():
 		if m:
 			o.addResolution(int(m.group(1)),int(m.group(2)))
 	return outputs
+
 def find_outputs():
 	outputs=[]
 	# regular expresson to find connected devices
@@ -99,6 +111,7 @@ def set_outputs(outputs, mode):
 			"--pos","0x0",
 			"--crtc",str(index),
 		])
+
 def invert_the_screen():
 	# dont try this at home...
 	run([
@@ -108,12 +121,26 @@ def invert_the_screen():
 		# see the xrandr(1) manual page
 		"--rotate","inverted",
 	])
+
+# Here is our main code...
 outputs=find_outputs()
 if checkTwoScreens and len(outputs)!=2:
 	raise ValueError("you have !=2 screens connected")
 if doPrint:
 	print('found two screens')
-mode=find_highest_mode(outputs)
-if doPrint:
-	print('found best mode to be',mode)
-set_outputs(outputs, mode)
+if doUseResolution:
+	# check that the two outputs support "resolutionToUse"
+	# if so set them
+	# if not issue error message
+	if outputs[0].supports(resolutionToUse) and
+		outputs[1].supports(resolutionToUse):
+		set_outputs(outputs, resolutionToUse)
+	else:
+		raise ValueError('your two screens do not support resolution', resolutionToUse)
+else:
+	# find the highest resolution supported by the two screens
+	mode=find_highest_mode(outputs)
+	if doPrint:
+		print('found best mode to be',mode)
+	# set it!
+	set_outputs(outputs, mode)
