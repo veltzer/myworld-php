@@ -14,6 +14,7 @@
 		<link rel='stylesheet' href='http://ajax.googleapis.com/ajax/libs/jqueryui/1.9.2/themes/ui-lightness/jquery-ui.css'/>
 		<script src='http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js'></script>
 		<script src='http://ajax.googleapis.com/ajax/libs/jqueryui/1.9.2/jquery-ui.min.js'></script>
+		<script src='/public/myworld_utils.js'></script>
 		<script src='/public/jquery.cont_valid.js'></script>
 		<script src='/public/jquery.cont_datetime.js'></script>
 		<script src='/public/jquery.cont_datepicker.js'></script>
@@ -22,7 +23,7 @@
 		<script src='/public/jquery.cont_combobox.js'></script>
 		<script src='/public/jquery.cont_submit.js'></script>
 		<script src='/public/jquery.cont_logger.js'></script>
-		<script src='/public/MyWorld.js'></script>
+		<script src='/public/forms.js'></script>
 		<link rel='stylesheet' type='text/css' href='MyWorld.css'>
 	</head>
 	<body>

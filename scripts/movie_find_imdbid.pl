@@ -132,7 +132,7 @@ my($sql,$sth,$rowhashref);
 
 # lets create a hash of all movie imdb ids...
 my(%hashExternalCode);
-$sql='SELECT externalCode,externalId,workId FROM TbWkWorkExternal,TbExternalType WHERE TbExternalType.name=\'imdb_title\'';
+$sql='SELECT externalCode,externalId,workId FROM TbWkWorkExternal,TbExternalType WHERE TbExternalType.name=\'imdb_title_id\'';
 $sth=$dbh->prepare($sql);
 $sth->execute() or die 'SQL Error: ['.$DBI::errstr.']'."\n";
 while($rowhashref=$sth->fetchrow_hashref()) {

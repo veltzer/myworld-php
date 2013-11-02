@@ -1,5 +1,7 @@
-now:
-====
+add jshint to do validation on this projects files.
+
+images
+======
 - make image handling more streamlined:
 	add dialog for new organization to myworld.
 		this one will have:
@@ -11,11 +13,6 @@ now:
 		it will create the big and the small images from it
 		it will insert into two tables: TbOrganization and TbImage
 		and will connect the two.
-
-now:
-====
-get newer versions of all the plugins.
-get the images and my own mp3's back into the blog.
 
 make the work view and review dialogs show groups and not people.
 add a dialog to create a group, give it a name and add people to it.
@@ -181,7 +178,7 @@ UTF doesn't show well in titles of articles. Check it out.
 
 javascript:
 ===========
-take a loot at: myworld/javascript/myworld.js - the calendar part should be part of the calendar support and not of myworld in general.
+take a loot at: myworld/javascript/myworld_jquery.js - the calendar part should be part of the calendar support and not of myworld in general.
 
 build system:
 =============

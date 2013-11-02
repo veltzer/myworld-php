@@ -67,9 +67,9 @@ sub to_mysql($) {
 }
 
 my($dbh);
-#my($person_sql)='select id from TbExternalType where name=\'imdb_person\'';
-my($imdb_person_code)=42;
-my($imdb_title_code)=1;
+#my($person_sql)='select id from TbExternalType where name=\'imdb_person_id\'';
+my($imdb_person_id)=42;
+my($imdb_title_id)=1;
 
 # [authorization.name] appeared [15] times
 # [authorization.xmlid] appeared [15] times
@@ -144,7 +144,7 @@ sub handle_person() {
 		if(defined($imdbid)) {
 			$dbh->do('INSERT INTO TbIdPersonExternal (externalCode,externalId,personId) VALUES(?,?,?)',undef,
 				$imdbid,
-				$imdb_person_code,
+				$imdb_person_id,
 				$personid,
 			);
 			#my($externalid)=$dbh->last_insert_id(undef,undef,undef,undef);
@@ -197,7 +197,7 @@ sub handle_title() {
 		if(defined($imdbid)) {
 			$dbh->do('INSERT INTO TbWkWorkExternal (externalCode,externalId,workId) VALUES(?,?,?)',undef,
 				$imdbid,
-				$imdb_title_code,
+				$imdb_title_id,
 				$titleid,
 			);
 			#my($externalid)=$dbh->last_insert_id(undef,undef,undef,undef);

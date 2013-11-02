@@ -5,6 +5,8 @@ use diagnostics;
 use DBI;
 use File::Basename qw();
 use Filesys::DiskUsage qw();
+use Encode qw();
+use utf8;
 
 # This script produces a list of audios that I have not heard
 
@@ -18,16 +20,20 @@ my($user)='';
 my($password)='';
 my($output)='list_not_heard.txt';
 
-	
+if ($debug) {
+	binmode(STDOUT, ":utf8");
+}
+
 my($dbh)=DBI->connect('dbi:mysql:myworld',$user,$password,{
 	RaiseError => 1,
 	PrintWarn => 1,
 	PrintError => 1,
 	AutoCommit => 0,
+	mysql_enable_utf8 => 1,
 });
 
 # selecting only works which are audio (selecting all as above will NOT work...)
-my($sql)='select TbWkWork.name from TbWkWork,TbWkWorkType where TbWkWork.typeId=TbWkWorkType.id and TbWkWorkType.name in (\'audio book\',\'audio course\',\'audio lecture\',\'audio show\')';
+my($sql)='select TbWkWork.name from TbWkWork,TbWkWorkType where TbWkWork.typeId=TbWkWorkType.id and TbWkWorkType.name in (\'audio book\',\'audio course\',\'audio lecture\',\'audio show\',\'audio essay\')';
 if($debug) {
 	print 'sql is ['.$sql.']'."\n";
 }
@@ -39,6 +45,9 @@ my($rowhashref);
 while($rowhashref=$sth->fetchrow_hashref()) {
 	my($f_name)=$rowhashref->{'name'};
 	$hash{$f_name}=defined;
+	if($debug) {
+		print 'inserted '.$f_name."\n";
+	}
 }
 $dbh->disconnect();
 
@@ -48,10 +57,11 @@ my(@file_list)=<by_name/*/*>;
 for(my($i)=0;$i<@file_list;$i++) {
 	my($path)=$file_list[$i];
 	my($filename, $directories, $suffix) = File::Basename::fileparse($path);
+	$filename=Encode::decode_utf8($filename, 1);
 	if($debug) {
 		print $filename."\n";
-		print $directories."\n";
-		print $suffix."\n";
+		#print $directories."\n";
+		#print $suffix."\n";
 	}
 	if($suffix ne '') {
 		warn('suffix problem with '.$path);
@@ -61,6 +71,13 @@ for(my($i)=0;$i<@file_list;$i++) {
 		#print OUTPUT $path."\n";
 		my($total)=Filesys::DiskUsage::du({ 'human-readable' => 1 },$path);
 		print OUTPUT $path.' - '.$total."\n";
+		if($debug) {
+			print 'there'."\n";
+		}
+	} else {
+		if($debug) {
+			print 'not there'."\n";
+		}
 	}
 }
 close(OUTPUT) || die('unable to close ['.$output.']');

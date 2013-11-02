@@ -1,5 +1,6 @@
-# parameters for this makefile...
-#################################
+##############
+# PARAMETERS #
+##############
 # target directory where all will be installed...
 WEB_ROOT:=/var/www
 # user to be used to access the application
@@ -25,10 +26,22 @@ DO_JSCOMPRESS:=1
 # output folder
 OUT:=out
 
-# here starts the makefile...
-#############################
-ALL:=
-CLEAN:=
+# tools
+TOOL_COMPILER:=~/install/closure/compiler.jar
+TOOL_JSMIN:=~/install/jsmin/jsmin
+TOOL_JSDOC:=~/install/jsdoc/jsdoc
+TOOL_JSL:=~/install/jsl/jsl
+TOOL_GJSLINT:=~/install/gjslint/gjslint
+TOOL_YUICOMPRESSOR:=yui-compressor
+TOOL_JSLINT:=jslint
+
+JSCHECK:=jscheck.stamp
+
+########
+# CODE #
+########
+ALL:=$(JSCHECK)
+CLEAN:=$(JSCHECK)
 
 # silent stuff
 ifeq ($(DO_MKDBG),1)
@@ -66,9 +79,14 @@ MYTHEME_THEME_ZIP=$(OUT)/themes/mytheme.zip
 CLEAN:=$(CLEAN) $(MYTHEME_THEME_ZIP)
 ALL:=$(ALL) $(MYTHEME_THEME_ZIP)
 
+SOURCES_JS:=$(shell find . -name "*.js")
+
+#########
+# RULES #
+#########
+
 .PHONY: all
 all: $(ALL)
-
 $(MYHEB_PLUGIN_ZIP): $(MYHEB_PLUGIN_FILES) $(ALL_DEP)
 	$(info doing [$@])
 	$(Q)-mkdir -p $(dir $@)
@@ -84,6 +102,16 @@ $(MYTHEME_THEME_ZIP): $(MYTHEME_THEME_FILES) $(ALL_DEP)
 	$(Q)-mkdir -p $(dir $@)
 	$(Q)-rm -f $@
 	$(Q)zip --quiet -r $@ $(MYTHEME_THEME_NAME)
+$(JSCHECK): $(SOURCES_JS) $(ALL_DEP)
+	$(info doing [$@])
+	$(Q)$(TOOL_JSL) --conf=support/jsl.conf --quiet --nologo --nosummary --nofilelisting $(SOURCES_JS)
+	$(Q)scripts/wrapper.py $(TOOL_GJSLINT) --flagfile support/gjslint.cfg $(SOURCES_JS)
+	$(Q)#scripts/wrapper.py jshint --config support/jshint.conf $(SOURCES_JS)
+	$(Q)#scripts/wrapper.py jshint --config support/jshint.conf public/myworld_utils.js
+	$(Q)#scripts/wrapper.py jslint $(SOURCES_JS)
+	$(Q)#scripts/wrapper.py jslint public/myworld_utils.js
+	$(Q)mkdir -p $(dir $@)
+	$(Q)touch $(JSCHECK)
 
 # list the plugins...
 .PHONY: list
@@ -106,27 +134,26 @@ install: all
 	$(Q)-sudo rm -rf $(MYHEB_PLUGIN_FULL_DIR)
 	$(Q)sudo cp -r $(MYHEB_PLUGIN_NAME) $(PLUGIN_DIR)
 	$(Q)#sudo chown www-data.www-data $(PLUGIN_DIR)/$(MYHEB_PLUGIN_NAME)
-	$(Q)sudo chmod -R go+rx $(PLUGIN_DIR)/$(MYHEB_PLUGIN_NAME)
+	$(Q)sudo chmod -R ugo+rx $(PLUGIN_DIR)/$(MYHEB_PLUGIN_NAME)
 	$(Q)-sudo rm -rf $(MYWORLD_PLUGIN_FULL_DIR)
 	$(Q)sudo cp -r $(MYWORLD_PLUGIN_NAME) $(PLUGIN_DIR)
 	$(Q)#sudo chown www-data.www-data $(PLUGIN_DIR)/$(MYWORLD_PLUGIN_NAME)
-	$(Q)sudo chmod -R go+rx $(PLUGIN_DIR)/$(MYWORLD_PLUGIN_NAME)
+	$(Q)sudo chmod -R ugo+rx $(PLUGIN_DIR)/$(MYWORLD_PLUGIN_NAME)
 	$(Q)-sudo rm -rf $(MYTHEME_THEME_FULL_DIR)
 	$(Q)sudo cp -r $(MYTHEME_THEME_NAME) $(THEME_DIR)
 	$(Q)#sudo chown www-data.www-data $(THEME_DIR)/$(MYTHEME_THEME_NAME)
-	$(Q)sudo chmod -R go+rx $(THEME_DIR)/$(MYTHEME_THEME_NAME)
+	$(Q)sudo chmod -R ugo+rx $(THEME_DIR)/$(MYTHEME_THEME_NAME)
 	$(Q)sudo cp misc/rss.png $(WP_DIR)/wp-includes/images/rss.png
-	$(Q)sudo cp misc/htaccess $(WEB_ROOT)/.htaccess
 	$(Q)# now install the private folder
 	$(Q)sudo rm -rf $(WEB_DIR_PRIVATE) # remove the old folder
 	$(Q)sudo cp -r private $(WEB_DIR_PRIVATE) # copy to the target
 	$(Q)sudo cp $(MYWORLD_PLUGIN_NAME)/src/utils.php $(WEB_DIR_PRIVATE) # copy support code
-	$(Q)sudo chmod -R go+rx $(WEB_DIR_PRIVATE)
+	$(Q)sudo chmod -R ugo+rx $(WEB_DIR_PRIVATE)
 	$(Q)# now install the public folder
 	$(Q)sudo rm -rf $(WEB_DIR_PUBLIC) # remove the old folder
 	$(Q)sudo cp -r public $(WEB_DIR_PUBLIC) # copy to the target
 	$(Q)sudo cp $(MYWORLD_PLUGIN_NAME)/src/utils.php private/GetData.php private/GetMovies.php $(WEB_DIR_PUBLIC) # copy support code
-	$(Q)sudo chmod -R go+rx $(WEB_DIR_PUBLIC)
+	$(Q)sudo chmod -R ugo+rx $(WEB_DIR_PUBLIC)
 
 .PHONY: clean
 clean:
@@ -145,6 +172,7 @@ debug:
 	$(info WEB_ROOT is $(WEB_ROOT))
 	$(info WP_DIR is $(WP_DIR))
 	$(info WEB_PASSWORD is $(WEB_PASSWORD))
+	$(info SOURCES_JS is $(SOURCES_JS))
 
 .PHONY: install_wp
 install_wp:

@@ -31,8 +31,8 @@ my($debug)=0;
 my($prog)=1;
 
 # this is for all works that this script knows how to handle which have not been updated (getting all as above will NOT work...)
-my($sql_all)='SELECT TbWkWork.id,TbWkWork.name,TbWkWorkExternal.externalCode FROM TbWkWork,TbWkWorkType,TbWkWorkExternal,TbExternalType WHERE TbWkWork.typeId=TbWkWorkType.id AND TbWkWorkType.name=\'video movie\' AND TbWkWorkExternal.workId=TbWkWork.id AND TbWkWorkExternal.externalId=TbExternalType.id and TbExternalType.name=\'imdb_title\'';
-my($sql_date_is_null)='SELECT TbWkWork.id,TbWkWork.name,TbWkWorkExternal.externalCode FROM TbWkWork,TbWkWorkType,TbWkWorkExternal,TbExternalType WHERE TbWkWork.typeId=TbWkWorkType.id AND TbWkWorkType.name=\'video movie\' AND TbWkWorkExternal.workId=TbWkWork.id AND TbWkWorkExternal.externalId=TbExternalType.id and TbExternalType.name=\'imdb_title\' AND TbWkWork.nameCheckedDate IS NULL';
+my($sql_all)='SELECT TbWkWork.id,TbWkWork.name,TbWkWorkExternal.externalCode FROM TbWkWork,TbWkWorkType,TbWkWorkExternal,TbExternalType WHERE TbWkWork.typeId=TbWkWorkType.id AND TbWkWorkType.name=\'video movie\' AND TbWkWorkExternal.workId=TbWkWork.id AND TbWkWorkExternal.externalId=TbExternalType.id and TbExternalType.name=\'imdb_title_id\'';
+my($sql_date_is_null)='SELECT TbWkWork.id,TbWkWork.name,TbWkWorkExternal.externalCode FROM TbWkWork,TbWkWorkType,TbWkWorkExternal,TbExternalType WHERE TbWkWork.typeId=TbWkWorkType.id AND TbWkWorkType.name=\'video movie\' AND TbWkWorkExternal.workId=TbWkWork.id AND TbWkWorkExternal.externalId=TbExternalType.id and TbExternalType.name=\'imdb_title_id\' AND TbWkWork.nameCheckedDate IS NULL';
 
 # the sql statement to get works that we need to work on...
 my($sql)=$sql_date_is_null;
