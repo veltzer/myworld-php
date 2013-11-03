@@ -18,6 +18,8 @@ NOTES:
 - I found that the "crtc" parameter to xrandr was essential (did not work without it).
 """
 
+from __future__ import print_function
+
 import subprocess # for check_output
 import re # for compile
 
@@ -37,6 +39,7 @@ res=[
 real=True
 checkTwoScreens=True
 doPrint=True
+doDebug=True
 doUseResolution=False
 resolutionToUse=(1024, 768)
 
@@ -50,6 +53,13 @@ class Output:
 		self.resolutions.add((x,y))
 	def supports(self, resolution):
 		return resolution in self.resolutions
+	def __repr__(self):
+		ret=self.name+': '
+		l=[]
+		for resolution in self.resolutions:
+			l.append(str(resolution))
+		ret+=','.join(l)
+		return ret
 
 def run(args):
 	if real:
@@ -82,6 +92,9 @@ def find_all_outputs():
 		m = re_res.match(line)
 		if m:
 			o.addResolution(int(m.group(1)),int(m.group(2)))
+	if doDebug:
+		for output in outputs:
+			print(output)
 	return outputs
 
 def find_outputs():
@@ -100,6 +113,9 @@ def find_outputs():
 		m = re_res.match(line)
 		if m:
 			o.addResolution(int(m.group(1)),int(m.group(2)))
+	if doDebug:
+		for output in outputs:
+			print(output)
 	return outputs
 
 def set_outputs(outputs, mode):
@@ -132,7 +148,7 @@ if doUseResolution:
 	# check that the two outputs support "resolutionToUse"
 	# if so set them
 	# if not issue error message
-	if outputs[0].supports(resolutionToUse) and
+	if outputs[0].supports(resolutionToUse) and \
 		outputs[1].supports(resolutionToUse):
 		set_outputs(outputs, resolutionToUse)
 	else:
