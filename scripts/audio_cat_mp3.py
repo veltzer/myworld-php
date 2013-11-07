@@ -3,6 +3,11 @@
 """
 This script will catenate mp3 files correctly using ffmpeg.
 see: http://superuser.com/questions/314239/how-to-join-merge-many-mp3-files
+
+TODO:
+- use command line parsing and have the output file be specified with -o.
+This is because the current usage may cause the user to accidentaly
+step on his own files.
 """
 
 import subprocess
