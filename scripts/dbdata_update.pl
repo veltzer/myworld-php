@@ -61,10 +61,8 @@ my($clean_chapters)=0;
 my($do_chapters)=1;
 # do lengths ?
 my($do_length)=1;
-# do movies ?
-my($do_movies)=1;
-# check title ?
-my($do_check_title)=0;
+# do video?
+my($do_video)=1;
 
 # the sql statement to get works that we need to work on...
 my($sql);
@@ -73,13 +71,13 @@ my($sql);
 #$sql='SELECT * FROM TbWkWork';
 
 # this is for all works that this script knows how to handle which have not been updated (getting all as above will NOT work...)
-$sql='SELECT TbWkWork.id,TbWkWork.name,TbWkWork.typeId FROM TbWkWork,TbWkWorkType WHERE TbWkWork.typeId=TbWkWorkType.id AND TbWkWorkType.name in (\'audio book\',\'audio course\',\'audio lecture\',\'audio show\',\'video course\') AND ( updatedLengthDate IS NULL )';
+#$sql='SELECT TbWkWork.id,TbWkWork.name,TbWkWork.typeId FROM TbWkWork,TbWkWorkType WHERE TbWkWork.typeId=TbWkWorkType.id AND TbWkWorkType.name in (\'audio book\',\'audio course\',\'audio lecture\',\'audio show\',\'video course\') AND ( updatedLengthDate IS NULL )';
 
 # this is for all works that do not have length
 #$sql='SELECT TbWkWork.id,TbWkWork.name,TbWkWork.typeId FROM TbWkWork,TbWkWorkType WHERE TbWkWork.typeId=TbWkWorkType.id AND TbWkWorkType.name in (\'audio book\',\'audio course\',\'audio lecture\',\'audio show\',\'video course\',\'video movie\') AND ( length IS NULL )';
 
 # this is for all works (even those that were updated)...
-#$sql='SELECT TbWkWork.id,TbWkWork.name,TbWkWork.typeId FROM TbWkWork,TbWkWorkType WHERE TbWkWork.typeId=TbWkWorkType.id AND TbWkWorkType.name in (\'audio book\',\'audio course\',\'audio lecture\',\'audio show\',\'video course\',\'video movie\')';
+$sql='SELECT TbWkWork.id,TbWkWork.name,TbWkWork.typeId FROM TbWkWork,TbWkWorkType WHERE TbWkWork.typeId=TbWkWorkType.id AND TbWkWorkType.name in (\'audio book\',\'audio course\',\'audio lecture\',\'audio show\',\'video course\',\'video movie\')';
 
 # this is just for movies
 #$sql='SELECT TbWkWork.id,TbWkWork.name,TbWkWork.typeId FROM TbWkWork,TbWkWorkType WHERE TbWkWork.typeId=TbWkWorkType.id AND TbWkWorkType.name in (\'video movie\')';
@@ -133,10 +131,15 @@ while($rowhashref=$sth->fetchrow_hashref()) {
 		if($type eq 'audio') {
 			$folder='/home/mark/links/topics_archive/audio/abooks/by_title_name/'.$f_name;
 		}
+		if($do_video==0 && $type eq 'video') {
+			print('breaking since this is a video'."\n");
+			next;
+		}
 		if($type eq 'video') {
 			$folder='/home/mark/links/topics_archive/video/emovies/by_title_name/'.$f_name;
 		}
 		if(! -d $folder) {
+			die('['.$folder.'] is not a folder'."\n");
 			print('['.$folder.'] is not a folder'."\n");
 			next;
 		}
