@@ -176,6 +176,11 @@ get ridd of the TbIdGrp tables (if no one is using them).
 have the ability to have many persons connected with a single view.
 have the ability to have many persons connected with a single review.
 
+Have the ability to have many honorifics to the same person.
+	Example: Father Joseph Koterski, S.J. (from TTC)
+	S.J. means Jesuit priest
+	Father means pastor of a community
+
 Misc issues:
 ============
 UTF doesn't show well in titles of articles. Check it out.
