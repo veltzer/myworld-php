@@ -270,16 +270,19 @@ function create_chart(loc, type) {
     var w_model;
     var field;
     var title;
+    var box_title;
     if (type == 'video_viewing_year') {
       url = 'video_viewing_year_ext';
       w_model = w_model_year;
       field = 'year';
       title = 'Year';
+      box_title = 'Movie view per year';
     } else {
       url = 'video_viewing_month_ext';
       w_model = w_model_month;
       field = 'month';
       title = 'Month';
+      box_title = 'Movie view per month';
     }
     var w_store = Ext.create('Ext.data.Store', {
       autoLoad: true,
@@ -342,7 +345,7 @@ function create_chart(loc, type) {
           // renderTo: loc,
         });
     Ext.create('Ext.panel.Panel', {
-      title: 'Movie view per year', // title of the panel
+      title: box_title, // title of the panel
       height: 400, // without this the panel will have height of 0 which is not
       // good
       border: true, // lets have a border to see where the panel deliniates
