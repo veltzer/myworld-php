@@ -1,5 +1,7 @@
 Now:
 ====
+- my php code is vulnerable to injection attacks. Use mysqli or some such.
+
 - add jshint to do validation on this projects files.
 - make my business page show all the companies that I taught as
 	photo album and not as boring table.
