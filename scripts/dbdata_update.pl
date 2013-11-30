@@ -71,13 +71,13 @@ my($sql);
 #$sql='SELECT * FROM TbWkWork';
 
 # this is for all works that this script knows how to handle which have not been updated (getting all as above will NOT work...)
-#$sql='SELECT TbWkWork.id,TbWkWork.name,TbWkWork.typeId FROM TbWkWork,TbWkWorkType WHERE TbWkWork.typeId=TbWkWorkType.id AND TbWkWorkType.name in (\'audio book\',\'audio course\',\'audio lecture\',\'audio show\',\'video course\') AND ( updatedLengthDate IS NULL )';
+$sql='SELECT TbWkWork.id,TbWkWork.name,TbWkWork.typeId FROM TbWkWork,TbWkWorkType WHERE TbWkWork.typeId=TbWkWorkType.id AND TbWkWorkType.name in (\'audio book\',\'audio course\',\'audio lecture\',\'audio show\',\'video course\') AND ( updatedLengthDate IS NULL )';
 
 # this is for all works that do not have length
 #$sql='SELECT TbWkWork.id,TbWkWork.name,TbWkWork.typeId FROM TbWkWork,TbWkWorkType WHERE TbWkWork.typeId=TbWkWorkType.id AND TbWkWorkType.name in (\'audio book\',\'audio course\',\'audio lecture\',\'audio show\',\'video course\',\'video movie\') AND ( length IS NULL )';
 
 # this is for all works (even those that were updated)...
-$sql='SELECT TbWkWork.id,TbWkWork.name,TbWkWork.typeId FROM TbWkWork,TbWkWorkType WHERE TbWkWork.typeId=TbWkWorkType.id AND TbWkWorkType.name in (\'audio book\',\'audio course\',\'audio lecture\',\'audio show\',\'video course\',\'video movie\')';
+#$sql='SELECT TbWkWork.id,TbWkWork.name,TbWkWork.typeId FROM TbWkWork,TbWkWorkType WHERE TbWkWork.typeId=TbWkWorkType.id AND TbWkWorkType.name in (\'audio book\',\'audio course\',\'audio lecture\',\'audio show\',\'video course\',\'video movie\')';
 
 # this is just for movies
 #$sql='SELECT TbWkWork.id,TbWkWork.name,TbWkWork.typeId FROM TbWkWork,TbWkWorkType WHERE TbWkWork.typeId=TbWkWorkType.id AND TbWkWorkType.name in (\'video movie\')';
