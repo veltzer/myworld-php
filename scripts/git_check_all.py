@@ -19,11 +19,21 @@ for gitfolder in glob.glob('*/.git'):
 			'--name-only',
 		])
 		'''
+		'''
+		# the --short flag is no good, it doesn't tell you if you are ahead...
 		subprocess.check_call([
 			'git',
 			'status',
 			'--short',
 		])
+		'''
+		out=subprocess.check_output([
+			'git',
+			'status',
+		])
+		for line in out.split('\n'):
+			if line.find('ahead')!=-1:
+				print(line)
 		os.chdir('..')
 	else:
 		print('skipping [{project}]'.format(project=project))
