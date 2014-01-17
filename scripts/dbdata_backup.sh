@@ -33,4 +33,4 @@ mysql_stats.sh | gzip > $DIR/stats.txt.gz
 
 # backup the blog
 mysqldump $OPTS wordpress | gzip > $DIR/wordpress_data_and_schema.sql.gz
-tar jcf $DIR/blog.tar.bz2 /var/www/blog
+tar jcfP $DIR/blog.tar.bz2 /var/www/blog

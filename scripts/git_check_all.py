@@ -12,13 +12,11 @@ for gitfolder in glob.glob('*/.git'):
 	if not os.path.isfile(os.path.join(folder,'.skip')):
 		print('doing [{project}]'.format(project=project))
 		os.chdir(folder)
-		'''
 		subprocess.check_call([
 			'git',
 			'diff',
 			'--name-only',
 		])
-		'''
 		'''
 		# the --short flag is no good, it doesn't tell you if you are ahead...
 		subprocess.check_call([
