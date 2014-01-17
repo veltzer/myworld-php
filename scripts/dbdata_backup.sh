@@ -29,7 +29,7 @@ mysqldump $OPTS $DB | gzip > $DIR/data_and_schema.sql.gz
 # only schema
 mysqldump $OPTS $DB --no-data | gzip > $DIR/schema_only.sql.gz
 # only stats
-./scripts/mysql_stats.sh | gzip > $DIR/stats.txt.gz
+mysql_stats.sh | gzip > $DIR/stats.txt.gz
 
 # backup the blog
 mysqldump $OPTS wordpress | gzip > $DIR/wordpress_data_and_schema.sql.gz
