@@ -1,9 +1,9 @@
 #!/bin/bash
 
-let x=10
+let x=600
 while [[ $x -gt 0 ]]; do
-	echo $x
-	sleep 1
-	let "x=x-1"
-	espeak "tthere are $x second to end of course"
+	espeak "there are $x second to end of exercise"
+	#espeak "there are $x second to end of course"
+	sleep 60
+	let "x=x-60"
 done
