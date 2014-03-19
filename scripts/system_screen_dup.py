@@ -119,6 +119,7 @@ def find_outputs():
 	return outputs
 
 def set_outputs(outputs, mode):
+	print('setting the outputs...')
 	for index,output in enumerate(outputs):
 		run([
 			"xrandr",
