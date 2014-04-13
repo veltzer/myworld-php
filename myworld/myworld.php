@@ -95,8 +95,8 @@ if(!class_exists('MyWorld')) {
 			// highcharts stuff
 			//echo "<script src='/public/highcharts/highcharts.js'></script>\n";
 			// Ext4(sencha) stuff - need that for the movies tab
-			echo "<link rel='stylesheet' href='https://cdn.sencha.io/ext/gpl/4.2.1/resources/css/ext-all.css'/>\n";
-			echo "<script src='https://cdn.sencha.io/ext/gpl/4.2.1/ext-all.js'></script>\n";
+			echo "<link rel='stylesheet' href='http://cdn.sencha.io/ext/gpl/4.2.1/resources/css/ext-all.css'/>\n";
+			echo "<script src='http://cdn.sencha.io/ext/gpl/4.2.1/ext-all.js'></script>\n";
 			// this line is to remove the nocss that extjs does on the whole page
 			echo "<script>Ext.onReady(function() { Ext.getBody().removeCls('x-body'); });</script>\n";
 
