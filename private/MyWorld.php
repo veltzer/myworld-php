@@ -11,9 +11,9 @@
 		<script src='http://ajax.googleapis.com/ajax/libs/jquery/1.7/jquery.min.js'></script>
 		<script src='http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/jquery-ui.min.js'></script>
 		-->
-		<link rel='stylesheet' href='http://ajax.googleapis.com/ajax/libs/jqueryui/1.9.2/themes/ui-lightness/jquery-ui.css'/>
-		<script src='http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js'></script>
-		<script src='http://ajax.googleapis.com/ajax/libs/jqueryui/1.9.2/jquery-ui.min.js'></script>
+		<link rel='stylesheet' href='https://ajax.googleapis.com/ajax/libs/jqueryui/1.9.2/themes/ui-lightness/jquery-ui.css'/>
+		<script src='https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js'></script>
+		<script src='https://ajax.googleapis.com/ajax/libs/jqueryui/1.9.2/jquery-ui.min.js'></script>
 		<script src='/public/myworld_utils.js'></script>
 		<script src='/public/jquery.cont_valid.js'></script>
 		<script src='/public/jquery.cont_datetime.js'></script>
