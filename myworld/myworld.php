@@ -16,11 +16,11 @@ function my_include($file) {
 }
 
 function link_to_direct($direct_page) {
-	return WP_PLUGIN_URL.'/myworld/sa/'.$direct_page;
+	return plugins_url('/sa/'.$direct_page, __FILE__);
 }
 
 function link_to_resource($resource) {
-	return WP_PLUGIN_URL.'/myworld/resources/'.$resource;
+	return plugins_url('/resources/'.$resource, __FILE__);
 }
 
 /* lets include all php files in 'src'... */
@@ -82,12 +82,12 @@ if(!class_exists('MyWorld')) {
 			 * Third party javascript libs
 			 */
 			// jquery - need that for the accordion stuff
-			echo "<script src='http://ajax.googleapis.com/ajax/libs/jquery/1.7/jquery.min.js'></script>\n";
+			echo "<script src='https://ajax.googleapis.com/ajax/libs/jquery/1.7/jquery.min.js'></script>\n";
 			// jquery ui
-			//echo "<link rel='stylesheet' href='http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/themes/ui-lightness/jquery-ui.css'/>\n";
-			//echo "<script src='http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/jquery-ui.min.js'></script>\n";
+			//echo "<link rel='stylesheet' href='https://ajax.googleapis.com/ajax/libs/jqueryui/1.8/themes/ui-lightness/jquery-ui.css'/>\n";
+			//echo "<script src='https://ajax.googleapis.com/ajax/libs/jqueryui/1.8/jquery-ui.min.js'></script>\n";
 			// dojo
-			echo "<script src='http://ajax.googleapis.com/ajax/libs/dojo/1.9.1/dojo/dojo.js'></script>";
+			echo "<script src='https://ajax.googleapis.com/ajax/libs/dojo/1.9.1/dojo/dojo.js'></script>";
 			// full calendar stuff
 			//echo "<link rel='stylesheet' href='/public/fullcalendar/fullcalendar.css'/>\n";
 			//echo "<script src='/public/fullcalendar/fullcalendar.min.js'></script>\n";
@@ -95,8 +95,8 @@ if(!class_exists('MyWorld')) {
 			// highcharts stuff
 			//echo "<script src='/public/highcharts/highcharts.js'></script>\n";
 			// Ext4(sencha) stuff - need that for the movies tab
-			echo "<link rel='stylesheet' href='http://cdn.sencha.io/ext/gpl/4.2.1/resources/css/ext-all.css'/>\n";
-			echo "<script src='http://cdn.sencha.io/ext/gpl/4.2.1/ext-all.js'></script>\n";
+			echo "<link rel='stylesheet' href='https://cdn.sencha.io/ext/gpl/4.2.1/resources/css/ext-all.css'/>\n";
+			echo "<script src='https://cdn.sencha.io/ext/gpl/4.2.1/ext-all.js'></script>\n";
 			// this line is to remove the nocss that extjs does on the whole page
 			echo "<script>Ext.onReady(function() { Ext.getBody().removeCls('x-body'); });</script>\n";
 
