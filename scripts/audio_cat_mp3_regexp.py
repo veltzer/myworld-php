@@ -58,7 +58,7 @@ lect=1
 for f in sorted(glob.glob('*.mp3')):
 	l.append(f)
 	if count%6==0:
-		name=f[5:]
+		name=f[7:]
 		res='%02d - %s' % (lect,name)
 		#res='%02d.mp3' % (lect)
 		unite(l, res)
