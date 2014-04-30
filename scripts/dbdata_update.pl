@@ -28,6 +28,9 @@ SELECT DISTINCT(TbWkWork.typeId) FROM TbWkWork;
 - use this query to all chapters of a certain work:
 	TBD
 
+TODO:
+- make this script be able to handle all titles and just new title by a command line switch.
+
 =cut
 
 use strict;
