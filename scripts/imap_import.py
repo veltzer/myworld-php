@@ -98,8 +98,7 @@ parser = optparse.OptionParser(
 )
 
 parser.add_option('-f', '--folder', dest='folder', default=__file__, help='Folder to store the emails. [default: %default]')
-parser.add_option('-d', '--debug', dest='debug', default=False, help='do you want to debug the script? [default: %default]')
- 
+parser.add_option('-d', '--debug', action='store_true', dest='debug', default=False, help='do you want to debug the script? [default: %default]')
 (options, args) = parser.parse_args()
 
 if options.debug:
