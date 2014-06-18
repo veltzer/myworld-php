@@ -8,10 +8,12 @@ TODO:
 - use command line parsing and have the output file be specified with -o.
 This is because the current usage may cause the user to accidentaly
 step on his own files.
+- check that the output file is NOT there
+- check that the input files are there
 """
 
-import subprocess
-import sys
+import subprocess # for check_call
+import sys # for argv
 
 if len(sys.argv)<3:
 	raise ValueError('usage: outfile.mp3 [infile1.mp3] [infile2.mp3] ...')
