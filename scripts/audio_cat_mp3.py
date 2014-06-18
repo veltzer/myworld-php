@@ -3,21 +3,45 @@
 """
 This script will catenate mp3 files correctly using ffmpeg.
 see: http://superuser.com/questions/314239/how-to-join-merge-many-mp3-files
-
-TODO:
-- use command line parsing and have the output file be specified with -o.
-This is because the current usage may cause the user to accidentaly
-step on his own files.
-- check that the output file is NOT there
-- check that the input files are there
 """
 
 import subprocess # for check_call
-import sys # for argv
+import optparse # for OptionParser
+import os.path # for isfile
+import sys # for exit
 
-if len(sys.argv)<3:
-	raise ValueError('usage: outfile.mp3 [infile1.mp3] [infile2.mp3] ...')
+##############
+# parameters #
+##############
+# version of this script
+__version__ = '0.1'
 
-#args=[ 'ffmpeg', '-i', 'concat:'+'|'.join(sys.argv[2:]), '-acodec', 'copy', sys.argv[1]]
-args=[ 'avconv', '-i', 'concat:'+'|'.join(sys.argv[2:]), '-acodec', 'copy', sys.argv[1], '-loglevel', 'quiet' ]
+########################
+# command line parsing #
+########################
+parser = optparse.OptionParser(
+	description=__doc__,
+	usage='%prog [options] [files to catenate]',
+	version=__version__
+)
+
+parser.add_option('-o', '--output', dest='output', default=None, help='output file [default: %default]')
+(options, free_args) = parser.parse_args()
+
+# check that all free files are there
+for file in free_args:
+	if not os.path.isfile(file):
+		print('file is not there', file)
+		sys.exit(1)
+if options.output is None:
+	print('must supply -o argument')
+	sys.exit(1)
+if os.path.isfile(options.output):
+	print('file is there', options.output)
+	sys.exit(1)
+
+########
+# code #
+########
+args=[ 'avconv', '-i', 'concat:'+'|'.join(free_args), '-acodec', 'copy', options.output, '-loglevel', 'quiet' ]
 subprocess.check_call(args)
