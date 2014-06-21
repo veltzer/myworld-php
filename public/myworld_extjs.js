@@ -304,6 +304,22 @@ function create_chart(loc, type) {
       box_title = 'Touch typing exercises per month';
       count_title = 'Number of exercises';
     }
+    if (type == 'study_year') {
+      url = type + '_ext';
+      w_model = w_model_year;
+      field = 'year';
+      title = 'Year';
+      box_title = 'Studies per year';
+      count_title = 'Number of works';
+    }
+    if (type == 'study_month') {
+      url = type + '_ext';
+      w_model = w_model_month;
+      field = 'month';
+      title = 'Month';
+      box_title = 'Studies per month';
+      count_title = 'Number of works';
+    }
     var w_store = Ext.create('Ext.data.Store', {
       autoLoad: true,
       model: w_model,
