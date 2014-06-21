@@ -271,18 +271,38 @@ function create_chart(loc, type) {
     var field;
     var title;
     var box_title;
+    var count_title;
     if (type == 'video_viewing_year') {
-      url = 'video_viewing_year_ext';
+      url = type + '_ext';
       w_model = w_model_year;
       field = 'year';
       title = 'Year';
       box_title = 'Movie view per year';
-    } else {
-      url = 'video_viewing_month_ext';
+      count_title = 'Number of movies seen';
+    }
+    if (type == 'video_viewing_month') {
+      url = type + '_ext';
       w_model = w_model_month;
       field = 'month';
       title = 'Month';
       box_title = 'Movie view per month';
+      count_title = 'Number of movies seen';
+    }
+    if (type == 'bt_year') {
+      url = type + '_ext';
+      w_model = w_model_year;
+      field = 'year';
+      title = 'Year';
+      box_title = 'Touch typing exercises per year';
+      count_title = 'Number of exercises';
+    }
+    if (type == 'bt_month') {
+      url = type + '_ext';
+      w_model = w_model_month;
+      field = 'month';
+      title = 'Month';
+      box_title = 'Touch typing exercises per month';
+      count_title = 'Number of exercises';
     }
     var w_store = Ext.create('Ext.data.Store', {
       autoLoad: true,
@@ -308,7 +328,7 @@ function create_chart(loc, type) {
             label: {
               renderer: Ext.util.Format.numberRenderer('0,0')
             },
-            title: 'Number of movies seen',
+            title: count_title,
             grid: true,
             minimum: 0
           }, {
@@ -360,7 +380,7 @@ function create_chart(loc, type) {
 
 function create_chart_here(type) {
   var loc = get_my_location();
-  // the onReady is needed because inside the innet function we don't do it
+  // the onReady is needed because inside the inner function we don't do it
   Ext.onReady(function() {
     create_chart(loc, type);
   });
