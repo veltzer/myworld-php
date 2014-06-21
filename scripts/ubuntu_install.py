@@ -13,6 +13,9 @@ packs=[
 	'python-pythonmagick', # for inserting blobs into the database
 	'imagemagick', # for convert(1) for image manipulation
 	'python-pip', # so that I could install python packages via pip
+	'python-id3', # mp3 tagging library
+	'python-mutagen', # mp3 tagging library
+	'python-eyed3', # mp3 tagging library
 ]
 
 args=['sudo','apt-get','install']
@@ -23,5 +26,6 @@ subprocess.check_call([
 	'pip',
 	'install',
 	'--user',
+	'--upgrade',
 	'PyGithub',
 ])
