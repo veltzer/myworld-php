@@ -127,18 +127,30 @@ while($rowhashref=$sth->fetchrow_hashref()) {
 					$dbh->commit();
 					print 'movie had no duration, updated anyway...'."\n";
 				} else {
-					if($duration!~/^(.*\: )?\d+ min/) {
-						die('duration has a weird value ['.$duration.']');
+					print 'duration is ['.$duration.']...'."\n";
+					# 60 min (13 episodes)
+					if($duration=~/^\d+ min \(\d+ episodes\)$/) {
+						my($data_min,$data_episodes)=($duration=~/^(\d+) min \((\d+) episodes\)$/);
+						my($stat_secs)=$data_min*60*$data_episodes;
+						$dbh->do('UPDATE TbWkWork SET length=? WHERE id=?',undef,$stat_secs,$f_id);
+						$dbh->do('UPDATE TbWkWork SET updatedLengthDate=NOW() WHERE id=?',undef,$f_id);
+						$dbh->do('UPDATE TbWkWork SET chapters=? WHERE id=?',undef,$data_episodes,$f_id);
+						print 'updated movie duration to ['.$stat_secs.'], ['.$data_episodes.'] chapters...'."\n";
+						$dbh->commit();
+					} else {
+						if($duration!~/^(.*\: )?\d+ min/) {
+							die('duration has a weird value ['.$duration.']');
+						}
+						my($country,$stat_secs)=($duration=~/^(.*\: )?(\d+) min/);
+						$stat_secs*=60;
+						if($debug) {
+							print 'found secs='.$stat_secs."\n";
+						}
+						$dbh->do('UPDATE TbWkWork SET length=? WHERE id=?',undef,$stat_secs,$f_id);
+						$dbh->do('UPDATE TbWkWork SET updatedLengthDate=NOW() WHERE id=?',undef,$f_id);
+						$dbh->commit();
+						print 'updated movie duration to ['.$stat_secs.']...'."\n";
 					}
-					my($country,$stat_secs)=($duration=~/^(.*\: )?(\d+) min/);
-					$stat_secs*=60;
-					if($debug) {
-						print 'found secs='.$stat_secs."\n";
-					}
-					$dbh->do('UPDATE TbWkWork SET length=? WHERE id=?',undef,$stat_secs,$f_id);
-					$dbh->do('UPDATE TbWkWork SET updatedLengthDate=NOW() WHERE id=?',undef,$f_id);
-					$dbh->commit();
-					print 'updated movie duration to ['.$stat_secs.']...'."\n";
 				}
 			}
 			if($do_aliases) {
