@@ -93,7 +93,9 @@ for x in cursor:
 	print('f_name: {0}'.format(f_name))
 	print('f_length: {0}'.format(f_length))
 	print('info_runtime: {0}'.format(info_runtime))
-	if info_runtime is not None:
+	if info_runtime is None:
+		update_check(db, c_update, f_id)
+	else:
 		deduced_runtime=analyze_runtimes(info_runtime)
 		print('deduced_runtime: {0}'.format(deduced_runtime))
 		if f_length is None:
