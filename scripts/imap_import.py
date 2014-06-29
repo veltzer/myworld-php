@@ -21,6 +21,7 @@ import imaplib # for IMAP4_SSL
 import configparser # for ConfigParser
 import os.path # for expanduser
 import optparse # for OptionParser
+import sys # for getdefaultencoding
 
 # version of this script
 __version__ = '0.1'
@@ -38,7 +39,7 @@ __version__ = '0.1'
 helper function to convert bytes to strings. Damn python3!
 '''
 def b2s(bytes):
-	return bytes.decode('utf-8')
+	return bytes.decode(sys.getdefaultencoding())
 
 def read_config(cp, filename):
 	filename=os.path.expanduser(filename)
