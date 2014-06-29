@@ -34,32 +34,39 @@ __version__ = '0.1'
 # helper functions #
 ####################
 
+'''
+helper function to convert bytes to strings. Damn python3!
+'''
+def b2s(bytes):
+	return bytes.decode('utf-8')
+
 def read_config(cp, filename):
 	filename=os.path.expanduser(filename)
 	if not os.path.isfile(filename):
-		raise ValueError('do not have config file', filename)
+		raise ValueError('do not have config file [{0}]'.format(filename))
 	cp.read(filename)
 
 def imap_have_mailbox(imap, name):
 	(res, l)=imap.list(name)
 	if res!='OK':
-		raise ValueError('could not list', name)
+		raise ValueError('could not list [{0}]. error is [{1}]'.format(name, b2s(l[0])))
 	if len(l)==1 and l[0] is None:
 		return False
 	return True
 
 '''
 this function creates a folder.
+if the folder exists then it will throw an exception
 '''
 def imap_create(imap, name):
 	(res, l)=imap.create(name)
 	if res!='OK':
-		raise ValueError('could not create', name)
+		raise ValueError('could not create [{0}]. error is [{1}]'.format(name, b2s(l[0])))
 
 def imap_delete(imap, name):
 	(res, l)=imap.delete(name)
 	if res!='OK':
-		raise ValueError('could not delete', name)
+		raise ValueError('could not delete [{0}]. error is [{1}]'.format(name, b2s(l[0])))
 
 def imap_create_fullpath(imap, path):
 	parts=path.split('/')
@@ -74,20 +81,47 @@ def imap_delete_fullpath(imap, path):
 def imap_logout(imap):
 	(res, l)=imap.logout()
 	if res!='BYE':
-		raise ValueError('could not logout', res, l)
+		raise ValueError('could not logout with error [{0}]'.format(res))
 
 def imap_login(imap, username, password):
 	(res, l)=imap.login(username, password)
 	if res!='OK':
-		raise ValueError('could not login')
+		raise ValueError('could not login with error [{0}]'.format(res))
+
+def imap_test(imap, options):
+	if options.debug:
+		print(imap.capability())
+		print(imap.list())
+
+	# this should not raise an error since the folder does not exist...
+	if imap_have_mailbox(imap, 'dontexist'):
+		raise ValueError('have mailbox which should not exist')
+	# this should not raise an error since the folder does exist...
+	if not imap_have_mailbox(imap, 'business'):
+		raise ValueError('do not have mailbox business')
+
+	# now we try to delete a folder which does not exist.
+	# this should raise an error. If it doesn't then we need to
+	# error
+	have_error=False
+	try:
+		imap_delete(imap, 'dontexist')
+	except ValueError as e:
+		have_error=True
+	if not have_error:
+		raise ValueError('did not get an exception')
+	
+	# these should both succeeed
+	imap_create_fullpath(imap, 'foo/bar/zoo')
+	imap_delete_fullpath(imap, 'foo/bar/zoo')
 
 ########
 # code #
 ########
 cp = configparser.ConfigParser()
-read_config(cp, '~/.pyimap.ini')
-opt_username = cp.get('imap', 'username')
-opt_password = cp.get('imap', 'password')
+read_config(cp, '~/.google.ini')
+opt_username = cp.get('authorization', 'username')
+opt_password = cp.get('authorization', 'password')
 opt_hostname = cp.get('imap', 'hostname')
 opt_port = cp.get('imap', 'port')
 
@@ -112,12 +146,5 @@ if options.debug:
 
 imap = imaplib.IMAP4_SSL(opt_hostname, opt_port)
 imap_login(imap, opt_username, opt_password)
-#print(imap.capability())
-#print(imap.list())
-if imap_have_mailbox(imap, 'foo'):
-	raise ValueError('have mailbox foo')
-if not imap_have_mailbox(imap, 'business'):
-	raise ValueError('do not have mailbox business')
-imap_create_fullpath(imap, 'foo/bar/zoo')
-imap_delete_fullpath(imap, 'foo/bar/zoo')
+imap_test(imap, options)
 imap_logout(imap)
