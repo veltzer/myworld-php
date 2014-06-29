@@ -186,12 +186,6 @@ install_wp:
 	$(Q)sudo chown -R root.root $(WP_DIR)
 	$(info dont forget to make install and enable all plugins and configure them if needed...)
 
-.PHONY: install_bins
-install_bins:
-	$(Q)scripts/install_bins.py
-.PHONY: install_perl
-install_perl:
-	$(Q)for x in perl/*.pm; do ln -fs $$PWD/$$x ~/install/myperl/`basename $$x`;done
-.PHONY: install_python
-install_python:
-	$(Q)cp -r python/* ~/install/mypython
+.PHONY: install_all
+install_all:
+	$(Q)scripts/install_all.py
