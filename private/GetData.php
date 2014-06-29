@@ -6,14 +6,18 @@ $types=array();
 $types['jsondata']=1;
 $types['video_devices']=1;
 $types['video_places']=1;
-$types['video_viewing_month_dojo']=1;
-$types['video_viewing_month_ext']=1;
 $types['video_viewing_year_dojo']=1;
-$types['video_viewing_year_ext']=1;
-$types['bt_month_ext']=1;
-$types['bt_year_ext']=1;
-$types['study_month_ext']=1;
-$types['study_year_ext']=1;
+$types['video_viewing_month_dojo']=1;
+$types['video_viewing_year']=1;
+$types['video_viewing_month']=1;
+$types['bt_year']=1;
+$types['bt_month']=1;
+$types['study_year']=1;
+$types['study_month']=1;
+$types['upgrade_laptop_year']=1;
+$types['upgrade_laptop_month']=1;
+$types['upgrade_desktop_year']=1;
+$types['upgrade_desktop_month']=1;
 $types['openbook_progress']=1;
 $types['TbIdPerson']=1;
 $types['TbLocation']=1;
@@ -62,32 +66,52 @@ if($type=='video_viewing_month_dojo') {
 	# the wrapping is for dojo charting to work...
 	$response='{ label: "id", identifier: "id", items: '.my_json_encode($result).'}';
 }
-if($type=='video_viewing_year_ext') {
+if($type=='video_viewing_year') {
 	$query=sprintf('SELECT DATE_FORMAT(TbWkWorkView.endViewDate,"%%Y") AS year,COUNT(*) AS views FROM TbWkWorkViewPerson, TbWkWorkView, TbWkWork, TbWkWorkType WHERE TbWkWorkView.endViewDate is not NULL AND TbWkWorkView.workId=TbWkWork.id AND TbWkWorkViewPerson.viewerId=1 AND TbWkWorkViewPerson.viewId=TbWkWorkView.id AND TbWkWorkType.name="video movie" AND TbWkWorkType.id=TbWkWork.typeId GROUP BY DATE_FORMAT(TbWkWorkView.endViewDate,"%%Y") ORDER BY TbWkWorkView.endViewDate');
 	$result=my_mysql_query($query);
 	$response='{ items: '.my_json_encode($result).'}';
 }
-if($type=='video_viewing_month_ext') {
+if($type=='video_viewing_month') {
 	$query=sprintf('SELECT DATE_FORMAT(TbWkWorkView.endViewDate,"%%m/%%y") AS month,COUNT(*) AS views FROM TbWkWorkViewPerson, TbWkWorkView, TbWkWork, TbWkWorkType WHERE TbWkWorkView.endViewDate is not NULL AND TbWkWorkView.workId=TbWkWork.id AND TbWkWorkViewPerson.viewerId=1 AND TbWkWorkViewPerson.viewId=TbWkWorkView.id AND TbWkWorkType.name="video movie" AND TbWkWorkType.id=TbWkWork.typeId GROUP BY DATE_FORMAT(TbWkWorkView.endViewDate,"%%m/%%y") ORDER BY TbWkWorkView.endViewDate');
 	$result=my_mysql_query($query);
 	$response='{ items: '.my_json_encode($result).'}';
 }
-if($type=='bt_year_ext') {
+if($type=='bt_year') {
 	$query=sprintf('SELECT DATE_FORMAT(TbTdDone.end,"%%Y") AS year,COUNT(*) AS views FROM TbTdDone, TbTdActivity WHERE TbTdDone.end is not NULL AND TbTdDone.activityId=TbTdActivity.id AND TbTdDone.personId=1 AND TbTdActivity.name="blind typing training" GROUP BY DATE_FORMAT(TbTdDone.end,"%%Y") ORDER BY TbTdDone.end');
 	$result=my_mysql_query($query);
 	$response='{ items: '.my_json_encode($result).'}';
 }
-if($type=='bt_month_ext') {
+if($type=='bt_month') {
 	$query=sprintf('SELECT DATE_FORMAT(TbTdDone.end,"%%m/%%Y") AS month,COUNT(*) AS views FROM TbTdDone, TbTdActivity WHERE TbTdDone.end is not NULL AND TbTdDone.activityId=TbTdActivity.id AND TbTdDone.personId=1 AND TbTdActivity.name="blind typing training" GROUP BY DATE_FORMAT(TbTdDone.end,"%%m/%%Y") ORDER BY TbTdDone.end');
 	$result=my_mysql_query($query);
 	$response='{ items: '.my_json_encode($result).'}';
 }
-if($type=='study_year_ext') {
+if($type=='upgrade_laptop_year') {
+	$query=sprintf('SELECT DATE_FORMAT(TbTdDone.end,"%%Y") AS year,COUNT(*) AS views FROM TbTdDone, TbTdActivity WHERE TbTdDone.end is not NULL AND TbTdDone.activityId=TbTdActivity.id AND TbTdDone.personId=1 AND TbTdActivity.name="upgrade laptop machine" GROUP BY DATE_FORMAT(TbTdDone.end,"%%Y") ORDER BY TbTdDone.end');
+	$result=my_mysql_query($query);
+	$response='{ items: '.my_json_encode($result).'}';
+}
+if($type=='upgrade_laptop_month') {
+	$query=sprintf('SELECT DATE_FORMAT(TbTdDone.end,"%%m/%%Y") AS month,COUNT(*) AS views FROM TbTdDone, TbTdActivity WHERE TbTdDone.end is not NULL AND TbTdDone.activityId=TbTdActivity.id AND TbTdDone.personId=1 AND TbTdActivity.name="upgrade laptop machine" GROUP BY DATE_FORMAT(TbTdDone.end,"%%m/%%Y") ORDER BY TbTdDone.end');
+	$result=my_mysql_query($query);
+	$response='{ items: '.my_json_encode($result).'}';
+}
+if($type=='upgrade_desktop_year') {
+	$query=sprintf('SELECT DATE_FORMAT(TbTdDone.end,"%%Y") AS year,COUNT(*) AS views FROM TbTdDone, TbTdActivity WHERE TbTdDone.end is not NULL AND TbTdDone.activityId=TbTdActivity.id AND TbTdDone.personId=1 AND TbTdActivity.name="upgrade desktop machine" GROUP BY DATE_FORMAT(TbTdDone.end,"%%Y") ORDER BY TbTdDone.end');
+	$result=my_mysql_query($query);
+	$response='{ items: '.my_json_encode($result).'}';
+}
+if($type=='upgrade_desktop_month') {
+	$query=sprintf('SELECT DATE_FORMAT(TbTdDone.end,"%%m/%%Y") AS month,COUNT(*) AS views FROM TbTdDone, TbTdActivity WHERE TbTdDone.end is not NULL AND TbTdDone.activityId=TbTdActivity.id AND TbTdDone.personId=1 AND TbTdActivity.name="upgrade desktop machine" GROUP BY DATE_FORMAT(TbTdDone.end,"%%m/%%Y") ORDER BY TbTdDone.end');
+	$result=my_mysql_query($query);
+	$response='{ items: '.my_json_encode($result).'}';
+}
+if($type=='study_year') {
 	$query=sprintf('SELECT DATE_FORMAT(TbWkWorkView.endViewDate,"%%Y") as year,COUNT(*) AS views FROM TbWkWorkViewPerson,TbWkWorkView,TbWkWork,TbWkWorkType WHERE TbWkWorkViewPerson.viewerId=1 AND TbWkWorkViewPerson.viewId=TbWkWorkView.id AND TbWkWorkView.workId=TbWkWork.id AND TbWkWork.typeId=TbWkWorkType.id AND TbWkWorkType.isStudy=1 GROUP BY DATE_FORMAT(TbWkWorkView.endViewDate,"%%Y") ORDER BY TbWkWorkView.endViewDate');
 	$result=my_mysql_query($query);
 	$response='{ items: '.my_json_encode($result).'}';
 }
-if($type=='study_month_ext') {
+if($type=='study_month') {
 	$query=sprintf('SELECT DATE_FORMAT(TbWkWorkView.endViewDate,"%%m/%%Y") AS month,COUNT(*) AS views FROM TbWkWorkViewPerson,TbWkWorkView,TbWkWork,TbWkWorkType WHERE TbWkWorkViewPerson.viewerId=1 AND TbWkWorkViewPerson.viewId=TbWkWorkView.id AND TbWkWorkView.workId=TbWkWork.id AND TbWkWork.typeId=TbWkWorkType.id AND TbWkWorkType.isStudy=1 GROUP BY DATE_FORMAT(TbWkWorkView.endViewDate,"%%m/%%Y") ORDER BY TbWkWorkView.endViewDate');
 	$result=my_mysql_query($query);
 	$response='{ items: '.my_json_encode($result).'}';

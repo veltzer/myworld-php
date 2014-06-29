@@ -243,89 +243,26 @@ function create_movies_here() {
   });
 }
 
-function create_chart(loc, type) {
+function create_chart(loc, type, model_x_label, model_y_label,
+    box_title, count_title, field_title) {
   Ext.require(['Ext.data.Model', 'Ext.chart.Chart', 'Ext.panel.Panel',
     'Ext.data.Store'], function() {
-    var w_model_year = Ext.define('MovieModel', {
+    var w_model = Ext.define('MyModel', {
       extend: 'Ext.data.Model',
       fields: [{
-        name: 'year',
+        name: model_x_label,
         type: 'string'
       }, {
-        name: 'views',
+        name: model_y_label,
         type: 'number'
       }]
     });
-    var w_model_month = Ext.define('MovieModel', {
-      extend: 'Ext.data.Model',
-      fields: [{
-        name: 'month',
-        type: 'string'
-      }, {
-        name: 'views',
-        type: 'number'
-      }]
-    });
-    var url;
-    var w_model;
-    var field;
-    var title;
-    var box_title;
-    var count_title;
-    if (type == 'video_viewing_year') {
-      url = type + '_ext';
-      w_model = w_model_year;
-      field = 'year';
-      title = 'Year';
-      box_title = 'Movie view per year';
-      count_title = 'Number of movies seen';
-    }
-    if (type == 'video_viewing_month') {
-      url = type + '_ext';
-      w_model = w_model_month;
-      field = 'month';
-      title = 'Month';
-      box_title = 'Movie view per month';
-      count_title = 'Number of movies seen';
-    }
-    if (type == 'bt_year') {
-      url = type + '_ext';
-      w_model = w_model_year;
-      field = 'year';
-      title = 'Year';
-      box_title = 'Touch typing exercises per year';
-      count_title = 'Number of exercises';
-    }
-    if (type == 'bt_month') {
-      url = type + '_ext';
-      w_model = w_model_month;
-      field = 'month';
-      title = 'Month';
-      box_title = 'Touch typing exercises per month';
-      count_title = 'Number of exercises';
-    }
-    if (type == 'study_year') {
-      url = type + '_ext';
-      w_model = w_model_year;
-      field = 'year';
-      title = 'Year';
-      box_title = 'Studies per year';
-      count_title = 'Number of works';
-    }
-    if (type == 'study_month') {
-      url = type + '_ext';
-      w_model = w_model_month;
-      field = 'month';
-      title = 'Month';
-      box_title = 'Studies per month';
-      count_title = 'Number of works';
-    }
     var w_store = Ext.create('Ext.data.Store', {
       autoLoad: true,
       model: w_model,
       proxy: {
         type: 'ajax',
-        url: '/public/GetData.php?type=' + url,
+        url: '/public/GetData.php?type=' + type,
         reader: {
           type: 'json',
           root: 'items'
@@ -340,7 +277,7 @@ function create_chart(loc, type) {
           axes: [{
             type: 'Numeric',
             position: 'left',
-            fields: ['views'],
+            fields: [model_y_label],
             label: {
               renderer: Ext.util.Format.numberRenderer('0,0')
             },
@@ -350,8 +287,8 @@ function create_chart(loc, type) {
           }, {
             type: 'Category',
             position: 'bottom',
-            fields: [field],
-            title: title
+            fields: [model_x_label],
+            title: field_title
           }],
           series: [{
             type: 'column',
@@ -363,20 +300,20 @@ function create_chart(loc, type) {
               height: 28,
               renderer: function(storeItem, item) {
                 fake_use(item);
-                this.setTitle(storeItem.get(field) + ': ' +
-                    storeItem.get('views'));
+                this.setTitle(storeItem.get(model_x_label) + ': ' +
+                    storeItem.get(model_y_label));
               }
             },
             label: {
               display: 'insideEnd',
               'text-anchor': 'middle',
-              field: 'views',
+              field: model_y_label,
               renderer: Ext.util.Format.numberRenderer('0'),
               orientation: 'horizonal'
               // color: '#333'
             },
-            xField: field,
-            yField: 'views'
+            xField: model_x_label,
+            yField: model_y_label
           }]
           // renderTo: loc,
         });
@@ -394,10 +331,12 @@ function create_chart(loc, type) {
   });
 }
 
-function create_chart_here(type) {
+function create_chart_here(type, model_x_label, model_y_label,
+    box_title, count_title, field_title) {
   var loc = get_my_location();
   // the onReady is needed because inside the inner function we don't do it
   Ext.onReady(function() {
-    create_chart(loc, type);
+    create_chart(loc, type, model_x_label, model_y_label,
+        box_title, count_title, field_title);
   });
 }
