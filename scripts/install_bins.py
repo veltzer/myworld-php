@@ -11,7 +11,7 @@ import os.path # for join, expanduser, abspath, islink
 root_folder='scripts'
 target_folder=os.path.expanduser('~/install/bin')
 doit=True
-debug=True
+debug=False
 
 cwd=os.getcwd()
 for file in os.listdir(target_folder):
@@ -19,9 +19,10 @@ for file in os.listdir(target_folder):
 	if os.path.islink(full):
 		link_target=os.path.realpath(full)
 		if link_target.startswith(cwd):
-			if debug:
-				print('unlinking [{0}]'.format(full))
-			os.unlink(full)
+			if doit:
+				if debug:
+					print('unlinking [{0}]'.format(full))
+				os.unlink(full)
 for root,dirs,files in os.walk(root_folder):
 	for cfile in files:
 		source=os.path.abspath(os.path.join(root, cfile))
