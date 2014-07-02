@@ -132,14 +132,14 @@ while($rowhashref=$sth->fetchrow_hashref()) {
 	if($type eq 'audio' || $type eq 'video') {
 		my($folder);
 		if($type eq 'audio') {
-			$folder='/home/mark/links/topics_archive/audio/abooks/by_title_name/'.$f_name;
+			$folder='/home/mark/slow_links/topics_archive/audio/abooks/by_title_name/'.$f_name;
 		}
 		if($do_video==0 && $type eq 'video') {
 			print('breaking since this is a video'."\n");
 			next;
 		}
 		if($type eq 'video') {
-			$folder='/home/mark/links/topics_archive/video/emovies/by_title_name/'.$f_name;
+			$folder='/home/mark/slow_links/topics_archive/video/emovies/by_title_name/'.$f_name;
 		}
 		if(! -d $folder) {
 			die('['.$folder.'] is not a folder'."\n");

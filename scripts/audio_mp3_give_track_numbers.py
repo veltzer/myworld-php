@@ -28,7 +28,7 @@ for file in sys.argv[1:]:
 for i, file in enumerate(sys.argv[1:]):
 	id3info = ID3.ID3(file)
 	#print(id3info)
-	#id3info['TRACKNUMBER'] = i+1
-	id3info['TITLE'] = str(i+1)
-	print(id3info)
+	id3info['TRACKNUMBER'] = i+1
+	#id3info['TITLE'] = str(i+1)
+	#print(id3info)
 	id3info.write()
