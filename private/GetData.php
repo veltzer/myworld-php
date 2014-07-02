@@ -14,6 +14,10 @@ $types['bt_year']=1;
 $types['bt_month']=1;
 $types['study_year']=1;
 $types['study_month']=1;
+$types['pw_year']=1;
+$types['pw_month']=1;
+$types['et_year']=1;
+$types['et_month']=1;
 $types['upgrade_laptop_year']=1;
 $types['upgrade_laptop_month']=1;
 $types['upgrade_desktop_year']=1;
@@ -125,6 +129,26 @@ if($type=='study_year') {
 }
 if($type=='study_month') {
 	$query=sprintf('SELECT DATE_FORMAT(TbWkWorkView.endViewDate,"%%m/%%Y") AS month,COUNT(*) AS views FROM TbWkWorkViewPerson,TbWkWorkView,TbWkWork,TbWkWorkType WHERE TbWkWorkViewPerson.viewerId=1 AND TbWkWorkViewPerson.viewId=TbWkWorkView.id AND TbWkWorkView.workId=TbWkWork.id AND TbWkWork.typeId=TbWkWorkType.id AND TbWkWorkType.isStudy=1 GROUP BY DATE_FORMAT(TbWkWorkView.endViewDate,"%%m/%%Y") ORDER BY TbWkWorkView.endViewDate');
+	$result=my_mysql_query($query);
+	$response='{ items: '.my_json_encode($result).'}';
+}
+if($type=='pw_year') {
+	$query=sprintf('SELECT DATE_FORMAT(TbTdDone.end,"%%Y") AS year,COUNT(*) AS views FROM TbTdDone, TbTdActivity WHERE TbTdDone.end is not NULL AND TbTdDone.activityId=TbTdActivity.id AND TbTdDone.personId=1 AND TbTdActivity.name="piano workout" GROUP BY DATE_FORMAT(TbTdDone.end,"%%Y") ORDER BY TbTdDone.end');
+	$result=my_mysql_query($query);
+	$response='{ items: '.my_json_encode($result).'}';
+}
+if($type=='pw_month') {
+	$query=sprintf('SELECT DATE_FORMAT(TbTdDone.end,"%%m/%%Y") AS month,COUNT(*) AS views FROM TbTdDone, TbTdActivity WHERE TbTdDone.end is not NULL AND TbTdDone.activityId=TbTdActivity.id AND TbTdDone.personId=1 AND TbTdActivity.name="piano workout" GROUP BY DATE_FORMAT(TbTdDone.end,"%%m/%%Y") ORDER BY TbTdDone.end');
+	$result=my_mysql_query($query);
+	$response='{ items: '.my_json_encode($result).'}';
+}
+if($type=='et_year') {
+	$query=sprintf('SELECT DATE_FORMAT(TbTdDone.end,"%%Y") AS year,COUNT(*) AS views FROM TbTdDone, TbTdActivity WHERE TbTdDone.end is not NULL AND TbTdDone.activityId=TbTdActivity.id AND TbTdDone.personId=1 AND TbTdActivity.name="ear training" GROUP BY DATE_FORMAT(TbTdDone.end,"%%Y") ORDER BY TbTdDone.end');
+	$result=my_mysql_query($query);
+	$response='{ items: '.my_json_encode($result).'}';
+}
+if($type=='et_month') {
+	$query=sprintf('SELECT DATE_FORMAT(TbTdDone.end,"%%m/%%Y") AS month,COUNT(*) AS views FROM TbTdDone, TbTdActivity WHERE TbTdDone.end is not NULL AND TbTdDone.activityId=TbTdActivity.id AND TbTdDone.personId=1 AND TbTdActivity.name="ear training" GROUP BY DATE_FORMAT(TbTdDone.end,"%%m/%%Y") ORDER BY TbTdDone.end');
 	$result=my_mysql_query($query);
 	$response='{ items: '.my_json_encode($result).'}';
 }
