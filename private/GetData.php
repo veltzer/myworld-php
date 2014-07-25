@@ -10,6 +10,8 @@ $types['video_viewing_year_dojo']=1;
 $types['video_viewing_month_dojo']=1;
 $types['video_viewing_year']=1;
 $types['video_viewing_month']=1;
+$types['ob_year']=1;
+$types['ob_month']=1;
 $types['bt_year']=1;
 $types['bt_month']=1;
 $types['study_year']=1;
@@ -79,6 +81,16 @@ if($type=='video_viewing_year') {
 }
 if($type=='video_viewing_month') {
 	$query=sprintf('SELECT DATE_FORMAT(TbWkWorkView.endViewDate,"%%m/%%y") AS month,COUNT(*) AS views FROM TbWkWorkViewPerson, TbWkWorkView, TbWkWork, TbWkWorkType WHERE TbWkWorkView.endViewDate is not NULL AND TbWkWorkView.workId=TbWkWork.id AND TbWkWorkViewPerson.viewerId=1 AND TbWkWorkViewPerson.viewId=TbWkWorkView.id AND TbWkWorkType.name="video movie" AND TbWkWorkType.id=TbWkWork.typeId GROUP BY DATE_FORMAT(TbWkWorkView.endViewDate,"%%m/%%y") ORDER BY TbWkWorkView.endViewDate');
+	$result=my_mysql_query($query);
+	$response='{ items: '.my_json_encode($result).'}';
+}
+if($type=='ob_year') {
+	$query=sprintf('SELECT DATE_FORMAT(TbGraphData.dt,"%%Y") AS year,value AS views FROM TbGraphData, TbGraph WHERE TbGraphData.graphId=TbGraph.id AND TbGraph.name="openbook_progress" GROUP BY DATE_FORMAT(TbGraphData.dt,"%%Y") ORDER BY TbGraphData.dt');
+	$result=my_mysql_query($query);
+	$response='{ items: '.my_json_encode($result).'}';
+}
+if($type=='ob_month') {
+	$query=sprintf('SELECT DATE_FORMAT(TbGraphData.dt,"%%m/%%Y") AS month,value AS views FROM TbGraphData, TbGraph WHERE TbGraphData.graphId=TbGraph.id AND TbGraph.name="openbook_progress" GROUP BY DATE_FORMAT(TbGraphData.dt,"%%m/%%Y") ORDER BY TbGraphData.dt');
 	$result=my_mysql_query($query);
 	$response='{ items: '.my_json_encode($result).'}';
 }
