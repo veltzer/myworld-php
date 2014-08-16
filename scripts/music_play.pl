@@ -26,7 +26,8 @@ my($play)=1;
 # assert that we have idv2.4 tags?
 my($assert)=0;
 # where is my music?
-my($music_folder)='/home/mark/topics_archive/audio/music';
+#my($music_folder)='/home/mark/topics_archive/audio/music';
+my($music_folder)='/mnt/external/mark/topics_archive/audio/music';
 # check that we are only playing stuff from the music folder? This is a SECURITY CHECK, DONT REMOVE!
 my($check_sec)=1;
 
