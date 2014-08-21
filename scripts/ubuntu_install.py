@@ -23,10 +23,11 @@ args=['sudo','apt-get','install','--assume-yes']
 args.extend(packs)
 subprocess.check_call(args)
 
-subprocess.check_call([
-	'pip',
-	'install',
-	'--user',
-	'--upgrade',
-	'PyGithub',
-])
+if False:
+	subprocess.check_call([
+		'pip',
+		'install',
+		'--user',
+		'--upgrade',
+		'PyGithub',
+	])
