@@ -394,7 +394,7 @@ function get_external_href($external_name,$external_id) {
 	$vars['external_id']=$external_id;
 	$result=template_it($template,$vars);
 	//deubg_print("result is [$result]");
-	return $result;
+	return htmlspecialchars($result, ENT_QUOTES);
 }
 
 function get_full_name($hash,$honorifics_hash) {
