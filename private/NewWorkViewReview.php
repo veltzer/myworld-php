@@ -39,7 +39,7 @@ $query=sprintf('insert into TbWkWorkExternal (workId,externalId,externalCode) va
 my_mysql_query($query);
 $p_externalId=mysql_insert_id();
 // insert a new view
-$query=sprintf('insert into TbWkWorkView (workId,endViewDate,viewerId,locationId,deviceId) values(%s,%s,%s,%s,%s,%s)',
+$query=sprintf('insert into TbWkWorkView (workId,endViewDate,viewerId,locationId,deviceId) values(%s,%s,%s,%s,%s)',
 	my_mysql_real_escape_string($p_workId),
 	my_mysql_real_escape_string($p_end),
 	my_mysql_real_escape_string($p_personId),
