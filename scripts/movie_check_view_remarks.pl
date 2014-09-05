@@ -42,6 +42,7 @@ sub my_menu() {
 		'o - change the todo',
 		'n - null the todo',
 		'u - update view date to now',
+		's - skip',
 		'q - quit',
 	);
 }
@@ -135,9 +136,14 @@ while($rowhashref=$sth->fetchrow_hashref()) {
 	print 'f_deviceId is ['.$f_deviceId.'], '.$hashDevice{$f_deviceId}."\n";
 	my($res);
 	$res=my_menu();
-	while($res ne 'q') {
+	while($res ne 's') {
 		if($debug) {
 			print 'doing ['.$res.']'."\n";
+		}
+		if($res eq 'q') {
+			$sth->finish();
+			$dbh->disconnect();
+			exit(1);
 		}
 		if($res eq 'd') {
 			while(my($key,$val)=each(%hashDevice)) {

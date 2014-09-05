@@ -29,15 +29,18 @@ def file_gen(root_folder, recurse):
 def install(root_folder, target_folder, recurse):
 	target_folder=os.path.expanduser(target_folder)
 	cwd=os.getcwd()
-	for file in os.listdir(target_folder):
-		full=os.path.join(target_folder, file)
-		if os.path.islink(full):
-			link_target=os.path.realpath(full)
-			if link_target.startswith(cwd):
-				if doit:
-					if debug:
-						print('unlinking [{0}]'.format(full))
-					os.unlink(full)
+	if os.path.isdir(target_folder):
+		for file in os.listdir(target_folder):
+			full=os.path.join(target_folder, file)
+			if os.path.islink(full):
+				link_target=os.path.realpath(full)
+				if link_target.startswith(cwd):
+					if doit:
+						if debug:
+							print('unlinking [{0}]'.format(full))
+						os.unlink(full)
+	else:
+		os.mkdir(target_folder)
 	for root,dirs,files in file_gen(root_folder, recurse):
 		for file in files:
 			source=os.path.abspath(os.path.join(root, file))
