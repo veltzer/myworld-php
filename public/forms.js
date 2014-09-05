@@ -10,7 +10,8 @@ jQuery(document).ready(function() {
 
   // regular movie
 
-  var init = {
+  var init;
+  init = {
     name: 'Send',
     url: 'NewMovie.php',
     logger: '#log',
