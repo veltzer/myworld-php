@@ -11,10 +11,6 @@ $p_name=my_get_post('name');
 $p_typeId=my_get_post_or_null('typeId');
 $p_externalId=my_get_post('externalId');
 $p_externalCode=my_get_post('externalCode');
-$p_start=my_get_post('start');
-if($p_start!='') {
-	$p_start=javascriptdate_to_mysqldate($p_start);
-}
 $p_end=javascriptdate_to_mysqldate(my_get_post('end'));
 if($p_end!='') {
 	$p_end=javascriptdate_to_mysqldate($p_end);
@@ -43,9 +39,8 @@ $query=sprintf('insert into TbWkWorkExternal (workId,externalId,externalCode) va
 my_mysql_query($query);
 $p_externalId=mysql_insert_id();
 // insert a new view
-$query=sprintf('insert into TbWkWorkView (workId,startViewDate,endViewDate,viewerId,locationId,deviceId) values(%s,%s,%s,%s,%s,%s)',
+$query=sprintf('insert into TbWkWorkView (workId,endViewDate,viewerId,locationId,deviceId) values(%s,%s,%s,%s,%s,%s)',
 	my_mysql_real_escape_string($p_workId),
-	my_mysql_real_escape_string($p_start),
 	my_mysql_real_escape_string($p_end),
 	my_mysql_real_escape_string($p_personId),
 	my_mysql_real_escape_string($p_locationId),

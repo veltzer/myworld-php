@@ -766,6 +766,7 @@ jQuery(document).ready(function() {
     sname: 'typeId',
     initState: true,
     initMsg: 'Put type type of work here',
+    initVal: 12, // 12 stands for video clip
     url: 'GetData.php?type=TbWkWorkType',
     logger: '#log',
     submit: '#workviewreview_send'
@@ -778,6 +779,7 @@ jQuery(document).ready(function() {
     sname: 'externalId',
     initState: true,
     initMsg: 'Put the type of external id here',
+    initVal: 40, // 40 stands for youtube id
     url: 'GetData.php?type=TbExternalType',
     logger: '#log',
     submit: '#workviewreview_send'
@@ -796,14 +798,6 @@ jQuery(document).ready(function() {
   jQuery('#workviewreview_externalcode').cont_valid(init);
 
   init = {
-    name: 'Start date',
-    sname: 'start',
-    logger: '#log',
-    submit: '#workviewreview_send'
-  };
-  jQuery('#workviewreview_start').cont_datetime(init);
-
-  init = {
     name: 'End date',
     sname: 'end',
     logger: '#log',
@@ -817,7 +811,7 @@ jQuery(document).ready(function() {
     sname: 'personId',
     initState: false,
     initMsg: 'Put the person id here',
-    initVal: 1,
+    initVal: 1, // 1 stands for me
     url: 'GetData.php?type=TbIdPerson',
     logger: '#log',
     submit: '#workviewreview_send'
@@ -843,6 +837,7 @@ jQuery(document).ready(function() {
     sname: 'deviceId',
     initState: true,
     initMsg: 'put the device on which you saw the movie',
+    initVal: 33, // desktop streaming
     url: 'GetData.php?type=TbDevice',
     logger: '#log',
     submit: '#workviewreview_send'

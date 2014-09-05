@@ -171,7 +171,6 @@
 					<div id='workviewreview_typeid'></div>
 					<div id='workviewreview_externalid'></div>
 					<div id='workviewreview_externalcode'></div>
-					<div id='workviewreview_start'></div>
 					<div id='workviewreview_end'></div>
 					<div id='workviewreview_personid'></div>
 					<div id='workviewreview_locationid'></div>
