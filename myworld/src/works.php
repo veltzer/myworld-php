@@ -109,14 +109,11 @@ function create_works($params) {
 			break;
 	}
 	$query=sprintf('SELECT TbWkWork.id,TbWkWork.name,TbWkWork.length,TbWkWork.size,TbWkWork.chapters,TbWkWork.typeId,TbWkWork.languageId,TbWkWorkView.startViewDate,TbWkWorkView.endViewDate,TbWkWorkViewPerson.viewerId,TbWkWorkView.locationId,TbWkWorkView.deviceId,TbWkWorkView.langId,TbWkWorkReview.ratingId,TbWkWorkReview.review,TbWkWorkReview.reviewDate FROM TbWkWorkViewPerson,TbWkWork,TbWkWorkType,TbWkWorkReview,TbWkWorkView WHERE TbWkWork.typeId=TbWkWorkType.id AND TbWkWorkViewPerson.viewId=TbWkWorkView.id AND TbWkWorkReview.workId=TbWkWork.id AND TbWkWorkView.workId=TbWkWork.id AND %s order by TbWkWorkView.endViewDate %s LIMIT %s',$add,$order,$limit);
-	//$query=sprintf('SELECT * FROM TbWkWork');
 	$result=my_mysql_query($query);
 
-	$fields_num=mysql_num_fields($result);
-
 	// analyzing positions of ids in the data
-	for($i=0; $i<$fields_num; $i++) {
-		$field=mysql_fetch_field($result,$i);
+	$i=0;
+	while($field=$result->fetch_field()) {
 		if($field->name=='id') {
 			$idid=$i;
 		}
@@ -167,10 +164,11 @@ function create_works($params) {
 		if($field->name=='reviewDate') {
 			$reviewdateid=$i;
 		}
+		$i++;
 	}
 	$res.=multi_accordion_start();
 	// printing table rows
-	while($row=mysql_fetch_row($result))
+	while($row=mysqli_fetch_row($result))
 	{
 		if($row[$typeid]!=NULL) {
 			$s_type=$types[$row[$typeid]]['name'];

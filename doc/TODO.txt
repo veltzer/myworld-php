@@ -1,6 +1,6 @@
 Now:
 ====
-- my php code is vulnerable to injection attacks. Use mysqli or some such.
+- my php code is vulnerable to injection attacks. use binding of parameters or some such.
 
 - add jshint to do validation on this projects files.
 - make my business page show all the companies that I taught as

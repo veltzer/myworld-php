@@ -87,18 +87,16 @@ function my_mysql_connect() {
 		$db_host='localhost';
 		$db_user='mark';
 		$db_pwd='';
-		$database='myworld';
-		$link=mysql_connect($db_host,$db_user,$db_pwd);
-		assert($link);
-		//assert(mysql_select_db($database,$link));
-		assert(mysql_select_db($database));
+		$db_database='myworld';
+		$db_charset='utf8';
+		assert($link=mysqli_connect($db_host, $db_user, $db_pwd, $db_database));
 		my_mysql_query('SET AUTOCOMMIT=0');
 		# I need this because the default client configuration is for latin1.
 		# The thing is that this config is hard to detect since if you turn it
 		# off then inserting AND extracting from the db in hebrew will WORK and
 		# the data in the command line mysql client will look ok but in fact it is
 		# not UTF in the db. USE THIS!!!
-		assert(mysql_set_charset('utf8',$link));
+		assert($link->set_charset($db_charset));
 	}
 }
 
@@ -109,30 +107,31 @@ function my_mysql_disconnect() {
 	/*
 	global $link;
 	if($link!=NULL) {
-		assert(mysql_close($link));
+		assert($link->close());
 		$link=NULL;
 	}
 	*/
 	// TODO: this is UGLY. I should not need to do that...
 	global $link;
 	if($link!=NULL) {
-		assert(mysql_select_db('wordpress'));
+		assert($link->select_db('wordpress'));
 		$link=NULL;
 	}
 }
 
 /* free a result set from mysql */
 function my_mysql_free_result($result) {
-	assert(mysql_free_result($result));
+	$result->free();
 }
 
-/* A wrapper for mysql_query */
+/* A wrapper for mysqli_query */
 function my_mysql_query($query) {
+	global $link;
 	logger_log($query);
 	logger_log("\n============================\n");
-	$result=mysql_query($query);
+	$result=mysqli_query($link, $query);
 	if(!$result) {
-		error('mysql error: '.mysql_errno().': '.mysql_error());
+		error('mysql error: '.mysqli_errno().': '.mysqli_error());
 	}
 	return $result;
 }
@@ -141,10 +140,10 @@ function my_mysql_query($query) {
 function my_mysql_query_one($query) {
 	$result=my_mysql_query($query);
 	# we should only get one result...
-	assert(mysql_num_rows($result)==1);
-	$row=mysql_fetch_array($result,MYSQL_NUM);
+	assert($result->num_rows==1);
+	$row=mysqli_fetch_array($result,MYSQL_NUM);
 	$ret=$row[0];
-	my_mysql_free_result($result);
+	$result->free();
 	return $ret;
 }
 
@@ -153,8 +152,8 @@ function my_mysql_query_one($query) {
 function my_mysql_query_one_row($query) {
 	$result=my_mysql_query($query);
 	# we should only get one result...
-	assert(mysql_num_rows($result)==1);
-	$row=mysql_fetch_assoc($result);
+	assert($result->num_rows==1);
+	$row=mysqli_fetch_assoc($result);
 	my_mysql_free_result($result);
 	return $row;
 }
@@ -163,7 +162,7 @@ function my_mysql_query_one_row($query) {
 function my_mysql_query_hash($query,$hash_key) {
 	$result=my_mysql_query($query);
 	$ret=array();
-	while($row=mysql_fetch_assoc($result)) {
+	while($row=mysqli_fetch_assoc($result)) {
 		$ret[$row[$hash_key]]=$row;
 	}
 	#debug: print the array...
@@ -184,8 +183,9 @@ function my_mysql_commit() {
 
 /* escape strings in my own style */
 function my_mysql_real_escape_string($str) {
+	global $link;
 	if($str!=NULL) {
-		return '\''.mysql_real_escape_string($str).'\'';
+		return '\''.$link->real_escape_string($str).'\'';
 	} else {
 		return 'NULL';
 	}
@@ -327,10 +327,9 @@ function formatTimeperiod($size) {
 function my_get_rows($result) {
 	// iterate over every row
 	$rows=array();
-	while($row=mysql_fetch_assoc($result)) {
+	while($row=$result->fetch_assoc()) {
 		// for every field in the result..
-			for($i=0;$i<mysql_num_fields($result);$i++) {
-			$info=mysql_fetch_field($result,$i);
+		while($info=$result->fetch_field()) {
 			$type=$info->type;
 			$val=$row[$info->name];
 			if ($val!=null) {
@@ -426,7 +425,7 @@ function get_person_data() {
 	$honorifics_hash=my_mysql_query_hash('SELECT * FROM TbIdHonorific','id');
 	$query=sprintf('select id,honorificId,firstname,surname,othername,ordinal from TbIdPerson order by firstname,surname');
 	$result=my_mysql_query($query);
-	while($row=mysql_fetch_assoc($result)) {
+	while($row=mysqli_fetch_assoc($result)) {
 		$row['label']=get_full_name($row,$honorifics_hash);
 		$rows[]=$row;
 	}
@@ -448,7 +447,7 @@ function make_table($query,$desc) {
 	$res.='<a title="'.$query.'">'.$desc.'</a>';
 	$res.='<table><tbody>';
 	$first=true;
-	while($row=mysql_fetch_assoc($result)) {
+	while($row=mysqli_fetch_assoc($result)) {
 		if($first) {
 			$res.='<tr>';
 			# iterate the result and print the headers...
