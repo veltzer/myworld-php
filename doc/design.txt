@@ -78,7 +78,7 @@ problems:
 	I cannot have the same work in two different formats.
 	Example: Charles Darwin/On the Origin of Species
 	I have read this one in text and audio format and so I had to insert
-	it twice into the database and as a result had to drop the following:
+	the reason is the following:
 	UNIQUE KEY `avoid_dups` (`externalId`,`externalCode`),
 	contraint on the TbWkWorkExternal table.
 	How should we solve this?
