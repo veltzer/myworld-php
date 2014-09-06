@@ -131,7 +131,7 @@ function my_mysql_query($query) {
 	logger_log("\n============================\n");
 	$result=mysqli_query($link, $query);
 	if(!$result) {
-		error('mysql error: '.mysqli_errno().': '.mysqli_error());
+		error('mysqli error: '.$link->errno.': '.$link->error);
 	}
 	return $result;
 }
@@ -257,8 +257,7 @@ function logger_setup($flag) {
 	global $handle;
 	$debug=$flag;
 	if($debug) {
-		$handle=fopen('/tmp/phplog.txt','a+');
-		assert($handle);
+		assert($handle=fopen('/tmp/phplog.txt','a+'));
 	}
 }
 
