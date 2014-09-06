@@ -25,7 +25,7 @@ $query=sprintf('insert into TbIdPerson (honorificId,firstname,surname,othername,
 	my_mysql_real_escape_string($p_remark)
 );
 my_mysql_query($query);
-$p_id=mysql_insert_id();
+$p_id=my_mysql_insert_id();
 my_mysql_commit();
 
 echo 'new person successfully inserted with id ['.$p_id.']';

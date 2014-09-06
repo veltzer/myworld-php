@@ -27,7 +27,7 @@ $query=sprintf('insert into TbTdDone (end,personId,locationId,activityId,remark)
 	my_mysql_real_escape_string($p_remark)
 );
 my_mysql_query($query);
-$p_doneid=mysql_insert_id();
+$p_doneid=my_mysql_insert_id();
 
 my_mysql_commit();
 

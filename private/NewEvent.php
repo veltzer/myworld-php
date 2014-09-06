@@ -28,7 +28,7 @@ $query=sprintf("insert into TbEvent (name,calendarId,companyId,courseId,location
 	my_mysql_real_escape_string($p_remark)
 );
 my_mysql_query($query);
-$p_eventid=mysql_insert_id();
+$p_eventid=my_mysql_insert_id();
 my_mysql_commit();
 
 echo 'new event successfully inserted with id ['.$p_eventid.']';

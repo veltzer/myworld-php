@@ -19,7 +19,7 @@ $query=sprintf('insert into TbWkWork (name,typeId,languageId) values(%s,%s,%s)',
 	my_mysql_real_escape_string($p_languageId)
 );
 my_mysql_query($query);
-$p_workid=mysql_insert_id();
+$p_workid=my_mysql_insert_id();
 my_mysql_commit();
 
 echo "new work successfully inserted with id [$p_workid]";

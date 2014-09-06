@@ -27,14 +27,14 @@ $query=sprintf('insert into TbWkWorkView (endViewDate,locationId,deviceId,langId
 	my_mysql_real_escape_string($p_workId)
 );
 my_mysql_query($query);
-$p_insertworkviewid=mysql_insert_id();
+$p_insertworkviewid=my_mysql_insert_id();
 // insert the viewer
 $query=sprintf('insert into TbWkWorkViewPerson (viewerId,viewId) values(%s,%s)',
 	my_mysql_real_escape_string($p_personId),
 	my_mysql_real_escape_string($p_insertworkviewid)
 );
 my_mysql_query($query);
-$p_workviewpersonid=mysql_insert_id();
+$p_workviewpersonid=my_mysql_insert_id();
 // insert a new review
 $query=sprintf('insert into TbWkWorkReview (reviewerId,ratingId,review,reviewDate,workId) values(%s,%s,%s,%s,%s)',
 	my_mysql_real_escape_string($p_personId),
@@ -44,7 +44,7 @@ $query=sprintf('insert into TbWkWorkReview (reviewerId,ratingId,review,reviewDat
 	my_mysql_real_escape_string($p_workId)
 );
 my_mysql_query($query);
-$p_insertworkreviewid=mysql_insert_id();
+$p_insertworkreviewid=my_mysql_insert_id();
 my_mysql_commit();
 
 echo "inserted view=[{$p_insertworkviewid}],viewer=[{$p_workviewpersonid}],review=[{$p_insertworkreviewid}] ok";

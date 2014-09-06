@@ -19,7 +19,7 @@ $query=sprintf('insert into TbWkWorkContrib (workId,typeId,organizationId) value
 	my_mysql_real_escape_string($p_organizationId)
 );
 my_mysql_query($query);
-$p_id=mysql_insert_id();
+$p_id=my_mysql_insert_id();
 my_mysql_commit();
 
 echo 'new record successfully inserted with id ['.$p_id.']';

@@ -29,7 +29,7 @@ $query=sprintf('insert into TbWkWork (name,typeId) values(%s,%s)',
 	my_mysql_real_escape_string($p_typeId)
 );
 my_mysql_query($query);
-$p_workId=mysql_insert_id();
+$p_workId=my_mysql_insert_id();
 // insert an external imdb id
 $query=sprintf('insert into TbWkWorkExternal (workId,externalId,externalCode) values(%s,%s,%s)',
 	my_mysql_real_escape_string($p_workId),
@@ -37,7 +37,7 @@ $query=sprintf('insert into TbWkWorkExternal (workId,externalId,externalCode) va
 	my_mysql_real_escape_string($p_imdbid)
 );
 my_mysql_query($query);
-$p_externalId=mysql_insert_id();
+$p_externalId=my_mysql_insert_id();
 // insert a new view
 $query=sprintf('insert into TbWkWorkView (endViewDate,locationId,deviceId,workId,remark) values(%s,%s,%s,%s,%s)',
 	my_mysql_real_escape_string($p_date),
@@ -47,14 +47,14 @@ $query=sprintf('insert into TbWkWorkView (endViewDate,locationId,deviceId,workId
 	my_mysql_real_escape_string($p_remark)
 );
 my_mysql_query($query);
-$p_workviewid=mysql_insert_id();
+$p_workviewid=my_mysql_insert_id();
 // insert the viewer
 $query=sprintf('insert into TbWkWorkViewPerson (viewerId,viewId) values(%s,%s)',
 	my_mysql_real_escape_string($p_personId),
 	my_mysql_real_escape_string($p_workviewid)
 );
 my_mysql_query($query);
-$p_workviewpersonid=mysql_insert_id();
+$p_workviewpersonid=my_mysql_insert_id();
 my_mysql_commit();
 
 echo "new work [$p_workId], external [$p_externalId], view [$p_workviewid], viewperson[$p_workviewpersonid] successfully inserted";

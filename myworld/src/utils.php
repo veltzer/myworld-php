@@ -100,6 +100,11 @@ function my_mysql_connect() {
 	}
 }
 
+function my_mysql_insert_id() {
+	global $link;
+	return $link->insert_id;
+}
+
 /* disconnect from mysql */
 function my_mysql_disconnect() {
 	// TODO: this code is in remark because it causes wordpress issues
