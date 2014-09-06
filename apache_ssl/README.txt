@@ -4,7 +4,7 @@ to be used by the apache web server to provide ssl services.
 The output of this folder is the 'veltzer.pem' and the 'veltzer.key' which
 should be placed in the /etc/ssl/certs and /etc/ssl/private folders.
 
-These are references by lines in an apache virtual host defintion like this:
+These are referenced by lines in an apache virtual host defintion like this:
 
 <VirtualHost ...>
 

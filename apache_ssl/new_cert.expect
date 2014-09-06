@@ -3,6 +3,7 @@
 #spawn -noecho /usr/bin/openssl req -new -out /dev/null
 spawn -noecho /usr/bin/openssl req -new
 
+expect {Enter pass phrase for privkey.pem:} { send "call me ishmael\r" }
 expect {Enter PEM pass phrase:} { send "call me ishmael\r" }
 expect {Verifying - Enter PEM pass phrase:} { send "call me ishmael\r" }
 expect {Country Name (2 letter code) \[AU\]:} { send "IL\r" }
