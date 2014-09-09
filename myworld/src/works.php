@@ -582,7 +582,7 @@ function create_person($params) {
 		my_mysql_real_escape_string($id)
 	);
 	$result=my_mysql_query($query);
-	while($row=mysql_fetch_assoc($result)) {
+	while($row=$result->fetch_assoc()) {
 		$externalcode=$row['externalCode'];
 		$externalid=$row['externalId'];
 		$externalname=$external[$externalid]['name'];
