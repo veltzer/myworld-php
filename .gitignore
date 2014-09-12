@@ -6,3 +6,6 @@
 # *~
 /out/*
 *.stamp
+
+# python cache folders
+__pycache__

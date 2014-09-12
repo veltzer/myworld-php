@@ -105,11 +105,11 @@ $(MYTHEME_THEME_ZIP): $(MYTHEME_THEME_FILES) $(ALL_DEP)
 $(JSCHECK): $(SOURCES_JS) $(ALL_DEP)
 	$(info doing [$@])
 	$(Q)$(TOOL_JSL) --conf=support/jsl.conf --quiet --nologo --nosummary --nofilelisting $(SOURCES_JS)
-	$(Q)uscripts/wrapper.py $(TOOL_GJSLINT) --flagfile support/gjslint.cfg $(SOURCES_JS)
-	$(Q)#uscripts/wrapper.py jshint --config support/jshint.conf $(SOURCES_JS)
-	$(Q)#uscripts/wrapper.py jshint --config support/jshint.conf public/myworld_utils.js
-	$(Q)#uscripts/wrapper.py jslint $(SOURCES_JS)
-	$(Q)#uscripts/wrapper.py jslint public/myworld_utils.js
+	$(Q)scripts/wrapper.py $(TOOL_GJSLINT) --flagfile support/gjslint.cfg $(SOURCES_JS)
+	$(Q)#scripts/wrapper.py jshint --config support/jshint.conf $(SOURCES_JS)
+	$(Q)#scripts/wrapper.py jshint --config support/jshint.conf public/myworld_utils.js
+	$(Q)#scripts/wrapper.py jslint $(SOURCES_JS)
+	$(Q)#scripts/wrapper.py jslint public/myworld_utils.js
 	$(Q)mkdir -p $(dir $@)
 	$(Q)touch $(JSCHECK)
 
@@ -188,4 +188,4 @@ install_wp:
 
 .PHONY: install_scripts
 install_scripts:
-	$(Q)uscripts/install_scripts.py
+	$(Q)scripts/install_scripts.py

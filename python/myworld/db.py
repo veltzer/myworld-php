@@ -38,3 +38,30 @@ def get_config():
 
 def connect():
 	return mysql.connector.Connect(**get_config())
+
+'''
+A generic function to print the results of a query on the screen
+'''
+def print_results(conn, sql):
+	cursor=conn.cursor()
+	cursor.execute(sql)
+	columns = [column[0] for column in cursor.description]
+	results = []
+	for row in cursor.fetchall():
+		results.append(dict(zip(columns, row)))
+	cursor.close()
+	print(results)
+
+'''
+A generic function to get results in hash format from the db
+'''
+def get_results(conn, sql):
+	cursor=conn.cursor()
+	cursor.execute(sql)
+	columns = [column[0] for column in cursor.description]
+	results = []
+	for row in cursor.fetchall():
+		results.append(dict(zip(columns, row)))
+	cursor.close()
+	return results
+

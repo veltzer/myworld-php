@@ -1,19 +1,32 @@
 #!/usr/bin/perl -w
 
+# This script touches a file with the latest time of any of the files
+# that he finds...
+
+# libraries
 use strict;
 use diagnostics;
 use File::Find qw(); # for recursivly descending into folders
-
-# This script touches a file with the latest time of any of the files
-# that he finds...
 
 # parameters
 my($debug)=0;
 my($max)=0;
 my($max_filename)=undef;
 
-# here we go
+# functions
+sub handler() {
+	my($filename)=$File::Find::name;
+	my($dev,$ino,$mode,$nlink,$uid,$gid,$rdev,$size,
+		$atime,$mtime,$ctime,$blksize,$blocks)
+		=stat($filename);
+	if($mtime>$max) {
+		$max=$mtime;
+		$max_filename=$filename;
+	}
+}
 
+
+# code
 my($length)=scalar(@ARGV);
 if($debug) {
 	print STDERR "ARGV is ".join('-',@ARGV)."\n";
@@ -26,17 +39,6 @@ my(@folders)=@ARGV[1,$length-1];
 if($debug) {
 	print STDERR "compare is $compare\n";
 	print STDERR "folders is ".join(',',@folders)."\n";
-}
-
-sub handler() {
-	my($filename)=$File::Find::name;
-	my($dev,$ino,$mode,$nlink,$uid,$gid,$rdev,$size,
-		$atime,$mtime,$ctime,$blksize,$blocks)
-		=stat($filename);
-	if($mtime>$max) {
-		$max=$mtime;
-		$max_filename=$filename;
-	}
 }
 
 for(my($i)=0;$i<@folders;$i++) {

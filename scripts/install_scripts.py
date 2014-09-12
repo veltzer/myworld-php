@@ -1,4 +1,4 @@
-#!/usr/bin/python
+#!/usr/bin/python3
 
 '''
 this script installs all products of the meta package as symbolic links
@@ -59,6 +59,6 @@ def install(root_folder, target_folder, recurse):
 					print('symlinking [{0}], [{1}]'.format(source, target))
 				os.symlink(source, target)
 
-install('scripts', '~/install/bin', False)
-install('perl', '~/install/myperl', False)
-install('python', '~/install/mypython', False)
+install('bin', '~/install/bin', False)
+install('perl', '~/install/perl', False)
+install('python', '~/install/python', False)
