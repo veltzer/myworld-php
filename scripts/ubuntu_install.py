@@ -17,6 +17,7 @@ packs=[
 	'python-mutagen', # mp3 tagging library
 	'python-eyed3', # mp3 tagging library
 	'youtube-dl', # for youtube-dl
+	'imagemagick', # for convert(1)
 ]
 
 args=['sudo','apt-get','install','--assume-yes']
