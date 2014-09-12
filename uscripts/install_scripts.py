@@ -8,8 +8,10 @@ into ~/install.
 import os # for walk, getcwd, readlink
 import os.path # for join, expanduser, abspath, islink
 
+# actually perform the actions?
 doit=True
-debug=False
+# print what we are doing?
+debug=True
 
 def file_gen(root_folder, recurse):
 	if recurse:

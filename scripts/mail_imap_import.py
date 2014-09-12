@@ -1,6 +1,6 @@
 #!/usr/bin/python3
 
-"""
+'''
 This script imports mail in maildir format to an imap server.
 
 Restructuring the flow of this app:
@@ -14,7 +14,7 @@ This thing started from me wanting to import my old mail to gmail and seeing
 this blog post: http://scott.yang.id.au/2009/01/migrate-emails-maildir-gmail.html
 
 		Mark Veltzer <mark@veltzer.net>
-"""
+'''
 
 from __future__ import print_function
 import imaplib # for IMAP4_SSL
