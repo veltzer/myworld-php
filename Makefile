@@ -186,6 +186,6 @@ install_wp:
 	$(Q)sudo chown -R root.root $(WP_DIR)
 	$(info dont forget to make install and enable all plugins and configure them if needed...)
 
-.PHONY: install_all
-install_all:
-	$(Q)scripts/install_all.py
+.PHONY: install_scripts
+install_scripts:
+	$(Q)scripts/install_scripts.py
