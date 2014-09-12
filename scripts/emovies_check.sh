@@ -6,3 +6,6 @@ find . -mindepth 2 -type f -and -not -name "*.avi" -and -not -name "*.m4v" -and 
 # this checks for permissions other than 444
 echo "Permission problems"
 find . -mindepth 2 -type f -and -not -perm 444
+echo "directory problems"
+find by_name -mindepth 4 -type f
+find by_name -mindepth 1 -maxdepth 2 -type f
