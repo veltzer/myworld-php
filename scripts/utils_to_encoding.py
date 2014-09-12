@@ -7,12 +7,18 @@ encoding and writes using the utf-encoding.
 '''
 
 import chardet # for detect
-import sys # for argv
+import sys # for argv, stderr
+import codecs # for open
 
-#charset='utf_8';
-charset='UTF-8';
-#charset='ascii';
+# to which charset to translate to? the -sig is what causes codecs to emit the
+# utf-8 BOM at the begining of the output file (these are 3 characters)
+to_charset='utf-8-sig';
+# from which charset to translate from?
+from_charset='ascii';
+# overwrite the files we read?
 write=True
+# do you want to debug?
+debug=True
 
 # list all encodings that are supported by python
 # CAVEAT: does not list encodings that do not have aliases
@@ -20,14 +26,23 @@ write=True
 #print(encodings.aliases.aliases.keys())
 #exit(1)
 
+if len(sys.argv)<2:
+	print('usage: utils_to_encoding.py [filename]', file=sys.stderr)
+	exit(1)
+
 for filename in sys.argv[1:]:
-	print('doing file',filename)
-	with open(filename,'r') as f:
+	if debug:
+		print('doing file [{0}]'.format(filename))
+	with open(filename, 'rb') as f:
 		b=f.read()
-		h=chardet.detect(b);
-		origcharset=h['encoding']
-		print('detect is',h['encoding'])
-		new_content=b.decode(origcharset).encode(charset)
-	if write:
-		with open(filename,'w') as f:
-			f.write(new_content)
+		h=chardet.detect(b)
+		detect_charset=h['encoding']
+		if detect_charset is None:
+			if debug:
+				print('could not detect charset, continuing to next file...')
+			continue
+		#new_content=b.decode(detect_charset).encode(to_charset)
+		new_content=b.decode(detect_charset)
+		if write:
+			with codecs.open(filename, 'w', to_charset) as f:
+				f.write(new_content)
