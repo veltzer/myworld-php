@@ -4,6 +4,8 @@
 This script converts files given to it to some encoding, utf_8 by default.
 It auto-detects the current encoding, reads using the current
 encoding and writes using the utf-encoding.
+
+	Mark Veltzer <mark@veltzer.net>
 '''
 
 import chardet # for detect
@@ -41,7 +43,6 @@ for filename in sys.argv[1:]:
 			if debug:
 				print('could not detect charset, continuing to next file...')
 			continue
-		#new_content=b.decode(detect_charset).encode(to_charset)
 		new_content=b.decode(detect_charset)
 		if write:
 			with codecs.open(filename, 'w', to_charset) as f:
