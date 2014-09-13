@@ -111,110 +111,55 @@ function create_works($params) {
 	$query=sprintf('SELECT TbWkWork.id,TbWkWork.name,TbWkWork.length,TbWkWork.size,TbWkWork.chapters,TbWkWork.typeId,TbWkWork.languageId,TbWkWorkView.startViewDate,TbWkWorkView.endViewDate,TbWkWorkViewPerson.viewerId,TbWkWorkView.locationId,TbWkWorkView.deviceId,TbWkWorkView.langId,TbWkWorkReview.ratingId,TbWkWorkReview.review,TbWkWorkReview.reviewDate FROM TbWkWorkViewPerson,TbWkWork,TbWkWorkType,TbWkWorkReview,TbWkWorkView WHERE TbWkWork.typeId=TbWkWorkType.id AND TbWkWorkViewPerson.viewId=TbWkWorkView.id AND TbWkWorkReview.workId=TbWkWork.id AND TbWkWorkView.workId=TbWkWork.id AND %s order by TbWkWorkView.endViewDate %s LIMIT %s',$add,$order,$limit);
 	$result=my_mysql_query($query);
 
-	// analyzing positions of ids in the data
-	$i=0;
-	while($field=$result->fetch_field()) {
-		if($field->name=='id') {
-			$idid=$i;
-		}
-		if($field->name=='name') {
-			$nameid=$i;
-		}
-		if($field->name=='typeId') {
-			$typeid=$i;
-		}
-		if($field->name=='languageId') {
-			$languageid=$i;
-		}
-		if($field->name=='length') {
-			$lengthid=$i;
-		}
-		if($field->name=='size') {
-			$sizeid=$i;
-		}
-		if($field->name=='chapters') {
-			$chaptersid=$i;
-		}
-		# view table
-		if($field->name=='startViewDate') {
-			$startviewdateid=$i;
-		}
-		if($field->name=='endViewDate') {
-			$endviewdateid=$i;
-		}
-		if($field->name=='viewerId') {
-			$viewerid=$i;
-		}
-		if($field->name=='locationId') {
-			$locationid=$i;
-		}
-		if($field->name=='deviceId') {
-			$deviceid=$i;
-		}
-		if($field->name=='langId') {
-			$langid=$i;
-		}
-		# review table
-		if($field->name=='ratingId') {
-			$ratingid=$i;
-		}
-		if($field->name=='review') {
-			$reviewid=$i;
-		}
-		if($field->name=='reviewDate') {
-			$reviewdateid=$i;
-		}
-		$i++;
-	}
 	$res.=multi_accordion_start();
 	// printing table rows
-	while($row=mysqli_fetch_row($result))
+	while($row=$result->fetch_assoc())
 	{
-		if($row[$typeid]!=NULL) {
-			$s_type=$types[$row[$typeid]]['name'];
+		if($row['typeId']!=NULL) {
+			$s_type=$types[$row['typeId']]['name'];
 		} else {
 			$s_type=get_na_string();
 		}
-		if($row[$languageid]!=NULL) {
-			$s_language=$languages[$row[$languageid]]['name'];
+		if($row['languageId']!=NULL) {
+			$s_language=$languages[$row['languageId']]['name'];
 		} else {
 			$s_language=get_na_string();
 		}
-		if($row[$locationid]!=NULL) {
-			$s_location=$locations[$row[$locationid]]['name'];
+		if($row['locationId']!=NULL) {
+			$s_location=$locations[$row['locationId']]['name'];
 		} else {
 			$s_location=get_na_string();
 		}
-		if($row[$deviceid]!=NULL) {
-			$s_device=$devices[$row[$deviceid]]['name'];
+		if($row['deviceId']!=NULL) {
+			$s_device=$devices[$row['deviceId']]['name'];
 		} else {
 			$s_device=get_na_string();
 		}
-		if($row[$langid]!=NULL) {
-			$s_lang=$languages[$row[$langid]]['name'];
+		if($row['langId']!=NULL) {
+			$s_lang=$languages[$row['langId']]['name'];
 		} else {
 			$s_lang=get_na_string();
 		}
-		if($row[$viewerid]!=NULL) {
-			$s_viewer=get_full_name($persons[$row[$viewerid]],$honorifics);
+		if($row['viewerId']!=NULL) {
+			$s_viewer=get_full_name($persons[$row['viewerId']],$honorifics);
 		} else {
 			$s_viewer=get_na_string();
 		}
-		if($row[$sizeid]!=NULL) {
-			$s_size=formatSize($row[$sizeid]);
+		if($row['size']!=NULL) {
+			$s_size=formatSize($row['size']);
 		}
-		if($row[$lengthid]!=NULL) {
-			$s_length=formatTimeperiod($row[$lengthid]);
+		if($row['length']!=NULL) {
+			$s_length=formatTimeperiod($row['length']);
 		}
-		if($row[$nameid]!=NULL) {
-			$header=$row[$nameid];
+		if($row['name']!=NULL) {
+			$header=$row['name'];
 		} else {
 			$header='No Name';
 		}
 		# append contributors to the header...(do not include organizations)
-		if(isset($work_contrib[$row[$idid]])) {
+		if(isset($work_contrib[$row['id']])) {
 			$cont_array=array();
-			foreach($work_contrib[$row[$idid]] as $personId) {
+			foreach($work_contrib[$row['id']] as $personId) {
 				$cont_array[]=get_full_name($persons[$personId],$honorifics);
 			}
 			if(count($cont_array)>0) {
@@ -224,62 +169,62 @@ function create_works($params) {
 
 		$body='';
 		$body.='<ul>';
-		if($row[$idid]!=NULL) {
-			$body.='<li>id: '.$row[$idid].'</li>';
+		if($row['id']!=NULL) {
+			$body.='<li>id: '.$row['id'].'</li>';
 		}
-		if($row[$nameid]!=NULL) {
-			$body.='<li>name: '.$row[$nameid].'</li>';
+		if($row['name']!=NULL) {
+			$body.='<li>name: '.$row['name'].'</li>';
 		}
-		if($row[$lengthid]!=NULL) {
+		if($row['length']!=NULL) {
 			$body.='<li>length: '.$s_length.'</li>';
 		}
-		if($row[$sizeid]!=NULL) {
+		if($row['size']!=NULL) {
 			$body.='<li>size: '.$s_size.'</li>';
 		}
-		if($row[$chaptersid]!=NULL) {
-			$body.='<li>chapters: '.$row[$chaptersid].'</li>';
+		if($row['chapters']!=NULL) {
+			$body.='<li>chapters: '.$row['chapters'].'</li>';
 		}
-		if($row[$typeid]!=NULL) {
+		if($row['typeId']!=NULL) {
 			$body.='<li>type: '.$s_type.'</li>';
 		}
-		if($row[$languageid]!=NULL) {
+		if($row['languageId']!=NULL) {
 			$body.='<li>language: '.$s_language.'</li>';
 		}
 		# view stuff
-		if($row[$startviewdateid]!=NULL) {
-			$body.='<li>start view date: '.$row[$startviewdateid].'</li>';
+		if($row['startViewDate']!=NULL) {
+			$body.='<li>start view date: '.$row['startViewDate'].'</li>';
 		}
-		if($row[$endviewdateid]!=NULL) {
-			$body.='<li>end view date: '.$row[$endviewdateid].'</li>';
+		if($row['endViewDate']!=NULL) {
+			$body.='<li>end view date: '.$row['endViewDate'].'</li>';
 		}
-		if($row[$viewerid]!=NULL) {
+		if($row['viewerId']!=NULL) {
 			$body.='<li>viewer: '.$s_viewer.'</li>';
 		}
-		if($row[$locationid]!=NULL) {
+		if($row['locationId']!=NULL) {
 			$body.='<li>location: '.$s_location.'</li>';
 		}
-		if($row[$deviceid]!=NULL) {
+		if($row['deviceId']!=NULL) {
 			$body.='<li>device: '.$s_device.'</li>';
 		}
-		if($row[$langid]!=NULL) {
+		if($row['langId']!=NULL) {
 			$body.='<li>lang: '.$s_lang.'</li>';
 		}
 		# review stuff
-		if($row[$ratingid]!=NULL) {
-			$body.='<li>rating: '.$row[$ratingid].'</li>';
+		if($row['ratingId']!=NULL) {
+			$body.='<li>rating: '.$row['ratingId'].'</li>';
 		}
-		if($row[$reviewid]!=NULL) {
-			$body.='<li>review: '.$row[$reviewid].'</li>';
+		if($row['review']!=NULL) {
+			$body.='<li>review: '.$row['review'].'</li>';
 		}
-		if($row[$reviewdateid]!=NULL) {
-			$body.='<li>review date: '.$row[$reviewdateid].'</li>';
+		if($row['reviewDate']!=NULL) {
+			$body.='<li>review date: '.$row['reviewDate'].'</li>';
 		}
 		# contributor stuff
-		if(isset($work_contrib[$row[$idid]])) {
+		if(isset($work_contrib[$row['id']])) {
 			$j=0;
-			foreach($work_contrib[$row[$idid]] as $personId) {
+			foreach($work_contrib[$row['id']] as $personId) {
 				$name=get_full_name($persons[$personId],$honorifics);
-				$roleid=$role_contrib[$row[$idid]][$j];
+				$roleid=$role_contrib[$row['id']][$j];
 				$role_name=$contribtype[$roleid]['name'];
 				$body.='<li>'.$role_name.': '.$name;
 				$j++;
@@ -296,12 +241,12 @@ function create_works($params) {
 				$body.='</li>';
 			}
 		}
-		if(isset($work_contrib_org[$row[$idid]])) {
+		if(isset($work_contrib_org[$row['id']])) {
 			$j=0;
-			foreach($work_contrib_org[$row[$idid]] as $organizationId) {
+			foreach($work_contrib_org[$row['id']] as $organizationId) {
 				$name=$organizations[$organizationId]['name'];
 				$url=$organizations[$organizationId]['url'];
-				$roleid=$role_contrib_org[$row[$idid]][$j];
+				$roleid=$role_contrib_org[$row['id']][$j];
 				$role_name=$contribtype[$roleid]['name'];
 				$body.='<li>'.$role_name.': '.'<a href=\''.$url.'\'>'.$name.'</a></li>';
 				$j++;
@@ -309,9 +254,9 @@ function create_works($params) {
 		}
 		# external stuff
 		$j=0;
-		if(isset($workexternal_externalid[$row[$idid]])) {
-			foreach($workexternal_externalid[$row[$idid]] as $externalid) {
-				$externalcode=$workexternal_externalcode[$row[$idid]][$j];
+		if(isset($workexternal_externalid[$row['id']])) {
+			foreach($workexternal_externalid[$row['id']] as $externalid) {
+				$externalcode=$workexternal_externalcode[$row['id']][$j];
 				$externalname=$external[$externalid]['name'];
 				$externalidname=$external[$externalid]['idname'];
 				$link=get_external_href($externalname,$externalcode);
@@ -592,7 +537,6 @@ function create_person($params) {
 		$res.='<li>'.$link.'</li>';
 	}
 	my_mysql_free_result($result);
-	// finish up
 	$res.='</ul>';
 	return $res;
 }
