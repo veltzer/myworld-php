@@ -1,5 +1,7 @@
 Now:
 ====
+- make just one dialog to put in new works with toggle buttons for review and view.
+- links to the great courses site are broken. Fix them.
 - my php code is vulnerable to injection attacks. use binding of parameters or some such.
 
 - add jshint to do validation on this projects files.
