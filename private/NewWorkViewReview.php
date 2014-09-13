@@ -18,6 +18,7 @@ if($p_end!='') {
 $p_personId=my_get_post('personId');
 $p_locationId=my_get_post('locationId');
 $p_deviceId=my_get_post('deviceId');
+$p_remark=my_get_post('remark');
 $p_ratingId=my_get_post('ratingId');
 $p_review=my_get_post('review');
 
@@ -39,11 +40,12 @@ $query=sprintf('insert into TbWkWorkExternal (workId,externalId,externalCode) va
 my_mysql_query($query);
 $p_externalId=my_mysql_insert_id();
 // insert a new view
-$query=sprintf('insert into TbWkWorkView (workId,endViewDate,locationId,deviceId) values(%s,%s,%s,%s)',
+$query=sprintf('insert into TbWkWorkView (workId,endViewDate,locationId,deviceId,remark) values(%s,%s,%s,%s,%s)',
 	my_mysql_real_escape_string($p_workId),
 	my_mysql_real_escape_string($p_end),
 	my_mysql_real_escape_string($p_locationId),
-	my_mysql_real_escape_string($p_deviceId)
+	my_mysql_real_escape_string($p_deviceId),
+	my_mysql_real_escape_string($p_remark)
 );
 my_mysql_query($query);
 $p_workviewid=my_mysql_insert_id();

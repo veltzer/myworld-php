@@ -845,6 +845,19 @@ jQuery(document).ready(function() {
   jQuery('#workviewreview_deviceid').cont_valid(init);
 
   init = {
+    name: 'Remark',
+    sname: 'remark',
+    initState: true,
+    initMsg: 'Put your remark here',
+    type: 'textarea',
+    rows: 1,
+    regex: /.*/,
+    logger: '#log',
+    submit: '#workviewreview_send'
+  };
+  jQuery('#workviewreview_remark').cont_valid(init);
+
+  init = {
     name: 'Rating',
     sname: 'ratingId',
     initState: true,

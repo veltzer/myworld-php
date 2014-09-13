@@ -175,6 +175,7 @@
 					<div id='workviewreview_personid'></div>
 					<div id='workviewreview_locationid'></div>
 					<div id='workviewreview_deviceid'></div>
+					<div id='workviewreview_remark'></div>
 					<div id='workviewreview_ratingid'></div>
 					<div id='workviewreview_review'></div>
 					<div id='workviewreview_send'></div>
