@@ -141,7 +141,7 @@ function my_mysql_query($query) {
 	return $result;
 }
 
-/* A query which is assertained to return 1 result */
+/* A query which is ascertained to return 1 result */
 function my_mysql_query_one($query) {
 	$result=my_mysql_query($query);
 	# we should only get one result...
@@ -158,7 +158,7 @@ function my_mysql_query_one_row($query) {
 	$result=my_mysql_query($query);
 	# we should only get one result...
 	assert($result->num_rows==1);
-	$row=mysqli_fetch_assoc($result);
+	$row=$result->fetch_assoc();
 	my_mysql_free_result($result);
 	return $row;
 }
@@ -167,7 +167,7 @@ function my_mysql_query_one_row($query) {
 function my_mysql_query_hash($query,$hash_key) {
 	$result=my_mysql_query($query);
 	$ret=array();
-	while($row=mysqli_fetch_assoc($result)) {
+	while($row=$result->fetch_assoc()) {
 		$ret[$row[$hash_key]]=$row;
 	}
 	#debug: print the array...
@@ -429,7 +429,7 @@ function get_person_data() {
 	$honorifics_hash=my_mysql_query_hash('SELECT * FROM TbIdHonorific','id');
 	$query=sprintf('select id,honorificId,firstname,surname,othername,ordinal from TbIdPerson order by firstname,surname');
 	$result=my_mysql_query($query);
-	while($row=mysqli_fetch_assoc($result)) {
+	while($row=$result->fetch_assoc()) {
 		$row['label']=get_full_name($row,$honorifics_hash);
 		$rows[]=$row;
 	}
@@ -451,7 +451,7 @@ function make_table($query,$desc) {
 	$res.='<a title="'.$query.'">'.$desc.'</a>';
 	$res.='<table><tbody>';
 	$first=true;
-	while($row=mysqli_fetch_assoc($result)) {
+	while($row=$result->fetch_assoc()) {
 		if($first) {
 			$res.='<tr>';
 			# iterate the result and print the headers...
