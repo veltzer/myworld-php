@@ -20,7 +20,7 @@ function create_works($params) {
 	if(array_key_exists('order',$params)) {
 		$limit=$params['order'];
 	} else {
-		$order='desc';
+		$order='DESC';
 	}
 	$res='';
 
@@ -108,13 +108,24 @@ function create_works($params) {
 			$add='TbWkWorkType.name=\''.$type.'\'';
 			break;
 	}
-	$query=sprintf('SELECT TbWkWork.id,TbWkWork.name,TbWkWork.length,TbWkWork.size,TbWkWork.chapters,TbWkWork.typeId,TbWkWork.languageId,TbWkWorkView.startViewDate,TbWkWorkView.endViewDate,TbWkWorkViewPerson.viewerId,TbWkWorkView.locationId,TbWkWorkView.deviceId,TbWkWorkView.langId,TbWkWorkReview.ratingId,TbWkWorkReview.review,TbWkWorkReview.reviewDate FROM TbWkWorkViewPerson,TbWkWork,TbWkWorkType,TbWkWorkReview,TbWkWorkView WHERE TbWkWork.typeId=TbWkWorkType.id AND TbWkWorkViewPerson.viewId=TbWkWorkView.id AND TbWkWorkReview.workId=TbWkWork.id AND TbWkWorkView.workId=TbWkWork.id AND %s order by TbWkWorkView.endViewDate %s LIMIT %s',$add,$order,$limit);
+	#$query=sprintf('SELECT TbWkWork.id,TbWkWork.name,TbWkWork.length,TbWkWork.size,TbWkWork.chapters,TbWkWork.typeId,TbWkWork.languageId,TbWkWorkView.startViewDate,TbWkWorkView.endViewDate,TbWkWorkViewPerson.viewerId,TbWkWorkView.locationId,TbWkWorkView.deviceId,TbWkWorkView.langId,TbWkWorkReview.ratingId,TbWkWorkReview.review,TbWkWorkReview.reviewDate FROM TbWkWorkViewPerson,TbWkWork,TbWkWorkType,TbWkWorkReview,TbWkWorkView WHERE TbWkWork.typeId=TbWkWorkType.id AND TbWkWorkViewPerson.viewId=TbWkWorkView.id AND TbWkWorkReview.workId=TbWkWork.id AND TbWkWorkView.workId=TbWkWork.id AND %s ORDER BY TbWkWorkView.endViewDate %s LIMIT %s',$add,$order,$limit);
+	$query=sprintf('SELECT TbWkWork.id,TbWkWork.name,TbWkWork.length,TbWkWork.size,TbWkWork.chapters,TbWkWork.typeId,TbWkWork.languageId,TbWkWorkView.startViewDate,TbWkWorkView.endViewDate,TbWkWorkViewPerson.viewerId,TbWkWorkView.locationId,TbWkWorkView.deviceId,TbWkWorkView.langId,TbWkWorkReview.ratingId,TbWkWorkReview.review,TbWkWorkReview.reviewDate FROM TbWkWorkViewPerson,TbWkWorkType,TbWkWork LEFT JOIN TbWkWorkView ON TbWkWorkView.workId=TbWkWork.id LEFT JOIN TbWkWorkReview ON TbWkWorkReview.workId=TbWkWork.id WHERE TbWkWork.typeId=TbWkWorkType.id AND TbWkWorkViewPerson.viewId=TbWkWorkView.id AND %s ORDER BY TbWkWorkView.endViewDate %s LIMIT %s',$add,$order,$limit);
 	$result=my_mysql_query($query);
 
 	$res.=multi_accordion_start();
+	$body='';
 	// printing table rows
+	$currid=NULL;
 	while($row=$result->fetch_assoc())
 	{
+		// finish the previous entry if that is the case
+		if($currid!=$row['id']) {
+			if($currid!=NULL) {
+				$body.='</ul>';
+				$res.=multi_accordion_entry($header,$body);
+			}
+		}
+
 		if($row['typeId']!=NULL) {
 			$s_type=$types[$row['typeId']]['name'];
 		} else {
@@ -167,28 +178,77 @@ function create_works($params) {
 			}
 		}
 
-		$body='';
-		$body.='<ul>';
-		if($row['id']!=NULL) {
-			$body.='<li>id: '.$row['id'].'</li>';
-		}
-		if($row['name']!=NULL) {
-			$body.='<li>name: '.$row['name'].'</li>';
-		}
-		if($row['length']!=NULL) {
-			$body.='<li>length: '.$s_length.'</li>';
-		}
-		if($row['size']!=NULL) {
-			$body.='<li>size: '.$s_size.'</li>';
-		}
-		if($row['chapters']!=NULL) {
-			$body.='<li>chapters: '.$row['chapters'].'</li>';
-		}
-		if($row['typeId']!=NULL) {
-			$body.='<li>type: '.$s_type.'</li>';
-		}
-		if($row['languageId']!=NULL) {
-			$body.='<li>language: '.$s_language.'</li>';
+		if($currid!=$row['id']) {
+			$currid=$row['id'];
+			$body='';
+			$body.='<ul>';
+			if($row['id']!=NULL) {
+				$body.='<li>id: '.$row['id'].'</li>';
+			}
+			if($row['name']!=NULL) {
+				$body.='<li>name: '.$row['name'].'</li>';
+			}
+			if($row['length']!=NULL) {
+				$body.='<li>length: '.$s_length.'</li>';
+			}
+			if($row['size']!=NULL) {
+				$body.='<li>size: '.$s_size.'</li>';
+			}
+			if($row['chapters']!=NULL) {
+				$body.='<li>chapters: '.$row['chapters'].'</li>';
+			}
+			if($row['typeId']!=NULL) {
+				$body.='<li>type: '.$s_type.'</li>';
+			}
+			if($row['languageId']!=NULL) {
+				$body.='<li>language: '.$s_language.'</li>';
+			}
+			# contributor stuff
+			if(isset($work_contrib[$row['id']])) {
+				$j=0;
+				foreach($work_contrib[$row['id']] as $personId) {
+					$name=get_full_name($persons[$personId],$honorifics);
+					$roleid=$role_contrib[$row['id']][$j];
+					$role_name=$contribtype[$roleid]['name'];
+					$body.='<li>'.$role_name.': '.$name;
+					$j++;
+					$e=0;
+					foreach($personexternal_externalid[$personId] as $externalid) {
+						$externalcode=$personexternal_externalcode[$personId][$e];
+						$externalname=$external[$externalid]['name'];
+						$externalidname=$external[$externalid]['idname'];
+						$link=get_external_href($externalname,$externalcode);
+						$link='<a href=\''.$link.'\'>'.$externalidname.': '.$externalcode.'</a>';
+						$body.=' '.$link;
+						$e++;
+					}
+					$body.='</li>';
+				}
+			}
+			if(isset($work_contrib_org[$row['id']])) {
+				$j=0;
+				foreach($work_contrib_org[$row['id']] as $organizationId) {
+					$name=$organizations[$organizationId]['name'];
+					$url=$organizations[$organizationId]['url'];
+					$roleid=$role_contrib_org[$row['id']][$j];
+					$role_name=$contribtype[$roleid]['name'];
+					$body.='<li>'.$role_name.': '.'<a href=\''.$url.'\'>'.$name.'</a></li>';
+					$j++;
+				}
+			}
+			# external stuff
+			$j=0;
+			if(isset($workexternal_externalid[$row['id']])) {
+				foreach($workexternal_externalid[$row['id']] as $externalid) {
+					$externalcode=$workexternal_externalcode[$row['id']][$j];
+					$externalname=$external[$externalid]['name'];
+					$externalidname=$external[$externalid]['idname'];
+					$link=get_external_href($externalname,$externalcode);
+					$link='<a href=\''.$link.'\'>'.$externalidname.': '.$externalcode.'</a>';
+					$body.='<li>'.$link.'</li>';
+					$j++;
+				}
+			}
 		}
 		# view stuff
 		if($row['startViewDate']!=NULL) {
@@ -219,54 +279,6 @@ function create_works($params) {
 		if($row['reviewDate']!=NULL) {
 			$body.='<li>review date: '.$row['reviewDate'].'</li>';
 		}
-		# contributor stuff
-		if(isset($work_contrib[$row['id']])) {
-			$j=0;
-			foreach($work_contrib[$row['id']] as $personId) {
-				$name=get_full_name($persons[$personId],$honorifics);
-				$roleid=$role_contrib[$row['id']][$j];
-				$role_name=$contribtype[$roleid]['name'];
-				$body.='<li>'.$role_name.': '.$name;
-				$j++;
-				$e=0;
-				foreach($personexternal_externalid[$personId] as $externalid) {
-					$externalcode=$personexternal_externalcode[$personId][$e];
-					$externalname=$external[$externalid]['name'];
-					$externalidname=$external[$externalid]['idname'];
-					$link=get_external_href($externalname,$externalcode);
-					$link='<a href=\''.$link.'\'>'.$externalidname.': '.$externalcode.'</a>';
-					$body.=' '.$link;
-					$e++;
-				}
-				$body.='</li>';
-			}
-		}
-		if(isset($work_contrib_org[$row['id']])) {
-			$j=0;
-			foreach($work_contrib_org[$row['id']] as $organizationId) {
-				$name=$organizations[$organizationId]['name'];
-				$url=$organizations[$organizationId]['url'];
-				$roleid=$role_contrib_org[$row['id']][$j];
-				$role_name=$contribtype[$roleid]['name'];
-				$body.='<li>'.$role_name.': '.'<a href=\''.$url.'\'>'.$name.'</a></li>';
-				$j++;
-			}
-		}
-		# external stuff
-		$j=0;
-		if(isset($workexternal_externalid[$row['id']])) {
-			foreach($workexternal_externalid[$row['id']] as $externalid) {
-				$externalcode=$workexternal_externalcode[$row['id']][$j];
-				$externalname=$external[$externalid]['name'];
-				$externalidname=$external[$externalid]['idname'];
-				$link=get_external_href($externalname,$externalcode);
-				$link='<a href=\''.$link.'\'>'.$externalidname.': '.$externalcode.'</a>';
-				$body.='<li>'.$link.'</li>';
-				$j++;
-			}
-		}
-		$body.='</ul>';
-		$res.=multi_accordion_entry($header,$body);
 	}
 	my_mysql_free_result($result);
 	$res.=multi_accordion_end();
