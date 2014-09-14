@@ -73,6 +73,9 @@ function create_movies(loc) {
         name: 'viewId',
         type: 'number'
       }, {
+        name: 'workId',
+        type: 'number'
+      }, {
         name: 'name',
         type: 'string'
       }, {
@@ -154,6 +157,12 @@ function create_movies(loc) {
       columns: [{
         text: 'ViewId',
         dataIndex: 'viewId',
+        flex: 1,
+        hidden: true,
+        sortable: true
+      }, {
+        text: 'WorkId',
+        dataIndex: 'workId',
         flex: 1,
         hidden: true,
         sortable: true

@@ -4,6 +4,7 @@ function create_movies($params) {
 	return "<script>create_movies_here()</script>";
 }
 
+// this function is not currently used...
 function create_movies_iframe($params) {
 	$code=<<<EOD
 		<iframe id="myframe" frameborder="0" src="/public/movies.html" width="100%"></iframe>
