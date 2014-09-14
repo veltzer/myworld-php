@@ -49,7 +49,7 @@ for row in res:
 		continue
 	url=template.replace('$external_id', f_externalCode)
 	if p_download_report:
-		print('downloading [{0}] from [{1}]...'.format(file, url))
+		print('downloading [{0}] from [{1}], [{2}]...'.format(file, url, f_name))
 	subprocess.check_call([
 		'youtube-dl',
 		url,
