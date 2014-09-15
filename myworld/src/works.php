@@ -280,6 +280,10 @@ function create_works($params) {
 			$body.='<li>review date: '.$row['reviewDate'].'</li>';
 		}
 	}
+	if($currid!=NULL) {
+		$body.='</ul>';
+		$res.=multi_accordion_entry($header,$body);
+	}
 	my_mysql_free_result($result);
 	$res.=multi_accordion_end();
 	return $res;
