@@ -12,6 +12,8 @@ import subprocess # for check_call
 # parameters
 # where should the files be downloaded to?
 p_folder='/home/mark/download'
+p_folder='/home/mark/slow_links/emovies/youtube'
+p_folder='/mnt/external/mark/topics_archive/video/emovies/youtube'
 # report progress?
 p_progress=False
 # report on downloads?
@@ -37,12 +39,14 @@ SELECT TbWkWorkExternal.externalCode, TbWkWork.name FROM TbWkWorkExternal, TbExt
 '''
 
 res=myworld.db.get_results(conn, sql)
+count=0
 for row in res:
 	f_externalCode=row['externalCode']
 	f_name=row['name']
 	if p_progress:
 		print('doing work [{0}] code [{1}]...'.format(f_name, f_externalCode))
 	file=os.path.join(p_folder, f_externalCode)
+	count+=1
 	if os.path.isfile(file):
 		if p_progress:
 			print('file is already there...')
@@ -58,3 +62,4 @@ for row in res:
 	])
 
 conn.close()
+print('did [{0}] works...'.format(count))
