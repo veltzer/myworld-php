@@ -142,7 +142,7 @@ while($rowhashref=$sth->fetchrow_hashref()) {
 			$folder='/home/mark/slow_links/topics_archive/video/emovies/by_title_name/'.$f_name;
 		}
 		if(! -d $folder) {
-			die('['.$folder.'] is not a folder'."\n");
+			#die('['.$folder.'] is not a folder'."\n");
 			print('['.$folder.'] is not a folder'."\n");
 			next;
 		}
