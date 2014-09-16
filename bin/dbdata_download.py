@@ -39,14 +39,15 @@ SELECT TbWkWorkExternal.externalCode, TbWkWork.name FROM TbWkWorkExternal, TbExt
 '''
 
 res=myworld.db.get_results(conn, sql)
-count=0
+stat_count=0
+stat_download=0
 for row in res:
 	f_externalCode=row['externalCode']
 	f_name=row['name']
 	if p_progress:
 		print('doing work [{0}] code [{1}]...'.format(f_name, f_externalCode))
 	file=os.path.join(p_folder, f_externalCode)
-	count+=1
+	stat_count+=1
 	if os.path.isfile(file):
 		if p_progress:
 			print('file is already there...')
@@ -60,6 +61,8 @@ for row in res:
 		'--output',
 		file,
 	])
+	stat_download+=1
 
 conn.close()
-print('did [{0}] works...'.format(count))
+print('stat_count [{0}]'.format(stat_count))
+print('stat_download [{0}]'.format(stat_download))

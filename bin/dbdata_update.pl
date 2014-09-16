@@ -109,10 +109,12 @@ while($rowhashref=$sth->fetchrow_hashref()) {
 	my($f_externalCode)=$rowhashref->{'externalCode'};
 	$external_hash{$f_workId}=$f_externalCode;
 }
-my($counter)=0;
+my($stat_update)=0;
+my($stat_count)=0;
 $sth=$dbh->prepare($sql);
 $sth->execute() or die 'SQL Error: ['.$DBI::errstr.']'."\n";
 while($rowhashref=$sth->fetchrow_hashref()) {
+	$stat_update++;
 	my($f_id)=$rowhashref->{'id'};
 	my($f_name)=$rowhashref->{'name'};
 	my($f_typeId)=$rowhashref->{'typeId'};
@@ -203,12 +205,13 @@ while($rowhashref=$sth->fetchrow_hashref()) {
 				$f_id
 			);
 		}
-		$counter++;
+		$stat_update++;
 	}
 }
 $dbh->commit();
 $dbh->disconnect();
 
 if($stats) {
-	print 'did ['.$counter.'] works...'."\n";
+	print 'stat_count ['.$stat_count.']'."\n";
+	print 'stat_update ['.$stat_update.']'."\n";
 }
