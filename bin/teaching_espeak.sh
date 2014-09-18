@@ -1,11 +1,17 @@
-#!/bin/bash
+#!/bin/bash -u
 
-let x=$1
-let dec=$2
-while [[ $x -gt 0 ]]; do
-	espeak "there are $x second to end of exercise"
-	#espeak "there are $x second to end of course"
-	sleep 60
-	let "x=x-60"
+if [[ $# -ne 3 ]]; then
+	echo "usage: $0 [seconds] [dec] [description]"
+	echo "example: $0 60 10 exercise"
+	exit 1
+fi
+
+sec=$1
+dec=$2
+desc=$3
+while [[ $sec -gt 0 ]]; do
+	espeak "there are $sec second to end of $desc"
+	sleep $dec 
+	let "sec=sec-dec"
 done
-espeak "the exercise is over!"
+espeak "the $desc is over!"

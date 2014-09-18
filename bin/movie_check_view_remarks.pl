@@ -47,6 +47,18 @@ sub my_menu() {
 	);
 }
 
+sub print_sorted_hash($) {
+	my($hash)=$_[0];
+	my($rev_hash)={};
+	while(my($key,$val)=each(%$hash)) {
+		$rev_hash->{$val}=$key;
+	}
+	foreach my $key (sort(keys(%$rev_hash))) {
+		my($val)=$rev_hash->{$key};
+		print 'name is ['.$key.'], id is ['.$val.']'."\n";
+	}
+}
+
 # some variables for sql
 my($sql,$sth,$rowhashref);
 
@@ -112,7 +124,7 @@ if($debug) {
 
 
 # select all movies
-$sql='SELECT TbWkWorkView.id,TbWkWork.name,TbWkWorkView.remark,TbWkWorkView.todo,TbWkWorkView.locationId,TbWkWorkView.deviceId FROM TbWkWork,TbWkWorkType,TbWkWorkView WHERE TbWkWorkView.remark IS NOT NULL AND TbWkWork.typeId=TbWkWorkType.id AND TbWkWorkType.name in (\'video movie\') AND TbWkWorkView.workId=TbWkWork.id';
+$sql='SELECT TbWkWorkView.id,TbWkWork.name,TbWkWorkView.remark,TbWkWorkView.todo,TbWkWorkView.locationId,TbWkWorkView.deviceId FROM TbWkWork,TbWkWorkType,TbWkWorkView WHERE TbWkWorkView.remark IS NOT NULL AND TbWkWork.typeId=TbWkWorkType.id AND TbWkWorkType.name in (\'video movie\', \'video clip\') AND TbWkWorkView.workId=TbWkWork.id';
 $sth=$dbh->prepare($sql);
 $sth->execute() or die 'SQL Error: ['.$DBI::errstr.']'."\n";
 while($rowhashref=$sth->fetchrow_hashref()) {
@@ -146,27 +158,21 @@ while($rowhashref=$sth->fetchrow_hashref()) {
 			exit(1);
 		}
 		if($res eq 'd') {
-			while(my($key,$val)=each(%hashDevice)) {
-				print 'id is ['.$key.'], name is ['.$val.']'."\n";
-			}
+			print_sorted_hash(\%hashDevice);
 			my($newid)=MyUtils::get_from_user('give me the device id: ');
 			$dbh->do('UPDATE TbWkWorkView SET deviceId=? WHERE id=?',undef,$newid,$f_id);
 			$dbh->commit();
 			$f_deviceId=$newid;
 		}
 		if($res eq 'l') {
-			while(my($key,$val)=each(%hashLocation)) {
-				print 'id is ['.$key.'], name is ['.$val.']'."\n";
-			}
+			print_sorted_hash(\%hashLocation);
 			my($newid)=MyUtils::get_from_user('give me the location id: ');
 			$dbh->do('UPDATE TbWkWorkView SET locationId=? WHERE id=?',undef,$newid,$f_id);
 			$dbh->commit();
 			$f_locationId=$newid;
 		}
 		if($res eq 'a') {
-			while(my($key,$val)=each(%hashFriend)) {
-				print 'id is ['.$key.'], name is ['.$val.']'."\n";
-			}
+			print_sorted_hash(\%hashFriend);
 			my($newid)=MyUtils::get_from_user('give me the friend id: ');
 			$dbh->do('INSERT TbWkWorkViewPerson (viewerId,viewId) VALUES(?,?)',undef,$newid,$f_id);
 			$dbh->commit();

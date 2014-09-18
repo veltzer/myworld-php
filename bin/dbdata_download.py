@@ -55,7 +55,7 @@ for row in res:
 	url=template.replace('$external_id', f_externalCode)
 	if p_download_report:
 		print('downloading [{0}] from [{1}], [{2}]...'.format(file, url, f_name))
-	subprocess.check_call([
+	subprocess.call([
 		'youtube-dl',
 		url,
 		'--output',
