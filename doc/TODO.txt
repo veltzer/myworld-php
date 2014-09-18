@@ -1,5 +1,24 @@
 Now:
 ====
+- rename all the stuff that has to do with myworld to myworld_.py
+- move all script to perl
+- unite the following scripts:
+	movie_check_view_remarks.pl
+	movie_check_view_todo.pl
+	movie_update_from_imdb.pl
+	movie_update_from_imdb.py
+	movie_check_names.pl
+	movie_check_dups.pl
+	movie_update.pl
+	dbdata_download.py
+	dbdate_update.pl
+	dbdata_sanity.pl
+to one python script that does everything and allows you to control exactly what you do.
+- add the lengths of the youtube videos to my database with dbdata_update.pl.
+- check that all links to articles are ok and if they are not then
+	find the articles again, and fetch them as pdfs.
+	create a repository for them (just like for youtube videos).
+
 - make just one dialog to put in new works with toggle buttons for review and view.
 - links to the great courses site are broken. Fix them.
 - my php code is vulnerable to injection attacks. use binding of parameters or some such.
