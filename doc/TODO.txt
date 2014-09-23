@@ -1,7 +1,5 @@
 Now:
 ====
-- rename all the stuff that has to do with myworld to myworld_*.py
-- move all perl scripts to python
 - unite the following scripts:
 	movie_check_view_remarks.pl
 	movie_check_view_todo.pl
@@ -19,6 +17,7 @@ to one python script that does everything and allows you to control exactly what
 	find the articles again, and fetch them as pdfs.
 	create a repository for them (just like for youtube videos).
 
+- move all perl scripts to python
 - make just one dialog to put in new works with toggle buttons for review and view.
 - links to the great courses site are broken. Fix them.
 - my php code is vulnerable to injection attacks. use binding of parameters or some such.
