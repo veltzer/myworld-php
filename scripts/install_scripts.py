@@ -3,15 +3,24 @@
 '''
 this script installs all products of the meta package as symbolic links
 into ~/install.
+
+TODO:
+- add easy option to copy files instead of sylinking them.
 '''
 
-import os # for walk, getcwd, readlink
-import os.path # for join, expanduser, abspath, islink
+import os # for walk, getcwd, symlink, listdir, unlink, mkdir
+import os.path # for join, expanduser, realpath, abspath, islink, isdir, isfile
 
 # actually perform the actions?
 doit=True
 # print what we are doing?
 debug=True
+
+def do_install(source, target):
+	if doit:
+		if debug:
+			print('symlinking [{0}], [{1}]'.format(source, target))
+		os.symlink(source, target)
 
 def file_gen(root_folder, recurse):
 	if recurse:
@@ -47,17 +56,11 @@ def install(root_folder, target_folder, recurse):
 		for file in files:
 			source=os.path.abspath(os.path.join(root, file))
 			target=os.path.join(target_folder, file)
-			if doit:
-				if debug:
-					print('symlinking [{0}], [{1}]'.format(source, target))
-				os.symlink(source, target)
+			do_install(source, target)
 		for dir in dirs:
 			source=os.path.abspath(os.path.join(root, dir))
 			target=os.path.join(target_folder, dir)
-			if doit:
-				if debug:
-					print('symlinking [{0}], [{1}]'.format(source, target))
-				os.symlink(source, target)
+			do_install(source, target)
 
 install('bin', '~/install/bin', False)
 install('perl', '~/install/perl', False)
