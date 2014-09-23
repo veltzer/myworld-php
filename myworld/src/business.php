@@ -16,7 +16,7 @@ function create_courses($params) {
 	$res.='<td style=\'width:80%\'>name</td>';
 	$res.='</tr>';
 
-	while($row=mysql_fetch_assoc($result)) {
+	while($row=$result->fetch_assoc()) {
 		$id=$row['id'];
 		$category=$row['category'];
 		$name=$row['name'];
@@ -25,7 +25,7 @@ function create_courses($params) {
 		$res.='<td>'.$name.'</td>';
 		$res.='</tr>';
 	}
-	my_mysql_free_result($result);
+	$result->free();
 	$res.='</table>';
 	return $res;
 }
@@ -43,7 +43,7 @@ function create_consulting($params) {
 	$res.='<td style=\'width:20%\'>image</td>';
 	$res.='</tr>';
 
-	while($row=mysql_fetch_assoc($result)) {
+	while($row=$result->fetch_assoc()) {
 		$id=$row['id'];
 		$name=$row['name'];
 		$slug=$row['slug'];
@@ -63,7 +63,7 @@ function create_consulting($params) {
 		$res.='<td><img src=\''.$link_img.'\'/></td>';
 		$res.='</tr>';
 	}
-	my_mysql_free_result($result);
+	$result->free();
 	$res.='</table>';
 	return $res;
 }
@@ -72,8 +72,7 @@ function create_teaching($params) {
 	$res='';
 	// sending query
 	$query=sprintf('SELECT id,name,slug,imageId,remark,url FROM TbOrganization where funcTeaching order by name asc');
-	$result=mysql_query($query);
-	assert($result);
+	$result=my_mysql_query($query);
 
 	$res.=get_start_table();
 	$res.='<tr>';
@@ -82,7 +81,7 @@ function create_teaching($params) {
 	$res.='<td style=\'width:20%\'>image</td>';
 	$res.='</tr>';
 
-	while($row=mysql_fetch_assoc($result)) {
+	while($row=$result->fetch_assoc()) {
 		$id=$row['id'];
 		$name=$row['name'];
 		$slug=$row['slug'];
@@ -102,7 +101,7 @@ function create_teaching($params) {
 		$res.='<td><img src=\''.$link_img.'\'/></td>';
 		$res.='</tr>';
 	}
-	my_mysql_free_result($result);
+	$result->free();
 	$res.='</table>';
 	return $res;
 }
@@ -111,8 +110,7 @@ function create_certification($params) {
 	$res='';
 	// sending query
 	$query=sprintf('SELECT id,name,slug,url,imageId,fromDate FROM TbOrganization where funcCertification order by name asc');
-	$result=mysql_query($query);
-	assert($result);
+	$result=my_mysql_query($query);
 
 	$res.=get_start_table();
 	$res.='<tr>';
@@ -121,7 +119,7 @@ function create_certification($params) {
 	$res.='<td style=\'width:20%\'>image</td>';
 	$res.='</tr>';
 	// printing table rows
-	while($row=mysql_fetch_assoc($result)) {
+	while($row=$result->fetch_assoc()) {
 		$id=$row['id'];
 		$name=$row['name'];
 		$slug=$row['slug'];
@@ -135,7 +133,7 @@ function create_certification($params) {
 		$res.='<td><img src=\''.$link_img.'\'/></td>';
 		$res.='</tr>';
 	}
-	my_mysql_free_result($result);
+	$result->free();
 	$res.='</table>';
 	return $res;
 }
