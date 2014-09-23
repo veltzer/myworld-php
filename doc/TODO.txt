@@ -1,7 +1,7 @@
 Now:
 ====
-- rename all the stuff that has to do with myworld to myworld_.py
-- move all script to perl
+- rename all the stuff that has to do with myworld to myworld_*.py
+- move all perl scripts to python
 - unite the following scripts:
 	movie_check_view_remarks.pl
 	movie_check_view_todo.pl

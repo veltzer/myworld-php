@@ -1,9 +1,9 @@
 #!/usr/bin/python3
 
-"""
+'''
 This script will catenate mp3 files correctly using ffmpeg.
 see: http://superuser.com/questions/314239/how-to-join-merge-many-mp3-files
-"""
+'''
 
 import subprocess # for check_call
 import optparse # for OptionParser
@@ -31,13 +31,13 @@ parser.add_option('-o', '--output', dest='output', default=None, help='output fi
 # check that all free files are there
 for file in free_args:
 	if not os.path.isfile(file):
-		print('file is not there', file)
+		print('file [{0}] is not there...'.format(file))
 		sys.exit(1)
 if options.output is None:
 	print('must supply -o argument')
 	sys.exit(1)
 if os.path.isfile(options.output):
-	print('file is there', options.output)
+	print('file [{0}] is there...'.format(options.output))
 	sys.exit(1)
 
 ########
