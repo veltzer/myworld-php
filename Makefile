@@ -34,6 +34,7 @@ TOOL_JSL:=~/install/jsl/jsl
 TOOL_GJSLINT:=~/install/gjslint/gjslint
 TOOL_YUICOMPRESSOR:=yui-compressor
 TOOL_JSLINT:=jslint
+TOOL_WRAPPER:=scripts/wrapper.py
 
 JSCHECK:=jscheck.stamp
 
@@ -102,16 +103,17 @@ $(MYTHEME_THEME_ZIP): $(MYTHEME_THEME_FILES) $(ALL_DEP)
 	$(Q)-mkdir -p $(dir $@)
 	$(Q)-rm -f $@
 	$(Q)zip --quiet -r $@ $(MYTHEME_THEME_NAME)
-$(JSCHECK): $(SOURCES_JS) $(ALL_DEP)
+$(JSCHECK): $(SOURCES_JS) $(ALL_DEP) $(TOOL_WRAPPER)
 	$(info doing [$@])
 	$(Q)$(TOOL_JSL) --conf=support/jsl.conf --quiet --nologo --nosummary --nofilelisting $(SOURCES_JS)
-	$(Q)scripts/wrapper.py $(TOOL_GJSLINT) --flagfile support/gjslint.cfg $(SOURCES_JS)
-	$(Q)#scripts/wrapper.py jshint --config support/jshint.conf $(SOURCES_JS)
-	$(Q)#scripts/wrapper.py jshint --config support/jshint.conf public/myworld_utils.js
-	$(Q)#scripts/wrapper.py jslint $(SOURCES_JS)
-	$(Q)#scripts/wrapper.py jslint public/myworld_utils.js
+	$(Q)$(TOOL_WRAPPER) $(TOOL_GJSLINT) --flagfile support/gjslint.cfg $(SOURCES_JS)
 	$(Q)mkdir -p $(dir $@)
 	$(Q)touch $(JSCHECK)
+	
+#	$(Q)$(TOOL_WRAPPER) jshint --config support/jshint.conf $(SOURCES_JS)
+#	$(Q)$(TOOL_WRAPPER) jshint --config support/jshint.conf public/myworld_utils.js
+#	$(Q)$(TOOL_WRAPPER) jslint $(SOURCES_JS)
+#	$(Q)$(TOOL_WRAPPER) jslint public/myworld_utils.js
 
 # list the plugins...
 .PHONY: list
