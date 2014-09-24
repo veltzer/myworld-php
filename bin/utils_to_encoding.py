@@ -4,8 +4,6 @@
 This script converts files given to it to some encoding, utf_8 by default.
 It auto-detects the current encoding, reads using the current
 encoding and writes using the utf-encoding.
-
-	Mark Veltzer <mark@veltzer.net>
 '''
 
 import chardet # for detect

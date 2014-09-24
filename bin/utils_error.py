@@ -2,9 +2,8 @@
 
 '''
 A small app exiting with the error code you want.
-
-	Mark Veltzer <mark@veltzer.net>
 '''
+
 import re # for .compile, .finditer
 import sys # for argv, exit
 import os # for .path.join

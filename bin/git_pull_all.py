@@ -1,5 +1,13 @@
 #!/usr/bin/python
 
+'''
+This script should be python2 because it relies on the github module which
+is python2 only
+
+TODO:
+- remove the username and password from this script.
+'''
+
 from __future__ import print_function
 import glob # for glob
 import os.path # for split, join, isfile
@@ -19,7 +27,7 @@ for repo in g.get_user().get_repos():
 			subprocess.check_call([
 				'git',
 				'pull',
-	#			'--tags',
+				#'--tags',
 			])
 			os.chdir('..')
 		else:

@@ -37,3 +37,12 @@ if False:
 		'--upgrade',
 		'PyGithub',
 	])
+	'''
+	subprocess.check_call([
+		'pip3',
+		'install',
+		'--user',
+		'--upgrade',
+		'PyGithub',
+	])
+	'''

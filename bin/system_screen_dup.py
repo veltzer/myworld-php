@@ -6,8 +6,6 @@ machine, and then sets the two screens to the maximum resolution
 that the two screens support.
 I mainly use this script for teaching...
 
-	Mark Veltzer <mark@veltzer.net>
-
 TODO
 - add a feature by which I could supply a desired resolution and it
 	will be picked if supported by the two screens.

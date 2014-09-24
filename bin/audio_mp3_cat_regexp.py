@@ -2,9 +2,6 @@
 
 '''
 Script to be used to catenate many mp3 files.
-
-	Mark Veltzer <mark@veltzer.net>
-
 '''
 
 import subprocess

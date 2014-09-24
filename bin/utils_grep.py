@@ -1,10 +1,9 @@
 #!/usr/bin/python3
 
 '''
-Implemting a better grep in python
-
-	Mark Veltzer <mark@veltzer.net>
+implemting grep in python
 '''
+
 import re # for compile, finditer
 import sys # for argv, exit
 import os.path # for join
