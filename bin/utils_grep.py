@@ -1,17 +1,18 @@
 #!/usr/bin/python3
 
-"""
+'''
 Implemting a better grep in python
 
 	Mark Veltzer <mark@veltzer.net>
-"""
-import re # for .compile, .finditer
+'''
+import re # for compile, finditer
 import sys # for argv, exit
-import os # for .path.join
+import os.path # for join
+import os # for walk
 
 # command line usage...
 if len(sys.argv)!=4:
-	print("usage: grep.py [expr] [fileregexp] [folder]")
+	print('usage: grep.py [expr] [fileregexp] [folder]')
 	sys.exit(1)
 # first compile the regular expression to search for...
 c=re.compile(sys.argv[1])
@@ -26,10 +27,10 @@ for root,dirs,files in os.walk(folder):
 	for file in files:
 		full=os.path.join(root,file)
 		if debug:
-			print("file is [{0}]".format(full))
+			print('file is [{0}]'.format(full))
 		if cf.match(full):
 			if debug:
-				print("doing file [{0}]".format(full))
+				print('doing file [{0}]'.format(full))
 			for num,line in enumerate(open(full)):
 				for x in c.finditer(line):
 					if printOnlyFiles:
@@ -37,4 +38,4 @@ for root,dirs,files in os.walk(folder):
 							print(full)
 							printedFiles.add(full)
 					else:
-						print("{0}, {1}: {2}".format(full,num,line[:-1]))
+						print('{0}, {1}: {2}'.format(full,num,line[:-1]))
