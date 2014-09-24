@@ -8,7 +8,7 @@ This script does sanity on the database
 # 1. AUTO_INCREMENT always implies tight packing of the table.
 # 2. no works without views.
 # 3. no works without reviews.
-# 4. no works without lenghts.
+# 4. no works without lengths.
 # 5. no person without single group representing him.
 # 6. no works without people involved (at least one).
 # 7. no person without external id of some sort (at least one).
@@ -36,11 +36,10 @@ my($dbh)=DBI->connect('dbi:mysql:myworld','','',{
 	AutoCommit => 0,
 });
 
-my($sql)="select count(*) from TbWkWorkView where remark is not NULL";
+my($sql)="SELECT COUNT(*) FROM TbWkWorkView WHERE remark IS NOT NULL";
 my($sth)=$dbh->prepare($sql);
 $sth->execute() or die 'SQL Error: ['.$DBI::errstr.']'."\n";
 $sth->finish();
-
 
 # were are not making any changes using this script so there is no need to commit anything
 #$dbh->commit();

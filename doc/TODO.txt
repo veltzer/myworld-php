@@ -1,16 +1,16 @@
 Now:
 ====
 - unite the following scripts:
-	movie_check_view_remarks.pl
-	movie_check_view_todo.pl
-	movie_update_from_imdb.pl
-	movie_update_from_imdb.py
-	movie_check_names.pl
-	movie_check_dups.pl
-	movie_update.pl
-	dbdata_download.py
-	dbdate_update.pl
-	dbdata_sanity.pl
+	myworld_check_view_remarks.pl
+	myworld_check_view_todo.pl
+	myworld_update_from_imdb.pl
+	myworld_update_from_imdb.py
+	myworld_check_names.pl
+	myworld_check_dups.pl
+	myworld_update.pl
+	myworld_download.py
+	myworld_update.pl
+	myworld_sanity.pl
 to one python script that does everything and allows you to control exactly what you do.
 - add the lengths of the youtube videos to my database with dbdata_update.pl.
 - check that all links to articles are ok and if they are not then
