@@ -1,9 +1,12 @@
-#!/usr/bin/python
+#!/usr/bin/python2
 
-"""
+'''
 This script gives track number according to order.
 use like this: [script name] *.mp3
-"""
+
+NOTES:
+- this script must stay python2 until we get ID3 for python3
+'''
 
 from __future__ import print_function
 import subprocess # for check_call
@@ -27,8 +30,5 @@ for file in sys.argv[1:]:
 # now change the track numbers
 for i, file in enumerate(sys.argv[1:]):
 	id3info = ID3.ID3(file)
-	#print(id3info)
 	id3info['TRACKNUMBER'] = i+1
-	#id3info['TITLE'] = str(i+1)
-	#print(id3info)
 	id3info.write()

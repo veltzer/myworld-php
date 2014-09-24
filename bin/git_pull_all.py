@@ -1,7 +1,9 @@
-#!/usr/bin/python
+#!/usr/bin/python2
 
 '''
-This script should be python2 because it relies on the github module which
+
+NOTES:
+- this script should be python2 because it relies on the github module which
 is python2 only
 
 TODO:

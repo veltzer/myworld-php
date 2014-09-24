@@ -1,6 +1,5 @@
-#!/usr/bin/python
+#!/usr/bin/python3
 
-from __future__ import print_function
 import glob # for glob
 import os.path # for split, join, isfile
 import subprocess # for check_call
