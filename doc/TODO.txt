@@ -12,7 +12,8 @@ Now:
 	myworld_update.pl
 	myworld_sanity.pl
 to one python script that does everything and allows you to control exactly what you do.
-- add the lengths of the youtube videos to my database with dbdata_update.pl.
+
+- add the lengths of the youtube videos to my database with myworld_update.pl.
 - check that all links to articles are ok and if they are not then
 	find the articles again, and fetch them as pdfs.
 	create a repository for them (just like for youtube videos).
