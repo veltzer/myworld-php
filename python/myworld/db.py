@@ -40,6 +40,23 @@ def connect():
 	return mysql.connector.Connect(**get_config())
 
 '''
+Special cursor to return dicts and not tuples
+Reference: http://geert.vanderkelen.org/connectorpython-custom-cursors/
+'''
+class MySQLCursorDict(mysql.connector.cursor.MySQLCursor):
+	def _row_to_python(self, rowdata, desc=None):
+		row = super(MySQLCursorDict, self)._row_to_python(rowdata, desc)
+		if row:
+			return dict(zip(self.column_names, row))
+		return None
+
+'''
+get a cursor of the dictionary type
+'''
+def get_cursor(conn):
+	return conn.cursor(cursor_class=MySQLCursorDict)
+
+'''
 A generic function to print the results of a query on the screen
 '''
 def print_results(conn, sql):
@@ -64,4 +81,3 @@ def get_results(conn, sql):
 		results.append(dict(zip(columns, row)))
 	cursor.close()
 	return results
-

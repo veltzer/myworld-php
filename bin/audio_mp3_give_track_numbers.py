@@ -14,7 +14,7 @@ import optparse # for OptionParser
 import os.path # for isfile
 import os # for stat
 import sys # for argv, exit
-import stat # for ST_IWRITE
+import stat # for ST_IWRITE, ST_MODE
 import ID3 # for ID3
 
 # first check that all files are there

@@ -18,6 +18,11 @@ packs=[
 	'python-mutagen', # mp3 tagging library
 	'youtube-dl', # for youtube-dl
 	'python-imdbpy', # for imdb python module
+	'python-enzyme', # for video meta data
+	'python3-enzyme', # for video meta data
+	'python-mediainfodll', # for video meta data
+	'python3-mediainfodll', # for video meta data
+	'python-kaa-metadata', # for video meta data
 ]
 
 args=[

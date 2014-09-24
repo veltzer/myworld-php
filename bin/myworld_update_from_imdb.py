@@ -43,8 +43,7 @@ def analyze_runtimes(runtimes):
 	return avg([analyze_runtime(x) for x in runtimes])
 
 def update_time(db, cursor, f_id, deduced_runtime):
-	cursor.execute('UPDATE TbWkWork SET length=%s WHERE id=%s',(deduced_runtime, f_id))
-	cursor.execute('UPDATE TbWkWork SET updatedLengthDate=NOW() WHERE id=%s',(f_id,))
+	cursor.execute('UPDATE TbWkWork SET length=%s, updatedLengthDate=NOW() WHERE id=%s',(deduced_runtime, f_id))
 	db.commit()
 
 def update_check(db, cursor, f_id):
