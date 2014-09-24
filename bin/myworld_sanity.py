@@ -37,10 +37,10 @@ SELECT TbWkWork.id,TbWkWork.name FROM TbWkWork, TbWkWorkType WHERE
 	AND TbWkWork.typeId=TbWkWorkType.id
 	AND TbWkWorkType.isVideo=TRUE
 '''
-res=myworld.db.get_results(conn, sql)
-if len(res)>0:
+results=myworld.db.get_results(conn, sql)
+if len(results)>0:
 	print('got works with no length')
-	for i in range(10):
-		print(res[i]['name'])
+	for result in results:
+		print('\t{0}'.format(result['name']))
 
 conn.close()
