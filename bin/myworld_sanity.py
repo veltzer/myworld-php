@@ -43,4 +43,15 @@ if len(results)>0:
 	for result in results:
 		print('\t{0}'.format(result['name']))
 
+print('checking bad work names')
+sql='''
+SELECT TbWkWork.id,TbWkWork.name FROM TbWkWork
+'''
+results=myworld.db.get_results(conn, sql)
+for result in results:
+	f_id=result['id']
+	f_name=result['name']
+	if f_name.strip()!=f_name:
+		print('got bad name of work for id [{0}] and name [{1}]'.format(f_id, f_name))
+
 conn.close()
