@@ -23,6 +23,8 @@ packs=[
 	'python-mediainfodll', # for video meta data
 	'python3-mediainfodll', # for video meta data
 	'python-kaa-metadata', # for video meta data
+	'python-bs4', # for html parsing
+	'python3-bs4', # for html parsing
 ]
 
 args=[
