@@ -53,4 +53,23 @@ for result in results:
 	if f_name.strip()!=f_name:
 		print('\tgot bad name of work for id [{0}] and name [{1}]'.format(f_id, f_name))
 
+print('checking for people that do not have external ids and are not friends')
+sql='''
+SELECT TbIdPerson.id, TbIdPerson.firstname, TbIdPerson.surname FROM TbIdPerson
+WHERE NOT EXISTS (
+	SELECT TbIdPersonExternal.id
+	FROM TbIdPersonExternal
+	WHERE TbIdPersonExternal.personId=TbIdPerson.id
+) AND NOT EXISTS (
+	SELECT TbIdGrpPerson.id
+	FROM TbIdGrpPerson, TbIdGrp
+	WHERE TbIdGrpPerson.personId=TbIdPerson.id AND
+	TbIdGrpPerson.groupId=TbIdGrp.id AND
+	TbIdGrp.name='friends'
+)
+'''
+results=myworld.db.get_results(conn, sql)
+for result in results:
+	print('\t{0}'.format(result))
+
 conn.close()
