@@ -9,8 +9,9 @@ http://pranavashok.com/blog/2009/12/script-to-download-ted-videos-in-bulk/
  
 import urllib.request # for urlopen
 import re # for compile
+import download.generic # for get
 
-def download(link):
+def get(link, file):
 	ted_re='http://download.ted.com/talks/[\w_]+-480p.mp4'
 	web=urllib.request.urlopen(link)
 	web_content=web.read().decode()
@@ -20,5 +21,5 @@ def download(link):
 		raise ValueError('no match')
 	if len(m)!=1:
 		raise ValueError('too many matches')
-	match=m[0]
-	print(match)
+	url=m[0]
+	download.generic.get(url, file)

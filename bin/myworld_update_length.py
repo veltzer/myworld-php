@@ -17,7 +17,7 @@ import stat # for ST_SIZE
 # parameters #
 ##############
 # where should the files be downloaded to?
-p_folder='/mnt/external/mark/topics_archive/video/emovies/youtube'
+p_folder='/mnt/external/mark/topics_archive/video/emovies'
 # do statistics?
 p_do_stats=True
 # do progress?
@@ -28,8 +28,8 @@ p_doit=True
 #############
 # functions #
 #############
-def get_filename(code):
-	return os.path.join(p_folder, code)
+def get_filename(code, f_tname):
+	return os.path.join(p_folder, f_tname, code)
 def update_length(conn, curr, f_id, val):
 	if p_do_progress:
 		print('updating length to [{0}]'.format(val))
@@ -61,23 +61,24 @@ curr=myworld.db.get_cursor(conn)
 curr2=myworld.db.get_cursor(conn)
 
 sql='''
-SELECT TbWkWork.id, TbWkWork.name, TbWkWorkExternal.externalCode FROM TbWkWork, TbWkWorkExternal, TbExternalType WHERE
+SELECT TbWkWork.id, TbWkWork.name, TbWkWorkExternal.externalCode, TbExternalType.name AS tname FROM TbWkWork, TbWkWorkExternal, TbExternalType WHERE
 	( TbWkWork.updatedLengthDate IS NULL OR
 	TbWkWork.updatedSizeDate IS NULL ) AND
 	TbWkWorkExternal.workId=TbWkWork.id AND
 	TbWkWorkExternal.externalId=TbExternalType.id AND
-	TbExternalType.name='youtube_video_id'
+	TbExternalType.name IN ('youtube_video_id', 'ted_video_id')
 '''
 stat_did=0
 curr.execute(sql)
 results=curr.fetchall()
 for result in results:
-	f_externalCode=result['externalCode']
-	f_name=result['name']
 	f_id=result['id']
+	f_name=result['name']
+	f_externalCode=result['externalCode']
+	f_tname=result['tname']
 	if p_do_progress:
 		print('doing [{0}]...'.format(f_name))
-	filename=get_filename(f_externalCode)
+	filename=get_filename(f_externalCode, f_tname)
 	update_length(conn, curr2, f_id, get_length(filename))
 	update_size(conn, curr2, f_id, get_size(filename))
 	stat_did+=1
