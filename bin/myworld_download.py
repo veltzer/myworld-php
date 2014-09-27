@@ -24,10 +24,14 @@ p_download_report=True
 conn=myworld.db.connect()
 
 sql='''
-SELECT TbWkWorkExternal.externalCode, TbWkWork.name, TbExternalType.template, TbExternalType.name as tname FROM TbWkWorkExternal, TbExternalType, TbWkWork WHERE
+SELECT
+	TbWkWorkExternal.externalCode, TbWkWork.name, TbExternalType.template, TbExternalType.name AS tname
+FROM
+	TbWkWorkExternal, TbExternalType, TbWkWork
+WHERE
 	TbWkWorkExternal.externalId=TbExternalType.id AND
 	TbWkWorkExternal.workId=TbWkWork.id AND
-	TbExternalType.name in ('youtube_video_id', 'ted_video_id')
+	TbExternalType.name IN ('youtube_video_id', 'ted_video_id')
 '''
 
 res=myworld.db.get_results(conn, sql)

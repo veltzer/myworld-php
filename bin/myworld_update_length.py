@@ -45,7 +45,7 @@ def update_size(conn, curr, f_id, val):
 def get_length(filename):
 	MI=MediaInfoDLL3.MediaInfo()
 	MI.Open(filename)
-	duration_string = MI.Get(MediaInfoDLL3.Stream.Video, 0, "Duration")
+	duration_string = MI.Get(MediaInfoDLL3.Stream.Video, 0, 'Duration')
 	MI.Close()
 	duration = int(duration_string)//1000
 	return duration
@@ -79,6 +79,9 @@ for result in results:
 	if p_do_progress:
 		print('doing [{0}]...'.format(f_name))
 	filename=get_filename(f_externalCode, f_tname)
+	if not os.path.isfile(filename):
+		print('file [{0}] does not exist, download it first...'.format(filename))
+		continue
 	update_length(conn, curr2, f_id, get_length(filename))
 	update_size(conn, curr2, f_id, get_size(filename))
 	stat_did+=1

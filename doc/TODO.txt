@@ -1,5 +1,9 @@
 Now:
 ====
+- add command line parsing to demos-python. Then add it to the myworld_sanity.py
+	script.
+- check all the directors for imdb movies and update the corresponding "checkedDate"
+	field in the TbWkWorkContrib table.
 - unite the following scripts:
 	myworld_check_view_remarks.pl
 	myworld_check_view_todo.pl
@@ -11,6 +15,7 @@ Now:
 	myworld_download.py
 	myworld_update.pl
 	myworld_sanity.pl
+	myworld_sanity.py
 to one python script that does everything and allows you to control exactly what you do.
 
 - add the lengths of the youtube videos to my database with myworld_update.pl.
