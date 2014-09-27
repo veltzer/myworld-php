@@ -40,18 +40,15 @@ SELECT TbWkWork.id,TbWkWork.name FROM TbWkWork, TbWkWorkType WHERE
 '''
 results=myworld.db.get_results(conn, sql)
 for result in results:
-	print('\t{0}'.format(result['name']))
+	print('\t{0}'.format(result))
 
 print('checking bad work names')
 sql='''
-SELECT TbWkWork.id,TbWkWork.name FROM TbWkWork
+SELECT TbWkWork.id,TbWkWork.name FROM TbWkWork WHERE name REGEXP '^[[:space:]].*$' OR name REGEXP '^.*[[:space:]]$'
 '''
 results=myworld.db.get_results(conn, sql)
 for result in results:
-	f_id=result['id']
-	f_name=result['name']
-	if f_name.strip()!=f_name:
-		print('\tgot bad name of work for id [{0}] and name [{1}]'.format(f_id, f_name))
+	print('\t{0}'.format(result))
 
 print('checking for people that do not have external ids and are not friends')
 sql='''
@@ -66,6 +63,19 @@ WHERE NOT EXISTS (
 	WHERE TbIdGrpPerson.personId=TbIdPerson.id AND
 	TbIdGrpPerson.groupId=TbIdGrp.id AND
 	TbIdGrp.name='friends'
+)
+'''
+results=myworld.db.get_results(conn, sql)
+for result in results:
+	print('\t{0}'.format(result))
+
+print('checking for works that do not have external ids')
+sql='''
+SELECT TbWkWork.id, TbWkWork.name FROM TbWkWork
+WHERE NOT EXISTS (
+	SELECT TbWkWorkExternal.id
+	FROM TbWkWorkExternal
+	WHERE TbWkWorkExternal.workId=TbWkWork.id
 )
 '''
 results=myworld.db.get_results(conn, sql)
