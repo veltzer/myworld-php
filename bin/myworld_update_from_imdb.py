@@ -1,7 +1,13 @@
 #!/usr/bin/python2
 
 '''
-first phase: read all lengths of all movies from imdb
+This script updates all movies lengths from imdb.
+Unlike the equivalent perl script it does not check the name of the film.
+
+TODO:
+- check the name of the movie too.
+- exception handling is not good, when getting timeouts from imdb it updates the
+length to NULL (which is wrong). Take care of this.
 '''
 
 from __future__ import print_function
@@ -9,6 +15,11 @@ import MySQLdb # for connect
 import imdb # for IMDb
 import sys # for stdout, getdefaultencoding
 import re # for compile
+
+##############
+# parameters #
+##############
+p_do_progress=True
 
 #############
 # functions #
@@ -77,15 +88,21 @@ for x in cursor:
 	f_workId=x[1]
 	ids[f_workId]=f_externalCode
 
+# all movies which have not been update for length
 sql='SELECT TbWkWork.id,TbWkWork.name,TbWkWork.length FROM TbWkWork,TbWkWorkType WHERE TbWkWork.typeId=TbWkWorkType.id AND TbWkWorkType.name in (\'video movie\') AND TbWkWork.updatedLengthDate IS NULL'
+# all movies
 #sql='SELECT TbWkWork.id,TbWkWork.name,TbWkWork.length FROM TbWkWork,TbWkWorkType WHERE TbWkWork.typeId=TbWkWorkType.id AND TbWkWorkType.name in (\'video movie\')'
+# all movies where length is unknown
 #sql='SELECT TbWkWork.id,TbWkWork.name,TbWkWork.length FROM TbWkWork,TbWkWorkType WHERE TbWkWork.typeId=TbWkWorkType.id AND TbWkWorkType.name in (\'video movie\') AND TbWkWork.length is NULL'
+
 cursor.execute(sql)
 for x in cursor:
 	f_id=x[0]
 	f_name=x[1]
 	f_length=x[2]
 	f_external=ids[f_id]
+	if p_do_progress:
+		print('working on [{0}]...'.format(f_name))
 	movie=connection.get_movie(f_external)
 	info_runtime=movie.get('runtime')
 	print('f_id: {0}'.format(f_id))
