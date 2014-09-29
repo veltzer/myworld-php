@@ -48,7 +48,15 @@ WHERE
 '''
 results=myworld.db.get_results(conn, sql)
 for result in results:
+	f_id=result['id']
 	print('\t{0}'.format(result))
+	sql2='''SELECT TbWkWorkExternal.externalCode, TbExternalType.name
+		FROM TbWkWorkExternal, TbExternalType
+		WHERE TbExternalType.id=TbWkWorkExternal.externalId AND
+		TbWkWorkExternal.workId='''+str(f_id)
+	results2=myworld.db.get_results(conn, sql2)
+	for result2 in results2:
+		print('\t\t{0}'.format(result2))
 
 print('checking works with space in the begining or end of name')
 sql='''
