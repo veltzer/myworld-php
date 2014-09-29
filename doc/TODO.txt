@@ -1,5 +1,8 @@
 Now:
 ====
+- add option to add work which I want to see. Just add the work without views
+	or reviews.
+	Then have a script which shows you which works do not have views.
 - add command line parsing to demos-python. Then add it to the myworld_sanity.py
 	script.
 - check all the directors for imdb movies and update the corresponding "checkedDate"
