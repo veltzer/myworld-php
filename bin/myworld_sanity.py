@@ -12,8 +12,7 @@ This script checks the sanity of the myworld database.
 # 6. no works without people involved (at least one).
 # 7. no person without external id of some sort (at least one).
 # more to come...
-
-Currently it does very little.
+# check the reverse: that every file in the download folders corresponds to a work and external entity in my database.
 '''
 
 #############
@@ -29,6 +28,12 @@ import myworld.db # for connect, get_results
 # code #
 ########
 conn=myworld.db.connect()
+
+print('checking for work views that have remarks or todos')
+sql='''SELECT TbWkWorkView.workId FROM TbWkWorkView WHERE remark IS NOT NULL OR todo IS NOT NULL'''
+results=myworld.db.get_results(conn, sql)
+for result in results:
+	print('\t{0}'.format(result))
 
 print('checking works which are videos without length updated')
 sql='''

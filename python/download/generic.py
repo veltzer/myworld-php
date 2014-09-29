@@ -21,10 +21,10 @@ def get(url, file):
 	block_sz=8192
 
 	maxval=file_size//block_sz
-	if file_size % block_sz>0:
+	if file_size%block_sz>0:
 		maxval+=1
 
-	pbar = progressbar.ProgressBar(maxval=maxval)
+	pbar=progressbar.ProgressBar(maxval=maxval)
 	pbar.start()
 	while True:
 		buffer=u.read(block_sz)

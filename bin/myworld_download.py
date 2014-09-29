@@ -9,6 +9,7 @@ import myworld.db # for connect, print_results, get_results
 import os.path # for join
 import subprocess # for check_call
 import download.ted # for get
+import download.generic # for get
 
 # parameters
 # where should the files be downloaded to?
@@ -19,6 +20,10 @@ p_folder='/mnt/external/mark/topics_archive/video/emovies'
 p_progress=False
 # report on downloads?
 p_download_report=True
+# enable various kinds of downloads
+p_do_youtube=True
+p_do_ted=True
+p_do_url=False
 
 # code
 conn=myworld.db.connect()
@@ -31,7 +36,7 @@ FROM
 WHERE
 	TbWkWorkExternal.externalId=TbExternalType.id AND
 	TbWkWorkExternal.workId=TbWkWork.id AND
-	TbExternalType.name IN ('youtube_video_id', 'ted_video_id')
+	TbExternalType.name IN ('youtube_video_id', 'ted_video_id', 'url')
 '''
 
 res=myworld.db.get_results(conn, sql)
@@ -53,15 +58,17 @@ for row in res:
 	url=f_template.replace('$external_id', f_externalCode)
 	if p_download_report:
 		print('downloading [{0}] from [{1}], [{2}]...'.format(file, url, f_name))
-	if f_tname=='youtube_video_id':
+	if p_do_youtube and f_tname=='youtube_video_id':
 		subprocess.call([
 			'youtube-dl',
 			url,
 			'--output',
 			file,
 		])
-	if f_tname=='ted_video_id':
+	if p_do_ted and f_tname=='ted_video_id':
 		download.ted.get(url, file)
+	if p_do_url and f_tname=='url':
+		download.generic.get(url, file)
 	stat_download+=1
 
 conn.close()
