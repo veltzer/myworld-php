@@ -119,13 +119,22 @@ results=myworld.db.get_results(conn, sql)
 for result in results:
 	f_id=result['id']
 	print('\t{0}'.format(result))
-	sql2='''SELECT TbWkWork.name
-		FROM TbWkWork, TbWkWorkContrib
+	sql2='''SELECT TbWkWork.name, TbWkWork.id, TbWkWorkType.name as typeName
+		FROM TbWkWork, TbWkWorkContrib, TbWkWorkType
 		WHERE TbWkWork.id=TbWkWorkContrib.workId AND
+		TbWkWorkType.id=TbWkWork.typeId AND
 		TbWkWorkContrib.personId='''+str(f_id)
 	results2=myworld.db.get_results(conn, sql2)
 	for result2 in results2:
+		f_workid=result2['id']
 		print('\t\t{0}'.format(result2))
+		sql3='''SELECT TbWkWorkExternal.externalCode, TbExternalType.name
+		FROM TbWkWorkExternal, TbExternalType
+		WHERE TbWkWorkExternal.externalId=TbExternalType.id AND
+		TbWkWorkExternal.workId='''+str(f_workid)
+		results3=myworld.db.get_results(conn, sql3)
+		for result3 in results3:
+			print('\t\t\t{0}'.format(result3))
 
 print('checking for works that do not have external ids')
 sql='''
@@ -139,6 +148,7 @@ WHERE
 		FROM TbWkWorkExternal
 		WHERE TbWkWorkExternal.workId=TbWkWork.id
 	)
+ORDER BY TbWkWork.name
 '''
 results=myworld.db.get_results(conn, sql)
 for result in results:

@@ -1,5 +1,6 @@
 Now:
 ====
+- do a script that checks all the directors to be correct.
 - add option to add work which I want to see. Just add the work without views
 	or reviews.
 	Then have a script which shows you which works do not have views.
