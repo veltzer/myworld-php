@@ -72,6 +72,30 @@ results=myworld.db.get_results(conn, sql)
 for result in results:
 	print('\t{0}'.format(result))
 
+print('checking for people that are not connected to works and are not friends')
+sql='''
+SELECT
+	TbIdPerson.id, TbIdPerson.firstname, TbIdPerson.surname
+FROM
+	TbIdPerson
+WHERE
+	NOT EXISTS (
+		SELECT TbWkWork.id
+		FROM TbWkWork, TbWkWorkContrib
+		WHERE TbWkWork.id=TbWkWorkContrib.workId AND
+		TbWkWorkContrib.personId=TbIdPerson.id
+	) AND NOT EXISTS (
+		SELECT TbIdGrpPerson.id
+		FROM TbIdGrpPerson, TbIdGrp
+		WHERE TbIdGrpPerson.personId=TbIdPerson.id AND
+		TbIdGrpPerson.groupId=TbIdGrp.id AND
+		TbIdGrp.name='friends'
+	)
+'''
+results=myworld.db.get_results(conn, sql)
+for result in results:
+	print('\t{0}'.format(result))
+
 print('checking for people that do not have external ids and are not friends')
 sql='''
 SELECT
