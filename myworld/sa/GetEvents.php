@@ -17,8 +17,8 @@ $p_end='2011-08-24 01:32:40';
 # connect to the database
 my_mysql_connect();
 $query=sprintf('SELECT id,title,url,start,end FROM TbEvent where start > \'%s\' and end < \'%s\'',
-	mysql_real_escape_string($p_start),
-	mysql_real_escape_string($p_end)
+	$p_start,
+	$p_end
 );
 if($debug==1) {
 	printDebug($query);

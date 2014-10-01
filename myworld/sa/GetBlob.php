@@ -25,11 +25,11 @@ assert($p_mime_field=='smallMime');
 my_mysql_connect();
 $query=sprintf('SELECT %s,%s,%s FROM %s where %s=%s',
 	// not real escaping is on purpose here...
-	mysql_real_escape_string($p_data_field),
-	mysql_real_escape_string($p_name_field),
-	mysql_real_escape_string($p_mime_field),
-	mysql_real_escape_string($p_table),
-	mysql_real_escape_string($p_select_field),
+	$p_data_field,
+	$p_name_field,
+	$p_mime_field,
+	$p_table,
+	$p_select_field,
 	my_mysql_real_escape_string($p_select_id)
 );
 if($debug) {

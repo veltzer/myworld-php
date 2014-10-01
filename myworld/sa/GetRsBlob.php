@@ -12,7 +12,7 @@ $debug=0;
 
 my_mysql_connect();
 $query=sprintf('SELECT id,name,slug,mime,data FROM TbRsBlob where slug="%s"',
-	mysql_real_escape_string($p_slug)
+	$p_slug
 );
 if($debug==1) {
 	echo $query.'<br/>';
