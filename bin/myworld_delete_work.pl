@@ -2,7 +2,7 @@
 
 =head desciption 
 
-This script deletes a single movie using it's ID IN THE DATABASE.
+This script deletes a single work using it's ID IN THE DATABASE.
 Mind you: this is NOT according to imdbid.
 
 =cut
@@ -24,6 +24,6 @@ if(!@ARGV) {
 	die 'please provide f_id'."\n";
 }
 my($f_id)=shift;
-MyUtils::delete_movie($dbh,$f_id);
+MyUtils::delete_work($dbh,$f_id);
 $dbh->commit();
 $dbh->disconnect();

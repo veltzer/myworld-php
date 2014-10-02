@@ -79,7 +79,7 @@ sub get_from_user($) {
 	return $res;
 }
 
-sub delete_movie($$) {
+sub delete_work($$) {
 	my($dbh)=$_[0];
 	my($f_id)=$_[1];
 	$dbh->do('DELETE FROM TbWkWorkAuthorization WHERE workId=?',undef,$f_id);

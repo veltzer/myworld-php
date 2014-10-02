@@ -152,6 +152,15 @@ ORDER BY TbWkWork.name
 '''
 results=myworld.db.get_results(conn, sql)
 for result in results:
+	f_id=result['id']
 	print('\t{0}'.format(result))
+	sql2='''SELECT TbIdPerson.id, TbIdPerson.firstname, TbIdPerson.surname, TbWkWorkContribType.name
+		FROM TbIdPerson, TbWkWorkContrib, TbWkWorkContribType
+		WHERE TbIdPerson.id=TbWkWorkContrib.personId AND
+		TbWkWorkContribType.id=TbWkWorkContrib.typeId AND
+		TbWkWorkContrib.workId='''+str(f_id)
+	results2=myworld.db.get_results(conn, sql2)
+	for result2 in results2:
+		print('\t\t{0}'.format(result2))
 
 conn.close()
