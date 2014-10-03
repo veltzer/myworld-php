@@ -5,6 +5,9 @@ this script sorts file on disk. it does so by moving them around so that the ord
 to see its effect use 'ls -f' before and after the sort.
 this script will only run on linux and only on filesystems where create order is the naturl order
 of files on them.
+
+References:
+http://www.linuxforums.org/forum/newbie/111044-change-order-files-directory.html
 '''
 
 import sys # for argv, exit, stderr
