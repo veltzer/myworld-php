@@ -38,8 +38,8 @@ p_folder='/home/mark/slow_links/emovies/youtube'
 p_folder='/mnt/external/mark/topics_archive/video/emovies'
 # report progress?
 p_progress=False
-# report on downloads?
-p_download_report=True
+# report on downloads and skips?
+p_report=True
 # enable various kinds of downloads
 p_do_types=set([
 	'youtube_video_id',
@@ -107,13 +107,15 @@ for row in res:
 		stat_already_there+=1
 		continue
 	url=f_template.replace('$external_id', f_externalCode)
-	if p_download_report:
-		print('downloading [{0}] from [{1}], [{2}]...'.format(file, url, f_name))
 	if f_tname in p_do_types:
+		if p_report:
+			print('downloading [{0}] from [{1}], [{2}]...'.format(file, url, f_name))
 		download_switch(f_tname, url, file)
 		stat_download_by_type[f_tname]+=1
 		stat_download+=1
 	else:
+		if p_report:
+			print('skipping [{0}] from [{1}], [{2}]...'.format(file, url, f_name))
 		stat_skipped_by_type[f_tname]+=1
 
 conn.close()
