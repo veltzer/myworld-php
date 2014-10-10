@@ -1,18 +1,26 @@
 #!/usr/bin/python3
 
-# imports
-import sys
-import os.path
-sys.path.append(os.path.expanduser('~/install/mypython'))
-import os
-import jack_pulse_config
+########
+# path #
+########
+import sys # for path
+import os.path # for expanduser
+sys.path.append(os.path.expanduser('~/install/python'))
 
-# configuration
-jack_pulse_config.getConfig()
+###########
+# imports #
+###########
+import os.path # for expanduser
+import os # for kill
+import jack_pulse.config # for getConfig
+
+########
+# code #
+########
+jack_pulse.config.getConfig()
 runfile=os.path.expanduser('~/.myjack_run')
 
-# code
-if jack_pulse_config.do_midi_bridge:
+if jack_pulse.config.do_midi_bridge:
 	with open(runfile,'r') as f:
 		p1=int(f.readline().rstrip())
 		p2=int(f.readline().rstrip())
