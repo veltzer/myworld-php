@@ -50,7 +50,7 @@ results=myworld.db.get_results(conn, sql)
 for result in results:
 	f_id=result['id']
 	print('\t{0}'.format(result))
-	sql2='''SELECT TbWkWorkExternal.externalCode, TbExternalType.name
+	sql2='''SELECT TbWkWorkExternal.externalCode, TbExternalType.name, TbWkWorkExternal.id
 		FROM TbWkWorkExternal, TbExternalType
 		WHERE TbExternalType.id=TbWkWorkExternal.externalId AND
 		TbWkWorkExternal.workId='''+str(f_id)

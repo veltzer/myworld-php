@@ -1,6 +1,6 @@
 #!/usr/bin/python3
 
-"""
+'''
 This script serves as post jack start script to route pulseaudio to jack...
 
 References:
@@ -12,17 +12,15 @@ http://superuser.com/questions/210617/how-to-automatically-set-pulseaudio-defaul
 
 TODO:
 - make a post about it...
-"""
+'''
 
-# imports
-import sys
-import os.path
-sys.path.append(os.path.expanduser('~/install/mypython'))
-import os
-import multiprocessing
-import subprocess
-import re
-import jack_pulse_config
+###########
+# imports #
+###########
+import os.path # for expanduser
+import subprocess # for Popen, check_call
+import re # for compile
+import jack_pulse.config
 
 # helpers
 def get_sinks():
@@ -34,15 +32,15 @@ def get_sinks():
 			yield int(mymatch.group(1))
 
 # code
-jack_pulse_config.getConfig()
+jack_pulse.config.getConfig()
 runfile=os.path.expanduser('~/.myjack_run')
 f_null=open('/dev/null','w')
 if jack_pulse_config.do_midi_bridge:
 	p1=subprocess.Popen('a2jmidi_bridge')
 	p2=subprocess.Popen('j2amidi_bridge')
 	with open(runfile,'w') as f:
-		f.write(str(p1.pid)+"\n")
-		f.write(str(p2.pid)+"\n")
+		f.write(str(p1.pid)+'\n')
+		f.write(str(p2.pid)+'\n')
 if jack_pulse_config.do_load_jack_module:
 	subprocess.check_call(['pactl','load-module','module-jack-sink','channels=2'],stderr=f_null,stdout=f_null)
 if jack_pulse_config.do_route_jack:

@@ -1,12 +1,10 @@
-#!/usr/bin/python
-
-"""
+'''
 This is the config object for the jack+pulse scripts
 
 	Mark Veltzer <mark@veltzer.net>
-"""
-import configparser
-import os.path
+'''
+import configparser # for ConfigParser
+import os.path # for expanduser, isfile
 
 mysection='jack_pulse'
 
