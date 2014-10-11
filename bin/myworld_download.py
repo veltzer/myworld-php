@@ -50,7 +50,6 @@ p_do_types=set([
 p_query_types=set([
 	'youtube_video_id',
 	'ted_video_id',
-	'url',
 	'download_url',
 ])
 p_print_stats=True
@@ -100,7 +99,7 @@ for row in res:
 	f_template=row['template']
 	f_tname=row['tname']
 	if p_progress:
-		print('doing work [{0}] code [{1}]...'.format(f_name, f_externalCode))
+		print('doing work [{0}] code [{1}] type [{2}]...'.format(f_name, f_externalCode, f_tname))
 	file=myworld.utils.filename_switch(p_folder, f_tname, f_externalCode)
 	stat_count+=1
 	if os.path.isfile(file):
