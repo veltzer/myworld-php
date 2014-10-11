@@ -66,11 +66,16 @@ curr=myworld.db.get_cursor(conn)
 curr2=myworld.db.get_cursor(conn)
 
 sql='''
-SELECT TbWkWork.id, TbWkWork.name, TbWkWorkExternal.externalCode, TbExternalType.name AS tname FROM TbWkWork, TbWkWorkExternal, TbExternalType WHERE
-	( TbWkWork.updatedLengthDate IS NULL OR
-	TbWkWork.updatedSizeDate IS NULL ) AND
+SELECT
+	TbWkWork.id, TbWkWork.name, TbWkWorkExternal.externalCode, TbExternalType.name AS tname
+FROM
+	TbWkWork, TbWkWorkExternal, TbExternalType, TbWkWorkType
+WHERE
+	( TbWkWork.updatedLengthDate IS NULL OR TbWkWork.updatedSizeDate IS NULL ) AND
 	TbWkWorkExternal.workId=TbWkWork.id AND
 	TbWkWorkExternal.externalId=TbExternalType.id AND
+	TbWkWork.typeId=TbWkWorkType.id AND
+	TbWkWorkType.isVideo AND
 	TbExternalType.name IN ('{0}')
 '''.format('\',\''.join(p_query_types))
 stat_did=0
