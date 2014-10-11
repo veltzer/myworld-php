@@ -12,6 +12,8 @@ import os.path # for join
 import subprocess # for check_call
 import download.ted # for get
 import download.generic # for get
+import urllib.parse # for urlparse
+import myworld.utils # for filename_switch
 
 #############
 # functions #
@@ -26,16 +28,14 @@ def download_switch(f_tname, url, file):
 		])
 	if f_tname=='ted_video_id':
 		download.ted.get(url, file)
-	if f_tname=='url':
+	if f_tname=='download_url':
 		download.generic.get(url, file)
 
 ##############
 # parameters #
 ##############
 # where should the files be downloaded to?
-p_folder='/home/mark/download'
-p_folder='/home/mark/slow_links/emovies/youtube'
-p_folder='/mnt/external/mark/topics_archive/video/emovies'
+p_folder='/mnt/external/mark/topics_archive/video/emovies/download'
 # report progress?
 p_progress=False
 # report on downloads and skips?
@@ -44,12 +44,14 @@ p_report=True
 p_do_types=set([
 	'youtube_video_id',
 	'ted_video_id',
-#	'url',
+	'download_url',
 ])
+# what types of urls to do the query on?
 p_query_types=set([
 	'youtube_video_id',
 	'ted_video_id',
 	'url',
+	'download_url',
 ])
 p_print_stats=True
 
@@ -99,7 +101,7 @@ for row in res:
 	f_tname=row['tname']
 	if p_progress:
 		print('doing work [{0}] code [{1}]...'.format(f_name, f_externalCode))
-	file=os.path.join(p_folder, f_tname, f_externalCode)
+	file=myworld.utils.filename_switch(p_folder, f_tname, f_externalCode)
 	stat_count+=1
 	if os.path.isfile(file):
 		if p_progress:

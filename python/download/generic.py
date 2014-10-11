@@ -7,6 +7,8 @@ http://stackoverflow.com/questions/22676/how-do-i-download-a-file-over-http-usin
 
 import urllib.request # for urlretrieve
 import progressbar # for ProgressBar
+import os # for mkdirs
+import os.path # for dirname
 
 '''
 A function to download a file and show progress report
@@ -14,6 +16,7 @@ while doing it
 '''
 def get(url, file):
 	print('downloading [{0}]...'.format(url))
+	os.makedirs(os.path.dirname(file), exist_ok=True)
 	f=open(file, 'wb')
 	u=urllib.request.urlopen(url)
 	meta=u.info()

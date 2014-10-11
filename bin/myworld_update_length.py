@@ -12,24 +12,29 @@ import MediaInfoDLL3 # for Stream, MediaInfo
 import os.path # for join
 import os # for stat
 import stat # for ST_SIZE
+import myworld.utils # for filename_switch
 
 ##############
 # parameters #
 ##############
 # where should the files be downloaded to?
-p_folder='/mnt/external/mark/topics_archive/video/emovies'
+p_folder='/mnt/external/mark/topics_archive/video/emovies/download'
 # do statistics?
 p_do_stats=True
 # do progress?
 p_do_progress=True
 # really update the database?
 p_doit=True
+# what types of urls to do the query on?
+p_query_types=set([
+	'youtube_video_id',
+	'ted_video_id',
+	'download_url',
+])
 
 #############
 # functions #
 #############
-def get_filename(code, f_tname):
-	return os.path.join(p_folder, f_tname, code)
 def update_length(conn, curr, f_id, val):
 	if p_do_progress:
 		print('updating length to [{0}]'.format(val))
@@ -66,8 +71,8 @@ SELECT TbWkWork.id, TbWkWork.name, TbWkWorkExternal.externalCode, TbExternalType
 	TbWkWork.updatedSizeDate IS NULL ) AND
 	TbWkWorkExternal.workId=TbWkWork.id AND
 	TbWkWorkExternal.externalId=TbExternalType.id AND
-	TbExternalType.name IN ('youtube_video_id', 'ted_video_id')
-'''
+	TbExternalType.name IN ('{0}')
+'''.format('\',\''.join(p_query_types))
 stat_did=0
 curr.execute(sql)
 results=curr.fetchall()
@@ -78,7 +83,7 @@ for result in results:
 	f_tname=result['tname']
 	if p_do_progress:
 		print('doing [{0}]...'.format(f_name))
-	filename=get_filename(f_externalCode, f_tname)
+	filename=myworld.utils.filename_switch(p_folder, f_tname, f_externalCode)
 	if not os.path.isfile(filename):
 		print('file [{0}] does not exist, download it first...'.format(filename))
 		continue
