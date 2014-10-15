@@ -38,7 +38,7 @@ for result in results:
 print('checking works which are videos without length updated')
 sql='''
 SELECT
-	TbWkWork.id,TbWkWork.name
+	TbWkWork.id, TbWkWork.name
 FROM
 	TbWkWork, TbWkWorkType
 WHERE
@@ -61,12 +61,27 @@ for result in results:
 print('checking works with space in the begining or end of name')
 sql='''
 SELECT
-	TbWkWork.id,TbWkWork.name
+	TbWkWork.id, TbWkWork.name
 FROM
 	TbWkWork
 WHERE
 	name REGEXP '^[[:space:]].*$' OR
 	name REGEXP '^.*[[:space:]]$'
+'''
+results=myworld.db.get_results(conn, sql)
+for result in results:
+	print('\t{0}'.format(result))
+
+print('checking people with space in the firstname, surname or othername')
+sql='''
+SELECT
+	TbIdPerson.id, TbIdPerson.firstname, TbIdPerson.surname, TbIdPerson.othername
+FROM
+	TbIdPerson
+WHERE
+	firstname REGEXP '[[:space:]]' OR
+	surname REGEXP '[[:space:]]' OR
+	othername REGEXP '[[:space:]]'
 '''
 results=myworld.db.get_results(conn, sql)
 for result in results:
