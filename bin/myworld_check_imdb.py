@@ -2,6 +2,7 @@
 
 '''
 This script will check that names in imdb are the same as in my db.
+This script will also check that directors are connected correctly to works.
 
 NOTES:
 - the script is written in python2 because we need the imdb module which is
@@ -30,10 +31,10 @@ p_do_db=True
 #############
 # functions #
 #############
-def update_check(db, cursor, f_id):
+def update_check(db, cursor, f_id, tablename):
 	global stat_check
 	stat_check+=1
-	sql='UPDATE TbIdPersonExternal SET checkedDate=NOW() WHERE id=%s'
+	sql='UPDATE {0} SET checkedDate=NOW() WHERE id=%s'.format(tablename)
 	vals=(f_id,)
 	if p_do_db:
 		cursor.execute(sql, vals)
@@ -134,9 +135,48 @@ for x in cursor:
 		#print('diff in othername {0}!={1}'.format(i_othername.encode(out_encoding), f_othername.encode(out_encoding)))
 		if not p_confirm or menu.select():
 			update_field(db, c_update, f_id, 'othername', i_othername)
-	update_check(db, c_update, f_peid)
+	update_check(db, c_update, f_peid, 'TbIdPersonExternal')
 	if p_do_progress:
 		print('=========================================')
+
+sql='''
+SELECT
+	TbWkWorkExternal.externalCode AS workExternalCode,
+	TbIdPersonExternal.externalCode AS personExternalCode,
+	TbWkWorkContrib.id
+FROM
+	TbExternalType, TbWkWorkExternal, TbWkWork, TbWkWorkContrib, TbIdPerson, TbIdPersonExternal, TbExternalType AS B, TbWkWorkContribType
+WHERE
+	TbExternalType.name='imdb_title_id' AND
+	TbWkWorkExternal.externalId=TbExternalType.id AND
+	TbWkWorkExternal.workId=TbWkWork.id AND
+	TbWkWork.id=TbWkWorkContrib.workId AND
+	TbWkWorkContrib.personId=TbIdPerson.id AND
+	TbWkWorkContrib.checkedDate IS NULL AND
+	TbIdPerson.id=TbIdPersonExternal.personId AND
+	TbIdPersonExternal.externalId=B.id AND
+	B.name='imdb_person_id' AND
+	TbWkWorkContrib.typeId=TbWkWorkContribType.id AND
+	TbWkWorkContribType.slug='movie_director'
+'''
+cursor.execute(sql)
+for x in cursor:
+	f_workExternalCode=x[0]
+	f_personExternalCode=x[1]
+	f_id=x[2]
+	if p_do_progress:
+		print('f_workExternalCode: {0}'.format(f_workExternalCode))
+		print('f_personExternalCode: {0}'.format(f_personExternalCode))
+		print('f_id: {0}'.format(f_id))
+	# get the film info and check the directors
+	i_movie=connection.get_movie(f_workExternalCode)
+	i_directors=i_movie.get('director')
+	directors_set=set()
+	for d in i_directors:
+		directors_set.add(d.personID)
+	if f_personExternalCode in directors_set:
+		update_check(db, c_update, f_id, 'TbWkWorkContrib')
+
 cursor.close()
 db.close()
 
