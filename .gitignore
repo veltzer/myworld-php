@@ -9,3 +9,5 @@
 
 # python cache folders
 __pycache__
+# python compiled modules
+*.pyc
