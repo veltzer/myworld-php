@@ -174,6 +174,8 @@ for x in cursor:
 	directors_set=set()
 	for d in i_directors:
 		directors_set.add(d.personID)
+	if p_do_progress:
+		print('directors_set: {0}'.format(directors_set))
 	if f_personExternalCode in directors_set:
 		update_check(db, c_update, f_id, 'TbWkWorkContrib')
 
