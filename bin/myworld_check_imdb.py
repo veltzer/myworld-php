@@ -38,8 +38,8 @@ def update_check(db, cursor, f_id):
 	if p_do_db:
 		cursor.execute(sql, vals)
 		db.commit()
-	else:
-		print('would execute {0} with {1}'.format(sql, vals))
+	if p_do_progress:
+		print('execute {0} with {1}'.format(sql, vals))
 
 def update_field(db, cursor, f_id, fieldname, value):
 	global stat_update
@@ -49,8 +49,8 @@ def update_field(db, cursor, f_id, fieldname, value):
 	if p_do_db:
 		cursor.execute(sql, vals)
 		db.commit()
-	else:
-		print('would execute {0} with {1}'.format(sql, vals))
+	if p_do_progress:
+		print('execute {0} with {1}'.format(sql, vals))
 
 ########
 # code #
