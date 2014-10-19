@@ -23,6 +23,10 @@ packs=[
 	'python-kaa-metadata', # for video meta data
 	'python-bs4', # for html parsing
 	'python3-bs4', # for html parsing
+	'libimdb-film-perl', # for perl access to imdb
+	'libxml-simple-perl',
+	'libyaml-perl',
+	'libdate-manip-perl',
 ]
 
 args=[
