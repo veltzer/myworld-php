@@ -1,15 +1,18 @@
 #!/usr/bin/perl -w
 
+=head
+
+this script gets string dates from the database and reinserts them as real mysql datetime
+objects...
+
+=cut
+
 use strict;
 use diagnostics;
-use Date::Manip qw();
+use Date::Manip;
 use DBI;
 
-# this string gets string dates from the database and reinserts them as real mysql datetime
-# objects...
-
 # parameters
-############
 
 # the table to work on
 my($p_table)='TbWkWork';
@@ -23,7 +26,6 @@ my($p_write_column)='viewdatesub';
 my($debug)=1;
 
 # code
-#######
 
 sub unixdate_to_mysql($) {
 	my($string)=@_;
@@ -38,7 +40,7 @@ my($dbh)=DBI->connect('dbi:mysql:myworld','','',{
 	AutoCommit => 0,
 });
 
-my($sql)='select '.$p_id_column.','.$p_read_column.' from '.$p_table;
+my($sql)='SELECT '.$p_id_column.','.$p_read_column.' FROM '.$p_table;
 my($sth)=$dbh->prepare($sql);
 $sth->execute();
 my($rowhashref);
@@ -53,7 +55,7 @@ while($rowhashref=$sth->fetchrow_hashref()) {
 		print 'newdate is '.$newdate."\n";
 	}
 	# now update the database...
-	$dbh->do('update '.$p_table.' set '.$p_write_column.'=? where '.$p_id_column.'=?',undef,$newdate,$id);
+	$dbh->do('UPDATE '.$p_table.' SET '.$p_write_column.'=? WHERE '.$p_id_column.'=?',undef,$newdate,$id);
 }
 
 $dbh->commit();

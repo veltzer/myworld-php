@@ -1,24 +1,29 @@
 #!/usr/bin/perl -w
 
-# this script reorders a table and fixes references to it
+=head
 
-# TODO:
-# - auto deduce the field list
-# - auto deduce which other tables need to be changed
-# - do not require the $reorder_sql var
+this script reorders a table and fixes references to it
+
+TODO:
+- auto deduce the field list
+- auto deduce which other tables need to be changed
+- do not require the $reorder_sql var
+
+=cut
+
+# uses
 
 use strict;
 use diagnostics;
 use DBI;
 
-# parameters...
+# parameters
 
 my($db_name)='myworld';
-#my($db_name)='myworld';
 my($db_user)='';
 my($db_pass)='';
-my($reorder_sql)='select * from TbWkWorkType order by name';
-my($reorder_clause)='order by name';
+my($reorder_sql)='SELECT * FROM TbWkWorkType ORDER BY name';
+my($reorder_clause)='ORDER BY name';
 my($db_table_name)='TbWkWorkType';
 my($id_field)='id';
 my($field_list)='name,remark,isVideo,isAudio,isLive,isText';
@@ -27,13 +32,14 @@ my($debug)=1;
 my(@tablecheck)=('TbWkWork');
 my(@fieldcheck)=('typeId');
 
-# here we go...
+# code
+
 my($db_table_temp)=$db_table_name.'_temp';
 
-my($dbh)=DBI->connect('dbi:mysql:'.$db_name,$db_user,$db_pass,{ RaiseError => 1 }) or die "Connection Error: $DBI::errstr\n";
+my($dbh)=DBI->connect('dbi:mysql:'.$db_name,$db_user,$db_pass,{ RaiseError => 1 }) or die 'Connection Error: '.$DBI::errstr;
 
 my($sth)=$dbh->prepare($reorder_sql);
-$sth->execute() or die "SQL Error: $DBI::errstr\n";
+$sth->execute() or die 'SQL Error: '.$DBI::errstr;
 my($rowhashref);
 my($counter)=$start;
 my(%hash);
@@ -55,10 +61,10 @@ $dbh->do('DROP TABLE '.$db_table_temp);
 # TODO: do this for EVERY fk found...
 my($table_fkfix)='TbWkWork';
 my($field_fkfix)='typeId';
-$dbh->do('update '.$table_fkfix.' set '.$field_fkfix.'='.$field_fkfix.'+'.$max,undef);
+$dbh->do('UPDATE '.$table_fkfix.' SET '.$field_fkfix.'='.$field_fkfix.'+'.$max,undef);
 for(my($i)=$start;$i<$counter;$i++) {
 	my($newval)=$hash{$i};
-	$dbh->do('update '.$table_fkfix.' set '.$field_fkfix.'=? where '.$field_fkfix.'=?',undef,
+	$dbh->do('UPDATE '.$table_fkfix.' SET '.$field_fkfix.'=? WHERE '.$field_fkfix.'=?',undef,
 		$newval,
 		$i+$max,
 	);
