@@ -1,5 +1,11 @@
 #!/usr/bin/perl -w
 
+=head
+
+dump data for a particual id of a feature on imdb
+
+=cut
+
 use strict;
 use diagnostics;
 use XML::Simple qw();
@@ -9,9 +15,6 @@ use URI qw();
 use YAML::Dumper qw();
 use MyImdb qw();
 use IMDB::Film qw();
-
-#my $dumper = YAML::Dumper->new;
-#$dumper->indent_width(4);
 
 if(!@ARGV) {
 	die 'please provide imdbid'."\n";
@@ -28,11 +31,5 @@ print 'fetching from IMDB...'."\n";
 my($imdbObj)=new IMDB::Film(crit => $imdbid);
 if($imdbObj->status) {
 	my($title)=$imdbObj->title();
-	#print 'title is ['.$title.']'."\n";
-	#my($also_known_as)=$imdbObj->also_known_as();
-	#for(my($i)=0;$i<=$#$also_known_as;$i++) {
-	#	print 'also_known_as ['.$i.'] is ['.$also_known_as->[$i].']'."\n";
-	#}
-	#print $dumper->dump($imdbObj);
-	print Data::Dumper::Dumper($imdbObj);
+	print(Data::Dumper::Dumper($imdbObj));
 }

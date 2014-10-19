@@ -1,12 +1,12 @@
 #!/bin/bash
 
+# This script alters the character set of a tables in a database
 # TODO:
 # rewrite this script as a python script
 
+source ~/.myworld.shinc
+
 # parameters...
-USER='mark'
-PASS=''
-DB='myworld'
 CHARSET='utf8'
 COLLATION='utf8_unicode_ci'
 
