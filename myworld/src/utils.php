@@ -86,7 +86,7 @@ function my_mysql_connect() {
 	if($link==NULL) {
 		$db_host='localhost';
 		$db_user='mark';
-		$db_pwd='';
+		$db_pwd='fVgyzpYy5N';
 		$db_database='myworld';
 		$db_charset='utf8';
 		assert($link=mysqli_connect($db_host, $db_user, $db_pwd, $db_database));
