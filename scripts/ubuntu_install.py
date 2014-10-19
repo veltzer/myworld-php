@@ -27,6 +27,8 @@ packs=[
 	'libxml-simple-perl',
 	'libyaml-perl',
 	'libdate-manip-perl',
+	'libmp3-info-perl',
+	'libvideo-info-perl',
 ]
 
 args=[

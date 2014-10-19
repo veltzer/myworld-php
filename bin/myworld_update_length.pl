@@ -41,7 +41,7 @@ use IMDB::Film qw();
 use File::Glob ':glob';
 use DBI;
 
-my($dbh)=DBI->connect('dbi:mysql:myworld','','',{
+my($dbh)=DBI->connect('dbi:mysql:myworld','mark','fVgyzpYy5N',{
 	RaiseError => 1,
 	PrintWarn => 1,
 	PrintError => 1,
