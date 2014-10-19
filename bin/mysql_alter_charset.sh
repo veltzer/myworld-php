@@ -1,5 +1,8 @@
 #!/bin/bash
 
+# TODO:
+# rewrite this script as a python script
+
 # parameters...
 USER='mark'
 PASS=''

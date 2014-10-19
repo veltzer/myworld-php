@@ -2,6 +2,7 @@
 
 # this script copies a database in it's entirety. The idea is to allow you to play around
 # and not "fuck up" the real data.
+# TODO: turn this into a python script
 
 # parameters
 DB_SOURCE=myworld
