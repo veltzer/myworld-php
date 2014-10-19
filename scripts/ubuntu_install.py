@@ -6,7 +6,10 @@
 import subprocess # for check_call
 
 packs=[
+	# javascript
 	'yui-compressor', # for compressing javascript
+
+	# python
 	'python-pythonmagick', # for inserting blobs into the database
 	'imagemagick', # for convert(1) for image manipulation
 	'python-pip', # so that I could install python packages via pip
@@ -23,6 +26,9 @@ packs=[
 	'python-kaa-metadata', # for video meta data
 	'python-bs4', # for html parsing
 	'python3-bs4', # for html parsing
+	'python-mysqldb', # for imdb API
+
+	# perl
 	'libimdb-film-perl', # for perl access to imdb
 	'libxml-simple-perl',
 	'libyaml-perl',

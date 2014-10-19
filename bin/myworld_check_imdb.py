@@ -56,11 +56,7 @@ def update_field(db, cursor, f_id, fieldname, value):
 ########
 # code #
 ########
-params={
-	'db': 'myworld',
-	'read_default_file': '~/.my.cnf',
-}
-db=MySQLdb.connect(**params)
+db=MySQLdb.connect(read_default_file='~/.my.cnf')
 cursor=db.cursor()
 c_update=db.cursor()
 menu=myworld.menu_maker.YNMenu('change ?')

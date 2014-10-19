@@ -70,13 +70,9 @@ def reset_lengths(db):
 ########
 # code #
 ########
-params={
-	'db': 'myworld',
-	'read_default_file': '~/.my.cnf',
-}
 connection=imdb.IMDb()
 out_encoding=sys.stdout.encoding or sys.getdefaultencoding()
-db=MySQLdb.connect(**params)
+db=MySQLdb.connect(read_default_file='~/.my.cnf')
 
 cursor=db.cursor()
 c_update=db.cursor()
@@ -96,7 +92,9 @@ sql='SELECT TbWkWork.id,TbWkWork.name,TbWkWork.length FROM TbWkWork,TbWkWorkType
 #sql='SELECT TbWkWork.id,TbWkWork.name,TbWkWork.length FROM TbWkWork,TbWkWorkType WHERE TbWkWork.typeId=TbWkWorkType.id AND TbWkWorkType.name in (\'video movie\') AND TbWkWork.length is NULL'
 
 cursor.execute(sql)
+stat_count=0
 for x in cursor:
+	stat_count+=1
 	f_id=x[0]
 	f_name=x[1]
 	f_length=x[2]
@@ -129,3 +127,4 @@ for x in cursor:
 				update_check(db, c_update, f_id)
 cursor.close()
 db.close()
+print('stat_count is [{0}]'.format(stat_count))
