@@ -45,7 +45,7 @@ sub my_menu() {
 
 # code
 
-my($dbh)=MtUtils::db_connect();
+my($dbh)=MyUtils::db_connect();
 
 # some variables for sql
 my($sql,$sth,$rowhashref);
