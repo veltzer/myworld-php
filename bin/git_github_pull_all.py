@@ -13,12 +13,19 @@ TODO:
 
 from __future__ import print_function
 import glob # for glob
-import os.path # for split, join, isfile
+import os.path # for split, join, isfile, expanduser
 import subprocess # for check_call
 import os # for chdir
 import github # for Github
+import ConfigParser # for ConfigParser
 
-g=github.Github('veltzer','7PEpAqxvse')
+inifile=os.path.expanduser('~/.githubrc')
+config=ConfigParser.ConfigParser()
+config.read(inifile)
+opt_login=config.get('github','login')
+opt_pass=config.get('github','pass')
+g=github.Github(opt_login, opt_pass)
+
 done=set()
 for repo in g.get_user().get_repos():
 	folder=repo.name

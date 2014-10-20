@@ -155,8 +155,8 @@ install: all $(CONFIG)
 .PHONY: check
 check:
 	$(info doing [$@])
-	$(Q)git grep \'veltzer\'
-	$(Q)git grep \'mark\'
+	$(Q)-git grep \'veltzer\'
+	$(Q)-git grep \'mark\'
 
 .PHONY: clean
 clean:
