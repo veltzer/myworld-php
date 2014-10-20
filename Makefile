@@ -152,6 +152,12 @@ install: all
 	$(Q)sudo cp $(MYWORLD_PLUGIN_NAME)/src/utils.php private/GetData.php private/GetMovies.php $(WEB_DIR_PUBLIC) # copy support code
 	$(Q)sudo chmod -R ugo+rx $(WEB_DIR_PUBLIC)
 
+.PHONY: check
+check:
+	$(info doing [$@])
+	$(Q)git grep \'veltzer\'
+	$(Q)git grep \'mark\'
+
 .PHONY: clean
 clean:
 	$(info doing [$@])

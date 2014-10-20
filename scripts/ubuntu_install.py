@@ -1,7 +1,9 @@
 #!/usr/bin/python3
 
-# this script will install all the required packages that you need on
-# ubuntu to compile and work with this package.
+'''
+this script will install all the required packages that you need on
+ubuntu to compile and work with this package.
+'''
 
 import subprocess # for check_call
 
@@ -45,21 +47,3 @@ args=[
 ]
 args.extend(packs)
 subprocess.check_call(args)
-
-if False:
-	subprocess.check_call([
-		'pip',
-		'install',
-		'--user',
-		'--upgrade',
-		'PyGithub',
-	])
-	'''
-	subprocess.check_call([
-		'pip3',
-		'install',
-		'--user',
-		'--upgrade',
-		'PyGithub',
-	])
-	'''

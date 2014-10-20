@@ -1,6 +1,7 @@
 #!/usr/bin/python2
 
 '''
+This script pulls all the project from a github account.
 
 NOTES:
 - this script should be python2 because it relies on the github module which

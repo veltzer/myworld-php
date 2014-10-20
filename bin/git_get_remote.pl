@@ -1,13 +1,21 @@
 #!/usr/bin/perl -w
 
+# uses
+
 use strict;
 use diagnostics;
 use Net::GitHub;
 use Net::GitHub::V2::Repositories;
+use Config::IniFiles;
 
-# connect
+# code
+
+my($cfg)=Config::IniFiles->new( -file => File::HomeDir->my_home.'/.githubrc' ) or die('unable to access ini file');
+$param_login=$cfg->val('github', 'login');
+$param_pass=$cfg->val('github', 'pass');
+
 my($repos)=Net::GitHub::V2::Repositories->new(
-	owner => 'veltzer',
+	owner => $param_login,
 	repo => 'nosuchrepo',
 );
 # list of reps to clone
@@ -17,10 +25,6 @@ my($repositories)=$repos->list();
 for(my($i)=0;$i<$#$repositories;$i++) {
 	my($curr)=$repositories->[$i];
 	my($name)=$curr->{name};
-	# debug code
-	#while(my($key,$val)=each(%$curr)) {
-	#	print $key.' => '.$val."\n";
-	#}
 	push(@check_list,$name);
 }
 # extra stuff to clone (forks)
