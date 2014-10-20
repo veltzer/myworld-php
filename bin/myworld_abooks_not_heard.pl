@@ -1,5 +1,15 @@
 #!/usr/bin/perl -w
 
+=head
+
+This script produces a list of audios that I have not heard
+
+TODO:
+- the sql stated below is not accurate. It assumes that every work in the database
+has been heard. Fix it to only retrieve works that have been viewed by "Mark Veltzer".
+
+=cut
+
 use strict;
 use diagnostics;
 use DBI;
@@ -7,33 +17,25 @@ use File::Basename qw();
 use Filesys::DiskUsage qw();
 use Encode qw();
 use utf8;
+use MyUtils;
 
-# This script produces a list of audios that I have not heard
-
-# TODO:
-# - the sql stated below is not accurate. It assumes that every work in the database
-# has been heard. Fix it to only retrieve works that have been viewed by "Mark Veltzer".
+# parameters
 
 # print debug messages ?
 my($debug)=0;
-my($user)='';
-my($password)='';
+# name of output file?
 my($output)='list_not_heard.txt';
+
+# code
 
 if ($debug) {
 	binmode(STDOUT, ":utf8");
 }
 
-my($dbh)=DBI->connect('dbi:mysql:myworld',$user,$password,{
-	RaiseError => 1,
-	PrintWarn => 1,
-	PrintError => 1,
-	AutoCommit => 0,
-	mysql_enable_utf8 => 1,
-});
+my($dbh)=MyUtils::db_connect();
 
 # selecting only works which are audio (selecting all as above will NOT work...)
-my($sql)='select TbWkWork.name from TbWkWork,TbWkWorkType where TbWkWork.typeId=TbWkWorkType.id and TbWkWorkType.name in (\'audio book\',\'audio course\',\'audio lecture\',\'audio show\',\'audio essay\')';
+my($sql)='SELECT TbWkWork.name FROM TbWkWork,TbWkWorkType WHERE TbWkWork.typeId=TbWkWorkType.id AND TbWkWorkType.name IN (\'audio book\',\'audio course\',\'audio lecture\',\'audio show\',\'audio essay\')';
 if($debug) {
 	print 'sql is ['.$sql.']'."\n";
 }
@@ -49,6 +51,7 @@ while($rowhashref=$sth->fetchrow_hashref()) {
 		print 'inserted '.$f_name."\n";
 	}
 }
+$dbh->commit();
 $dbh->disconnect();
 
 open(OUTPUT,'> '.$output) || die('unable to open ['.$output.'] for writing');

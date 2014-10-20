@@ -1,10 +1,12 @@
 #!/usr/bin/perl -w
 
-=head desciption 
+=head
 
 This script helps you handle remarks associated with viewing.
 
 =cut
+
+# uses
 
 use strict;
 use diagnostics;
@@ -12,6 +14,8 @@ use IMDB::Film qw();
 use DBI qw();
 use MyImdb qw();
 use MyUtils qw();
+
+# parameters
 
 # print debug messages ?
 my($debug)=0;
@@ -24,13 +28,7 @@ my($skip_have_imdb)=0;
 # should we check for indentity of directors and if so put the imdb ?
 my($do_directors)=0;
 
-# connect to the database
-my($dbh)=DBI->connect('dbi:mysql:myworld','','',{
-	RaiseError => 1,
-	PrintWarn => 1,
-	PrintError => 1,
-	AutoCommit => 0,
-});
+# functions
 
 sub my_menu() {
 	return MyUtils::show_menu(
@@ -58,6 +56,11 @@ sub print_sorted_hash($) {
 		print 'name is ['.$key.'], id is ['.$val.']'."\n";
 	}
 }
+
+# code
+
+# connect to the database
+my($dbh)=MyUtils::db_connect();
 
 # some variables for sql
 my($sql,$sth,$rowhashref);

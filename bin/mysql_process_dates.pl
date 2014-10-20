@@ -7,10 +7,13 @@ objects...
 
 =cut
 
+# uses
+
 use strict;
 use diagnostics;
 use Date::Manip;
 use DBI;
+use MyUtils;
 
 # parameters
 
@@ -25,7 +28,7 @@ my($p_write_column)='viewdatesub';
 # do debug?
 my($debug)=1;
 
-# code
+# functions
 
 sub unixdate_to_mysql($) {
 	my($string)=@_;
@@ -33,13 +36,9 @@ sub unixdate_to_mysql($) {
 	return($object);
 }
 
-my($dbh)=DBI->connect('dbi:mysql:myworld','','',{
-	RaiseError => 1,
-	PrintWarn => 1,
-	PrintError => 1,
-	AutoCommit => 0,
-});
+# code
 
+my($dbh)=MyUtils::db_connect();
 my($sql)='SELECT '.$p_id_column.','.$p_read_column.' FROM '.$p_table;
 my($sth)=$dbh->prepare($sql);
 $sth->execute();
@@ -57,6 +56,5 @@ while($rowhashref=$sth->fetchrow_hashref()) {
 	# now update the database...
 	$dbh->do('UPDATE '.$p_table.' SET '.$p_write_column.'=? WHERE '.$p_id_column.'=?',undef,$newdate,$id);
 }
-
 $dbh->commit();
 $dbh->disconnect();

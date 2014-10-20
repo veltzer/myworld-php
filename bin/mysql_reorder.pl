@@ -16,6 +16,7 @@ TODO:
 use strict;
 use diagnostics;
 use DBI;
+use MyUtils;
 
 # parameters
 
@@ -35,9 +36,7 @@ my(@fieldcheck)=('typeId');
 # code
 
 my($db_table_temp)=$db_table_name.'_temp';
-
-my($dbh)=DBI->connect('dbi:mysql:'.$db_name,$db_user,$db_pass,{ RaiseError => 1 }) or die 'Connection Error: '.$DBI::errstr;
-
+my($dbh)=MyUtils::db_connect();
 my($sth)=$dbh->prepare($reorder_sql);
 $sth->execute() or die 'SQL Error: '.$DBI::errstr;
 my($rowhashref);
@@ -71,4 +70,5 @@ for(my($i)=$start;$i<$counter;$i++) {
 }
 $dbh->do('SET FOREIGN_KEY_CHECKS = 1');
 
+$dbh->commit();
 $dbh->disconnect();

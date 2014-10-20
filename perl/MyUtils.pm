@@ -2,7 +2,14 @@
 
 package MyUtils;
 
+# uses
+
 use Date::Manip;
+use Config::IniFiles;
+use DBI;
+use File::HomeDir;
+
+# functions
 
 sub to_mysql($) {
 	my($string)=@_;
@@ -91,6 +98,41 @@ sub delete_work($$) {
 	$dbh->do('DELETE FROM TbWkWorkReview WHERE workId=?',undef,$f_id);
 	$dbh->do('DELETE FROM TbWkWorkAlias WHERE workId=?',undef,$f_id);
 	$dbh->do('DELETE FROM TbWkWork WHERE id=?',undef,$f_id);
+}
+
+sub handle_error() {
+	my($rc)=$dbh->err;
+	my($str)=$dbh->errstr;
+	my($rv)=$dbh->state;
+	throw Error::Simple($str.','.$rv.','.$rv);
+}
+
+sub db_connect() {
+	my($rcfile)=File::HomeDir->my_home.'/.myworldrc';
+	my($cfg);
+	$cfg=Config::IniFiles->new( -file => $rcfile ) || die('unable to access ini file '.$rcfile);
+	my($param_user)=$cfg->val('db', 'user');
+	my($param_pass)=$cfg->val('db', 'pass');
+	my($param_host)=$cfg->val('db', 'host');
+	my($param_port)=$cfg->val('db', 'port');
+	my($param_name)=$cfg->val('db', 'name');
+
+	my($dsn)='dbi:mysql:'.$param_name;
+	if(defined($param_host)) {
+		$dsn.=';host='.$param_host;
+	}
+	if(defined($param_port)) {
+		$dsn.=';=port'.$param_port;
+	}
+	my($dbh)=DBI->connect($dsn, $param_user, $param_pass, {
+		RaiseError => 1,
+		AutoCommit => 0,
+		PrintWarn => 1,
+		PrintError => 1,
+		mysql_enable_utf8 => 1,
+	}) or die 'Connection Error: '.$DBI::errstr;
+	#$dbh->{HandleError} =\&handle_error;
+	return $dbh;
 }
 
 return 1;

@@ -14,4 +14,3 @@ find . -mindepth 4 -and -type f | wc -l >> $file
 echo -n "size of collection: " >> $file
 du -hs . | cut -f 1 >> $file
 tree -L 2 by_name > list.txt
-abooks_not_heard.pl > list_not_heard.txt

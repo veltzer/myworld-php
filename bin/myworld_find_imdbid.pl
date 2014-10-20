@@ -1,11 +1,13 @@
 #!/usr/bin/perl -w
 
-=head desciption 
+=head
 
 This script helps you handle movies that do not have imdb ids.
 You can give those movies names etc.
 
 =cut
+
+# uses
 
 use strict;
 use diagnostics;
@@ -13,6 +15,8 @@ use IMDB::Film qw();
 use DBI qw();
 use MyImdb qw();
 use MyUtils qw();
+
+# parameters
 
 # print debug messages ?
 my($debug)=0;
@@ -25,13 +29,7 @@ my($skip_have_imdb)=0;
 # should we check for indentity of directors and if so put the imdb ?
 my($do_directors)=0;
 
-# connect to the database
-my($dbh)=DBI->connect('dbi:mysql:myworld','','',{
-	RaiseError => 1,
-	PrintWarn => 1,
-	PrintError => 1,
-	AutoCommit => 0,
-});
+# functions
 
 sub insert_imdbid($$) {
 	my($f_id)=$_[0];
@@ -126,6 +124,10 @@ sub my_menu() {
 		'q - quit',
 	);
 }
+
+# code
+
+my($dbh)=MyUtils::db_connect();
 
 # some variables for sql
 my($sql,$sth,$rowhashref);
@@ -268,14 +270,3 @@ while($rowhashref=$sth->fetchrow_hashref()) {
 	}
 }
 $dbh->disconnect();
-
-=head old code to find stuff using IMDB::Film
-	my($imdbObj)=new IMDB::Film(crit => $f_name);
-	if($imdbObj->status) {
-		print 'found\n';
-		my($imdb_id)=$imdbObj->id();
-		print 'imdb_id is ['.$imdb_id.']'."\n";
-	} else {
-		print 'not found with error ['.$imdbObj->error.']'."\n";
-	}
-=cut

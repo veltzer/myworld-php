@@ -13,15 +13,18 @@ It is ideal for the following purpse:
 
 =cut
 
+# uses
+
 use strict;
 use diagnostics;
 use DBI;
+use MyUtils;
 
-my($dbh)=DBI->connect('dbi:mysql:myworld','','',{ RaiseError => 1 }) or die 'Connection Error: '.$DBI::errstr;
+# code
 
+my($dbh)=MyUtils::db_connect();
 # hash to store values in the original table
 my(%orig_hash);
-
 my($sql)='SELECT * FROM TbWkWork';
 my($sth)=$dbh->prepare($sql);
 $sth->execute() or die 'SQL Error: '.$DBI::errstr;
@@ -44,4 +47,5 @@ while($rowhashref=$sth->fetchrow_hashref()) {
 	}
 	$dbh->do('UPDATE TbWkWork SET authorId=? WHERE id=?',undef,$id,$row_id);
 } 
+$dbh->commit();
 $dbh->disconnect();

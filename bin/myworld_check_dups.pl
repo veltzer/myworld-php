@@ -1,11 +1,13 @@
 #!/usr/bin/perl -w
 
-=head desciption 
+=head
 
 This script checks and fixes problems having to do with same movie twice inside the same
 database.
 
 =cut
+
+# uses
 
 use strict;
 use diagnostics;
@@ -13,20 +15,18 @@ use DBI;
 use MyImdb qw();
 use MyUtils qw();
 
-my($dbh)=DBI->connect('dbi:mysql:myworld','','',{
-	RaiseError => 1,
-	PrintWarn => 1,
-	PrintError => 1,
-	AutoCommit => 0,
-});
+# parameters
 
 # print debug messages ?
 my($debug)=0;
 # print progress messages ?
 my($prog)=1;
 
+# code
+
 die('do not use this script, it is now deprecated');
 
+my($dbh)=MyUtils::db_connect();
 # this is for all works that this script knows how to handle which have not been updated (getting all as above will NOT work...)
 my($sql)='SELECT id, externalCode, externalId, workId FROM TbWkWorkExternal';
 
@@ -73,4 +73,5 @@ while($rowhashref=$sth->fetchrow_hashref()) {
 		$hash{$hashkey}=$f_id.$;.$f_workId;
 	}
 }
+$dbh->commit();
 $dbh->disconnect();

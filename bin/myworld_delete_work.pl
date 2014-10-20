@@ -1,6 +1,6 @@
 #!/usr/bin/perl -w
 
-=head desciption 
+=head
 
 This script deletes a single work using it's ID IN THE DATABASE.
 Mind you: this is NOT according to imdbid.
@@ -10,22 +10,21 @@ TODO:
 
 =cut
 
+# uses
+
 use strict;
 use diagnostics;
 use DBI;
 use MyImdb qw();
 use MyUtils qw();
 
+# code
+
 if(!@ARGV) {
 	die 'please provide work id'."\n";
 }
 
-my($dbh)=DBI->connect('dbi:mysql:myworld','','',{
-	RaiseError => 1,
-	PrintWarn => 1,
-	PrintError => 1,
-	AutoCommit => 0,
-});
+my($dbh)=MyUtils::db_connect();
 my($f_id)=shift;
 MyUtils::delete_work($dbh,$f_id);
 $dbh->commit();

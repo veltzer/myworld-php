@@ -1,6 +1,6 @@
 #!/usr/bin/perl -w
 
-=head desciption 
+=head
 
 for movies:
 ===========
@@ -15,6 +15,8 @@ TODO:
 
 =cut
 
+# uses
+
 use strict;
 use diagnostics;
 use IMDB::Film qw();
@@ -22,12 +24,7 @@ use DBI qw();
 use MyImdb qw();
 use MyUtils qw();
 
-my($dbh)=DBI->connect('dbi:mysql:myworld','mark','fVgyzpYy5N',{
-	RaiseError => 1,
-	PrintWarn => 1,
-	PrintError => 1,
-	AutoCommit => 0,
-});
+# parameters
 
 # print debug messages ?
 my($debug)=0;
@@ -37,13 +34,16 @@ my($prog)=1;
 my($stats)=0;
 # is a human watching ?
 my($attended)=1;
-
 # check title ?
 my($do_check_title)=1;
 # do lengths ?
 my($do_duration)=1;
 # do aliases ?
 my($do_aliases)=1;
+
+# code
+
+my($dbh)=MyUtils::db_connect();
 
 # the sql statement to get works that we need to work on...
 my($sql);

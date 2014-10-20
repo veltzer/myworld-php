@@ -1,28 +1,24 @@
 #!/usr/bin/perl -w
 
-=head desciption 
+=head
 
 the script updates various bits of information in the database.
 it goes to the database and iterates all works that have not been updated.
 
 for audio:
-==========
 - it determines the folder where the work is and summs the length of all
 mp3s, the size and number of chapters in that folder writing the data back to the database
 using an update.
 - it inserts all the chapters into the database.
 
 for video:
-==========
 - same as audio but determines length via the Video::Info module.
 
 for movies:
-===========
 - uses IMDB::Film to get the films duration.
 - check that the name of the work is identical to the imdb name.
 
 hints:
-======
 - use this query to see all types of works in my database:
 SELECT DISTINCT(TbWkWork.typeId) FROM TbWkWork;
 - use this query to all chapters of a certain work:
@@ -33,6 +29,8 @@ TODO:
 
 =cut
 
+# uses
+
 use strict;
 use diagnostics;
 use MP3::Info qw();
@@ -40,17 +38,9 @@ use Video::Info qw();
 use IMDB::Film qw();
 use File::Glob ':glob';
 use DBI;
+use MyUtils;
 
-my($dbh)=DBI->connect('dbi:mysql:myworld','mark','fVgyzpYy5N',{
-	RaiseError => 1,
-	PrintWarn => 1,
-	PrintError => 1,
-	AutoCommit => 0,
-});
-# this one didn't work for me in order to enable utf-8
-#$dbh->{'mysql_enable_utf8'} = 1;
-# this one did
-$dbh->do(qq{SET NAMES 'utf8';});
+# parameters
 
 # print debug messages ?
 my($debug)=0;
@@ -67,6 +57,9 @@ my($do_length)=1;
 # do video?
 my($do_video)=1;
 
+# code
+
+my($dbh)=MyUtils::db_connect();
 # the sql statement to get works that we need to work on...
 my($sql);
 
