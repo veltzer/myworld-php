@@ -1,44 +1,51 @@
 #!/usr/bin/perl -w
 
+=head
+
+this is the old import script for my movies
+
+In order to know that I am importing everything I use:
+xmlutils_stats.pl --file=movie_dbdat.xml
+
+here is the entire file structure:
+[authorization] appeared [15] times
+[person] appeared [824] times
+[title] appeared [1735] times
+[person_title_role] appeared [1657] times
+[title_authorization] appeared [2234] times
+[person_title] appeared [2752] times
+[review] appeared [79] times
+
+stuff which was handled:
+authorization
+person
+title
+person_title_role
+title_authorization
+person_title
+review
+	in review the score needs to be adjusted (multiplied by 2).
+
+TODO:
+check that everything is done well.
+find out how to backup the database and document it here.
+		mysqldump myworld | mysql myworld_test
+backup the database and run this...
+
+=cut
+
+# uses
+
 use strict;
 use diagnostics;
 use DBI;
 use XML::Twig;
 use Date::Parse;
 use Date::Manip;
+use MyUtils;
 
-# this is the old import script for my movies
-#
-# In order to know that I am importing everything I use:
-# xmlutils_stats.pl --file=movie_dbdat.xml
+# parameters
 
-# here is the entire file structure:
-#[authorization] appeared [15] times
-#[person] appeared [824] times
-#[title] appeared [1735] times
-#[person_title_role] appeared [1657] times
-#[title_authorization] appeared [2234] times
-#[person_title] appeared [2752] times
-#[review] appeared [79] times
-
-# stuff which was handled:
-# authorization
-# person
-# title
-# person_title_role
-# title_authorization
-# person_title
-# review
-#	in review the score needs to be adjusted (multiplied by 2).
-
-# TODO:
-# check that everything is done well.
-# find out how to backup the database and document it here.
-# 		mysqldump myworld | mysql myworld_test
-# backup the database and run this...
-
-# parameters start here
-########################
 # print debug messages ?
 my($debug)=1;
 # do database stuff ?
@@ -46,8 +53,9 @@ my($do_db)=1;
 # do commit ?
 my($do_commit)=1;
 
-=head
-sub to_mysql($) {
+# functions
+
+sub old_to_mysql($) {
 	my($date_string)=$_[0];
 	print $date_string;
 	my($time);
@@ -55,7 +63,6 @@ sub to_mysql($) {
 	print $time;
 	return "NULL";
 }
-=cut
 
 sub to_mysql($) {
 	my($string)=@_;
@@ -65,11 +72,6 @@ sub to_mysql($) {
 	}
 	return($object);
 }
-
-my($dbh);
-#my($person_sql)='select id from TbExternalType where name=\'imdb_person_id\'';
-my($imdb_person_id)=42;
-my($imdb_title_id)=1;
 
 # [authorization.name] appeared [15] times
 # [authorization.xmlid] appeared [15] times
@@ -322,15 +324,15 @@ sub handle_review() {
 	#}
 }
 
-# here is the real code
+# code
+
+my($dbh);
+#my($person_sql)='select id from TbExternalType where name=\'imdb_person_id\'';
+my($imdb_person_id)=42;
+my($imdb_title_id)=1;
 
 if($do_db) {
-	$dbh=DBI->connect('dbi:mysql:myworld','','',{
-		RaiseError => 1,
-		PrintWarn => 1,
-		PrintError => 1,
-		AutoCommit => 0,
-	});
+	$dbh=MyUtils::db_connect();
 }
 my($t)=XML::Twig->new(twig_handlers => {
 	authorization => \&handle_authorization,

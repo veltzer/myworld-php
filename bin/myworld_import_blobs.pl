@@ -1,15 +1,21 @@
 #!/usr/bin/perl -w
 
-# this script a blob into my database.
-#
-# Currently it handles:
-# - small company images
-#
-# TODO:
-# - import should be either database driven or disk driven (today it is disk driven).
-# (which means we should first query the database for missing images and then
-# find them on the disk and import them. Then, as bonus, we could also print a message
-# if there were images on the disk which were not imported).
+=head
+
+this script a blob into my database.
+
+Currently it handles:
+- small company images
+
+TODO:
+- import should be either database driven or disk driven (today it is disk driven).
+(which means we should first query the database for missing images and then
+find them on the disk and import them. Then, as bonus, we could also print a message
+if there were images on the disk which were not imported).
+
+=cut
+
+# uses
 
 use strict;
 use diagnostics;
@@ -21,6 +27,7 @@ use Perl6::Slurp qw();
 use MIME::Types qw();
 use File::MimeInfo qw();
 use File::Slurp qw();
+use MyUtils;
 
 # parameters
 
@@ -37,26 +44,10 @@ my($do_work)=1;
 # should we die if there are organizations with no images ?
 my($noimage_die)=1;
 
-# here starts the script...
+# code
+
+my($dbh)=MyUtils::db_connect();
 my($imported)=0;
-my($dbh);
-
-
-sub handle_error() {
-	my($rc)=$dbh->err;
-	my($str)=$dbh->errstr;
-	my($rv)=$dbh->state;
-	throw Error::Simple($str.','.$rv.','.$rv);
-}
-
-$dbh=DBI->connect('dbi:mysql:myworld','','',{
-	RaiseError => 1,
-	AutoCommit => 0,
-	mysql_enable_utf8 => 1,
-});
-#my $mimetypes = MIME::Types->new;
-#$dbh->{HandleError} =\&handle_error;
-
 my(@list_small)=<images/organizations/target/sma/*.png>;
 my(@list_large)=<images/organizations/target/big/*.png>;
 my(@list_orig)=<images/organizations/src/*>;

@@ -1,10 +1,14 @@
 #!/usr/bin/perl -w
 
+# uses
+
 use strict;
 use diagnostics;
 use MyImdb qw();
 use MyUtils qw();
 use DBI qw();
+
+# parameters
 
 # print debug messages ?
 my($debug)=0;
@@ -15,32 +19,7 @@ my($stats)=1;
 # do actual inserting ?
 my($do_work)=1;
 
-sub get_movies();
-sub get_movies_reviews();
-sub get_devices();
-sub get_friends();
-sub get_locations();
-
-die("do not use me! I'm already imported");
-
-# connect to the database
-my($dbh)=DBI->connect('dbi:mysql:myworld','','',{
-	RaiseError => 1,
-	PrintWarn => 1,
-	PrintError => 1,
-	AutoCommit => 0,
-});
-my($locations)=get_locations();
-my($devices)=get_devices();
-my($friends)=get_friends();
-my($movieNameByImdb);
-my($movieIdByImdb);
-my($movieWithReviews);
-my($movieRatings);
-get_movies();
-get_movies_reviews();
-my($have_movie)=0;
-my($dont_have_movie)=0;
+# functions
 
 sub get_movies() {
 	my($sql,$sth,$rowhashref);
@@ -259,6 +238,23 @@ sub store_it($) {
 		}
 	}
 }
+
+# code
+
+die('do not use me! I'm already imported');
+
+my($dbh)=MyUtils::db_connect();
+my($locations)=get_locations();
+my($devices)=get_devices();
+my($friends)=get_friends();
+my($movieNameByImdb);
+my($movieIdByImdb);
+my($movieWithReviews);
+my($movieRatings);
+get_movies();
+get_movies_reviews();
+my($have_movie)=0;
+my($dont_have_movie)=0;
 
 my($line);
 my($hash)={};

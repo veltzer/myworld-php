@@ -1,17 +1,21 @@
 #!/usr/bin/perl -w
 
-# This script import languages into my database.
-# The languages are imported from the file: /usr/share/xml/iso-codes/iso_639.xml
-# which is part of the iso-codes package.
-#
-# TODO:
-#
+=head
+
+This script import languages into my database.
+The languages are imported from the file: /usr/share/xml/iso-codes/iso_639.xml
+which is part of the iso-codes package.
+
+=cut
+
+# uses
 
 use strict;
 use diagnostics;
 use DBI;
 use Error qw(:try);
 use XML::DOM qw();
+use MyUtils;
 
 # parameters
 
@@ -26,23 +30,13 @@ my($debug)=0;
 # print stats at the end ?
 my($stats)=1;
 
-# here starts the script...
+# code
+
 my($imported)=0;
 my($dbh);
 
-sub handle_error() {
-	my($rc)=$dbh->err;
-	my($str)=$dbh->errstr;
-	my($rv)=$dbh->state;
-	throw Error::Simple($str.','.$rv.','.$rv);
-}
-
 if($do_db) {
-	$dbh=DBI->connect('dbi:mysql:myworld','','',{
-		RaiseError => 1,
-		AutoCommit => 0,
-		mysql_enable_utf8 => 1,
-	});
+	$dbh=MyUtils::db_connect();
 }
 
 # Lets parse the file via DOM

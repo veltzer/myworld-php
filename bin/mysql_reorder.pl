@@ -20,9 +20,6 @@ use MyUtils;
 
 # parameters
 
-my($db_name)='myworld';
-my($db_user)='';
-my($db_pass)='';
 my($reorder_sql)='SELECT * FROM TbWkWorkType ORDER BY name';
 my($reorder_clause)='ORDER BY name';
 my($db_table_name)='TbWkWorkType';

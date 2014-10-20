@@ -1,20 +1,24 @@
 #!/usr/bin/perl -w
 
+=head
+
+This script plays music files and then stores their data into the database...
+TODO:
+add stuff better into the database (integrate with the works tables...).
+
+=cut
+
+# uses
+
 use strict;
 use diagnostics;
-#use MP3::Info qw();
 use MP3::Tag qw();
 use DBI qw();
 use File::Spec qw();
+use MyUtils;
 
-# This script plays music files and then stores their data into the database...
-# TODO:
-# add stuff better into the database (integrate with the works tables...).
-#
+# parameters
 
-##############
-# PARAMETERS #
-##############
 # add stuff to the database ?
 my($add)=1;
 # print each file as it is played ?
@@ -31,9 +35,7 @@ my($music_folder)='/mnt/external/mark/topics_archive/audio/music';
 # check that we are only playing stuff from the music folder? This is a SECURITY CHECK, DONT REMOVE!
 my($check_sec)=1;
 
-########
-# BODY #
-########
+# functions
 
 # a general assertion function...
 sub assert($$) {
@@ -63,6 +65,8 @@ sub mysql_now() {
 	my($result)=sprintf('%4d-%02d-%02d %02d:%02d:%02d',$year+1900,$mon+1,$mday,$hour,$min,$sec);
 	return $result;
 }
+
+# code
 
 for(my($i)=0;$i<@ARGV;$i++) {
 	my($filename)=$ARGV[$i];
@@ -128,12 +132,7 @@ for(my($i)=0;$i<@ARGV;$i++) {
 	}
 	# we only add to the database once the playing is over...
 	if($add) {
-		my($dbh)=DBI->connect('dbi:mysql:myworld','','',{
-				RaiseError=>1,
-				PrintWarn=>1,
-				PrintError=>1,
-				AutoCommit=>0,
-			});
+		my($dbh)=MyUtils::db_connect();
 		$dbh->do('INSERT INTO TbMsHearing (title,track,artist,album,comment,year,genre,filename,date) VALUES(?,?,?,?,?,?,?,?,?)',undef,
 			$title,
 			$track,

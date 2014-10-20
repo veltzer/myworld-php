@@ -1,10 +1,14 @@
 #!/usr/bin/perl -w
 
+# uses
+
 use strict;
 use diagnostics;
 use MyImdb qw();
 use MyUtils qw();
 use DBI qw();
+
+# parameters
 
 # print debug messages ?
 my($debug)=0;
@@ -15,16 +19,13 @@ my($stats)=1;
 # do actual inserting ?
 my($do_work)=1;
 
-# stats
-my($movies_saw)=0;
+# code
 
 # connect to the database
-my($dbh)=DBI->connect('dbi:mysql:myworld','','',{
-	RaiseError => 1,
-	PrintWarn => 1,
-	PrintError => 1,
-	AutoCommit => 0,
-});
+my($dbh)=MyUtils::db_connect();
+
+# stats
+my($movies_saw)=0;
 
 # get all movies with external imdbs
 my(%external_hash);
