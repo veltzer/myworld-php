@@ -19,7 +19,7 @@ import os # for chdir
 import github # for Github
 import ConfigParser # for ConfigParser
 
-inifile=os.path.expanduser('~/.githubrc')
+inifile=os.path.expanduser('~/.github.ini')
 config=ConfigParser.ConfigParser()
 config.read(inifile)
 opt_login=config.get('github','login')

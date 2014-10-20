@@ -6,7 +6,7 @@
 # TODO:
 # - rewrite this in python
 
-source ~/.myworld.shinc
+source ~/.myworld.sh
 
 databases=`mysql -u $USER -p$PASS -e "SHOW DATABASES;" | tr -d "| " | grep -v Database`
 

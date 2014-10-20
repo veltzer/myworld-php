@@ -108,7 +108,7 @@ sub handle_error() {
 }
 
 sub db_connect() {
-	my($rcfile)=File::HomeDir->my_home.'/.myworldrc';
+	my($rcfile)=File::HomeDir->my_home.'/.myworld.ini';
 	my($cfg);
 	$cfg=Config::IniFiles->new( -file => $rcfile ) || die('unable to access ini file '.$rcfile);
 	my($param_user)=$cfg->val('db', 'user');

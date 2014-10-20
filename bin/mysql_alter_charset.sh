@@ -4,7 +4,7 @@
 # TODO:
 # rewrite this script as a python script
 
-source ~/.myworld.shinc
+source ~/.myworld.sh
 
 # parameters...
 CHARSET='utf8'

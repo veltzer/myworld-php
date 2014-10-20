@@ -10,7 +10,7 @@ use Config::IniFiles;
 
 # code
 
-my($cfg)=Config::IniFiles->new( -file => File::HomeDir->my_home.'/.githubrc' ) or die('unable to access ini file');
+my($cfg)=Config::IniFiles->new( -file => File::HomeDir->my_home.'/.github.ini' ) or die('unable to access ini file');
 $param_login=$cfg->val('github', 'login');
 $param_pass=$cfg->val('github', 'pass');
 

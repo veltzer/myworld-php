@@ -1,5 +1,5 @@
 #!/bin/bash
 
-source ~/.myworld.shinc
+source ~/.myworld.sh
 
 sudo chown -R root.root $BLOGDIR
