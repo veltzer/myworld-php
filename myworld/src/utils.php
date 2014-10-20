@@ -84,11 +84,7 @@ function utils_finish() {
 function my_mysql_connect() {
 	global $link;
 	if($link==NULL) {
-		$db_host='localhost';
-		$db_user='mark';
-		$db_pwd='fVgyzpYy5N';
-		$db_database='myworld';
-		$db_charset='utf8';
+		include 'config.php';
 		assert($link=mysqli_connect($db_host, $db_user, $db_pwd, $db_database));
 		my_mysql_query('SET AUTOCOMMIT=0');
 		# I need this because the default client configuration is for latin1.
@@ -96,6 +92,7 @@ function my_mysql_connect() {
 		# off then inserting AND extracting from the db in hebrew will WORK and
 		# the data in the command line mysql client will look ok but in fact it is
 		# not UTF in the db. USE THIS!!!
+		$db_charset='utf8';
 		assert($link->set_charset($db_charset));
 	}
 }

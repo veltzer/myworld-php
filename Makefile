@@ -82,6 +82,8 @@ ALL:=$(ALL) $(MYTHEME_THEME_ZIP)
 
 SOURCES_JS:=$(shell find . -name "*.js")
 
+CONFIG:=~/.myworld.php
+
 #########
 # RULES #
 #########
@@ -131,26 +133,24 @@ remake_public_password:
 	$(Q)htpasswd -bc ~/public_html/.htpasswd $(WEB_USER) $(WEB_PASSWORD) 2> /dev/null # set security
 
 .PHONY: install
-install: all
+install: all $(CONFIG)
 	$(info doing [$@])
 	$(Q)-sudo rm -rf $(MYHEB_PLUGIN_FULL_DIR)
 	$(Q)-sudo rm -rf $(MYWORLD_PLUGIN_FULL_DIR)
 	$(Q)-sudo rm -rf $(MYTHEME_THEME_FULL_DIR)
 	$(Q)sudo cp -r $(MYHEB_PLUGIN_NAME) $(PLUGIN_DIR)
-	$(Q)sudo chmod -R ugo+rx $(PLUGIN_DIR)/$(MYHEB_PLUGIN_NAME)
 	$(Q)sudo cp -r $(MYWORLD_PLUGIN_NAME) $(PLUGIN_DIR)
-	$(Q)sudo chmod -R ugo+rx $(PLUGIN_DIR)/$(MYWORLD_PLUGIN_NAME)
 	$(Q)sudo cp -r $(MYTHEME_THEME_NAME) $(THEME_DIR)
-	$(Q)sudo chmod -R ugo+rx $(THEME_DIR)/$(MYTHEME_THEME_NAME)
+	$(Q)sudo cp $(CONFIG) $(PLUGIN_DIR)/$(MYWORLD_PLUGIN_NAME)/src/config.php
 	$(Q)sudo cp misc/rss.png $(WP_DIR)/wp-includes/images/rss.png
 	$(Q)sudo rm -rf $(WEB_DIR_PRIVATE) # remove the old folder
 	$(Q)sudo cp -r private $(WEB_DIR_PRIVATE) # copy to the target
 	$(Q)sudo cp $(MYWORLD_PLUGIN_NAME)/src/utils.php $(WEB_DIR_PRIVATE) # copy support code
-	$(Q)sudo chmod -R ugo+rx $(WEB_DIR_PRIVATE)
+	$(Q)sudo cp $(CONFIG) $(WEB_DIR_PRIVATE)/config.php # copy support code
 	$(Q)sudo rm -rf $(WEB_DIR_PUBLIC) # remove the old folder
 	$(Q)sudo cp -r public $(WEB_DIR_PUBLIC) # copy to the target
 	$(Q)sudo cp $(MYWORLD_PLUGIN_NAME)/src/utils.php private/GetData.php private/GetMovies.php $(WEB_DIR_PUBLIC) # copy support code
-	$(Q)sudo chmod -R ugo+rx $(WEB_DIR_PUBLIC)
+	$(Q)sudo cp $(CONFIG) $(WEB_DIR_PUBLIC)/config.php # copy support code
 
 .PHONY: check
 check:
