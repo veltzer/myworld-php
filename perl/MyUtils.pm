@@ -1,5 +1,3 @@
-#!/bin/echo This is a perl module and should not be run
-
 package MyUtils;
 
 # uses
