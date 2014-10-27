@@ -106,14 +106,14 @@ sub handle_error() {
 }
 
 sub db_connect() {
-	my($rcfile)=File::HomeDir->my_home.'/.myworld.ini';
+	my($rcfile)=File::HomeDir->my_home.'/.details.ini';
 	my($cfg);
 	$cfg=Config::IniFiles->new( -file => $rcfile ) || die('unable to access ini file '.$rcfile);
-	my($param_user)=$cfg->val('db', 'user');
-	my($param_pass)=$cfg->val('db', 'pass');
-	my($param_host)=$cfg->val('db', 'host');
-	my($param_port)=$cfg->val('db', 'port');
-	my($param_name)=$cfg->val('db', 'name');
+	my($param_user)=$cfg->val('myworld', 'username');
+	my($param_pass)=$cfg->val('myworld', 'password');
+	my($param_host)=$cfg->val('myworld', 'hostname');
+	my($param_port)=$cfg->val('myworld', 'port');
+	my($param_name)=$cfg->val('myworld', 'name');
 
 	my($dsn)='dbi:mysql:'.$param_name;
 	if(defined($param_host)) {
