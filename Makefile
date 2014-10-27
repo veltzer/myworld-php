@@ -89,17 +89,17 @@ CONFIG:=~/.myworld.php
 all: $(ALL)
 $(MYHEB_PLUGIN_ZIP): $(MYHEB_PLUGIN_FILES) $(ALL_DEP)
 	$(info doing [$@])
-	$(Q)-mkdir -p $(dir $@)
+	$(Q)mkdir -p $(dir $@)
 	$(Q)-rm -f $@
 	$(Q)zip --quiet -r $@ $(MYHEB_PLUGIN_NAME)
 $(MYWORLD_PLUGIN_ZIP): $(MYWORLD_PLUGIN_FILES) $(ALL_DEP)
 	$(info doing [$@])
-	$(Q)-mkdir -p $(dir $@)
+	$(Q)mkdir -p $(dir $@)
 	$(Q)-rm -f $@
 	$(Q)zip --quiet -r $@ $(MYWORLD_PLUGIN_NAME)
 $(MYTHEME_THEME_ZIP): $(MYTHEME_THEME_FILES) $(ALL_DEP)
 	$(info doing [$@])
-	$(Q)-mkdir -p $(dir $@)
+	$(Q)mkdir -p $(dir $@)
 	$(Q)-rm -f $@
 	$(Q)zip --quiet -r $@ $(MYTHEME_THEME_NAME)
 $(JSCHECK): $(SOURCES_JS) $(ALL_DEP) $(TOOL_WRAPPER)
