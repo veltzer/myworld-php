@@ -4,8 +4,8 @@
 Script to be used to catenate many mp3 files.
 '''
 
-import subprocess
-import glob
+import subprocess # for check_call, call, DEVNULL
+import glob # for glob
 
 doRun=True
 doDebug=False
@@ -20,12 +20,12 @@ def unite(l, out):
 	if doRun:
 		if doCheck:
 			if doRedirect:
-				subprocess.check_call(args, stdout=open('/dev/null','w'))
+				subprocess.check_call(args, stdout=subprocess.DEVNULL)
 			else:
 				subprocess.check_call(args)
 		else:
 			if doRedirect:
-				subprocess.call(args, stdout=open('/dev/null','w'))
+				subprocess.call(args, stdout=subprocess.DEVNULL)
 			else:
 				subprocess.call(args)
 	else:
