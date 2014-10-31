@@ -21,10 +21,37 @@ import imaplib # for IMAP4_SSL
 import configparser # for ConfigParser
 import os.path # for expanduser
 import optparse # for OptionParser
+import email # for messsage_from_string
+import email.utils # for parsedate_tz
+import email.header # for decode_header
+import time # for localtime, mktime
 
 ####################
 # helper functions #
 ####################
+
+def decode_header(value):
+	result = []
+	for v, c in email.header.decode_header(value):
+		try:
+			if c is None:
+				v = v.decode()
+			else:
+				v = v.decode(c)
+		except (UnicodeError, LookupError):
+			v = v.decode('iso-8859-1')
+		result.append(v)
+	return u' '.join(result)
+
+def parsedate(value):
+	value = decode_header(value)
+	value = email.utils.parsedate_tz(value)
+	timestamp = time.mktime(tuple(value[:9]))
+	if value[9]:
+		timestamp -= time.timezone + value[9]
+		if time.daylight:
+			timestamp += 3600
+	return time.localtime(timestamp)
 
 def imap_login(imap, username, password):
 	(res, l)=imap.login(username, password)
@@ -93,6 +120,21 @@ def imap_delete_fullpath(imap, path):
 		imap_delete(imap, '/'.join(parts[:x]))
 
 '''
+append a single message to a mailbox
+'''
+def imap_append(imap, mailbox, flags, date_time, message):
+	(res, l)=imap.append(mailbox, flags, date_time, message)
+	if res!='OK':
+		raise ValueError('could not append to [{0}]. error is [{1}]'.format(mailbox, l[0].decode()))
+
+def imap_append_file(imap, folder, flags, filename):
+	content = open(filename, 'rb').read()
+	message = email.message_from_string(content)
+	timestamp = parsedate(message['date'])
+	subject = decode_header(message['subject'])
+	imap_append(imap, folder, flags, timestamp, content)
+
+'''
 test function
 '''
 def imap_test(imap, options):
@@ -147,12 +189,20 @@ def imap_test(imap, options):
 	'''
 
 	# this should fail
-	#imap_create(imap, 'business')
+	'''
+	imap_create(imap, 'business')
+	'''
 
 	# this works
 	'''
 	assert imap_have_fullpath(imap, 'business/hinbit/projects/smartbuild')
 	'''
+
+	filename='/home/mark/Mail/.hobbies.directory/blog/cur/1279466171.2097.5oTh7:2,S'
+
+	# lets try this
+	#imap_create_fullpath(imap, 'foo/bar/zoo')
+	imap_append(imap, 'foo/bar/zoo', None, None, open(filename, 'rb').read())
 
 ########
 # code #
