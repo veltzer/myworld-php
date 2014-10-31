@@ -20,6 +20,8 @@ $types['et_year']=1;
 $types['et_month']=1;
 $types['dr_year']=1;
 $types['dr_month']=1;
+$types['bg_year']=1;
+$types['bg_month']=1;
 $types['upgrade_laptop_year']=1;
 $types['upgrade_laptop_month']=1;
 $types['upgrade_desktop_year']=1;
@@ -158,6 +160,16 @@ if($type=='dr_year') {
 }
 if($type=='dr_month') {
 	$query=sprintf('SELECT DATE_FORMAT(TbTdDone.end,"%%m/%%Y") AS month,COUNT(*) AS views FROM TbTdDone, TbTdActivity WHERE TbTdDone.end is not NULL AND TbTdDone.activityId=TbTdActivity.id AND TbTdDone.personId=1 AND TbTdActivity.name="drum training" GROUP BY DATE_FORMAT(TbTdDone.end,"%%m/%%Y") ORDER BY TbTdDone.end');
+	$result=my_mysql_query($query);
+	$response='{ items: '.my_json_encode($result).'}';
+}
+if($type=='bg_year') {
+	$query=sprintf('SELECT DATE_FORMAT(TbTdDone.end,"%%Y") AS year,COUNT(*) AS views FROM TbTdDone, TbTdActivity WHERE TbTdDone.end is not NULL AND TbTdDone.activityId=TbTdActivity.id AND TbTdDone.personId=1 AND TbTdActivity.name="bass guitar training" GROUP BY DATE_FORMAT(TbTdDone.end,"%%Y") ORDER BY TbTdDone.end');
+	$result=my_mysql_query($query);
+	$response='{ items: '.my_json_encode($result).'}';
+}
+if($type=='bg_month') {
+	$query=sprintf('SELECT DATE_FORMAT(TbTdDone.end,"%%m/%%Y") AS month,COUNT(*) AS views FROM TbTdDone, TbTdActivity WHERE TbTdDone.end is not NULL AND TbTdDone.activityId=TbTdActivity.id AND TbTdDone.personId=1 AND TbTdActivity.name="bass guitar training" GROUP BY DATE_FORMAT(TbTdDone.end,"%%m/%%Y") ORDER BY TbTdDone.end');
 	$result=my_mysql_query($query);
 	$response='{ items: '.my_json_encode($result).'}';
 }

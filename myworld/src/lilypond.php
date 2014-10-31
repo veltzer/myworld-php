@@ -8,7 +8,7 @@ function create_lilypond($params) {
 
 	$res.=multi_accordion_start();
 
-	while($row=mysql_fetch_assoc($result)) {
+	while($row=$result->fetch_assoc()) {
 		$id=$row['id'];
 		$s_uuid=$row['uuid'];
 		$s_title=val_or_na($row['title']);

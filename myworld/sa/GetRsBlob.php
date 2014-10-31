@@ -17,12 +17,12 @@ $query=sprintf('SELECT id,name,slug,mime,data FROM TbRsBlob where slug="%s"',
 if($debug==1) {
 	echo $query.'<br/>';
 }
-$result=mysql_query($query);
+$result=my_mysql_query($query);
 # make sure we really have a result
 assert($result);
 # we should only get one result...
 assert(mysql_num_rows($result)==1);
-$row=mysql_fetch_assoc($result);
+$row=$result->fetch_assoc();
 $r_id=$row['id'];
 $r_name=$row['name'];
 $r_slug=$row['slug'];

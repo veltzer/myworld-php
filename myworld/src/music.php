@@ -10,7 +10,7 @@ function create_music($params) {
 	);
 	$result=my_mysql_query($query);
 	$res.=multi_accordion_start();
-	while($row=mysql_fetch_assoc($result)) {
+	while($row=$result->fetch_assoc()) {
 		$header=$row['title'].' / '.$row['album'].' / '.$row['artist'];
 		$body='';
 		$body.='<ul>';
