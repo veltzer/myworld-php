@@ -37,7 +37,7 @@ TOOL_JSL:=~/install/jsl/jsl
 TOOL_GJSLINT:=gjslint
 TOOL_YUICOMPRESSOR:=yui-compressor
 TOOL_JSLINT:=jslint
-TOOL_WRAPPER:=scripts/wrapper.py
+TOOL_WRAPPER_QUIET:=scripts/wrapper_quiet.py
 
 JSCHECK:=jscheck.stamp
 
@@ -102,17 +102,17 @@ $(MYTHEME_THEME_ZIP): $(MYTHEME_THEME_FILES) $(ALL_DEP)
 	$(Q)mkdir -p $(dir $@)
 	$(Q)-rm -f $@
 	$(Q)zip --quiet -r $@ $(MYTHEME_THEME_NAME)
-$(JSCHECK): $(SOURCES_JS) $(ALL_DEP) $(TOOL_WRAPPER)
+$(JSCHECK): $(SOURCES_JS) $(ALL_DEP) $(TOOL_WRAPPER_QUIET)
 	$(info doing [$@])
 	$(Q)$(TOOL_JSL) --conf=support/jsl.conf --quiet --nologo --nosummary --nofilelisting $(SOURCES_JS)
-	$(Q)$(TOOL_WRAPPER) $(TOOL_GJSLINT) --flagfile support/gjslint.cfg $(SOURCES_JS)
+	$(Q)$(TOOL_WRAPPER_QUIET) $(TOOL_GJSLINT) --flagfile support/gjslint.cfg $(SOURCES_JS)
 	$(Q)mkdir -p $(dir $@)
 	$(Q)touch $(JSCHECK)
 	
-#	$(Q)$(TOOL_WRAPPER) jshint --config support/jshint.conf $(SOURCES_JS)
-#	$(Q)$(TOOL_WRAPPER) jshint --config support/jshint.conf public/myworld_utils.js
-#	$(Q)$(TOOL_WRAPPER) jslint $(SOURCES_JS)
-#	$(Q)$(TOOL_WRAPPER) jslint public/myworld_utils.js
+#	$(Q)$(TOOL_WRAPPER_QUIET) jshint --config support/jshint.conf $(SOURCES_JS)
+#	$(Q)$(TOOL_WRAPPER_QUIET) jshint --config support/jshint.conf public/myworld_utils.js
+#	$(Q)$(TOOL_WRAPPER_QUIET) jslint $(SOURCES_JS)
+#	$(Q)$(TOOL_WRAPPER_QUIET) jslint public/myworld_utils.js
 
 # list the plugins...
 .PHONY: list
@@ -152,8 +152,8 @@ install: all $(CONFIG)
 .PHONY: check
 check:
 	$(info doing [$@])
-	$(Q)-git grep \'veltzer\'
-	$(Q)-git grep \'mark\'
+	$(Q)scripts/wrapper_noerr.py git grep \'veltzer\'
+	$(Q)scripts/wrapper_noerr.py git grep \'mark\'
 
 .PHONY: clean
 clean:

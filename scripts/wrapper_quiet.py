@@ -2,7 +2,11 @@
 
 '''
 run any command line and do not emit it's standard
-error or output unless there is an error
+error or output unless there is an error, in which case
+emit them and exit with the original commands exit code.
+
+This wrapper is DIFFERENT than the wrapper_noerr.py wrapper
+since this one actually emits error codes.
 '''
 
 import sys # for argv, exit
