@@ -19,16 +19,32 @@ TODO:
 
 import imaplib # for IMAP4_SSL
 import configparser # for ConfigParser
-import os.path # for expanduser
+import os.path # for expanduser, join, sep
+import os # for walk
 import optparse # for OptionParser
 import email # for messsage_from_string
 import email.utils # for parsedate_tz
 import email.header # for decode_header
 import time # for localtime, mktime
+import dbm.gnu # for open
 
 ####################
 # helper functions #
 ####################
+
+def db_open():
+	global opt_database
+	dbname=os.path.expanduser('~/.imap_import.db')
+	opt_database = dbm.gnu.open(dbname, 'c')
+def db_have(filename):
+	global opt_database
+	return filename in opt_database
+def db_mark(filename):
+	global opt_database
+	opt_database[filename]='1'
+def db_close():
+	global opt_database
+	opt_database.close()
 
 def decode_header(value):
 	result = []
@@ -102,6 +118,18 @@ def imap_have_fullpath(imap, path):
 		if not imap_have(imap, '/'.join(parts[:x])):
 			return False
 	return True
+
+'''
+create a full path and remember which paths have been created in a set
+'''
+def imap_create_fullpath_mem(imap, path, made_set):
+	parts=path.split('/')
+	for x in range(1, len(parts)+1):
+		cur='/'.join(parts[:x])
+		if not cur in made_set:
+			if not imap_have(imap, cur):
+				imap_create(imap, cur)
+			made_set.add(cur)
 
 '''
 create a full path of folders. strict.
@@ -204,6 +232,36 @@ def imap_test(imap, options):
 	#imap_create_fullpath(imap, 'foo/bar/zoo')
 	imap_append(imap, 'foo/bar/zoo', None, None, open(filename, 'rb').read())
 
+def imap_import_folder(imap, options, folder):
+	made_folders=set()
+	for root, dir, files in os.walk(folder):
+		for file in files:
+			if not file.endswith(',S'):
+				continue
+			filename=os.path.join(root, file)
+			assert os.path.isfile(filename)
+			relpath=os.path.relpath(os.path.dirname(filename), folder)
+			# calculate folder in gmail
+			parts=relpath.split(os.path.sep)
+			assert parts[-1]=='cur'
+			parts.pop()
+			# all but the last folder element are of the form [.folder.directory]
+			for i, part in enumerate(parts[:-1]):
+				assert part.endswith('.directory')
+				assert part.startswith('.')
+				parts[i]=part[1:-10]
+			target_folder='/'.join([opt_toplevel, '/'.join(parts)])
+			if options.progress:
+				print('filename is [{0}]'.format(filename))
+				print('target_folder is [{0}]'.format(target_folder))
+			if options.real:
+				if options.labels:
+					imap_create_fullpath_mem(imap, target_folder, made_folders)
+				if options.messages:
+					if not db_have(filename):
+						imap_append(imap, target_folder, None, None, open(filename, 'rb').read())
+						db_mark(filename)
+
 ########
 # code #
 ########
@@ -213,6 +271,8 @@ opt_username = cp.get('google', 'username')
 opt_password = cp.get('google_imap', 'password')
 opt_hostname = cp.get('google_imap', 'hostname')
 opt_port = cp.get('google_imap', 'port')
+opt_toplevel = 'imap_import'
+opt_database = None
 
 parser = optparse.OptionParser(
 	description=__doc__,
@@ -220,18 +280,31 @@ parser = optparse.OptionParser(
 )
 parser.add_option('-f', '--folder', dest='folder', default=None, help='Folder where mail is. [default: %default]')
 parser.add_option('-d', '--debug', action='store_true', dest='debug', default=False, help='do you want to debug the script? [default: %default]')
+parser.add_option('-r', '--real', action='store_true', dest='real', default=False, help='do actual imap operations [default: %default]')
+parser.add_option('-p', '--progress', action='store_true', dest='progress', default=False, help='report progress [default: %default]')
+parser.add_option('-l', '--labels', action='store_true', dest='labels', default=False, help='do labels [default: %default]')
+parser.add_option('-m', '--messages', action='store_true', dest='messages', default=False, help='do messages [default: %default]')
 (options, args) = parser.parse_args()
 
 if options.debug:
 	print('opt_username:', opt_username)
-	# remarked for security reasons
-	#print('opt_password:', opt_password)
+	print('opt_password:', opt_password)
 	print('opt_hostname:', opt_hostname)
 	print('opt_port:', opt_port)
 	print('options.folder:', options.folder)
 	print('options.debug:', options.debug)
+	print('options.real:', options.real)
+	print('options.progress:', options.progress)
 
-imap = imaplib.IMAP4_SSL(opt_hostname, opt_port)
-imap_login(imap, opt_username, opt_password)
-imap_test(imap, options)
-imap_logout(imap)
+if options.real:
+	imap = imaplib.IMAP4_SSL(opt_hostname, opt_port)
+	imap_login(imap, opt_username, opt_password)
+	db_open()
+else:
+	imap=None
+#imap_test(imap, options)
+imap_import_folder(imap, options, os.path.expanduser('~/Mail'))
+
+if options.real:
+	imap_logout(imap)
+	db_close()
