@@ -6,6 +6,9 @@ Tecnically this is a wrapper object.
 To see the documentation of the API use: pydoc imaplib
 This thing started from me wanting to import my old mail to gmail and seeing
 this blog post: http://scott.yang.id.au/2009/01/migrate-emails-maildir-gmail.html
+
+Refrences:
+http://stackoverflow.com/questions/3180891/imap-deleting-messages
 '''
 
 import imaplib # for IMAP4_SSL
@@ -117,7 +120,8 @@ class IMAP(object):
 	def have_fullpath(self, path):
 		parts=path.split('/')
 		for x in range(1, len(parts)+1):
-			if not self.have('/'.join(parts[:x])):
+			cur='/'.join(parts[:x])
+			if not self.have(cur):
 				return False
 		return True
 
@@ -146,8 +150,10 @@ class IMAP(object):
 	'''
 	def delete_fullpath(self, path):
 		parts=path.split('/')
+		# note that delete is in reverse order
 		for x in range(len(parts), 0, -1):
-			self.delete('/'.join(parts[:x]))
+			cur='/'.join(parts[:x])
+			self.delete(cur)
 
 	'''
 	append a single message to a mailbox
@@ -230,11 +236,16 @@ class IMAP(object):
 		assert self.have_fullpath('business/hinbit/projects/smartbuild')
 		'''
 
-		filename='/home/mark/Mail/.hobbies.directory/blog/cur/1279466171.2097.5oTh7:2,S'
+		# this works
+		'''
+		#filename='/home/mark/Mail/.hobbies.directory/blog/cur/1279466171.2097.5oTh7:2,S'
+		filename='support/test_mail_msg'
+		self.create_fullpath('test/foo/bar/zoo')
+		self.append('test/foo/bar/zoo', None, None, open(filename, 'rb').read())
+		'''
 
 		# lets try this
-		#self.create_fullpath('foo/bar/zoo')
-		self.append('foo/bar/zoo', None, None, open(filename, 'rb').read())
+		self.delete_fullpath('test/foo/bar/zoo')
 
 	def import_folder(self, folder, toplevel, doprogress):
 		for root, dir, files in os.walk(folder):
