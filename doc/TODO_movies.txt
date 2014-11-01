@@ -20,7 +20,7 @@ stats problem:
 
 old file problem:
 	there is one minor file in the still not done folder.
-	do it and then get ridd of the whole folder. 
+	do it and then get ridd of the whole folder.
 
 blog view of movies:
 	add stat to the blog with movies which imdb could not be found for and those for which it could.

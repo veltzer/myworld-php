@@ -41,7 +41,7 @@ p.audioplayer_container {
 /* calendar css */
 
 /* override the default value for calendar which demands no floating things left
- * or right of it which is bad for wordpress */ 
+ * or right of it which is bad for wordpress */
 .fc-content {
 	clear: none;
 }

@@ -4,8 +4,8 @@ Plugin Name: MyWorld
 Plugin URI: http://veltzer.net/
 Description: MyWorld plugin for WordPress
 Version: 0.0.2
-Author: Mark Veltzer <mark.veltzer@gmail.com> 
-Author URI: http://www.veltzer.net 
+Author: Mark Veltzer <mark.veltzer@gmail.com>
+Author URI: http://www.veltzer.net
 */
 
 /*
@@ -29,7 +29,7 @@ foreach(glob(plugin_dir_path(__FILE__).'src/*.php') as $filename) {
 }
 
 if(!class_exists('MyWorld')) {
-	class MyWorld { 
+	class MyWorld {
 		/*
 		 * Our own version number
 		 */
@@ -57,7 +57,7 @@ if(!class_exists('MyWorld')) {
 				// the first is always the name of the content
 				$name=trim(array_shift($extra_array));
 				foreach ($extra_array as $val) {
-					$pair=preg_split('/=/',$val);	
+					$pair=preg_split('/=/',$val);
 					$extra_hash[trim($pair[0])]=trim($pair[1]);
 				}
 				$new_content=$this->create_content($name,$extra_hash);

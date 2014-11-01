@@ -5,7 +5,7 @@ div. make this behave better.
 - this plugin is over simplistic in it's approach - it simply scans the text for
 hebrew. Allow the user to say what is hebrew or what is not using a tag.
 
-- allow comments in hebrew. 
+- allow comments in hebrew.
 
 - comments issues:
 	comments do not look good if they are on hebrew posts.

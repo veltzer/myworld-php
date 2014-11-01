@@ -10,7 +10,7 @@
 # see: http://stackoverflow.com/a/3303298/357774
 ##wget "http://www.w3.org/QA/Tools/css-validator/css-validator.jar"
 #sudo aptitude install -y ant # uncomment if you don't have ant
-CVSROOT=:pserver:anonymous:anonymous@dev.w3.org:/sources/public cvs checkout 2002/css-validator 
+CVSROOT=:pserver:anonymous:anonymous@dev.w3.org:/sources/public cvs checkout 2002/css-validator
 mkdir 2002/css-validator/lib
 TOMCAT6_VERSION='6.0.37'
 wget "http://www.apache.org/dist/tomcat/tomcat-6/v$TOMCAT6_VERSION/bin/apache-tomcat-$TOMCAT6_VERSION.tar.gz"

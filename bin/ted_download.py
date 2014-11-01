@@ -3,7 +3,7 @@
 '''
 A simple script to download stuff from ted.com via the command line
 '''
- 
+
 import download.ted # for get
 import sys # for stderr, exit
 

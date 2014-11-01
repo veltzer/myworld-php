@@ -64,7 +64,7 @@ class Gmail(object):
 	print(self.folder)
         print(self.imap.append(self.folder, '(\\Seen)', timestamp, content))
         self.mark_appended(filename)
-    
+
     def check_appended(self, filename):
         return os.path.basename(filename) in self.database
 
@@ -84,7 +84,7 @@ class Gmail(object):
         from imaplib import IMAP4_SSL
         if self.__imap is None:
             if not self.username or not self.password:
-                raise Exception('Username/password not supplied') 
+                raise Exception('Username/password not supplied')
 
             self.__imap = IMAP4_SSL('imap.gmail.com')
             self.__imap.login(self.username, self.password)

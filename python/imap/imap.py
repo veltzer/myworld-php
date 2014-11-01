@@ -54,7 +54,7 @@ def parsedate(value):
 	return time.localtime(timestamp)
 
 # imap functions
-	
+
 def connect(opt_hostname, opt_port):
 	return imaplib.IMAP4_SSL(opt_hostname, opt_port)
 

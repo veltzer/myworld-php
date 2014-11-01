@@ -59,7 +59,7 @@ currently it is used for blobs.
 some database conventions:
 all tables have "id INTEGER NOT NULL AUTO_INCREMENT PRIMARY KEY"
 all tables are TbCamelCase with words which are legal.
-fileds are FdCamelCase with words which are legal. 
+fileds are FdCamelCase with words which are legal.
 if a field refers to a table Foo it should have the name FdPurposeFooId
 
 table names:

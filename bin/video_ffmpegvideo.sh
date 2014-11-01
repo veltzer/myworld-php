@@ -18,7 +18,7 @@ height=`/usr/bin/mediainfo --Inform=Video\;%Height% "$1"`
 
 audcodec="ac3"
 
-aspect=$(echo "scale=2; ($width/$height)*100" | bc | awk -F '.' '{ print $1; exit; }' ) 
+aspect=$(echo "scale=2; ($width/$height)*100" | bc | awk -F '.' '{ print $1; exit; }' )
 
 echo $aspect
 comp=175
@@ -40,7 +40,7 @@ echo $pad
 
 # Make sure the ffmpeg path is correct
 if [ "$bars" -eq 1 ]; then
-   # bars top and bottom 
+   # bars top and bottom
   exec ffmpeg -i "$1" -b ${VBITRATE} -maxrate ${VBITRATE} -minrate ${VBITRATE} \
 -bufsize 5097k -bt 380k -padtop ${pad} -padbottom ${pad} -threads 2 -ab ${ABITRATE} \
 -acodec ${audcodec} -async 1 -f mpegts -y - > "$2"

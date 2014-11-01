@@ -55,7 +55,7 @@ $dbh->commit();
 $dbh->disconnect();
 
 open(OUTPUT,'> '.$output) || die('unable to open ['.$output.'] for writing');
-# now lets reviews all works 
+# now lets reviews all works
 my(@file_list)=<by_name/*/*>;
 for(my($i)=0;$i<@file_list;$i++) {
 	my($path)=$file_list[$i];

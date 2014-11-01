@@ -11,7 +11,7 @@
 	<li id="recentposts"><h2>Recent Posts</h2>
 		<ul>
 		<?php $postslist = get_posts('numberposts=5&order=DESC&orderby=date'); foreach ($postslist as $post) : setup_postdata($post);
-		?> 
+		?>
 			<li><a href="<?php the_permalink() ?>" rel="bookmark" title="Link to <?php the_title(); ?>"><?php the_title(); ?></a>
 			</li>
 		<?php endforeach; ?>

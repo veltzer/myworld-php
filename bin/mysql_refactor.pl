@@ -46,6 +46,6 @@ while($rowhashref=$sth->fetchrow_hashref()) {
 		$orig_hash{$name}=$id;
 	}
 	$dbh->do('UPDATE TbWkWork SET authorId=? WHERE id=?',undef,$id,$row_id);
-} 
+}
 $dbh->commit();
 $dbh->disconnect();

@@ -5,7 +5,7 @@
 <?php if (have_posts()) : while (have_posts()) : the_post(); ?>
 	<div class="post-wrap" id="post-<?php the_ID(); ?>">
 		<h1 class="post-title"><a href="<?php the_permalink() ?>" rel="bookmark" title="Link to <?php the_title(); ?>"><?php the_title(); ?></a></h1>
-		<div><?php the_time('F j, Y'); ?></div>	
+		<div><?php the_time('F j, Y'); ?></div>
 		<div class="story-content">
 			<?php the_content('Continue Reading &raquo;'); ?>
 			<?php link_pages('<p><strong>Pages:</strong> ', '</p>', 'number'); ?>

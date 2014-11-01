@@ -4,8 +4,8 @@ Plugin Name: MyHeb
 Plugin URI: http://veltzer.net/
 Description: MyHeb plugin for WordPress
 Version: 0.0.3
-Author: Mark Veltzer <mark.veltzer@gmail.com> 
-Author URI: http://www.veltzer.net 
+Author: Mark Veltzer <mark.veltzer@gmail.com>
+Author URI: http://www.veltzer.net
 */
 
 /*

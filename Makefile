@@ -108,7 +108,7 @@ $(JSCHECK): $(SOURCES_JS) $(ALL_DEP) $(TOOL_WRAPPER_QUIET)
 	$(Q)$(TOOL_WRAPPER_QUIET) $(TOOL_GJSLINT) --flagfile support/gjslint.cfg $(SOURCES_JS)
 	$(Q)mkdir -p $(dir $@)
 	$(Q)touch $(JSCHECK)
-	
+
 #	$(Q)$(TOOL_WRAPPER_QUIET) jshint --config support/jshint.conf $(SOURCES_JS)
 #	$(Q)$(TOOL_WRAPPER_QUIET) jshint --config support/jshint.conf public/myworld_utils.js
 #	$(Q)$(TOOL_WRAPPER_QUIET) jslint $(SOURCES_JS)
@@ -154,6 +154,8 @@ check:
 	$(info doing [$@])
 	$(Q)scripts/wrapper_noerr.py git grep \'veltzer\'
 	$(Q)scripts/wrapper_noerr.py git grep \'mark\'
+	$(Q)scripts/wrapper_noerr.py git grep ' $$'
+	$(Q)scripts/wrapper_noerr.py git grep '\s$$'
 
 .PHONY: clean
 clean:

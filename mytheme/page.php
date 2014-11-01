@@ -12,7 +12,7 @@
 			</div><!-- end post content -->
 	</div><!-- end post -->
 <?php endwhile;
-// to disable comments, comment the line below 
+// to disable comments, comment the line below
 comments_template();
 else: ?>
 		<h2 class="title"><?php _e('Not Found'); ?></h2>

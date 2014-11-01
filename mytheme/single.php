@@ -5,7 +5,7 @@
 <?php if (have_posts()) : while (have_posts()) : the_post(); ?>
 	<div class="post-wrap" id="post">
 		<h1 class="post-title"><a href="<?php the_permalink() ?>" rel="bookmark" title="Permanent Link to <?php the_title_attribute(); ?>"><?php the_title(); ?></a></h1>
-	                <div><?php the_time('F j, Y'); ?></div> 
+	                <div><?php the_time('F j, Y'); ?></div>
 			<div class="story-content">
 			<?php the_content(); ?>
 			</div><!-- end post content -->

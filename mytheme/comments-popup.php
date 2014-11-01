@@ -1,4 +1,4 @@
-<?php 
+<?php
 /* Don't remove these lines. */
 add_filter('comment_text', 'popuplinks');
 foreach ($posts as $post) { start_wp();
@@ -44,19 +44,19 @@ if (!empty($post->post_password) && $_COOKIE['wp-postpass_'. COOKIEHASH] != $pos
 				<?php endif; // end if comment is moderated ?>
 				<p class="commentmetadata"><a href="#comment-<?php comment_ID(); ?>" title="">Link</a> | <?php comment_date('F jS, Y'); ?> at <?php comment_time(); ?> <?php edit_comment_link('edit',' | ',''); ?></p>
 			</li>
-	<?php 
+	<?php
 			if ('alt' == $oddcomment) $oddcomment = '';
 			else $oddcomment = 'alt'; // decorate author and alternating comments.
-			endforeach; // end comment loop.  
+			endforeach; // end comment loop.
 	?>
 </ol>
 	<?php else : // this is displayed if there are no comments so far
-	 	if ('open' == $post->comment_status) : ?> 
+	 	if ('open' == $post->comment_status) : ?>
 			<!-- If comments are open, but there are no comments. -->
-			
+
 	<?php else : // comments are closed ?>
 			<!-- If comments are closed. -->
-		
+
 <?php endif; endif;
 
  if ('open' == $post->comment_status) : ?>
@@ -68,8 +68,8 @@ if (!empty($post->post_password) && $_COOKIE['wp-postpass_'. COOKIEHASH] != $pos
 	<form action="<?php echo get_option('siteurl'); ?>/wp-comments-post.php" method="post" id="commentform">
 		<fieldset>
 			<legend>Comment Form</legend>
-				<?php if ($user_ID) : // user's logged in ?>				
-					<p>Logged in as <a href="<?php echo get_option('siteurl'); ?>/wp-admin/profile.php"><?php echo $user_identity; ?></a>. <a href="<?php echo get_option('siteurl'); ?>/wp-login.php?action=logout" title="Log out of this account">Logout &raquo;</a></p>				
+				<?php if ($user_ID) : // user's logged in ?>
+					<p>Logged in as <a href="<?php echo get_option('siteurl'); ?>/wp-admin/profile.php"><?php echo $user_identity; ?></a>. <a href="<?php echo get_option('siteurl'); ?>/wp-login.php?action=logout" title="Log out of this account">Logout &raquo;</a></p>
 				<?php else : // otherwise show commenter info form ?>
 				<dl class="commentinfo">
 					<dt><label for="author">Name <?php if ($req) echo "(required)"; ?></label></dt>
@@ -85,7 +85,7 @@ if (!empty($post->post_password) && $_COOKIE['wp-postpass_'. COOKIEHASH] != $pos
 					<dd>
 						<!--<p><strong>Allowed (X)HTML:</strong> <?php echo allowed_tags(); ?></p>-->
 						<textarea name="comment" id="comment" cols="50" rows="10" tabindex="4"></textarea>
-					</dd>			
+					</dd>
 				</dl>
 				<p><input name="submit" type="submit" id="submit" tabindex="5" value="Post Comment" /></p>
 				<input type="hidden" name="comment_post_ID" value="<?php echo $id; ?>" />
@@ -93,12 +93,12 @@ if (!empty($post->post_password) && $_COOKIE['wp-postpass_'. COOKIEHASH] != $pos
 		</fieldset>
 </form>
 </div>
-<?php endif; 
+<?php endif;
 else :
 ?>
 <p>The comment form is closed.</p>
 <?php
-endif; 
+endif;
 } // end password check
 ?>
 
@@ -111,7 +111,7 @@ endif;
 <!-- // this is just the end of the motor - don't touch that line either :) -->
 <script type="text/javascript">
 <!--
-document.onkeypress = function esc(e) {	
+document.onkeypress = function esc(e) {
 	if(typeof(e) == "undefined") { e=event; }
 	if (e.keyCode == 27) { self.close(); }
 }

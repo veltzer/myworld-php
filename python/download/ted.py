@@ -6,7 +6,7 @@ a module which knows how to download stuff from ted.com
 References:
 http://pranavashok.com/blog/2009/12/script-to-download-ted-videos-in-bulk/
 '''
- 
+
 import urllib.request # for urlopen
 import re # for compile
 import download.generic # for get
