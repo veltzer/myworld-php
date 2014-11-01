@@ -7,11 +7,7 @@ Restructuring the flow of this app:
 - parse parameters from the command line.
 - login to imap.
 - recursively traverse the folder given.
-- any file which is an email move to gmail.
-
-To see the documentation of the API use: pydoc imaplib
-This thing started from me wanting to import my old mail to gmail and seeing
-this blog post: http://scott.yang.id.au/2009/01/migrate-emails-maildir-gmail.html
+- any file which is an email copy to gmail.
 
 TODO:
 - move to argparser
@@ -21,11 +17,10 @@ TODO:
 - make an rmdir executable to remove a directory on the imap server.
 '''
 
-import imaplib # for IMAP4_SSL
 import configparser # for ConfigParser
 import os.path # for expanduser
 import optparse # for OptionParser
-import imap.imap # for connect, login, db_open, test, import_folder, logout, db_close
+import imap.imap # for IMAP
 
 ########
 # code #
@@ -57,13 +52,12 @@ if options.debug:
 	print('options.debug:', options.debug)
 	print('options.progress:', options.progress)
 
-imap=imap.imap.connect(opt_hostname, opt_port)
-imap.imap.login(opt_username, opt_password)
-imap.imap.db_open()
+imp=imap.imap.IMAP()
 
-#imap.imap.test(imap)
-imap.imap.import_folder(imap, os.path.expanduser(options.mailfolder), options.progress)
+imp.connect(opt_hostname, opt_port)
+imp.login(opt_username, opt_password)
 
-imap.imap.logout(imap)
-imap=None
-imap.imap.db_close()
+#imp.test(imap)
+imp.import_folder(os.path.expanduser(options.mailfolder), opt_toplevel, options.progress)
+
+imp.logout()

@@ -1,5 +1,11 @@
 '''
-module to help with imap
+module to help with imap.
+
+Tecnically this is a wrapper object.
+
+To see the documentation of the API use: pydoc imaplib
+This thing started from me wanting to import my old mail to gmail and seeing
+this blog post: http://scott.yang.id.au/2009/01/migrate-emails-maildir-gmail.html
 '''
 
 import imaplib # for IMAP4_SSL
@@ -55,196 +61,203 @@ def parsedate(value):
 
 # imap functions
 
-def connect(opt_hostname, opt_port):
-	return imaplib.IMAP4_SSL(opt_hostname, opt_port)
+class IMAP(object):
 
-def login(imap, username, password):
-	(res, l)=imap.login(username, password)
-	if res!='OK':
-		raise ValueError('could not login with error [{0}]'.format(res))
+	def __init__(self):
+		pass
 
-def logout(imap):
-	(res, l)=imap.logout()
-	if res!='BYE':
-		raise ValueError('could not logout with error [{0}]'.format(res))
+	def connect(self, opt_hostname, opt_port):
+		self.imap=imaplib.IMAP4_SSL(opt_hostname, opt_port)
 
-'''
-check if we have a single folder. if you pass 'a/b' it will check if you have a SINGLE
-folder called 'a/b'...
-'''
-def have(imap, name):
-	(res, l)=imap.list(name)
-	if res!='OK':
-		raise ValueError('could not list [{0}]. error is [{1}]'.format(name, l[0].decode()))
-	if len(l)==1 and l[0] is None:
-		return False
-	return True
+	def login(self, username, password):
+		(res, l)=self.imap.login(username, password)
+		if res!='OK':
+			raise ValueError('could not login with error [{0}]'.format(res))
+		db_open()
 
-'''
-this function creates a single folder.
-if the folder exists then it will throw an exception
-'''
-def create(imap, name):
-	(res, l)=imap.create(name)
-	if res!='OK':
-		raise ValueError('could not create [{0}]. error is [{1}]'.format(name, l[0].decode()))
+	def logout(self):
+		db_close()
+		(res, l)=self.imap.logout()
+		if res!='BYE':
+			raise ValueError('could not logout with error [{0}]'.format(res))
 
-'''
-this function deletes a single folder.
-If the folder doesn't exist then it will throw an exception
-'''
-def delete(imap, name):
-	(res, l)=imap.delete(name)
-	if res!='OK':
-		raise ValueError('could not delete [{0}]. error is [{1}]'.format(name, l[0].decode()))
-
-'''
-check that we have a full path. Returns boolean to indicate the state.
-'''
-def have_fullpath(imap, path):
-	parts=path.split('/')
-	for x in range(1, len(parts)+1):
-		if not have(imap, '/'.join(parts[:x])):
+	'''
+	check if we have a single folder. if you pass 'a/b' it will check if you have a SINGLE
+	folder called 'a/b'...
+	'''
+	def have(self, name):
+		(res, l)=self.imap.list(name)
+		if res!='OK':
+			raise ValueError('could not list [{0}]. error is [{1}]'.format(name, l[0].decode()))
+		if len(l)==1 and l[0] is None:
 			return False
-	return True
+		return True
 
-'''
-create a full path and remember which paths have been created in a set
-'''
-def create_fullpath_db(imap, path):
-	parts=path.split('/')
-	for x in range(1, len(parts)+1):
-		cur='/'.join(parts[:x])
-		if not db_have(cur):
-			if not have(imap, cur):
-				create(imap, cur)
-			db_mark(cur)
+	'''
+	this function creates a single folder.
+	if the folder exists then it will throw an exception
+	'''
+	def create(self, name):
+		(res, l)=self.imap.create(name)
+		if res!='OK':
+			raise ValueError('could not create [{0}]. error is [{1}]'.format(name, l[0].decode()))
 
-'''
-create a full path of folders. strict.
-'''
-def create_fullpath(imap, path):
-	parts=path.split('/')
-	for x in range(1, len(parts)+1):
-		create(imap, '/'.join(parts[:x]))
+	'''
+	this function deletes a single folder.
+	If the folder doesn't exist then it will throw an exception
+	'''
+	def delete(self, name):
+		(res, l)=self.imap.delete(name)
+		if res!='OK':
+			raise ValueError('could not delete [{0}]. error is [{1}]'.format(name, l[0].decode()))
 
-'''
-delete a full path of folders. strict.
-'''
-def delete_fullpath(imap, path):
-	parts=path.split('/')
-	for x in range(len(parts), 0, -1):
-		delete(imap, '/'.join(parts[:x]))
+	'''
+	check that we have a full path. Returns boolean to indicate the state.
+	'''
+	def have_fullpath(self, path):
+		parts=path.split('/')
+		for x in range(1, len(parts)+1):
+			if not self.have('/'.join(parts[:x])):
+				return False
+		return True
 
-'''
-append a single message to a mailbox
-'''
-def append(imap, mailbox, flags, date_time, message):
-	(res, l)=imap.append(mailbox, flags, date_time, message)
-	if res!='OK':
-		raise ValueError('could not append to [{0}]. error is [{1}]'.format(mailbox, l[0].decode()))
+	'''
+	create a full path and remember which paths have been created in a set
+	'''
+	def create_fullpath_db(self, path):
+		parts=path.split('/')
+		for x in range(1, len(parts)+1):
+			cur='/'.join(parts[:x])
+			if not db_have(cur):
+				if not self.have(cur):
+					self.create(cur)
+				db_mark(cur)
 
-def append_file(imap, folder, flags, filename):
-	content = open(filename, 'rb').read()
-	message = email.message_from_string(content)
-	timestamp = parsedate(message['date'])
-	subject = decode_header(message['subject'])
-	append(imap, folder, flags, timestamp, content)
+	'''
+	create a full path of folders. strict.
+	'''
+	def create_fullpath(self, path):
+		parts=path.split('/')
+		for x in range(1, len(parts)+1):
+			self.create('/'.join(parts[:x]))
 
-'''
-test function
-'''
-def test(imap):
-	# this works
 	'''
-	print(imap.capability())
-	print(imap.list())
+	delete a full path of folders. strict.
 	'''
+	def delete_fullpath(self, path):
+		parts=path.split('/')
+		for x in range(len(parts), 0, -1):
+			self.delete('/'.join(parts[:x]))
 
-	# this works
 	'''
-	assert not have(imap, 'dontexist')
-	assert have(imap, 'business')
+	append a single message to a mailbox
 	'''
+	def append(self, mailbox, flags, date_time, message):
+		(res, l)=self.imap.append(mailbox, flags, date_time, message)
+		if res!='OK':
+			raise ValueError('could not append to [{0}]. error is [{1}]'.format(mailbox, l[0].decode()))
 
-	# this works
-	'''
-	# now we try to delete a folder which does not exist.
-	# this should raise an error. If it doesn't then we need to
-	# error
-	have_error=False
-	try:
-		delete(imap, 'dontexist')
-	except ValueError as e:
-		have_error=True
-	assert have_error
-	'''
+	def append_file(self, mailbox, flags, filename):
+		content = open(filename, 'rb').read()
+		message = email.message_from_string(content)
+		timestamp = parsedate(message['date'])
+		subject = decode_header(message['subject'])
+		self.append(mailbox, flags, timestamp, content)
 
-	# this works
 	'''
-	create(imap, 'foo')
-	assert have(imap, 'foo')
-	delete(imap, 'foo')
-	assert not have(imap, 'foo')
+	test function
 	'''
+	def test(self):
+		# this works
+		'''
+		print(self.imap.capability())
+		print(self.imap.list())
+		'''
 
-	# this works
-	# this creates a label called 'foo/bar' and not two labels one within the other
-	'''
-	create(imap, 'foo/bar')
-	delete(imap, 'foo/bar')
-	'''
+		# this works
+		'''
+		assert not self.have('dontexist')
+		assert self.have('business')
+		'''
 
-	# this works
-	'''
-	create_fullpath(imap, 'foo/bar/zoo')
-	assert have(imap, 'foo')
-	assert have(imap, 'foo/bar')
-	assert have(imap, 'foo/bar/zoo')
-	delete_fullpath(imap, 'foo/bar/zoo')
-	assert not have(imap, 'foo')
-	assert not have(imap, 'foo/bar')
-	assert not have(imap, 'foo/bar/zoo')
-	'''
+		# this works
+		'''
+		# now we try to delete a folder which does not exist.
+		# this should raise an error. If it doesn't then we need to
+		# error
+		have_error=False
+		try:
+			self.delete('dontexist')
+		except ValueError as e:
+			have_error=True
+		assert have_error
+		'''
 
-	# this should fail
-	'''
-	create(imap, 'business')
-	'''
+		# this works
+		'''
+		self.create('foo')
+		assert self.have('foo')
+		self.delete('foo')
+		assert not self.have('foo')
+		'''
 
-	# this works
-	'''
-	assert have_fullpath(imap, 'business/hinbit/projects/smartbuild')
-	'''
+		# this works
+		# this creates a label called 'foo/bar' and not two labels one within the other
+		'''
+		self.create('foo/bar')
+		self.delete('foo/bar')
+		'''
 
-	filename='/home/mark/Mail/.hobbies.directory/blog/cur/1279466171.2097.5oTh7:2,S'
+		# this works
+		'''
+		self.create_fullpath('foo/bar/zoo')
+		assert self.have('foo')
+		assert self.have('foo/bar')
+		assert self.have('foo/bar/zoo')
+		self.delete_fullpath('foo/bar/zoo')
+		assert not self.have('foo')
+		assert not self.have('foo/bar')
+		assert not self.have('foo/bar/zoo')
+		'''
 
-	# lets try this
-	#create_fullpath(imap, 'foo/bar/zoo')
-	append(imap, 'foo/bar/zoo', None, None, open(filename, 'rb').read())
+		# this should fail
+		'''
+		self.create('business')
+		'''
 
-def import_folder(imap, folder, doprogress):
-	for root, dir, files in os.walk(folder):
-		for file in files:
-			if not file.endswith(',S'):
-				continue
-			filename=os.path.join(root, file)
-			assert os.path.isfile(filename)
-			relpath=os.path.relpath(os.path.dirname(filename), folder)
-			# calculate folder in gmail
-			parts=relpath.split(os.path.sep)
-			assert parts[-1]=='cur'
-			parts.pop()
-			# all but the last folder element are of the form [.folder.directory]
-			for i, part in enumerate(parts[:-1]):
-				assert part.endswith('.directory')
-				assert part.startswith('.')
-				parts[i]=part[1:-10]
-			target_folder='/'.join([opt_toplevel, '/'.join(parts)])
-			if doprogress:
-				print('filename is [{0}]'.format(filename))
-				print('target_folder is [{0}]'.format(target_folder))
-			create_fullpath_db(imap, target_folder)
-			if not db_have(filename):
-				append(imap, target_folder, None, None, open(filename, 'rb').read())
-				db_mark(filename)
+		# this works
+		'''
+		assert self.have_fullpath('business/hinbit/projects/smartbuild')
+		'''
+
+		filename='/home/mark/Mail/.hobbies.directory/blog/cur/1279466171.2097.5oTh7:2,S'
+
+		# lets try this
+		#self.create_fullpath('foo/bar/zoo')
+		self.append('foo/bar/zoo', None, None, open(filename, 'rb').read())
+
+	def import_folder(self, folder, toplevel, doprogress):
+		for root, dir, files in os.walk(folder):
+			for file in files:
+				if not file.endswith(',S'):
+					continue
+				filename=os.path.join(root, file)
+				assert os.path.isfile(filename)
+				relpath=os.path.relpath(os.path.dirname(filename), folder)
+				# calculate folder in gmail
+				parts=relpath.split(os.path.sep)
+				assert parts[-1]=='cur'
+				parts.pop()
+				# all but the last folder element are of the form [.folder.directory]
+				for i, part in enumerate(parts[:-1]):
+					assert part.endswith('.directory')
+					assert part.startswith('.')
+					parts[i]=part[1:-10]
+				target_folder='/'.join([toplevel, '/'.join(parts)])
+				if doprogress:
+					print('filename is [{0}]'.format(filename))
+					print('target_folder is [{0}]'.format(target_folder))
+				self.create_fullpath_db(target_folder)
+				if not db_have(filename):
+					self.append(target_folder, None, None, open(filename, 'rb').read())
+					db_mark(filename)
