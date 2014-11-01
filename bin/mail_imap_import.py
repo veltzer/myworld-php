@@ -10,7 +10,6 @@ Restructuring the flow of this app:
 - any file which is an email copy to gmail.
 
 TODO:
-- move to argparser
 - do real progress report - find number of files to be imported
 	in advance and report on progress.
 - do watchdog for connections hanging.
@@ -20,7 +19,7 @@ TODO:
 
 import configparser # for ConfigParser
 import os.path # for expanduser
-import optparse # for OptionParser
+import argparse # for ArgumentParser, ArgumentDefaultsHelpFormatter
 import imap.imap # for IMAP
 import sys # for exit
 
@@ -35,27 +34,45 @@ opt_hostname = cp.get('google_imap', 'hostname')
 opt_port = cp.get('google_imap', 'port')
 opt_database = None
 
-parser = optparse.OptionParser(
-	description=__doc__,
-	usage='%prog [options]',
+parser=argparse.ArgumentParser(
+	formatter_class=argparse.ArgumentDefaultsHelpFormatter,
 )
-parser.add_option('', '--mailfolder', dest='mailfolder', default='~/Mail', help='Folder where mail is. [default: %default]')
-parser.add_option('', '--debug', action='store_true', dest='debug', default=False, help='do you want to debug the script? [default: %default]')
-parser.add_option('', '--exit', action='store_true', dest='exit', default=False, help='exit after debug? [default: %default]')
-parser.add_option('', '--noprogress', action='store_true', dest='noprogress', default=False, help='dont report progress [default: %default]')
-parser.add_option('', '--toplevel', dest='toplevel', default='imap_import', help='default tag under which to import [default: %default]')
-(options, args) = parser.parse_args()
+parser.add_argument('--debug', help='do you want to debug the script?', default=False, action='store_true')
+parser.add_argument('--exit', help='exif after debug?', default=False, action='store_true')
+parser.add_argument('--noprogress', help='dont report progress', default=False, action='store_true')
 
-if options.debug:
+subparsers=parser.add_subparsers(
+	title='subcommands',
+	dest='subcommand',
+)
+
+subparser_import=subparsers.add_parser(
+	'import',
+	formatter_class=argparse.ArgumentDefaultsHelpFormatter,
+)
+subparser_import.add_argument('--mailfolder', help='folder where the mail is', default='~/Mail')
+subparser_import.add_argument('--toplevel', help='tag under which to import', default='imap_import', action='store_true')
+	
+subparser_test=subparsers.add_parser(
+	'test',
+	formatter_class=argparse.ArgumentDefaultsHelpFormatter,
+)
+	
+subparser_rmdir=subparsers.add_parser(
+	'rmdir',
+	formatter_class=argparse.ArgumentDefaultsHelpFormatter,
+)
+subparser_rmdir.add_argument('--toplevel', help='tag which to remove', default='imap_import', action='store_true')
+
+args=parser.parse_args()
+
+if args.debug:
 	print('opt_username:', opt_username)
 	print('opt_password:', opt_password)
 	print('opt_hostname:', opt_hostname)
 	print('opt_port:', opt_port)
-	print('options.mailfolder:', options.mailfolder)
-	print('options.debug:', options.debug)
-	print('options.noprogress:', options.noprogress)
-	print('options.toplevel:', options.toplevel)
-if options.exit:
+	print(args)
+if args.exit:
 	sys.exit(0)
 
 imp=imap.imap.IMAP()
@@ -63,7 +80,11 @@ imp=imap.imap.IMAP()
 imp.connect(opt_hostname, opt_port)
 imp.login(opt_username, opt_password)
 
-#imp.test(imap)
-imp.import_folder(os.path.expanduser(options.mailfolder), options.toplevel, not options.noprogress)
+if args.subcommand=='import':
+	imp.import_folder(os.path.expanduser(args.mailfolder), args.toplevel, not args.noprogress)
+if args.subcommand=='test':
+	imp.test()
+if args.subcommand=='rmdir':
+	imp.rmdir()
 
 imp.logout()
