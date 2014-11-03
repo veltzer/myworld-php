@@ -106,7 +106,7 @@ sub handle_error() {
 }
 
 sub db_connect() {
-	my($rcfile)=File::HomeDir->my_home.'/.details.ini';
+	my($rcfile)=File::HomeDir->my_home.'/.perlmyworld.ini';
 	my($cfg);
 	$cfg=Config::IniFiles->new( -file => $rcfile ) || die('unable to access ini file '.$rcfile);
 	my($param_user)=$cfg->val('myworld', 'username');

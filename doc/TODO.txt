@@ -1,5 +1,7 @@
 Now:
 ====
+- perl now reads a different file than python.
+	make python supply data for the perl scripts too.
 - add option to add work which I want to see. Just add the work without views
 	or reviews.
 	Then have a script which shows you which works do not have views.
