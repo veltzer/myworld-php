@@ -37,6 +37,9 @@ packs=[
 	'libdate-manip-perl',
 	'libmp3-info-perl',
 	'libvideo-info-perl',
+
+	# my own
+	'templar',
 ]
 
 args=[
