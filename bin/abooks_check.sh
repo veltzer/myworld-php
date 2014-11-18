@@ -12,4 +12,4 @@ find by_name -mindepth 1 -type f -and -not -name "*.mp3" -and -not -name "*.WMA"
 # this checks for permissions other than 444
 echo "Permission problems"
 find by_name -mindepth 1 -type f -and -not -perm 444
-find by_name -type d -and -not -perm 755
+find by_name -type d -and -not -perm 775
