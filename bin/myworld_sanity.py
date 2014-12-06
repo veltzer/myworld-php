@@ -79,7 +79,6 @@ def check_4(conn):
 		TbIdPerson
 	WHERE
 		firstname REGEXP '[[:space:]]' OR
-		surname REGEXP '[[:space:]]' OR
 		othername REGEXP '[[:space:]]'
 	'''
 	results=myworld.db.get_results(conn, sql)
