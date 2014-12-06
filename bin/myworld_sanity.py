@@ -71,10 +71,10 @@ def check_3(conn):
 		print('\t{0}'.format(result))
 
 def check_4(conn):
-	print('checking people with space in the firstname, surname or othername')
+	print('checking people with space in the firstname or othername')
 	sql='''
 	SELECT
-		TbIdPerson.id, TbIdPerson.firstname, TbIdPerson.surname, TbIdPerson.othername
+		TbIdPerson.id, TbIdPerson.firstname, TbIdPerson.othername
 	FROM
 		TbIdPerson
 	WHERE
@@ -86,6 +86,25 @@ def check_4(conn):
 		print('\t{0}'.format(result))
 
 def check_5(conn):
+	print('checking people with space in the begining or end of their firstname, surname or othername')
+	sql='''
+	SELECT
+		TbIdPerson.id, TbIdPerson.firstname, TbIdPerson.surname, TbIdPerson.othername
+	FROM
+		TbIdPerson
+	WHERE
+		firstname REGEXP '^[[:space:]].*$' OR
+		firstname REGEXP '^.*[[:space:]]$' OR
+		surname REGEXP '^[[:space:]].*$' OR
+		surname REGEXP '^.*[[:space:]]$' OR
+		othername REGEXP '^[[:space:]].*$' OR
+		othername REGEXP '^.*[[:space:]]$'
+	'''
+	results=myworld.db.get_results(conn, sql)
+	for result in results:
+		print('\t{0}'.format(result))
+
+def check_6(conn):
 	print('checking for people that are not connected to works and are not friends')
 	sql='''
 	SELECT
@@ -110,7 +129,7 @@ def check_5(conn):
 	for result in results:
 		print('\t{0}'.format(result))
 
-def check_6(conn):
+def check_7(conn):
 	print('checking for people that do not have external ids and are not friends')
 	sql='''
 	SELECT
@@ -151,7 +170,7 @@ def check_6(conn):
 			for result3 in results3:
 				print('\t\t\t{0}'.format(result3))
 
-def check_7(conn):
+def check_8(conn):
 	print('checking for works that do not have external ids')
 	sql='''
 	SELECT
@@ -179,7 +198,7 @@ def check_7(conn):
 		for result2 in results2:
 			print('\t\t{0}'.format(result2))
 
-def check_8(conn):
+def check_9(conn):
 	print('checking for audio works that do not have files')
 	sql='''
 	SELECT
@@ -211,4 +230,5 @@ check_5(conn)
 check_6(conn)
 check_7(conn)
 check_8(conn)
+check_9(conn)
 conn.close()
