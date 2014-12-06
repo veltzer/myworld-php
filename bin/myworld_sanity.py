@@ -212,7 +212,6 @@ def check_9(conn):
 	basedir='/home/mark/slow_links/topics_archive/audio/abooks/by_title_name'
 	results=myworld.db.get_results(conn, sql)
 	for result in results:
-		f_id=result['id']
 		f_name=result['name']
 		folder=os.path.join(basedir, f_name)
 		if not os.path.isdir(folder):
