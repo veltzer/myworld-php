@@ -12,4 +12,4 @@ args=[
 ]
 # give all command line args passed to the wrapper excluding the first (the program name)
 args.extend(sys.argv[1:])
-sys.exit(subprocess.call(args), stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+sys.exit(subprocess.call(args, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL))
