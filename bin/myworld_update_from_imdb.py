@@ -72,6 +72,8 @@ def reset_lengths(db):
 ########
 connection=imdb.IMDb()
 out_encoding=sys.stdout.encoding or sys.getdefaultencoding()
+# this will read from the [client] section of the file
+# that means that that section must declare 'database', 'user' and 'password' attributes.
 db=MySQLdb.connect(read_default_file='~/.my.cnf')
 
 cursor=db.cursor()
