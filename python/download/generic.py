@@ -16,7 +16,8 @@ while doing it
 '''
 def get(url, file):
 	print('downloading [{0}]...'.format(url))
-	os.makedirs(os.path.dirname(file), exist_ok=True)
+	if os.path.dirname(file)!='':
+		os.makedirs(os.path.dirname(file), exist_ok=True)
 	f=open(file, 'wb')
 	u=urllib.request.urlopen(url)
 	meta=u.info()
