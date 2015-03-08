@@ -9,5 +9,4 @@ import subprocess # for call, DEVNULL
 
 args=['/usr/bin/gnome-open']
 args.extend(sys.argv[1:])
-ret=subprocess.call(args, stderr=subprocess.DEVNULL)
-assert ret==0
+subprocess.check_call(args, stderr=subprocess.DEVNULL, stdout=subprocess.DEVNULL)

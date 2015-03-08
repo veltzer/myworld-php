@@ -13,3 +13,4 @@ echo -n "number of files: " >> $file
 find by_name -mindepth 3 -maxdepth 3 -and -type f | wc -l >> $file
 echo -n "size of collection: " >> $file
 du -hs . | cut -f 1 >> $file
+tree -L 2 by_name > list.txt
