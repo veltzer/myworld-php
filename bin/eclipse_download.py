@@ -14,6 +14,8 @@ http://mirrors.hustunique.com/eclipse/technology/epp/downloads/release/luna/SR2/
 
 protocol='http'
 mirror='mirror.hust.edu.cn'
+mirror='mirrors.hustunique.com'
+mirror='kambing.ui.ac.id'
 products=[
 	'automotive',
 	'cpp',
