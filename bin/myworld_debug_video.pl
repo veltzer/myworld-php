@@ -9,6 +9,8 @@ This script debugs the Video::Info module.
 use strict;
 use diagnostics;
 use Video::Info qw();
+use Data::Dumper qw();
 
+print("version is ".$Video::Info::VERSION."\n");
 my($info)=Video::Info->new(-file=>$ARGV[0]);
-print($info);
+print Data::Dumper::Dumper($info);
