@@ -22,7 +22,7 @@ print "achannels: " . $videoInfo{'achannels'} . "\n";
 # returns media information in a hash
 sub videoInfo {
 	# ffmpeg command
-	my $ffmpeg = '/usr/local/bin/ffmpeg';
+	my $ffmpeg = 'avconv';
  
 	my %finfo = (
 				'duration' => "00:00:00.00",
