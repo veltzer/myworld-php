@@ -11,7 +11,7 @@
 
 # PARAMETERS
 FOLDER=`date +%y%m%d%H%M%S`
-DIR=~/Dropbox/db/$FOLDER
+DIR=~/Dropbox.real/db/$FOLDER
 DBS="--databases myworld"
 DB="--database=myworld"
 MYSQL_DATE=`date +'%F %T'`
