@@ -1,7 +1,9 @@
 #!/usr/bin/python3
 
 '''
-This script fixes length problems of mp3 files.
+This script re-encodes mp3 files. The idea is that this re-encoding
+fixes lots of common problems with mp3 files like files which have bad
+length because they were catenated badly.
 '''
 
 import subprocess # for check_call, call, DEVNULL
