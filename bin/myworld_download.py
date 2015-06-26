@@ -9,6 +9,7 @@ This script downloads all youtube videos referenced from the database to my goog
 ###########
 import myworld.db # for connect, print_results, get_results
 import os.path # for join
+import os # for rename
 import subprocess # for check_call
 import download.ted # for get
 import download.generic # for get
@@ -26,6 +27,7 @@ def download_switch(f_tname, url, file):
 			'--output',
 			file,
 		])
+		os.rename(file+'.mp4', file)
 	if f_tname=='ted_video_id':
 		download.ted.get(url, file)
 	if f_tname=='download_url':
