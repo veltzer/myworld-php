@@ -27,7 +27,11 @@ def download_switch(f_tname, url, file):
 			'--output',
 			file,
 		])
-		os.rename(file+'.mp4', file)
+		for suff in ['mp4', 'mkv']:
+			filename=file+'.'+suff
+			if os.path.isfile(filename):
+				os.rename(filename, file)
+				break
 	if f_tname=='ted_video_id':
 		download.ted.get(url, file)
 	if f_tname=='download_url':
