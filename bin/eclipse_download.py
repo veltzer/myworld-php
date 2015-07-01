@@ -19,34 +19,20 @@ mirror='kambing.ui.ac.id'
 mirror='ftp.jaist.ac.jp'
 mirror='http://ftp.jaist.ac.jp/pub/eclipse/technology/epp/downloads/release'
 products=[
-	'automotive',
-	'cpp',
-	'dsl',
-	'java',
-	'jee',
-	'modeling',
-	'parallel',
-	'php',
-	'rcp',
-	'reporting',
-	'scout',
-	'standard',
-	'testing',
-]
-incubations=[
-	True,
-	False,
-	False,
-	False,
-	False,
-	False,
-	False,
-	False,
-	False,
-	False,
-	False,
-	False,
-	False,
+#	('automotive', True),
+#	('cpp', False),
+#	('dsl', False),
+#	('java', False),
+#	('jee', False),
+#	('modeling', False),
+#	('parallel', False),
+#	('php', False),
+#	('rcp', False),
+#	('reporting', False),
+#	('scout', False),
+#	('standard', False),
+#	('testing', False),
+	('committers', False),
 ]
 #version='SR2'
 version='R'
@@ -57,7 +43,7 @@ platforms=[
 	'',
 ]
 
-for product, incubation in zip(products, incubations):
+for product, incubation in products:
 	if incubation:
 		incubation_str='-incubation'
 	else:
