@@ -38,7 +38,8 @@ use Video::Info qw();
 use IMDB::Film qw();
 use File::Glob ':glob';
 use DBI;
-use MyUtils;
+use MyUtils qw();
+use MyVideo qw();
 
 # parameters
 
@@ -127,14 +128,14 @@ while($rowhashref=$sth->fetchrow_hashref()) {
 	if($type eq 'audio' || $type eq 'video') {
 		my($folder);
 		if($type eq 'audio') {
-			$folder='/home/mark/slow_links/topics_archive/audio/abooks/by_title_name/'.$f_name;
+			$folder='/home/mark/links/topics_archive/audio/abooks/by_title_name/'.$f_name;
 		}
 		if($do_video==0 && $type eq 'video') {
 			print('breaking since this is a video'."\n");
 			next;
 		}
 		if($type eq 'video') {
-			$folder='/home/mark/slow_links/topics_archive/video/emovies/by_title_name/'.$f_name;
+			$folder='/home/mark/links/topics_archive/video/emovies/by_title_name/'.$f_name;
 		}
 		if(! -d $folder) {
 			#die('['.$folder.'] is not a folder'."\n");
@@ -167,9 +168,12 @@ while($rowhashref=$sth->fetchrow_hashref()) {
 				$stat_size+=$res->{'SIZE'};
 			}
 			if($type eq 'video') {
-				my($info)=Video::Info->new(-file=>$filename);
-				my($curr_secs)=$info->duration();
-				my($curr_size)=$info->filesize();
+				#my($info)=Video::Info->new(-file=>$filename);
+				#my($curr_secs)=$info->duration();
+				#my($curr_size)=$info->filesize();
+				my(%info)=MyVideo::info($filename);
+				my($curr_secs)=$info{'durationsecs'};
+				my($curr_size)=$info{'size'};
 				if($debug) {
 					print 'curr secs is ['.$curr_secs.']'."\n";
 					print 'curr size is ['.$curr_size.']'."\n";
