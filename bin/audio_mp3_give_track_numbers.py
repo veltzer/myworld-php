@@ -9,8 +9,6 @@ NOTES:
 '''
 
 from __future__ import print_function
-import subprocess # for check_call
-import optparse # for OptionParser
 import os.path # for isfile
 import os # for stat
 import sys # for argv, exit
