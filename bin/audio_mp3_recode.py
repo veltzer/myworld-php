@@ -4,6 +4,9 @@
 This script re-encodes mp3 files. The idea is that this re-encoding
 fixes lots of common problems with mp3 files like files which have bad
 length because they were catenated badly.
+
+Avconv supports many codecs. See "avconv -codecs".
+we will use libmp3lame.
 '''
 
 import subprocess # for check_call, call, DEVNULL
@@ -11,27 +14,40 @@ import sys # for argv
 import tempfile # for NamedTemporaryFile
 import shutil # for move
 import os # for unlink
+import os.path # for isfile
 
 doRun=True
 doDebug=False
 doCheck=True
 # do you want to redirect standard output?
 doRedirect=False
+opt_codec='copy'
+#opt_codec='libmp3lame'
 
-def fix(l):
-	print('fixing [{0}]...'.format(l))
+def fix(filename):
+	print('fixing [{0}]...'.format(filename))
 	f=tempfile.NamedTemporaryFile(suffix='.mp3')
 	out=f.name
 	f.close()
+	#args=[
+	#	'avconv',
+	#	'-i',
+	#	filename,
+	#	'-acodec',
+	#	opt_codec,
+	#	out,
+	#	'-loglevel',
+	#	'quiet'
+	#]
 	args=[
-		'avconv',
-		'-i',
-		l,
-		'-acodec',
-		'copy',
+		'lame',
+		'-m',
+		's',
+		'--resample',
+		'11.025',
+		'--quiet',
+		filename,
 		out,
-		'-loglevel',
-		'quiet'
 	]
 	if doRun:
 		if doCheck:
@@ -46,8 +62,15 @@ def fix(l):
 				subprocess.call(args)
 	else:
 		print(args)
-	os.unlink(l)
-	shutil.move(out, l)
+	# copy the mp3 tag data
+	subprocess.call([
+		'id3cp',
+		filename,
+		out,
+	])
+	os.unlink(filename)
+	shutil.move(out, filename)
 
-for x in sys.argv[1:]:
-	fix(x)
+for filename in sys.argv[1:]:
+	assert os.path.isfile(filename)
+	fix(filename)
