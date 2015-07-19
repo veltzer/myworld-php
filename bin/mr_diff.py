@@ -6,7 +6,7 @@ This script prints repos which are not registered in mr.
 It will first read the projects registered in ~/.mrconfig
 '''
 
-import os.path # for expanduser
+import os.path # for expanduser, isdir, join
 
 have_mrconfig=set()
 filename=os.path.expanduser('~/.mrconfig')
@@ -16,9 +16,11 @@ for line in open(filename):
 		project=line[1:-1].split('/')[-1]
 		have_mrconfig.add(project)
 
+base='/home/mark/git/branches'
 have_folder=set()
-for f in os.listdir('.'):
-	if os.path.isdir(f):
+for f in os.listdir(base):
+	full=os.path.join(base, f)
+	if os.path.isdir(full):
 		have_folder.add(f)
 
 if have_folder!=have_mrconfig:
