@@ -31,7 +31,7 @@ my($debug)=0;
 # print progress while working ?
 my($prog)=1;
 # print stats at the end ?
-my($stats)=0;
+my($stats)=1;
 # is a human watching ?
 my($attended)=1;
 # check title ?
