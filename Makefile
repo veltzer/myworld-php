@@ -156,8 +156,8 @@ check:
 	$(Q)make_helper wrapper-noerr git grep ' $$'
 	$(Q)make_helper wrapper-noerr git grep '\s$$'
 
-.PHONY: clean
-clean:
+.PHONY: clean_full
+clean_full:
 	$(info doing [$@])
 	$(Q)git clean -fxd > /dev/null
 
@@ -166,8 +166,8 @@ clean_manual:
 	$(info doing [$@])
 	$(Q)-rm -f $(CLEAN)
 
-.PHONY: debug
-debug:
+.PHONY: debug_full
+debug_full:
 	$(info ALL is $(ALL))
 	$(info CLEAN is $(CLEAN))
 	$(info WEB_ROOT is $(WEB_ROOT))
