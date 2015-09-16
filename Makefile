@@ -8,8 +8,6 @@ ALL_DEP:=$(TEMPLAR_ALL_DEP)
 ##############
 # target directory where all will be installed...
 WEB_ROOT:=/var/www
-# user to be used to access the application
-attr.web_username:=mark
 # blog directory within the target directory...
 WP_DIR:=$(WEB_ROOT)/blog
 # private directory...
@@ -122,11 +120,11 @@ list:
 
 .PHONY: remake_password
 remake_password:
-	$(Q)htpasswd -bc private/.htpasswd $(attr.web_username) $(attr.web_password) 2> /dev/null # set security
+	$(Q)htpasswd -bc private/.htpasswd $(tdefs.web_username) $(tdefs.web_password) 2> /dev/null # set security
 
 .PHONY: remake_public_password
 remake_public_password:
-	$(Q)htpasswd -bc ~/public_html/.htpasswd $(attr.web_username) $(attr.web_password) 2> /dev/null # set security
+	$(Q)htpasswd -bc ~/public_html/.htpasswd $(tdefs.web_username) $(tdefs.web_password) 2> /dev/null # set security
 
 .PHONY: install
 install: all $(CONFIG)
@@ -172,8 +170,8 @@ debug_full:
 	$(info CLEAN is $(CLEAN))
 	$(info WEB_ROOT is $(WEB_ROOT))
 	$(info WP_DIR is $(WP_DIR))
-	$(info attr.web_password is $(attr.web_password))
-	$(info attr.web_username is $(attr.web_username))
+	$(info tdefs.web_password is $(tdefs.web_password))
+	$(info tdefs.web_username is $(tdefs.web_username))
 	$(info SOURCES_JS is $(SOURCES_JS))
 
 .PHONY: install_wp
