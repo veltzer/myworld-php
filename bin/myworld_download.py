@@ -41,7 +41,7 @@ def download_switch(f_tname, url, file):
 # parameters #
 ##############
 # where should the files be downloaded to?
-p_folder='/mnt/external/mark/topics_archive/video/emovies/download'
+p_folder='/mnt/seagate/mark/topics_archive/video/emovies/download'
 # report progress?
 p_progress=False
 # report on downloads and skips?

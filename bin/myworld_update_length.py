@@ -18,7 +18,7 @@ import myworld.utils # for filename_switch
 # parameters #
 ##############
 # where should the files be downloaded to?
-p_folder='/mnt/external/mark/topics_archive/video/emovies/download'
+p_folder='/mnt/seagate/mark/topics_archive/video/emovies/download'
 # do statistics?
 p_do_stats=True
 # do progress?
