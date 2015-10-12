@@ -6,6 +6,9 @@ This is a script that knows how to download eclipse.
 These are examples of urls to download
 http://kambing.ui.ac.id/eclipse/technology/epp/downloads/release/luna/SR2/eclipse-cpp-luna-SR2-linux-gtk-x86_64.tar.gz
 http://mirrors.hustunique.com/eclipse/technology/epp/downloads/release/luna/SR2/eclipse-cpp-luna-SR2-linux-gtk.tar.gz
+
+TODO:
+- make this script convert the files to .xz storage.
 '''
 
 import download.generic # for get
