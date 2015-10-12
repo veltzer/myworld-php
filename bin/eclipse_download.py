@@ -12,6 +12,7 @@ TODO:
 '''
 
 import download.generic # for get
+import os.path # for isfile
 
 protocol='http'
 mirror='http://ftp.jaist.ac.jp/pub/eclipse/technology/epp/downloads/release'
@@ -27,7 +28,7 @@ products=[
 	('rcp', False),
 	('reporting', False),
 	('scout', False),
-	('standard', False),
+#	('standard', False),
 	('testing', False),
 	('committers', False),
 ]
@@ -46,4 +47,7 @@ for product, incubation in products:
 	for platform in platforms:
 		url='{mirror}/{release}/{version}/eclipse-{product}-{release}-{version}{incubation_str}-linux-gtk{platform}.tar.gz'.format(**vars())
 		filename='eclipse-{product}-{release}-{version}-linux-gtk{platform}.tar.gz'.format(**vars())
-		download.generic.get(url, filename)
+		if os.path.isfile(filename):
+			print('skipping [{0}]...'.format(filename))
+		else:
+			download.generic.get(url, filename)
