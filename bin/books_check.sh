@@ -16,10 +16,10 @@
 
 # this checks that the files are of the right type
 echo "EXTENSION PROBLEMS"
-find by_name by_title -mindepth 2 -type f -and -not -name "*.chm" -and -not -name "*.tar.bz2" -and -not -name "*.pdf" -and -not -name "*.ps" -and -not -name "*.html" -and -not -name "*.dvi" -and -not -name "*.lit" -and -not -name "*.doc" -and -not -name "*.djvu" -and -not -name "*.zip" -and -not -name "*.rtf" -and -not -name "*.txt" -and -not -name "*.pdb" -and -not -name "*.mht" -and -not -name "*.rar" -and -not -name "*.jpg" -and -not -name "*.js" -and -not -name "*.gif"
+find by_name -mindepth 2 -type f -and -not -name "*.chm" -and -not -name "*.tar.bz2" -and -not -name "*.pdf" -and -not -name "*.ps" -and -not -name "*.html" -and -not -name "*.dvi" -and -not -name "*.lit" -and -not -name "*.doc" -and -not -name "*.djvu" -and -not -name "*.zip" -and -not -name "*.rtf" -and -not -name "*.txt" -and -not -name "*.pdb" -and -not -name "*.mht" -and -not -name "*.rar" -and -not -name "*.jpg" -and -not -name "*.js" -and -not -name "*.gif" -and -not -name "*.epub" -and -not -name "*.mobi" -and -not -name "*.nfo" -and -not -name "*.tar.xz"
 # this checks for permissions other than 444
 echo "PERMISSION PROBLEMS"
-find . -mindepth 2 -type f -and -not -perm 444
+find by_name -mindepth 2 -type f -and -not -perm 444
 # Really to enable this someday and take care of the problems it creates...
-#echo "DEPTH PROBLEMS"
-#find . -mindepth 5 -type f
+echo "DEPTH PROBLEMS"
+find by_name -mindepth 4 -type f
