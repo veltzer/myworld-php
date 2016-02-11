@@ -54,7 +54,8 @@ class MySQLCursorDict(mysql.connector.cursor.MySQLCursor):
 get a cursor of the dictionary type
 '''
 def get_cursor(conn):
-	return conn.cursor(cursor_class=MySQLCursorDict)
+	#return conn.cursor(cursor_class=MySQLCursorDict)
+	return conn.cursor(dictionary=True)
 
 '''
 A generic function to print the results of a query on the screen
