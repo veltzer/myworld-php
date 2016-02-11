@@ -42,6 +42,7 @@ doPrint=True
 doDebug=True
 doUseResolution=False
 resolutionToUse=(1024, 768)
+doCrtc=False
 
 # functions start here
 
@@ -121,13 +122,17 @@ def find_outputs():
 def set_outputs(outputs, mode):
 	print('setting the outputs...')
 	for index,output in enumerate(outputs):
-		run([
+		args=[
 			'xrandr',
 			'--output',output.name,
 			'--mode',str(mode[0])+'x'+str(mode[1]),
 			'--pos','0x0',
-			'--crtc',str(index),
-		])
+		]
+		if doCrtc:
+			args.extend([
+				'--crtc',str(index),
+			])
+		run(args)
 
 def invert_the_screen():
 	# dont try this at home...
