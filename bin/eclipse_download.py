@@ -29,20 +29,19 @@ def hexdigest(filename, algo):
 protocol='http'
 mirror='http://ftp.jaist.ac.jp/pub/eclipse/technology/epp/downloads/release'
 products=[
-	('automotive', True),
-	('cpp', False),
-	('dsl', False),
-	('java', False),
 	('jee', False),
-	('modeling', False),
-	('parallel', False),
+	('java', False),
+	('cpp', False),
 	('php', False),
-	('rcp', False),
-	('reporting', False),
-	('scout', False),
-#	('standard', False),
-	('testing', False),
 	('committers', False),
+	('dsl', False),
+	('rcp', False),
+	('modeling', False),
+	('reporting', False),
+	('parallel', False),
+	('testing', False),
+	('scout', False),
+	('automotive', True),
 ]
 version='2'
 release='mars'
@@ -63,11 +62,11 @@ for product, incubation in products:
 		filename='eclipse-{product}-{release}-{version}-linux-gtk{platform}.tar.gz'.format(**vars())
 		cs_filename='eclipse-{product}-{release}-{version}-linux-gtk{platform}.tar.gz.{cs_type}'.format(**vars())
 		if os.path.isfile(filename):
-			print('skipping [{0}] from [{1}]...'.format(filename, url))
+			print('skipping download for [{0}]...'.format(filename))
 		else:
 			download.generic.get(url, filename)
 		if os.path.isfile(cs_filename):
-			print('skipping [{0}] from [{1}]...'.format(cs_filename, cs_url))
+			print('skipping download for [{0}]...'.format(cs_filename))
 		else:
 			download.generic.get(cs_url, cs_filename)
 		# read the checksum and compare
