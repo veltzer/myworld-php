@@ -14,6 +14,7 @@ TODO:
 import download.generic # for get
 import os.path # for isfile
 import hashlib # for new
+import sys # for exit
 
 def hexdigest(filename, algo):
 	BLOCKSIZE = 65536
@@ -43,7 +44,7 @@ products=[
 	('testing', False),
 	('committers', False),
 ]
-version='1'
+version='2'
 release='mars'
 platforms=[
 	'-x86_64', # x64
