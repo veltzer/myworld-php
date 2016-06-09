@@ -1,0 +1,5 @@
+Still to-do in this backup system:
+==================================
+- produce a list of config files THAT I CHANGED.
+- only backup the config files THAT I CHANGED.
+- add backup of home folders (only important info).
