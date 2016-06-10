@@ -15,8 +15,13 @@ import os.path # for join, expanduser, realpath, abspath, islink, isdir, isfile
 doit=True
 # print what we are doing?
 debug=True
+# remove target files if they are links
+force=True
 
 def do_install(source, target):
+	if force:
+		if os.path.islink(target):
+			os.unlink(target)
 	if doit:
 		if debug:
 			print('symlinking [{0}], [{1}]'.format(source, target))
