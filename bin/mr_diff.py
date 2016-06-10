@@ -25,3 +25,5 @@ for f in os.listdir(base):
 
 if have_folder!=have_mrconfig:
 	print(have_folder ^ have_mrconfig)
+else:
+	print('all ok with {0} entries...'.format(len(have_mrconfig)))
