@@ -17,7 +17,7 @@ for line in open(filename):
 		have_mrconfig.add(project)
 
 have_folder=set()
-base=os.path.expanduser('~/git/branches')
+base=os.path.expanduser('~/git')
 for f in os.listdir(base):
 	full=os.path.join(base, f)
 	if os.path.isdir(full):
