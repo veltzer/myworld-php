@@ -40,6 +40,9 @@ packs=[
 
 	# my own
 	'templar',
+
+	# tools
+	'unison',
 ]
 
 args=[
