@@ -10,13 +10,14 @@ if [[ $USER == 'root' ]];then
 	exit 1
 fi
 
+FOLDER=$HOME/insync.real/system_backup
 HOSTNAME=`hostname`
 # we sudo since we are running as regular user and cannot enter into some folders...
 sudo tar jcvf /tmp/etc.$HOSTNAME.tar.bz2 /etc
-cp /tmp/etc.$HOSTNAME.tar.bz2 .
+cp /tmp/etc.$HOSTNAME.tar.bz2 $FOLDER
 sudo rm /tmp/etc.$HOSTNAME.tar.bz2
 # this step can be done by any user...
-dpkg --get-selections  > dpkg_selections.$HOSTNAME.txt
-update-alternatives --get-selections > alternatives.$HOSTNAME.txt
+dpkg --get-selections  > $FOLDER/dpkg_selections.$HOSTNAME.txt
+update-alternatives --get-selections > $FOLDER/alternatives.$HOSTNAME.txt
 # again - this can be done only as root...
 #sudo chown $USER.$USER etc.$HOSTNAME.tar.bz2 dpkg_selections.$HOSTNAME.txt
