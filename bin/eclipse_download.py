@@ -27,27 +27,30 @@ def hexdigest(filename, algo):
 	return hasher.hexdigest()
 
 protocol='http'
-mirror='http://ftp.jaist.ac.jp/pub/eclipse/technology/epp/downloads/release'
+#mirror='http://ftp.jaist.ac.jp/pub/eclipse/technology/epp/downloads/release'
+mirror='http://mirror.netcologne.de/eclipse//technology/epp/downloads/release'
 products=[
 	('jee', False),
 	('java', False),
 	('cpp', False),
 	('php', False),
+	('android', True),
 	('committers', False),
-	('dsl', False),
+	('javascript', False),
 	('rcp', False),
+	('dsl', False),
 	('modeling', False),
 	('reporting', False),
 	('parallel', False),
 	('testing', False),
 	('scout', False),
-	('automotive', True),
+#	('automotive', True),
 ]
-version='2'
-release='mars'
+version='R'
+release='neon'
 platforms=[
 	'-x86_64', # x64
-	'', # i386
+#	'', # i386
 ]
 cs_type='sha512'
 
