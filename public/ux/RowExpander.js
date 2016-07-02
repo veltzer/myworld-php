@@ -6,7 +6,7 @@
 // data or support raw html as well?
 /**
  * @class Ext.ux.RowExpander
- * @extends {Ext.AbstractPlugin Plugin (ptype = 'rowexpander') that adds the
+ * @extends {Ext.AbstractPlugin} Plugin (ptype = 'rowexpander') that adds the
  *          ability to have a Column in a grid which enables a second row body
  *          which expands/contracts. The expand/contract behavior is
  *          configurable to react on clicking of the column, double click of the
