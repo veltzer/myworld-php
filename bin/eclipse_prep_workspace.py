@@ -30,6 +30,8 @@ remove_and_recreate=True
 debug=False
 # report progress?
 do_progress=True
+# do import?
+do_import=True
 
 #############
 # functions #
@@ -51,17 +53,17 @@ if remove_and_recreate:
 	progress('making the new folder ([{0}])'.format(folder))
 	os.mkdir(folder)
 
-# run eclipse with the folder as the workspace
-progress('running headless eclipse to import the project')
-subprocess.check_call([
-	eclipse,
-	'-nosplash',
-	'-data',
-	folder,
-	'-application',
-	'org.eclipse.cdt.managedbuilder.core.headlessbuild',
-	'-import',
-	'.',
-], stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+if do_import:
+	progress('running headless eclipse to import the project')
+	subprocess.check_call([
+		eclipse,
+		'-nosplash',
+		'-data',
+		folder,
+		'-application',
+		'org.eclipse.cdt.managedbuilder.core.headlessbuild',
+		'-import',
+		'.',
+	], stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
 
 progress('eclipse workspace is ready ([{0}])'.format(folder))
