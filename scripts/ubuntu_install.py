@@ -8,6 +8,9 @@ ubuntu to compile and work with this package.
 import subprocess # for check_call
 
 packs=[
+	# tools
+	'wmctrl', # for wmctrl(1)
+
 	# javascript
 	'yui-compressor', # for compressing javascript
 
