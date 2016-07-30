@@ -32,6 +32,9 @@ packs=[
 	'python-bs4', # for html parsing
 	'python3-bs4', # for html parsing
 	'python-mysqldb', # for imdb API
+	'python-github', # for github
+	'python3-github', # for github
+	'python3-jsonpickle', # for jsonpickle
 
 	# perl
 	'libimdb-film-perl', # for perl access to imdb
@@ -40,6 +43,10 @@ packs=[
 	'libdate-manip-perl',
 	'libmp3-info-perl',
 	'libvideo-info-perl',
+	'libnet-github-perl',
+	'libfile-homedir-perl',
+	'libconfig-tiny-perl',
+	'libconfig-inifiles-perl',
 
 	# my own
 	'templar',
