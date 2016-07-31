@@ -29,6 +29,6 @@ g=github.Github(
 for repo in g.get_user(opt_username).get_repos():
 	if repo.homepage=='':
 		print('patching {0}...'.format(repo.name))
-		repo.edit(repo.name, homepage="none");
+		#repo.edit(repo.name, homepage="");
 	if repo.homepage is None:
 		print('webpage is None for {0}...'.format(repo.name))
