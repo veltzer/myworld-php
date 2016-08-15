@@ -11,7 +11,7 @@ if len(sys.argv)!=1:
     print('{0}: usage: {0}'.format(sys.argv[0]), file=sys.stderr)
     sys.exit(1)
 
-old_email='mark.veltzer@gmail.net'
+old_email='mark@veltzer.net'
 new_email='mark.veltzer@gmail.com'
 expr='''if [ "$GIT_COMMITTER_EMAIL" = "{old_email}" ];
 then
