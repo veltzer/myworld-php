@@ -20,6 +20,6 @@ then
 else
 	git commit-tree "$@";
 fi'''.format(**locals())
-# --force, HEAD
-args=['git','filter-branch','--commit-filter',expr]
+# --force is there to override old backup of 'git filter-branch'
+args=['git','filter-branch','--force','--commit-filter',expr]
 subprocess.check_call(args)
