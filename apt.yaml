@@ -1,0 +1,59 @@
+---
+packages:
+        - name: wmctrl
+          reason: for wmctrl(1)
+        - name: yui-compressor
+          reason: for compressing javascript
+	- name: python-pythonmagick
+	  reason: for inserting blobs into the database
+	- name: imagemagick
+	  reason: for convert(1) for image manipulation
+	- name: python-pip
+	  reason: so that I could install python packages via pip
+	- name: python3-pip
+	  reason: so that I could install python packages via pip
+	- name: python-id3
+	  reason: mp3 tagging library
+	- name: python-eyed3
+	  reason: mp3 tagging library
+	- name: python-mutagen
+	  reason: mp3 tagging library
+	- name: youtube-dl
+	  reason: for youtube-dl
+	- name: python-imdbpy
+	  reason: for imdb python module
+	- name: python-enzyme
+	  reason: for video meta data
+	- name: python3-enzyme
+	  reason: for video meta data
+	- name: python-mediainfodll
+	  reason: for video meta data
+	- name: python3-mediainfodll
+	  reason: for video meta data
+	- name: python-kaa-metadata
+	  reason: for video meta data
+	- name: python-bs4
+	  reason: for html parsing
+	- name: python3-bs4
+	  reason: for html parsing
+	- name: python-mysqldb
+	  reason: for imdb API
+	- name: python-github
+	  reason: for github
+	- name: python3-github
+	  reason: for github
+	- name: python3-jsonpickle
+	  reason: for jsonpickle
+	- name: libimdb-film-perl
+          reason: for perl access to imdb
+	- name: libxml-simple-perl
+	- name: libyaml-perl
+	- name: libdate-manip-perl
+	- name: libmp3-info-perl
+	- name: libvideo-info-perl
+	- name: libnet-github-perl
+	- name: libfile-homedir-perl
+	- name: libconfig-tiny-perl
+	- name: libconfig-inifiles-perl
+	- name: unison
+          reason: for synching files
