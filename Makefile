@@ -74,7 +74,7 @@ MYTHEME_THEME_ZIP=$(OUT)/themes/mytheme.zip
 CLEAN:=$(CLEAN) $(MYTHEME_THEME_ZIP)
 ALL+=$(MYTHEME_THEME_ZIP)
 
-SOURCES_JS:=$(shell find . -name "*.js")
+SOURCES_JS:=$(shell find public -name "*.js")
 
 CONFIG:=~/.myworld.php
 
