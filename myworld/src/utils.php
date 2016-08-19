@@ -85,7 +85,8 @@ function my_mysql_connect() {
 	global $link;
 	if($link==NULL) {
 		include 'config.php';
-		assert($link=mysqli_connect($db_host, $db_user, $db_pwd, $db_database));
+		$link=mysqli_connect($db_host, $db_user, $db_pwd, $db_database);
+		assert($line!=null);
 		my_mysql_query('SET AUTOCOMMIT=0');
 		# I need this because the default client configuration is for latin1.
 		# The thing is that this config is hard to detect since if you turn it
@@ -143,7 +144,7 @@ function my_mysql_query_one($query) {
 	$result=my_mysql_query($query);
 	# we should only get one result...
 	assert($result->num_rows==1);
-	$row=mysqli_fetch_array($result,MYSQL_NUM);
+	$row=mysqli_fetch_array($result,MYSQLI_NUM);
 	$ret=$row[0];
 	$result->free();
 	return $ret;
