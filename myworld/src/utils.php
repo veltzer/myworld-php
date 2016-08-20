@@ -86,7 +86,7 @@ function my_mysql_connect() {
 	if($link==NULL) {
 		include 'config.php';
 		$link=mysqli_connect($db_host, $db_user, $db_pwd, $db_database);
-		assert($line!=null);
+		assert($line!=NULL);
 		my_mysql_query('SET AUTOCOMMIT=0');
 		# I need this because the default client configuration is for latin1.
 		# The thing is that this config is hard to detect since if you turn it
@@ -133,9 +133,12 @@ function my_mysql_query($query) {
 	logger_log($query);
 	logger_log("\n============================\n");
 	$result=mysqli_query($link, $query);
+	assert($result!=NULL);
+	/*
 	if(!$result) {
 		error('mysqli error: '.$link->errno.': '.$link->error);
 	}
+	 */
 	return $result;
 }
 
@@ -165,12 +168,15 @@ function my_mysql_query_one_row($query) {
 function my_mysql_query_hash($query,$hash_key) {
 	$result=my_mysql_query($query);
 	$ret=array();
-	while($row=$result->fetch_assoc()) {
+	$row=$result->fetch_assoc();
+	while($row!=NULL) {
 		$ret[$row[$hash_key]]=$row;
+		$row=$result->fetch_assoc();
 	}
 	#debug: print the array...
 	#print_r($ret);
-	my_mysql_free_result($result);
+	$result->free();
+	#my_mysql_free_result($result);
 	return $ret;
 }
 
@@ -329,29 +335,51 @@ function formatTimeperiod($size) {
 function my_get_rows($result) {
 	// iterate over every row
 	$rows=array();
-	while($row=$result->fetch_assoc()) {
+	$row=$result->fetch_assoc();
+	while($row!=NULL) {
+		//error_log(print_r($row, $return=true));
 		// for every field in the result..
-		while($info=$result->fetch_field()) {
+		$info=$result->fetch_field();
+		while($info!=NULL) {
 			$type=$info->type;
 			$val=$row[$info->name];
-			if ($val!=null) {
+			if ($val!=NULL) {
 				if($type=='real') {
+					//error_log('here');
 					$row[$info->name]=doubleval($row[$info->name]);
 				}
 				if($type=='int') {
+					//error_log('there');
 					$row[$info->name]=intval($row[$info->name]);
 				}
 			}
+			$info=$result->fetch_field();
 		}
 		$rows[]=$row;
+		$row=$result->fetch_assoc();
 	}
 	return $rows;
+	/*
+	$myArray = array();
+	while($row = $result->fetch_array(MYSQLI_ASSOC)) {
+		$myArray[] = $row;
+	}
+	$result->close();
+	return $myArray;
+	 */
 }
 
 /* echo a result set in json style... */
 function my_json_encode($result) {
 	// JSON-ify all rows together as one big array
-	return json_encode(my_get_rows($result));
+	$ret=json_encode(my_get_rows($result));
+	if(json_last_error()) {
+		error_log('json_error');
+		error_log(json_last_error());
+		error_log(json_last_error_msg());
+		return json_last_error_msg();
+	}
+	return $ret;
 }
 
 /* functions for embedding stuff from youtube */
@@ -427,9 +455,11 @@ function get_person_data() {
 	$honorifics_hash=my_mysql_query_hash('SELECT * FROM TbIdHonorific','id');
 	$query=sprintf('select id,honorificId,firstname,surname,othername,ordinal from TbIdPerson order by firstname,surname');
 	$result=my_mysql_query($query);
-	while($row=$result->fetch_assoc()) {
+	$row=$result->fetch_assoc();
+	while($row!=NULL) {
 		$row['label']=get_full_name($row,$honorifics_hash);
 		$rows[]=$row;
+		$row=$result->fetch_assoc();
 	}
 	return $rows;
 }
@@ -437,7 +467,7 @@ function get_person_data() {
 /* generic function to print a statistics line */
 function make_stat($query,$func,$desc) {
 	$result=my_mysql_query_one($query);
-	if($func!=null) {
+	if($func!=NULL) {
 		$result=$func($result);
 	}
 	return '<a title="'.$query.'">'.$desc.' = '.$result.'</a><br/>';
