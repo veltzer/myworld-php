@@ -28,10 +28,10 @@ DO_JSCOMPRESS:=1
 OUT:=out
 
 # tools
-TOOL_COMPILER:=~/install/closure/compiler.jar
-TOOL_JSMIN:=~/install/jsmin/jsmin
-TOOL_JSDOC:=~/install/jsdoc/jsdoc
-TOOL_JSL:=~/install/jsl/jsl
+TOOL_COMPILER:=tools/compiler.jar
+TOOL_JSMIN:=tools/jsmin/jsmin
+TOOL_JSDOC:=tools/jsdoc/jsdoc
+TOOL_JSL:=tools/jsl/jsl
 TOOL_GJSLINT:=gjslint
 TOOL_YUICOMPRESSOR:=yui-compressor
 TOOL_JSLINT:=jslint
