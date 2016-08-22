@@ -17,5 +17,4 @@ __pycache__
 *.out
 
 # templar generated
-/.tdefs.config
 /tools
