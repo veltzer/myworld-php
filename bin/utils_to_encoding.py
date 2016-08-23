@@ -27,21 +27,21 @@ debug=True
 #exit(1)
 
 if len(sys.argv)<2:
-	print('usage: utils_to_encoding.py [filename]', file=sys.stderr)
-	exit(1)
+    print('usage: utils_to_encoding.py [filename]', file=sys.stderr)
+    exit(1)
 
 for filename in sys.argv[1:]:
-	if debug:
-		print('doing file [{0}]'.format(filename))
-	with open(filename, 'rb') as f:
-		b=f.read()
-		h=chardet.detect(b)
-		detect_charset=h['encoding']
-		if detect_charset is None:
-			if debug:
-				print('could not detect charset, continuing to next file...')
-			continue
-		new_content=b.decode(detect_charset)
-		if write:
-			with codecs.open(filename, 'w', to_charset) as f:
-				f.write(new_content)
+    if debug:
+        print('doing file [{0}]'.format(filename))
+    with open(filename, 'rb') as f:
+        b=f.read()
+        h=chardet.detect(b)
+        detect_charset=h['encoding']
+        if detect_charset is None:
+            if debug:
+                print('could not detect charset, continuing to next file...')
+            continue
+        new_content=b.decode(detect_charset)
+        if write:
+            with codecs.open(filename, 'w', to_charset) as f:
+                f.write(new_content)

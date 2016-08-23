@@ -37,33 +37,33 @@ do_import=True
 # functions #
 #############
 def progress(msg):
-	if do_progress:
-		print(msg, file=sys.stderr)
+    if do_progress:
+        print(msg, file=sys.stderr)
 
 ########
 # code #
 ########
 
 if remove_and_recreate:
-	# remove the old folder
-	if os.path.isdir(folder):
-		progress('removing the old folder ([{0}])'.format(folder))
-		shutil.rmtree(folder)
-	# create the new folder
-	progress('making the new folder ([{0}])'.format(folder))
-	os.mkdir(folder)
+    # remove the old folder
+    if os.path.isdir(folder):
+        progress('removing the old folder ([{0}])'.format(folder))
+        shutil.rmtree(folder)
+    # create the new folder
+    progress('making the new folder ([{0}])'.format(folder))
+    os.mkdir(folder)
 
 if do_import:
-	progress('running headless eclipse to import the project')
-	subprocess.check_call([
-		eclipse,
-		'-nosplash',
-		'-data',
-		folder,
-		'-application',
-		'org.eclipse.cdt.managedbuilder.core.headlessbuild',
-		'-import',
-		'.',
-	], stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+    progress('running headless eclipse to import the project')
+    subprocess.check_call([
+        eclipse,
+        '-nosplash',
+        '-data',
+        folder,
+        '-application',
+        'org.eclipse.cdt.managedbuilder.core.headlessbuild',
+        '-import',
+        '.',
+    ], stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
 
 progress('eclipse workspace is ready ([{0}])'.format(folder))

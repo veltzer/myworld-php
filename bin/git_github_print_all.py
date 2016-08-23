@@ -28,17 +28,17 @@ for what we do here
 
 for authenticated called pass one of:
 1) login_or_token=opt_username, password=opt_password
-	* this will cause issued with 2factor auth)
+    * this will cause issued with 2factor auth)
 2) login_or_token=opt_personal_token
-	The token is generated in the github gui.
+    The token is generated in the github gui.
 3) client_id=opt_client_id, client_secret=opt_client_secret
-	These items are also generated in the github gui.
+    These items are also generated in the github gui.
 '''
 
 g=github.Github()
 for repo in g.get_user(opt_username).get_repos():
-	print(repo.name)
-	print(repo.description)
-#	print(jsonpickle.encode(repo, max_depth=1, unpicklable=False, make_refs=False))
-#	json.dump(repo, sys.stdout, skipkeys=True);
-#	print(dir(repo))
+    print(repo.name)
+    print(repo.description)
+#    print(jsonpickle.encode(repo, max_depth=1, unpicklable=False, make_refs=False))
+#    json.dump(repo, sys.stdout, skipkeys=True);
+#    print(dir(repo))

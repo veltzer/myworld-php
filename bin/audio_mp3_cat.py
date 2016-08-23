@@ -20,9 +20,9 @@ __version__ = '0.1'
 # command line parsing #
 ########################
 parser = optparse.OptionParser(
-	description=__doc__,
-	usage='%prog [options] [files to catenate]',
-	version=__version__
+    description=__doc__,
+    usage='%prog [options] [files to catenate]',
+    version=__version__
 )
 
 parser.add_option('-o', '--output', dest='output', default=None, help='output file [default: %default]')
@@ -30,15 +30,15 @@ parser.add_option('-o', '--output', dest='output', default=None, help='output fi
 
 # check that all free files are there
 for file in free_args:
-	if not os.path.isfile(file):
-		print('file [{0}] is not there...'.format(file))
-		sys.exit(1)
+    if not os.path.isfile(file):
+        print('file [{0}] is not there...'.format(file))
+        sys.exit(1)
 if options.output is None:
-	print('must supply -o argument')
-	sys.exit(1)
+    print('must supply -o argument')
+    sys.exit(1)
 if os.path.isfile(options.output):
-	print('file [{0}] is there...'.format(options.output))
-	sys.exit(1)
+    print('file [{0}] is there...'.format(options.output))
+    sys.exit(1)
 
 ########
 # code #

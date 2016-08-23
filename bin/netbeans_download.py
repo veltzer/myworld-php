@@ -16,15 +16,15 @@ http://download.netbeans.org/netbeans/8.0.2/final/bundles/netbeans-8.0.2-javase-
 '''
 
 products=[
-	'',
-	'php-',
-	'cpp-',
-	'javaee-',
-	'javase-',
+    '',
+    'php-',
+    'cpp-',
+    'javaee-',
+    'javase-',
 ]
 version='8.0.2'
 
 for product in products:
-	url='http://download.netbeans.org/netbeans/{version}/final/bundles/netbeans-{version}-{product}linux.sh'.format(**vars())
-	filename='netbeans-{version}-{product}linux.sh'.format(**vars())
-	download.generic.get(url, filename)
+    url='http://download.netbeans.org/netbeans/{version}/final/bundles/netbeans-{version}-{product}linux.sh'.format(**vars())
+    filename='netbeans-{version}-{product}linux.sh'.format(**vars())
+    download.generic.get(url, filename)

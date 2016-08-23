@@ -32,8 +32,8 @@ progress=True
 debug=False
 # what features do I want installed?
 features=[
-	'org.eclipse.cdt',
-	'net.sourceforge.vrapper',
+    'org.eclipse.cdt',
+    'net.sourceforge.vrapper',
 ]
 
 ########
@@ -41,29 +41,29 @@ features=[
 ########
 
 def die(*args, **kwargs):
-	print(*args, file=sys.stderr, **kwargs)
-	sys.exit(1)
+    print(*args, file=sys.stderr, **kwargs)
+    sys.exit(1)
 
 # first check if this is an eclipse folder
 if not os.path.isfile(checkfile):
-	die('this is not an eclipse folder')
+    die('this is not an eclipse folder')
 if not os.access(checkfile, os.X_OK):
-	die('this is not an eclipse folder')
+    die('this is not an eclipse folder')
 
 for feature in features:
-	if progress:
-		print('doing feature [{0}]'.format(feature))
-	args=[
-		'./eclipse',
-		'-nosplash',
-		'-application',
-		'org.eclipse.equinox.p2.director',
-		'-repository',
-		'http://download.eclipse.org/releases/neon/',
-		'-installIU',
-		feature+'.feature.group',
-	]
-	if debug:
-		subprocess.check_call(args)
-	else:
-		subprocess.check_call(args, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+    if progress:
+        print('doing feature [{0}]'.format(feature))
+    args=[
+        './eclipse',
+        '-nosplash',
+        '-application',
+        'org.eclipse.equinox.p2.director',
+        '-repository',
+        'http://download.eclipse.org/releases/neon/',
+        '-installIU',
+        feature+'.feature.group',
+    ]
+    if debug:
+        subprocess.check_call(args)
+    else:
+        subprocess.check_call(args, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)

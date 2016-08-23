@@ -17,9 +17,9 @@ filename_large='/tmp/large.jpg'
 target_mime='image/jpeg'
 
 if len(sys.argv)!=4:
-	print('usage: dbdata_import_image.py [image] [name] [slug]')
-	print('example: dbdata_import_image.py earlysense.jpg EarlySense earlysense')
-	sys.exit(1)
+    print('usage: dbdata_import_image.py [image] [name] [slug]')
+    print('example: dbdata_import_image.py earlysense.jpg EarlySense earlysense')
+    sys.exit(1)
 
 # command line parameters
 filename=sys.argv[1]
@@ -34,19 +34,19 @@ mime=mime.rstrip()
 
 # remove the tmp files if they exist
 if os.path.isfile(filename_small):
-	os.unlink(filename_small)
+    os.unlink(filename_small)
 if os.path.isfile(filename_large):
-	os.unlink(filename_large)
+    os.unlink(filename_large)
 
 # create large and small images
 args=[
-	'convert','-background','white','-type','TrueColorMatte','-gravity','center',
-	'-resize',size_small,'-extent',size_small,filename,filename_small,
+    'convert','-background','white','-type','TrueColorMatte','-gravity','center',
+    '-resize',size_small,'-extent',size_small,filename,filename_small,
 ]
 subprocess.check_call(args)
 args=[
-	'convert','-background','white','-type','TrueColorMatte','-gravity','center',
-	'-resize',size_large,'-extent',size_large,filename,filename_large,
+    'convert','-background','white','-type','TrueColorMatte','-gravity','center',
+    '-resize',size_large,'-extent',size_large,filename,filename_large,
 ]
 subprocess.check_call(args)
 
@@ -59,7 +59,7 @@ data_large=open(filename_large,'rb').read()
 conn=myworld.db.connect()
 cur=conn.cursor()
 cur.execute('INSERT INTO TbImage (name,slug,smallMime,largeMime,origMime,smallData,largeData,origData) '+
-	'VALUES(%s,%s,%s,%s,%s,%s,%s,%s)',(name,slug,target_mime,target_mime,mime,data_small,data_large,data))
+    'VALUES(%s,%s,%s,%s,%s,%s,%s,%s)',(name,slug,target_mime,target_mime,mime,data_small,data_large,data))
 print('cur.lastrowid is [{0}]'.format(cur.lastrowid))
 cur.close()
 conn.commit()

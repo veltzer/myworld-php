@@ -21,8 +21,8 @@ jack_pulse.config.getConfig()
 runfile=os.path.expanduser('~/.myjack_run')
 
 if jack_pulse.config.do_midi_bridge:
-	with open(runfile,'r') as f:
-		p1=int(f.readline().rstrip())
-		p2=int(f.readline().rstrip())
-	os.kill(p1,9)
-	os.kill(p2,9)
+    with open(runfile,'r') as f:
+        p1=int(f.readline().rstrip())
+        p2=int(f.readline().rstrip())
+    os.kill(p1,9)
+    os.kill(p2,9)
