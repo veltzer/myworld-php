@@ -21,6 +21,11 @@ for line in open(filename):
 home=os.getenv('HOME')
 
 for repo in utils.github.get_nonforked_repos():
-    print(repo.name)
-    os.chdir(os.path.join(home,'git',repo.name))
-    os.system('make')
+    project_root=os.path.join(home,'git',repo.name)
+    makefile=os.path.join(project_root, 'Makefile')
+    if os.path.isfile(makefile):
+        print('building [{0}]...'.format(repo.name))
+        os.chdir(os.path.join(home,'git',repo.name))
+        os.system('make')
+    else:
+        print('skipping [{0}]...'.format(repo.name))

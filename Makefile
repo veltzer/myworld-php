@@ -26,6 +26,8 @@ DO_MKDBG:=0
 DO_JSCOMPRESS:=1
 # output folder
 OUT:=out
+# do you want to install tools?
+DO_TOOLS:=1
 
 # tools
 TOOL_COMPILER:=tools/compiler.jar
@@ -52,6 +54,10 @@ else # DO_MKDBG
 Q:=@
 #.SILENT:
 endif # DO_MKDBG
+
+ifeq ($(DO_TOOLS),1)
+	ALL_DEP+=tools.stamp
+endif
 
 MYWORLD_PLUGIN_NAME:=myworld
 MYWORLD_PLUGIN_FULL_DIR:=$(PLUGIN_DIR)/$(MYWORLD_PLUGIN_NAME)
@@ -84,6 +90,11 @@ CONFIG:=~/.myworld.php
 .DEFAULT_GOAL=all
 .PHONY: all
 all: $(ALL)
+
+tools.stamp: apt.yaml
+	$(info doing [$@])
+	$(Q)templar_cmd install_deps
+	$(Q)make_helper touch-mkdir $@
 $(MYHEB_PLUGIN_ZIP): $(MYHEB_PLUGIN_FILES) $(ALL_DEP)
 	$(info doing [$@])
 	$(Q)mkdir -p $(dir $@)
