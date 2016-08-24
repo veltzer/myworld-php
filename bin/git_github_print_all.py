@@ -39,6 +39,7 @@ g=github.Github()
 for repo in g.get_user(opt_username).get_repos():
     print(repo.name)
     print(repo.description)
+    print(repo.fork)
 #    print(jsonpickle.encode(repo, max_depth=1, unpicklable=False, make_refs=False))
 #    json.dump(repo, sys.stdout, skipkeys=True);
-#    print(dir(repo))
+#    print(repo)
