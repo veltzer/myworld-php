@@ -20,7 +20,7 @@ for line in open(filename):
 
 home=os.getenv('HOME')
 
-for repo in utils.github.get_nonforked_repos():
+for repo in utils.github.get_nonforked_repos_list():
     project_root=os.path.join(home,'git',repo.name)
     makefile=os.path.join(project_root, 'Makefile')
     if os.path.isfile(makefile):
