@@ -57,7 +57,7 @@ endif # DO_MKDBG
 
 ifeq ($(DO_TOOLS),1)
 	ALL_DEP+=tools.stamp
-endif
+endif # DO_TOOLS
 
 MYWORLD_PLUGIN_NAME:=myworld
 MYWORLD_PLUGIN_FULL_DIR:=$(PLUGIN_DIR)/$(MYWORLD_PLUGIN_NAME)
@@ -178,6 +178,7 @@ clean_manual:
 .PHONY: debug_full
 debug_full:
 	$(info ALL is $(ALL))
+	$(info ALL_DEP is $(ALL_DEP))
 	$(info CLEAN is $(CLEAN))
 	$(info WEB_ROOT is $(WEB_ROOT))
 	$(info WP_DIR is $(WP_DIR))
