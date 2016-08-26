@@ -23,9 +23,14 @@ home=os.getenv('HOME')
 for repo in utils.github.get_nonforked_repos_list():
     project_root=os.path.join(home,'git',repo.name)
     makefile=os.path.join(project_root, 'Makefile')
+    bootstrap=os.path.join(project_root, 'boostrap')
     if os.path.isfile(makefile):
         print('building [{0}]...'.format(repo.name))
-        os.chdir(os.path.join(home,'git',repo.name))
+        os.chdir(project_root)
         os.system('make')
+    elif os.path.isfile(bootstrap):
+        print('building [{0}]...'.format(repo.name))
+        os.chdir(project_root)
+        os.system('./bootstrap')
     else:
-        print('skipping [{0}]...'.format(repo.name))
+        print('dont know how to build [{0}]...'.format(repo.name))
