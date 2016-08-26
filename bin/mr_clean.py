@@ -22,10 +22,6 @@ home=os.getenv('HOME')
 
 for repo in utils.github.get_nonforked_repos_list():
     project_root=os.path.join(home,'git',repo.name)
-    makefile=os.path.join(project_root, 'Makefile')
-    if os.path.isfile(makefile):
-        print('building [{0}]...'.format(repo.name))
-        os.chdir(os.path.join(home,'git',repo.name))
-        os.system('git clean -qffxd')
-    else:
-        print('skipping [{0}]...'.format(repo.name))
+    print('cleaning [{0}]...'.format(repo.name))
+    os.chdir(os.path.join(home,'git',repo.name))
+    os.system('git clean -qffxd')
