@@ -15,10 +15,11 @@ import lxml.html # for fromstring
 import lxml.etree # for tostring
 import json # for loads
 import shutil # for copyfileobj
+import sys # for argv
 
 def get_real_content(r):
     assert r.status_code==200
-    strcontent=r.content.decode()
+    strcontent=r.content.decode(errors='ignore')
     strcontent=strcontent[strcontent.find('<input'):]
     c=str.encode('<html><body>')+str.encode(strcontent)+str.encode('</body></html>')
     root=lxml.html.fromstring(c)
