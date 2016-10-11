@@ -1,6 +1,10 @@
-#!/bin/sh
+#!/bin/bash
 
-# this script updates your system
+<<'COMMENT'
+
+This script updates your system
+
+COMMENT
 
 #if test $USER != 'root';then
 #	echo "run me as root..."

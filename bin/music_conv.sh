@@ -1,7 +1,11 @@
 #!/bin/bash
 
-# This script converts wma files to ogg vorbis files
-# use with care
+<<'COMMENT'
+
+This script converts wma files to ogg vorbis files
+use with care
+
+COMMENT
 
 if [ $# -eq 0 ]
 then

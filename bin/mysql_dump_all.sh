@@ -1,10 +1,16 @@
 #!/bin/bash
 
-# this script dumps all databases
-# References:
-# http://stackoverflow.com/questions/9497869/export-and-import-all-mysql-databases-at-one-time
-# TODO:
-# - rewrite this in python
+<<'COMMENT'
+
+This script dumps all databases
+
+References:
+http://stackoverflow.com/questions/9497869/export-and-import-all-mysql-databases-at-one-time
+
+TODO:
+- rewrite this in python
+
+COMMENT
 
 source ~/.myworld.sh
 

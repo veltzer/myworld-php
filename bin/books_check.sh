@@ -1,18 +1,22 @@
 #!/bin/bash
 
-# TODO:
-# - fixup the code so it will work with the suffixes list
+<<'COMMENT'
 
-# This code does not work because of incorrect expansion
-# the list of suffixes we support for book content
-#suff=(chm tar.bz2 pdf ps html dvi lit doc djvu zip rtf txt pdb mht)
-#cmd=""
-#for x in ${suff[*]}; do
-#	cmd="$cmd -and -not -name '*.$x'"
-#done
-#echo $cmd
-# this checks that the files are of the right type
-#find . -mindepth 1 -type f $cmd
+TODO:
+- fixup the code so it will work with the suffixes list
+
+This code does not work because of incorrect expansion
+the list of suffixes we support for book content
+suff=(chm tar.bz2 pdf ps html dvi lit doc djvu zip rtf txt pdb mht)
+cmd=""
+for x in ${suff[*]}; do
+	cmd="$cmd -and -not -name '*.$x'"
+done
+echo $cmd
+this checks that the files are of the right type
+find . -mindepth 1 -type f $cmd
+
+COMMENT
 
 # this checks that the files are of the right type
 echo "EXTENSION PROBLEMS"

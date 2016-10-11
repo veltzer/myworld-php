@@ -1,8 +1,12 @@
 #!/bin/bash
 
-# this script converts videos given to it to the xvid codec, IN PLACE,
-# this means it replaces the original files...
-# this script changes the suffix of the file to avi.
+<<'COMMENT'
+
+This script converts videos given to it to the xvid codec, IN PLACE,
+this means it replaces the original files...
+this script changes the suffix of the file to avi.
+
+COMMENT
 
 SUFFIX=avi
 OVC=xvid

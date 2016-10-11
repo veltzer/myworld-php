@@ -1,8 +1,13 @@
 #!/bin/bash
 
-# This script alters the character set of a tables in a database
-# TODO:
-# rewrite this script as a python script
+<<'COMMENT'
+
+This script alters the character set of a tables in a database
+
+TODO:
+- rewrite this script as a python script
+
+COMMENT
 
 source ~/.myworld.sh
 

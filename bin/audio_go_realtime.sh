@@ -1,12 +1,16 @@
 #!/bin/bash
 
-# script to turn off all unneccessary things for you.
-# this script kills anything that may get in the way of a good recording session:
-# browsers, skype and more
+<<'COMMENT'
 
-# TODO:
-# - record which services out of the ones we are shutting down were up and have a feature
-# to reload them once we are done with recording.
+script to turn off all unneccessary things for you.
+this script kills anything that may get in the way of a good recording session:
+browsers, skype and more
+
+TODO:
+- record which services out of the ones we are shutting down were up and have a feature
+to reload them once we are done with recording.
+
+COMMENT
 
 sudo /etc/init.d/apache2 stop
 sudo /etc/init.d/postfix stop

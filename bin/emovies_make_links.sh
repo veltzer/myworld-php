@@ -1,6 +1,10 @@
 #!/bin/bash
 
-# this script will create symlinks so that you could access a piece by it's name only...
+<<'COMMENT'
+
+This script will create symlinks so that you could access a piece by it's name only...
+
+COMMENT
 
 # remove all old links...
 rm -f by_title_name/*

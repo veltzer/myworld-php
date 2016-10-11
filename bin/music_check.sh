@@ -1,14 +1,18 @@
 #!/bin/bash
 
-# TODO:
-# - check that track names are of the right style and unified all over
-# - check that mp3 info matches the directory structure.
-# - unify some of the checks here to run faster
-# - cover art using cddb ids ? dreaming ?
-# - check what to do about the m4a files. Are they good ?
+<<'COMMENT'
 
-# This script was supposed to be replaced by the java code but the java code
-# is not yet working properly so this is the right code for now.
+TODO:
+- check that track names are of the right style and unified all over
+- check that mp3 info matches the directory structure.
+- unify some of the checks here to run faster
+- cover art using cddb ids ? dreaming ?
+- check what to do about the m4a files. Are they good ?
+
+This script was supposed to be replaced by the java code but the java code
+is not yet working properly so this is the right code for now.
+
+COMMENT
 
 # first check that we are in the right folder
 if [[ ! -d by_name ]];then

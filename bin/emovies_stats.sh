@@ -1,6 +1,10 @@
 #!/bin/bash
 
-# This script create the stats file which containts meta information about the collection
+<<'COMMENT'
+
+This script create the stats file which containts meta information about the collection
+
+COMMENT
 
 file=summary.txt
 

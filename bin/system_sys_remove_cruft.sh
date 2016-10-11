@@ -1,10 +1,14 @@
-#!/bin/sh
+#!/bin/bash
 
-# this script cleans up package manager cruft on your system...
-# three things it does:
-# 1. purge package which are removed but NOT purged.
-# 2. autoremove any leftover packages.
-# 3. remove deb packages from the package cache that can no longer be downloaded.
+<<'COMMENT'
+
+This script cleans up package manager cruft on your system...
+three things it does:
+1. purge package which are removed but NOT purged.
+2. autoremove any leftover packages.
+3. remove deb packages from the package cache that can no longer be downloaded.
+
+COMMENT
 
 #if test $USER != 'root';then
 #	echo "run me as root..."

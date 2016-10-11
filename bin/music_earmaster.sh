@@ -1,7 +1,13 @@
 #!/bin/bash
 
+<<'COMMENT'
+
+This script runs earmaster for you
+
+COMMENT
+
 # this is to suspend pulseaudio (not really needed)
-#pasuspender -- wine /home/mark/.wine/drive_c/Program\ Files/EarMaster\ Pro\ 5/Ear50.exe 2> /dev/null &
+pasuspender -- wine /home/mark/.wine/drive_c/Program\ Files/EarMaster\ Pro\ 5/Ear50.exe 2> /dev/null &
 # this is because timidity server is refusing to run on ubuntu so I just run it myself...
 #killall timidity
 #timidity -iA > /dev/null 2>&1 &

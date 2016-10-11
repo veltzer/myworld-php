@@ -1,13 +1,16 @@
-#!/bin/sh
+#!/bin/bash
 
-# DESCRIPTION
-# This script backs up any non home dir file related to my data.
-# This means:
-# - the myworld and wordpress databases.
-# - the /var/www/blog folder.
+<<'COMMENT'
 
-# TODO
-# - add backup of the entire web folder.
+This script backs up any non home dir file related to my data.
+This means:
+- the myworld and wordpress databases.
+- the /var/www/blog folder.
+
+TODO
+- add backup of the entire web folder.
+
+COMMENT
 
 # PARAMETERS
 FOLDER=`date +%y%m%d%H%M%S`

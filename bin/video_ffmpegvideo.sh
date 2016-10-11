@@ -1,14 +1,18 @@
 #!/bin/bash
 
-# This script transcodes various video formats to MPEG2 Video and
-# AC3 audio in an MPEG2 Transport Stream for the DirecTV HR2x
-#
-# FFMpeg and Mediainfo must be installed for this script to work.
-#
-# Input Parameters: Input, Output, Video Bitrate, Audio Bitrate
-#
-# Revision 2.00  11/29/2008
-# Updated to work with the HR2x auto screen size feature
+<<'COMMENT'
+
+This script transcodes various video formats to MPEG2 Video and
+AC3 audio in an MPEG2 Transport Stream for the DirecTV HR2x
+
+FFMpeg and Mediainfo must be installed for this script to work.
+
+Input Parameters: Input, Output, Video Bitrate, Audio Bitrate
+
+Revision 2.00  11/29/2008
+Updated to work with the HR2x auto screen size feature
+
+COMMENT
 
 VBITRATE="$3"
 ABITRATE="$4"

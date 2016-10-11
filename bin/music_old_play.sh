@@ -1,6 +1,10 @@
 #!/bin/bash
 
-# this script receives a list of mp3s to play, plays them and records each one to a specific list file.
+<<'COMMENT'
+
+This script receives a list of mp3s to play, plays them and records each one to a specific list file.
+
+COMMENT
 
 FILE="/mnt/sdd1/mark/dev/personal/music/listening/heard.list"
 

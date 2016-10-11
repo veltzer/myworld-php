@@ -1,4 +1,9 @@
 #!/bin/bash
 
-# this script kills jack
+<<'COMMENT'
+
+This script kills jack
+
+COMMENT
+
 killall jackd

@@ -1,9 +1,13 @@
 #!/bin/bash
 
-# this script clones the package selections that have been on some
-# other machine to the machine this is run on...
+<<'COMMENT'
 
-# use it as sudo ./install_selections [selections file]
+This script clones the package selections that have been on some
+other machine to the machine this is run on...
+
+use it as sudo ./install_selections [selections file]
+
+COMMENT
 
 if test $USER != 'root';then
 	echo "run me as root..."

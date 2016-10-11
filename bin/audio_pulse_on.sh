@@ -1,6 +1,10 @@
 #!/bin/bash
 
-# this script turns pulse audio back on
+<<'COMMENT'
+
+This script turns pulse audio back on
+
+COMMENT
 
 rm -f ~/.pulse/client.conf
 pulseaudio --start
