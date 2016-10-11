@@ -1,27 +1,32 @@
 #!/usr/bin/python3
 
 '''
-This script runs 'make' (make(1)) in every project
-that is mine.
+This script uses git to clean all of my projects.
 '''
 
-import os.path # for expanduser, isdir, join
-import utils.github # for get_nonforked_repos
+import os.path # for expanduser, join, isdir
+import utils.github # for get_nonforked_repos_list
+import os # for chdir, system, getenv
+import subprocess # for check_call
 
-'''
-have_mrconfig=set()
+home=os.getenv('HOME')
+
+projects=list()
 filename=os.path.expanduser('~/.mrconfig')
 for line in open(filename):
     line=line.rstrip()
     if line.startswith('['):
-        project=line[1:-1].split('/')[-1]
-        have_mrconfig.add(project)
-'''
+        project_root=os.path.join(home, line[1:-1])
+        project_name=line[1:-1].split('/')[-1]
+        projects.append((project_name, project_root))
 
-home=os.getenv('HOME')
+#projects=[(repo.name, os.path.join(home,'git',repo.name)) for repo in utils.github.get_nonforked_repos_list()]
 
-for repo in utils.github.get_nonforked_repos_list():
-    project_root=os.path.join(home,'git',repo.name)
-    print('cleaning [{0}]...'.format(repo.name))
-    os.chdir(os.path.join(home,'git',repo.name))
-    os.system('git clean -qffxd')
+for project_name, project_root in projects:
+    print('cleaning [{0}] at [{1}]...'.format(project_name, project_root), end='')
+    if os.path.isdir(project_root):
+        os.chdir(project_root)
+        subprocess.check_call(['git','clean','-qffxd'])
+        print('OK')
+    else:
+        print('NOT FOUND')
