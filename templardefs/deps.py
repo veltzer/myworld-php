@@ -3,7 +3,12 @@ dependencies for this project
 '''
 
 def populate(d):
-    d.tools=['jsl']
+    d.tools=[
+        'jsl',
+    ]
+    d.requirements=[
+        'PyGithub',
+    ]
 
 def getdeps():
     return [
