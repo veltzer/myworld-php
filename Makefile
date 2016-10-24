@@ -91,7 +91,7 @@ CONFIG:=~/.myworld.php
 .PHONY: all
 all: $(ALL)
 
-tools.stamp: apt.yaml requirements.txt
+tools.stamp: apt.yaml templardefs/deps.py
 	$(info doing [$@])
 	$(Q)templar_cmd install_deps
 	$(Q)make_helper touch-mkdir $@
