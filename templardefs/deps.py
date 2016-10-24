@@ -6,7 +6,7 @@ def populate(d):
     d.tools=[
         'jsl',
     ]
-    d.requirements=[
+    d.requirements3=[
         'PyGithub',
     ]
 
