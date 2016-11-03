@@ -38,4 +38,5 @@ for project_name, project_root in projects:
         subprocess.check_call(['./bootstrap'])
         #os.system('./bootstrap')
     else:
-        print('dont know how to build [{0}]...'.format(project_name))
+        #print('dont know how to build [{0}]...'.format(project_name))
+        pass
