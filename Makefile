@@ -91,10 +91,6 @@ CONFIG:=~/.myworld.php
 .PHONY: all
 all: $(ALL)
 
-tools.stamp: templardefs/deps.py
-	$(info doing [$@])
-	$(Q)templar_cmd install_deps
-	$(Q)make_helper touch-mkdir $@
 $(MYHEB_PLUGIN_ZIP): $(MYHEB_PLUGIN_FILES) $(ALL_DEP)
 	$(info doing [$@])
 	$(Q)mkdir -p $(dir $@)
