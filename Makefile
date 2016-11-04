@@ -56,7 +56,7 @@ Q:=@
 endif # DO_MKDBG
 
 ifeq ($(DO_TOOLS),1)
-	ALL_DEP+=tools.stamp
+ALL_DEP+=tools.stamp
 endif # DO_TOOLS
 
 MYWORLD_PLUGIN_NAME:=myworld
@@ -91,7 +91,7 @@ CONFIG:=~/.myworld.php
 .PHONY: all
 all: $(ALL)
 
-tools.stamp: apt.yaml templardefs/deps.py
+tools.stamp: templardefs/deps.py
 	$(info doing [$@])
 	$(Q)templar_cmd install_deps
 	$(Q)make_helper touch-mkdir $@
