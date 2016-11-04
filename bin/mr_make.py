@@ -32,7 +32,7 @@ else:
 #print(opts)
 #sys.exit(1)
 
-def run_check_string(args, string):
+def run_check_string(args, string, string_to_print=None):
     ''' this method runs make and checks that the output does not have lines with warnings in them '''
     p=subprocess.Popen(args, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
     res_out, res_err = p.communicate()
@@ -44,16 +44,20 @@ def run_check_string(args, string):
     if any(line.find(string)>0 for line in res_err.split()):
         error=True
     if error:
+        if string_to_print:
+            print(string_to_print)
         print(res_out, file=sys.stderr, end='')
         print(res_err, file=sys.stderr, end='')
         sys.exit(p.returncode)
 
-def run_empty_output(args):
+def run_empty_output(args, string_to_print=None):
     p=subprocess.Popen(args, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
     res_out, res_err = p.communicate()
     res_out=res_out.decode()
     res_err=res_err.decode()
     if p.returncode or res_out!='' or res_err!='':
+        if string_to_print:
+            print(string_to_print)
         print(res_out, file=sys.stderr, end='')
         print(res_err, file=sys.stderr, end='')
         sys.exit(p.returncode)
@@ -63,7 +67,9 @@ def run_empty_output(args):
 for project_name, project_root in projects:
     if not os.path.isdir(project_root):
         continue
-    print('building [{0}] at [{1}]...'.format(project_name, project_root))
+    string_to_print='building [{0}] at [{1}]...'.format(project_name, project_root)
+    if False:
+        print('building [{0}] at [{1}]...'.format(project_name, project_root))
     makefile=os.path.join(project_root, 'Makefile')
     bootstrap=os.path.join(project_root, 'bootstrap')
     if os.path.isfile(makefile):
@@ -73,9 +79,9 @@ for project_name, project_root in projects:
             if 'dont_check_empty_output' in opts[project_name]:
                 check_empty_output=False
         if check_empty_output:
-            run_empty_output(['make'])
+            run_empty_output(['make'], string_to_print=string_to_print)
         else:
-            run_check_string(['make'], string='warning')
+            run_check_string(['make'], string='warning', string_to_print=string_to_print)
         #os.system('make')
     elif os.path.isfile(bootstrap):
         os.chdir(project_root)
