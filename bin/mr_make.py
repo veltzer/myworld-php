@@ -13,6 +13,7 @@ import yaml # for loads
 import sys # for exit
 
 home=os.getenv('HOME')
+print_all=True
 
 projects=list()
 filename=os.path.expanduser('~/.mrconfig')
@@ -32,25 +33,30 @@ else:
 #print(opts)
 #sys.exit(1)
 
-def run_check_string(args, string, string_to_print=None):
+def run_check_string(args, string, string_to_print=None, exit=False, do_print=False):
     ''' this method runs make and checks that the output does not have lines with warnings in them '''
     p=subprocess.Popen(args, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
     res_out, res_err = p.communicate()
     res_out=res_out.decode()
     res_err=res_err.decode()
     error=False
+    error_code=p.returncode
     if p.returncode:
         error=True
     if any(line.find(string)>0 for line in res_err.split()):
         error=True
+        error_code=1
     if error:
         if string_to_print:
             print(string_to_print)
-        print(res_out, file=sys.stderr, end='')
-        print(res_err, file=sys.stderr, end='')
-        sys.exit(p.returncode)
+        if do_print:
+            print(res_out, file=sys.stderr, end='')
+            print(res_err, file=sys.stderr, end='')
+        if exit:
+            sys.exit(p.returncode)
+    return error_code
 
-def run_empty_output(args, string_to_print=None):
+def run_empty_output(args, string_to_print=None, exit=False, do_print=False):
     p=subprocess.Popen(args, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
     res_out, res_err = p.communicate()
     res_out=res_out.decode()
@@ -58,9 +64,12 @@ def run_empty_output(args, string_to_print=None):
     if p.returncode or res_out!='' or res_err!='':
         if string_to_print:
             print(string_to_print)
-        print(res_out, file=sys.stderr, end='')
-        print(res_err, file=sys.stderr, end='')
-        sys.exit(p.returncode)
+        if do_print:
+            print(res_out, file=sys.stderr, end='')
+            print(res_err, file=sys.stderr, end='')
+        if exit:
+            sys.exit(p.returncode)
+    return p.returncode
 
 #projects=[(repo.name, os.path.join(home,'git',repo.name)) for repo in utils.github.get_nonforked_repos_list()]
 
@@ -68,8 +77,9 @@ for project_name, project_root in projects:
     if not os.path.isdir(project_root):
         continue
     string_to_print='building [{0}] at [{1}]...'.format(project_name, project_root)
-    if False:
-        print('building [{0}] at [{1}]...'.format(project_name, project_root))
+    if print_all:
+        print('building [{0}] at [{1}]...'.format(project_name, project_root), end='')
+        sys.stdout.flush()
     makefile=os.path.join(project_root, 'Makefile')
     bootstrap=os.path.join(project_root, 'bootstrap')
     if os.path.isfile(makefile):
@@ -79,9 +89,21 @@ for project_name, project_root in projects:
             if 'dont_check_empty_output' in opts[project_name]:
                 check_empty_output=False
         if check_empty_output:
-            run_empty_output(['make'], string_to_print=string_to_print)
+            code=run_empty_output(['make'], string_to_print=string_to_print)
+            if code:
+                print('ERROR')
+                if stop_on_fail:
+                    sys.exit(code)
+            else:
+                print('OK')
         else:
-            run_check_string(['make'], string='warning', string_to_print=string_to_print)
+            code=run_check_string(['make'], string='warning', string_to_print=string_to_print)
+            if code:
+                print('ERROR')
+                if stop_on_fail:
+                    sys.exit(code)
+            else:
+                print('OK')
         #os.system('make')
     elif os.path.isfile(bootstrap):
         os.chdir(project_root)
