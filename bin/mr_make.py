@@ -78,7 +78,7 @@ for project_name, project_root in projects:
         continue
     string_to_print='building [{0}] at [{1}]...'.format(project_name, project_root)
     if print_all:
-        print('building [{0}] at [{1}]...'.format(project_name, project_root), end='')
+        print(string_to_print, end='')
         sys.stdout.flush()
     makefile=os.path.join(project_root, 'Makefile')
     bootstrap=os.path.join(project_root, 'bootstrap')
@@ -111,4 +111,5 @@ for project_name, project_root in projects:
         #os.system('./bootstrap')
     else:
         #print('dont know how to build [{0}]...'.format(project_name))
+        print('NOT FOUND')
         pass
