@@ -111,5 +111,5 @@ for project_name, project_root in projects:
         #os.system('./bootstrap')
     else:
         #print('dont know how to build [{0}]...'.format(project_name))
-        print('NOT FOUND')
+        print('MAKEFILE NOT FOUND')
         pass
