@@ -14,6 +14,7 @@ import sys # for exit
 
 home=os.getenv('HOME')
 print_all=True
+stop_on_fail=False
 
 projects=list()
 filename=os.path.expanduser('~/.mrconfig')
@@ -89,7 +90,7 @@ for project_name, project_root in projects:
             if 'dont_check_empty_output' in opts[project_name]:
                 check_empty_output=False
         if check_empty_output:
-            code=run_empty_output(['make'], string_to_print=string_to_print)
+            code=run_empty_output(['make'])
             if code:
                 print('ERROR')
                 if stop_on_fail:
@@ -97,7 +98,7 @@ for project_name, project_root in projects:
             else:
                 print('OK')
         else:
-            code=run_check_string(['make'], string='warning', string_to_print=string_to_print)
+            code=run_check_string(['make'], string='warning')
             if code:
                 print('ERROR')
                 if stop_on_fail:
