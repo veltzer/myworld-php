@@ -17,7 +17,7 @@ fi
 FOLDER=$HOME/insync.real/system_backup
 HOSTNAME=`hostname`
 # we sudo since we are running as regular user and cannot enter into some folders...
-sudo tar jcvf /tmp/etc.$HOSTNAME.tar.bz2 /etc
+sudo tar jcf /tmp/etc.$HOSTNAME.tar.bz2 /etc
 cp /tmp/etc.$HOSTNAME.tar.bz2 $FOLDER
 sudo rm /tmp/etc.$HOSTNAME.tar.bz2
 # this step can be done by any user...
