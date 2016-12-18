@@ -69,7 +69,7 @@ def populate(d):
         'unison',
     ]
 
-def getdeps():
+def get_deps():
     return [
         __file__, # myself
     ]
