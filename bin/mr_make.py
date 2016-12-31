@@ -74,6 +74,9 @@ def run_empty_output(args, string_to_print=None, exit=False, do_print=False):
 
 #projects=[(repo.name, os.path.join(home,'git',repo.name)) for repo in utils.github.get_nonforked_repos_list()]
 
+event_error = 0
+event_ok = 0
+event_makefile = 0
 for project_name, project_root in projects:
     if not os.path.isdir(project_root):
         continue
@@ -93,24 +96,53 @@ for project_name, project_root in projects:
             code=run_empty_output(['make'])
             if code:
                 print('ERROR')
+                event_error += 1
                 if stop_on_fail:
                     sys.exit(code)
             else:
                 print('OK')
+                event_ok += 1
         else:
             code=run_check_string(['make'], string='warning')
             if code:
                 print('ERROR')
+                event_error += 1
                 if stop_on_fail:
                     sys.exit(code)
             else:
                 print('OK')
+                event_ok += 1
         #os.system('make')
     elif os.path.isfile(bootstrap):
         os.chdir(project_root)
-        subprocess.check_call(['./bootstrap'])
-        #os.system('./bootstrap')
+        code = subprocess.run_empty_output(['./bootstrap'])
+        if code:
+                print('ERROR')
+                event_error += 1
+                if stop_on_fail:
+                    sys.exit(code)
+                continue
+        code = subprocess.run_empty_output(['./configure'])
+        if code:
+                print('ERROR')
+                event_error += 1
+                if stop_on_fail:
+                    sys.exit(code)
+                continue
+        code = subprocess.run_empry_output(['make'])
+        if code:
+                print('ERROR')
+                event_error += 1
+                if stop_on_fail:
+                    sys.exit(code)
+                continue
+        event_ok += 1
     else:
         #print('dont know how to build [{0}]...'.format(project_name))
         print('MAKEFILE NOT FOUND')
+        event_makefile += 1
         pass
+
+print("event_makefile happened [{}]".format(event_makefile))
+print("event_error happened [{}]".format(event_error))
+print("event_ok happened [{}]".format(event_ok))
