@@ -13,6 +13,13 @@ there are here too.
 
 import os.path # for expanduser, isdir, join
 
+
+def add_folder(base, have_folder):
+    for f in os.listdir(base):
+        full=os.path.join(base, f)
+        if os.path.isdir(full):
+            have_folder.add(f)
+
 have_mrconfig=set()
 filename=os.path.expanduser('~/.mrconfig')
 for line in open(filename):
@@ -22,11 +29,8 @@ for line in open(filename):
         have_mrconfig.add(project)
 
 have_folder=set()
-base=os.path.expanduser('~/git')
-for f in os.listdir(base):
-    full=os.path.join(base, f)
-    if os.path.isdir(full):
-        have_folder.add(f)
+add_folder(os.path.expanduser('~/git'), have_folder)
+add_folder(os.path.expanduser('~/twiggle/git'), have_folder)
 
 if have_folder!=have_mrconfig:
     print(have_folder ^ have_mrconfig)
