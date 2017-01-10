@@ -115,14 +115,14 @@ for project_name, project_root in projects:
         #os.system('make')
     elif os.path.isfile(bootstrap):
         os.chdir(project_root)
-        code = subprocess.run_empty_output(['./bootstrap'])
+        code = run_empty_output(['./bootstrap'])
         if code:
                 print('ERROR')
                 event_error += 1
                 if stop_on_fail:
                     sys.exit(code)
                 continue
-        code = subprocess.run_empty_output(['./configure'])
+        code = run_empty_output(['./configure'])
         if code:
                 print('ERROR')
                 event_error += 1
