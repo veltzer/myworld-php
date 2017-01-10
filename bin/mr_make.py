@@ -129,7 +129,7 @@ for project_name, project_root in projects:
                 if stop_on_fail:
                     sys.exit(code)
                 continue
-        code = run_empry_output(['make'])
+        code = run_empty_output(['make'])
         if code:
                 print('ERROR')
                 event_error += 1
