@@ -137,6 +137,7 @@ for project_name, project_root in projects:
                     sys.exit(code)
                 continue
         event_ok += 1
+        print('OK')
     else:
         #print('dont know how to build [{0}]...'.format(project_name))
         print('MAKEFILE NOT FOUND')
