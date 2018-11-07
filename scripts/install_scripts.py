@@ -67,6 +67,6 @@ def install(root_folder, target_folder, recurse):
             target=os.path.join(target_folder, dir)
             do_install(source, target)
 
-install('bin', '~/shared_archive/install/bin', False)
-install('perl', '~/shared_archive/install/perl', False)
-install('python', '~/shared_archive/install/python', False)
+install('bin', '~/install/bin', False)
+install('perl', '~/install/perl', False)
+install('python', '~/install/python', False)
