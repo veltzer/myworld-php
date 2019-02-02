@@ -17,7 +17,7 @@ jQuery(document).ready(
           initMsg: null,
           rows: 10,
           initState: false,
-          initVal: new Date(),
+          initVal: new Date().toLocaleString(),
           httptype: 'GET',
           url: null,
           // set if you want this widget to log into your logger
