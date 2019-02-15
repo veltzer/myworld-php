@@ -47,7 +47,7 @@ products=[
 #    ('automotive', True),
 ]
 version='R'
-release='neon'
+release='2018-12'
 platforms=[
     '-x86_64', # x64
 #    '', # i386
