@@ -14,7 +14,7 @@ COMMENT
 
 # PARAMETERS
 FOLDER=`date +%y%m%d%H%M%S`
-DIR=~/insync.real/backups/db/$FOLDER
+DIR=~/insync/backups/db/$FOLDER
 DBS="--databases myworld"
 DB="--database=myworld"
 MYSQL_DATE=`date +'%F %T'`

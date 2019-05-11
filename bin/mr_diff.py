@@ -30,7 +30,7 @@ for line in open(filename):
 
 have_folder=set()
 add_folder(os.path.expanduser('~/git'), have_folder)
-add_folder(os.path.expanduser('~/twiggle/git'), have_folder)
+# add_folder(os.path.expanduser('~/twiggle/git'), have_folder)
 
 if have_folder!=have_mrconfig:
     print(have_folder ^ have_mrconfig)

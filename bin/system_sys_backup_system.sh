@@ -14,7 +14,7 @@ if [[ $USER == 'root' ]];then
 	exit 1
 fi
 
-FOLDER=$HOME/insync.real/backups/system
+FOLDER=$HOME/insync/backups/system
 HOSTNAME=`hostname`
 # we sudo since we are running as regular user and cannot enter into some folders...
 sudo tar --create --bzip2 --absolute-names --file /tmp/etc.$HOSTNAME.tar.bz2 /etc
