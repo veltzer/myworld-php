@@ -33,6 +33,11 @@ add_folder(os.path.expanduser('~/git'), have_folder)
 # add_folder(os.path.expanduser('~/twiggle/git'), have_folder)
 
 if have_folder!=have_mrconfig:
+    print("in mrconfig and not found")
+    print(have_mrconfig - have_folder)
+    print("found in folder and not in mrconfig")
+    print(have_folder - have_mrconfig)
+    print("total diff")
     print(have_folder ^ have_mrconfig)
 else:
     print('all ok with {0} entries...'.format(len(have_mrconfig)))
