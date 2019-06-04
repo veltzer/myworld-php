@@ -133,8 +133,17 @@ remake_password:
 remake_public_password:
 	$(Q)htpasswd -bc ~/public_html/.htpasswd $(tdefs.web_username) $(tdefs.web_password) 2> /dev/null # set security
 
-.PHONY: install
-install: all $(CONFIG)
+
+.PHONY: install_private
+install_private:
+	$(info doing [$@])
+	$(Q)sudo rm -rf $(WEB_DIR_PRIVATE) # remove the old folder
+	$(Q)sudo cp -r private $(WEB_DIR_PRIVATE) # copy to the target
+	$(Q)sudo cp $(MYWORLD_PLUGIN_NAME)/src/utils.php $(WEB_DIR_PRIVATE) # copy support code
+	$(Q)sudo cp $(CONFIG) $(WEB_DIR_PRIVATE)/config.php # copy support code
+
+.PHONY: install_site
+install_site: all $(CONFIG)
 	$(info doing [$@])
 	$(Q)-sudo rm -rf $(MYHEB_PLUGIN_FULL_DIR)
 	$(Q)-sudo rm -rf $(MYWORLD_PLUGIN_FULL_DIR)
