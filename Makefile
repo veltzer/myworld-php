@@ -173,7 +173,7 @@ check:
 .PHONY: clean_full
 clean_full:
 	$(info doing [$@])
-	$(Q)git clean -fxd > /dev/null
+	$(Q)git clean -qffxd
 
 .PHONY: clean_manual
 clean_manual:
