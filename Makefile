@@ -109,14 +109,14 @@ $(MYTHEME_THEME_ZIP): $(MYTHEME_THEME_FILES) $(ALL_DEP)
 $(JSCHECK): $(SOURCES_JS) $(ALL_DEP)
 	$(info doing [$@])
 	$(Q)$(TOOL_JSL) --conf=support/jsl.conf --quiet --nologo --nosummary --nofilelisting $(SOURCES_JS)
-	$(Q)make_helper wrapper-silent $(TOOL_GJSLINT) --flagfile support/gjslint.cfg $(SOURCES_JS)
+	$(Q)pymakehelper only_print_on_error $(TOOL_GJSLINT) --flagfile support/gjslint.cfg $(SOURCES_JS)
 	$(Q)mkdir -p $(dir $@)
 	$(Q)touch $(JSCHECK)
 
-#	$(Q)make_helper wrapper-silent jshint --config support/jshint.conf $(SOURCES_JS)
-#	$(Q)make_helper wrapper-silent jshint --config support/jshint.conf public/myworld_utils.js
-#	$(Q)make_helper wrapper-silent jslint $(SOURCES_JS)
-#	$(Q)make_helper wrapper-silent jslint public/myworld_utils.js
+#	$(Q)pymakehelper only_print_on_error jshint --config support/jshint.conf $(SOURCES_JS)
+#	$(Q)pymakehelper only_print_on_error jshint --config support/jshint.conf public/myworld_utils.js
+#	$(Q)pymakehelper only_print_on_error jslint $(SOURCES_JS)
+#	$(Q)pymakehelper only_print_on_error jslint public/myworld_utils.js
 
 # list the plugins...
 .PHONY: list
@@ -165,10 +165,10 @@ install_site: all $(CONFIG)
 .PHONY: check
 check:
 	$(info doing [$@])
-	$(Q)make_helper wrapper-noerr git grep \'veltzer\'
-	$(Q)make_helper wrapper-noerr git grep \'mark\'
-	$(Q)make_helper wrapper-noerr git grep ' $$'
-	$(Q)make_helper wrapper-noerr git grep '\s$$'
+	$(Q)pymakehelper only_print_on_error git grep \'veltzer\'
+	$(Q)pymakehelper only_print_on_error git grep \'mark\'
+	$(Q)pymakehelper only_print_on_error git grep ' $$'
+	$(Q)pymakehelper only_print_on_error git grep '\s$$'
 
 .PHONY: clean_full
 clean_full:
