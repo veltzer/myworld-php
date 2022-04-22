@@ -1,6 +1,3 @@
-ALL:=$(TEMPLAR_ALL)
-ALL_DEP:=$(TEMPLAR_ALL_DEP)
-
 ##############
 # PARAMETERS #
 ##############
@@ -16,8 +13,6 @@ WEB_DIR_PUBLIC:=$(WEB_ROOT)/public
 PLUGIN_DIR:=$(WP_DIR)/wp-content/plugins
 # where are themes to be installed in wordpress...
 THEME_DIR:=$(WP_DIR)/wp-content/themes
-# do you want dependency on the makefile itself ?
-DO_MAKEDEPS:=1
 # do you want to see the commands executed ?
 DO_MKDBG:=0
 # do you want to compress javascript code ?
@@ -26,6 +21,8 @@ DO_JSCOMPRESS:=1
 OUT:=out
 # do you want to install tools?
 DO_TOOLS:=1
+# do you want dependency on the Makefile itself ?
+DO_ALLDEP:=1
 
 # tools
 TOOL_COMPILER:=tools/compiler.jar
@@ -53,8 +50,13 @@ Q:=@
 #.SILENT:
 endif # DO_MKDBG
 
+# dependency on the makefile itself
+ifeq ($(DO_ALLDEP),1)
+.EXTRA_PREREQS+=$(foreach mk, ${MAKEFILE_LIST},$(abspath ${mk}))
+endif
+
 ifeq ($(DO_TOOLS),1)
-ALL_DEP+=tools.stamp
+.EXTRA_PREREQS+=tools.stamp
 endif # DO_TOOLS
 
 MYWORLD_PLUGIN_NAME:=myworld
@@ -88,22 +90,22 @@ CONFIG:=~/.myworld.php
 .PHONY: all
 all: $(ALL)
 
-$(MYHEB_PLUGIN_ZIP): $(MYHEB_PLUGIN_FILES) $(ALL_DEP)
+$(MYHEB_PLUGIN_ZIP): $(MYHEB_PLUGIN_FILES)
 	$(info doing [$@])
 	$(Q)mkdir -p $(dir $@)
 	$(Q)-rm -f $@
 	$(Q)zip --quiet -r $@ $(MYHEB_PLUGIN_NAME)
-$(MYWORLD_PLUGIN_ZIP): $(MYWORLD_PLUGIN_FILES) $(ALL_DEP)
+$(MYWORLD_PLUGIN_ZIP): $(MYWORLD_PLUGIN_FILES)
 	$(info doing [$@])
 	$(Q)mkdir -p $(dir $@)
 	$(Q)-rm -f $@
 	$(Q)zip --quiet -r $@ $(MYWORLD_PLUGIN_NAME)
-$(MYTHEME_THEME_ZIP): $(MYTHEME_THEME_FILES) $(ALL_DEP)
+$(MYTHEME_THEME_ZIP): $(MYTHEME_THEME_FILES)
 	$(info doing [$@])
 	$(Q)mkdir -p $(dir $@)
 	$(Q)-rm -f $@
 	$(Q)zip --quiet -r $@ $(MYTHEME_THEME_NAME)
-$(JSCHECK): $(SOURCES_JS) $(ALL_DEP)
+$(JSCHECK): $(SOURCES_JS)
 	$(info doing [$@])
 	$(Q)$(TOOL_JSL) --conf=support/jsl.conf --quiet --nologo --nosummary --nofilelisting $(SOURCES_JS)
 	$(Q)pymakehelper only_print_on_error $(TOOL_GJSLINT) --flagfile support/gjslint.cfg $(SOURCES_JS)
@@ -180,7 +182,6 @@ clean_manual:
 .PHONY: debug_full
 debug_full:
 	$(info ALL is $(ALL))
-	$(info ALL_DEP is $(ALL_DEP))
 	$(info CLEAN is $(CLEAN))
 	$(info WEB_ROOT is $(WEB_ROOT))
 	$(info WP_DIR is $(WP_DIR))
