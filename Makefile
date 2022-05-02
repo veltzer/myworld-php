@@ -19,8 +19,6 @@ DO_MKDBG:=0
 DO_JSCOMPRESS:=1
 # output folder
 OUT:=out
-# do you want to install tools?
-DO_TOOLS:=1
 # do you want dependency on the Makefile itself ?
 DO_ALLDEP:=1
 
@@ -54,10 +52,6 @@ endif # DO_MKDBG
 ifeq ($(DO_ALLDEP),1)
 .EXTRA_PREREQS+=$(foreach mk, ${MAKEFILE_LIST},$(abspath ${mk}))
 endif
-
-ifeq ($(DO_TOOLS),1)
-.EXTRA_PREREQS+=tools.stamp
-endif # DO_TOOLS
 
 MYWORLD_PLUGIN_NAME:=myworld
 MYWORLD_PLUGIN_FULL_DIR:=$(PLUGIN_DIR)/$(MYWORLD_PLUGIN_NAME)
