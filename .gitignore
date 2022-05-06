@@ -16,5 +16,5 @@ __pycache__
 # output files
 *.out
 
-# templar generated
 /tools
+/.pydmt

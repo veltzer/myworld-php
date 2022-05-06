@@ -10,41 +10,41 @@ packages=[
     # for compressing javascript
     'yui-compressor',
     # for inserting blobs into the database
-    'python-pythonmagick',
+    # 'python-pythonmagick', - cant find
     # for convert(1) for image manipulation
     'imagemagick',
     # so that I could install python packages via pip
     'python-pip',
     # so that I could install python packages via pip
-    'python3-pip',
+    # 'python3-pip', - cant find
     # mp3 tagging library
-    'python-id3',
+    # 'python-id3', - cant find
     # mp3 tagging library
-    'python-eyed3',
+    # 'python-eyed3', - cant find
     # mp3 tagging library
-    'python-mutagen',
+    # 'python-mutagen', - cant find
     # for youtube-dl
     'youtube-dl',
     # for imdb python module
-    'python-imdbpy',
+    # 'python-imdbpy', - cant find
     # for video meta data
-    'python-enzyme',
+    # 'python-enzyme', - cant find
     # for video meta data
     'python3-enzyme',
     # for video meta data
-    'python-mediainfodll',
+    # 'python-mediainfodll', - cant find
     # for video meta data
     'python3-mediainfodll',
     # for video meta data
-    'python-kaa-metadata',
+    # 'python-kaa-metadata', - cant find
     # for html parsing
-    'python-bs4',
+    # 'python-bs4', - cant find
     # for html parsing
     'python3-bs4',
     # for imdb API
-    'python-mysqldb',
+    # 'python-mysqldb', - cant find
     # for github
-    'python-github',
+    # 'python-github', - cant find
     # for github
     'python3-github',
     # for jsonpickle

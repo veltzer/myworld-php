@@ -1,10 +1,12 @@
-${tdefs.project_name}
-${'=' * len(tdefs.project_name)}
+<%!
+    import config.project
+    import config.version
+    import user.personal
+%>${config.project.project_name}
+${'=' * len(config.project.project_name)}
 
-version: ${tdefs.git_lasttag}
+${config.project.project_long_description}
 
-${tdefs.project_long_description}
+${config.project.project_description}
 
-${tdefs.project_description}
-
-	${tdefs.personal_origin}, ${tdefs.project_copyright_years}
+	${user.personal.personal_origin}, ${config.project.project_copyright_years}
