@@ -16,7 +16,7 @@ jobs:
         python-version: ${{ matrix.python-version }}
     - name: pydmt
       run: python -m pip install pydmt pyclassifiers
-    - name: build_tools
+    - name: build_tools --verbose True
       run: pydmt build_tools
     - name: build_reqs
       run: pydmt build_reqs
