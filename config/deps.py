@@ -14,7 +14,7 @@ packages=[
     # for convert(1) for image manipulation
     'imagemagick',
     # so that I could install python packages via pip
-    'python-pip',
+    # 'python-pip', - cant find
     # so that I could install python packages via pip
     # 'python3-pip', - cant find
     # mp3 tagging library
