@@ -86,6 +86,7 @@ CONFIG:=~/.myworld.php
 #########
 .PHONY: all
 all: $(ALL)
+	@true
 
 $(MYHEB_PLUGIN_ZIP): $(MYHEB_PLUGIN_FILES)
 	$(info doing [$@])
