@@ -12,7 +12,7 @@ website: https://veltzer.github.io/myworld-php
 
 This is a collection of scripts and wordpress plugins that I use for my own databases.
 
-## contact 
+## contact
 
 chat with me at [![gitter](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/veltzer/mark.veltzer)
 
