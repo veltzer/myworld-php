@@ -1,65 +1,65 @@
 tools=[
-    'jsl',
+    "jsl",
 ]
 requirements3=[
-    'PyGithub',
+    "PyGithub",
 ]
 packages=[
     # for wmctrl(1)
-    'wmctrl',
+    "wmctrl",
     # for compressing javascript
-    'yui-compressor',
+    "yui-compressor",
     # for inserting blobs into the database
-    # 'python-pythonmagick', - cant find
+    # "python-pythonmagick", - cant find
     # for convert(1) for image manipulation
-    'imagemagick',
+    "imagemagick",
     # so that I could install python packages via pip
-    # 'python-pip', - cant find
+    # "python-pip", - cant find
     # so that I could install python packages via pip
-    # 'python3-pip', - cant find
+    # "python3-pip", - cant find
     # mp3 tagging library
-    # 'python-id3', - cant find
+    # "python-id3", - cant find
     # mp3 tagging library
-    # 'python-eyed3', - cant find
+    # "python-eyed3", - cant find
     # mp3 tagging library
-    # 'python-mutagen', - cant find
+    # "python-mutagen", - cant find
     # for youtube-dl
-    'youtube-dl',
+    "youtube-dl",
     # for imdb python module
-    # 'python-imdbpy', - cant find
+    # "python-imdbpy", - cant find
     # for video meta data
-    # 'python-enzyme', - cant find
+    # "python-enzyme", - cant find
     # for video meta data
-    'python3-enzyme',
+    "python3-enzyme",
     # for video meta data
-    # 'python-mediainfodll', - cant find
+    # "python-mediainfodll", - cant find
     # for video meta data
-    'python3-mediainfodll',
+    "python3-mediainfodll",
     # for video meta data
-    # 'python-kaa-metadata', - cant find
+    # "python-kaa-metadata", - cant find
     # for html parsing
-    # 'python-bs4', - cant find
+    # "python-bs4", - cant find
     # for html parsing
-    'python3-bs4',
+    "python3-bs4",
     # for imdb API
-    # 'python-mysqldb', - cant find
+    # "python-mysqldb", - cant find
     # for github
-    # 'python-github', - cant find
+    # "python-github", - cant find
     # for github
-    'python3-github',
+    "python3-github",
     # for jsonpickle
-    'python3-jsonpickle',
+    "python3-jsonpickle",
     # for perl access to imdb
-    'libimdb-film-perl',
-    'libxml-simple-perl',
-    'libyaml-perl',
-    'libdate-manip-perl',
-    'libmp3-info-perl',
-    'libvideo-info-perl',
-    'libnet-github-perl',
-    'libfile-homedir-perl',
-    'libconfig-tiny-perl',
-    'libconfig-inifiles-perl',
+    "libimdb-film-perl",
+    "libxml-simple-perl",
+    "libyaml-perl",
+    "libdate-manip-perl",
+    "libmp3-info-perl",
+    "libvideo-info-perl",
+    "libnet-github-perl",
+    "libfile-homedir-perl",
+    "libconfig-tiny-perl",
+    "libconfig-inifiles-perl",
     # for synching files
-    'unison',
+    "unison",
 ]
