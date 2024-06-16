@@ -24,7 +24,7 @@ packages=[
     # mp3 tagging library
     # "python-mutagen", - cant find
     # for youtube-dl
-    "youtube-dl",
+    #"youtube-dl",
     # for imdb python module
     # "python-imdbpy", - cant find
     # for video meta data
