@@ -1,5 +1,5 @@
 ##############
-# PARAMETERS #
+# parameters #
 ##############
 # do you want to see the commands executed ?
 DO_MKDBG:=0
@@ -24,7 +24,7 @@ TOOL_JSLINT:=jslint
 JSCHECK:=jscheck.stamp
 
 ########
-# CODE #
+# code #
 ########
 # target directory where all will be installed...
 WEB_ROOT:=/var/www
@@ -82,7 +82,7 @@ SOURCES_JS:=$(shell find public -name "*.js")
 CONFIG:=~/.myworld.php
 
 #########
-# RULES #
+# rules #
 #########
 .PHONY: all
 all: $(ALL)
