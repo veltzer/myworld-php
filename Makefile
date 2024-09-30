@@ -77,7 +77,7 @@ MYTHEME_THEME_FILES:=$(shell find $(MYTHEME_THEME_NAME) -type f)
 MYTHEME_THEME_ZIP=$(OUT)/themes/mytheme.zip
 ALL+=$(MYTHEME_THEME_ZIP)
 
-SOURCES_JS:=$(shell find public -name "*.js")
+SOURCES_JS:=$(shell find public -type f -and -name "*.js")
 
 CONFIG:=~/.myworld.php
 
