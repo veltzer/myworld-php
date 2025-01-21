@@ -162,8 +162,8 @@ check:
 	$(Q)pymakehelper only_print_on_error git grep ' $$'
 	$(Q)pymakehelper only_print_on_error git grep '\s$$'
 
-.PHONY: clean_full
-clean_full:
+.PHONY: clean_hard
+clean_hard:
 	$(info doing [$@])
 	$(Q)git clean -qffxd
 
