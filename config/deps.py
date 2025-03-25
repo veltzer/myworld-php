@@ -1,9 +1,11 @@
-tools=[
-    "jsl",
-]
+"""
+os level dependencies for this project
+"""
+
 requirements3=[
     "PyGithub",
 ]
+
 packages=[
     # for wmctrl(1)
     "wmctrl",
@@ -62,4 +64,8 @@ packages=[
     "libconfig-inifiles-perl",
     # for synching files
     "unison",
+]
+
+tools=[
+    "jsl",
 ]
