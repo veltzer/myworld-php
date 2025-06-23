@@ -105,8 +105,8 @@ $(JSCHECK): $(SOURCES_JS)
 	$(Q)mkdir -p $(dir $@)
 	$(Q)touch $(JSCHECK)
 
-#	$(Q)pymakehelper only_print_on_error jshint --config support/jshint.conf $(SOURCES_JS)
-#	$(Q)pymakehelper only_print_on_error jshint --config support/jshint.conf public/myworld_utils.js
+#	$(Q)pymakehelper only_print_on_error jshint $(SOURCES_JS)
+#	$(Q)pymakehelper only_print_on_error jshint public/myworld_utils.js
 #	$(Q)pymakehelper only_print_on_error jslint $(SOURCES_JS)
 #	$(Q)pymakehelper only_print_on_error jslint public/myworld_utils.js
 
