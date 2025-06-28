@@ -12,7 +12,6 @@ only available for python2 in ubuntu.
 ###########
 # imports #
 ###########
-from __future__ import print_function
 import MySQLdb # for connect
 import imdb # for IMDb
 import sys # for stdout, getdefaultencoding
@@ -34,24 +33,24 @@ p_do_db=True
 def update_check(db, cursor, f_id, tablename):
     global stat_check
     stat_check+=1
-    sql='UPDATE {0} SET checkedDate=NOW() WHERE id=%s'.format(tablename)
+    sql=f'UPDATE {tablename} SET checkedDate=NOW() WHERE id=%s'
     vals=(f_id,)
     if p_do_db:
         cursor.execute(sql, vals)
         db.commit()
     if p_do_progress:
-        print('execute {0} with {1}'.format(sql, vals))
+        print(f'execute {sql} with {vals}')
 
 def update_field(db, cursor, f_id, fieldname, value):
     global stat_update
     stat_update+=1
-    sql='UPDATE TbIdPerson SET {0}=%s WHERE id=%s'.format(fieldname)
+    sql=f'UPDATE TbIdPerson SET {fieldname}=%s WHERE id=%s'
     vals=(value, f_id)
     if p_do_db:
         cursor.execute(sql, vals)
         db.commit()
     if p_do_progress:
-        print('execute {0} with {1}'.format(sql, vals))
+        print(f'execute {sql} with {vals}')
 
 ########
 # code #
@@ -88,15 +87,15 @@ for x in cursor:
     f_externalCode=x[4]
     f_peid=x[5]
     if p_do_progress:
-        print('f_id: {0}'.format(f_id))
+        print(f'f_id: {f_id}')
         if f_firstname is not None:
-            print('f_firstname: {0}'.format(f_firstname.encode(out_encoding)))
+            print(f'f_firstname: {f_firstname.encode(out_encoding)}')
         if f_surname is not None:
-            print('f_surname: {0}'.format(f_surname.encode(out_encoding)))
+            print(f'f_surname: {f_surname.encode(out_encoding)}')
         if f_othername is not None:
-            print('f_othername: {0}'.format(f_othername.encode(out_encoding)))
-        print('f_externalCode: {0}'.format(f_externalCode.encode(out_encoding)))
-        print('f_peid: {0}'.format(f_peid))
+            print(f'f_othername: {f_othername.encode(out_encoding)}')
+        print(f'f_externalCode: {f_externalCode.encode(out_encoding)}')
+        print(f'f_peid: {f_peid}')
     i_person=connection.get_person(f_externalCode)
     i_canonical_name=i_person['canonical name']
     if ',' in i_canonical_name:
@@ -114,11 +113,11 @@ for x in cursor:
         i_othername=None
     if p_do_progress:
         if i_firstname is not None:
-            print('i_firstname: {0}'.format(i_firstname.encode(out_encoding)))
+            print(f'i_firstname: {i_firstname.encode(out_encoding)}')
         if i_surname is not None:
-            print('i_surname: {0}'.format(i_surname.encode(out_encoding)))
+            print(f'i_surname: {i_surname.encode(out_encoding)}')
         if i_othername is not None:
-            print('i_othername: {0}'.format(i_othername.encode(out_encoding)))
+            print(f'i_othername: {i_othername.encode(out_encoding)}')
     if i_firstname!=f_firstname:
         #print('diff in firstname {0}!={1}'.format(i_firstname.encode(out_encoding), f_firstname.encode(out_encoding)))
         if not p_confirm or menu.select():
@@ -161,9 +160,9 @@ for x in cursor:
     f_personExternalCode=x[1]
     f_id=x[2]
     if p_do_progress:
-        print('f_workExternalCode: {0}'.format(f_workExternalCode))
-        print('f_personExternalCode: {0}'.format(f_personExternalCode))
-        print('f_id: {0}'.format(f_id))
+        print(f'f_workExternalCode: {f_workExternalCode}')
+        print(f'f_personExternalCode: {f_personExternalCode}')
+        print(f'f_id: {f_id}')
     # get the film info and check the directors
     i_movie=connection.get_movie(f_workExternalCode)
     i_directors=i_movie.get('director')
@@ -171,12 +170,12 @@ for x in cursor:
     for d in i_directors:
         directors_set.add(d.personID)
     if p_do_progress:
-        print('directors_set: {0}'.format(directors_set))
+        print(f'directors_set: {directors_set}')
     if f_personExternalCode in directors_set:
         update_check(db, c_update, f_id, 'TbWkWorkContrib')
 
 cursor.close()
 db.close()
 
-print('stat_check is [{0}]'.format(stat_check))
-print('stat_update is [{0}]'.format(stat_update))
+print(f'stat_check is [{stat_check}]')
+print(f'stat_update is [{stat_update}]')

@@ -26,24 +26,24 @@ p_do_progress=True
 # really update the database?
 p_doit=True
 # what types of urls to do the query on?
-p_query_types=set([
+p_query_types={
     'youtube_video_id',
     'ted_video_id',
     'download_url',
-])
+}
 
 #############
 # functions #
 #############
 def update_length(conn, curr, f_id, val):
     if p_do_progress:
-        print('updating length to [{0}]'.format(val))
+        print(f'updating length to [{val}]')
     if p_doit:
         curr.execute('UPDATE TbWkWork SET length=%s, updatedLengthDate=NOW() WHERE id=%s',(val, f_id))
         conn.commit()
 def update_size(conn, curr, f_id, val):
     if p_do_progress:
-        print('updating size to [{0}]'.format(val))
+        print(f'updating size to [{val}]')
     if p_doit:
         curr.execute('UPDATE TbWkWork SET size=%s, updatedSizeDate=NOW() WHERE id=%s',(val, f_id))
         conn.commit()
@@ -76,7 +76,7 @@ WHERE
     TbWkWorkExternal.externalId=TbExternalType.id AND
     TbWkWork.typeId=TbWkWorkType.id AND
     TbWkWorkType.isVideo AND
-    TbExternalType.name IN ('{0}')
+    TbExternalType.name IN ('{}')
 '''.format('\',\''.join(p_query_types))
 stat_did=0
 curr.execute(sql)
@@ -87,10 +87,10 @@ for result in results:
     f_externalCode=result['externalCode']
     f_tname=result['tname']
     if p_do_progress:
-        print('doing [{0}]...'.format(f_name))
+        print(f'doing [{f_name}]...')
     filename=myworld.utils.filename_switch(p_folder, f_tname, f_externalCode)
     if not os.path.isfile(filename):
-        print('file [{0}] does not exist, download it first...'.format(filename))
+        print(f'file [{filename}] does not exist, download it first...')
         continue
     update_length(conn, curr2, f_id, get_length(filename))
     update_size(conn, curr2, f_id, get_size(filename))
@@ -100,4 +100,4 @@ curr.close()
 conn.close()
 
 if p_do_stats:
-    print('stat_did [{0}]'.format(stat_did))
+    print(f'stat_did [{stat_did}]')

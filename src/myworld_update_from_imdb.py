@@ -10,7 +10,6 @@ TODO:
 length to NULL (which is wrong). Take care of this.
 '''
 
-from __future__ import print_function
 import MySQLdb # for connect
 import imdb # for IMDb
 import sys # for stdout, getdefaultencoding
@@ -32,10 +31,10 @@ u'Canada:90::(Toronto International Film Festival)'
 u'118::(unrated version)'
 '''
 regs=[
-    re.compile('^(\d+)$'),
-    re.compile('^.+:(\d+)$'),
-    re.compile('^.+:(\d+)::.+$'),
-    re.compile('^(\d+)::.+$'),
+    re.compile(r'^(\d+)$'),
+    re.compile(r'^.+:(\d+)$'),
+    re.compile(r'^.+:(\d+)::.+$'),
+    re.compile(r'^(\d+)::.+$'),
 ]
 
 def analyze_runtime(runtime):
@@ -102,31 +101,31 @@ for x in cursor:
     f_length=x[2]
     f_external=ids[f_id]
     if p_do_progress:
-        print('working on [{0}]...'.format(f_name))
+        print(f'working on [{f_name}]...')
     movie=connection.get_movie(f_external)
     info_runtime=movie.get('runtime')
-    print('f_id: {0}'.format(f_id))
-    print('f_name: {0}'.format(f_name))
-    print('f_length: {0}'.format(f_length))
-    print('info_runtime: {0}'.format(info_runtime))
+    print(f'f_id: {f_id}')
+    print(f'f_name: {f_name}')
+    print(f'f_length: {f_length}')
+    print(f'info_runtime: {info_runtime}')
     if info_runtime is None:
         update_check(db, c_update, f_id)
     else:
         deduced_runtime=analyze_runtimes(info_runtime)
-        print('deduced_runtime: {0}'.format(deduced_runtime))
+        print(f'deduced_runtime: {deduced_runtime}')
         if f_length is None:
             print('============================')
-            print('new time is {0}...'.format(deduced_runtime))
+            print(f'new time is {deduced_runtime}...')
             print('============================')
             update_time(db, c_update, f_id, deduced_runtime)
         else:
             if deduced_runtime>f_length:
                 print('============================')
-                print('updating {0} with {1}...'.format(f_length, deduced_runtime))
+                print(f'updating {f_length} with {deduced_runtime}...')
                 print('============================')
                 update_time(db, c_update, f_id, deduced_runtime)
             else:
                 update_check(db, c_update, f_id)
 cursor.close()
 db.close()
-print('stat_count is [{0}]'.format(stat_count))
+print(f'stat_count is [{stat_count}]')

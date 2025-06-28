@@ -22,7 +22,7 @@ class State(enum.Enum):
     s_after=1,
     s_in=2
 
-allowed=set([
+allowed={
     'name',
     'url',
     'type',
@@ -30,14 +30,14 @@ allowed=set([
     'loc',
     'review',
     'rating',
-])
-musthave=set([
+}
+musthave={
     'name',
     'url',
     'type',
     'date',
     'loc',
-]);
+};
 
 def date_to_mysql(output):
     parts=output.split()

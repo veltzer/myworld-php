@@ -29,7 +29,7 @@ def check_1(conn):
     sql='''SELECT TbWkWorkView.workId FROM TbWkWorkView WHERE remark IS NOT NULL OR todo IS NOT NULL'''
     results=myworld.db.get_results(conn, sql)
     for result in results:
-        print('\t{0}'.format(result))
+        print(f'\t{result}')
 
 def check_2(conn):
     print('checking works which are videos without length updated')
@@ -46,14 +46,14 @@ def check_2(conn):
     results=myworld.db.get_results(conn, sql)
     for result in results:
         f_id=result['id']
-        print('\t{0}'.format(result))
+        print(f'\t{result}')
         sql2='''SELECT TbWkWorkExternal.externalCode, TbExternalType.name, TbWkWorkExternal.id
             FROM TbWkWorkExternal, TbExternalType
             WHERE TbExternalType.id=TbWkWorkExternal.externalId AND
             TbWkWorkExternal.workId='''+str(f_id)
         results2=myworld.db.get_results(conn, sql2)
         for result2 in results2:
-            print('\t\t{0}'.format(result2))
+            print(f'\t\t{result2}')
 
 def check_3(conn):
     print('checking works with space in the begining or end of name')
@@ -68,7 +68,7 @@ def check_3(conn):
     '''
     results=myworld.db.get_results(conn, sql)
     for result in results:
-        print('\t{0}'.format(result))
+        print(f'\t{result}')
 
 def check_4(conn):
     print('checking people with space in the firstname or othername')
@@ -83,7 +83,7 @@ def check_4(conn):
     '''
     results=myworld.db.get_results(conn, sql)
     for result in results:
-        print('\t{0}'.format(result))
+        print(f'\t{result}')
 
 def check_5(conn):
     print('checking people with space in the begining or end of their firstname, surname or othername')
@@ -102,7 +102,7 @@ def check_5(conn):
     '''
     results=myworld.db.get_results(conn, sql)
     for result in results:
-        print('\t{0}'.format(result))
+        print(f'\t{result}')
 
 def check_6(conn):
     print('checking for people that are not connected to works and are not friends')
@@ -127,7 +127,7 @@ def check_6(conn):
     '''
     results=myworld.db.get_results(conn, sql)
     for result in results:
-        print('\t{0}'.format(result))
+        print(f'\t{result}')
 
 def check_7(conn):
     print('checking for people that do not have external ids and are not friends')
@@ -152,7 +152,7 @@ def check_7(conn):
     results=myworld.db.get_results(conn, sql)
     for result in results:
         f_id=result['id']
-        print('\t{0}'.format(result))
+        print(f'\t{result}')
         sql2='''SELECT TbWkWork.name, TbWkWork.id, TbWkWorkType.name as typeName
             FROM TbWkWork, TbWkWorkContrib, TbWkWorkType
             WHERE TbWkWork.id=TbWkWorkContrib.workId AND
@@ -161,14 +161,14 @@ def check_7(conn):
         results2=myworld.db.get_results(conn, sql2)
         for result2 in results2:
             f_workid=result2['id']
-            print('\t\t{0}'.format(result2))
+            print(f'\t\t{result2}')
             sql3='''SELECT TbWkWorkExternal.externalCode, TbExternalType.name
             FROM TbWkWorkExternal, TbExternalType
             WHERE TbWkWorkExternal.externalId=TbExternalType.id AND
             TbWkWorkExternal.workId='''+str(f_workid)
             results3=myworld.db.get_results(conn, sql3)
             for result3 in results3:
-                print('\t\t\t{0}'.format(result3))
+                print(f'\t\t\t{result3}')
 
 def check_8(conn):
     print('checking for works that do not have external ids')
@@ -188,7 +188,7 @@ def check_8(conn):
     results=myworld.db.get_results(conn, sql)
     for result in results:
         f_id=result['id']
-        print('\t{0}'.format(result))
+        print(f'\t{result}')
         sql2='''SELECT TbIdPerson.id, TbIdPerson.firstname, TbIdPerson.surname, TbWkWorkContribType.name
             FROM TbIdPerson, TbWkWorkContrib, TbWkWorkContribType
             WHERE TbIdPerson.id=TbWkWorkContrib.personId AND
@@ -196,7 +196,7 @@ def check_8(conn):
             TbWkWorkContrib.workId='''+str(f_id)
         results2=myworld.db.get_results(conn, sql2)
         for result2 in results2:
-            print('\t\t{0}'.format(result2))
+            print(f'\t\t{result2}')
 
 def check_9(conn):
     print('checking for audio works that do not have files')
@@ -215,7 +215,7 @@ def check_9(conn):
         f_name=result['name']
         folder=os.path.join(basedir, f_name)
         if not os.path.isdir(folder):
-            print('\t{0}'.format(result))
+            print(f'\t{result}')
 
 ########
 # code #

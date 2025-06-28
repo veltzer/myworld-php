@@ -60,7 +60,7 @@ conn=myworld.db.connect()
 cur=conn.cursor()
 cur.execute('INSERT INTO TbImage (name,slug,smallMime,largeMime,origMime,smallData,largeData,origData) '+
     'VALUES(%s,%s,%s,%s,%s,%s,%s,%s)',(name,slug,target_mime,target_mime,mime,data_small,data_large,data))
-print('cur.lastrowid is [{0}]'.format(cur.lastrowid))
+print(f'cur.lastrowid is [{cur.lastrowid}]')
 cur.close()
 conn.commit()
 conn.close()

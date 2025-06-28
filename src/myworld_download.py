@@ -47,17 +47,17 @@ p_progress=False
 # report on downloads and skips?
 p_report=True
 # enable various kinds of downloads
-p_do_types=set([
+p_do_types={
     'youtube_video_id',
     'ted_video_id',
     'download_url',
-])
+}
 # what types of urls to do the query on?
-p_query_types=set([
+p_query_types={
     'youtube_video_id',
     'ted_video_id',
     'download_url',
-])
+}
 p_print_stats=True
 
 ########
@@ -87,7 +87,7 @@ WHERE
     TbWkWorkExternal.workId=TbWkWork.id AND
     TbWkWork.typeId=TbWkWorkType.id AND
     TbWkWorkType.isVideo AND
-    TbExternalType.name IN ('{0}')
+    TbExternalType.name IN ('{}')
 '''.format('\',\''.join(p_query_types))
 
 res=myworld.db.get_results(conn, sql)
@@ -105,7 +105,7 @@ for row in res:
     f_template=row['template']
     f_tname=row['tname']
     if p_progress:
-        print('doing work [{0}] code [{1}] type [{2}]...'.format(f_name, f_externalCode, f_tname))
+        print(f'doing work [{f_name}] code [{f_externalCode}] type [{f_tname}]...')
     file=myworld.utils.filename_switch(p_folder, f_tname, f_externalCode)
     stat_count+=1
     if os.path.isfile(file):
@@ -116,19 +116,19 @@ for row in res:
     url=f_template.replace('$external_id', f_externalCode)
     if f_tname in p_do_types:
         if p_report:
-            print('downloading [{0}] from [{1}], [{2}]...'.format(file, url, f_name))
+            print(f'downloading [{file}] from [{url}], [{f_name}]...')
         download_switch(f_tname, url, file)
         stat_download_by_type[f_tname]+=1
         stat_download+=1
     else:
         if p_report:
-            print('skipping [{0}] from [{1}], [{2}]...'.format(file, url, f_name))
+            print(f'skipping [{file}] from [{url}], [{f_name}]...')
         stat_skipped_by_type[f_tname]+=1
 
 conn.close()
 if p_print_stats:
-    print('stat_count [{0}]'.format(stat_count))
-    print('stat_already_there [{0}]'.format(stat_already_there))
-    print('stat_download [{0}]'.format(stat_download))
-    print('stat_download_by_type [{0}]'.format(dict((x,y) for (x,y) in stat_download_by_type.items() if y>0)))
-    print('stat_skipped_by_type [{0}]'.format(dict((x,y) for (x,y) in stat_skipped_by_type.items() if y>0)))
+    print(f'stat_count [{stat_count}]')
+    print(f'stat_already_there [{stat_already_there}]')
+    print(f'stat_download [{stat_download}]')
+    print(f'stat_download_by_type [{{x:y for (x,y) in stat_download_by_type.items() if y>0}}]')
+    print(f'stat_skipped_by_type [{{x:y for (x,y) in stat_skipped_by_type.items() if y>0}}]')
