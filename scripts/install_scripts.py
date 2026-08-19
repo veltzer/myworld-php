@@ -5,32 +5,33 @@ this script installs all products of the meta package as symbolic links
 into ~/install.
 
 TODO:
-- add easy option to copy files instead of sylinking them.
+- add easy option to copy files instead of symlinking them.
 '''
 
 import os # for walk, getcwd, symlink, listdir, unlink, mkdir
 import os.path # for join, expanduser, realpath, abspath, islink, isdir, isfile
 
 # actually perform the actions?
-doit=True
+DOIT=True
 # print what we are doing?
-debug=True
+DEBUG=True
 # remove target files if they are links
-force=True
+FORCE=True
 
 def do_install(source, target):
-    if force:
+    """ Symlink source at target, replacing an existing link if FORCE. """
+    if FORCE:
         if os.path.islink(target):
             os.unlink(target)
-    if doit:
-        if debug:
+    if DOIT:
+        if DEBUG:
             print(f'symlinking [{source}], [{target}]')
         os.symlink(source, target)
 
 def file_gen(root_folder, recurse):
+    """ Yield (root, dirs, files) either recursively or for one level. """
     if recurse:
-        for root,dirs,files in os.walk(root_folder):
-            yield root,dirs,files
+        yield from os.walk(root_folder)
     else:
         dirs=[]
         files=[]
@@ -40,31 +41,31 @@ def file_gen(root_folder, recurse):
                 dirs.append(file)
             if os.path.isfile(full):
                 files.append(file)
-        yield root_folder,dirs,files
+        yield root_folder, dirs, files
+
+def clean_stale_links(target_folder, cwd):
+    """ Remove links in target_folder that point back into cwd. """
+    for file in os.listdir(target_folder):
+        full=os.path.join(target_folder, file)
+        if not os.path.islink(full):
+            continue
+        link_target=os.path.realpath(full)
+        if link_target.startswith(cwd) and DOIT:
+            if DEBUG:
+                print(f'unlinking [{full}]')
+            os.unlink(full)
 
 def install(root_folder, target_folder, recurse):
+    """ Symlink everything under root_folder into target_folder. """
     target_folder=os.path.expanduser(target_folder)
-    cwd=os.getcwd()
     if os.path.isdir(target_folder):
-        for file in os.listdir(target_folder):
-            full=os.path.join(target_folder, file)
-            if os.path.islink(full):
-                link_target=os.path.realpath(full)
-                if link_target.startswith(cwd):
-                    if doit:
-                        if debug:
-                            print(f'unlinking [{full}]')
-                        os.unlink(full)
+        clean_stale_links(target_folder, os.getcwd())
     else:
         os.mkdir(target_folder)
-    for root,dirs,files in file_gen(root_folder, recurse):
-        for file in files:
-            source=os.path.abspath(os.path.join(root, file))
-            target=os.path.join(target_folder, file)
-            do_install(source, target)
-        for dir in dirs:
-            source=os.path.abspath(os.path.join(root, dir))
-            target=os.path.join(target_folder, dir)
+    for root, dirs, files in file_gen(root_folder, recurse):
+        for name in files+dirs:
+            source=os.path.abspath(os.path.join(root, name))
+            target=os.path.join(target_folder, name)
             do_install(source, target)
 
 install('src', '~/install/bin', False)

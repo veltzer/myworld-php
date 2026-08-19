@@ -1,4 +1,4 @@
-#!/usr/bin/python2
+#!/usr/bin/python3
 
 '''
 This script updates all movies lengths from imdb.
@@ -10,96 +10,68 @@ TODO:
 length to NULL (which is wrong). Take care of this.
 '''
 
+import re # for compile
+
 import MySQLdb # for connect
 import imdb # for IMDb
-import sys # for stdout, getdefaultencoding
-import re # for compile
 
 ##############
 # parameters #
 ##############
 p_do_progress=True
 
-#############
-# functions #
-#############
-'''
-times return as one of the following three:
-u'104'
-u'Argentina:94'
-u'Canada:90::(Toronto International Film Festival)'
-u'118::(unrated version)'
-'''
-regs=[
+# times return as one of the following three:
+#   u'104'
+#   u'Argentina:94'
+#   u'Canada:90::(Toronto International Film Festival)'
+#   u'118::(unrated version)'
+REGS=[
     re.compile(r'^(\d+)$'),
     re.compile(r'^.+:(\d+)$'),
     re.compile(r'^.+:(\d+)::.+$'),
     re.compile(r'^(\d+)::.+$'),
 ]
 
+#############
+# functions #
+#############
 def analyze_runtime(runtime):
-    runtime.encode(out_encoding, 'replace')
-    for reg in regs:
+    """ Extract the minutes from an imdb runtime string, in seconds. """
+    for reg in REGS:
         m=reg.match(runtime)
         if m:
-            mins=m.group(1)
-            return float(mins)*60.0
+            return float(m.group(1))*60.0
     raise ValueError('didnt find a regexp to match', runtime)
 
-def avg(l):
-    return sum(l)/len(l)
+def avg(values):
+    """ Arithmetic mean of a sequence. """
+    return sum(values)/len(values)
 
 def analyze_runtimes(runtimes):
+    """ Average of the analyzed runtimes. """
     return avg([analyze_runtime(x) for x in runtimes])
 
 def update_time(db, cursor, f_id, deduced_runtime):
-    cursor.execute('UPDATE TbWkWork SET length=%s, updatedLengthDate=NOW() WHERE id=%s',(deduced_runtime, f_id))
+    """ Store a deduced length and stamp updatedLengthDate. """
+    cursor.execute('UPDATE TbWkWork SET length=%s, updatedLengthDate=NOW() WHERE id=%s',
+                   (deduced_runtime, f_id))
     db.commit()
 
 def update_check(db, cursor, f_id):
-    cursor.execute('UPDATE TbWkWork SET updatedLengthDate=NOW() WHERE id=%s',(f_id,))
+    """ Stamp updatedLengthDate without changing length. """
+    cursor.execute('UPDATE TbWkWork SET updatedLengthDate=NOW() WHERE id=%s', (f_id,))
     db.commit()
 
-def reset_lengths(db):
-    cursor=db.cursor()
-    cursor.execute('UPDATE TbWkWork SET updatedLengthDate=NULL WHERE TbWkWork.typeId=15')
-    db.commit()
-    cursor.close()
+def load_external_ids(cursor):
+    """ Map workId -> externalCode from TbWkWorkExternal. """
+    cursor.execute('SELECT externalCode,workId FROM TbWkWorkExternal')
+    ids={}
+    for f_externalCode, f_workId in cursor:
+        ids[f_workId]=f_externalCode
+    return ids
 
-########
-# code #
-########
-connection=imdb.IMDb()
-out_encoding=sys.stdout.encoding or sys.getdefaultencoding()
-# this will read from the [client] section of the file
-# that means that that section must declare 'database', 'user' and 'password' attributes.
-db=MySQLdb.connect(read_default_file='~/.myworld.cnf')
-
-cursor=db.cursor()
-c_update=db.cursor()
-sql='SELECT externalCode,workId FROM TbWkWorkExternal'
-cursor.execute(sql)
-ids={}
-for x in cursor:
-    f_externalCode=x[0]
-    f_workId=x[1]
-    ids[f_workId]=f_externalCode
-
-# all movies which have not been update for length
-sql='SELECT TbWkWork.id,TbWkWork.name,TbWkWork.length FROM TbWkWork,TbWkWorkType WHERE TbWkWork.typeId=TbWkWorkType.id AND TbWkWorkType.name in (\'video movie\') AND TbWkWork.updatedLengthDate IS NULL'
-# all movies
-#sql='SELECT TbWkWork.id,TbWkWork.name,TbWkWork.length FROM TbWkWork,TbWkWorkType WHERE TbWkWork.typeId=TbWkWorkType.id AND TbWkWorkType.name in (\'video movie\')'
-# all movies where length is unknown
-#sql='SELECT TbWkWork.id,TbWkWork.name,TbWkWork.length FROM TbWkWork,TbWkWorkType WHERE TbWkWork.typeId=TbWkWorkType.id AND TbWkWorkType.name in (\'video movie\') AND TbWkWork.length is NULL'
-
-cursor.execute(sql)
-stat_count=0
-for x in cursor:
-    stat_count+=1
-    f_id=x[0]
-    f_name=x[1]
-    f_length=x[2]
-    f_external=ids[f_id]
+def process_movie(connection, db, c_update, f_id, f_name, f_length, f_external):
+    """ Fetch a movie's runtime from imdb and update the db row. """
     if p_do_progress:
         print(f'working on [{f_name}]...')
     movie=connection.get_movie(f_external)
@@ -110,22 +82,42 @@ for x in cursor:
     print(f'info_runtime: {info_runtime}')
     if info_runtime is None:
         update_check(db, c_update, f_id)
-    else:
-        deduced_runtime=analyze_runtimes(info_runtime)
-        print(f'deduced_runtime: {deduced_runtime}')
+        return
+    deduced_runtime=analyze_runtimes(info_runtime)
+    print(f'deduced_runtime: {deduced_runtime}')
+    if f_length is None or deduced_runtime>f_length:
+        print('============================')
         if f_length is None:
-            print('============================')
             print(f'new time is {deduced_runtime}...')
-            print('============================')
-            update_time(db, c_update, f_id, deduced_runtime)
         else:
-            if deduced_runtime>f_length:
-                print('============================')
-                print(f'updating {f_length} with {deduced_runtime}...')
-                print('============================')
-                update_time(db, c_update, f_id, deduced_runtime)
-            else:
-                update_check(db, c_update, f_id)
-cursor.close()
-db.close()
-print(f'stat_count is [{stat_count}]')
+            print(f'updating {f_length} with {deduced_runtime}...')
+        print('============================')
+        update_time(db, c_update, f_id, deduced_runtime)
+    else:
+        update_check(db, c_update, f_id)
+
+def main():
+    """ main entry point """
+    connection=imdb.IMDb()
+    # this reads the [client] section of ~/.myworld.cnf, which must declare
+    # 'database', 'user' and 'password'.
+    db=MySQLdb.connect(read_default_file='~/.myworld.cnf')
+    cursor=db.cursor()
+    c_update=db.cursor()
+    ids=load_external_ids(cursor)
+
+    # all movies which have not been updated for length
+    sql=("SELECT TbWkWork.id,TbWkWork.name,TbWkWork.length FROM TbWkWork,TbWkWorkType "
+         "WHERE TbWkWork.typeId=TbWkWorkType.id AND TbWkWorkType.name in ('video movie') "
+         "AND TbWkWork.updatedLengthDate IS NULL")
+    cursor.execute(sql)
+    stat_count=0
+    for f_id, f_name, f_length in cursor:
+        stat_count+=1
+        process_movie(connection, db, c_update, f_id, f_name, f_length, ids[f_id])
+    cursor.close()
+    db.close()
+    print(f'stat_count is [{stat_count}]')
+
+if __name__=='__main__':
+    main()

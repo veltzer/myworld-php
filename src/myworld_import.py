@@ -1,28 +1,21 @@
 #!/usr/bin/python3
 
 '''
-A generic import application t be hacked for various purposes of importing
+A generic import application to be hacked for various purposes of importing
 data into the myworld system.
 '''
 
-import subprocess # for check_output, check_call
-import sys # for exit
-import os # for unlink
-import myworld.db # for connect
-import enum # for Enum
 import datetime # for strptime
+import enum # for Enum
 
-# parameters, classes, functions
+import myworld.db # for connect
 
-doDb=True
+# parameters
 
-doDebug=True
+DO_DB=True
+DO_DEBUG=True
 
-class State(enum.Enum):
-    s_after=1,
-    s_in=2
-
-allowed={
+ALLOWED={
     'name',
     'url',
     'type',
@@ -31,117 +24,116 @@ allowed={
     'review',
     'rating',
 }
-musthave={
+MUSTHAVE={
     'name',
     'url',
     'type',
     'date',
     'loc',
-};
+}
+
+class State(enum.Enum):
+    """ Parser state while reading the import text file. """
+    s_after=1
+    s_in=2
 
 def date_to_mysql(output):
+    """ Parse a `date` command output string into a datetime. """
     parts=output.split()
     if int(parts[2])<10:
         parts[2]='0'+parts[2]
     output=' '.join(parts)
-    format='%a %b %d %H:%M:%S %Z %Y'
-    d=datetime.datetime.strptime(output, format)
-    #print('d is [{0}]'.format(d))
-    return d
+    fmt='%a %b %d %H:%M:%S %Z %Y'
+    return datetime.datetime.strptime(output, fmt)
 
-def add_entry(attrib):
+def add_entry(cur, attrib):
+    """ Validate one parsed entry and insert its work/view/review rows. """
     keys_set=set(attrib.keys())
-    if not keys_set.issubset(allowed):
-        print(allowed)
+    if not keys_set.issubset(ALLOWED):
+        print(ALLOWED)
         print(keys_set)
         print(attrib)
         raise ValueError('bad state 3')
-    if not musthave.issubset(keys_set):
-        print(allowed)
+    if not MUSTHAVE.issubset(keys_set):
+        print(ALLOWED)
         print(keys_set)
         print(attrib)
         raise ValueError('bad state 4')
-    if 'review' in attrib and not 'rating' in attrib:
+    if 'review' in attrib and 'rating' not in attrib:
         print(attrib)
         raise ValueError('bad state 5')
-    if doDebug:
+    if DO_DEBUG:
         print('ended entry', attrib)
-    if doDb:
-        f_name=attrib['name']
-        f_url=attrib['url']
-        f_type=attrib['type']
-        f_date=attrib['date']
-        f_loc=attrib['loc']
-        f_date=date_to_mysql(f_date)
-        if f_type=='YOUTUBE':
-            f_externalId=40
-            f_externalCode=f_url.split('=')[1]
-        else:
-            f_externalId=16
-            f_externalCode=f_url
-        # insert the work
-        cur.execute('INSERT INTO TbWkWork (name, typeId) VALUES(%s,%s)', (f_name, 12))
-        p_workid=cur.lastrowid
-        # insert the external id
-        cur.execute('INSERT INTO TbWkWorkExternal (externalCode, externalId, workId) VALUES(%s,%s,%s)',
-            (f_externalCode, f_externalId, p_workid))
-        p_externalid=cur.lastrowid
-        # insert the view
-        if f_loc=='by myself at my computer at home':
-            locationId=2
-            deviceId=33
-            cur.execute('INSERT INTO TbWkWorkView (locationId, deviceId, workId, endViewDate) VALUES(%s,%s,%s,%s)',
-                (locationId, deviceId, p_workid, f_date))
-        else:
-            locationId=10
-            deviceId=11
-            cur.execute('INSERT INTO TbWkWorkView (locationId, deviceId, workId, endViewDate, remark) VALUES(%s,%s,%s,%s,%s)',
-                (locationId, deviceId, p_workid, f_date, f_loc))
-        p_viewid=cur.lastrowid
-        cur.execute('INSERT INTO TbWkWorkViewPerson (viewId, viewerId) VALUES(%s,%s)',
-            (p_viewid, 1))
-        # insert the review
-        if 'review' in attrib and 'rating' in attrib:
-            f_review=attrib['review']
-            f_rating=attrib['rating']
-            cur.execute('INSERT INTO TbWkWorkReview (ratingId, review, reviewDate, workId, reviewerId) VALUES(%s,%s,%s,%s,%s)',
-                (f_rating, f_review, f_date, p_workid, 1))
-            p_reviewid=cur.lastrowid
+    if not DO_DB:
+        return
+    f_name=attrib['name']
+    f_url=attrib['url']
+    f_type=attrib['type']
+    f_loc=attrib['loc']
+    f_date=date_to_mysql(attrib['date'])
+    if f_type=='YOUTUBE':
+        f_externalId=40
+        f_externalCode=f_url.split('=')[1]
+    else:
+        f_externalId=16
+        f_externalCode=f_url
+    # insert the work
+    cur.execute('INSERT INTO TbWkWork (name, typeId) VALUES(%s,%s)', (f_name, 12))
+    p_workid=cur.lastrowid
+    # insert the external id
+    cur.execute('INSERT INTO TbWkWorkExternal (externalCode, externalId, workId) VALUES(%s,%s,%s)',
+        (f_externalCode, f_externalId, p_workid))
+    # insert the view
+    if f_loc=='by myself at my computer at home':
+        cur.execute('INSERT INTO TbWkWorkView (locationId, deviceId, workId, endViewDate) VALUES(%s,%s,%s,%s)',
+            (2, 33, p_workid, f_date))
+    else:
+        cur.execute('INSERT INTO TbWkWorkView (locationId, deviceId, workId, endViewDate, remark) VALUES(%s,%s,%s,%s,%s)',
+            (10, 11, p_workid, f_date, f_loc))
+    p_viewid=cur.lastrowid
+    cur.execute('INSERT INTO TbWkWorkViewPerson (viewId, viewerId) VALUES(%s,%s)',
+        (p_viewid, 1))
+    # insert the review
+    if 'review' in attrib and 'rating' in attrib:
+        cur.execute('INSERT INTO TbWkWorkReview (ratingId, review, reviewDate, workId, reviewerId) VALUES(%s,%s,%s,%s,%s)',
+            (attrib['rating'], attrib['review'], f_date, p_workid, 1))
 
-# code
-
-if doDb:
-    conn=myworld.db.connect()
-    cur=conn.cursor()
-state=State.s_after
-attrib=dict()
-for line in open('educational_movies_saw.txt'):
-    line=line.rstrip()
+def parse_line(state, attrib, line, cur):
+    """ Advance the parser one line; returns the new (state, attrib). """
     if state==State.s_after:
         if line.startswith('\t'):
             raise ValueError('bad state 1')
-        else:
-            attrib['name']=line
-            state=State.s_in
-    elif state==State.s_in:
-        if line.startswith('\t'):
-            parts=line.split(':')
-            key=parts[0]
-            val=':'.join(parts[1:])
-            key=key.strip()
-            val=val.strip()
-            if key not in attrib:
-                attrib[key]=val
-            else:
-                raise ValueError('bad state 2')
-        else:
-            add_entry(attrib)
-            attrib=dict()
-            attrib['name']=line
-            state=State.s_in
+        attrib['name']=line
+        return State.s_in, attrib
+    # state is s_in
+    if line.startswith('\t'):
+        parts=line.split(':')
+        key=parts[0].strip()
+        val=':'.join(parts[1:]).strip()
+        if key in attrib:
+            raise ValueError('bad state 2')
+        attrib[key]=val
+        return state, attrib
+    add_entry(cur, attrib)
+    return State.s_in, {'name': line}
 
-add_entry(attrib)
-if doDb:
-    cur.close()
-    conn.commit()
-    conn.close()
+def main():
+    """ main entry point """
+    conn=None
+    cur=None
+    if DO_DB:
+        conn=myworld.db.connect()
+        cur=conn.cursor()
+    state=State.s_after
+    attrib={}
+    with open('educational_movies_saw.txt', encoding='utf-8') as stream:
+        for line in stream:
+            state, attrib=parse_line(state, attrib, line.rstrip(), cur)
+    add_entry(cur, attrib)
+    if DO_DB:
+        cur.close()
+        conn.commit()
+        conn.close()
+
+if __name__=='__main__':
+    main()

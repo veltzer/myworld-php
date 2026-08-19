@@ -30,10 +30,10 @@ class Menu:
                 print(str(i)+') '+text)
                 i+=1
             print('your selection ---> ', end='')
-            sel=raw_input()
+            sel=input()
             try:
                 option=int(sel)
-            except Exception, e:
+            except ValueError:
                 print('selection [%s] is problematic...' % (sel))
                 continue
             if backIsImplemented:
@@ -53,7 +53,7 @@ class YNMenu:
         over=False
         while not over:
             print(self.text)
-            res=raw_input()
+            res=input()
             if res.startswith('y') or res.startswith('Y'):
                 ret=True
                 over=True

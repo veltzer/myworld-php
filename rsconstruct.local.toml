@@ -1,0 +1,4 @@
+# Repo-specific overlay. Deep-merged over the canonical rsconstruct.toml.
+
+[processor.tera]
+src_dirs = ["tera.templates"]

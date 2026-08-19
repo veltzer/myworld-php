@@ -18,8 +18,9 @@ here is what it should check:
 ###########
 # imports #
 ###########
-import myworld.db # for connect, get_results
 import os.path # for join, isdir
+
+import myworld.db # for connect, get_results
 
 #############
 # functions #
@@ -217,17 +218,19 @@ def check_9(conn):
         if not os.path.isdir(folder):
             print(f'\t{result}')
 
-########
-# code #
-########
-conn=myworld.db.connect()
-check_1(conn)
-check_2(conn)
-check_3(conn)
-check_4(conn)
-check_5(conn)
-check_6(conn)
-check_7(conn)
-check_8(conn)
-check_9(conn)
-conn.close()
+def main():
+    """ main entry point """
+    conn=myworld.db.connect()
+    check_1(conn)
+    check_2(conn)
+    check_3(conn)
+    check_4(conn)
+    check_5(conn)
+    check_6(conn)
+    check_7(conn)
+    check_8(conn)
+    check_9(conn)
+    conn.close()
+
+if __name__=='__main__':
+    main()
