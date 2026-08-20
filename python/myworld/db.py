@@ -3,10 +3,11 @@ Module which allows to connect easily to my database without
 storing user or password in my script.
 '''
 
-import mysql.connector # for Connect
-import os.path # for isfile, expanduser
-import configparser # for ConfigParser
-import getpass # for getuser
+import configparser  # for ConfigParser
+import getpass  # for getuser
+import os.path  # for isfile, expanduser
+
+import mysql.connector  # for Connect
 
 '''
 get the configuration, including user and password from the ~/.my.cnf

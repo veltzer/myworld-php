@@ -4,8 +4,7 @@ Module to help build command line menus and y/n questions.
     Mark Veltzer <mark@veltzer.net>
 '''
 
-from __future__ import print_function
-import os # for system
+import os  # for system
 
 # is the back functionality implemented?
 backIsImplemented=False
@@ -34,7 +33,7 @@ class Menu:
             try:
                 option=int(sel)
             except ValueError:
-                print('selection [%s] is problematic...' % (sel))
+                print(f'selection [{sel}] is problematic...')
                 continue
             if backIsImplemented:
                 startCheck=0
@@ -43,7 +42,7 @@ class Menu:
             if option>=startCheck and option<=len(self.items):
                 over=True
             else:
-                print('selection [%s] is problematic...' % (sel))
+                print(f'selection [{sel}] is problematic...')
         return self.items[option-1][1]
 
 class YNMenu:
@@ -54,13 +53,13 @@ class YNMenu:
         while not over:
             print(self.text)
             res=input()
-            if res.startswith('y') or res.startswith('Y'):
+            if res.startswith(('y', 'Y')):
                 ret=True
                 over=True
                 continue
-            if res.startswith('n') or res.startswith('N'):
+            if res.startswith(('n', 'N')):
                 ret=False
                 over=True
                 continue
-            print('I dont know what you mean by [%s]\n' % (res))
+            print(f'I dont know what you mean by [{res}]\n')
         return ret

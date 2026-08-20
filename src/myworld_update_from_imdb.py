@@ -10,10 +10,10 @@ TODO:
 length to NULL (which is wrong). Take care of this.
 '''
 
-import re # for compile
+import re  # for compile
 
-import MySQLdb # for connect
-import imdb # for IMDb
+import imdb  # for IMDb
+import MySQLdb  # for connect
 
 ##############
 # parameters #

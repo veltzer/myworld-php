@@ -2,8 +2,9 @@
 Various python utils until they get sorted
 '''
 
-import os.path # for join
-import urllib.parse # for urlparse
+import os.path  # for join
+import urllib.parse  # for urlparse
+
 
 def filename_switch(p_folder, f_tname, f_externalCode):
     if f_tname=='youtube_video_id':

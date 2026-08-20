@@ -8,8 +8,8 @@ TODO:
 - add easy option to copy files instead of symlinking them.
 '''
 
-import os # for walk, getcwd, symlink, listdir, unlink, mkdir
-import os.path # for join, expanduser, realpath, abspath, islink, isdir, isfile
+import os  # for walk, getcwd, symlink, listdir, unlink, mkdir
+import os.path  # for join, expanduser, realpath, abspath, islink, isdir, isfile
 
 # actually perform the actions?
 DOIT=True
@@ -20,9 +20,8 @@ FORCE=True
 
 def do_install(source, target):
     """ Symlink source at target, replacing an existing link if FORCE. """
-    if FORCE:
-        if os.path.islink(target):
-            os.unlink(target)
+    if FORCE and os.path.islink(target):
+        os.unlink(target)
     if DOIT:
         if DEBUG:
             print(f'symlinking [{source}], [{target}]')

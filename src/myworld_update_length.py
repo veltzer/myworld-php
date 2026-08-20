@@ -7,14 +7,13 @@ update lengths for youtube movies in myworld.
 #############
 # libraries #
 #############
-import os # for stat
-import os.path # for join, isfile
-import stat # for ST_SIZE
+import os  # for stat
+import os.path  # for join, isfile
+import stat  # for ST_SIZE
 
-import MediaInfoDLL3 # for Stream, MediaInfo
-
-import myworld.db # for connect, get_cursor
-import myworld.utils # for filename_switch
+import MediaInfoDLL3  # for Stream, MediaInfo
+import myworld.db  # for connect, get_cursor
+import myworld.utils  # for filename_switch
 
 ##############
 # parameters #

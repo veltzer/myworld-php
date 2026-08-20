@@ -8,14 +8,14 @@ google drive.
 ###########
 # imports #
 ###########
-import os # for rename
-import os.path # for join, isfile
-import subprocess # for check_call
+import os  # for rename
+import os.path  # for join, isfile
+import subprocess  # for check_call
 
-import download.generic # for get
-import download.ted # for get
-import myworld.db # for connect, print_results, get_results
-import myworld.utils # for filename_switch
+import download.generic  # for get
+import download.ted  # for get
+import myworld.db  # for connect, print_results, get_results
+import myworld.utils  # for filename_switch
 
 ##############
 # parameters #

@@ -18,9 +18,10 @@ here is what it should check:
 ###########
 # imports #
 ###########
-import os.path # for join, isdir
+import os.path  # for join, isdir
 
-import myworld.db # for connect, get_results
+import myworld.db  # for connect, get_results
+
 
 #############
 # functions #

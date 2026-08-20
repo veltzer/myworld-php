@@ -4,11 +4,11 @@
 This application imports one image into the database
 '''
 
-import os # for unlink
-import subprocess # for check_output, check_call
-import sys # for exit
+import os  # for unlink
+import subprocess  # for check_output, check_call
+import sys  # for exit
 
-import myworld.db # for connect
+import myworld.db  # for connect
 
 # parameters
 SIZE_LARGE='256x128'

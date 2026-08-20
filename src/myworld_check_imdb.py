@@ -8,12 +8,11 @@ This script will also check that directors are connected correctly to works.
 ###########
 # imports #
 ###########
-import sys # for stdout, getdefaultencoding
+import sys  # for stdout, getdefaultencoding
 
-import MySQLdb # for connect
-import imdb # for IMDb
-
-import myworld.menu_maker # for YNMenu
+import imdb  # for IMDb
+import MySQLdb  # for connect
+import myworld.menu_maker  # for YNMenu
 
 ##############
 # parameters #
