@@ -2,3 +2,17 @@
 
 [processor.tera]
 src_dirs = ["tera.templates"]
+
+# The Makefile's default build zipped three WordPress bundles: the myworld and
+# myheb plugins into out/plugins/, and the mytheme theme into out/themes/.
+# scripts/build_bundles.py runs the same `zip -r` per directory; the explicit
+# processor keys on the source files and declares the three zips as outputs.
+# (JSCHECK was DO_JSCHECK:=0 in the Makefile, so the jshint step was off.)
+[processor.explicit.bundles]
+command = "scripts/build_bundles.py"
+input_globs = ["myworld/**/*", "myheb/**/*", "mytheme/**/*"]
+output_files = [
+    "out/plugins/myworld.zip",
+    "out/plugins/myheb.zip",
+    "out/themes/mytheme.zip",
+]
