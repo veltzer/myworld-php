@@ -11,6 +11,14 @@ dependencies = [
     "mysqlclient",
 ]
 
+[dependency-groups]
+dev = [
+    "mypy",
+    "pylint",
+    "pytest",
+    "ruff",
+]
+
 [tool.uv]
 # Demo/teaching/archive repo: not an installable package.
 package = false
