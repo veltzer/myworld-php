@@ -48,9 +48,9 @@ my($noimage_die)=1;
 
 my($dbh)=MyUtils::db_connect();
 my($imported)=0;
-my(@list_small)=<images/organizations/target/sma/*.png>;
-my(@list_large)=<images/organizations/target/big/*.png>;
-my(@list_orig)=<images/organizations/src/*>;
+my(@list_small)= glob("images/organizations/target/sma/*.png");
+my(@list_large)= glob("images/organizations/target/big/*.png");
+my(@list_orig)= glob("images/organizations/src/*");
 for(my($i)=0;$i<@list_small;$i++) {
 	my($curr_small)=$list_small[$i];
 	my($curr_large)=$list_large[$i];

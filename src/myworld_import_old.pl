@@ -55,7 +55,7 @@ my($do_commit)=1;
 
 # functions
 
-sub old_to_mysql($) {
+sub old_to_mysql {
 	my($date_string)=$_[0];
 	print $date_string;
 	my($time);
@@ -64,7 +64,7 @@ sub old_to_mysql($) {
 	return "NULL";
 }
 
-sub to_mysql($) {
+sub to_mysql {
 	my($string)=@_;
 	my($object)=Date::Manip::UnixDate($string,'%Y-%m-%d %T');
 	if(!defined($object)) {
@@ -77,7 +77,7 @@ sub to_mysql($) {
 # [authorization.xmlid] appeared [15] times
 # [authorization.description] appeared [15] times
 my(%authorizations);
-sub handle_authorization() {
+sub handle_authorization {
 	my($t,$el)=@_;
 	my($name)=$el->{'att'}->{'name'};
 	my($xmlid)=$el->{'att'}->{'xmlid'};
@@ -103,7 +103,7 @@ sub handle_authorization() {
 # [person.lineage] appeared [58] times
 # [person.sequential] appeared [5] times
 my(%persons);
-sub handle_person() {
+sub handle_person {
 	my($t,$el)=@_;
 	# get the data
 	my($xmlid)=$el->{'att'}->{'xmlid'};
@@ -162,7 +162,7 @@ sub handle_person() {
 # [title.name] appeared [1674] times
 # [title.tickets] appeared [66] times
 my(%titles);
-sub handle_title() {
+sub handle_title {
 	my($t,$el)=@_;
 	# get the data
 	my($xmlid)=$el->{'att'}->{'xmlid'};
@@ -209,7 +209,7 @@ sub handle_title() {
 # [person_title_role.person_id] appeared [1657] times
 # [person_title_role.role_id] appeared [1657] times
 # [person_title_role.title_id] appeared [1657] times
-sub handle_person_title_role() {
+sub handle_person_title_role {
 	my($t,$el)=@_;
 	# get the data
 	my($f_person_id)=$el->{'att'}->{'person_id'};
@@ -230,7 +230,7 @@ sub handle_person_title_role() {
 }
 # [title_authorization.authorization_id] appeared [2234] times
 # [title_authorization.title_id] appeared [2234] times
-sub handle_title_authorization() {
+sub handle_title_authorization {
 	my($t,$el)=@_;
 	# get the data
 	my($f_authorization_id)=$el->{'att'}->{'authorization_id'};
@@ -250,7 +250,7 @@ sub handle_title_authorization() {
 # [person_title.title_id] appeared [2752] times
 # [person_title.remark] appeared [269] times
 # [person_title.date] appeared [481] times
-sub handle_person_title() {
+sub handle_person_title {
 	my($t,$el)=@_;
 	my($f_person_id)=$el->{'att'}->{'person_id'};
 	my($f_title_id)=$el->{'att'}->{'title_id'};
@@ -293,7 +293,7 @@ sub handle_person_title() {
 # [review.date] appeared [79] times
 # [review.score] appeared [79] times
 # [review.title_id] appeared [79] times
-sub handle_review() {
+sub handle_review {
 	my($t,$el)=@_;
 	my($f_review_text)=$el->{'att'}->{'text'};
 	my($f_person_id)=$el->{'att'}->{'person_id'};

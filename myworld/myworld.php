@@ -123,6 +123,6 @@ if(!class_exists('MyWorld')) {
 	}
 	// now create an instance of the class...
 	global $MyWorld_instance;
-	$MyWorld_instance=&new MyWorld();
+	$MyWorld_instance = new MyWorld();
 }
 ?>

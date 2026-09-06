@@ -38,14 +38,14 @@ my($check_sec)=1;
 # functions
 
 # a general assertion function...
-sub assert($$) {
+sub assert {
 	my($val,$msg)=@_;
 	if(!$val) {
 		die($msg);
 	}
 }
 # this wraps calls to system()
-sub my_system($) {
+sub my_system {
 	my($cmd)=@_;
 	if($debug) {
 		print STDERR 'my_system ['.join(',',@{$cmd}).']'."\n";
@@ -60,7 +60,7 @@ sub my_system($) {
 	#return $res;
 }
 # function to return the current time in mysql format
-sub mysql_now() {
+sub mysql_now {
 	my($sec,$min,$hour,$mday,$mon,$year,$wday, $yday,$isdst)=localtime(time);
 	my($result)=sprintf('%4d-%02d-%02d %02d:%02d:%02d',$year+1900,$mon+1,$mday,$hour,$min,$sec);
 	return $result;

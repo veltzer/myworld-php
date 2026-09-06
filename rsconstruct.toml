@@ -33,7 +33,6 @@ src_dirs = ["src", "scripts", "config"]
 
 [processor.shellcheck]
 src_dirs = ["scripts", "src", "misc", "config"]
-args = ["--severity=error", "--shell=bash"]
 
 # ─── lua ─────────────────────────────────────────────────────────────────────
 
@@ -62,3 +61,40 @@ output_files = [
 # lint the GitHub Actions workflow files with actionlint
 [processor.actionlint]
 src_dirs = [".github/workflows"]
+
+# ─── markdown ────────────────────────────────────────────────────────────────
+
+[processor.rumdl]
+src_files = ["README.md"]
+
+# ─── json ────────────────────────────────────────────────────────────────────
+
+[processor.ijsonlint]
+src_dirs = ["private"]
+src_files = ["package.json"]
+
+# ─── php ─────────────────────────────────────────────────────────────────────
+
+[processor.php_lint]
+src_dirs = ["myheb", "mytheme", "myworld", "private"]
+
+# ─── perl ────────────────────────────────────────────────────────────────────
+
+[processor.perlcritic]
+src_dirs = ["perl", "src"]
+
+# ─── html ────────────────────────────────────────────────────────────────────
+
+[processor.htmlhint]
+src_dirs = ["private"]
+
+# ─── css ─────────────────────────────────────────────────────────────────────
+
+[processor.stylelint]
+src_dirs = ["myheb/css", "mytheme", "myworld/css", "private"]
+
+# ─── javascript ──────────────────────────────────────────────────────────────
+
+[processor.eslint]
+src_dirs = ["public"]
+args = ["-c", ".eslint.config.js"]

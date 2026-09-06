@@ -31,7 +31,7 @@ my($do_directors)=0;
 
 # functions
 
-sub insert_imdbid($$) {
+sub insert_imdbid {
 	my($f_id)=$_[0];
 	my($imdbid)=$_[1];
 	$dbh->do('INSERT INTO TbWkWorkExternal (externalCode,externalId,workId) VALUES(?,?,?)',
@@ -43,7 +43,7 @@ sub insert_imdbid($$) {
 	$dbh->commit();
 }
 
-sub get_directors($) {
+sub get_directors {
 	my($f_id)=$_[0];
 	my($sql)='SELECT TbIdPerson.firstname,TbIdPerson.surname FROM TbIdPerson,TbWkWorkContrib,TbWkWork WHERE TbWkWorkContrib.personId=TbIdPerson.id AND TbWkWorkContrib.workId=TbWkWork.id AND TbWkWork.id=\''.$f_id.'\'';
 	if($debug) {
@@ -69,7 +69,7 @@ sub get_directors($) {
 	return join(', ',@directors);
 }
 
-sub get_views($) {
+sub get_views {
 	my($f_id)=$_[0];
 	my($sql)='SELECT * FROM TbWkWorkView WHERE TbWkWorkView.workId='.$f_id.'';
 	if($debug) {
@@ -103,7 +103,7 @@ sub get_views($) {
 	return join(', ',@views);
 }
 
-sub replace_movie_name($$) {
+sub replace_movie_name {
 	my($f_id)=$_[0];
 	my($movie_name)=$_[1];
 	$dbh->do('UPDATE TbWkWork SET name=? WHERE id=?',
@@ -114,7 +114,7 @@ sub replace_movie_name($$) {
 	$dbh->commit();
 }
 
-sub my_menu() {
+sub my_menu {
 	return MyUtils::show_menu(
 		'd - delete this movie',
 		'n - give new name to this movie',

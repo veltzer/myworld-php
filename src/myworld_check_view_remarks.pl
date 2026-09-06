@@ -30,7 +30,7 @@ my($do_directors)=0;
 
 # functions
 
-sub my_menu() {
+sub my_menu {
 	return MyUtils::show_menu(
 		'd - set device',
 		'l - set location',
@@ -45,7 +45,7 @@ sub my_menu() {
 	);
 }
 
-sub print_sorted_hash($) {
+sub print_sorted_hash {
 	my($hash)=$_[0];
 	my($rev_hash)={};
 	while(my($key,$val)=each(%$hash)) {

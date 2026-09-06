@@ -30,7 +30,7 @@ my($do_directors)=0;
 
 # functions
 
-sub my_menu() {
+sub my_menu {
 	return MyUtils::show_menu(
 		'd - set device',
 		'l - set location',

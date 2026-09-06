@@ -143,7 +143,7 @@ while($rowhashref=$sth->fetchrow_hashref()) {
 			next;
 		}
 		# now calculate the length
-		my(@file_list)=<$folder/*>;
+		my(@file_list)=glob("$folder/*");
 		my($stat_secs)=0;
 		my($stat_size)=0.0;
 		for(my($i)=0;$i<@file_list;$i++) {

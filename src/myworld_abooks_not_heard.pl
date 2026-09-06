@@ -29,7 +29,7 @@ my($output)='list_not_heard.txt';
 # code
 
 if ($debug) {
-	binmode(STDOUT, ":utf8");
+	binmode(STDOUT, ":encoding(UTF-8)");
 }
 
 my($dbh)=MyUtils::db_connect();
@@ -54,9 +54,9 @@ while($rowhashref=$sth->fetchrow_hashref()) {
 $dbh->commit();
 $dbh->disconnect();
 
-open(OUTPUT,'> '.$output) || die('unable to open ['.$output.'] for writing');
+open(my $output_fh, '>', $output) || die('unable to open ['.$output.'] for writing');
 # now lets reviews all works
-my(@file_list)=<by_name/*/*>;
+my(@file_list)= glob("by_name/*/*");
 for(my($i)=0;$i<@file_list;$i++) {
 	my($path)=$file_list[$i];
 	my($filename, $directories, $suffix) = File::Basename::fileparse($path);
@@ -71,9 +71,9 @@ for(my($i)=0;$i<@file_list;$i++) {
 		next;
 	}
 	if(!exists($hash{$filename})) {
-		#print OUTPUT $path."\n";
+		#print {$output_fh} $path."\n";
 		my($total)=Filesys::DiskUsage::du({ 'human-readable' => 1 },$path);
-		print OUTPUT $path.' - '.$total."\n";
+		print {$output_fh} $path.' - '.$total."\n";
 		if($debug) {
 			print 'there'."\n";
 		}
@@ -83,4 +83,4 @@ for(my($i)=0;$i<@file_list;$i++) {
 		}
 	}
 }
-close(OUTPUT) || die('unable to close ['.$output.']');
+close($output_fh) || die('unable to close ['.$output.']');

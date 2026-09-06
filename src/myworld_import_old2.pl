@@ -21,7 +21,7 @@ my($do_work)=1;
 
 # functions
 
-sub get_movies() {
+sub get_movies {
 	my($sql,$sth,$rowhashref);
 	$movieNameByImdb={};
 	$movieIdByImdb={};
@@ -42,7 +42,7 @@ sub get_movies() {
 	}
 }
 
-sub get_movies_reviews() {
+sub get_movies_reviews {
 	my($sql,$sth,$rowhashref);
 	$movieWithReviews={};
 	$movieRatings={};
@@ -63,7 +63,7 @@ sub get_movies_reviews() {
 	}
 }
 
-sub get_friends() {
+sub get_friends {
 	my($sql,$sth,$rowhashref);
 	my($friends)={};
 	$sql='SELECT TbIdPerson.id,TbIdPerson.firstname,TbIdPerson.surname,TbIdPerson.ordinal,TbIdPerson.remark FROM TbIdPerson,TbIdGrpPerson,TbIdGrp WHERE TbIdGrp.name=\'friends\' AND TbIdGrp.id=TbIdGrpPerson.groupId AND TbIdGrpPerson.personId=TbIdPerson.id';
@@ -99,7 +99,7 @@ sub get_friends() {
 	return $friends;
 }
 
-sub get_locations() {
+sub get_locations {
 	my($sql,$sth,$rowhashref);
 	my($locations)={};
 	$sql='SELECT id,slug FROM TbLocation';
@@ -117,7 +117,7 @@ sub get_locations() {
 	return $locations;
 }
 
-sub get_devices() {
+sub get_devices {
 	my($sql,$sth,$rowhashref);
 	my($devices)={};
 	$sql='SELECT id,slug FROM TbDevice';
@@ -135,7 +135,7 @@ sub get_devices() {
 	return $devices;
 }
 
-sub store_it($) {
+sub store_it {
 	my($hash)=$_[0];
 	if($debug) {
 		while(my($key,$val)=each(%$hash)) {
