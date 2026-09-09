@@ -75,7 +75,6 @@ src_files = ["README.md"]
 
 [processor.ijsonlint]
 src_dirs = ["private"]
-src_files = ["package.json"]
 
 # ─── php ─────────────────────────────────────────────────────────────────────
 
