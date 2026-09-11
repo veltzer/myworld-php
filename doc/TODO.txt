@@ -135,7 +135,7 @@ installation
 	This will enable me to make an easy script to transfer my blog to another host.
 - write a script that copies the blog to a remote machine (veltzer.org for instance).
 - permalinks look bad. A link to an article looks like:
-	http://veltzer.net/blog/blog/2010/07/02/grep-is-broken-use-perl-instead/
+	http://veltzer.org/blog/blog/2010/07/02/grep-is-broken-use-perl-instead/
 	The extra "blog" there is redundant. Do something about it.
 	this is because of the multi-site feature - when I'll get ridd of it the
 	permalinks will be better.

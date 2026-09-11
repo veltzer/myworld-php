@@ -1,11 +1,11 @@
 <?php
 /*
 Plugin Name: MyHeb
-Plugin URI: http://veltzer.net/
+Plugin URI: http://veltzer.org/
 Description: MyHeb plugin for WordPress
 Version: 0.0.3
 Author: Mark Veltzer <mark.veltzer@gmail.com>
-Author URI: http://www.veltzer.net
+Author URI: http://www.veltzer.org
 */
 
 /*

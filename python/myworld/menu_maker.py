@@ -1,7 +1,7 @@
 '''
 Module to help build command line menus and y/n questions.
 
-    Mark Veltzer <mark@veltzer.net>
+    Mark Veltzer <mark@veltzer.org>
 '''
 
 import os  # for system

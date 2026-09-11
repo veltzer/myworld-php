@@ -1,11 +1,11 @@
 <?php
 /*
 Plugin Name: MyWorld
-Plugin URI: http://veltzer.net/
+Plugin URI: http://veltzer.org/
 Description: MyWorld plugin for WordPress
 Version: 0.0.2
 Author: Mark Veltzer <mark.veltzer@gmail.com>
-Author URI: http://www.veltzer.net
+Author URI: http://www.veltzer.org
 */
 
 /*
@@ -97,8 +97,8 @@ if(!class_exists('MyWorld')) {
 			// Ext4(sencha) stuff - need that for the movies tab
 			//echo "<link rel='stylesheet' href='http://cdn.sencha.io/ext/gpl/4.2.1/resources/css/ext-all.css'/>\n";
 			//echo "<script src='http://cdn.sencha.io/ext/gpl/4.2.1/ext-all.js'></script>\n";
-			echo "<link rel='stylesheet' href='https://veltzer.net/~mark/public/archive/extjs/resources/css/ext-all.css'/>\n";
-			echo "<script src='https://veltzer.net/~mark/public/archive/extjs/ext-all.js'></script>\n";
+			echo "<link rel='stylesheet' href='https://veltzer.org/~mark/public/archive/extjs/resources/css/ext-all.css'/>\n";
+			echo "<script src='https://veltzer.org/~mark/public/archive/extjs/ext-all.js'></script>\n";
 			// this line is to remove the nocss that extjs does on the whole page
 			echo "<script>Ext.onReady(function() { Ext.getBody().removeCls('x-body'); });</script>\n";
 
