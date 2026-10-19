@@ -46,7 +46,7 @@ def date_to_mysql(output):
     fmt='%a %b %d %H:%M:%S %Z %Y'
     # the `date` output carries %Z but strptime yields a naive local
     # datetime, which is what this local import wants.
-    return datetime.datetime.strptime(output, fmt)  # noqa: DTZ007
+    return datetime.datetime.strptime(output, fmt)
 
 def add_entry(cur, attrib):
     """ Validate one parsed entry and insert its work/view/review rows. """
