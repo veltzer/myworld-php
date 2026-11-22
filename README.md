@@ -5,7 +5,7 @@
 
 description: life feed project
 
-project website: https://veltzer.github.io/myworld-php
+project website: <https://veltzer.github.io/myworld-php>
 
 author: Mark Veltzer
 
