@@ -5,7 +5,7 @@ A generic import application to be hacked for various purposes of importing
 data into the myworld system.
 '''
 
-import datetime  # for strptime
+import datetime as dt  # for strptime
 import enum  # for Enum
 
 import myworld.db  # for connect
@@ -46,7 +46,7 @@ def date_to_mysql(output):
     fmt='%a %b %d %H:%M:%S %Z %Y'
     # the `date` output carries %Z but strptime yields a naive datetime;
     # it is local time, so say so (the wall-clock time stays the same).
-    return datetime.datetime.strptime(output, fmt).astimezone()
+    return dt.datetime.strptime(output, fmt).astimezone()
 
 def add_entry(cur, attrib):
     """ Validate one parsed entry and insert its work/view/review rows. """
