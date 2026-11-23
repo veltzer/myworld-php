@@ -30,18 +30,18 @@ mkdir "${DIR}"
 OPTS="--complete-insert"
 # data and schema
 echo "dumping the database with schema"
-mysqldump "${OPTS}" "${DBS[@]}" | gzip > "${DIR}/data_and_schema.sql.gz"
+{ mysqldump "${OPTS}" "${DBS[@]}" || true; } | gzip > "${DIR}/data_and_schema.sql.gz"
 # only data
 #mysqldump $OPTS $DB --no-create-info | gzip > $DIR/data_only.sql.gz
 # only schema
 echo "dumping the schema"
-mysqldump "${OPTS}" "${DBS[@]}" --no-data | gzip > "${DIR}/schema_only.sql.gz"
+{ mysqldump "${OPTS}" "${DBS[@]}" --no-data || true; } | gzip > "${DIR}/schema_only.sql.gz"
 # only stats
 echo "dumping stats"
-mysql_stats.sh | gzip > "${DIR}/stats.txt.gz"
+{ mysql_stats.sh || true; } | gzip > "${DIR}/stats.txt.gz"
 
 # backup the blog
 echo "dumping wordpress blog"
-mysqldump "${OPTS}" --databases wordpress | gzip > "${DIR}/wordpress_data_and_schema.sql.gz"
+{ mysqldump "${OPTS}" --databases wordpress || true; } | gzip > "${DIR}/wordpress_data_and_schema.sql.gz"
 echo "dumping wordpress folder"
 tar jcfP "${DIR}/blog.tar.bz2" /var/www/blog
