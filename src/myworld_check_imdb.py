@@ -82,16 +82,16 @@ def check_people(db, cursor, c_update, connection, menu, out_encoding):
     '''
     cursor.execute(sql)
     for x in cursor:
-        f_id, f_firstname, f_surname, f_othername, f_externalCode, f_peid=x
+        f_id, f_firstname, f_surname, f_othername, f_external_code, f_peid=x
         if p_do_progress:
             print(f'f_id: {f_id}')
             for label, val in (('f_firstname', f_firstname), ('f_surname', f_surname),
                                ('f_othername', f_othername)):
                 if val is not None:
                     print(f'{label}: {val.encode(out_encoding)}')
-            print(f'f_externalCode: {f_externalCode.encode(out_encoding)}')
+            print(f'f_external_code: {f_external_code.encode(out_encoding)}')
             print(f'f_peid: {f_peid}')
-        i_person=connection.get_person(f_externalCode)
+        i_person=connection.get_person(f_external_code)
         i_firstname, i_surname, i_othername=split_canonical_name(i_person['canonical name'])
         if p_do_progress:
             for label, val in (('i_firstname', i_firstname), ('i_surname', i_surname),
@@ -133,16 +133,16 @@ def check_directors(db, cursor, c_update, connection):
     '''
     cursor.execute(sql)
     for x in cursor:
-        f_workExternalCode, f_personExternalCode, f_id=x
+        f_work_external_code, f_person_external_code, f_id=x
         if p_do_progress:
-            print(f'f_workExternalCode: {f_workExternalCode}')
-            print(f'f_personExternalCode: {f_personExternalCode}')
+            print(f'f_work_external_code: {f_work_external_code}')
+            print(f'f_person_external_code: {f_person_external_code}')
             print(f'f_id: {f_id}')
-        i_movie=connection.get_movie(f_workExternalCode)
+        i_movie=connection.get_movie(f_work_external_code)
         directors_set={d.personID for d in i_movie.get('director')}
         if p_do_progress:
             print(f'directors_set: {directors_set}')
-        if f_personExternalCode in directors_set:
+        if f_person_external_code in directors_set:
             stat_check+=update_check(db, c_update, f_id, 'TbWkWorkContrib')
     return stat_check
 

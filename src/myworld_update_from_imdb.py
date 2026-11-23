@@ -65,10 +65,7 @@ def update_check(db, cursor, f_id):
 def load_external_ids(cursor):
     """ Map workId -> externalCode from TbWkWorkExternal. """
     cursor.execute('SELECT externalCode,workId FROM TbWkWorkExternal')
-    ids={}
-    for f_externalCode, f_workId in cursor:
-        ids[f_workId]=f_externalCode
-    return ids
+    return {f_work_id: f_external_code for f_external_code, f_work_id in cursor}
 
 def process_movie(connection, db, c_update, f_id, f_name, f_length, f_external):
     """ Fetch a movie's runtime from imdb and update the db row. """

@@ -44,9 +44,9 @@ def date_to_mysql(output):
         parts[2]='0'+parts[2]
     output=' '.join(parts)
     fmt='%a %b %d %H:%M:%S %Z %Y'
-    # the `date` output carries %Z but strptime yields a naive local
-    # datetime, which is what this local import wants.
-    return datetime.datetime.strptime(output, fmt)
+    # the `date` output carries %Z but strptime yields a naive datetime;
+    # it is local time, so say so (the wall-clock time stays the same).
+    return datetime.datetime.strptime(output, fmt).astimezone()
 
 def add_entry(cur, attrib):
     """ Validate one parsed entry and insert its work/view/review rows. """
@@ -74,17 +74,17 @@ def add_entry(cur, attrib):
     f_loc=attrib['loc']
     f_date=date_to_mysql(attrib['date'])
     if f_type=='YOUTUBE':
-        f_externalId=40
-        f_externalCode=f_url.split('=')[1]
+        f_external_id=40
+        f_external_code=f_url.split('=')[1]
     else:
-        f_externalId=16
-        f_externalCode=f_url
+        f_external_id=16
+        f_external_code=f_url
     # insert the work
     cur.execute('INSERT INTO TbWkWork (name, typeId) VALUES(%s,%s)', (f_name, 12))
     p_workid=cur.lastrowid
     # insert the external id
     cur.execute('INSERT INTO TbWkWorkExternal (externalCode, externalId, workId) VALUES(%s,%s,%s)',
-        (f_externalCode, f_externalId, p_workid))
+        (f_external_code, f_external_id, p_workid))
     # insert the view
     if f_loc=='by myself at my computer at home':
         cur.execute('INSERT INTO TbWkWorkView (locationId, deviceId, workId, endViewDate) VALUES(%s,%s,%s,%s)',

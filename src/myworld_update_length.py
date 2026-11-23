@@ -91,11 +91,11 @@ def main():
     for result in curr.fetchall():
         f_id=result['id']
         f_name=result['name']
-        f_externalCode=result['externalCode']
+        f_external_code=result['externalCode']
         f_tname=result['tname']
         if p_do_progress:
             print(f'doing [{f_name}]...')
-        filename=myworld.utils.filename_switch(p_folder, f_tname, f_externalCode)
+        filename=myworld.utils.filename_switch(p_folder, f_tname, f_external_code)
         if not os.path.isfile(filename):
             print(f'file [{filename}] does not exist, download it first...')
             continue

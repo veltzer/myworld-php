@@ -94,23 +94,23 @@ def main():
     stat_count=0
     stat_already_there=0
     stat_download=0
-    stat_download_by_type={t: 0 for t in all_types}
-    stat_skipped_by_type={t: 0 for t in all_types}
+    stat_download_by_type=dict.fromkeys(all_types, 0)
+    stat_skipped_by_type=dict.fromkeys(all_types, 0)
     for row in res:
-        f_externalCode=row['externalCode']
+        f_external_code=row['externalCode']
         f_name=row['name']
         f_template=row['template']
         f_tname=row['tname']
         if p_progress:
-            print(f'doing work [{f_name}] code [{f_externalCode}] type [{f_tname}]...')
-        file=myworld.utils.filename_switch(p_folder, f_tname, f_externalCode)
+            print(f'doing work [{f_name}] code [{f_external_code}] type [{f_tname}]...')
+        file=myworld.utils.filename_switch(p_folder, f_tname, f_external_code)
         stat_count+=1
         if os.path.isfile(file):
             if p_progress:
                 print('file is already there...')
             stat_already_there+=1
             continue
-        url=f_template.replace('$external_id', f_externalCode)
+        url=f_template.replace('$external_id', f_external_code)
         if f_tname in p_do_types:
             if p_report:
                 print(f'downloading [{file}] from [{url}], [{f_name}]...')

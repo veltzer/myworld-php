@@ -32,24 +32,12 @@ def get_config():
         if config.has_option('mysql', 'password'):
             d['password']=config.get('mysql', 'password')
         return d
-    else:
-        d['user']=getpass.getuser()
-        d['database']='mysql'
-        return d
+    d['user']=getpass.getuser()
+    d['database']='mysql'
+    return d
 
 def connect():
     return mysql.connector.Connect(**get_config())
-
-'''
-Special cursor to return dicts and not tuples
-Reference: http://geert.vanderkelen.org/connectorpython-custom-cursors/
-'''
-class MySQLCursorDict(mysql.connector.cursor.MySQLCursor):
-    def _row_to_python(self, rowdata, desc=None):
-        row = super()._row_to_python(rowdata, desc)
-        if row:
-            return dict(zip(self.column_names, row))
-        return None
 
 '''
 get a cursor of the dictionary type
@@ -65,9 +53,7 @@ def print_results(conn, sql):
     cursor=conn.cursor()
     cursor.execute(sql)
     columns = [column[0] for column in cursor.description]
-    results = []
-    for row in cursor.fetchall():
-        results.append(dict(zip(columns, row)))
+    results = [dict(zip(columns, row, strict=True)) for row in cursor.fetchall()]
     cursor.close()
     print(results)
 
@@ -78,8 +64,6 @@ def get_results(conn, sql):
     cursor=conn.cursor()
     cursor.execute(sql)
     columns = [column[0] for column in cursor.description]
-    results = []
-    for row in cursor.fetchall():
-        results.append(dict(zip(columns, row)))
+    results = [dict(zip(columns, row, strict=True)) for row in cursor.fetchall()]
     cursor.close()
     return results

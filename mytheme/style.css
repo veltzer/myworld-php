@@ -235,7 +235,7 @@ blockquote p {
 	margin: 0px;
 }
 pre {
-	font-family:'Courier New', Courier, Monospace, Fixed;
+	font-family:'Courier New', Courier, Monospace, Fixed, monospace;
 	line-height: normal;
 	overflow: auto;
 	padding-bottom: 25px;
