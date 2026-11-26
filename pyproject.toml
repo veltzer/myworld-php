@@ -37,9 +37,7 @@ search-path = [
 # Third-party libraries without type information.
 ignore-missing-imports = [
     "download.*",
-    "imdb.*",
     "MediaInfoDLL3.*",
-    "MySQLdb.*",
 ]
 
 [tool.pyrefly.errors]
