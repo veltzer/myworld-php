@@ -41,3 +41,6 @@ ignore-missing-imports = [
     "MediaInfoDLL3.*",
     "MySQLdb.*",
 ]
+
+[tool.pyrefly.errors]
+no-any-return = "error"
