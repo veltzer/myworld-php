@@ -35,7 +35,7 @@ src_dirs = ["config"]
 # ─── toml / yaml / json ──────────────────────────────────────────────────────
 
 [processor.checker.taplo]
-src_files = [".rumdl.toml", "pyproject.toml", "rsconstruct.toml"]
+src_files = [".ruff.toml", ".rumdl.toml", "pyproject.toml", "rsconstruct.toml"]
 
 # The Makefile's default build zipped three WordPress bundles: the myworld and
 # myheb plugins into out/plugins/, and the mytheme theme into out/themes/.
