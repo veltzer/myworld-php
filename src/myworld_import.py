@@ -127,7 +127,7 @@ def main():
         conn=myworld.db.connect()
         cur=conn.cursor()
     state=State.s_after
-    attrib={}
+    attrib: dict[str, str] = {}
     with open('educational_movies_saw.txt', encoding='utf-8') as stream:
         for line in stream:
             state, attrib=parse_line(state, attrib, line.rstrip(), cur)
