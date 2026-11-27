@@ -18,7 +18,7 @@ DEBUG=True
 # remove target files if they are links
 FORCE=True
 
-def do_install(source, target):
+def do_install(source: str, target: str) -> None:
     """ Symlink source at target, replacing an existing link if FORCE. """
     if FORCE and os.path.islink(target):
         os.unlink(target)
@@ -27,7 +27,7 @@ def do_install(source, target):
             print(f'symlinking [{source}], [{target}]')
         os.symlink(source, target)
 
-def file_gen(root_folder, recurse):
+def file_gen(root_folder: str, *, recurse: bool):
     """ Yield (root, dirs, files) either recursively or for one level. """
     if recurse:
         yield from os.walk(root_folder)
@@ -42,7 +42,7 @@ def file_gen(root_folder, recurse):
                 files.append(file)
         yield root_folder, dirs, files
 
-def clean_stale_links(target_folder, cwd):
+def clean_stale_links(target_folder: str, cwd: str) -> None:
     """ Remove links in target_folder that point back into cwd. """
     for file in os.listdir(target_folder):
         full=os.path.join(target_folder, file)
@@ -54,14 +54,14 @@ def clean_stale_links(target_folder, cwd):
                 print(f'unlinking [{full}]')
             os.unlink(full)
 
-def install(root_folder, target_folder, recurse):
+def install(root_folder: str, target_folder: str, *, recurse: bool) -> None:
     """ Symlink everything under root_folder into target_folder. """
     target_folder=os.path.expanduser(target_folder)
     if os.path.isdir(target_folder):
         clean_stale_links(target_folder, os.getcwd())
     else:
         os.mkdir(target_folder)
-    for root, dirs, files in file_gen(root_folder, recurse):
+    for root, dirs, files in file_gen(root_folder, recurse=recurse):
         for name in files+dirs:
             source=os.path.abspath(os.path.join(root, name))
             target=os.path.join(target_folder, name)

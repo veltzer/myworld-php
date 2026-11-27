@@ -6,10 +6,15 @@ This script will also check that directors are connected correctly to works.
 '''
 
 import sys  # for stdout, getdefaultencoding
+from typing import TYPE_CHECKING, Any
 
 import imdb  # for IMDb
 import MySQLdb  # for connect
 import myworld.menu_maker  # for YNMenu
+
+if TYPE_CHECKING:
+    from imdb.parser.s3 import IMDbS3AccessSystem
+    from myworld.menu_maker import YNMenu
 
 ##############
 # parameters #
@@ -24,7 +29,7 @@ p_do_db=True
 #############
 # functions #
 #############
-def update_check(db, cursor, f_id, tablename):
+def update_check(db: Any, cursor: Any, f_id: int, tablename: str) -> int:
     """ Stamp checkedDate on a row and return 1 for the check counter. """
     sql=f'UPDATE {tablename} SET checkedDate=NOW() WHERE id=%s'
     vals=(f_id,)
@@ -35,7 +40,7 @@ def update_check(db, cursor, f_id, tablename):
         print(f'execute {sql} with {vals}')
     return 1
 
-def update_field(db, cursor, f_id, fieldname, value):
+def update_field(db: Any, cursor: Any, f_id: int, fieldname: str, value: object) -> int:
     """ Update a single TbIdPerson field and return 1 for the update counter. """
     sql=f'UPDATE TbIdPerson SET {fieldname}=%s WHERE id=%s'
     vals=(value, f_id)
@@ -46,7 +51,7 @@ def update_field(db, cursor, f_id, fieldname, value):
         print(f'execute {sql} with {vals}')
     return 1
 
-def split_canonical_name(i_canonical_name):
+def split_canonical_name(i_canonical_name: str):
     """ Split an imdb 'surname, firstname othername' into its parts. """
     if ',' in i_canonical_name:
         i_surname, i_firstname=i_canonical_name.split(',')
@@ -62,7 +67,7 @@ def split_canonical_name(i_canonical_name):
         i_othername=None
     return i_firstname, i_surname, i_othername
 
-def check_people(db, cursor, c_update, connection, menu, out_encoding):
+def check_people(db: Any, cursor: Any, c_update: Any, connection: IMDbS3AccessSystem, menu: YNMenu, out_encoding: str) -> tuple[int, int]:
     """ Compare db person names against imdb and update mismatches. """
     stat_check=0
     stat_update=0
@@ -105,7 +110,7 @@ def check_people(db, cursor, c_update, connection, menu, out_encoding):
             print('=========================================')
     return stat_check, stat_update
 
-def check_directors(db, cursor, c_update, connection):
+def check_directors(db: Any, cursor: Any, c_update: Any, connection: IMDbS3AccessSystem) -> int:
     """ Check that db directors match imdb directors for each work. """
     stat_check=0
     sql='''
@@ -136,14 +141,14 @@ def check_directors(db, cursor, c_update, connection):
             print(f'f_person_external_code: {f_person_external_code}')
             print(f'f_id: {f_id}')
         i_movie=connection.get_movie(f_work_external_code)
-        directors_set={d.personID for d in i_movie.get('director')}
+        directors_set={d.personID for d in i_movie.get('director') or []}
         if p_do_progress:
             print(f'directors_set: {directors_set}')
         if f_person_external_code in directors_set:
             stat_check+=update_check(db, c_update, f_id, 'TbWkWorkContrib')
     return stat_check
 
-def main():
+def main() -> None:
     """ main entry point """
     db=MySQLdb.connect(read_default_file='~/.myworld.cnf')
     cursor=db.cursor()

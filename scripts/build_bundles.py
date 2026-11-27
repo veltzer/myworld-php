@@ -16,7 +16,7 @@ BUNDLES = {
 }
 
 
-def main():
+def main() -> None:
     """ main entry point """
     for source, target in BUNDLES.items():
         os.makedirs(os.path.dirname(target), exist_ok=True)

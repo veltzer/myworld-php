@@ -17,7 +17,7 @@ FILENAME_SMALL='/tmp/small.jpg'
 FILENAME_LARGE='/tmp/large.jpg'
 TARGET_MIME='image/jpeg'
 
-def main():
+def main() -> None:
     """ main entry point """
     if len(sys.argv)!=4:
         print('usage: dbdata_import_image.py [image] [name] [slug]')

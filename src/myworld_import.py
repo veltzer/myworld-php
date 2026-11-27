@@ -7,6 +7,8 @@ data into the myworld system.
 
 import datetime as dt  # for strptime
 import enum  # for Enum
+from datetime import datetime
+from typing import Any
 
 import myworld.db  # for connect
 
@@ -37,7 +39,7 @@ class State(enum.Enum):
     s_after=1
     s_in=2
 
-def date_to_mysql(output):
+def date_to_mysql(output: str) -> datetime:
     """ Parse a `date` command output string into a datetime. """
     parts=output.split()
     if int(parts[2])<10:
@@ -48,7 +50,7 @@ def date_to_mysql(output):
     # it is local time, so say so (the wall-clock time stays the same).
     return dt.datetime.strptime(output, fmt).astimezone()
 
-def add_entry(cur, attrib):
+def add_entry(cur: Any, attrib: dict[str, str]) -> None:
     """ Validate one parsed entry and insert its work/view/review rows. """
     keys_set=set(attrib.keys())
     if not keys_set.issubset(ALLOWED):
@@ -100,7 +102,7 @@ def add_entry(cur, attrib):
         cur.execute('INSERT INTO TbWkWorkReview (ratingId, review, reviewDate, workId, reviewerId) VALUES(%s,%s,%s,%s,%s)',
             (attrib['rating'], attrib['review'], f_date, p_workid, 1))
 
-def parse_line(state, attrib, line, cur):
+def parse_line(state: State, attrib: dict[str, str], line: str, cur: Any):
     """ Advance the parser one line; returns the new (state, attrib). """
     if state==State.s_after:
         if line.startswith('\t'):
@@ -119,7 +121,7 @@ def parse_line(state, attrib, line, cur):
     add_entry(cur, attrib)
     return State.s_in, {'name': line}
 
-def main():
+def main() -> None:
     """ main entry point """
     conn=None
     cur=None

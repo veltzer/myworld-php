@@ -11,9 +11,13 @@ length to NULL (which is wrong). Take care of this.
 '''
 
 import re  # for compile
+from typing import TYPE_CHECKING, Any
 
 import imdb  # for IMDb
 import MySQLdb  # for connect
+
+if TYPE_CHECKING:
+    from imdb.parser.s3 import IMDbS3AccessSystem
 
 ##############
 # parameters #
@@ -35,7 +39,7 @@ REGS=[
 #############
 # functions #
 #############
-def analyze_runtime(runtime):
+def analyze_runtime(runtime: str) -> float:
     """ Extract the minutes from an imdb runtime string, in seconds. """
     for reg in REGS:
         m=reg.match(runtime)
@@ -43,31 +47,31 @@ def analyze_runtime(runtime):
             return float(m.group(1))*60.0
     raise ValueError('didnt find a regexp to match', runtime)
 
-def avg(values):
+def avg(values: list[float]):
     """ Arithmetic mean of a sequence. """
     return sum(values)/len(values)
 
-def analyze_runtimes(runtimes):
+def analyze_runtimes(runtimes: list[str]):
     """ Average of the analyzed runtimes. """
     return avg([analyze_runtime(x) for x in runtimes])
 
-def update_time(db, cursor, f_id, deduced_runtime):
+def update_time(db: Any, cursor: Any, f_id: int, deduced_runtime: float) -> None:
     """ Store a deduced length and stamp updatedLengthDate. """
     cursor.execute('UPDATE TbWkWork SET length=%s, updatedLengthDate=NOW() WHERE id=%s',
                    (deduced_runtime, f_id))
     db.commit()
 
-def update_check(db, cursor, f_id):
+def update_check(db: Any, cursor: Any, f_id: int) -> None:
     """ Stamp updatedLengthDate without changing length. """
     cursor.execute('UPDATE TbWkWork SET updatedLengthDate=NOW() WHERE id=%s', (f_id,))
     db.commit()
 
-def load_external_ids(cursor):
+def load_external_ids(cursor: Any):
     """ Map workId -> externalCode from TbWkWorkExternal. """
     cursor.execute('SELECT externalCode,workId FROM TbWkWorkExternal')
     return {f_work_id: f_external_code for f_external_code, f_work_id in cursor}
 
-def process_movie(connection, db, c_update, f_id, f_name, f_length, f_external):
+def process_movie(connection: IMDbS3AccessSystem, db: Any, c_update: Any, f_id: int, f_name: str, f_length: float | None, f_external: str) -> None:
     """ Fetch a movie's runtime from imdb and update the db row. """
     if p_do_progress:
         print(f'working on [{f_name}]...')
@@ -93,7 +97,7 @@ def process_movie(connection, db, c_update, f_id, f_name, f_length, f_external):
     else:
         update_check(db, c_update, f_id)
 
-def main():
+def main() -> None:
     """ main entry point """
     connection=imdb.IMDb()
     # this reads the [client] section of ~/.myworld.cnf, which must declare

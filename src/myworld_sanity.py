@@ -16,21 +16,26 @@ here is what it should check:
 '''
 
 import os.path  # for join, isdir
+from typing import TYPE_CHECKING
 
 import myworld.db  # for connect, get_results
+
+if TYPE_CHECKING:
+    from mysql.connector.abstracts import MySQLConnectionAbstract
+    from mysql.connector.pooling import PooledMySQLConnection
 
 
 #############
 # functions #
 #############
-def check_1(conn):
+def check_1(conn: MySQLConnectionAbstract | PooledMySQLConnection) -> None:
     print('checking for work views that have remarks or todos')
     sql='''SELECT TbWkWorkView.workId FROM TbWkWorkView WHERE remark IS NOT NULL OR todo IS NOT NULL'''
     results=myworld.db.get_results(conn, sql)
     for result in results:
         print(f'\t{result}')
 
-def check_2(conn):
+def check_2(conn: MySQLConnectionAbstract | PooledMySQLConnection) -> None:
     print('checking works which are videos without length updated')
     sql='''
     SELECT
@@ -54,7 +59,7 @@ def check_2(conn):
         for result2 in results2:
             print(f'\t\t{result2}')
 
-def check_3(conn):
+def check_3(conn: MySQLConnectionAbstract | PooledMySQLConnection) -> None:
     print('checking works with space in the begining or end of name')
     sql='''
     SELECT
@@ -69,7 +74,7 @@ def check_3(conn):
     for result in results:
         print(f'\t{result}')
 
-def check_4(conn):
+def check_4(conn: MySQLConnectionAbstract | PooledMySQLConnection) -> None:
     print('checking people with space in the firstname or othername')
     sql='''
     SELECT
@@ -84,7 +89,7 @@ def check_4(conn):
     for result in results:
         print(f'\t{result}')
 
-def check_5(conn):
+def check_5(conn: MySQLConnectionAbstract | PooledMySQLConnection) -> None:
     print('checking people with space in the begining or end of their firstname, surname or othername')
     sql='''
     SELECT
@@ -103,7 +108,7 @@ def check_5(conn):
     for result in results:
         print(f'\t{result}')
 
-def check_6(conn):
+def check_6(conn: MySQLConnectionAbstract | PooledMySQLConnection) -> None:
     print('checking for people that are not connected to works and are not friends')
     sql='''
     SELECT
@@ -128,7 +133,7 @@ def check_6(conn):
     for result in results:
         print(f'\t{result}')
 
-def check_7(conn):
+def check_7(conn: MySQLConnectionAbstract | PooledMySQLConnection) -> None:
     print('checking for people that do not have external ids and are not friends')
     sql='''
     SELECT
@@ -169,7 +174,7 @@ def check_7(conn):
             for result3 in results3:
                 print(f'\t\t\t{result3}')
 
-def check_8(conn):
+def check_8(conn: MySQLConnectionAbstract | PooledMySQLConnection) -> None:
     print('checking for works that do not have external ids')
     sql='''
     SELECT
@@ -197,7 +202,7 @@ def check_8(conn):
         for result2 in results2:
             print(f'\t\t{result2}')
 
-def check_9(conn):
+def check_9(conn: MySQLConnectionAbstract | PooledMySQLConnection) -> None:
     print('checking for audio works that do not have files')
     sql='''
     SELECT
@@ -216,7 +221,7 @@ def check_9(conn):
         if not os.path.isdir(folder):
             print(f'\t{result}')
 
-def main():
+def main() -> None:
     """ main entry point """
     conn=myworld.db.connect()
     check_1(conn)

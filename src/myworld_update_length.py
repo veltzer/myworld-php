@@ -10,10 +10,15 @@ update lengths for youtube movies in myworld.
 import os  # for stat
 import os.path  # for join, isfile
 import stat  # for ST_SIZE
+from typing import TYPE_CHECKING, Any
 
 import MediaInfoDLL3  # for Stream, MediaInfo
 import myworld.db  # for connect, get_cursor
 import myworld.utils  # for filename_switch
+
+if TYPE_CHECKING:
+    from mysql.connector.abstracts import MySQLConnectionAbstract
+    from mysql.connector.pooling import PooledMySQLConnection
 
 ##############
 # parameters #
@@ -36,7 +41,7 @@ p_query_types={
 #############
 # functions #
 #############
-def update_length(conn, curr, f_id, val):
+def update_length(conn: MySQLConnectionAbstract | PooledMySQLConnection, curr: Any, f_id: int, val: int) -> None:
     """ Store the media length for a work. """
     if p_do_progress:
         print(f'updating length to [{val}]')
@@ -45,7 +50,7 @@ def update_length(conn, curr, f_id, val):
                      (val, f_id))
         conn.commit()
 
-def update_size(conn, curr, f_id, val):
+def update_size(conn: MySQLConnectionAbstract | PooledMySQLConnection, curr: Any, f_id: int, val: int) -> None:
     """ Store the file size for a work. """
     if p_do_progress:
         print(f'updating size to [{val}]')
@@ -54,7 +59,7 @@ def update_size(conn, curr, f_id, val):
                      (val, f_id))
         conn.commit()
 
-def get_length(filename):
+def get_length(filename: str) -> int:
     """ Media duration in seconds via libmediainfo. """
     media_info=MediaInfoDLL3.MediaInfo()
     media_info.Open(filename)
@@ -62,11 +67,11 @@ def get_length(filename):
     media_info.Close()
     return int(duration_string)//1000
 
-def get_size(filename):
+def get_size(filename: str) -> int:
     """ File size in bytes. """
     return os.stat(filename)[stat.ST_SIZE]
 
-def main():
+def main() -> None:
     """ main entry point """
     conn=myworld.db.connect()
     curr=myworld.db.get_cursor(conn)

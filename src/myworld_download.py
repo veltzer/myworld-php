@@ -40,7 +40,7 @@ p_print_stats=True
 #############
 # functions #
 #############
-def download_switch(f_tname, url, file):
+def download_switch(f_tname: str, url: str, file: str) -> None:
     """ Dispatch a download to the right backend for its external type. """
     if f_tname=='youtube_video_id':
         subprocess.call([
@@ -59,7 +59,7 @@ def download_switch(f_tname, url, file):
     if f_tname=='download_url':
         download.generic.get(url, file)
 
-def main():
+def main() -> None:
     """ main entry point """
     conn=myworld.db.connect()
 
