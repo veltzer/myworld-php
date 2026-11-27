@@ -22,9 +22,9 @@ p_do_progress=True
 
 # times return as one of the following three:
 #   u'104'
-#   u'Argentina:94'
-#   u'Canada:90::(Toronto International Film Festival)'
-#   u'118::(unrated version)'
+#   u'Argentina:94'  # noqa: ERA001  not code: an example of the value, written out
+#   u'Canada:90::(Toronto International Film Festival)'  # noqa: ERA001  not code: an example of the value, written out
+#   u'118::(unrated version)'  # noqa: ERA001  not code: an example of the value, written out
 REGS=[
     re.compile(r'^(\d+)$'),
     re.compile(r'^.+:(\d+)$'),

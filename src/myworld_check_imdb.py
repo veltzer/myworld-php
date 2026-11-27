@@ -5,9 +5,6 @@ This script will check that names in imdb are the same as in my db.
 This script will also check that directors are connected correctly to works.
 '''
 
-###########
-# imports #
-###########
 import sys  # for stdout, getdefaultencoding
 
 import imdb  # for IMDb

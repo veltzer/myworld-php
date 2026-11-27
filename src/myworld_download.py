@@ -5,9 +5,6 @@ This script downloads all youtube videos referenced from the database to my
 google drive.
 '''
 
-###########
-# imports #
-###########
 import os  # for rename
 import os.path  # for join, isfile
 import subprocess  # for check_call

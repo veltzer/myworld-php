@@ -15,9 +15,6 @@ here is what it should check:
 9. that every audio book that has length has it's correct folder to calculate the length from.
 '''
 
-###########
-# imports #
-###########
 import os.path  # for join, isdir
 
 import myworld.db  # for connect, get_results
